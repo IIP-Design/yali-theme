@@ -1,0 +1,16 @@
+{% extends 'base.twig' %}
+
+{% block main %}
+	{% include 'sidebar.twig' %}
+		
+	<section class="main-content main-content--home">		
+		
+		{{ post.content }}		
+		
+		{% if is_home %}
+			{% include 'home/post-content.twig' %}
+		{% endif %}
+	</section>	
+
+{% endblock %}
+

@@ -1,0 +1,10 @@
+{% extends 'base.twig' %}
+
+{% block main %}
+	<section class="main-content main-content--blog">
+		<p>BLOG.TWIG</p>
+		{% include 'blog/blog-list.twig' %}
+		{{ pagination | print_r }}
+	</section>
+	{% include 'sidebar.twig' %}
+{% endblock %}

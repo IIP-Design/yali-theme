@@ -1,0 +1,8 @@
+{% for post in posts %}
+	<article>
+		<h3>
+			<a href="{{ post.link }}">{{ post.title }}</a>
+		</h3>
+		<p>{{ post.content | excerpt(30) }}</p>
+	</article>
+{% endfor %}

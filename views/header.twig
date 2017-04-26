@@ -1,0 +1,31 @@
+{% block header %}
+<!DOCTYPE html>
+<html {{ site.language_attributes }}>
+	<head>
+		<title>{{ site.title }}</title>
+		<meta charset={{ site.charset }}>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="profile" href="http://gmpg.org/xfn/11">
+		<link rel="pingback" href="{{ site.pingback_url }}">	
+		<link rel="stylesheet" type="text/css" href="{{ theme.link }}/css/custom.css">
+		<script>
+			let links = ["http://yali.rest.dev/wp-content/uploads/sites/4/formidable/css/formidablepro.css?ver=3301530", "http://yali.rest.dev/wp-content/themes/parallelus-moxie/extensions/layout-manager/css/bootstrap/css/bootstrap-responsive.min.css?ver=4.7.3", "http://yali.rest.dev/wp-content/themes/parallelus-moxie/extensions/layout-manager/css/bootstrap/css/bootstrap.min.css?ver=4.7.3", "http://yali.rest.dev/wp-includes/css/dashicons.min.css?ver=4.7.3", "http://yali.rest.dev/wp-includes/css/admin-bar.min.css?ver=4.7.3", "http://yali.rest.dev/wp-content/plugins/formidable/css/frm_fonts.css?ver=2.03.04", "//d3q1ytufopwvkq.cloudfront.net/0/formrenderer.css", "http://yali.rest.dev/wp-content/plugins/pdf-print/css/style.css?ver=4.7.3", "http://yali.rest.dev/wp-content/plugins/wordpress-seo/css/adminbar.min.css?ver=2.0", "http://yali.rest.dev/wp-content/themes/moxie-yali/style.css?ver=4.7.3", "http://yali.rest.dev/wp-content/themes/moxie-yali/assets/css/font-awesome.min.css?ver=4.7.3", "http://yali.rest.dev/wp-content/themes/moxie-yali/assets/css/colorbox.css?ver=4.7.3", "http://fonts.googleapis.com/css?family=Oxygen|Oxygen&subset=latin,latin-ext", "http://yali.rest.dev/wp-content/themes/moxie-yali/assets/css/flexslider.css?ver=2.1", "http://yali.rest.dev/wp-content/themes/parallelus-moxie/extensions/ubermenu/lite/styles/basic.css?ver=2.3.0.0-LITE", "http://yali.rest.dev/wp-content/themes/parallelus-moxie/style.css"];
+
+			links.forEach(function(link) {
+				let ss = document.createElement('link');
+				ss.type = 'text/css';
+				ss.rel = 'stylesheet'
+				ss.href = link;
+
+				document.getElementsByTagName('head')[0].appendChild(ss);
+			});
+		</script>
+	</head>
+	{{ wp_head }}
+	<body>		
+		<div class="wrapper">		
+			<a href="/">
+				<img src="{{ header_img }}">
+			</a>
+			{% include 'menus/main-menu.twig' %}
+{% endblock %}
