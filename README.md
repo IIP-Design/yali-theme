@@ -1,3 +1,3 @@
 ### YALI Theme ###
 
-## Child theme of Corona - requires Timber plugin ##
+### Child theme of Corona - uses Twig templating ###
