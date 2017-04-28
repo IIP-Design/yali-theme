@@ -1,0 +1,10 @@
+{
+    "name": "iip-design/yali",
+    "description": "YALI's theme, a child of Corona",
+    "license": "MIT",
+    "minimum-stability": "stable",
+    "type": "wordpress-theme",
+    "require": {
+        "composer/installers": "v1.0.21"
+    }
+}
