@@ -16,7 +16,6 @@ $context['footer_menu'] = rest_get_footer_menu();
 
 
 
-
 if( is_page(602) ) {
 	$context['blog_list'] = !empty($page_num) ? rest_get_paginated_posts($page_num) : rest_get_all_posts();
 }

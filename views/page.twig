@@ -1,35 +1,14 @@
 {% extends 'base.twig' %}
 
-{% block main %}
-	<h1>PAGE.TWIG</h1>
-	
-	<!-- {{ dump(header_menu['items'][0].children[0]) }} -->
-
-	<ul>
-	{% for key, value in header_menu['items'] %}
-		<li>
-			<a href="{{ header_menu['items'][key].url }}">{{ header_menu['items'][key].title }}</a>
-			{% if header_menu['items'][key].children %}
-				<ul>
-				{% for x in header_menu['items'][key].children %}
-					<li><a href="{{ x.url }}">{{ x.title }}</a></li>					
-				{% endfor %}
-				</ul>
-			{% endif %}
-		</li>		
-	{% endfor %}
-	</ul>
-
-	<section>
-		<h2>{{ title }}</h2>
-		
+{% block main %}	
+	<section>		
 		{% if is_blog() %}
 		<h4>Page - {{ page_num }}</h4>		
 		{% endif %}
 
 		{% if not is_blog() %}
-		<div style="float: left; width: 30%;">{{ home_sidebar_right['rendered'] | raw }}</div>
-		<div style="float: left; width: 65%; margin-left: 15px;">
+		<div class='sidebar sidebar--home'>{{ home_sidebar_right['rendered'] | raw }}</div>
+		<div class='main-content main-content--home'>
 			<section>
 				{{ page_data["content"]["rendered"] | raw }}
 				
@@ -70,21 +49,6 @@
 			</div>
 		</div>			
 		{% endif %}
-	</section>	
-
-	<ul style="display: block; clear: both;">
-	{% for key, value in footer_menu['items'] %}
-		<li>
-			<a href="{{ footer_menu['items'][key].url }}">{{ footer_menu['items'][key].title }}</a>
-			{% if footer_menu['items'][key].children %}
-				<ul>
-				{% for x in footer_menu['items'][key].children %}
-					<li><a href="{{ x.url }}">{{ x.title }}</a></li>					
-				{% endfor %}
-				</ul>
-			{% endif %}
-		</li>		
-	{% endfor %}
-	</ul>
+	</section>		
 	
 {% endblock %}

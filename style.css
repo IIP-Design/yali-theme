@@ -23,7 +23,7 @@ body {
 	content: '';
 	display: block;
 	clear: both;
-}
+}	
 
 .sidebar,
 .main-content {
@@ -73,7 +73,7 @@ body {
 .sub-menu {
 	display: none;
 	position: absolute;
-	top: 25px;
+	top: 20px;
 	z-index: 2;
 	width: 100%;
 	text-indent: 0;
@@ -92,6 +92,10 @@ article {
 
 .wpb_row {
 	margin: 0 !important;
+}
+
+footer {
+	clear: both;
 }
 
 footer nav.wrapper {

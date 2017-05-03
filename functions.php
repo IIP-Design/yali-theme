@@ -42,6 +42,12 @@ $twig_is_blog = new Twig_Function('is_blog', function() {
 });
 $twig->addFunction($twig_is_blog);
 
+$twig_header_img = new Twig_Function('header_img', function() {
+	return 'http://yali.rest.dev/wp-content/uploads/sites/4/2014/07/yali_network_banner.png';
+});
+$twig->addFunction($twig_header_img);
+
+
 
 /*
 * WP API Methods
