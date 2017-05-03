@@ -1,37 +1,90 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title></title>
-</head>
-<body>
+{% extends 'base.twig' %}
 
+{% block main %}
 	<h1>PAGE.TWIG</h1>
-		
-	<section>
-		<h2>{{ title }}</h2>		
-		
-		{% if blog_list is empty %}
-		<div style="float: left; width: 30%;">{{ home_sidebar_right | raw }}</div>
-		<div style="float: left; width: 65%;"">{{ restdata["content"]["rendered"] | raw }}</div>
-		{% endif %}
-			
-
-		{% if blog_list is not empty %}
-			<div style="width: 75%; margin:0 auto;">
-			{% for item in blog_list %}
-				<article>
-					<h3>
-						<a href="{{ item.link }}">{{ item['title']['rendered'] }}</a>
-					</h3>
-					<div>{{ item['excerpt']['rendered'] | raw }}</div>
-				</article>	
-				<hr>
-			{% endfor %}
-			</div>
-		{% endif %}		
-				
-	</section>
 	
+	<!-- {{ dump(header_menu['items'][0].children[0]) }} -->
 
-</body>
-</html>
+	<ul>
+	{% for key, value in header_menu['items'] %}
+		<li>
+			<a href="{{ header_menu['items'][key].url }}">{{ header_menu['items'][key].title }}</a>
+			{% if header_menu['items'][key].children %}
+				<ul>
+				{% for x in header_menu['items'][key].children %}
+					<li><a href="{{ x.url }}">{{ x.title }}</a></li>					
+				{% endfor %}
+				</ul>
+			{% endif %}
+		</li>		
+	{% endfor %}
+	</ul>
+
+	<section>
+		<h2>{{ title }}</h2>
+		
+		{% if is_blog() %}
+		<h4>Page - {{ page_num }}</h4>		
+		{% endif %}
+
+		{% if not is_blog() %}
+		<div style="float: left; width: 30%;">{{ home_sidebar_right['rendered'] | raw }}</div>
+		<div style="float: left; width: 65%; margin-left: 15px;">
+			<section>
+				{{ page_data["content"]["rendered"] | raw }}
+				
+				{% if is_home() %}					
+				<div style='margin-bottom: 50px;' class='recent_posts'>
+					{% for item in recent_posts %}					
+					<article>
+						<h3>
+							<a href="{{ item.link }}">{{ item['title']['rendered'] }}</a>
+						</h3>
+						<div><p>{{ item['excerpt']['rendered'] | raw }}</p></div>
+					</article>	
+					{% endfor %}
+				</div>				
+				<div class='home_cta'>					
+					{{ home_cta.widgets[1].rendered | raw }}					
+				</div>
+				{% endif %}	
+			</section>			
+		</div>
+		{% endif %}			
+
+		{% if is_blog() %}			
+		<div style="width: 75%; margin:0 auto;">
+			{% for item in blog_list['data'] %}
+			<article>
+				<h3>
+					<a href="{{ item.link }}">{{ item['title']['rendered'] }}</a>
+				</h3>
+				<div>{{ item['excerpt']['rendered'] | raw }}</div>
+			</article>	
+			{% endfor %}
+
+			<div class='pagination' style='padding: 25px 0;'>
+				{% for i in 1..blog_list['total_pages'] %}
+				<a href="{{ site_url() }}/resources/blog/{{ i }}">{{ i }}</a>
+				{% endfor %}
+			</div>
+		</div>			
+		{% endif %}
+	</section>	
+
+	<ul style="display: block; clear: both;">
+	{% for key, value in footer_menu['items'] %}
+		<li>
+			<a href="{{ footer_menu['items'][key].url }}">{{ footer_menu['items'][key].title }}</a>
+			{% if footer_menu['items'][key].children %}
+				<ul>
+				{% for x in footer_menu['items'][key].children %}
+					<li><a href="{{ x.url }}">{{ x.title }}</a></li>					
+				{% endfor %}
+				</ul>
+			{% endif %}
+		</li>		
+	{% endfor %}
+	</ul>
+	
+{% endblock %}
