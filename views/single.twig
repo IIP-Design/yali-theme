@@ -3,6 +3,23 @@
 {% block main %}
 	<h1>SINGLE.TWIG</h1>
 	<br>
-	<h2>{{ title }}</h2>
-	<div>{{ restdata["content"]["rendered"] | raw }}</div>
+	<div>
+		<h5>SEO Data</h5>
+
+		<div>
+			<p><u>Keywords</u></p>
+			<p>{{ post_data['yoast_seo']['keywords'] }}</p>	
+		</div>
+		<div>
+			<p><u>Title</u></p>
+			<p>{{ post_data['yoast_seo']['title'] }}</p>	
+		</div>
+		<div>
+			<p><u>Description</u></p>
+			<p>{{ post_data['yoast_seo']['description'] }}</p>
+		</div>		
+	</div>
+	
+	<div class='title-header'>{{ post_data["title"]["rendered"] }}</div>
+	<div>{{ post_data["content"]["rendered"] | raw }}</div>
 {% endblock %}

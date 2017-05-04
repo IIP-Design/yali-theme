@@ -118,5 +118,24 @@ function blog_list_pagination_num() {
 }
 
 
+/*
+* Add Yoast Seo Data to API Response
+*/
+add_action('rest_api_init', 'yoast_register_title');
+function yoast_register_title() {
+	register_rest_field(array('post', 'page'), 'yoast_seo', array(
+		'get_callback' => 'yoast_seo_data'
+	));
+}
+
+function yoast_seo_data($object, $request) {
+	$yoast_seo = array();
+	$yoast_seo['keywords'] = get_post_meta($object['id'], '_yoast_wpseo_focuskw', true);
+	$yoast_seo['title'] = get_post_meta($object['id'], '_yoast_wpseo_title', true);
+	$yoast_seo['description'] = get_post_meta($object['id'], '_yoast_wpseo_metadesc', true);
+	return $yoast_seo;
+}
+
+
 
 ?>

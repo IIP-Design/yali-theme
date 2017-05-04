@@ -1,6 +1,10 @@
 {% extends 'base.twig' %}
 
-{% block main %}	
+{% block main %}
+	{% if not is_home() %}
+	<div class='title-header'>{{ page_data["title"]["rendered"] }}</div>
+	{% endif %}	
+	
 	<section>		
 		{% if is_blog() %}
 		<h4>Page - {{ page_num }}</h4>		
