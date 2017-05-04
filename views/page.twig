@@ -4,55 +4,18 @@
 	{% if not is_home() %}
 	<div class='title-header'>{{ page_data["title"]["rendered"] }}</div>
 	{% endif %}	
-	
+
 	<section>		
 		{% if is_blog() %}
 		<h4>Page - {{ page_num }}</h4>		
 		{% endif %}
 
 		{% if not is_blog() %}
-		<div class='sidebar sidebar--home'>{{ home_sidebar_right['rendered'] | raw }}</div>
-		<div class='main-content main-content--home'>
-			<section>
-				{{ page_data["content"]["rendered"] | raw }}
-				
-				{% if is_home() %}					
-				<div style='margin-bottom: 50px;' class='recent_posts'>
-					{% for item in recent_posts %}					
-					<article>
-						<h3>
-							<a href="{{ item.link }}">{{ item['title']['rendered'] }}</a>
-						</h3>
-						<div><p>{{ item['excerpt']['rendered'] | raw }}</p></div>
-					</article>	
-					{% endfor %}
-				</div>				
-				<div class='home_cta'>					
-					{{ home_cta.widgets[1].rendered | raw }}					
-				</div>
-				{% endif %}	
-			</section>			
-		</div>
+			{% include 'content/content_page.twig' %}
 		{% endif %}			
 
 		{% if is_blog() %}			
-		<div style="width: 75%; margin:0 auto;">
-			{% for item in blog_list['data'] %}
-			<article>
-				<h3>
-					<a href="{{ item.link }}">{{ item['title']['rendered'] }}</a>
-				</h3>
-				<div>{{ item['excerpt']['rendered'] | raw }}</div>
-			</article>	
-			{% endfor %}
-
-			<div class='pagination' style='padding: 25px 0;'>
-				{% for i in 1..blog_list['total_pages'] %}
-				<a href="{{ site_url() }}/resources/blog/{{ i }}">{{ i }}</a>
-				{% endfor %}
-			</div>
-		</div>			
+			{% include 'content/content_blog.twig' %}
 		{% endif %}
-	</section>		
-	
+	</section>	
 {% endblock %}

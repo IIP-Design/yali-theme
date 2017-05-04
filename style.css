@@ -124,3 +124,16 @@ footer nav.wrapper {
 	color: #fff;
 	background-color: #4191bf;
 }
+
+.pagination-page {
+	display: inline-block;
+	width: 25px;
+	padding: 5px;	
+	margin-bottom: 5px;
+	text-align: center;
+	background-color: #ccc;
+}
+
+.pagination-page:hover {
+	background-color: #333;	
+}

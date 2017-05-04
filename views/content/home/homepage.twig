@@ -1,0 +1,8 @@
+<div style='margin-bottom: 50px;' class='recent_posts homepage'>
+	{% for item in recent_posts %}							
+		{% include 'content/post_list_item.twig' %}
+	{% endfor %}
+</div>				
+<div class='home_cta'>
+	{{ home_cta.widgets[1].rendered | raw }}					
+</div>
