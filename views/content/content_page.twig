@@ -1,4 +1,4 @@
-<div class='sidebar sidebar--home'>{{ home_sidebar_right['rendered'] | raw }}</div>
+{% include 'sidebar.twig' %}
 <div class='main-content main-content--home'>
 	<section>
 		{{ page_data["content"]["rendered"] | raw }}
