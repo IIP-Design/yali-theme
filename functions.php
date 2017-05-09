@@ -53,6 +53,11 @@ $twig_is_page = new Twig_Function('is_page', function() {
 });
 $twig->addFunction($twig_is_page);
 
+$twig_is_archive = new Twig_Function('is_archive', function() {
+	return is_archive();
+});
+$twig->addFunction($twig_is_archive);
+
 $twig_header_img = new Twig_Function('header_img', function() {
 	return 'http://yali.rest.dev/wp-content/uploads/sites/4/2014/07/yali_network_banner.png';
 });

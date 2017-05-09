@@ -9,12 +9,12 @@
 		<div class='tax_terms'>
 			<p>
 				{% for cat in categories %}		
-				<span>{{ cat.name | raw }}</span>		
+				<a href='/category/{{ cat.slug }}'>{{ cat.name | raw }}</a>		
 				{% endfor %}
 			</p>
 			<p>			
 				{% for tag in tags %}		
-				<span><i>{{ tag.name }}</i></span>		
+				<a href='/tag/{{ tag.slug }}'><i>{{ tag.name | raw }}</i></a>		
 				{% endfor %}			
 			</p>
 		</div>

@@ -1,0 +1,10 @@
+{% extends 'base.twig' %}
+
+{% block main %}
+	<div class='title-header'>{{ archive_query }}</div>
+
+	<section>				
+		{% include 'content/content_blog.twig' %}		
+	</section>	
+
+{% endblock %}

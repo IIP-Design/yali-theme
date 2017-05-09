@@ -3,11 +3,11 @@
 		{% include 'content/post_list_item.twig' %}
 	{% endfor %}
 
-	<div class='pagination' style='padding: 25px 0;'>
-		{% for i in 1..blog_list['total_pages'] %}
-		<a href="{{ site_url() }}/resources/blog/{{ i }}" class='pagination-page'>{{ i }}</a>
-		{% endfor %}
-	</div>
+	{% if is_archive() %}
+		{% include 'content/pagination/pagination_archive.twig' %}
+	{% else %}
+		{% include 'content/pagination/pagination_blog.twig' %}
+	{% endif %}
 </div>
 
 {% include 'sidebar.twig' %}
