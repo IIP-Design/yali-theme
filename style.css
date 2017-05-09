@@ -43,11 +43,11 @@ body {
 	width: 65%;	
 }	
 
-.main-content--home {
+.main-content--gutter-left {
 	margin-left: 4%;	
 }
 
-.main-content--blog {
+.main-content--gutter-right {
 	margin-right: 4%;	
 }
 

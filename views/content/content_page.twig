@@ -1,5 +1,8 @@
-{% include 'sidebar.twig' %}
-<div class='main-content main-content--home'>
+{% if is_home() %}
+	{% include 'sidebar.twig' %}
+{% endif %}
+
+<div class='main-content {{ is_home() ? "main-content--gutter-left" : "main-content--gutter-right" }}'>
 	<section>
 		{{ page_data["content"]["rendered"] | raw }}
 		
@@ -8,3 +11,7 @@
 		{% endif %}	
 	</section>			
 </div>
+
+{% if not is_home() %}
+	{% include 'sidebar.twig' %}
+{% endif %}

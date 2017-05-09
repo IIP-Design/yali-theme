@@ -43,6 +43,16 @@ $twig_is_blog = new Twig_Function('is_blog', function() {
 });
 $twig->addFunction($twig_is_blog);
 
+$twig_is_single = new Twig_Function('is_single', function() {
+	return is_single();
+});
+$twig->addFunction($twig_is_single);
+
+$twig_is_page = new Twig_Function('is_page', function() {
+	return is_page();
+});
+$twig->addFunction($twig_is_page);
+
 $twig_header_img = new Twig_Function('header_img', function() {
 	return 'http://yali.rest.dev/wp-content/uploads/sites/4/2014/07/yali_network_banner.png';
 });
@@ -62,8 +72,8 @@ function blog_list_pagination_num() {
 /*
 * Add Yoast Seo Data to API Response
 */
-add_action('rest_api_init', 'yoast_register_title');
-function yoast_register_title() {
+add_action('rest_api_init', 'yoast_register_data');
+function yoast_register_data() {
 	register_rest_field(array('post', 'page'), 'yoast_seo', array(
 		'get_callback' => 'yoast_seo_data'
 	));
@@ -75,6 +85,51 @@ function yoast_seo_data($object, $request) {
 	$yoast_seo['title'] = get_post_meta($object['id'], '_yoast_wpseo_title', true);
 	$yoast_seo['description'] = get_post_meta($object['id'], '_yoast_wpseo_metadesc', true);
 	return $yoast_seo;
+}
+
+
+/*
+* Add Featured Image URL to JSON response
+*/
+add_action('rest_api_init', 'featured_img_register_json');
+function featured_img_register_json() {
+	register_rest_field(array('post'), 'featured_img_url', array(
+		'get_callback' => 'featured_img_url'
+	));
+}
+
+function featured_img_url($post, $request) {
+	return ( has_post_thumbnail($post->ID) ) ? wp_get_attachment_url(get_post_thumbnail_id($post->ID)) : false;
+}
+
+
+/*
+* Add Post Tag Names to JSON Response
+*/
+add_action('rest_api_init', 'tag_names_register_json');
+function tag_names_register_json() {
+	register_rest_field(array('post'), 'post_tag_names', array(
+		'get_callback' => 'post_tag_names'
+	));
+}
+
+function post_tag_names($post, $request) {	
+	return $post_tag_names = get_the_tags($post->ID);
+}
+
+
+/*
+* Add Post Category Names to JSON Response
+*/
+add_action('rest_api_init', 'category_name_register_json');
+function category_name_register_json() {
+	register_rest_field(array('post'), 'post_category_names', array(
+		'get_callback' => 'post_category_names'
+	));
+}
+
+function post_category_names($post, $request) {	
+	return $post_tag_names = get_the_category($post->ID);
 }
 
 

@@ -17,6 +17,7 @@ $context['page_num'] = $page_num;
 $context['header_menu'] = Yali::get_header_menu();
 $context['footer_menu'] = Yali::get_footer_menu();
 
+
 if( is_page(602) ) {
 	$context['blog_list'] = !empty($page_num) ? Yali::get_paginated_posts($page_num) : Yali::get_all_posts();
 }
