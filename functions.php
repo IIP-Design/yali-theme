@@ -63,6 +63,11 @@ $twig_header_img = new Twig_Function('header_img', function() {
 });
 $twig->addFunction($twig_header_img);
 
+$twig_corona_entry_footer_output = new Twig_Function('corona_entry_footer_output', function() {
+	return corona_entry_footer_output();
+});
+$twig->addFunction($twig_corona_entry_footer_output);
+
 
 /*
 * Utility Functions
@@ -136,6 +141,23 @@ function category_name_register_json() {
 function post_category_names($post, $request) {	
 	return $post_tag_names = get_the_category($post->ID);
 }
+
+
+/*
+* Test Hook Filters
+*/
+function hook_css() {
+?>
+	<style type='text/css'>
+	    .wp_head_example {
+	        background-color : #333;
+	        width: 100%;
+	        padding-bottom: 15px;
+	    }
+	</style>
+<?php
+}
+add_action('wp_head', 'hook_css');
 
 
 ?>
