@@ -1,0 +1,23 @@
+{
+  "name": "yali-theme",
+  "version": "1.0.0",
+  "description": "Theme developed for use on YALI website",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IIP-Design/yali-theme.git"
+  },
+  "keywords": [
+    "theme",
+    "yali"
+  ],
+  "author": "Office of Design, U.S. Department of State",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/IIP-Design/yali-theme/issues"
+  },
+  "homepage": "https://github.com/IIP-Design/yali-theme#readme"
+}

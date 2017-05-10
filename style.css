@@ -1,9 +1,12 @@
 /*
-Theme Name: Twig Only
-Description: Child of the Corona theme. Uses Twig templating W/O the use of Timber plugin
-Template: corona
+ Theme Name:   YLAI Theme
+ Description:  YLAI's theme
+ Author:       Office of Design, U.S. Department of State
+ Template:     corona
+ Version:      0.0.1
+ License:      MIT
+ Text Domain:  yali
 */
-
 
 @import url("../corona/style.css");
 @import url("../moxie-yali/style.css");

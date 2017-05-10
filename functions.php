@@ -1,7 +1,5 @@
 <?php 
-
 require_once 'inc/yali-util.php';
-require_once 'inc/vendor/autoload.php';
 
 $loader = new Twig_Loader_Filesystem(get_stylesheet_directory() . '/views');
 $twig = new Twig_Environment($loader, array(
