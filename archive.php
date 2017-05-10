@@ -6,7 +6,7 @@ $page_num = blog_list_pagination_num();
 $queried_object = get_queried_object();
 // var_dump($queried_object);
 
-$filter = $queried_object->term_taxonomy_id;
+$filter = $queried_object->term_id;
 $taxonomy = $queried_object->taxonomy;
 
 $context['header_menu'] = Yali::get_header_menu();

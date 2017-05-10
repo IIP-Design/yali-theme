@@ -48,7 +48,7 @@ class Yali {
 		}
 
 		if( $taxonomy == 'category' ) {
-			$request->set_param('category', $filter);	
+			$request->set_param('categories', $filter);	
 		}
 		
 		$response = rest_do_request($request);
@@ -66,7 +66,7 @@ class Yali {
 		}
 
 		if( $taxonomy == 'category' ) {
-			$request->set_param('category', $filter);	
+			$request->set_param('categories', $filter);	
 		}
 		
 		$request->set_param('page', $page_num);

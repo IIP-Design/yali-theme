@@ -1,7 +1,7 @@
 {% extends 'base.twig' %}
 
 {% block main %}
-	<div class='title-header'>{{ archive_query }}</div>
+	<div class='title-header'>{{ archive_query | raw }}</div>
 
 	<section>				
 		{% include 'content/content_blog.twig' %}		
