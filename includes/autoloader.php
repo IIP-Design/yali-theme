@@ -41,7 +41,7 @@ class YALI_Autoloader {
 			
 			// is file?
 			} else {
-				if(strpos($file, '.class.php') !== false) {
+				if(strpos($file, '_class.php') !== false) {
             require_once $dir . '/' . $file;
         }
 			}
