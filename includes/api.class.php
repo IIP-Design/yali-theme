@@ -1,8 +1,11 @@
 <?php
 
-class Yali {
+namespace Yali;
 
-	public static function get_page($id) {			
+use WP_REST_Request;
+
+class API {
+  public static function get_page($id) {			
 		$request = new WP_REST_Request('GET', '/wp/v2/pages/' . $id);
 		$response = rest_do_request($request);
 		return $response->data;
@@ -80,20 +83,34 @@ class Yali {
 
 	public static function get_sidebar($sidebar) {
 		$request = new WP_REST_Request('GET', '/wp-rest-api-sidebars/v1/sidebars/' . $sidebar);
-		$response = rest_do_request($request);
-		return $response->data;	
+		return self::do_request( $request );
+	}
+
+	public static function get_menu( $id ) {
+		$request = new WP_REST_Request( 'GET', '/wp-api-menus/v2/menus/' . $id );
+		$menu = self::do_request( $request );
+		return $menu['items'];
 	}
 
 	public static function get_header_menu() {
 		$request = new WP_REST_Request('GET', '/wp-api-menus/v2/menus/2');
-		$response = rest_do_request($request);
-		return $response->data;	
+		return self::do_request( $request );
 	}
 
 	public static function get_footer_menu() {
 		$request = new WP_REST_Request('GET', '/wp-api-menus/v2/menus/3');
-		$response = rest_do_request($request);
+		return self::do_request( $request );
+	}
+
+	public static function do_request( $request ) {
+		$response = rest_do_request( $request );
 		return $response->data;	
+	}
+
+	public static function debug( $obj ) {
+		echo '<pre>'; 
+		var_dump( $obj );
+		echo '</pre>'; 
 	}
 
 }

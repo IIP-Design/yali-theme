@@ -1,0 +1,145 @@
+@import 'version.json';
+@import 'assets/scss/base'; 
+
+/*!
+Theme Name: YLAI Theme
+Theme URI: https://github.com/IIP-Design/yali-theme
+Author: Office of Design, U.S. Department of State
+Author URI: https://github.com/IIP-Design
+Description: Yali wordpress theme
+Version: #{$version}
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: yali
+*/
+
+body {
+	background-color: #ccc;
+}
+
+.wrapper {
+	max-width: 1300px;
+	padding: 20px;
+	margin: 0 auto;
+	background-color: #fff;
+}
+
+.wrapper:after {
+	content: '';
+	display: block;
+	clear: both;
+}	
+
+.sidebar,
+.main-content {
+	float: left;
+}
+
+.sidebar {				
+	width: 30%;
+	margin-left: 4%;
+}
+
+.sidebar--home {
+	margin-left: 0;	
+}
+
+.main-content {
+	width: 65%;	
+}	
+
+.main-content--gutter-left {
+	margin-left: 4%;	
+}
+
+.main-content--gutter-right {
+	margin-right: 4%;	
+}
+
+.nav ul {
+	list-style: none;	
+	text-indent: 0;
+}
+
+.nav ul li:before {
+	content: '';
+	padding: 0 !important;
+}
+
+.nav-item {
+	display: inline-block;
+	position: relative;
+}
+
+.nav-item:hover .sub-menu {
+	display: block;
+}
+
+.sub-menu {
+	display: none;
+	position: absolute;
+	top: 20px;
+	z-index: 2;
+	width: 100%;
+	text-indent: 0;
+	background-color: #fff;
+}
+
+.sub-menu-item {
+	margin: 0;
+	padding: 5px;
+}
+
+article {
+	padding-bottom: 10px;
+	border-bottom: 1px solid #000;	
+}
+
+.wpb_row {
+	margin: 0 !important;
+}
+
+footer {
+	clear: both;
+}
+
+footer nav.wrapper {
+	background-color: #3d3d3d;
+}
+
+.blog-list-thumb,
+.blog-list-content {
+	display: inline-block;
+	vertical-align: top;
+}
+
+.blog-list-thumb {
+ 	width: 30%;
+}
+
+.blog-list-content {
+	width: 65%;
+	padding: 5px;
+}	
+
+.title-header {
+	padding: 50px 25px;
+	margin-bottom: 25px;
+	font-size: 36px;
+	color: #fff;
+	background-color: #4191bf;
+}
+
+.pagination-page {
+	display: inline-block;
+	width: 25px;
+	padding: 5px;	
+	margin-bottom: 5px;
+	text-align: center;
+	background-color: #ccc;
+}
+
+.pagination-page:hover {
+	background-color: #333;	
+}
+
