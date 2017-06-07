@@ -1,10 +1,13 @@
 {% if menu %}
 	{% for item in menu %}
     <div class="item">
-    <a target="{{ item.target }}" href="{{ item.link }}">
-    {{ item.title }}
-    <i class="dropdown icon"></i>
-    </a>
+      <a target="{{ item.target }}" href="{{ item.link }}">
+      {{ item.title }}
+      {% if item.get_children %}
+        <i class="dropdown icon"></i>
+        {% include "menu.twig" with {'menu': item.get_children} %}
+      {% endif %}
+      </a>
     </div>
 	{% endfor %}
 {% endif %}
