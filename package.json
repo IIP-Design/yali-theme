@@ -27,9 +27,9 @@
     "lint-scss": "stylelint assets/scss/*.scss --syntax scss || true",
     "imagemin": "imagemin assets/images/* -o dist/images",
     "build:css": "run-s lint-scss scss autoprefixer",
-    "build:js": "run-s lint browserify uglify",
+    "build:js": "run-s lint browserify uglify copy",
     "build:images": "run-s imagemin",
-    "copy": "cp assets/lib/*.js dist/lib",
+    "copy": "cp assets/lib/*.js dist/js",
     "prebuild": "rimraf dist/{js/*,images/*,css/*}",
     "build": "run-s build:*",
     "version": "versionbump 'version.json' 'package.json'",
@@ -62,14 +62,12 @@
     "onchange": "^3.2.1 ",
     "postcss-cli": "^2.5.2",
     "rimraf": "^2.6.1",
+    "semantic-ui-sass": "^2.2.10-5",
     "stylelint": "^7.10.1",
     "stylelint-config-standard": "^16.0.0",
     "svg-sprite-generator": "0.0.7",
     "svgo": "^0.7.2",
     "uglify-js": "^3.0.13",
     "versionbump": "git+ssh://git@github.com/IIP-Design/versionbump.git"
-  },
-  "dependencies": {
-    "semantic-ui": "^2.2.10"
   }
 }

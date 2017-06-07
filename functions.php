@@ -9,6 +9,8 @@ YALI_Autoloader::register( get_stylesheet_directory() . '/includes/' );
 
 
 use Yali\Twig as Twig;
+use Yali\Content_Block as Content_Block;
+
 
 class YaliSite {
 
@@ -43,8 +45,13 @@ class YaliSite {
 		return $constants;
 	}
 
-	function register_post_types() {
-		// this is where you can register custom post types
+	/**
+     * Registers custom post types
+     *
+     * @return void
+     */
+    function register_post_types() {
+        Content_Block::register();
 	}
 
 	function register_taxonomies() {
@@ -56,12 +63,11 @@ class YaliSite {
 	}
 
 	function enqueue_scripts() {
-		wp_enqueue_script( 'semantic-js', get_stylesheet_directory_uri() . '/node_modules/semantic-ui/dist/semantic.min.js', array('jquery'), '2.2.10', true );
-		wp_enqueue_script( 'yali-js', get_stylesheet_directory_uri() . '/dist/js/bundle.min.js', array(), CHILD_THEME_VERSION, true );
+			wp_enqueue_script( 'yali-js', get_stylesheet_directory_uri() . '/dist/js/bundle.min.js', array('jquery'), CHILD_THEME_VERSION, true );
 	}
 
 	function enqueue_styles() {
-		wp_enqueue_style( 'semantic-css', get_stylesheet_directory_uri() . '/node_modules/semantic-ui/dist/semantic.min.css', array(), '2.2.10', 'all' );
+			// emque additional styles
 	}
 
 	function add_to_twig( $twig ) {

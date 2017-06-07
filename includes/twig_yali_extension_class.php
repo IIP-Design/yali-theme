@@ -23,7 +23,8 @@ class Twig_YALI_Extension extends Twig_Extension implements Twig_Extension_Globa
 				new Twig_Function( 'is_page', 										array($this, 'is_page') ),
 			  new Twig_Function( 'is_archive', 									array($this, 'is_archive') ),
 
-				new Twig_Function( 'corona_entry_footer_output', 	array($this, 'corona_entry_footer_output') ),
+				new Twig_Function( 'corona_entry_footer_output', 	array($this, 'corona_entry_footer_output') ),  
+				new Twig_Function( 'corona_get_header_image_tag', array($this, 'corona_get_header_image_tag') ),
 				
 				new Twig_Function( 'tha_html_before', 						array($this, 'tha_html_before') ),  
 				new Twig_Function( 'tha_head_top', 								array($this, 'tha_head_top') ),
@@ -54,6 +55,7 @@ class Twig_YALI_Extension extends Twig_Extension implements Twig_Extension_Globa
 
 	// add corona functions
 	public function corona_entry_footer_output() {  return corona_entry_footer_output(); }
+	public function corona_get_header_image_tag() {  return corona_get_header_image_tag(); }
 
 	// add tha hook functions
 	public function tha_html_before() {  return tha_html_before(); }

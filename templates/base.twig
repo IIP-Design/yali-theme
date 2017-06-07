@@ -22,15 +22,24 @@
 			<header id="masthead" class="site-header">
 				
 				{% block header %}
-					<div class="wrapper">
-						<h1 class="hdr-logo" role="banner">
-							<a class="hdr-logo-link" href="{{ site.url }}" rel="home">{{ site.name }}</a>
-						</h1>
-						<nav id="nav-main" class="nav-main" role="navigation">
+					<div class="ui container">
+						<nav id="nav-main" class="ui inverted top fixed menu" role="navigation">
+							<h1 class="hdr-logo item">
+								<a class="hdr-logo-link" href="{{ site.url }}" rel="home">{{ site.name }}</a>
+							</h1>
+
 							{% include "menu.twig" with {'menu': site.get_menu(2)} %}
+
+							<div class="right item">
+								<button class="ui button">Join the Network</button>
+
+								<!-- cdp: search pulled right as 'join the network has to go here as well-->
+								<div class="ui input">
+									<input type="text" placeholder="Search...">
+								</div>
+							</div>
+						
 						</nav><!-- #nav -->
-						<!-- search pulled right as 'join the network has to go here as well-->
-						<div>search</div>
 					</div>
 				{% endblock %}
 				
@@ -38,7 +47,7 @@
 
 			{{ tha_content_before() }}
 
-			<main id="content" role="main" name="main" class="content-wrapper">
+			<main id="content" role="main" name="main" class="ui container">
 			
 				{{ tha_content_top() }}
 				
