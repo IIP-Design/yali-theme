@@ -92,16 +92,6 @@ class API {
 		return $menu['items'];
 	}
 
-	public static function get_header_menu() {
-		$request = new WP_REST_Request('GET', '/wp-api-menus/v2/menus/2');
-		return self::do_request( $request );
-	}
-
-	public static function get_footer_menu() {
-		$request = new WP_REST_Request('GET', '/wp-api-menus/v2/menus/3');
-		return self::do_request( $request );
-	}
-
 	public static function do_request( $request ) {
 		$response = rest_do_request( $request );
 		return $response->data;	

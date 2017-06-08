@@ -9,7 +9,11 @@ class Twig_YALI_Extension extends Twig_Extension implements Twig_Extension_Globa
 				'site' 		=> new Site(),
 				'context' => array()
 			);
-    }
+  }
+
+	 public function getTests() {
+			return array();
+  }
     
 	public function getFunctions() {
 			return array(
@@ -42,6 +46,7 @@ class Twig_YALI_Extension extends Twig_Extension implements Twig_Extension_Globa
 			);
     }
 
+		
 	// add wordpress functions
 	public function wp_head() {  return wp_head(); }
 	public function wp_title() {  return wp_title(); }

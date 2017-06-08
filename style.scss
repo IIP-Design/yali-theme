@@ -13,9 +13,11 @@ Text Domain: yali
 */
 
 // Import semantic ui first so that rules can be overrided
+$icons-font-path: 'node_modules/semantic-ui-sass/icons' !default;
 @import 'node_modules/semantic-ui-sass/semantic-ui'; 
 
-// use semantic-ui-sass
-
 @import 'assets/scss/variables';
+@import 'assets/scss/mixins';
 @import 'assets/scss/base'; 
+@import 'assets/scss/menu';
+@import 'assets/scss/accessibility';

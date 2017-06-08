@@ -51,7 +51,7 @@ class YaliSite {
      * @return void
      */
     function register_post_types() {
-        Content_Block::register();
+        //Content_Block::register();
 	}
 
 	function register_taxonomies() {
@@ -63,7 +63,7 @@ class YaliSite {
 	}
 
 	function enqueue_scripts() {
-			wp_enqueue_script( 'yali-js', get_stylesheet_directory_uri() . '/dist/js/bundle.min.js', array('jquery'), CHILD_THEME_VERSION, true );
+		 	wp_enqueue_script( 'yali-js', get_stylesheet_directory_uri() . '/dist/js/bundle.min.js', array('jquery'), CHILD_THEME_VERSION, true );
 	}
 
 	function enqueue_styles() {

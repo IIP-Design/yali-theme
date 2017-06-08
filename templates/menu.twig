@@ -1,24 +1,15 @@
 {% if menu %}
 	{% for item in menu %}
-    <div class="item">
-      <a target="{{ item.target }}" href="{{ item.link }}">
-      {{ item.title }}
-      {% if item.get_children %}
-        <i class="dropdown icon"></i>
-        {% include "menu.twig" with {'menu': item.get_children} %}
-      {% endif %}
-      </a>
-    </div>
+     <div class="ui item {{ item.children ? 'dropdown' : '' }}">
+       <a target="{{ item.target }}" href="{{ item.url }}">{{ item.title }}</a>
+       {% if item.children %}
+          <i class="dropdown icon"></i>
+          <div class="menu">
+            {% for child in item.children %}
+              <a class="item" target="{{ child.target }}" href="{{ child.url }}">{{ child.title }}</a>
+            {% endfor %}
+          </div>
+       {% endif %}
+     </div>
 	{% endfor %}
 {% endif %}
-
-
-
-{#{% if menu %}
-	{% for item in menu %}
-		<li class="item {{ item.classes | join(' ') }}">
-			<a target="{{ item.target }}" href="{{ item.link }}">{{ item.title }}</a>
-			{% include "menu.twig" with {'menu': item.get_children} %}
-		</li>
-	{% endfor %}
-{% endif %}#}
