@@ -3,7 +3,7 @@
 require_once get_stylesheet_directory() . '/includes/autoloader.php';
 
 /**
- * Autoload classes - any class that is in theincludes dir with a '[NAME].class.php file format will be autoloaded'
+ * Autoload classes - any class that is in the includes dir with a '[NAME]_class.php file format will be autoloaded'
  */
 YALI_Autoloader::register( get_stylesheet_directory() . '/includes/' );
 
