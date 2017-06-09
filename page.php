@@ -6,4 +6,3 @@ global $post;
 
 $context = array();
 Twig::render( array( 'page-' . $post->post_name . '.twig', 'page.twig' ), $context );
-

@@ -51,14 +51,14 @@ class YaliSite {
      * @return void
      */
     function register_post_types() {
-        //Content_Block::register();
-	}
+    	Content_Block::register();
+		}
 
 	function register_taxonomies() {
 		// this is where you can register custom taxonomies
 	}
 
-	function register_shortcodes() { // content blocks
+	function register_shortcodes() { 
 		// this is where you can register shortcodes
 	}
 
