@@ -11,7 +11,108 @@ require('../../node_modules/semantic-ui-sass/semantic-ui');
   }
 })(jQuery);
 
-},{"../../node_modules/semantic-ui-sass/semantic-ui":26}],2:[function(require,module,exports){
+},{"../../node_modules/semantic-ui-sass/semantic-ui":27}],2:[function(require,module,exports){
+'use strict';
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+var Nav = function () {
+
+	// DOM Elems
+	var burger = document.querySelector('.burger'),
+	    nav_siteurl = document.querySelectorAll('.nav_siteurl'),
+	    nav_text = document.querySelector('.nav_siteurl span'),
+	    nav_menu = document.querySelectorAll('.nav_menu'),
+	    nav_item = document.querySelectorAll('.nav_menu_item');
+
+	var init = function init() {
+		// Init Semantic dropdown menu
+		$('.ui.dropdown').dropdown();
+
+		mobile_menu();
+		display_sub_menu();
+		window_resize();
+	};
+
+	var mobile_menu = function mobile_menu() {
+		burger.addEventListener('click', function () {
+			this.classList.toggle('active');
+
+			[].concat(_toConsumableArray(nav_siteurl), _toConsumableArray(nav_menu)).forEach(function (item) {
+				item.classList.toggle('mobile');
+			});
+		});
+
+		// Change Site Url Text on smaller viewports
+		if (window.innerWidth < 680) nav_text.innerHTML = 'YALI';
+	};
+
+	var display_sub_menu = function display_sub_menu() {
+		Array.from(nav_item).forEach(function (item) {
+			item.addEventListener('click', function () {
+				// Remove any existing active classes and highlight clicked menu item
+				if (document.querySelector('.nav_menu_item .active') !== null) document.querySelector('.nav_menu_item .active').classList.remove('active');
+				this.getElementsByClassName('nav_menu_item_title-wrapper')[0].classList.toggle('active');
+
+				// Toggle dropdown arrows
+				var current_upArrow = document.querySelector('.upArrow');
+				var menuDropdown = this.getElementsByClassName('menuDropdown')[0];
+				if (menuDropdown.classList.contains('downArrow')) {
+					if (current_upArrow !== null) {
+						current_upArrow.classList.remove('upArrow');
+						current_upArrow.classList.add('downArrow');
+					}
+					menuDropdown.classList.remove('downArrow');
+					menuDropdown.classList.add('upArrow');
+				} else {
+					menuDropdown.classList.remove('upArrow');
+					menuDropdown.classList.add('downArrow');
+				}
+			});
+		});
+
+		// Remove Up Arrow on off clicks				
+		document.addEventListener('click', function (e) {
+			if (!nav_menu[0].contains(e.target)) {
+				var current_upArrow = document.querySelector('.upArrow');
+				if (current_upArrow !== null) {
+					current_upArrow.classList.remove('upArrow');
+					current_upArrow.classList.add('downArrow');
+				}
+			}
+		});
+	};
+
+	var window_resize = function window_resize() {
+		var resized;
+		window.addEventListener('resize', function () {
+			clearTimeout(resized);
+			resized = setTimeout(function () {
+				if (window.innerWidth > 932) {
+					[].concat(_toConsumableArray(nav_siteurl), _toConsumableArray(nav_menu)).forEach(function (item) {
+						if (item.classList.contains('mobile')) item.classList.remove('mobile');
+					});
+
+					if (burger.classList.contains('active')) burger.classList.remove('active');
+				}
+
+				if (window.innerWidth > 680) {
+					nav_text.innerHTML = 'Young African Leaders Initiative';
+				} else {
+					nav_text.innerHTML = 'YALI';
+				}
+			}, 250);
+		});
+	};
+
+	return {
+		init: init
+	};
+}();
+
+Nav.init();
+
+},{}],3:[function(require,module,exports){
 'use strict';
 
 /**
@@ -48,7 +149,7 @@ require('../../node_modules/semantic-ui-sass/semantic-ui');
 	}
 })();
 
-},{}],3:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 /*!
  * # Semantic UI - Accordion
  * http://github.com/semantic-org/semantic-ui/
@@ -660,7 +761,7 @@ $.extend( $.easing, {
 })( jQuery, window, document );
 
 
-},{}],4:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 /*!
  * # Semantic UI - API
  * http://github.com/semantic-org/semantic-ui/
@@ -1829,7 +1930,7 @@ $.api.settings = {
 
 })( jQuery, window, document );
 
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 /*!
  * # Semantic UI - Checkbox
  * http://github.com/semantic-org/semantic-ui/
@@ -2662,7 +2763,7 @@ $.fn.checkbox.settings = {
 
 })( jQuery, window, document );
 
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 /*!
  * # Semantic UI - Colorize
  * http://github.com/semantic-org/semantic-ui/
@@ -2944,7 +3045,7 @@ $.fn.colorize.settings = {
 
 })( jQuery, window, document );
 
-},{}],7:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 /*!
  * # Semantic UI - Dimmer
  * http://github.com/semantic-org/semantic-ui/
@@ -3654,7 +3755,7 @@ $.fn.dimmer.settings = {
 
 })( jQuery, window, document );
 
-},{}],8:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 /*!
  * # Semantic UI - Dropdown
  * http://github.com/semantic-org/semantic-ui/
@@ -7438,7 +7539,7 @@ $.fn.dropdown.settings.templates = {
 
 })( jQuery, window, document );
 
-},{}],9:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 /*!
  * # Semantic UI - Embed
  * http://github.com/semantic-org/semantic-ui/
@@ -8136,7 +8237,7 @@ $.fn.embed.settings = {
 
 })( jQuery, window, document );
 
-},{}],10:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 /*!
  * # Semantic UI - Form Validation
  * http://github.com/semantic-org/semantic-ui/
@@ -9744,7 +9845,7 @@ $.fn.form.settings = {
 
 })( jQuery, window, document );
 
-},{}],11:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 /*!
  * # Semantic UI - Modal
  * http://github.com/semantic-org/semantic-ui/
@@ -10667,7 +10768,7 @@ $.fn.modal.settings = {
 
 })( jQuery, window, document );
 
-},{}],12:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 /*!
  * # Semantic UI - Nag
  * http://github.com/semantic-org/semantic-ui/
@@ -11176,7 +11277,7 @@ $.extend( $.easing, {
 
 })( jQuery, window, document );
 
-},{}],13:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 /*!
  * # Semantic UI - Popup
  * http://github.com/semantic-org/semantic-ui/
@@ -12653,7 +12754,7 @@ $.fn.popup.settings = {
 
 })( jQuery, window, document );
 
-},{}],14:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 /*!
  * # Semantic UI - Progress
  * http://github.com/semantic-org/semantic-ui/
@@ -13586,7 +13687,7 @@ $.fn.progress.settings = {
 
 })( jQuery, window, document );
 
-},{}],15:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 /*!
  * # Semantic UI - Rating
  * http://github.com/semantic-org/semantic-ui/
@@ -14096,7 +14197,7 @@ $.fn.rating.settings = {
 
 })( jQuery, window, document );
 
-},{}],16:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 /*!
  * # Semantic UI - Search
  * http://github.com/semantic-org/semantic-ui/
@@ -15540,7 +15641,7 @@ $.fn.search.settings = {
 
 })( jQuery, window, document );
 
-},{}],17:[function(require,module,exports){
+},{}],18:[function(require,module,exports){
 /*!
  * # Semantic UI - Shape
  * http://github.com/semantic-org/semantic-ui/
@@ -16463,7 +16564,7 @@ $.fn.shape.settings = {
 
 })( jQuery, window, document );
 
-},{}],18:[function(require,module,exports){
+},{}],19:[function(require,module,exports){
 /*!
  * # Semantic UI - Sidebar
  * http://github.com/semantic-org/semantic-ui/
@@ -17501,7 +17602,7 @@ $.fn.sidebar.settings = {
 
 })( jQuery, window, document );
 
-},{}],19:[function(require,module,exports){
+},{}],20:[function(require,module,exports){
 /*!
  * # Semantic UI - Site
  * http://github.com/semantic-org/semantic-ui/
@@ -17990,7 +18091,7 @@ $.extend($.expr[ ":" ], {
 
 })( jQuery, window, document );
 
-},{}],20:[function(require,module,exports){
+},{}],21:[function(require,module,exports){
 /*!
  * # Semantic UI - State
  * http://github.com/semantic-org/semantic-ui/
@@ -18700,7 +18801,7 @@ $.fn.state.settings = {
 
 })( jQuery, window, document );
 
-},{}],21:[function(require,module,exports){
+},{}],22:[function(require,module,exports){
 /*!
  * # Semantic UI - Sticky
  * http://github.com/semantic-org/semantic-ui/
@@ -19644,7 +19745,7 @@ $.fn.sticky.settings = {
 
 })( jQuery, window, document );
 
-},{}],22:[function(require,module,exports){
+},{}],23:[function(require,module,exports){
 /*!
  * # Semantic UI - Tab
  * http://github.com/semantic-org/semantic-ui/
@@ -20598,7 +20699,7 @@ $.fn.tab.settings = {
 
 })( jQuery, window, document );
 
-},{}],23:[function(require,module,exports){
+},{}],24:[function(require,module,exports){
 /*!
  * # Semantic UI - Transition
  * http://github.com/semantic-org/semantic-ui/
@@ -21695,7 +21796,7 @@ $.fn.transition.settings = {
 
 })( jQuery, window, document );
 
-},{}],24:[function(require,module,exports){
+},{}],25:[function(require,module,exports){
 /*!
  * # Semantic UI - Visibility
  * http://github.com/semantic-org/semantic-ui/
@@ -23008,7 +23109,7 @@ $.fn.visibility.settings = {
 
 })( jQuery, window, document );
 
-},{}],25:[function(require,module,exports){
+},{}],26:[function(require,module,exports){
 /*!
  * # Semantic UI - Visit
  * http://github.com/semantic-org/semantic-ui/
@@ -23535,7 +23636,7 @@ $.fn.visit.settings = {
 
 })( jQuery, window, document );
 
-},{}],26:[function(require,module,exports){
+},{}],27:[function(require,module,exports){
 require('./js/api');
 require('./js/colorize');
 require('./js/form');
@@ -23560,4 +23661,4 @@ require('./js/sticky');
 require('./js/tab');
 require('./js/transition');
 
-},{"./js/accordion":3,"./js/api":4,"./js/checkbox":5,"./js/colorize":6,"./js/dimmer":7,"./js/dropdown":8,"./js/embed":9,"./js/form":10,"./js/modal":11,"./js/nag":12,"./js/popup":13,"./js/progress":14,"./js/rating":15,"./js/search":16,"./js/shape":17,"./js/sidebar":18,"./js/site":19,"./js/state":20,"./js/sticky":21,"./js/tab":22,"./js/transition":23,"./js/visibility":24,"./js/visit":25}]},{},[1,2]);
+},{"./js/accordion":4,"./js/api":5,"./js/checkbox":6,"./js/colorize":7,"./js/dimmer":8,"./js/dropdown":9,"./js/embed":10,"./js/form":11,"./js/modal":12,"./js/nag":13,"./js/popup":14,"./js/progress":15,"./js/rating":16,"./js/search":17,"./js/shape":18,"./js/sidebar":19,"./js/site":20,"./js/state":21,"./js/sticky":22,"./js/tab":23,"./js/transition":24,"./js/visibility":25,"./js/visit":26}]},{},[1,2,3]);

@@ -1,4 +1,6 @@
-@import 'version.json';
+
+// @import 'version.json';
+// Version: #{$version}
 
 /*!
 Theme Name: YLAI Theme
@@ -6,7 +8,7 @@ Theme URI: https://github.com/IIP-Design/yali-theme
 Author: Office of Design, U.S. Department of State
 Author URI: https://github.com/IIP-Design
 Description: Yali wordpress theme
-Version: #{$version}
+
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: yali
@@ -21,3 +23,13 @@ $icons-font-path: 'node_modules/semantic-ui-sass/icons' !default;
 @import 'assets/scss/base'; 
 @import 'assets/scss/menu';
 @import 'assets/scss/accessibility';
+
+// Shawn - Nav Partial - 6/14
+@import 'assets/scss/nav/_typography.scss';
+@import 'assets/scss/nav/_colors.scss';
+@import 'assets/scss/nav/_general.scss';
+@import 'assets/scss/nav/_elements.scss';
+@import 'assets/scss/nav/_nav.scss';
+@import 'assets/scss/nav/_menu.scss';
+@import 'assets/scss/nav/_submenu.scss';
+@import 'assets/scss/nav/_burger.scss';
