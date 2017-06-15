@@ -1,4 +1,4 @@
-var Nav = (function () {
+var Nav = (function ($) {
 
 	// DOM Elems
 	var burger = document.querySelector('.burger'),
@@ -91,6 +91,6 @@ var Nav = (function () {
 		init: init
 	}
 
-})();
+})(jQuery);
 
 Nav.init();
