@@ -1,0 +1,35 @@
+//Overwrite Semantic
+.ui.dropdown .menu {
+	top: 55px;
+	border: none;
+	border-radius: 0;
+	background: transparent;
+	@media screen and (min-width: 1025px) and (max-width: 1200px) {
+		top: 54px;
+	}
+	@media screen and (max-width: 933px) {
+		position: relative;
+		top: auto;
+		margin-top: 16px;
+		box-shadow: none;
+	}
+}
+
+.nav_menu_submenu {	
+	@media screen and (max-width: 933px) {
+		.opaque_bg {
+			display: none;
+		}
+	}
+
+	&_item {		
+		&.item {
+
+			a {
+				font-weight: 700;
+				color: #fff;
+			}			
+		}
+
+	}
+}

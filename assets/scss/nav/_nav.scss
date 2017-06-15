@@ -1,0 +1,104 @@
+.nav {
+  width: 100%;
+  padding: 26px;
+  color: #fff; 
+  @media screen and (max-width: 933px) {
+    padding: 16px;
+  }
+
+
+  &.ui.menu {
+    font-family: $SSP;
+    font-weight: 700;
+    background-color: $darkblue;
+  }
+
+
+  &_wrapper {
+    position: relative;
+    width: 100%;
+  }
+
+
+  &_siteurl {
+    float: left;
+    @media screen and (max-width: 933px) {
+      margin-right: 10px;
+    }
+
+    &.mobile {
+      display: inline-block;
+      float: none;
+    }
+
+    span {
+      vertical-align: top;
+      display: inline-block;
+      margin-top: 3px;
+      font-size: em(24);
+      color: #fff;
+      @include transition(all 0.5s ease);
+      @media screen and (min-width: 1025px) and (max-width: 1200px) {
+        font-size: em(20);
+      }
+      @media screen and (min-width: 934px) and (max-width: 1024px) {
+        font-size: em(16);
+      }      
+
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }  
+
+
+  &_right {
+    float: right;
+    @media screen and (max-width: 933px) {
+      float: none;
+      vertical-align: top;
+      display: inline-block;
+    }
+  }
+
+
+  &_join {    
+    display: none;
+    margin: 0 15px;
+    padding: 7px 23px;
+    color: $darkblue;
+    background-color: $yellow;    
+
+    &--mobile {
+      @media screen and (max-width: 933px) {
+        display: inline-block;
+      } 
+      @media screen and (min-width: 551px) and (max-width: 680px) {
+        @include transform(translateX(100%));
+      }
+      @media screen and (min-width: 500px) and (max-width: 550px) {
+        @include transform(translateX(75%));
+      }
+      @media screen and (max-width: 330px) {
+        margin: 0;
+      }            
+    }
+
+    &--desktop {
+      font-size: em(18);
+      @media screen and (min-width: 934px) {
+        display: inline-block;
+      } 
+      @media screen and (min-width: 934px) and (max-width: 1200px) {
+        margin: 0 7.5px;        
+      }
+      @media screen and (min-width: 1025px) and (max-width: 1200px) {
+        font-size: em(16);
+      }
+      @media screen and (min-width: 934px) and (max-width: 1024px) {
+        font-size: em(14);
+      }
+    }
+  }
+
+}
