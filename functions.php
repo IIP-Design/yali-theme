@@ -10,7 +10,7 @@ YALI_Autoloader::register( get_stylesheet_directory() . '/includes/' );
 
 use Yali\Twig as Twig;
 use Yali\Content_Block as Content_Block;
-
+use Yali\Content_Block_Shortcode as Content_Block_Shortcode;
 
 class YaliSite {
 
@@ -26,9 +26,10 @@ class YaliSite {
 		add_filter( 'twig_init', array( $this, 'add_to_twig' ) );
 		add_action( 'init', array( $this, 'register_post_types' ) );
 		add_action( 'init', array( $this, 'register_taxonomies' ) );
+		add_action( 'init', array( $this, 'register_shortcodes' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) ); 
-		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_styles' ) );
-
+		add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) ); 
+	
 		$this->twig_init();
 	}
 
@@ -58,16 +59,17 @@ class YaliSite {
 		// this is where you can register custom taxonomies
 	}
 
-	function register_shortcodes() { 
-		// this is where you can register shortcodes
+	function register_shortcodes() {
+		//add_shortcode( 'content_block', array($this, 'render_content_block') );
+		Content_Block_Shortcode::register();
 	}
 
 	function enqueue_scripts() {
 		 	wp_enqueue_script( 'yali-js', get_stylesheet_directory_uri() . '/dist/js/bundle.min.js', array('jquery'), CHILD_THEME_VERSION, true );
 	}
 
-	function enqueue_styles() {
-			// emque additional styles
+	function admin_enqueue_scripts() {
+			wp_enqueue_style( 'yali-admin-css', get_stylesheet_directory_uri() . '/style-admin.css' );
 	}
 
 	function add_to_twig( $twig ) {

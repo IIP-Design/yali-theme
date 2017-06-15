@@ -1,8 +1,9 @@
 {% extends "base.twig" %}
 
 {% block content %}
-	
-  <div class="ui container">
+	{{ page_header }}
+  <div>
+    
     {% if page_title %}
       <h1 class="ui header">{{ page_title }}</h1>
     {% endif %}

@@ -4,3 +4,4 @@ node_modules/
 npm-debug.log*
 vendor/
 .bundle
+example-functions.php

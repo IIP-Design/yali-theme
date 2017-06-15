@@ -56,7 +56,7 @@ class Twig {
    */
   public static function render( $templates, $context ) {
     $template = self::pick_template( $templates );
-    echo self::$twig->render( $template, $context );
+    return self::$twig->render( $template, $context );
 	}
 
   /**

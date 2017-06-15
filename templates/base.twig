@@ -19,48 +19,47 @@
 
 			{{ tha_header_before() }}
 			
-			<header id="masthead" class="site-header">
-				
+			<header class="ui fixed inverted menu">
 				{% block header %}
-					<div class="ui container">
-						<nav id="nav-main" class="ui text menu top fixed" role="navigation">
-							<h1 class="hdr-logo item">
-								<a class="hdr-logo-link" href="{{ site.url }}" rel="home">{{ site.name }}</a>
-							</h1>
-
-							{% include "menu.twig" with {'menu': site.get_menu(2)} %}
-
-							<div class="right item">
-								<button class="ui button">Join the Network</button>
-
-								<!-- cdp: search pulled right as 'join the network has to go here as well-->
-								<div class="ui input">
-									<input type="text" placeholder="Search...">
-								</div>
-							</div>
+					<nav class="ui container">
 						
-						</nav><!-- #nav -->
-					</div>
+						<a href="{{ site.url }}" class="header item">
+        			<img class="logo" src="{{ site.logo }}">
+							{{ site.name }}
+						</a>
+						
+						<!-- main nav -->
+						{% include "menu.twig" with {'menu': site.get_menu(2)} %}
+						
+						<!-- pull 'join the network right -->
+						<div class="ui input right item">
+							<button class="ui button right item">Join the Network</button>
+						</div>
+
+						<!--  pull cdp: search right -->
+						<div class="ui input right item">
+							<input type="text" placeholder="Search...">
+						</div>
+
+					</nav>
 				{% endblock %}
-				
-			</header><!-- #header -->
+			</header>
 
 			{{ tha_content_before() }}
 
-			<main id="content" role="main" name="main" class="ui container">
+			<main class="site-content" name="main" role="main">
 			
 				{{ tha_content_top() }}
-				
-				{% if title %}
-					<h1>{{ title }}</h1>
-				{% endif %}
-
-				<div class="wrapper {{ sidebar_class }}">
+						
+				<!-- overrride default content block with page specifc content -->
+				<div class="">
 					{% block content %}
-						Sorry, no content
+							<div class="ui container">
+								<p>Content area</p>
+							</div>
 					{% endblock %}
 				</div>
-
+			
 				{% if sidebar %}
 					<aside class="layout-sidebar">
 						{{ sidebar }}
@@ -74,8 +73,10 @@
 			{{ tha_content_after() }}
 
 			{% block footer %}
-				<footer id="footer">
-					{% include 'footer.twig' %}
+				<footer id="footer" class="ui inverted vertical footer segment">
+					<div class="ui container">
+						{% include 'footer.twig' %}
+					</div>
 				</footer>
 			{% endblock %}
 

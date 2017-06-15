@@ -15,30 +15,6 @@ $font-size-context: 16; // Default
   @return #{$pixels/$context}em;
 }
 
-
-/**
-  * Media query within the style declaration. Designed for mobile-first.
-  *
-  * @param A valid media query breakpoint
-  *
-  * @example
-  *
-  * .site-container {
-  *   margin: 0;
-  *
-  *   @include bp(48em) {
-  *     margin: 1em;
-  *   }
-  * }
-  *
-  */
-
-@mixin bp($point) {
-  @media ( 'min-width:' + $point ) {
-    @content;
-  }
-}
-
 /**
   * Hide visual elements in a way that makes them accessible to screen readers
   *
@@ -59,4 +35,27 @@ $font-size-context: 16; // Default
   padding: 0;
   position: absolute !important;
   width: 1px;
+}
+
+/**
+  * Media query within the style declaration. Designed for mobile-first.
+  *
+  * @param A valid media query breakpoint
+  *
+  * @example
+  *
+  * .site-container {
+  *   margin: 0;
+  *
+  *   @include bp(48em) {
+  *     margin: 1em;
+  *   }
+  * }
+  *
+  */
+
+@mixin bp($point) {
+  @media ('min-width:' + $point) {
+    @content;
+  }
 }
