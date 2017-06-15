@@ -30,7 +30,7 @@
 					</a>
 					<div class='nav_right'>
 						<div class='nav_join nav_join--mobile'>
-							<p>JOIN THE NETWORK</p>
+							<p>JOIN THE NETWORK</p>							
 						</div>
 						<ul class='nav_menu'>
 							<span class='opaque_bg'></span>
@@ -84,7 +84,7 @@
 								</ul>
 							</li>
 							<li class='nav_join nav_join--desktop'>
-								<p>JOIN THE NETWORK</p>
+								<p>JOIN THE NETWORK</p>								
 							</li>					
 							<li class='nav_menu_item nav_menu_item--search ui search'>
 								<div class='search_wrapper'>
@@ -103,19 +103,21 @@
 								</div>
 							</li>
 						</ul>				
-					</div>
-				</div><!-- nav_right -->
+					</div><!-- nav_right -->
+					
+					<!-- Join Form -->		
+					{% include '/partials/join-form.twig' %}
+				</div><!-- nav_wrapper -->
 
 				<div class='burger'>
 					<span></span>
 					<span></span>
 					<span></span>
-				</div>		
+				</div>				
 			</nav>
 			<!-- End Nav -->
 
-			<header id="masthead" class="site-header">
-				
+			<header id="masthead" class="site-header">				
 				{% block header %}
 					<div class="ui container" style="display: none;">
 						<nav id="nav-main" class="ui text menu top fixed" role="navigation">

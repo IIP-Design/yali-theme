@@ -23,6 +23,7 @@ Text Domain: yali
 @import 'assets/scss/content-block';
 @import 'assets/scss/accessibility';
 
+// Partials
 // Shawn - Nav Partial - 6/14
 @import 'assets/scss/nav/_typography.scss';
 @import 'assets/scss/nav/_colors.scss';
@@ -32,3 +33,6 @@ Text Domain: yali
 @import 'assets/scss/nav/_menu.scss';
 @import 'assets/scss/nav/_submenu.scss';
 @import 'assets/scss/nav/_burger.scss';
+
+// Join Form
+@import 'assets/scss/join-form/_join-form.scss';

@@ -85,7 +85,7 @@ $font-size-context: 16; // Default
 /**
   * Shawn Addition - 6/14
   *
-  */
+  
 @mixin transition($transition...) {
   -webkit-transition: $transition;
   -moz-transition: $transition;
@@ -105,3 +105,4 @@ $font-size-context: 16; // Default
   -moz-border-radius: $border-radius;
   border-radius: $border-radius;
 }
+*/

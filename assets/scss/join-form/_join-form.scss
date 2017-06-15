@@ -1,0 +1,46 @@
+.join {			
+	text-align: center;	
+	color: $darkblue;
+
+
+	&.ui.form {
+		position: absolute;
+		top: 176px;
+		right: 0;
+		display: none;
+		max-width: 533px;
+		background-color: $yellow;
+
+		.field {
+			margin-bottom: em(20);
+
+			input {
+				height: 48px;
+			}
+		}
+	}	
+
+
+	&_wrapper {
+		position: relative;
+		padding: 40px;
+	}
+
+
+	&_intro {
+		font-size: em(34);
+	}
+
+
+	&_submit {		
+		width: 100%;
+		height: em(60);
+		font-size: em(20) !important;
+
+		&.ui.button {
+			background-color: $darkblue;
+			color: #fff;
+		}
+	}
+
+}
