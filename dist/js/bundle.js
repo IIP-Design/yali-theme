@@ -16,7 +16,7 @@ require('../../node_modules/semantic-ui-sass/semantic-ui');
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
-var Nav = function () {
+var Nav = function ($) {
 
 	// DOM Elems
 	var burger = document.querySelector('.burger'),
@@ -108,7 +108,7 @@ var Nav = function () {
 	return {
 		init: init
 	};
-}();
+}(jQuery);
 
 Nav.init();
 
