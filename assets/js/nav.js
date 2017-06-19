@@ -30,15 +30,15 @@ var Nav = (function ($) {
 	};
 
 	var display_sub_menu = function() {
-		Array.from(nav_item).forEach(item => {
-			item.addEventListener('click', function() {
+		[...nav_item].forEach(item => {
+			item.addEventListener('click', function() {		
 				// Remove any existing active classes and highlight clicked menu item
 				if( document.querySelector('.nav_menu_item .active') !== null ) document.querySelector('.nav_menu_item .active').classList.remove('active');
 				this.getElementsByClassName('nav_menu_item_title-wrapper')[0].classList.toggle('active');
 				
 				// Toggle dropdown arrows
-				var current_upArrow = document.querySelector('.upArrow');		
-				var menuDropdown = this.getElementsByClassName('menuDropdown')[0];
+				let current_upArrow = document.querySelector('.upArrow');		
+				let menuDropdown = this.getElementsByClassName('menuDropdown')[0];
 				if(  menuDropdown.classList.contains('downArrow') ) {
 					if( current_upArrow !== null ) {
 						current_upArrow.classList.remove('upArrow');
@@ -56,7 +56,7 @@ var Nav = (function ($) {
 		// Remove Up Arrow on off clicks				
 		document.addEventListener('click', function(e) {
 			if( !nav_menu[0].contains(e.target) ) {								
-				var current_upArrow = document.querySelector('.upArrow');				
+				let current_upArrow = document.querySelector('.upArrow');				
 				if( current_upArrow !== null ) {
 					current_upArrow.classList.remove('upArrow');
 					current_upArrow.classList.add('downArrow');
