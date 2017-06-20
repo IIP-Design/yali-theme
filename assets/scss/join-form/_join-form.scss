@@ -3,6 +3,7 @@
 	color: $darkblue;
 	transition: all 0.5s ease;
 
+
 	&.ui.form {
 		position: absolute;
 		top: 300%;
@@ -32,6 +33,21 @@
 	&.fade_out.ui.form {
 		top: 0;
 		opacity: 0;	
+	}
+
+
+	.upArrow {
+
+		&.upArrow--joinForm {
+			position: absolute;
+			top: -20px;
+			left: 50%;
+			border-width: 20px;
+			border-bottom-color: $yellow;
+			@media screen and (min-width: 934px) {
+				display: none;
+			}
+		}
 	}
 
 

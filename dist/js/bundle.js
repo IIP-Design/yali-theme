@@ -13,8 +13,9 @@ var Join = function () {
 	var init = function init() {
 		check_session_data();
 		display_form();
-		on_scroll();
 		on_resize();
+
+		window.addEventListener('scroll', on_scroll, false);
 	};
 
 	var check_session_data = function check_session_data() {
@@ -46,6 +47,8 @@ var Join = function () {
 			} else {
 				nav_join_mobile.style.display = 'inline-block';
 			}
+
+			off_scroll();
 		});
 	};
 
@@ -55,6 +58,8 @@ var Join = function () {
 			item.addEventListener('click', function () {
 				form.style.display = 'block';
 				formScrollPos = window.pageYOffset;
+
+				window.addEventListener('scroll', on_scroll, false);
 			});
 		});
 
@@ -63,27 +68,41 @@ var Join = function () {
 
 	var on_scroll = function on_scroll() {
 		// Hide form after scrolling 300px from formScrollPos
-		window.addEventListener('scroll', function () {
-			if (window.pageYOffset - formScrollPos >= 300) {
-				// Set session if user scrolled, used for resize event
-				localStorage.scrolled = 'true';
+		if (window.pageYOffset - formScrollPos >= 300) {
+			// Set session if user scrolled, used for resize event
+			localStorage.scrolled = 'true';
 
-				form.classList.add('fade_out');
-				setTimeout(function () {
-					form.style.display = 'none';
-					form.classList.remove('fade_out');
-				}, 500);
+			form.classList.add('fade_out');
+			setTimeout(function () {
+				form.style.display = 'none';
+				form.classList.remove('fade_out');
 
+				window.removeEventListener('scroll', on_scroll, false);
+			}, 250);
+
+			if (window.innerWidth > 933) {
 				nav_join_desktop.style.display = 'inline-block';
 				nav_join_desktop.classList.add('no_show');
+			} else {
+				nav_join_mobile.style.display = 'inline-block';
+				nav_join_mobile.classList.add('no_show');
+			}
 
-				// Transition in nav join menu btn
-				setTimeout(function () {
+			// Transition in nav join menu btn
+			setTimeout(function () {
+				if (window.innerWidth > 933) {
 					nav_join_desktop.classList.remove('no_show');
 					nav_join_desktop.classList.add('fade_in');
-				}, 0);
-			}
-		});
+				} else {
+					nav_join_mobile.classList.remove('no_show');
+					nav_join_mobile.classList.add('fade_in');
+				}
+			}, 0);
+		}
+	};
+
+	var off_scroll = function off_scroll() {
+		window.removeEventListener('scroll', on_scroll, false);
 	};
 
 	var on_resize = function on_resize() {
@@ -138,9 +157,18 @@ var Nav = function ($) {
 		// Init Semantic dropdown menu
 		$('.ui.dropdown').dropdown();
 
+		set_title_text();
 		mobile_menu();
 		display_sub_menu();
 		window_resize();
+	};
+
+	var set_title_text = function set_title_text() {
+		if (window.innerWidth > 767) {
+			nav_text.innerHTML = 'Young African Leaders Initiative';
+		} else {
+			nav_text.innerHTML = 'YALI';
+		}
 	};
 
 	var mobile_menu = function mobile_menu() {
@@ -164,7 +192,7 @@ var Nav = function ($) {
 				this.getElementsByClassName('nav_menu_item_title-wrapper')[0].classList.toggle('active');
 
 				// Toggle dropdown arrows
-				var current_upArrow = document.querySelector('.upArrow');
+				var current_upArrow = document.querySelector('.nav_menu .upArrow');
 				var menuDropdown = this.getElementsByClassName('menuDropdown')[0];
 				if (menuDropdown.classList.contains('downArrow')) {
 					if (current_upArrow !== null) {
@@ -183,7 +211,7 @@ var Nav = function ($) {
 		// Remove Up Arrow on off clicks				
 		document.addEventListener('click', function (e) {
 			if (!nav_menu[0].contains(e.target)) {
-				var current_upArrow = document.querySelector('.upArrow');
+				var current_upArrow = document.querySelector('.nav_menu .upArrow');
 				if (current_upArrow !== null) {
 					current_upArrow.classList.remove('upArrow');
 					current_upArrow.classList.add('downArrow');
@@ -205,11 +233,7 @@ var Nav = function ($) {
 					if (burger.classList.contains('active')) burger.classList.remove('active');
 				}
 
-				if (window.innerWidth > 680) {
-					nav_text.innerHTML = 'Young African Leaders Initiative';
-				} else {
-					nav_text.innerHTML = 'YALI';
-				}
+				set_title_text();
 			}, 250);
 		});
 	};

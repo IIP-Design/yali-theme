@@ -9,9 +9,10 @@ var Join = (function() {
 
 	var init = function() {
 		check_session_data();
-		display_form();
-		on_scroll();
+		display_form();		
 		on_resize();
+
+		window.addEventListener('scroll', on_scroll, false);
 	};
 
 	var check_session_data = function() {
@@ -43,6 +44,8 @@ var Join = (function() {
 			} else {
 				nav_join_mobile.style.display = 'inline-block';
 			}
+
+			off_scroll();
 		});
 	};
 
@@ -52,35 +55,51 @@ var Join = (function() {
 			item.addEventListener('click', function() {
 				form.style.display = 'block';	
 				formScrollPos = window.pageYOffset;
+
+				window.addEventListener('scroll', on_scroll, false);
 			});
 		});		
-
+		
 		close_form();
 	};
 
 	var on_scroll = function() {
 		// Hide form after scrolling 300px from formScrollPos
-		window.addEventListener('scroll', () => {
-			if( (window.pageYOffset - formScrollPos) >= 300 ) {
-				// Set session if user scrolled, used for resize event
-				localStorage.scrolled = 'true';				
+		if( (window.pageYOffset - formScrollPos) >= 300 ) {
+			// Set session if user scrolled, used for resize event
+			localStorage.scrolled = 'true';				
 
-				form.classList.add('fade_out');
-				setTimeout(() => {
-					form.style.display = 'none';
-					form.classList.remove('fade_out');
-				}, 500);
-				
+			form.classList.add('fade_out');
+			setTimeout(() => {
+				form.style.display = 'none';
+				form.classList.remove('fade_out');
+
+				window.removeEventListener('scroll', on_scroll, false);
+			}, 250);
+			
+			if( window.innerWidth > 933 ) {
 				nav_join_desktop.style.display = 'inline-block';	
-				nav_join_desktop.classList.add('no_show');			
-				
-				// Transition in nav join menu btn
-				setTimeout(() => {
+				nav_join_desktop.classList.add('no_show');				
+			} else {
+				nav_join_mobile.style.display = 'inline-block';	
+				nav_join_mobile.classList.add('no_show');			
+			}
+							
+			// Transition in nav join menu btn
+			setTimeout(() => {
+				if( window.innerWidth > 933 ) {
 					nav_join_desktop.classList.remove('no_show');
-					nav_join_desktop.classList.add('fade_in');
-				}, 0);
-			}	
-		});		
+					nav_join_desktop.classList.add('fade_in');	
+				} else {
+					nav_join_mobile.classList.remove('no_show');
+					nav_join_mobile.classList.add('fade_in');
+				}					
+			}, 0);
+		}
+	};
+
+	var off_scroll = function() {
+		window.removeEventListener('scroll', on_scroll, false);
 	};
 
 	var on_resize = function() {
@@ -95,7 +114,7 @@ var Join = (function() {
 				}				
 			});
 		});
-	}
+	};
 
 	return {
 		init: init

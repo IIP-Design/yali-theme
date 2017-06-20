@@ -11,9 +11,18 @@ var Nav = (function ($) {
 		// Init Semantic dropdown menu
 		$('.ui.dropdown').dropdown();		
 
+		set_title_text();
 		mobile_menu();
 		display_sub_menu();
 		window_resize();
+	};
+
+	var set_title_text = function() {
+		if( window.innerWidth > 767 ) {
+			nav_text.innerHTML = 'Young African Leaders Initiative';
+		} else {
+			nav_text.innerHTML = 'YALI';
+		}
 	};
 
 	var mobile_menu = function() {
@@ -37,7 +46,7 @@ var Nav = (function ($) {
 				this.getElementsByClassName('nav_menu_item_title-wrapper')[0].classList.toggle('active');
 				
 				// Toggle dropdown arrows
-				let current_upArrow = document.querySelector('.upArrow');		
+				let current_upArrow = document.querySelector('.nav_menu .upArrow');		
 				let menuDropdown = this.getElementsByClassName('menuDropdown')[0];
 				if(  menuDropdown.classList.contains('downArrow') ) {
 					if( current_upArrow !== null ) {
@@ -56,7 +65,7 @@ var Nav = (function ($) {
 		// Remove Up Arrow on off clicks				
 		document.addEventListener('click', function(e) {
 			if( !nav_menu[0].contains(e.target) ) {								
-				let current_upArrow = document.querySelector('.upArrow');				
+				let current_upArrow = document.querySelector('.nav_menu .upArrow');				
 				if( current_upArrow !== null ) {
 					current_upArrow.classList.remove('upArrow');
 					current_upArrow.classList.add('downArrow');
@@ -78,11 +87,7 @@ var Nav = (function ($) {
 					if( burger.classList.contains('active') ) burger.classList.remove('active');
 				}
 
-				if( window.innerWidth > 680 ) {
-					nav_text.innerHTML = 'Young African Leaders Initiative';
-				} else {
-					nav_text.innerHTML = 'YALI';
-				}				
+				set_title_text();
 			}, 250);		
 		});
 	};

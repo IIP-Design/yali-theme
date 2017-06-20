@@ -59,7 +59,7 @@
     @media screen and (max-width: 933px) {
       float: none;
       vertical-align: top;
-      display: inline-block;
+      display: inline-block;      
     }
   }
 
@@ -76,15 +76,18 @@
     &--mobile {
       @media screen and (min-width: 934px) {
         display: none !important;
-      } 
-      @media screen and (min-width: 551px) and (max-width: 680px) {
-        transform: translateX(100%);
-      }
-      @media screen and (min-width: 500px) and (max-width: 550px) {
-        transform: translateX(75%);
-      }
-      @media screen and (max-width: 330px) {
-        margin: 0;
+      }       
+
+      @media screen and (max-width: 933px) {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        margin: 0 0 0 23px;
+      }      
+
+      @media screen and (max-width: 425px) {
+        margin: 0 0 0 14px;
+        padding: 7px 14px;
       }      
     }
 
