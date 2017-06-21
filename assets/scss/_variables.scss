@@ -1,9 +1,33 @@
-// primary colors
+/*------------------------------------*\
+  #VARIABLES (DEFAULTS)
+\*------------------------------------*/
+
+// colors
 $blue-navy: #192856;
 $blue-medium: #174f9f;
 $blue-bright: #25ace2;
 
+$darkblue: #192856;
+$blue: #174F9F;
+$lightblue: #25ACE2;
+$yellow: #F2D400;
 
-// accent colors
-$yellow: #f2d400;
+$yellow: #f2d400;    
 $red: #bd1125;
+
+// fonts
+$font-color: #1d1d1d;
+$font-size: 18;
+$mobile: 12;
+
+/*------------------------------------*\
+  #MEDIA-QUERIES
+\*------------------------------------*/
+
+$mobile-big:           25em;  // 400px
+$tablet-sm:            38em;  // 620px
+$tablet:               48em;  // 768px
+$laptop:               64em;  // 1024px
+$desktop:              75em;  // 1200px
+$desktop-big:          100em; // 1600px
+                                                                                                                                     

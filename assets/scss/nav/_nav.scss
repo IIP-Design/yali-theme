@@ -8,9 +8,9 @@
 
 
   &.ui.menu {
-    font-family: $SSP;
-    font-weight: 700;
-    background-color: $darkblue;
+   // font-family: $SSP;
+    font-weight: 600;
+    background-color: $blue-navy;
   }
 
 
@@ -36,7 +36,7 @@
     span {
       vertical-align: top;
       display: inline-block;
-      margin-top: 3px;
+      margin-top: -1px;
       font-size: em(24);
       color: #fff;
       transition: all 0.5s ease;
@@ -71,8 +71,8 @@
     display: none;
     margin: 0 15px;
     padding: 7px 23px;
-    color: $darkblue;
-    background-color: $yellow;
+    color: $blue-navy;
+    background-color: $yellow;    
     cursor: pointer;
     transition: opacity 2s ease;
 

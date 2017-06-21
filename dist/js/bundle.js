@@ -1,268 +1,268 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 'use strict';
 
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports.init = init;
+
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
-var Join = function () {
+// Common vars
+var form = document.querySelector('.join'),
+    form_close = document.querySelector('.close--join_form'),
+    formScrollPos = window.pageYOffset,
+    formHiddenFields = document.querySelectorAll('.hide_on_init'),
+    formPointer = document.querySelector('.upArrow--joinForm'),
+    nav_join_desktop = document.querySelector('.nav_join--desktop'),
+    nav_join_mobile = document.querySelector('.nav_join--mobile'),
+    site_title = document.querySelector('.nav_siteurl span');
 
-	// Common vars
-	var form = document.querySelector('.join'),
-	    form_close = document.querySelector('.close--join_form'),
-	    formScrollPos = window.pageYOffset,
-	    formHiddenFields = document.querySelectorAll('.hide_on_init'),
-	    formPointer = document.querySelector('.upArrow--joinForm'),
-	    nav_join_desktop = document.querySelector('.nav_join--desktop'),
-	    nav_join_mobile = document.querySelector('.nav_join--mobile'),
-	    site_title = document.querySelector('.nav_siteurl span');
+function check_session_data() {
+	var session = localStorage.session;
 
-	var init = function init() {
-		check_session_data();
-		display_form();
-		on_resize();
+	if (session == null || session == 'new') {
+		localStorage.session = 'new';
+		form.style.display = 'block';
 
-		window.addEventListener('scroll', on_scroll, false);
-	};
+		site_title.textContent === 'Young African Leaders Initiative';
+	}
 
-	var check_session_data = function check_session_data() {
-		var session = localStorage.session;
+	if (session == 'returning') {
+		form.style.display = 'none';
 
-		if (session == null || session == 'new') {
-			localStorage.session = 'new';
+		if (window.innerWidth > 933) {
+			nav_join_desktop.style.display = 'inline-block';
+		} else {
+			nav_join_mobile.style.display = 'inline-block';
+		}
+	}
+}
+
+function close_form() {
+	form_close.addEventListener('click', function () {
+		localStorage.session = 'returning';
+		form.style.display = 'none';
+
+		if (window.innerWidth > 933) {
+			nav_join_desktop.style.display = 'inline-block';
+		} else {
+			nav_join_mobile.style.display = 'inline-block';
+			set_title();
+		}
+
+		off_scroll();
+	});
+}
+
+function display_form() {
+	// Display form and set formScrollPos
+	[nav_join_desktop, nav_join_mobile].forEach(function (item) {
+		item.addEventListener('click', function () {
 			form.style.display = 'block';
-
-			site_title.textContent === 'Young African Leaders Initiative';
-		}
-
-		if (session == 'returning') {
-			form.style.display = 'none';
-
-			if (window.innerWidth > 933) {
-				nav_join_desktop.style.display = 'inline-block';
-			} else {
-				nav_join_mobile.style.display = 'inline-block';
-			}
-		}
-	};
-
-	var close_form = function close_form() {
-		form_close.addEventListener('click', function () {
-			localStorage.session = 'returning';
-			form.style.display = 'none';
-
-			if (window.innerWidth > 933) {
-				nav_join_desktop.style.display = 'inline-block';
-			} else {
-				nav_join_mobile.style.display = 'inline-block';
-				set_title();
-			}
-
-			off_scroll();
-		});
-	};
-
-	var display_form = function display_form() {
-		// Display form and set formScrollPos
-		[nav_join_desktop, nav_join_mobile].forEach(function (item) {
-			item.addEventListener('click', function () {
-				form.style.display = 'block';
-				[].concat(_toConsumableArray(formHiddenFields)).forEach(function (field) {
-					return field.classList.remove('hide_on_init');
-				});
-
-				formScrollPos = window.pageYOffset;
-				window.addEventListener('scroll', on_scroll, false);
-				formPointer.style.display = 'block';
+			[].concat(_toConsumableArray(formHiddenFields)).forEach(function (field) {
+				return field.classList.remove('hide_on_init');
 			});
+
+			formScrollPos = window.pageYOffset;
+			window.addEventListener('scroll', on_scroll, false);
+			formPointer.style.display = 'block';
 		});
+	});
 
-		close_form();
-	};
+	close_form();
+}
 
-	var on_scroll = function on_scroll() {
-		// Hide form after scrolling 300px from formScrollPos
-		if (window.pageYOffset - formScrollPos >= 300) {
-			// Set session if user scrolled, used for resize event
-			localStorage.scrolled = 'true';
+function on_scroll() {
+	// Hide form after scrolling 300px from formScrollPos
+	if (window.pageYOffset - formScrollPos >= 300) {
+		// Set session if user scrolled, used for resize event
+		localStorage.scrolled = 'true';
 
-			// Add fade out class and remove afterwards 
-			form.classList.add('fade_out');
-			setTimeout(function () {
-				form.style.display = 'none';
-				form.classList.remove('fade_out');
-			}, 250);
+		// Add fade out class and remove afterwards 
+		form.classList.add('fade_out');
+		setTimeout(function () {
+			form.style.display = 'none';
+			form.classList.remove('fade_out');
+		}, 250);
 
-			// Stop scroll event
-			window.removeEventListener('scroll', on_scroll, false);
-
-			// Display appropriate nav menu join button, set title if mobile
-			// initially set to opacity 0
-			if (window.innerWidth > 933) {
-				nav_join_desktop.style.display = 'inline-block';
-				nav_join_desktop.classList.add('no_show');
-			} else {
-				nav_join_mobile.style.display = 'inline-block';
-				nav_join_mobile.classList.add('no_show');
-				set_title();
-			}
-
-			// Transition in nav join menu btn
-			setTimeout(function () {
-				if (window.innerWidth > 933) {
-					nav_join_desktop.classList.remove('no_show');
-					nav_join_desktop.classList.add('fade_in');
-				} else {
-					nav_join_mobile.classList.remove('no_show');
-					nav_join_mobile.classList.add('fade_in');
-				}
-			}, 0);
-		}
-	};
-
-	var off_scroll = function off_scroll() {
+		// Stop scroll event
 		window.removeEventListener('scroll', on_scroll, false);
-	};
 
-	var set_title = function set_title() {
-		if (site_title.textContent === 'Young African Leaders Initiative') site_title.textContent = 'YALI';
-	};
+		// Display appropriate nav menu join button, set title if mobile
+		// initially set to opacity 0
+		if (window.innerWidth > 933) {
+			nav_join_desktop.style.display = 'inline-block';
+			nav_join_desktop.classList.add('no_show');
+		} else {
+			nav_join_mobile.style.display = 'inline-block';
+			nav_join_mobile.classList.add('no_show');
+			set_title();
+		}
 
-	var on_resize = function on_resize() {
-		var resized;
-		window.addEventListener('resize', function () {
-			clearTimeout(resized);
-			resized = setTimeout(function () {
-				if (window.innerWidth < 934) {
-					if (localStorage.session == 'returning' || localStorage.scrolled == 'true') {
-						nav_join_mobile.style.display = 'inline-block';
-						set_title();
-					}
-				} else {
-					if (localStorage.session == 'returning') nav_join_desktop.style.display = 'inline-block';
+		// Transition in nav join menu btn
+		setTimeout(function () {
+			if (window.innerWidth > 933) {
+				nav_join_desktop.classList.remove('no_show');
+				nav_join_desktop.classList.add('fade_in');
+			} else {
+				nav_join_mobile.classList.remove('no_show');
+				nav_join_mobile.classList.add('fade_in');
+			}
+		}, 0);
+	}
+}
+
+function off_scroll() {
+	window.removeEventListener('scroll', on_scroll, false);
+}
+
+function set_title() {
+	if (site_title.textContent === 'Young African Leaders Initiative') site_title.textContent = 'YALI';
+}
+
+function on_resize() {
+	var resized;
+	window.addEventListener('resize', function () {
+		clearTimeout(resized);
+		resized = setTimeout(function () {
+			if (window.innerWidth < 934) {
+				if (localStorage.session == 'returning' || localStorage.scrolled == 'true') {
+					nav_join_mobile.style.display = 'inline-block';
+					set_title();
 				}
-			});
+			} else {
+				if (localStorage.session == 'returning') nav_join_desktop.style.display = 'inline-block';
+			}
 		});
-	};
+	});
+}
 
-	return {
-		init: init
-	};
-}();
+function init() {
+	check_session_data();
+	display_form();
+	on_resize();
 
-Join.init();
+	window.addEventListener('scroll', on_scroll, false);
+}
 
 },{}],2:[function(require,module,exports){
 'use strict';
 
 require('../../node_modules/semantic-ui-sass/semantic-ui');
 
-(function ($) {
-  menuInit();
+var _nav = require('./nav.js');
 
-  function menuInit() {
-    $('.ui .dropdown').dropdown();
-  }
+var nav = _interopRequireWildcard(_nav);
+
+var _join_form = require('./join_form.js');
+
+var join_form = _interopRequireWildcard(_join_form);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+(function ($) {
+
+  nav.init($);
+  join_form.init();
 })(jQuery);
 
-},{"../../node_modules/semantic-ui-sass/semantic-ui":28}],3:[function(require,module,exports){
+},{"../../node_modules/semantic-ui-sass/semantic-ui":28,"./join_form.js":1,"./nav.js":3}],3:[function(require,module,exports){
 'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports.init = init;
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
-var Nav = function ($) {
+// DOM Elems
+var burger = document.querySelector('.burger'),
+    nav_siteurl = document.querySelectorAll('.nav_siteurl'),
+    nav_text = document.querySelector('.nav_siteurl span'),
+    nav_menu = document.querySelectorAll('.nav_menu'),
+    nav_item = document.querySelectorAll('.nav_menu_item');
 
-	// DOM Elems
-	var burger = document.querySelector('.burger'),
-	    nav_siteurl = document.querySelectorAll('.nav_siteurl'),
-	    nav_text = document.querySelector('.nav_siteurl span'),
-	    nav_menu = document.querySelectorAll('.nav_menu'),
-	    nav_item = document.querySelectorAll('.nav_menu_item');
+function mobile_menu() {
+	burger.addEventListener('click', function () {
+		this.classList.toggle('active');
 
-	var init = function init() {
-		// Init Semantic dropdown menu
-		$('.ui.dropdown').dropdown();
-
-		set_title_text();
-		mobile_menu();
-		display_sub_menu();
-		window_resize();
-	};
-
-	var set_title_text = function set_title_text() {
-		if (window.innerWidth > 767) {
-			nav_text.innerHTML = 'Young African Leaders Initiative';
-		}
-	};
-
-	var mobile_menu = function mobile_menu() {
-		burger.addEventListener('click', function () {
-			this.classList.toggle('active');
-
-			[].concat(_toConsumableArray(nav_siteurl), _toConsumableArray(nav_menu)).forEach(function (item) {
-				item.classList.toggle('mobile');
-			});
+		[].concat(_toConsumableArray(nav_siteurl), _toConsumableArray(nav_menu)).forEach(function (item) {
+			item.classList.toggle('mobile');
 		});
-	};
+	});
+}
 
-	var display_sub_menu = function display_sub_menu() {
-		[].concat(_toConsumableArray(nav_item)).forEach(function (item) {
-			item.addEventListener('click', function () {
-				// Remove any existing active classes and highlight clicked menu item
-				if (document.querySelector('.nav_menu_item .active') !== null) document.querySelector('.nav_menu_item .active').classList.remove('active');
-				this.getElementsByClassName('nav_menu_item_title-wrapper')[0].classList.toggle('active');
+function set_title_text() {
+	if (window.innerWidth > 767) {
+		nav_text.innerHTML = 'Young African Leaders Initiative';
+	}
+}
 
-				// Toggle dropdown arrows
-				var current_upArrow = document.querySelector('.nav_menu .upArrow');
-				var menuDropdown = this.getElementsByClassName('menuDropdown')[0];
-				if (menuDropdown.classList.contains('downArrow')) {
-					if (current_upArrow !== null) {
-						current_upArrow.classList.remove('upArrow');
-						current_upArrow.classList.add('downArrow');
-					}
-					menuDropdown.classList.remove('downArrow');
-					menuDropdown.classList.add('upArrow');
-				} else {
-					menuDropdown.classList.remove('upArrow');
-					menuDropdown.classList.add('downArrow');
-				}
-			});
-		});
+function display_sub_menu() {
+	Array.from(nav_item).forEach(function (item) {
+		item.addEventListener('click', function () {
+			// Remove any existing active classes and highlight clicked menu item
+			if (document.querySelector('.nav_menu_item .active') !== null) document.querySelector('.nav_menu_item .active').classList.remove('active');
+			this.getElementsByClassName('nav_menu_item_title-wrapper')[0].classList.toggle('active');
 
-		// Remove Up Arrow on off clicks				
-		document.addEventListener('click', function (e) {
-			if (!nav_menu[0].contains(e.target)) {
-				var current_upArrow = document.querySelector('.nav_menu .upArrow');
+			// Toggle dropdown arrows
+			var current_upArrow = document.querySelector('.nav_menu_item .upArrow');
+			var menuDropdown = this.getElementsByClassName('menuDropdown')[0];
+			if (menuDropdown.classList.contains('downArrow')) {
 				if (current_upArrow !== null) {
 					current_upArrow.classList.remove('upArrow');
 					current_upArrow.classList.add('downArrow');
 				}
+				menuDropdown.classList.remove('downArrow');
+				menuDropdown.classList.add('upArrow');
+			} else {
+				menuDropdown.classList.remove('upArrow');
+				menuDropdown.classList.add('downArrow');
 			}
 		});
-	};
+	});
 
-	var window_resize = function window_resize() {
-		var resized;
-		window.addEventListener('resize', function () {
-			clearTimeout(resized);
-			resized = setTimeout(function () {
-				if (window.innerWidth > 932) {
-					[].concat(_toConsumableArray(nav_siteurl), _toConsumableArray(nav_menu)).forEach(function (item) {
-						if (item.classList.contains('mobile')) item.classList.remove('mobile');
-					});
+	// Remove Up Arrow on off clicks				
+	document.addEventListener('click', function (e) {
+		if (!nav_menu[0].contains(e.target)) {
+			var current_upArrow = document.querySelector('.nav_menu_item .upArrow');
+			if (current_upArrow !== null) {
+				current_upArrow.classList.remove('upArrow');
+				current_upArrow.classList.add('downArrow');
+			}
+		}
+	});
+}
 
-					if (burger.classList.contains('active')) burger.classList.remove('active');
-				}
+function window_resize() {
+	var resized;
+	window.addEventListener('resize', function () {
+		clearTimeout(resized);
+		resized = setTimeout(function () {
+			if (window.innerWidth > 932) {
+				[].concat(_toConsumableArray(nav_siteurl), _toConsumableArray(nav_menu)).forEach(function (item) {
+					if (item.classList.contains('mobile')) item.classList.remove('mobile');
+				});
 
-				set_title_text();
-			}, 250);
-		});
-	};
+				if (burger.classList.contains('active')) burger.classList.remove('active');
+			}
 
-	return {
-		init: init
-	};
-}(jQuery);
+			set_title_text();
+		}, 250);
+	});
+}
 
-Nav.init();
+function init($) {
+	// Init Semantic dropdown menu
+	$('.ui.dropdown').dropdown();
+
+	set_title_text();
+	mobile_menu();
+	display_sub_menu();
+	window_resize();
+}
 
 },{}],4:[function(require,module,exports){
 'use strict';

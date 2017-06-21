@@ -34,7 +34,7 @@ class YaliSite {
 	}
 
 	function twig_init() {
-		Twig::$locations = array( 'templates', 'views' );
+		Twig::$locations = array( 'templates' );
 		Twig::init();
 	}
 

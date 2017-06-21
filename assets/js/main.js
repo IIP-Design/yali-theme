@@ -1,10 +1,10 @@
 import '../../node_modules/semantic-ui-sass/semantic-ui'; 
+import * as nav from './nav.js';
+import * as join_form from './join_form.js';
 
 (function($) {
-  menuInit();
-
-  function menuInit() {
-    $('.ui .dropdown').dropdown();
-  }
+ 
+  nav.init($);
+  join_form.init();
 
 })( jQuery ); 

@@ -27,9 +27,9 @@ class Site {
   protected function init() {
     $blog_id = get_current_blog_id();
 		$this->url = home_url();
-    $this->site_url = site_url();
+    	$this->site_url = site_url();
 		$this->theme_url = get_stylesheet_directory_uri();
-    $this->name = get_bloginfo( 'name' );
+    	$this->name = get_bloginfo( 'name' );
 		$this->title = $this->name;
 		$this->description = get_bloginfo( 'description' );
 		$this->language = get_bloginfo( 'language' );

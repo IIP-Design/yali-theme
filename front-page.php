@@ -4,17 +4,15 @@ use Yali\Twig as Twig;
 
 // Post Object
 global $post;
-// echo '<pre>';
-// var_dump($post);
-// echo '</pre>';
-$page_header = get_the_post_thumbnail( $post->ID );
-$page_title = $post->post_title;
-$page_content = do_shortcode( $post->post_content );
+
+$header_url = get_the_post_thumbnail_url( $post->ID );
+$title = $post->post_title;
+$content = do_shortcode( $post->post_content );
 
 $context = array(
-  "page_header" => $page_header,
-  "page_title" => $page_title,
-  "page_content" => $page_content
+  "header_url"  => $header_url,
+  "title"       => $title,
+  "content"     => $content
 );
 
 echo Twig::render( 'front-page.twig', $context );

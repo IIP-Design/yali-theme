@@ -15,6 +15,10 @@ $font-size-context: 16; // Default
   @return #{$pixels/$context}em;
 }
 
+@function rem($pixels, $context: $font-size-context) {
+  @return #{$pixels/$context}rem;
+}
+
 /**
   * Hide visual elements in a way that makes them accessible to screen readers
   *
@@ -35,6 +39,19 @@ $font-size-context: 16; // Default
   padding: 0;
   position: absolute !important;
   width: 1px;
+}
+
+
+@mixin transition($transition...) {
+  transition: $transition;
+}
+
+@mixin transform($transform...) {
+  transform: $transform;
+}
+
+@mixin border-radius($border-radius...) {
+  border-radius: $border-radius;
 }
 
 /**
@@ -58,27 +75,5 @@ $font-size-context: 16; // Default
   @media ('min-width:' + $point) {
     @content;
   }
-}
-
-/**
-  * Hide visual elements in a way that makes them accessible to screen readers
-  *
-  * @example
-  *
-  * label {
-  *   @extend %visuallyhidden;
-  * }
-  *
-  */
-
-%visuallyhidden {
-  border: 0;
-  clip: rect(0 0 0 0);
-  height: 1px;
-  margin: -1px;
-  overflow: hidden;
-  padding: 0;
-  position: absolute !important;
-  width: 1px;
 }
 
