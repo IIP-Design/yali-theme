@@ -20,8 +20,6 @@ var Nav = (function ($) {
 	var set_title_text = function() {
 		if( window.innerWidth > 767 ) {
 			nav_text.innerHTML = 'Young African Leaders Initiative';
-		} else {
-			nav_text.innerHTML = 'YALI';
 		}
 	};
 
@@ -32,10 +30,7 @@ var Nav = (function ($) {
 			[...nav_siteurl, ...nav_menu].forEach(item => {
 				item.classList.toggle('mobile');			
 			});					
-		});
-
-		// Change Site Url Text on smaller viewports
-		if( window.innerWidth < 680 ) nav_text.innerHTML = 'YALI';
+		});		
 	};
 
 	var display_sub_menu = function() {

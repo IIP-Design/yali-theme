@@ -46,6 +46,9 @@
       @media screen and (min-width: 934px) and (max-width: 1024px) {
         font-size: em(16);
       }      
+      @media screen and (max-width: 330px) {
+        font-size: 16px;
+      }
 
       &:hover {
         text-decoration: none;

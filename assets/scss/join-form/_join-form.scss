@@ -27,6 +27,14 @@
 				height: 48px;
 			}
 		}
+
+		select {
+			height: 48px;
+
+			&.hide_on_init {
+				display: none;
+			}
+		}
 	}	
 
 
@@ -42,10 +50,11 @@
 			position: absolute;
 			top: -20px;
 			left: 50%;
+			display: none;
 			border-width: 20px;
 			border-bottom-color: $yellow;
 			@media screen and (min-width: 934px) {
-				display: none;
+				display: none !important; 
 			}
 		}
 	}
@@ -59,6 +68,62 @@
 
 	&_intro {
 		font-size: em(34);
+	}
+
+	
+	&_select {
+		margin-bottom: 20px;						
+	}
+
+
+	&_interests {
+		@media screen and (max-width: 500px) {
+			text-align: left;
+		}
+
+		&_title {
+			margin-bottom: 10px;
+			font-size: em(28);
+			text-align: center;
+		}
+
+		&_chkbx_wrapper {
+			display: inline-block;
+			@media screen and (max-width: 500px) {
+				display: block;
+				padding-left: 16px;
+			}
+
+			&:first-of-type {
+				@media screen and (min-width: 501px) {
+					margin-right: 125px;
+				}				
+			}
+
+			&:last-child {
+				margin-bottom: 20px;
+			}
+
+			.ui.checkbox {
+				display: block;
+				padding-bottom: 16px;
+				@media screen and (max-width: 500px) {
+					padding-bottom: 8px;
+				}
+
+				label {
+					font-weight: 400;
+					@media screen and (max-width: 500px) {
+						display: inline-block;
+					}
+				}
+			}
+		}
+	}
+
+
+	.hide_on_init {
+		display: none;
 	}
 
 

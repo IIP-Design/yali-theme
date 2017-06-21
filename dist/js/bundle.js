@@ -1,14 +1,19 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 'use strict';
 
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
 var Join = function () {
 
 	// Common vars
 	var form = document.querySelector('.join'),
 	    form_close = document.querySelector('.close--join_form'),
 	    formScrollPos = window.pageYOffset,
+	    formHiddenFields = document.querySelectorAll('.hide_on_init'),
+	    formPointer = document.querySelector('.upArrow--joinForm'),
 	    nav_join_desktop = document.querySelector('.nav_join--desktop'),
-	    nav_join_mobile = document.querySelector('.nav_join--mobile');
+	    nav_join_mobile = document.querySelector('.nav_join--mobile'),
+	    site_title = document.querySelector('.nav_siteurl span');
 
 	var init = function init() {
 		check_session_data();
@@ -24,6 +29,8 @@ var Join = function () {
 		if (session == null || session == 'new') {
 			localStorage.session = 'new';
 			form.style.display = 'block';
+
+			site_title.textContent === 'Young African Leaders Initiative';
 		}
 
 		if (session == 'returning') {
@@ -46,6 +53,7 @@ var Join = function () {
 				nav_join_desktop.style.display = 'inline-block';
 			} else {
 				nav_join_mobile.style.display = 'inline-block';
+				set_title();
 			}
 
 			off_scroll();
@@ -57,9 +65,13 @@ var Join = function () {
 		[nav_join_desktop, nav_join_mobile].forEach(function (item) {
 			item.addEventListener('click', function () {
 				form.style.display = 'block';
-				formScrollPos = window.pageYOffset;
+				[].concat(_toConsumableArray(formHiddenFields)).forEach(function (field) {
+					return field.classList.remove('hide_on_init');
+				});
 
+				formScrollPos = window.pageYOffset;
 				window.addEventListener('scroll', on_scroll, false);
+				formPointer.style.display = 'block';
 			});
 		});
 
@@ -72,20 +84,25 @@ var Join = function () {
 			// Set session if user scrolled, used for resize event
 			localStorage.scrolled = 'true';
 
+			// Add fade out class and remove afterwards 
 			form.classList.add('fade_out');
 			setTimeout(function () {
 				form.style.display = 'none';
 				form.classList.remove('fade_out');
-
-				window.removeEventListener('scroll', on_scroll, false);
 			}, 250);
 
+			// Stop scroll event
+			window.removeEventListener('scroll', on_scroll, false);
+
+			// Display appropriate nav menu join button, set title if mobile
+			// initially set to opacity 0
 			if (window.innerWidth > 933) {
 				nav_join_desktop.style.display = 'inline-block';
 				nav_join_desktop.classList.add('no_show');
 			} else {
 				nav_join_mobile.style.display = 'inline-block';
 				nav_join_mobile.classList.add('no_show');
+				set_title();
 			}
 
 			// Transition in nav join menu btn
@@ -105,13 +122,20 @@ var Join = function () {
 		window.removeEventListener('scroll', on_scroll, false);
 	};
 
+	var set_title = function set_title() {
+		if (site_title.textContent === 'Young African Leaders Initiative') site_title.textContent = 'YALI';
+	};
+
 	var on_resize = function on_resize() {
 		var resized;
 		window.addEventListener('resize', function () {
 			clearTimeout(resized);
 			resized = setTimeout(function () {
 				if (window.innerWidth < 934) {
-					if (localStorage.session == 'returning' || localStorage.scrolled == 'true') nav_join_mobile.style.display = 'inline-block';
+					if (localStorage.session == 'returning' || localStorage.scrolled == 'true') {
+						nav_join_mobile.style.display = 'inline-block';
+						set_title();
+					}
 				} else {
 					if (localStorage.session == 'returning') nav_join_desktop.style.display = 'inline-block';
 				}
@@ -166,8 +190,6 @@ var Nav = function ($) {
 	var set_title_text = function set_title_text() {
 		if (window.innerWidth > 767) {
 			nav_text.innerHTML = 'Young African Leaders Initiative';
-		} else {
-			nav_text.innerHTML = 'YALI';
 		}
 	};
 
@@ -179,9 +201,6 @@ var Nav = function ($) {
 				item.classList.toggle('mobile');
 			});
 		});
-
-		// Change Site Url Text on smaller viewports
-		if (window.innerWidth < 680) nav_text.innerHTML = 'YALI';
 	};
 
 	var display_sub_menu = function display_sub_menu() {
