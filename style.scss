@@ -22,13 +22,8 @@ Text Domain: yali
 @import 'assets/scss/menu';
 @import 'assets/scss/content-block';
 @import 'assets/scss/accessibility';
+@import 'assets/scss/elements.scss';
 
-// Shawn - Nav Partial - 6/14
-@import 'assets/scss/nav/_typography.scss';
-@import 'assets/scss/nav/_colors.scss';
-@import 'assets/scss/nav/_general.scss';
-@import 'assets/scss/nav/_elements.scss';
-@import 'assets/scss/nav/_nav.scss';
-@import 'assets/scss/nav/_menu.scss';
-@import 'assets/scss/nav/_submenu.scss';
-@import 'assets/scss/nav/_burger.scss';
+@import 'assets/scss/nav/nav.scss';
+@import 'assets/scss/nav/submenu.scss';
+@import 'assets/scss/nav/burger.scss';

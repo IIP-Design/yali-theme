@@ -1,10 +1,8 @@
 import '../../node_modules/semantic-ui-sass/semantic-ui'; 
+import * as nav from './nav.js';
 
 (function($) {
-  menuInit();
-
-  function menuInit() {
-    $('.ui .dropdown').dropdown();
-  }
+ 
+  nav.init($);
 
 })( jQuery ); 
