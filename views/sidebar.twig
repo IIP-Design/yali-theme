@@ -1,9 +1,0 @@
-<aside class='sidebar {% if not is_blog() %}sidebar--home{% endif %}'>
-	{% if is_blog() or is_archive() %}
-		{{ blog_sidebar['rendered'] | raw }}
-	{% elseif is_single() %}
-		{{ sidebar['rendered'] | raw }}
-	{% else %}
-		{{ home_sidebar_right['rendered'] | raw }}		
-	{% endif %}		
-</aside>
