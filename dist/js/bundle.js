@@ -181,7 +181,10 @@ var burger = document.querySelector('.burger'),
     nav_siteurl = document.querySelectorAll('.nav_siteurl'),
     nav_text = document.querySelector('.nav_siteurl span'),
     nav_menu = document.querySelectorAll('.nav_menu'),
-    nav_item = document.querySelectorAll('.nav_menu_item');
+    nav_item = document.querySelectorAll('.nav_menu_item:not(.nav_menu_item--search):not(.nav_menu_item--social)'),
+    nav_search = document.querySelector('.search-icon_wrapper i'),
+    search_input = document.querySelector('.search_wrapper input'),
+    search_icon_wrapper = document.querySelector('.search-icon_wrapper');
 
 function mobile_menu() {
 	burger.addEventListener('click', function () {
@@ -237,17 +240,40 @@ function display_sub_menu() {
 	});
 }
 
+function display_search_input() {
+	nav_search.addEventListener('click', function () {
+
+		search_input.classList.toggle('hide');
+		search_icon_wrapper.classList.toggle('search_displaying');
+
+		if (this.classList.contains('search')) {
+			this.classList.remove('search');
+			this.classList.add('remove');
+		} else if (this.classList.contains('remove')) {
+			this.classList.remove('remove');
+			this.classList.add('search');
+		}
+	});
+}
+
 function window_resize() {
 	var resized;
 	window.addEventListener('resize', function () {
 		clearTimeout(resized);
 		resized = setTimeout(function () {
-			if (window.innerWidth > 932) {
+			if (window.innerWidth > 933) {
 				[].concat(_toConsumableArray(nav_siteurl), _toConsumableArray(nav_menu)).forEach(function (item) {
 					if (item.classList.contains('mobile')) item.classList.remove('mobile');
 				});
 
 				if (burger.classList.contains('active')) burger.classList.remove('active');
+			} else {
+				if (nav_search.classList.contains('remove')) {
+					nav_search.classList.remove('remove');
+					nav_search.classList.add('search');
+					search_input.classList.add('hide');
+					search_icon_wrapper.classList.remove('search_displaying');
+				}
 			}
 
 			set_title_text();
@@ -262,6 +288,7 @@ function init($) {
 	set_title_text();
 	mobile_menu();
 	display_sub_menu();
+	display_search_input();
 	window_resize();
 }
 
