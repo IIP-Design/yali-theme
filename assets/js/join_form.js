@@ -105,7 +105,7 @@ function off_scroll() {
 	window.removeEventListener('scroll', on_scroll, false);
 }
 
-function set_title() {		
+function set_title() {			
 	if( site_title.textContent === 'Young African Leaders Initiative' ) site_title.textContent = 'YALI';
 }
 
@@ -116,8 +116,7 @@ function on_resize() {
 		resized = setTimeout(function() {
 			if( window.innerWidth < 934 ) {
 				if( localStorage.session == 'returning' || localStorage.scrolled == 'true' ) {
-					nav_join_mobile.style.display = 'inline-block';						
-					set_title();
+					nav_join_mobile.style.display = 'inline-block';
 				}
 			} else {
 				if( localStorage.session == 'returning' ) nav_join_desktop.style.display = 'inline-block';

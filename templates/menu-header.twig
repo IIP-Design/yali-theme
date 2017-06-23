@@ -12,8 +12,8 @@
       </div>
       {% if menu %}
       <ul class='nav_menu'>
-        {% for item in menu %}
-          <span class='opaque_bg'></span>
+        <span class='opaque_bg'></span>
+        {% for item in menu %}          
           <li class='nav_menu_item ui {{ item.children ? "dropdown" : "" }}'>					
             <div class='nav_menu_item_title-wrapper'>
               <span>{{ item.title }}</span>
@@ -59,7 +59,6 @@
       <span></span>
       <span></span>
     </div>
-   
-  </div><!-- nav_wrapper -->
-  {% include 'partials/join-form.twig' %}
+    {% include 'partials/join-form.twig' %}
+  </div><!-- nav_wrapper -->  
 </nav>

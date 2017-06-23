@@ -5,11 +5,12 @@
 	margin-left: 3px;
 	border-left: 8px solid transparent;
 	border-right: 8px solid transparent;
-	border-top: 8px solid $blue-bright;
-	@media screen and (max-width: 933px) { 
+	border-top: 8px solid $lightblue;
+	@media screen and (max-width: 933px) {
 		border-width: 5px;
 	}
 }
+
 
 .upArrow {
 	display: inline-block;
@@ -18,20 +19,22 @@
 	margin-left: 3px;
 	border-left: 8px solid transparent;
 	border-right: 8px solid transparent;
-	border-bottom: 8px solid $blue-bright;
-	@media screen and (max-width: 933px) { 
+	border-bottom: 8px solid $lightblue;
+	@media screen and (max-width: 933px) {
 		border-width: 5px;
 	}
 }
+
 
 .img_placeholder {
 	display: inline-block;
 	width: 25px;
 	height: 25px;	
 	margin-right: 5px;
-	@include border-radius(50%);
+	border-radius: 50%;
 	background-color: #fff;
 }
+
 
 .opaque_bg {
 	position: absolute;
@@ -39,16 +42,52 @@
 	left: 0;
 	z-index: -1;
 	width: 100%;
-	height: 100%;
-	/*background-color: $blue-navy;
-	opacity: 0.8;*/
+	height: 100%;	
 	background: rgba(25, 40, 86, 0.6);
+}
+
+
+.close {	
+	position: absolute;
+	display: block;
+	height: 20px;
+	width: 20px;
+	cursor: pointer;
+
+	&:before, &:after {
+		content: '';
+		position: absolute;
+		height: 20px;
+		width: 5px;
+		background-color: $darkblue;
+	}
+
+	&:before {
+		transform: rotate(45deg);
+	}
+
+	&:after {
+		transform: rotate(-45deg);
+	}
+
+	&--join_form {
+		top: 20px;
+		right: 15px;
+	}
+}
+
+
+.text_break {
+	@media screen and (min-width: 425px) {
+		display: block;
+	}
 }
 
 
 .hero {
 	position: relative;
 }
+
 
 .hero-inner {
 	position: absolute;
@@ -58,8 +97,7 @@
 	@include bp($laptop) { bottom: 100px; }
 
 	h1 { 
-		margin-bottom: em(2);
-		
+		margin-bottom: em(2);		
 		@include bp($desktop) {
 			margin-bottom: em(1);
 			width: 80%;
@@ -78,55 +116,45 @@
 	p {
 		font-size: rem(18);
 		margin-bottom: em(16);
-		font-weight: 300;
-		
+		font-weight: 300;		
 		@include bp($tablet-sm) { font-size: rem(20); }
 		@include bp($tablet) { font-size: rem(22); }
 	}
 }
 
+
 .title-overlay {
 	display: block;
 	position: relative;
-	background-color: #fff;
-	
-	h2 { text-align: center; }
-
+	background-color: #fff;		
 	@include bp($laptop) { 
 		height: 100px;
 		top: -100px;
 		padding-top: 40px;
 	}
-
 	@include bp($desktop-big) { 
 		height: 200px;
 		top: -200px;
 	}
 
-	//margin-top: em(18);
-	//height: em(100);
-		// h2 {
-		// 	padding-top: 50px;
-		// }
+	h2 { 
+		text-align: center; 
+	}
 }
+
 
 .container-content {
-	// width: 80%;
 	padding: 1em;
-	@include bp($laptop) { padding: 0; }
-
-	@include bp($tablet) {
-   	// padding-top: 3em;
-		// padding-left: 5em;
-		// padding-right: 5em;
-  }
+	@include bp($laptop) { 
+		padding: 0; 
+	}	
 }
+
 
 .columns-text {
 	column-count: 1;
-  font-size: rem(18);
-
+	font-size: rem(18);
 	@include bp($tablet) {
-    column-count: 2;
-  }
+    	column-count: 2;	
+  	}
 }

@@ -1,4 +1,4 @@
-.join {			
+.join {				
 	text-align: center;	
 	color: $darkblue;
 	transition: all 0.5s ease;
@@ -12,6 +12,7 @@
 		max-height: 1000px;
 		max-width: 533px;
 		width: 100%;
+		font-family: $font-family;
 		background-color: $yellow;
 		opacity: 1;
 		@media screen and (max-width: 933px) {
@@ -25,11 +26,14 @@
 
 			input {
 				height: 48px;
+				font-family: $font-family;
+				font-weight: 400;
 			}
 		}
 
 		select {
 			height: 48px;
+			font-family: $font-family;
 
 			&.hide_on_init {
 				display: none;
@@ -67,6 +71,7 @@
 
 
 	&_intro {
+		font-family: $font-family;
 		font-size: em(34);
 	}
 
@@ -130,6 +135,7 @@
 	&_submit {		
 		width: 100%;
 		height: em(60);
+		font-family: $font-family;
 		font-size: em(20) !important;
 
 		&.ui.button {

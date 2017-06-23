@@ -129,7 +129,6 @@ function on_resize() {
 			if (window.innerWidth < 934) {
 				if (localStorage.session == 'returning' || localStorage.scrolled == 'true') {
 					nav_join_mobile.style.display = 'inline-block';
-					set_title();
 				}
 			} else {
 				if (localStorage.session == 'returning') nav_join_desktop.style.display = 'inline-block';
@@ -197,6 +196,8 @@ function mobile_menu() {
 function set_title_text() {
 	if (window.innerWidth > 767) {
 		nav_text.innerHTML = 'Young African Leaders Initiative';
+	} else {
+		if (localStorage.session !== 'new' || localStorage.scrolled == 'true') nav_text.innerHTML = 'YALI';
 	}
 }
 

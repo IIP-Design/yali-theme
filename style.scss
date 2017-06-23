@@ -18,6 +18,7 @@ Text Domain: yali
 @import 'assets/scss/semantic'; 
 @import 'assets/scss/variables';
 @import 'assets/scss/mixins';
+@import 'assets/scss/typography';
 @import 'assets/scss/base'; 
 @import 'assets/scss/menu';
 @import 'assets/scss/content-block';
@@ -25,16 +26,12 @@ Text Domain: yali
 @import 'assets/scss/elements.scss';
 
 
-// Partials
-// Shawn - Nav Partial - 6/14
-//@import 'assets/scss/nav/_typography.scss';
-//@import 'assets/scss/nav/_colors.scss';
-//@import 'assets/scss/nav/_general.scss';
-@import 'assets/scss/nav/_elements.scss';
-@import 'assets/scss/nav/_nav.scss';
-@import 'assets/scss/nav/_menu.scss';
-@import 'assets/scss/nav/_submenu.scss';
-@import 'assets/scss/nav/_burger.scss';
+// PARTIALS
+//Nav
+@import 'assets/scss/nav/nav';
+@import 'assets/scss/nav/menu';
+@import 'assets/scss/nav/submenu';
+@import 'assets/scss/nav/burger';
 
 // Join Form
-@import 'assets/scss/join-form/_join-form.scss';
+@import 'assets/scss/join-form/join-form';

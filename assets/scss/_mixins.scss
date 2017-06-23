@@ -42,18 +42,6 @@ $font-size-context: 16; // Default
 }
 
 
-@mixin transition($transition...) {
-  transition: $transition;
-}
-
-@mixin transform($transform...) {
-  transform: $transform;
-}
-
-@mixin border-radius($border-radius...) {
-  border-radius: $border-radius;
-}
-
 /**
   * Media query within the style declaration. Designed for mobile-first.
   *

@@ -2,43 +2,18 @@ x/*------------------------------------*\
   #HTML-ELEMENTS
 \*------------------------------------*/
 
-html {
-	font-size: 100%;
-}
-
-
 body {
 	background-color: #fff;
-  color: $font-color;
-  line-height: 1.4; 
-  font-size: 18px;
-	font-size: 1rem;
+  	color: $font-color;
+  	line-height: 1.428;
 }
 
 main {
-  position: relative;
-  top: 65px;
+	position: relative;
+	top: 150px;
+
 }
 
-
-/*------------------------------------*\
-  #TYPOGRAPHY
-\*------------------------------------*/
-
-
-h1 {
-  color: #fff;
-  font-size: rem(64);
-  font-weight: 900;
-  line-height: 1;
-
-  @include bp($tablet-sm) { font-size: rem(68); }
-  @include bp($tablet) { font-size: rem(78); }
-  @include bp($laptop) { font-size: rem(100); }
-  @include bp($desktop-big) { font-size: rem(120); }  //150
-}
-
-/*
 .site-container {
 	max-width: 1652px;
 	margin: 0 auto;
@@ -56,31 +31,7 @@ h1 {
 	border: none;
 }
 
-// Temp
-header {
-	margin-top: 200px;
-}
-*/
-
-h2 {
-    color: $blue-navy; 
-    font-size: rem(36);
-    font-weight: 900;
-    line-height: 1;
-
-    @include bp($tablet-sm) { font-size: rem(38);}
-    @include bp($tablet) { font-size: rem(44);}
-    @include bp($laptop) { font-size: rem(56); }
-    @include bp($desktop-big) { font-size: rem(67); } // 85
-}
 
 
-/*------------------------------------*\
-  #LINKS
-\*------------------------------------*/
 
-// .site-content {
-// 	// for mobile no margin, desktop em(74)
-// 	margin-top: em(0);
-// }
 
