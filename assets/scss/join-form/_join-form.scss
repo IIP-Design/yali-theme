@@ -1,8 +1,7 @@
 .join {				
 	text-align: center;	
 	color: $darkblue;
-	transition: all 0.5s ease;
-
+	transition: all 0.5s ease;	
 
 	&.ui.form {
 		position: absolute;
@@ -15,8 +14,12 @@
 		font-family: $font-family;
 		background-color: $yellow;
 		opacity: 1;
-		@media screen and (max-width: 933px) {
+		@media screen and (max-width: 1400px) {
 			top: 200%;
+			max-width: 400px;
+			font-size: 12px;
+		}
+		@media screen and (max-width: 933px) {			
 			right: 50%;
 			transform: translate(50%);
 		}
@@ -28,12 +31,18 @@
 				height: 48px;
 				font-family: $font-family;
 				font-weight: 400;
+				@media screen and (max-width: 1400px) {
+					height: 32px;
+				}
 			}
 		}
 
 		select {
 			height: 48px;
 			font-family: $font-family;
+			@media screen and (max-width: 1400px) {
+				height: 32px;
+			}
 
 			&.hide_on_init {
 				display: none;
@@ -60,6 +69,9 @@
 			@media screen and (min-width: 934px) {
 				display: none !important; 
 			}
+			@media screen and (max-width: 425px) {
+				margin-left: -10px;
+			}
 		}
 	}
 
@@ -67,12 +79,19 @@
 	&_wrapper {
 		position: relative;
 		padding: 40px;
+		@media screen and (max-width: 1400px) {
+			padding: 20px;
+		}
 	}
 
 
 	&_intro {
 		font-family: $font-family;
 		font-size: em(34);
+		@media screen and (max-width: 1400px) {
+			padding: 14px;
+			font-size: 1.5em;
+		}
 	}
 
 	
@@ -90,6 +109,9 @@
 			margin-bottom: 10px;
 			font-size: em(28);
 			text-align: center;
+			@media screen and (max-width: 1400px) {
+				font-size: 1.5em;
+			}
 		}
 
 		&_chkbx_wrapper {
@@ -118,6 +140,9 @@
 
 				label {
 					font-weight: 400;
+					@media screen and (max-width: 1400px) {
+						font-size: 1em;
+					}
 					@media screen and (max-width: 500px) {
 						display: inline-block;
 					}
@@ -137,6 +162,10 @@
 		height: em(60);
 		font-family: $font-family;
 		font-size: em(20) !important;
+		@media screen and (max-width: 1400px) {
+			padding: 15px;
+			font-size: 1.5em;
+		}
 
 		&.ui.button {
 			background-color: $darkblue;
