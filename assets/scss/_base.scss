@@ -10,14 +10,14 @@ body {
 
 main {
 	position: relative;
-	top: 150px;
-
+	top: 60px;
+	@include bp($laptop) {top: 85px; }
 }
 
 .site-container {
-	max-width: 1652px;
-	margin: 0 auto;
-	padding: 0 26px;
+	// max-width: 1652px;
+	// margin: 0 auto;
+	// padding: 0 26px;
 }
 
 .site-content {

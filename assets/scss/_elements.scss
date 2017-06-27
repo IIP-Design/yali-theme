@@ -102,6 +102,7 @@
 			margin-bottom: em(1);
 			width: 80%;
 		}
+		@include bp($desktop-big) { width: 90%; }
 		
 		&.hero-h1 { 
 			display: none;
@@ -132,10 +133,10 @@
 		top: -100px;
 		padding-top: 40px;
 	}
-	@include bp($desktop-big) { 
-		height: 200px;
-		top: -200px;
-	}
+	// @include bp($desktop-big) { 
+	// 	height: 200px;
+	// 	top: -200px;
+	// }
 
 	h2 { 
 		text-align: center; 
