@@ -24,9 +24,9 @@
       display: inline-block;
       margin: 10px 15px;
       font-size: em(18);
-      cursor: pointer;
+      cursor: pointer;      
       @media screen and (min-width: 934px) and (max-width: 1209px) {
-        margin: 0 7.5px;       
+        margin: 10px 7.5px;       
       }
       @media screen and (min-width: 1025px) and (max-width: 1200px) {
         font-size: em(16);
@@ -42,20 +42,35 @@
         margin: 0;
 
         &.ui.dropdown {
-          display: block;
+          display: block;          
         }                
+      }            
+
+      &.initial_wide {        
+        @media screen and (min-width: 934px) {
+          &:not(.search) {
+            width: 100px;
+          }
+
+          &.search {
+            margin-left: 45px;
+          }
+        }        
       }
 
-      &_title-wrapper {
-          position: relative;
-
-          &.active {
-            @media screen and (max-width: 933px) {
-              background-color: $blue;
-            }            
-          }          
-
+      &.active {
+        .nav_menu_item_title-wrapper {
           @media screen and (max-width: 933px) {
+            background-color: $blue;
+          }            
+        }
+      }      
+
+      &_title-wrapper {
+          position: relative;    
+          display: inline-block;    
+          @media screen and (max-width: 933px) {
+            display: block;
             margin: -10px -16px;
             padding: 16px;
 
@@ -64,6 +79,27 @@
               top: 50%;
               right: 16px;
               transform: translateY(-50%);              
+            }
+          }
+
+          &.current_page {
+            @media screen and (min-width: 934px) {
+              &:after {
+                content: '';
+                position: absolute;
+                bottom: -10px;
+                display: block;
+                height: 5px;
+                width: 100%;
+                background-color: $yellow;
+              }
+            }          
+          }
+
+          a {
+            color: #fff;
+            @media screen and (max-width: 933px) {
+              font-size: 1.2em;
             }
           }
       }      
