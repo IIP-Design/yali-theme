@@ -14,6 +14,22 @@ $lightblue: #25ACE2;
 $yellow: #F2D400;
 
 
+/*----------------------------------------------*\
+  #TYPOGRAPHY (semantic uses these values
+\*----------------------------------------------*/
+
+$icons-font-path: 'node_modules/semantic-ui-sass/icons' !default;
+$font-url: 'https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,900';
+$font-name: 'Source Sans Pro' !default;
+$font-family: $font-name, 'Helvetica Neue', Arial, Helvetica, sans-serif !default;
+$font-color: #1d1d1d;
+
+// Font Sizes
+$browser-default: 14;
+$font-size: 16;
+$mobile: 12;
+
+
 /*------------------------------------*\
   #MEDIA-QUERIES
 \*------------------------------------*/
@@ -23,5 +39,4 @@ $tablet-sm:            38em;  // 620px
 $tablet:               48em;  // 768px
 $laptop:               64em;  // 1024px
 $desktop:              75em;  // 1200px
-$desktop-big:          100em; // 1600px
-                                                                                                                                     
+$desktop-big:          100em; // 1600px                                                                                                                     

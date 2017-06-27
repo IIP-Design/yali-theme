@@ -14,10 +14,11 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: yali
 */
 
-// Import semantic ui first so that rules can be overrided
-@import 'assets/scss/semantic'; 
 @import 'assets/scss/variables';
 @import 'assets/scss/mixins';
+
+// Import semantic ui first so that rules can be overrided
+@import 'assets/scss/semantic'; 
 @import 'assets/scss/typography';
 @import 'assets/scss/base'; 
 @import 'assets/scss/menu';
@@ -27,7 +28,7 @@ Text Domain: yali
 
 
 // PARTIALS
-//Nav
+// Nav
 @import 'assets/scss/nav/nav';
 @import 'assets/scss/nav/menu';
 @import 'assets/scss/nav/submenu';
