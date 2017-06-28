@@ -1,22 +1,21 @@
 //Overwrite Semantic
-.ui.dropdown .menu {
-	top: 55px;
+.ui.dropdown .menu {	
 	border: none;
 	border-radius: 0;
-	background: transparent;
-	@media screen and (min-width: 1025px) and (max-width: 1200px) {
-		top: 54px;
+	background: transparent;	
+	@media screen and (min-width: 934px) {
+		padding-top: 37px;
 	}
 	@media screen and (max-width: 933px) {
 		position: relative;
-		top: auto;
-		margin-top: 16px;
+		margin-top: 1em;
 		box-shadow: none;
 	}
 }
 
 .nav_menu_submenu {	
-	@media screen and (max-width: 933px) {
+	@media screen and (max-width: 933px) {		
+
 		.opaque_bg {
 			display: none;
 		}

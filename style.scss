@@ -21,7 +21,6 @@ Text Domain: yali
 @import 'assets/scss/semantic'; 
 @import 'assets/scss/typography';
 @import 'assets/scss/base'; 
-@import 'assets/scss/menu';
 @import 'assets/scss/content-block';
 @import 'assets/scss/accessibility';
 @import 'assets/scss/elements.scss';
@@ -33,6 +32,7 @@ Text Domain: yali
 @import 'assets/scss/nav/menu';
 @import 'assets/scss/nav/submenu';
 @import 'assets/scss/nav/burger';
+@import 'assets/scss/nav/search';
 
 // Join Form
 @import 'assets/scss/join-form/join-form';

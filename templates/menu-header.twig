@@ -13,20 +13,21 @@
       {% if menu %}
       <ul class='nav_menu'>
         <span class='opaque_bg'></span>
-        {% for item in menu %}          
-          <li class='nav_menu_item ui {{ item.children ? "dropdown" : "" }}'>					
-            <div class='nav_menu_item_title-wrapper'>
-              <span>{{ item.title }}</span>
-              {#<a href="{{ child.url }}">{{ child.title }}</a>#}
-              {% if  item.children %}
+        {% for item in menu %}                    
+          <li class='nav_menu_item ui {{ item.children ? "dropdown" : "" }} initial_wide'>					
+            <div class='nav_menu_item_title-wrapper {{ pagename == item.object_slug ? "current_page" : "" }}'>
+              <a href="{{ item.url }}">{{ item.title }}</a>              
+              {% if item.children %}
                 <span class='menuDropdown downArrow'></span>
               {% endif %}
             </div>
             {% if item.children %}
               <ul class='nav_menu_submenu menu'>
-                <span class='opaque_bg'></span>
                 {% for child in item.children %}
-                  <li class='nav_menu_submenu_item item'><a href="{{ child.url }}">{{ child.title }}</a></li>
+                  <li class='nav_menu_submenu_item item'>
+                    <span class='opaque_bg'></span>
+                    <a href="{{ child.url }}">{{ child.title }}</a>
+                  </li>
                  {% endfor %}
               </ul>
             {% endif %}
@@ -35,9 +36,9 @@
         <li class='nav_join nav_join--desktop'>
           <p>JOIN THE NETWORK</p>
         </li>					
-        <li class='nav_menu_item nav_menu_item--search ui search'>
+        <li class='nav_menu_item nav_menu_item--search ui search initial_wide'>
           <div class='search_wrapper'>
-            <input type='text' placeholder='Search Placeholder'>
+            <input type='text' placeholder='Search Placeholder' class='hide'>
             <span class='search-icon_wrapper'>
               <i class='search icon'></i>	
             </span>							

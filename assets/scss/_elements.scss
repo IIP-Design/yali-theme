@@ -7,7 +7,7 @@
 	border-right: 8px solid transparent;
 	border-top: 8px solid $lightblue;
 	@media screen and (max-width: 933px) {
-		border-width: 5px;
+		border-width: 0.8rem;
 	}
 }
 
@@ -21,7 +21,7 @@
 	border-right: 8px solid transparent;
 	border-bottom: 8px solid $lightblue;
 	@media screen and (max-width: 933px) {
-		border-width: 5px;
+		border-width: 0.8rem;
 	}
 }
 
@@ -80,6 +80,12 @@
 .text_break {
 	@media screen and (min-width: 425px) {
 		display: block;
+	}
+
+	&--joinForm {
+		@media screen and (min-width: 1400px) {
+			display: block;
+		}
 	}
 }
 
