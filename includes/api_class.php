@@ -92,6 +92,12 @@ class API {
 		return $menu['items'];
 	}
 
+	public static function get_featImg_obj($id) {
+		$request = new WP_REST_Request('GET', '/wp/v2/media/' . $id);
+		$response = rest_do_request($request);
+		return $response->data;	
+	}
+
 	public static function do_request( $request ) {
 		$response = rest_do_request( $request );
 		return $response->data;	

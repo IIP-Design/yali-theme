@@ -1,8 +1,8 @@
 {% extends "base.twig" %}
 
-{% block content %}
+{% block content %}  
   <div class="hero">
-    <img class="ui fluid image" src="{{ header_url }}" alt="{{ header_url }}">
+    <img class="ui fluid image" src="{{ header_url }}" srcset="{{ srcset }}" sizes="{{ size }}" alt="{{ header_url }}">
     <div class="hero-inner">
       <div class="hero-content ui container">
         <h1 class="hero-h1">Young African Leaders Initiative</h1>
@@ -12,11 +12,11 @@
     </div>
   </div>
   <div class="ui container title-overlay">
-    <div class="container-content">
-      <h2>{{ title }}</h2>
-      <div class="columns-text">
-        {{ content }}
-      </div>
+    <div class="container-content">      
+      <h2>{{ page_data.title.rendered }}</h2>      
+      <div class="columns-text">        
+        {{ page_data.content.rendered }}
+      </div>      
     </div>
   </div>
   
