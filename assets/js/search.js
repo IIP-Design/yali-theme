@@ -1,24 +1,23 @@
 var nav_search = document.querySelector('.search-icon_wrapper i'),
 	search_input = document.querySelector('.search_wrapper input'),
-	search_icon_wrapper = document.querySelector('.search-icon_wrapper');
+	search_input_wrapper = document.querySelector('.search_input'),
+	search_icon_wrapper = document.querySelector('.search-icon_wrapper'),
+	search_close = document.querySelector('.search_input_close');
 
 function display_search_input() {
 	let nav_menu_width = document.querySelector('.nav_menu').getBoundingClientRect().width;
 	search_input.style.width = nav_menu_width - 39 + 'px';
 
-	search_input.classList.toggle('hide');
-	search_icon_wrapper.classList.toggle('search_displaying');
+	search_input_wrapper.classList.remove('hide');
+	search_icon_wrapper.classList.add('search_displaying');	
+}
 
-	if( this.classList.contains('search') ) {			
-		this.classList.remove('search');
-		this.classList.add('remove');			
-	}
-
-	else if( this.classList.contains('remove') ) {			
-		this.classList.remove('remove');
-		this.classList.add('search');	
+function close_search_input() {
+	search_close.addEventListener('click', function() {
+		search_input_wrapper.classList.add('hide');
+		search_icon_wrapper.classList.remove('search_displaying');
 		search_input.style.width = 0;
-	}
+	});
 }
 
 function on_resize() {
@@ -33,10 +32,8 @@ function on_resize() {
 			else {
 				nav_search.removeEventListener('click', display_search_input);
 
-				if( nav_search.classList.contains('remove') ) {
-					nav_search.classList.remove('remove');
-					nav_search.classList.add('search');
-					search_input.classList.add('hide');
+				if( nav_search.classList.contains('remove') ) {					
+					search_input_wrapper.classList.remove('hide');
 					search_icon_wrapper.classList.remove('search_displaying');
 				}
 			}
@@ -46,8 +43,8 @@ function on_resize() {
 
 export function init() {	
 	if( window.innerWidth > 933 ) {
-		nav_search.addEventListener('click', display_search_input);
-	}
-
+		nav_search.addEventListener('click', display_search_input);		
+	}	
+	close_search_input();
 	on_resize();
 }

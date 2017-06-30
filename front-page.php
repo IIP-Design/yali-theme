@@ -5,14 +5,19 @@ use Yali\Twig as Twig;
 // Post Object
 global $post;
 
-$header_url = get_the_post_thumbnail_url( $post->ID );
-$title = $post->post_title;
-$content = do_shortcode( $post->post_content );
+$page_data = Yali\API::get_page($post->ID);
+$feat_img_obj = Yali\API::get_featImg_obj($page_data['featured_media']);
+$header_url = $feat_img_obj['source_url'];
+
+$img_id = get_post_thumbnail_id( $post->ID );
+$srcset = wp_get_attachment_image_srcset($img_id, 'full');
+$size = wp_get_attachment_image_sizes($img_id, 'full');
 
 $context = array(
-  "header_url"  => $header_url,
-  "title"       => $title,
-  "content"     => $content
+  "header_url"  => $header_url,  
+  "feat_img"    => $feat_img_obj,
+  "srcset"		=> $srcset,
+  "size"		=> $size
 );
 
 echo Twig::render( 'front-page.twig', $context );
