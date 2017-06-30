@@ -32,5 +32,5 @@ h2 {
   @include bp($tablet-sm) { font-size: rem(38);}
   @include bp($tablet) { font-size: rem(44);}
   @include bp($laptop) { font-size: rem(56); }
-  @include bp($desktop-big) { font-size: rem(67); } // 85
+  @include bp($desktop-big) { font-size: rem(85); } // 85
 }

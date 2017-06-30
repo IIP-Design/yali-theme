@@ -14,6 +14,7 @@ $srcset = wp_get_attachment_image_srcset($img_id, 'full');
 $size = wp_get_attachment_image_sizes($img_id, 'full');
 
 $context = array(
+  "page_data"   => $page_data,
   "header_url"  => $header_url,  
   "feat_img"    => $feat_img_obj,
   "srcset"		=> $srcset,

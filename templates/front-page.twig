@@ -1,6 +1,6 @@
 {% extends "base.twig" %}
 
-{% block content %}  
+{% block content %}
   <div class="hero">
     <img class="ui fluid image" src="{{ header_url }}" srcset="{{ srcset }}" sizes="{{ size }}" alt="{{ header_url }}">
     <div class="hero-inner">
@@ -13,12 +13,9 @@
   </div>
   <div class="ui container title-overlay">
     <h2>{{ page_data.title.rendered }}</h2>      
-    <div class="columns-text">        
-      {{ page_data.content.rendered }}
-    </div> 
-    <div class="full-width" style="background-color: #25ACE2; margin-top: 100px; padding: 40px;">
-      <div class="ui container">[ CONTENT BLOCK FULL-WIDTH CONTENT]</div>
-    </div>   
+    <div>
+      {{ page_data.content.rendered }}          
+    </div>
   </div>
   
   </div>

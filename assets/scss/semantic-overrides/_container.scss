@@ -89,7 +89,9 @@
 /* Wide screen Monitor */ 
 @media only screen and (min-width: 1600px) {
   .ui.container {
-    width: 1547px;
+    /*width: 1547px;*/
+    width: 100%;
+    max-width: 1600px !important;
     margin-left: auto !important;
     margin-right: auto !important;
   }

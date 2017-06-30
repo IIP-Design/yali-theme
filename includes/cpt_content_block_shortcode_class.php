@@ -19,6 +19,7 @@ class Content_Block_Shortcode {
     return call_user_func( array($this, 'render_' . $type ), $id );
   }
 
+  // CTA CONTENT BLOCK
   public function render_cta( $id ) {
     $meta = get_post_meta(  $id );
     $post = get_post( $id );
@@ -37,8 +38,17 @@ class Content_Block_Shortcode {
     return Twig::render( 'content_blocks/cta.twig', $context );
   }
 
+  // SOCIAL CONTENT BLOCK
   public function render_social( $id ) {
-    return Twig::render( 'content_blocks/social.twig', array() );
+    $context = array(
+      "title" => "Stay connected with us:",
+      "facebook" => "https://www.facebook.com/YALINetwork",
+      "twitter" => "https://twitter.com/YALINetwork",
+      "linkedin" => "https://www.linkedin.com/groups/7425359/profile",
+      "bg-color" => "#25ACE2"
+    );
+
+    return Twig::render( 'content_blocks/social.twig', $context );
   }
  
 }
