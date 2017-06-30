@@ -5,46 +5,47 @@ use Yali\Site as Site;
 class Twig_YALI_Extension extends Twig_Extension implements Twig_Extension_GlobalsInterface {
     
 	public function getGlobals() {
-			return array(
-				'site' 		=> new Site(),
-				'context' => array()
-			);
+		return array(
+			'site' 		=> new Site(),
+			'context' => array()
+		);
   }
 
 	 public function getTests() {
-			return array();
+		return array();
   }
     
 	public function getFunctions() {
-			return array(
-				new Twig_Function( 'wp_head', 										array($this, 'wp_head') ),
-				new Twig_Function( 'wp_title', 										array($this, 'wp_title') ),	
-				new Twig_Function( 'body_class', 									array($this, 'body_class') ),
-				new Twig_Function( 'language_attributes', 				array($this, 'language_attributes') ),
-				new Twig_Function( 'wp_footer', 									array($this, 'wp_footer') ),
-				new Twig_Function( 'is_front_page', 							array($this, 'is_front_page') ),
-				new Twig_Function( 'is_home', 										array($this, 'is_home') ),
-				new Twig_Function( 'is_single', 									array($this, 'is_single') ),
-				new Twig_Function( 'is_page', 										array($this, 'is_page') ),
-			  new Twig_Function( 'is_archive', 									array($this, 'is_archive') ), 
+		return array(
+			new Twig_Function( 'wp_head', 										array($this, 'wp_head') ),
+			new Twig_Function( 'wp_title', 										array($this, 'wp_title') ),	
+			new Twig_Function( 'body_class', 									array($this, 'body_class') ),
+			new Twig_Function( 'language_attributes', 				array($this, 'language_attributes') ),
+			new Twig_Function( 'wp_footer', 									array($this, 'wp_footer') ),
+			new Twig_Function( 'is_front_page', 							array($this, 'is_front_page') ),
+			new Twig_Function( 'is_home', 										array($this, 'is_home') ),
+			new Twig_Function( 'is_single', 									array($this, 'is_single') ),
+			new Twig_Function( 'is_page', 										array($this, 'is_page') ),
+		  	new Twig_Function( 'is_archive', 									array($this, 'is_archive') ), 
+		  	new Twig_Function( 'get_pagename', 									array($this, 'get_pagename') ), 
 
-				new Twig_Function( 'corona_entry_footer_output', 	array($this, 'corona_entry_footer_output') ),  
-				new Twig_Function( 'corona_get_header_image_tag', array($this, 'corona_get_header_image_tag') ),
-				
-				new Twig_Function( 'tha_html_before', 						array($this, 'tha_html_before') ),  
-				new Twig_Function( 'tha_head_top', 								array($this, 'tha_head_top') ),
-				new Twig_Function( 'tha_head_bottom', 						array($this, 'tha_head_bottom') ),
-				new Twig_Function( 'tha_body_top', 								array($this, 'tha_body_top') ),
-				new Twig_Function( 'tha_body_bottom', 						array($this, 'tha_body_bottom') ),
-				new Twig_Function( 'tha_header_before', 					array($this, 'tha_header_before') ),
-				new Twig_Function( 'tha_content_before',					array($this, 'tha_content_before') ),
-				new Twig_Function( 'tha_content_after', 					array($this, 'tha_content_after') ),
-				new Twig_Function( 'tha_content_top',						 	array($this, 'tha_content_top') ),
-				new Twig_Function( 'tha_content_bottom', 					array($this, 'tha_content_bottom') ),
-				new Twig_Function( 'tha_footer_after', 						array($this, 'tha_footer_after') ),
-				new Twig_Function( 'tha_footer_top', 							array($this, 'tha_footer_top') ),
-				new Twig_Function( 'tha_footer_bottom', 					array($this, 'tha_footer_bottom') )
-			);
+			new Twig_Function( 'corona_entry_footer_output', 	array($this, 'corona_entry_footer_output') ),  
+			new Twig_Function( 'corona_get_header_image_tag', array($this, 'corona_get_header_image_tag') ),
+			
+			new Twig_Function( 'tha_html_before', 						array($this, 'tha_html_before') ),  
+			new Twig_Function( 'tha_head_top', 								array($this, 'tha_head_top') ),
+			new Twig_Function( 'tha_head_bottom', 						array($this, 'tha_head_bottom') ),
+			new Twig_Function( 'tha_body_top', 								array($this, 'tha_body_top') ),
+			new Twig_Function( 'tha_body_bottom', 						array($this, 'tha_body_bottom') ),
+			new Twig_Function( 'tha_header_before', 					array($this, 'tha_header_before') ),
+			new Twig_Function( 'tha_content_before',					array($this, 'tha_content_before') ),
+			new Twig_Function( 'tha_content_after', 					array($this, 'tha_content_after') ),
+			new Twig_Function( 'tha_content_top',						 	array($this, 'tha_content_top') ),
+			new Twig_Function( 'tha_content_bottom', 					array($this, 'tha_content_bottom') ),
+			new Twig_Function( 'tha_footer_after', 						array($this, 'tha_footer_after') ),
+			new Twig_Function( 'tha_footer_top', 							array($this, 'tha_footer_top') ),
+			new Twig_Function( 'tha_footer_bottom', 					array($this, 'tha_footer_bottom') )
+		);
     }
 
 		
@@ -60,6 +61,7 @@ class Twig_YALI_Extension extends Twig_Extension implements Twig_Extension_Globa
 	public function is_page() { return is_page(); }
 	public function is_archive() { return is_archive(); }
 	public function the_post_thumbnail() { return the_post_thumbnail(); }
+	public function get_pagename() { return get_query_var('pagename'); }
 
 	// add corona functions
 	public function corona_entry_footer_output() {  return corona_entry_footer_output(); }

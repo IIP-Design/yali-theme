@@ -3,10 +3,8 @@
 {% block content %}
 	
   <div class="ui container">
-    {% if page_title %}
-      <h1 class="ui header">{{ page_title }}</h1>      
-    {% endif %}
-    {{ page_content }}
+    <h1 class="ui header">{{ page_data.title.rendered }}</h1>          
+    <div>{{ page_data.content.rendered }}</div>
   </div>
 
 {% endblock %}

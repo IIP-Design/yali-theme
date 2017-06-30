@@ -33,7 +33,7 @@
 				{{ tha_content_top() }}
 						
 				<!-- overrride default content block with page specifc content -->
-				<div class="">
+				<div class="{{ get_pagename() }}">
 					{% block content %}
 							<div class="ui container">
 								<p>Content area</p>
