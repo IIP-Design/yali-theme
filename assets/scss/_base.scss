@@ -4,21 +4,14 @@ x/*------------------------------------*\
 
 body {
 	background-color: #fff;
-  	color: $font-color;
-  	line-height: 1.428;
+  color: $font-color;
+  line-height: 1.428;
 }
 
 main {
 	position: relative;
-	top: 60px;
-	@include bp($laptop) {top: 85px; }
 }
 
-.site-container {
-	// max-width: 1652px;
-	// margin: 0 auto;
-	// padding: 0 26px;
-}
 
 .site-content {
 	// for mobile no margin, desktop em(74)
@@ -30,8 +23,3 @@ main {
 .ui.inverted.menu {
 	border: none;
 }
-
-
-
-
-

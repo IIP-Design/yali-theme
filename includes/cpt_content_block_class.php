@@ -64,7 +64,7 @@ class Content_Block {
       'title'        => __( 'Content Block Fields', 'yali' ),
       'object_types' => array( 'content_block' )
     ));
-
+    
     $cb_box->add_field( array(
       'name'             => 'Type',
 	    'desc'             => 'What type of content block',
@@ -78,7 +78,15 @@ class Content_Block {
 	  ));
 
     $cb_box->add_field( array(
-      'name'             => 'Title Alignment',
+      'name' => 'Underline title?',
+      'desc' => '',
+      'id'   => $prefix . 'cb_title_underline',
+      'type' => 'checkbox'
+    ) );
+
+
+    $cb_box->add_field( array(
+      'name'             => 'Title alignment',
 	    'desc'             => 'How should the block title be aligned?',
 	    'id'               => $prefix . 'cb_title_alignment',
 	    'type'             => 'select',
@@ -91,7 +99,7 @@ class Content_Block {
 	  ));
     
     $cb_box->add_field( array(
-      'name'            => 'Excerpt Alignment',
+      'name'            => 'Excerpt alignment',
 	    'desc'            => 'How should the excerpt be aligned?',
 	    'id'              => $prefix . 'cb_excerpt_alignment',
 	    'type'            => 'select',
@@ -104,7 +112,7 @@ class Content_Block {
 	  ));
 
     $cb_box->add_field( array(
-      'name'               => 'Background Color',
+      'name'               => 'Background color',
 	    'desc'                => '',
 	    'id'                  => $prefix . 'cb_bg_color',
 	    'type'                => 'colorpicker',
@@ -116,6 +124,14 @@ class Content_Block {
         )),
       ),
 	  ));
+
+    $cb_box->add_field( array(
+      'id'   => $prefix . 'cb_widget',
+      'type' => 'text',
+      'name' => 'Widget shortcode',
+      'desc' => ''
+     
+    ));
 
     $button_group = $cb_box->add_field( array(
       'id'                => $prefix . 'cb_button',
@@ -141,7 +157,7 @@ class Content_Block {
     ));
 
     $cb_box->add_group_field( $button_group, array(
-      'name'               => 'Background Color',
+      'name'               => 'Background color',
 	    'desc'                => '',
 	    'id'                  => 'bg_color',
 	    'type'                => 'colorpicker',

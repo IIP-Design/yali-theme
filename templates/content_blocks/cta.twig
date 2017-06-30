@@ -6,8 +6,9 @@
   <p>{{ excerpt_alignment }}</p>
 </div>#}
 
-<div class="hero">
-    <span id="cafe" role="img" aria-label="Coffee and croissant.">
-        <span class="inner"></span>
-    </span>
+<div class="content-block full-width" style="background-color: {{ block_bg_color }}">
+   <div class="ui container">
+    <h2>{{ title }}</h2>
+    <div style="text-align: {{ excerpt_alignment }}">{{ excerpt }}</div>
+   </div>
 </div>

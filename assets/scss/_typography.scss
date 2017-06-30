@@ -4,10 +4,11 @@
 
 
 html {
+  font-size: 100%;
+}
+
+body {
   font-size: em($font-size);
-  @media screen and (max-width: 933px) {
-    font-size: em($mobile);
-  }
 }
 
 

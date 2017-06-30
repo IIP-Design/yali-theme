@@ -25,10 +25,13 @@ class Content_Block_Shortcode {
    
     $context = array(
       "title"             => $post->post_title,
+      "title_underline"   => get_post_meta( $id, 'yali_cb_title_underline', true ),
       "title_alignment"   => get_post_meta( $id, 'yali_cb_title_alignment', true ),
+      "block_bg_color"    => get_post_meta( $id, 'yali_cb_bg_color', true ),
       "excerpt"           => $post->post_excerpt,
       "excerpt_alignment" => get_post_meta( $id, 'yali_cb_excerpt_alignment', true ),
-      "image"             => get_the_post_thumbnail( $id )
+      "image"             => get_the_post_thumbnail( $id ),
+      "widget"            => get_post_meta( $id, 'yali_cb_widget', true ),
     );
     
     return Twig::render( 'content_blocks/cta.twig', $context );
@@ -40,6 +43,3 @@ class Content_Block_Shortcode {
  
 }
 
-  // $post = get_post( $id );
-  //   $excerpt = $post->post_excerpt;
-  //   $result = '<h1>Life is good!</h1>'; 
