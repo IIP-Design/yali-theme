@@ -1,0 +1,52 @@
+.footer {
+  width: 100%;
+  padding: 26px;
+  color: #fff;
+  @media screen and (max-width: 933px) {
+    padding: 16px;
+  }
+
+
+  &.ui.menu {
+    font-family: $font-family;
+    background-color: $blue-navy;
+  }
+
+
+  &_wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 1600px;
+    margin: 0 auto;
+  }
+
+  &_branding {
+    display: inline-block;
+    padding-bottom: 20px;
+    font-weight: 700;
+  }
+
+  &_list {
+    padding-top: 20px;
+    padding-bottom: 20px;
+
+    a {
+      font-size: 1.125em;
+      color: #fff;
+      font-weight: 600;
+    }
+  }
+
+  &_bureau {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    font-size: 1.25em;
+    font-weight: 600;
+  }
+
+  &_dislaimer {
+    padding-top: 20px;
+    padding-bottom: 80px;
+    font-size: 1.125em;
+    }
+}
