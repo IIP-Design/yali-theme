@@ -1,6 +1,6 @@
-<nav class="nav ui bottom fixed menu">
-	<div class="nav_wrapper">
-		<div>
+<footer class="footer ui bottom fixed menu">
+	<div class="footer_wrapper">
+		<div class="footer_branding">
 			<a href='{{ site.url }}' class="nav_siteurl">
 				<div class="img_placeholder">
 					<img src="{{ site.theme_url }}/assets/img/yali_logo_mark.svg">
@@ -8,7 +8,7 @@
 				<span href="/yalinav">Young African Leaders Initiative</span>
 			</a>
 		</div>
-		<div class="nav_list">
+		<div class="footer_list">
 		{% if menu %}
 			<div class="ui grid">
 				{% for item in menu %}
@@ -17,18 +17,17 @@
 			     </div>
 				{% endfor %}
 			</div>
-		{% endif %}
 		</div>
+		{% endif %}
 		<hr>
-		<div class="ui grid">
+		<div class="footer_bureau">
 			<div class="img_footer">
 				<img src="{{ site.theme_url }}/assets/img/us_flag_greyscale.svg">
 			</div>
-			<div><p>U.S. Department of State | Bureau of International Information Programs</p>
-			</div>
+			<span>U.S. Department of State | Bureau of International Information Programs</span>
 		</div>
-		<div>
-			<p>This site is managed by the U.S. Department of State. Links to external sites should not be construed as an endorsement of the views or privacy policies expressed on those sites.</p>
+		<div class="footer_disclaimer">
+			<span>This site is managed by the U.S. Department of State. Links to external sites should not be construed as an endorsement of the views or privacy policies expressed on those sites.</span>
 		</div>
-	 </div><!-- nav_wrapper -->
-</nav>
+	</div><!-- footer_wrapper -->
+</footer>

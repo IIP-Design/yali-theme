@@ -18,15 +18,18 @@ Text Domain: yali
 @import 'assets/scss/mixins';
 
 // Import semantic ui first so that rules can be overrided
-@import 'assets/scss/semantic'; 
+@import 'assets/scss/semantic';
 @import 'assets/scss/typography';
-@import 'assets/scss/base'; 
+@import 'assets/scss/base';
 @import 'assets/scss/content-block';
 @import 'assets/scss/accessibility';
 @import 'assets/scss/elements.scss';
 
 
 // PARTIALS
+// Footer
+@import 'assets/scss/footer/footer';
+
 // Nav
 @import 'assets/scss/nav/nav';
 @import 'assets/scss/nav/menu';
