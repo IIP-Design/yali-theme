@@ -1,37 +1,44 @@
+// Content blocks appear within the main post contetn which has constrainted width
+// So we back the left and right margins up to get a full width for the content block
+
+
 .content-block {
   padding-top: em(50);
 }
-// Content blocks appear within the main post contetn which has constrainted width
-// So we back the left and right margins up to get a full width for the content block
-.full-width {
-  margin-top: 50px;
 
-  margin-left: -28px;
-  margin-right: -28px;
-  padding-left: 14px;
-  padding-right: 14px;
 
-  @include bp(768px) {
-    padding-left: 28px;
-    padding-right: 28px;
-    margin-left: calc(-100vw / 2 + 723px / 2);
-    margin-right: calc(-100vw / 2 + 723px / 2);
+.ui.container {
+  
+  .full-width {
+    margin-top: 50px;
+    margin-left: -28px;
+    margin-right: -28px;
+    padding-left: 14px;
+    padding-right: 14px;
+
+    @include bp(768px) {
+      padding-left: 28px;
+      padding-right: 28px;
+      margin-left: calc(-100vw / 2 + 723px / 2);
+      margin-right: calc(-100vw / 2 + 723px / 2);
+    }
+
+    @include bp(992px) {
+      padding-left:0;
+      padding-right: 0;
+      margin-left: calc(-100vw / 2 + 933px / 2);
+      margin-right: calc(-100vw / 2 + 933px / 2);
+    }
+    
+    @include bp(1200px) {
+      margin-left: calc(-100vw / 2 + 1127px / 2);
+      margin-right: calc(-100vw / 2 + 1127px / 2);
+    }
+
+     @include bp(1600px) {
+      margin-left: calc(-100vw / 2 + 1547px / 2);
+      margin-right: calc(-100vw / 2 + 1547px / 2);
+    }
   }
 
-  @include bp(992px) {
-    padding-left:0;
-    padding-right: 0;
-    margin-left: calc(-100vw / 2 + 933px / 2);
-    margin-right: calc(-100vw / 2 + 933px / 2);
-  }
- 	
-  @include bp(1200px) {
-    margin-left: calc(-100vw / 2 + 1127px / 2);
-    margin-right: calc(-100vw / 2 + 1127px / 2);
-  }
-
-   @include bp(1600px) {
-    margin-left: calc(-100vw / 2 + 1547px / 2);
-    margin-right: calc(-100vw / 2 + 1547px / 2);
-  }
 }

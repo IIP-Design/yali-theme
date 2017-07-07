@@ -9,4 +9,7 @@ import * as search from './search.js';
   join_form.init();
   search.init();
 
+  // YALILearns Page
+  $('.ui.accordion').accordion();
+
 })( jQuery ); 

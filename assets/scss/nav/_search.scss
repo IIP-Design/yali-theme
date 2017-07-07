@@ -1,7 +1,7 @@
 .nav_menu_item--search {
 	  position: relative;
     vertical-align: top;
-    margin: 0;
+    margin: 3px 0 0 0;
     color: #000;
     @media screen and (max-width: 933px) {
       background-color: #fff;
@@ -12,6 +12,7 @@
     .search_wrapper {
       text-align: center;
     }    
+
 
     .search {
 
@@ -72,6 +73,7 @@
         }
       }
     }
+
 
     .search-icon_wrapper {
       vertical-align: top;

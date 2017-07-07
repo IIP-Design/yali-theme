@@ -1,0 +1,61 @@
+.yali-learns .materials {
+	padding-top: 80px;
+	padding-bottom: 80px;	
+	text-align: center;
+	color: $blue-navy;
+
+
+	&--promo {
+		padding-bottom: 80px;
+
+		.promo_item {
+			margin-bottom: 25px !important;
+
+			img {
+				width: 100%;
+			}
+
+			&_title {
+				margin-top: 10px;
+			}
+		}
+	}
+
+
+	&--campaigns {
+
+		.ui.styled.accordion {
+			width: 100%;
+			text-align: left;
+			box-shadow: none;
+
+			.title {
+				margin-bottom: 25px;
+				border: 8px solid $blue-navy;
+				font-size: em(45);
+				color: $blue-navy;
+
+				&:hover {
+					border-color: $blue-medium;
+					color: $blue-medium;					
+				}
+
+				&.active {
+					border-color: $blue-medium;	
+					color: #fff;					
+					background-color: $blue-medium;
+				}
+			}
+
+			.content {
+				margin-left: 2em;
+
+				a {
+					font-weight: 400;
+					font-style: italic;
+					color: $blue-medium;
+				}
+			}
+		}
+	}
+}

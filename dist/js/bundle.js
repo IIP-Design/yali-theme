@@ -183,6 +183,9 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
   nav.init($);
   join_form.init();
   search.init();
+
+  // YALILearns Page
+  $('.ui.accordion').accordion();
 })(jQuery);
 
 },{"../../node_modules/semantic-ui-sass/semantic-ui":29,"./join_form.js":1,"./nav.js":3,"./search.js":4}],3:[function(require,module,exports){
