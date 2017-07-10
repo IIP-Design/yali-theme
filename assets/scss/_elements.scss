@@ -93,13 +93,19 @@
 
 .hero-inner {
 	position: absolute;
-	width: 100%;
 	bottom: 0;
+	width: 100%;	
+	padding: 26px 0;
 	color: #fff;
 	@include bp($laptop) { bottom: 100px; }
+	@media screen and (max-width: 933px) {
+		padding: 0;
+	}
 
-	h1 { 
+	h1 {		 
 		margin-bottom: em(2);		
+		line-height: 1;
+		color: #fff;
 		@include bp($desktop) {
 			margin-bottom: em(1);
 			width: 80%;
@@ -114,8 +120,9 @@
 			display: block; 
 			@include bp($tablet-sm) { display: none; }
 		}
-	}
+	}	
 
+	/*
 	p {
 		font-size: rem(18);
 		margin-bottom: em(16);
@@ -123,6 +130,7 @@
 		@include bp($tablet-sm) { font-size: rem(20); }
 		@include bp($tablet) { font-size: rem(22); }
 	}
+	*/
 }
 
 
@@ -135,21 +143,25 @@
 		top: -100px;
 		padding-top: 40px;
 	}
-	// @include bp($desktop-big) { 
-	// 	height: 200px;
-	// 	top: -200px;
-	// }
 
 	h2 { 
 		text-align: center; 
+		color: $blue-navy;
 	}
 }
 
 
 .columns-text {
 	column-count: 1;
-	font-size: rem(18);
+	font-size: em(28);
 	@include bp($tablet) {
     	column-count: 2;	
+  	}
+  	@media screen and (max-width: 933px) {
+  		font-size: em(16, $mobile);
+  	}
+
+  	> p {
+  		font-size: 1em;
   	}
 }

@@ -1,6 +1,23 @@
 .yali-learns .feat_course {
-	padding-top: 80px;
-	padding-bottom: 80px;
+	color: $blue-navy;
+	@media screen and (min-width: 768px) {
+		padding-top: 80px;
+		padding-bottom: 80px;	
+	}
+
+	.ui.stackable.grid {
+
+		> .wide.column {
+			@media screen and (max-width: 767px) {
+				padding-left: 0 !important;
+				padding-right: 0 !important;
+
+				&:first-child {
+					padding-bottom: 0 !important;
+				}
+			}
+		}
+	}
 
 	&_title {
 		margin-bottom: 18px;
@@ -31,10 +48,16 @@
 		margin-right: 1em;
 		padding: 20px;		
 		background-color: $red;
+		@media screen and (max-width: 767px) {
+			padding: 10px;
+		}
 
 		a {
 			font-weight: 700;
 			color: #fff;
+			@media screen and (max-width: 767px) {
+				font-weight: 300;
+			}
 		}
 	}
 

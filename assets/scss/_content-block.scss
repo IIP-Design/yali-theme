@@ -10,12 +10,16 @@
 .ui.container {
   
   .full-width {
-    margin-top: 50px;
-    margin-left: -28px;
-    margin-right: -28px;
-    padding-left: 14px;
-    padding-right: 14px;
+    /*margin-top: 50px;*/
+    margin-left: -16px;
+    margin-right: -16px;
+    @media screen and (min-width: 934px) {
+      margin-left: -26px;
+      margin-right: -26px;
+    }
 
+    /*padding-left: 14px;
+    padding-right: 14px;    
     @include bp(768px) {
       padding-left: 28px;
       padding-right: 28px;
@@ -39,6 +43,7 @@
       margin-left: calc(-100vw / 2 + 1547px / 2);
       margin-right: calc(-100vw / 2 + 1547px / 2);
     }
+    */
   }
 
 }

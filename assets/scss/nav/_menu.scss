@@ -7,7 +7,7 @@
     @media (max-width: 933px) {
       display: none;
       min-width: 260px;
-      margin-top: 47px;
+      margin-top: 46px;
       margin-right: -16px;
       box-shadow: 1px 3px 5px #ababab;
     }
@@ -99,7 +99,7 @@
           a {
             color: #fff;
             @media screen and (max-width: 933px) {
-              font-size: 1.2em;
+              font-size: em(16, $mobile);
             }
           }
       }      

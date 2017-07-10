@@ -1,36 +1,25 @@
 .yali-learns {
 
-	h2 {
-		font-size: em(86);
-	}
-
-	h3 {
-		font-size: em(64);
-	}
-
-	h4 {
-		font-size: em(45);
-	}
-
-	h5 {
-		font-size: em(34);
-	}
-
-	p, ol {
-		font-size: em(28);
-	}
-		
 
 	.section {
 
 		p, ol, ul {
 			font-weight: 300;
 		}
+
+		ol, ul {
+			@media screen and (max-width: 767px) {
+				padding-left: 20px;
+			}
+		}
 	}
 
 
-	.intro {		
-		padding-bottom: 80px;
+	.intro {				
+		color: $blue-navy;
+		@media screen and (min-width: 768px) {
+			padding-bottom: 80px;
+		}
 		
 		h2 {
 			text-align: center;

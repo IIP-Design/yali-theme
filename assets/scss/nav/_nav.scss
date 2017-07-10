@@ -8,6 +8,7 @@
 
 
   &.ui.menu {
+    font-size: 1em;
     font-family: $font-family;
     font-weight: 700;
     background-color: $blue-navy;
@@ -51,7 +52,7 @@
         font-size: em(16);
       }      
       @media screen and (max-width: 330px) {
-        font-size: 14px;
+        font-size: em(16, $mobile);
       }
 
       &:hover {
@@ -100,7 +101,10 @@
       @media screen and (max-width: 330px) {
         margin: 0 0 0 10px;
         padding: 7px 10px;
-        font-size: em(12);
+
+        p {
+          font-size: em(12, $mobile);
+        }        
       }      
     }
 

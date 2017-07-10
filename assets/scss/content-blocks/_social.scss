@@ -1,7 +1,9 @@
 .cb-social {
 	padding: 98.5px 0;
 	text-align: center;
-
+	@media screen and (max-width: 767px) {
+		padding: 50px 0;
+	}
 
 	&.lightblue {
 		background-color: $lightblue;
@@ -9,13 +11,16 @@
 
 
 	&_title {
-
+		color: $blue-navy;
+		@media screen and (max-width: 767px) {
+			font-size: 2.2em;	
+		}
 	}
 
 
 	&_icon {
 		display: inline-block;
-		margin: 25px 15px;
+		margin: 0 15px;
 		border-radius: 50%;
 		font-size: 2rem;
 		@media screen and (max-width: 320px) {
@@ -24,15 +29,12 @@
 
 		i {
 			position: relative;
-			height: 50px;
-			width: 50px;
+			height: 2em;
+			width: 2em;
 			border-radius: 50%;
+			font-size: 1em;
 			color: $lightblue;
-			background-color: $darkblue;
-			@media screen and (max-width: 320px) {
-				height: 35px;
-				width: 35px;
-			}
+			background-color: $darkblue;			
 
 			&:before {
 				position: absolute;

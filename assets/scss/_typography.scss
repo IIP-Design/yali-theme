@@ -7,30 +7,71 @@ html {
   font-size: 100%;  
 }
 
+
 body {
-  font-size: em($font-size);  
+  font-size: $font-size + 0px;
+  @media screen and (max-width: 933px) {
+    font-size: $mobile + 0px;
+  } 
 }
 
 
 h1 {
-  color: #fff;
-  font-size: rem(64);
+  font-size: em(150);
   font-weight: 900;
-  line-height: 1;
-  @include bp($tablet-sm) { font-size: rem(68); }
-  @include bp($tablet) { font-size: rem(78); }
-  @include bp($laptop) { font-size: rem(100); }
-  @include bp($desktop-big) { font-size: rem(120); }  //150
+  @media screen and (max-width: 933px) {
+    font-size: em(75, $mobile);
+  }
 }
 
 
 h2 {
-  color: $blue-navy; 
-  font-size: rem(36);
+  font-size: em(86);
   font-weight: 900;
-  line-height: 1;
-  @include bp($tablet-sm) { font-size: rem(38);}
-  @include bp($tablet) { font-size: rem(44);}
-  @include bp($laptop) { font-size: rem(56); }
-  @include bp($desktop-big) { font-size: rem(85); } // 85
+  @media screen and (max-width: 933px) {
+    font-size: em(43, $mobile);
+  }
+}
+
+
+h3 {
+  font-size: em(64);
+  font-weight: 900;
+  @media screen and (max-width: 933px) {
+    font-size: em(32, $mobile);
+  }
+}
+
+
+h4 {
+  font-size: em(45);
+  font-weight: 900;
+  @media screen and (max-width: 933px) {
+    font-size: em(26, $mobile);
+  }
+}
+
+
+h5 {
+  font-size: em(34);
+  font-weight: 900;
+  @media screen and (max-width: 933px) {
+    font-size: em(20, $mobile);
+  }
+}
+
+
+p, ol {
+  font-size: em(28);  
+  @media screen and (max-width: 933px) {
+    font-size: em(16, $mobile);
+  }
+}
+
+
+blockquote {
+  font-size: $font-size + 0px;
+  @media screen and (max-width: 933px) {
+    font-size: $mobile + 0px;
+  }
 }

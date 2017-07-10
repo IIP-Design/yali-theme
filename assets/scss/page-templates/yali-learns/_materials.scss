@@ -1,12 +1,24 @@
-.yali-learns .materials {
-	padding-top: 80px;
-	padding-bottom: 80px;	
+.yali-learns .materials {	
 	text-align: center;
 	color: $blue-navy;
-
+	@media screen and (min-width: 768px) {
+		padding-top: 80px;
+		padding-bottom: 80px;	
+	}
 
 	&--promo {
 		padding-bottom: 80px;
+		@media screen and (max-width: 767px) {
+			padding-bottom: 40px;
+		}
+
+		.ui.stackable.grid {
+			
+			> .column.row > .column {
+				padding-left: 0 !important;
+				padding-right: 0 !important;
+			}
+		}
 
 		.promo_item {
 			margin-bottom: 25px !important;
@@ -17,6 +29,9 @@
 
 			&_title {
 				margin-top: 10px;
+				@media screen and (max-width: 767px) {
+					margin-top: 5px;
+				}
 			}
 		}
 	}
@@ -34,6 +49,9 @@
 				border: 8px solid $blue-navy;
 				font-size: em(45);
 				color: $blue-navy;
+				@media screen and (max-width: 933px) {
+					font-size: em(26, $mobile);
+				}
 
 				&:hover {
 					border-color: $blue-medium;
@@ -49,6 +67,15 @@
 
 			.content {
 				margin-left: 2em;
+				@media screen and (max-width: 767px) {
+					margin-left: 0;
+				}
+
+				h5 {
+					@media screen and (max-width: 767px) {
+						margin-bottom: 5px;
+					}
+				}
 
 				a {
 					font-weight: 400;

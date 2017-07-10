@@ -9,13 +9,13 @@
   *
   */
 
-$font-size-context: 16; // Default
+/*$font-size-context: 16;*/ // Default
 
-@function em($pixels, $context: $font-size-context) {
+@function em($pixels, $context: $font-size) {
   @return #{$pixels/$context}em;
 }
 
-@function rem($pixels, $context: $font-size-context) {
+@function rem($pixels, $context: $font-size) {
   @return #{$pixels/$context}rem;
 }
 
