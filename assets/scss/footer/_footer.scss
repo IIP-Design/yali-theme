@@ -1,0 +1,59 @@
+.footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  color: #fff;
+  @media screen and (max-width: 933px) {
+    padding: 16px;
+  }
+
+  &.ui.segment {
+    padding: 26px;
+  }
+
+  &.ui.menu {
+    font-family: $font-family;
+    background-color: $blue-navy;
+    margin: 0;
+    border-radius: 0;
+  }
+
+
+  &_wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 1600px;
+    margin: 0 auto;
+  }
+
+  &_branding {
+    display: inline-block;
+    padding-bottom: 20px;
+    font-weight: 700;
+  }
+
+  &_list {
+    padding-top: 20px;
+    padding-bottom: 20px;
+
+    a {
+      font-size: 1.125em;
+      color: #fff;
+      font-weight: 600;
+    }
+  }
+
+  &_bureau {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    font-size: 1.25em;
+    font-weight: 600;
+  }
+
+  &_dislaimer {
+    padding-top: 20px;
+    padding-bottom: 80px;
+    font-size: 1.125em;
+    }
+}

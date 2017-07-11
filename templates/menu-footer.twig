@@ -1,16 +1,32 @@
-{% if menu %}
-	{% for item in menu %}
-     <div class="ui item {{ item.children ? 'dropdown' : '' }}">
-       <a target="{{ item.target }}" href="{{ item.url }}">{{ item.title }}</a>
-       {% if item.children %}
-          <i class="dropdown icon"></i>
-          <div class="menu">
-            {% for child in item.children %}
-              <a class="item" target="{{ child.target }}" href="{{ child.url }}">{{ child.title }}</a>
-            {% endfor %}
-          </div>
-       {% endif %}
-     </div>
-	{% endfor %}
-{% endif %}
-	
+
+	<div class="footer_wrapper">
+		<div class="footer_branding">
+			<a href='{{ site.url }}' class="nav_siteurl">
+				<div class="img_placeholder">
+					<img src="{{ site.theme_url }}/assets/img/yali_logo_mark.svg">
+				</div>
+				<span href="/yalinav">Young African Leaders Initiative</span>
+			</a>
+		</div>
+		<div class="footer_list">
+		{% if menu %}
+			<div class="ui grid">
+				{% for item in menu %}
+			     <div class="ui item">
+			       <a target="{{ item.target }}" href="{{ item.url }}">{{ item.title }}</a>
+			     </div>
+				{% endfor %}
+			</div>
+		</div>
+		{% endif %}
+		<hr>
+		<div class="footer_bureau">
+			<div class="img_footer">
+				<img src="{{ site.theme_url }}/assets/img/us_flag_greyscale.svg">
+			</div>
+			<span>U.S. Department of State | Bureau of International Information Programs</span>
+		</div>
+		<div class="footer_disclaimer">
+			<span>This site is managed by the U.S. Department of State. Links to external sites should not be construed as an endorsement of the views or privacy policies expressed on those sites.</span>
+		</div>
+	</div><!-- footer_wrapper -->

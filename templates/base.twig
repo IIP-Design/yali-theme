@@ -7,7 +7,7 @@
 	{{ tha_head_bottom() }}
 
 	</head>
-	
+
 {% endblock %}
 
 	<body {{ body_class() }}>
@@ -19,19 +19,19 @@
 
 			{{ tha_header_before() }}
 
-			<header id="masthead" class="site-header">				
+			<header id="masthead" class="site-header">
 				{% block header %}
 					{# <!--Global nav, search, join button-- > #}
-					{% include "menu-header.twig" with {'menu': site.get_menu(2)} %}					
+					{% include "menu-header.twig" with {'menu': site.get_menu(2)} %}
 				{% endblock %}
 			</header>
 
 			{{ tha_content_before() }}
 
 			<main class="site-content" name="main" role="main">
-			
+
 				{{ tha_content_top() }}
-						
+
 				<!-- overrride default content block with page specifc content -->
 				<div class="{{ get_pagename() }}">
 					{% block content %}
@@ -40,7 +40,7 @@
 						</div>
 					{% endblock %}
 				</div>
-			
+
 				{% if sidebar %}
 					<aside class="layout-sidebar">
 						{{ sidebar }}
@@ -53,16 +53,14 @@
 
 			{{ tha_content_after() }}
 
-			{% block footer %}
-				{#<footer id="footer" class="ui inverted vertical footer segment">
-					<div class="ui container">
-						{% include 'footer.twig' %}
-					</div>
-				</footer>#}
-			{% endblock %}
+			<footer class="footer ui inverted bottom menu segment">
+				{% block footer %}
+					{% include "footer.twig" %}
+				{% endblock %}
+			</footer>
 
 			{{ tha_footer_after() }}
-		
+
 		</div><!-- .site-container -->
 
 		{{ tha_body_bottom() }}
