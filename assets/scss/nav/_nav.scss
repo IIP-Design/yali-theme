@@ -8,10 +8,14 @@
 
 
   &.ui.menu {
-    font-size: 1em;
+    /*font-size: 1em;*/
+    font-size: $font-size + 0px;
     font-family: $font-family;
     font-weight: 700;
     background-color: $blue-navy;
+    @media screen and (max-width: 933px) {
+      font-size: $mobile + 0px;
+    }
   }
 
 
@@ -98,30 +102,50 @@
         padding: 7px 14px;
       }
 
-      @media screen and (max-width: 330px) {
-        margin: 0 0 0 10px;
-        padding: 7px 10px;
+      @media screen and (max-width: 470px) {
+        margin: 0 0 0 14px;
+        padding: 7px 14px;
+
+        p {
+          font-size: em(14, $mobile);
+        }
+      }
+
+      @media screen and (max-width: 365px) {
 
         p {
           font-size: em(12, $mobile);
-        }        
+        }
+      }
+
+      @media screen and (max-width: 330px) {
+        margin: 0 0 0 10px;
+        padding: 7px 10px;        
       }      
     }
 
-    &--desktop {
-      font-size: em(18);
+    &--desktop {      
       @media screen and (max-width: 933px) {
         display: none !important;
-      } 
+      }            
       @media screen and (min-width: 934px) and (max-width: 1209px) {
         margin: 0 7.5px;        
       }
       @media screen and (min-width: 1025px) and (max-width: 1200px) {
-        font-size: em(16);
+        p {
+          font-size: em(16);
+        }        
       }
       @media screen and (min-width: 934px) and (max-width: 1024px) {
-        font-size: em(14);
+        p {
+          font-size: em(14);
+        }        
       }
+      @media screen and (min-width: 1201px) {
+        p {
+          font-size: em(18);
+        }
+      }            
     }
 
     &.no_show {

@@ -1,22 +1,28 @@
 .yali-learns .materials {	
 	text-align: center;
 	color: $blue-navy;
-	@media screen and (min-width: 768px) {
+	@media screen and (min-width: 934px) {
 		padding-top: 80px;
 		padding-bottom: 80px;	
+	}
+	@media screen and (min-width: 768px) and (max-width: 933px) {
+		padding-top: 16px;
+		padding-bottom: 16px;
 	}
 
 	&--promo {
 		padding-bottom: 80px;
-		@media screen and (max-width: 767px) {
+		@media screen and (max-width: 933px) {
 			padding-bottom: 40px;
 		}
+		@media screen and (max-width: 767px) {			
 
-		.ui.stackable.grid {
-			
-			> .column.row > .column {
-				padding-left: 0 !important;
-				padding-right: 0 !important;
+			.ui.stackable.grid {
+				
+				> .column.row > .column {
+					padding-left: 0 !important;
+					padding-right: 0 !important;
+				}
 			}
 		}
 

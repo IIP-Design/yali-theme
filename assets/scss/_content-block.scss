@@ -9,41 +9,17 @@
 
 .ui.container {
   
-  .full-width {
-    /*margin-top: 50px;*/
+  .full-width {    
     margin-left: -16px;
     margin-right: -16px;
     @media screen and (min-width: 934px) {
       margin-left: -26px;
       margin-right: -26px;
     }
-
-    /*padding-left: 14px;
-    padding-right: 14px;    
-    @include bp(768px) {
-      padding-left: 28px;
-      padding-right: 28px;
-      margin-left: calc(-100vw / 2 + 723px / 2);
-      margin-right: calc(-100vw / 2 + 723px / 2);
-    }
-
-    @include bp(992px) {
-      padding-left:0;
-      padding-right: 0;
-      margin-left: calc(-100vw / 2 + 933px / 2);
-      margin-right: calc(-100vw / 2 + 933px / 2);
-    }
-    
-    @include bp(1200px) {
-      margin-left: calc(-100vw / 2 + 1127px / 2);
-      margin-right: calc(-100vw / 2 + 1127px / 2);
-    }
-
-     @include bp(1600px) {
-      margin-left: calc(-100vw / 2 + 1547px / 2);
-      margin-right: calc(-100vw / 2 + 1547px / 2);
-    }
-    */
+    @media screen and (min-width: 1652px) {
+      margin-left: calc(-100vw / 2 + 50%);
+      margin-right: calc(-100vw / 2 + 50%); 
+    }    
   }
 
 }

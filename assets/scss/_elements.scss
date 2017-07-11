@@ -122,15 +122,9 @@
 		}
 	}	
 
-	/*
-	p {
-		font-size: rem(18);
-		margin-bottom: em(16);
-		font-weight: 300;		
-		@include bp($tablet-sm) { font-size: rem(20); }
-		@include bp($tablet) { font-size: rem(22); }
+	p {		
+		font-weight: 300;				
 	}
-	*/
 }
 
 
@@ -154,6 +148,7 @@
 .columns-text {
 	column-count: 1;
 	font-size: em(28);
+	font-weight: 300;
 	@include bp($tablet) {
     	column-count: 2;	
   	}
