@@ -5,16 +5,20 @@
     <img class="ui fluid image" src="{{ header_url }}" srcset="{{ srcset }}" sizes="{{ size }}" alt="{{ header_url }}">
     <div class="hero-inner">
       <div class="hero-content ui container">
-        <h1 class="hero-h1">Young African Leaders Initiative</h1>
-        <h1 class="hero-h1_m">YALI</h1>
-        <p>The Young African Leaders Initiative (YALI) is a signature effort to invest in the next generation of African leaders.</p>     
+        <div class='inner-container'>
+          <h1 class="hero-h1">Young African Leaders Initiative</h1>
+          <h1 class="hero-h1_m">YALI</h1>
+          <p>The Young African Leaders Initiative (YALI) is a signature effort to invest in the next generation of African leaders.</p>     
+        </div>
       </div>
     </div>
   </div>
   <div class="ui container title-overlay">
-    <h2>{{ page_data.title.rendered }}</h2>      
-    <div>
-      {{ page_data.content.rendered }}          
+    <div class='inner-container'>
+      <h2 class='title-overlay_title'>{{ page_data.title.rendered }}</h2>      
+      <div>
+        {{ page_data.content.rendered }}          
+      </div>
     </div>
   </div>
 {% endblock %}

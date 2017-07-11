@@ -1,0 +1,35 @@
+.hero {
+	position: relative;
+
+	&-inner {
+		position: absolute;
+		bottom: 0;
+		width: 100%;	
+		padding: 26px 0;
+		color: #fff;
+		@include bp($laptop) { bottom: 100px; }
+		@media screen and (max-width: 933px) {
+			padding: 0;
+		}
+
+		h1 {
+			line-height: 1;
+			color: #fff;
+
+			&.hero-h1 {
+				display: none;
+				@include bp($tablet-sm) { display: block; }
+			}
+			&.hero-h1_m {
+				display: block;
+				@include bp($tablet-sm) { display: none; }
+			}
+		}	
+
+		p {		
+			font-weight: 300;				
+		}
+	}
+}
+
+

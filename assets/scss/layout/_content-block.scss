@@ -1,0 +1,17 @@
+// Content blocks appear within the main post contetn which has constrainted width
+// So we back the left and right margins up to get a full width for the content block
+
+
+.content-block {
+  padding-top: em(50);
+}
+
+  
+.full-width {    
+  margin-left: -16px;
+  margin-right: -16px;
+  @media screen and (min-width: 934px) {   
+    margin-left: calc(-100vw / 2 + 50%);
+    margin-right: calc(-100vw / 2 + 50%); 
+  }
+}

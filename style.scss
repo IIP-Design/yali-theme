@@ -18,29 +18,35 @@ Text Domain: yali
 @import 'assets/scss/mixins';
 
 // Import semantic ui first so that rules can be overrided
-@import 'assets/scss/semantic';
-@import 'assets/scss/semantic-overrides/container';
+@import 'node_modules/semantic-ui-sass/semantic-ui';
 
+@import 'assets/scss/layout/container';
+@import 'assets/scss/layout/content-block';
 @import 'assets/scss/typography';
 @import 'assets/scss/base';
 @import 'assets/scss/accessibility';
-@import 'assets/scss/elements.scss';
-@import 'assets/scss/content-block';
 
 
 // PARTIALS
+// Hero/Page Title Elems
+@import 'assets/scss/partials/hero';
+@import 'assets/scss/partials/page-title-overlay';
+
+// General helper elems - dropdown, placeholders, etc. 
+@import 'assets/scss/partials/helpers';
+
 // Footer
-@import 'assets/scss/footer/footer';
+@import 'assets/scss/partials/footer/footer';
 
 // Nav
-@import 'assets/scss/nav/nav';
-@import 'assets/scss/nav/menu';
-@import 'assets/scss/nav/submenu';
-@import 'assets/scss/nav/burger';
-@import 'assets/scss/nav/search';
+@import 'assets/scss/partials/nav/nav';
+@import 'assets/scss/partials/nav/menu';
+@import 'assets/scss/partials/nav/submenu';
+@import 'assets/scss/partials/nav/burger';
+@import 'assets/scss/partials/nav/search';
 
 // Join Form
-@import 'assets/scss/join-form/join-form';
+@import 'assets/scss/partials/join-form/join-form';
 
 // CONTENT BLOCKS
 // Social
