@@ -7,9 +7,8 @@
 			padding-top: 80px;			
 			padding-bottom: 80px;
 		}
-		@media screen and (min-width: 768px) and (max-width: 933px) {
-			padding-top: 16px;
-			padding-bottom: 16px;
+		@media screen and (max-width: 933px) {
+			padding-top: 14px;
 		}
 
 		ol {
@@ -52,6 +51,10 @@
 		&--four {
 			margin-top: 16px !important;
 			background-color: $blue-navy;
+			@media screen and (max-width: 933px) {
+				margin-top: 8px !important;
+				padding-bottom: 14px;
+			}
 		}
 	}		
 
@@ -102,7 +105,7 @@
 			.event_cta {
 
 				&_wrapper {					
-					padding: 40px;
+					padding: 30px;
 					background-color: $yellow;
 					@media screen and (min-width: 768px) {					
 						transform: translateY(-160px);

@@ -6,12 +6,13 @@
   padding-top: em(50);
 }
 
-  
-.full-width {    
-  margin-left: -16px;
-  margin-right: -16px;
-  @media screen and (min-width: 934px) {   
-    margin-left: calc(-100vw / 2 + 50%);
-    margin-right: calc(-100vw / 2 + 50%); 
-  }
+.ui.container {
+	.full-width {    
+		margin-left: -16px;
+		margin-right: -16px;
+		@media screen and (min-width: 934px) {   
+			margin-left: calc(-100vw / 2 + 50%);
+			margin-right: calc(-100vw / 2 + 50%); 
+		}
+	}	
 }

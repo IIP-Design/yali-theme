@@ -62,10 +62,15 @@ h5 {
 
 
 p, ol {
-  font-size: em(28);  
+  font-size: em(28); 
+  font-weight: 300;
   @media screen and (max-width: 933px) {
     font-size: em(16, $mobile);
   }
+}
+
+ul {
+  font-weight: 300;
 }
 
 

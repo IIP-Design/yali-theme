@@ -3,10 +3,6 @@
 
 	.section {
 
-		p, ol, ul {
-			font-weight: 300;
-		}
-
 		ol, ul {
 			@media screen and (max-width: 767px) {
 				padding-left: 20px;
@@ -20,8 +16,8 @@
 		@media screen and (min-width: 934px) {
 			padding-bottom: 80px;
 		}
-		@media screen and (min-width: 768px) and (max-width: 933px) {
-			padding-bottom: 16px;
+		@media screen and (max-width: 933px) {
+			padding-bottom: 30px;
 		}
 		
 		h2 {

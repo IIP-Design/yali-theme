@@ -97,7 +97,8 @@
           }
 
           a {
-            color: #fff;
+            font-weight: 700;
+            color: #fff;            
             @media screen and (max-width: 933px) {
               font-size: em(16, $mobile);
             }

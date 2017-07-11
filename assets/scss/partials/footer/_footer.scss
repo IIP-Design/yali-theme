@@ -3,20 +3,27 @@
   bottom: 0;
   left: 0;
   width: 100%;
-  color: #fff;
-  @media screen and (max-width: 933px) {
-    padding: 16px;
-  }
+  color: #fff;  
+
 
   &.ui.segment {
     padding: 26px;
+    @media screen and (max-width: 933px) {
+      padding: 16px;
+    }
   }
 
+
   &.ui.menu {
+    font-size: 1em;
     font-family: $font-family;
     background-color: $blue-navy;
     margin: 0;
     border-radius: 0;
+
+    .ui.item:before {
+      display: none;
+    }    
   }
 
 
@@ -25,35 +32,101 @@
     width: 100%;
     max-width: 1600px;
     margin: 0 auto;
-  }
+    padding: 84px 0;
+    @media screen and (max-width: 589px) {
+      padding: 32px 0 20px 0;      
+      text-align: center;
+    }
 
-  &_branding {
-    display: inline-block;
-    padding-bottom: 20px;
-    font-weight: 700;
-  }
-
-  &_list {
-    padding-top: 20px;
-    padding-bottom: 20px;
-
-    a {
-      font-size: 1.125em;
-      color: #fff;
-      font-weight: 600;
+    > hr {
+      margin: 0
     }
   }
 
-  &_bureau {
-    padding-top: 20px;
-    padding-bottom: 20px;
-    font-size: 1.25em;
-    font-weight: 600;
+
+  &_branding {        
+    font-weight: 700;
+    @media screen and (max-width: 589px) {
+      padding-bottom: 36px;
+    }
+
+    a {
+      color: #fff;      
+    }
+
+    h5, .img_placeholder {
+      @media screen and (min-width: 590px) {
+        display: inline-block;
+      }
+    }
+
+    h5 {
+      vertical-align: top;
+      margin-top: 0;      
+      @media screen and (max-width: 589px) {
+        margin-top: 0.8em;
+      }
+    }
+
+    .img_placeholder {      
+        width: 40px;
+        height: 40px;
+    }
   }
+
+
+  &_list {
+    padding: 60px 0;
+    @media screen and (max-width: 589px) {      
+      padding: 20px 0 36px 0;      
+    }    
+
+    .ui.grid {
+      @media screen and (max-width: 589px) {
+        -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        margin: 0;        
+      }
+    }
+
+    .ui.item {
+      @media screen and (max-width: 589px) {
+        padding: 0 0 24px 0;
+        justify-content: center;
+        &:last-child {
+          padding-bottom: 0;
+        }        
+      }
+
+      a {      
+        color: #fff;
+        font-weight: 700;
+      }
+
+    }    
+  }  
+
+
+  &_bureau {
+    padding: 60px 0;    
+    font-size: 1.25em;
+    font-weight: 700;
+    @media screen and (max-width: 589px) {
+      padding: 36px 0 24px 0;
+    }
+
+    > p {
+      display: inline-block;
+      @media screen and (max-width: 589px) {
+        display: none;
+      }
+    }    
+  }
+
 
   &_dislaimer {
     padding-top: 20px;
     padding-bottom: 80px;
-    font-size: 1.125em;
-    }
+  }
 }
