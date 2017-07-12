@@ -1,5 +1,7 @@
 <?php
 
+use Yali\Twig as Twig;
+
 // Post Object
 global $post;
 
