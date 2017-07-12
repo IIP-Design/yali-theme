@@ -54,31 +54,28 @@
       color: #fff;      
     }
 
-    h5, .img_placeholder {
+    &_title, .img_placeholder {
       @media screen and (min-width: 590px) {
         display: inline-block;
       }
     }
 
-    h5 {
+    &_title {
       vertical-align: top;
       margin-top: 0;      
+      font-size: em(24, $font-size);
+      font-weight: 700;
       @media screen and (max-width: 589px) {
-        margin-top: 0.8em;
+        font-size: em(18, $mobile);
       }
-    }
-
-    .img_placeholder {      
-        width: 40px;
-        height: 40px;
-    }
+    }    
   }
 
 
   &_list {
     padding: 60px 0;
     @media screen and (max-width: 589px) {      
-      padding: 20px 0 36px 0;      
+      padding: 0 0 36px 0;      
     }    
 
     .ui.grid {
@@ -97,27 +94,78 @@
         &:last-child {
           padding-bottom: 0;
         }        
+      }      
+    }
+
+    &_item {
+      font-size: em(18, $font-size);
+      font-weight: 700;
+      @media screen and (max-width: 589px) {
+        font-size: em(14, $mobile);
       }
 
       a {      
-        color: #fff;
-        font-weight: 700;
+        color: #fff;        
       }
 
+      &--search {
+        position: relative;        
+        min-width: 176px;
+        @media screen and (min-width: 934px) {
+          display: none;
+        }
+
+        .search_input_wrapper {
+          position: absolute;
+          top: 0;
+          left: 0;                    
+          opacity: 1;
+          transition: opacity 0.5s ease;
+
+          &.hide {
+            z-index: -1;
+            opacity: 0;
+          }
+        }
+
+        .remove {
+          position: relative;
+          vertical-align: top;
+          height: 24px;
+          width: 24px;
+          margin: 0 -3px 0 0;
+          color: #000;
+          background-color: #fff;
+
+          &::before {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+          }
+        }
+
+        input {
+          height: 24px;
+          border: none;
+          text-align: center;
+          color: #000;
+        } 
+      }
     }    
   }  
 
 
   &_bureau {
     padding: 60px 0;    
-    font-size: 1.25em;
-    font-weight: 700;
     @media screen and (max-width: 589px) {
       padding: 36px 0 24px 0;
     }
 
-    > p {
+    &_txt {
       display: inline-block;
+      font-size: em(20, $font-size);
+      font-weight: 700;
       @media screen and (max-width: 589px) {
         display: none;
       }
@@ -125,8 +173,10 @@
   }
 
 
-  &_dislaimer {
-    padding-top: 20px;
-    padding-bottom: 80px;
+  &_disclaimer {
+
+    &_txt {
+      font-size: em(18, $font-size);
+    }    
   }
 }
