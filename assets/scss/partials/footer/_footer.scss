@@ -32,9 +32,9 @@
     width: 100%;
     max-width: 1600px;
     margin: 0 auto;
-    padding: 84px 0;
+    padding: 24px 0;
     @media screen and (max-width: 589px) {
-      padding: 32px 0 20px 0;      
+      padding: 8px 0 2px 0;
       text-align: center;
     }
 
@@ -47,7 +47,7 @@
   &_branding {        
     font-weight: 700;
     @media screen and (max-width: 589px) {
-      padding-bottom: 36px;
+      padding-bottom: 18px;
     }
 
     a {
@@ -62,10 +62,12 @@
 
     &_title {
       vertical-align: top;
+      display: inline-block;
       margin-top: 0;      
       font-size: em(24, $font-size);
       font-weight: 700;
-      @media screen and (max-width: 589px) {
+      @media screen and (max-width: 933px) {
+        margin-top: 3px;
         font-size: em(18, $mobile);
       }
     }    
@@ -73,9 +75,9 @@
 
 
   &_list {
-    padding: 60px 0;
+    padding: 30px 0;
     @media screen and (max-width: 589px) {      
-      padding: 0 0 36px 0;      
+      padding: 0 0 18px 0;      
     }    
 
     .ui.grid {
@@ -89,7 +91,7 @@
 
     .ui.item {
       @media screen and (max-width: 589px) {
-        padding: 0 0 24px 0;
+        padding: 0 0 18px 0;
         justify-content: center;
         &:last-child {
           padding-bottom: 0;
@@ -100,7 +102,7 @@
     &_item {
       font-size: em(18, $font-size);
       font-weight: 700;
-      @media screen and (max-width: 589px) {
+      @media screen and (max-width: 933px) {
         font-size: em(14, $mobile);
       }
 
@@ -109,33 +111,32 @@
       }
 
       &--search {
-        position: relative;        
-        min-width: 176px;
+        position: relative;
         @media screen and (min-width: 934px) {
           display: none;
         }
 
         .search_input_wrapper {
-          position: absolute;
-          top: 0;
-          left: 0;                    
-          opacity: 1;
+          display: inline-block;
+          opacity: 0;
           transition: opacity 0.5s ease;
+          @media screen and (min-width: 590px) and (max-width: 933px) {
+            position: absolute;
+            right: 100%;
+          }
 
           &.hide {
-            z-index: -1;
-            opacity: 0;
+            display: none;            
           }
+
         }
 
-        .remove {
+        .icon {
           position: relative;
           vertical-align: top;
-          height: 24px;
-          width: 24px;
-          margin: 0 -3px 0 0;
-          color: #000;
-          background-color: #fff;
+          height: 35px;
+          width: 35px;
+          margin: 0 -3px 0 0;          
 
           &::before {
             position: absolute;
@@ -143,29 +144,67 @@
             left: 50%;
             transform: translate(-50%, -50%);
           }
-        }
+
+          &.remove {
+            color: #000;
+            background-color: #fff;
+            @media screen and (min-width: 590px) and (max-width: 933px) {
+              position: absolute;
+              left: 0;
+            }
+          }
+
+          &.search {
+            margin: 0;
+            color: inherit;
+            background-color: initial;
+            transition: color 0.5s ease, background-color 0.5s ease;
+
+            &.active {
+              margin-left: -3px;
+              color: #000;
+              background-color: #fff;
+            }
+          }
+        }        
 
         input {
-          height: 24px;
+          height: 35px;          
           border: none;
           text-align: center;
           color: #000;
-        } 
+          transition: width 0.5s ease;
+
+          &.inactive {
+            width: 0 !important;
+          }
+
+          &.active {
+            width: 200px;
+            @media screen and (max-width: 589px) {
+              width: 200px !important;
+            }            
+          }
+        }
       }
     }    
   }  
 
 
   &_bureau {
-    padding: 60px 0;    
+    padding: 30px 0;    
     @media screen and (max-width: 589px) {
-      padding: 36px 0 24px 0;
+      padding: 18px 0 12px 0;
     }
 
     &_txt {
+      vertical-align: top;
       display: inline-block;
       font-size: em(20, $font-size);
       font-weight: 700;
+      @media screen and (min-width: 590px) and (max-width: 933px) {
+        font-size: em(16, $mobile);
+      }
       @media screen and (max-width: 589px) {
         display: none;
       }
