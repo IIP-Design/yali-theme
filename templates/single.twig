@@ -1,0 +1,12 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+
+  <div class="ui container">
+    <h2>{{ post_data.title.rendered }}</h2>
+    <div>
+      {{ post_data.content.rendered }}
+    </div>
+  </div>
+
+{% endblock %}
