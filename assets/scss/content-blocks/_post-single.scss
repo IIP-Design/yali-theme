@@ -1,0 +1,24 @@
+.cb_post {
+		
+	&.ui.grid {
+		margin: 0;
+	}
+
+	&_wrapper {
+		margin-bottom: 50px;
+	}
+
+	&_link {
+		display: block;
+		max-width: 400px;
+		padding: 25px;
+		text-align: center;
+		color: #fff;
+		background-color: $blue-navy;
+
+		&:hover {
+			color: #fff;
+		}
+	}
+
+}

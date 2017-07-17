@@ -51,6 +51,7 @@ Text Domain: yali
 // CONTENT BLOCKS
 // Social
 @import 'assets/scss/content-blocks/social';
+@import 'assets/scss/content-blocks/post-single';
 
 // PAGE TEMPLATES
 @import 'assets/scss/page-templates/yali-learns/yali-learns';
@@ -58,3 +59,4 @@ Text Domain: yali
 @import 'assets/scss/page-templates/yali-learns/materials';
 @import 'assets/scss/page-templates/yali-learns/featured-course';
 
+@import 'assets/scss/page-templates/campaigns/yalistands4all/yalistands4all';

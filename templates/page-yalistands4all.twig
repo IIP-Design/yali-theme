@@ -1,0 +1,70 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+<div class="hero">
+    <img class="ui fluid image" src="{{ header_url }}" srcset="{{ srcset }}" sizes="{{ size }}" alt="{{ header_url }}">
+</div>
+<div class="ui container title-overlay">
+	<div class='inner-container'>
+		<h2 class='title-overlay_title'>{{ page_data.title.rendered }}</h2>      
+		<div class='page-content'>
+			{{ page_data.content.rendered }}          
+		</div>
+
+		{% include 'content_blocks/post-single.twig' with 
+			{
+				'title': 'Read about (topic)',
+				'img_src': 'data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==',
+				'headline': 'Lorem Ipsum Dolor Sit Amet',
+				'excerpt': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus nisi nisi, ullamcorper nec ornare eget, consectetur vitae dolor. Nam accumsan gravida turpis, at tempor nibh aliquam vitae.'
+			} 
+		%}
+
+		{% include 'content_blocks/post-single.twig' with 
+			{
+				'title': 'Take the course(s)',
+				'img_src': 'data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==',
+				'headline': 'Lorem Ipsum Dolor Sit Amet',
+				'excerpt': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus nisi nisi, ullamcorper nec ornare eget, consectetur vitae dolor. Nam accumsan gravida turpis, at tempor nibh aliquam vitae.'
+			} 
+		%}
+
+		<section class='promote'>
+			<h3>Promote #YALIStands4All</h3>
+			<p>Share the #YALIStands4All announcement on Facebook or Twitter using the buttons below.</p>	
+			<div class='ui stackable grid promote_item'>
+				<div class='eight wide column'>
+					<a href='#' target='_blank' class='promote_item_share'>
+						<i class='facebook f icon'></i>
+						<span>Share on Facebook</span>
+					</a>
+					<img style='width: 100%;' src='data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='>
+					<p>Share the #YALIStands4All sahre graphic on your social media pages! Click this preview image to 
+						download.</p>
+				</div>
+				<div class='eight wide column promote_item'>
+					<a href='#' target='_blank' class='promote_item_share'>
+						<i class='twitter icon'></i>
+						<span>Share on Twitter</span>
+					</a>
+					<img src='data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='>
+					<p>Update your Facebook profile with the #YALIStands4All profile banner! Click this preview to
+						download.</p>
+				</div>
+			</div>
+		</section>
+		
+		{% include 'content_blocks/post-single.twig' with 
+			{
+				'title': 'Take the pledge',
+				'img_src': 'data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==',
+				'headline': 'Lorem Ipsum Dolor Sit Amet',
+				'excerpt': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus nisi nisi, ullamcorper nec ornare eget, consectetur vitae dolor. Nam accumsan gravida turpis, at tempor nibh aliquam vitae.',
+				'cta_link': '#',
+				'cta_text': 'Take the pledge'
+			} 
+		%}
+
+	</div>
+</div>
+{% endblock %}

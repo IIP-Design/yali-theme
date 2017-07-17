@@ -1,0 +1,45 @@
+.yalistands4all {
+	
+
+	.promote {
+		margin-bottom: 50px;
+		
+		&_item {
+
+			&_share {
+				position: relative;
+				display: block;
+				padding: 25px;
+				margin-bottom: 25px;
+				font-size: em(28);				
+				font-weight: 900;
+				text-align: center;
+				color: #fff;
+				background-color: $blue-medium;
+
+				i {
+					float: left;
+					font-size: 2em;
+
+					&::before {
+						position: absolute;
+						top: 50%;
+						transform: translateY(-50%);
+					}
+				}
+
+				span {
+					
+				}
+			}
+
+			img {
+				width: 100%;
+				max-height: 300px;
+			}
+		}
+
+	}
+	
+	
+}
