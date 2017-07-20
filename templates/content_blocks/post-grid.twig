@@ -1,0 +1,53 @@
+<section class='section cb-post_grid'>
+	<h3>Suggested Grid</h3>
+	<div class='grid_wrapper suggest_content'>		
+		<div class='grid_row'>		
+			<div class='grid_twothirds left'>
+				{% for post in posts if post.featured_post == true %}								
+				<div class='inner suggest_content_item suggest_content_item--feat_post' 
+					 style='background-image: url("{{ post.featured_img_url }}"); 
+					 		background-size: cover;'>					
+					<p class='suggest_content_item_title'>{{ post.title }}</p>
+					<div class='suggest_content_item_tags'>
+						{% for tag in post.tags  %}
+						<span>{{ tag }}</span>	
+						{% endfor %}							
+					</div>
+				</div>
+				{% endfor %}	
+			</div>							
+			<div class='grid_onethird right'>
+				{% for post in posts if post.featured_post != true %}				
+				{% if loop.index < 3 %}
+				<div class='inner suggest_content_item'>
+					<p class='suggest_content_item_title'>{{ post.title }}</p>
+					<p class='suggest_content_item_excerpt'>{{ post.excerpt }}</p>
+					<div class='suggest_content_item_tags'>
+						{% for tag in post.tags  %}
+						<span>{{ tag }}</span>	
+						{% endfor %}
+					</div>
+				</div>
+				{% endif %}
+				{% endfor %}
+			</div>
+		</div><!--row-->
+		<div class='grid_row'>
+			{% for post in posts if post.featured_post != true %}
+			{% if loop.index > 2 %}
+			<div class='grid_onethird bottom'>
+				<div class='inner suggest_content_item'>
+					<p class='suggest_content_item_title'>{{ post.title }}</p>
+					<p class='suggest_content_item_excerpt'>{{ post.excerpt }}</p>
+					<div class='suggest_content_item_tags'>
+						{% for tag in post.tags  %}
+						<span>{{ tag }}</span>	
+						{% endfor %}
+					</div>
+				</div>
+			</div>
+			{% endif %}
+			{% endfor %}
+		</div>										
+	</div><!--wrapper-->
+</section>

@@ -5,6 +5,17 @@ namespace Yali;
 use WP_REST_Request;
 
 class API {
+  public static function do_request( $request ) {
+		$response = rest_do_request( $request );
+		return $response->data;	
+	}
+
+  public static function debug( $obj ) {
+	 	echo '<pre>'; 
+		var_dump( $obj );
+		echo '</pre>'; 
+	}
+
   public static function get_page($id) {			
 		$request = new WP_REST_Request('GET', '/wp/v2/pages/' . $id);
 		$response = rest_do_request($request);
@@ -96,17 +107,12 @@ class API {
 		$request = new WP_REST_Request('GET', '/wp/v2/media/' . $id);
 		$response = rest_do_request($request);
 		return $response->data;	
-	}
+	}	
 
-	public static function do_request( $request ) {
-		$response = rest_do_request( $request );
-		return $response->data;	
-	}
-
-	public static function debug( $obj ) {
-		echo '<pre>'; 
-		var_dump( $obj );
-		echo '</pre>'; 
+	public static function get_child_pages($parent_page_id) {
+		$request = new WP_REST_Request('GET', '/wp/v2/pages');
+		$request->set_param('parent', $parent_page_id);
+		return self::do_request($request);
 	}
 
 }

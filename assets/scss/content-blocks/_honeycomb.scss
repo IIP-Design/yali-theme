@@ -1,0 +1,25 @@
+.cb_honeycomb {
+	text-align: center;	
+
+
+	&_wrapper {
+
+		&.lightblue {
+			color: $blue-navy;
+			background-color: $blue-bright;
+		}
+	}
+	
+	
+	&_item {
+		margin: auto;
+
+		&_img {
+			width: 100%;
+			border: 3px solid $blue-navy;
+			border-radius: 50%;			
+		}
+
+	}
+
+}

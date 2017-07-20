@@ -1,0 +1,12 @@
+.cta_link {
+	display: block;
+	max-width: 400px;
+	padding: 25px;
+	text-align: center;
+	color: #fff;
+	background-color: $blue-medium;
+
+	&:hover {
+		color: #fff;
+	}
+}

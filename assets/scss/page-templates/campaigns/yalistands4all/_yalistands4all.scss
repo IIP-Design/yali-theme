@@ -1,8 +1,12 @@
 .yalistands4all {
-	
 
-	.promote {
+	
+	.section {
 		margin-bottom: 50px;
+	}	
+
+	
+	.promote {		
 		
 		&_item {
 
@@ -27,10 +31,6 @@
 						transform: translateY(-50%);
 					}
 				}
-
-				span {
-					
-				}
 			}
 
 			img {
@@ -38,8 +38,36 @@
 				max-height: 300px;
 			}
 		}
+	}
 
+
+	.alumni {
+
+		&_vid {
+
+			img {
+				width: 100%;		
+				max-height: 300px;
+			}
+		}		
+	}
+
+
+	.org_event {
+
+		&_item {
+
+			.cta_link {
+				max-width: 100%;
+			}
+		}
 	}
 	
 	
+	.survey {
+
+		.cta_link {
+			max-width: 100%;
+		}
+	}
 }

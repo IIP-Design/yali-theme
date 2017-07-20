@@ -9,16 +9,10 @@
 	}
 
 	&_link {
-		display: block;
-		max-width: 400px;
-		padding: 25px;
-		text-align: center;
-		color: #fff;
-		background-color: $blue-navy;
 
-		&:hover {
-			color: #fff;
-		}
+		&.cta_link {
+			background-color: $blue-navy;
+		}		
 	}
 
 }

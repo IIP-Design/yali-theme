@@ -34,6 +34,7 @@ Text Domain: yali
 
 // General helper elems - dropdown, placeholders, etc. 
 @import 'assets/scss/partials/helpers';
+@import 'assets/scss/partials/cta-link';
 
 // Footer
 @import 'assets/scss/partials/footer/footer';
@@ -52,6 +53,8 @@ Text Domain: yali
 // Social
 @import 'assets/scss/content-blocks/social';
 @import 'assets/scss/content-blocks/post-single';
+@import 'assets/scss/content-blocks/post-grid';
+@import 'assets/scss/content-blocks/honeycomb';
 
 // PAGE TEMPLATES
 @import 'assets/scss/page-templates/yali-learns/yali-learns';

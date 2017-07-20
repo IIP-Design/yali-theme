@@ -29,7 +29,7 @@
 			} 
 		%}
 
-		<section class='promote'>
+		<section class='section promote'>
 			<h3>Promote #YALIStands4All</h3>
 			<p>Share the #YALIStands4All announcement on Facebook or Twitter using the buttons below.</p>	
 			<div class='ui stackable grid promote_item'>
@@ -38,7 +38,7 @@
 						<i class='facebook f icon'></i>
 						<span>Share on Facebook</span>
 					</a>
-					<img style='width: 100%;' src='data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='>
+					<img src='data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='>
 					<p>Share the #YALIStands4All sahre graphic on your social media pages! Click this preview image to 
 						download.</p>
 				</div>
@@ -62,6 +62,95 @@
 				'excerpt': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus nisi nisi, ullamcorper nec ornare eget, consectetur vitae dolor. Nam accumsan gravida turpis, at tempor nibh aliquam vitae.',
 				'cta_link': '#',
 				'cta_text': 'Take the pledge'
+			}
+		%}
+
+		<section class='section alumni'>
+			<h3>Hear from alumni</h3>
+			<p>Watch what (year) Mandela Washington Fellows have to say about (topic) for (campaign).</p>
+			<div class='ui stackable grid alumni_vids'>
+				<div class='eight wide column alumni_vid'>
+					<img src='data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='>
+				</div>
+				<div class='eight wide column alumni_vid'>
+					<img src='data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='>
+				</div>
+			</div>
+		</section>
+
+		<section class='section org_event'>
+			<h3>Organize an event</h3>
+			<p>Organize a #YALILearns event and facilitate understanding human rights to raise awareness and educate
+				your community about protecting human rights. Use our facilitation guide or presentation template to 
+				help.</p>
+			<div class='ui stackable grid org_event_items'>
+				<div class='eight wide column org_event_item'>
+					<a href="#" class='cta_link'>Facilitation Guide (PDF)</a>
+				</div>
+				<div class='eight wide column org_event_item'>
+					<a href="#" class='cta_link'>Presentation Template (PPTX)</a>
+				</div>
+			</div>												
+		</section>
+
+		<section class='section survey'>
+			<h3>Tell us about your #YALIStands4All event</h3>
+			<p>Take this short survey to let us know how your #YALIStands4All event turned out.</p>
+			<div class='ui stackable grid'>
+				<div class='eight wide column'>
+					<a href="#" class='cta_link'>Followup Event Report</a>
+				</div>
+			</div>			
+		</section>
+
+		{% include 'content_blocks/honeycomb.twig' with 
+			{ 				
+				content: campaigns,
+				bg_color: 'lightblue'
+			} 
+		%}
+
+		{% include 'content_blocks/post-grid.twig' with 
+			{
+				posts: [
+					{
+						'title': 'Post 1', 
+						'excerpt': 'Lorem ipsum set abet ipsum Lorem ipsum set abet ipsum', 
+						'tags': ['tag 1', 'tag 2', 'tag 3'],
+						'featured_img_url': 'data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='
+					},
+					{
+						'title': 'Post 2', 
+						'excerpt': 'Lorem ipsum set abet ipsum Lorem ipsum set abet ipsum', 
+						'tags': ['tag 1', 'tag 2', 'tag 3'],
+						'featured_img_url': 'data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='
+					},
+					{
+						'title': 'Post 3', 
+						'excerpt': 'Lorem ipsum set abet ipsum Lorem ipsum set abet ipsum', 
+						'tags': ['tag 1', 'tag 2', 'tag 3'],
+						'featured_img_url': 'data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==',
+						'featured_post': 'true'
+					},
+					{
+						'title': 'Post 4', 
+						'excerpt': 'Lorem ipsum set abet ipsum Lorem ipsum set abet ipsum', 
+						'tags': ['tag 1', 'tag 2', 'tag 3'],
+						'featured_img_url': 'data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='
+					},
+					{
+						'title': 'Post 5', 
+						'excerpt': 'Lorem ipsum set abet ipsum Lorem ipsum set abet ipsum', 
+						'tags': ['tag 1', 'tag 2', 'tag 3'],
+						'featured_img_url': 'data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='
+					},
+					{
+						'title': 'Post 6', 
+						'excerpt': 'Lorem ipsum set abet ipsum Lorem ipsum set abet ipsum', 
+						'tags': ['tag 1', 'tag 2', 'tag 3'],
+						'featured_img_url': 'data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='
+					}
+				]
 			} 
 		%}
 
