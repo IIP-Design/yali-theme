@@ -3,8 +3,8 @@
 <section class='section full-width cb_honeycomb_wrapper {{ bg_color }}'>
 	<div class='ui container cb_honeycomb'>
 		<div class='inner-container'>
-			<h2>Headline</h2>
-			<h5>Subheadline</h5>
+			<h2 class='cb_honeycomb_headline'>{{ headline }}</h2>
+			<h5 class='cb_honeycomb_subheadline'>{{ subheadline }}</h5>
 			<div class='ui stackable grid cb_honeycomb_items'>
 				{% for campaign in content %}
 					{% if current_page != campaign.title.rendered %}

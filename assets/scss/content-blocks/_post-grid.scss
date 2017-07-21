@@ -21,7 +21,13 @@
 			}
 
 			.left {
-				float: left;
+				float: left;				
+			}
+
+			.right, .left {
+				@media screen and  (max-width: 767px) {
+					float: none;
+				}
 			}
 		}
 
@@ -31,6 +37,12 @@
 			width: 66.66%;
 			height: 500px;
 			padding-right: 20px;
+			@media screen and (max-width: 767px) {
+				display: block;
+				width: 100%;
+				height: 250px;
+				padding: 0 0 20px 0;
+			}
 
 			.inner {
 				height: 100%;
@@ -43,22 +55,38 @@
 			display: inline-block;
 			width: 33%;
 			padding-right: 20px;
+			@media screen and (max-width: 767px) {
+				display: block;
+				width: 100%;
+				padding: 0;		
+			}
 			
 			&.bottom {
+				@media screen and (max-width: 767px) {
+					padding: 0 0 20px 0;
+				}
 
 				&:nth-child(2) {
-					padding-right: 15px;
+					padding-right: 18px;
+					@media screen and (max-width: 767px) {
+						padding: 0 0 20px 0;
+					}
 				}
 
 				&:last-child {
-					margin-left: 5px;
+					@media screen and (min-width: 986px) {
+						margin-left: 1px;
+					}					
 				}
 			}
 
 			.inner {
 				height: 240px;
 				padding: 15px;
-				border: 1px solid #000;
+				box-shadow: 0 0 5px 1px #ccc;
+				@media screen and (max-width: 767px) {
+					height: auto;
+				}
 
 				&:not(:last-child) {
 					margin-bottom: 20px;
@@ -70,6 +98,22 @@
 
 	// Content
 	.suggest_content {		
+
+
+		&_headline {
+			text-align: center;
+
+			&:after {
+				content: '';
+				display: block;
+				height: 5px;				
+				background-color: $blue-navy;
+				@media screen and (min-width: 768px) {
+					margin-right: 20px;
+				}
+			}
+		}
+
 
 		&_item {
 
@@ -83,7 +127,7 @@
 				}
 
 				.suggest_content_item_title {
-					bottom: 50px;
+					bottom: 60px;
 				}
 
 				.suggest_content_item_tags {
@@ -92,7 +136,19 @@
 			}
 
 			&_title {
+				font-size: em(24);				
+				font-weight: bold;
+				color: $blue-navy;
 
+
+				&:hover {
+					text-decoration: underline;
+					color: $blue-medium;					
+				}
+
+				&:active {
+					background-color: $yellow;
+				}
 			}
 
 			&_excerpt {
@@ -101,6 +157,22 @@
 
 			&_tags {
 
+				a {
+					display: inline-block;
+					margin-right: 10px;
+					font-family: $font-family;
+					font-size: em(14);
+					font-style: italic;
+					font-weight: 300;
+					color: $blue-navy;
+					@media screen and (max-width: 767px) {
+						font-size: em(12, $mobile);
+					}
+
+					&:hover {
+						text-decoration: underline;
+					}
+				}				
 			}
 		}
 	}

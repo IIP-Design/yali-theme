@@ -1,14 +1,31 @@
 .yalistands4all {
 
 	
-	.section {
-		margin-bottom: 50px;
+	.section,
+	.page-content {
+		margin-bottom: 75px;
+		@media screen and (max-width: 767px) {
+			margin-bottom: 35px;
+		}
 	}	
 
 	
 	.promote {		
 		
 		&_item {
+
+			&.ui.stackable.grid {
+
+				.eight.wide.column {
+					@media screen and (max-width: 767px) {
+						padding: 16px 0 !important;
+
+						img {
+							margin-bottom: 8px;
+						}
+					}
+				}				
+			}
 
 			&_share {
 				position: relative;
@@ -20,6 +37,9 @@
 				text-align: center;
 				color: #fff;
 				background-color: $blue-medium;
+				@media screen and (max-width: 767px) {
+					margin-bottom: 16px;
+				}
 
 				i {
 					float: left;
@@ -43,6 +63,17 @@
 
 	.alumni {
 
+		&_vids {
+
+			&.ui.stackable.grid {
+				@media screen and (max-width: 767px) {
+					.eight.wide.column {
+						padding: 16px 0 !important;
+					}
+				}
+			}
+		}
+
 		&_vid {
 
 			img {
@@ -55,6 +86,17 @@
 
 	.org_event {
 
+		&_items {
+
+			&.ui.stackable.grid {
+				@media screen and (max-width: 767px) {
+					.eight.wide.column {
+						padding: 16px 0 !important;
+					}
+				}
+			}
+		}
+
 		&_item {
 
 			.cta_link {
@@ -65,6 +107,14 @@
 	
 	
 	.survey {
+
+		.ui.stackable.grid {
+			@media screen and (max-width: 767px) {
+				.eight.wide.column {
+					padding: 16px 0 !important;
+				}
+			}
+		}
 
 		.cta_link {
 			max-width: 100%;
