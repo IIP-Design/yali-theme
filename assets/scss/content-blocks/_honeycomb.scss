@@ -34,13 +34,11 @@
 		}
 
 		&_img {
-			width: 100%;
+			width: 250px;
+			height: 250px;
 			margin-bottom: 5px;
 			border: 3px solid $blue-navy;
 			border-radius: 50%;			
-			@media screen and (max-width: 767px) {
-				width: 250px;
-			}
 		}
 
 	}

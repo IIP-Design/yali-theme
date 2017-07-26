@@ -95,7 +95,7 @@ add_post_type_support( 'page', 'excerpt' );
 */
 add_action('rest_api_init', 'featured_img_register_json');
 function featured_img_register_json() {
-	register_rest_field(array('post'), 'featured_img_url', array(
+	register_rest_field(array('post', 'page'), 'featured_img_url', array(
 		'get_callback' => 'featured_img_url'
 	));
 }

@@ -9,7 +9,7 @@
 				{% for campaign in content %}
 					{% if current_page != campaign.title.rendered %}
 					<div class='five wide column cb_honeycomb_item'>
-						<img class='cb_honeycomb_item_img' src='data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='>			
+						<img class='cb_honeycomb_item_img' src='{{ campaign.featured_img_url }}'>			
 						<div class='cb_honeycomb_item_text'>
 							<h4 class='cb_honeycomb_item_title'>
 								<a href='{{ campaign.link }}'>{{ campaign.title.rendered }}</a>

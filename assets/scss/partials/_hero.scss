@@ -4,12 +4,15 @@
 	&-inner {
 		position: absolute;
 		bottom: 0;
-		width: 100%;	
-		padding: 26px 0;
+		width: 100%;			
 		color: #fff;
-		@include bp($laptop) { bottom: 100px; }
-		@media screen and (max-width: 933px) {
-			padding: 0;
+		@include bp($laptop) { bottom: 100px; }		
+
+		&.w_padd {
+			padding: 26px 0;
+			@media screen and (max-width: 933px) {
+				padding: 0;
+			}
 		}
 
 		h1 {
