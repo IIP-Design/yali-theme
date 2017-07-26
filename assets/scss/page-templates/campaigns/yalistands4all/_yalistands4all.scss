@@ -1,8 +1,12 @@
 .yalistands4all {
 
 	
-	.section,
 	.page-content {
+		margin-bottom: 35px;
+	}
+	
+
+	.section {
 		margin-bottom: 75px;
 		@media screen and (max-width: 767px) {
 			margin-bottom: 35px;

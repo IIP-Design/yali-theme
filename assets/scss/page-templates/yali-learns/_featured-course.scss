@@ -30,9 +30,15 @@
 	
 
 	&_thumb {
-		
+		@media screen and (max-width: 767px) {
+			text-align: center;
+		}	
+
 		img {
 			width: 100%;
+			@media screen and (max-width: 767px) {
+				max-width: 300px !important;
+			}
 		}
 	}	
 
@@ -43,6 +49,13 @@
 
 		&.ui.grid {
 			margin-top: 0;
+			@media screen and (max-width: 599px) {
+
+				>.four.wide.column,
+				>.twelve.wide.column {
+					width: 100% !important;
+				}
+			}
 		}
 	}
 

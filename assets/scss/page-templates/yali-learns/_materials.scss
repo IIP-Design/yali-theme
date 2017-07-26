@@ -31,6 +31,9 @@
 
 			img {
 				width: 100%;
+				@media screen and (max-width: 767px) {
+					max-width: 300px !important;
+				}
 			}
 
 			&_title {
@@ -51,7 +54,7 @@
 			box-shadow: none;
 
 			.title {
-				margin-bottom: 25px;
+				margin-bottom: 16px;
 				border: 8px solid $blue-navy;
 				font-size: em(32);
 				color: $blue-navy;
