@@ -31,8 +31,7 @@ class Content_Block_Shortcode {
       "block_bg_color"    => get_post_meta( $id, 'yali_cb_bg_color', true ),
       "excerpt"           => $post->post_excerpt,
       "excerpt_alignment" => get_post_meta( $id, 'yali_cb_excerpt_alignment', true ),
-      "image"             => get_the_post_thumbnail( $id ),
-      "widget"            => get_post_meta( $id, 'yali_cb_widget', true ),
+      "image"             => get_the_post_thumbnail( $id )
     );
     
     return Twig::render( 'content_blocks/cta.twig', $context );
@@ -41,15 +40,48 @@ class Content_Block_Shortcode {
   // SOCIAL CONTENT BLOCK
   public function render_social( $id ) {
     $context = array(
-      "title" => "Stay connected with us:",
-      "facebook" => "https://www.facebook.com/YALINetwork",
-      "twitter" => "https://twitter.com/YALINetwork",
-      "linkedin" => "https://www.linkedin.com/groups/7425359/profile",
-      "bg-color" => "#25ACE2"
+      "title"           => "Stay connected with us:",
+      "facebook"        => "https://www.facebook.com/YALINetwork",
+      "twitter"         => "https://twitter.com/YALINetwork",
+      "linkedin"        => "https://www.linkedin.com/groups/7425359/profile",
+      "block_bg_color"  => get_post_meta( $id, 'yali_cb_bg_color', true ),
     );
 
     return Twig::render( 'content_blocks/social.twig', $context );
   }
+
+  // WIDGET CONTENT BLOCK
+  public function render_post_list( $id ) {
+    $meta = get_post_meta(  $id );
+    $post = get_post( $id );
+    $widget = get_post_meta( $id, 'yali_cb_widget', true );
+    $button = get_post_meta( $id, 'yali_cb_button', true );
+
+    $context = array(
+      "title"             => $post->post_title,
+      "title_underline"   => get_post_meta( $id, 'yali_cb_title_underline', true ),
+      "title_alignment"   => get_post_meta( $id, 'yali_cb_title_alignment', true ),
+      "block_bg_color"    => get_post_meta( $id, 'yali_cb_bg_color', true ),
+      "excerpt"           => $post->post_excerpt,
+      "excerpt_alignment" => get_post_meta( $id, 'yali_cb_excerpt_alignment', true ),
+      "text_alignment"    => get_post_meta( $id, 'yali_cb_text_alignment', true )
+    );
+
+    if( $button && $button[0]['link'] ) {
+      $link = $button[0]['link'];
+      $context['btn_label'] = $link['text'];
+      $context['btn_link'] = $link['url'];
+      $context['btn_new_win'] = ($link['blank'] == 'true') ? 'target="_blank"' : '';
+      $context['btn_bg_color'] = $button[0]['bg_color'];
+      $context['btn_text_alignment'] = $button[0]['h_alignment'];
+    }
+
+    if( !empty($widget ) ) {
+      $path = "https://s3.amazonaws.com/iip-design-stage-modules/modules/cdp-module-{$widget}/";
+      $context['widget_css'] = $path . $widget . '.min.css';
+      $context['widget_js'] = $path . $widget . '.min.js';
+    } 
+    return Twig::render( 'content_blocks/post-list.twig', $context );
+  }
  
 }
-

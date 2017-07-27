@@ -1,8 +1,4 @@
-{% if bg-color == "#25ACE2" %}
-	{% set bgcolor = 'lightblue' %}
-{% endif %}
-
-<div class='{{ bgcolor }} cb-social full-width'>
+<div class='cb-social full-width' style="background-color: {{ block_bg_color }}">
 	<div class='ui container'>
 		<h2 class='cb-social_title'>{{ title }}</h2>
 		<a class='cb-social_icon' href='{{ facebook }}' target='_blank'>

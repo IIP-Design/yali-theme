@@ -73,7 +73,8 @@ class Content_Block {
 	    'default'          => 'left',
       'options'          => array(
         'cta'            => __( 'Call To Action', 'yali' ),
-        'social'         => __( 'Social Icons', 'yali' )
+        'social'         => __( 'Social Icons', 'yali' ),
+        'post_list'      => __( 'Post List', 'yali' )
       )
 	  ));
 
@@ -112,6 +113,19 @@ class Content_Block {
 	  ));
 
     $cb_box->add_field( array(
+      'name'            => 'Text alignment',
+	    'desc'            => 'How should the remaining text be aligned?',
+	    'id'              => $prefix . 'cb_text_alignment',
+	    'type'            => 'select',
+	    'default'         => 'left',
+      'options'         => array(
+        'left'          => __( 'Left', 'yali' ),
+        'center'        => __( 'Center', 'yali' ),
+        'right'         => __( 'Right', 'yali' ),
+      ),
+	  ));
+
+    $cb_box->add_field( array(
       'name'               => 'Background color',
 	    'desc'                => '',
 	    'id'                  => $prefix . 'cb_bg_color',
@@ -129,8 +143,7 @@ class Content_Block {
       'id'   => $prefix . 'cb_widget',
       'type' => 'text',
       'name' => 'Widget shortcode',
-      'desc' => ''
-     
+      'desc' => ''    
     ));
 
     $button_group = $cb_box->add_field( array(
@@ -145,15 +158,9 @@ class Content_Block {
 
     // Id's for group's fields only need to be unique for the group. Prefix is not needed.
     $cb_box->add_group_field( $button_group, array(
-      'name' => 'Label',
-      'id'   => 'label',
-      'type' => 'text'
-    ));
-
-    $cb_box->add_group_field( $button_group, array(
       'name' => 'Link',
       'id'   => 'link',
-      'type' => 'text'
+      'type' => 'link_picker'
     ));
 
     $cb_box->add_group_field( $button_group, array(

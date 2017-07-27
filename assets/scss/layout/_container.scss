@@ -31,6 +31,19 @@
   } 
 }
 
+<<<<<<< HEAD
+=======
+.ui.container {
+	.full-width {    
+		margin-left: -16px;
+		margin-right: -16px;
+		@media screen and (min-width: 934px) {   
+			margin-left: calc(-100vw / 2 + 50%);
+			margin-right: calc(-100vw / 2 + 50%); 
+		}
+	}	
+}
+>>>>>>> Integrated CDP article feed into theme via content block
 
 .inner-container {
   width: 100%;
@@ -41,5 +54,7 @@
     padding: 0;
   }
 }
+
+
 
 

@@ -60,7 +60,6 @@ class YaliSite {
 	}
 
 	function register_shortcodes() {
-		//add_shortcode( 'content_block', array($this, 'render_content_block') );
 		Content_Block_Shortcode::register();
 	}
 
