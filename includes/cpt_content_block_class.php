@@ -95,7 +95,7 @@ class Content_Block {
       'options'          => array(
         'left'           => __( 'Left', 'yali' ),
         'center'         => __( 'Center', 'yali' ),
-        'right'          => __( 'Right', 'yali' ),
+        'right'          => __( 'Right', 'yali' )
       )
 	  ));
     
@@ -108,8 +108,8 @@ class Content_Block {
       'options'         => array(
         'left'          => __( 'Left', 'yali' ),
         'center'        => __( 'Center', 'yali' ),
-        'right'         => __( 'Right', 'yali' ),
-      ),
+        'right'         => __( 'Right', 'yali' )
+      )
 	  ));
 
     $cb_box->add_field( array(
@@ -121,8 +121,8 @@ class Content_Block {
       'options'         => array(
         'left'          => __( 'Left', 'yali' ),
         'center'        => __( 'Center', 'yali' ),
-        'right'         => __( 'Right', 'yali' ),
-      ),
+        'right'         => __( 'Right', 'yali' )
+      )
 	  ));
 
     $cb_box->add_field( array(
@@ -134,25 +134,140 @@ class Content_Block {
       'attributes'          => array(
         'data-colorpicker'  => json_encode( array(
             'border'        => false,
-            'palettes'      => array( '#ffffff', '#eeeeee', '#f2d400', '#25ace2', '#174f9f', '#192856' ),
-        )),
-      ),
+            'palettes'      => array( '#ffffff', '#eeeeee', '#f2d400', '#25ace2', '#174f9f', '#192856' )
+        ))
+      )
 	  ));
 
-    $cb_box->add_field( array(
+     ///*** Widget post group  ***///
+    $post_group = $cb_box->add_field( array(
       'id'   => $prefix . 'cb_widget',
-      'type' => 'text',
-      'name' => 'Widget shortcode',
-      'desc' => ''    
+      'type' => 'group',
+      'description'  => __( '', 'yali' ),
+      'repeatable' => false, 
+      'options' => array(
+        'group_title'  => __( 'CDP Widget', 'yali' ),
+      ), 
+      'attributes' => array(
+        'required'               => true, // Will be required only if visible.
+        'data-conditional-id'    => $prefix . 'cb_type',
+        'data-conditional-value' => 'post_list'
+		  )
     ));
+    
+    // Id's for group's fields only need to be unique for the group. Prefix is not needed.
+    $cb_box->add_group_field( $post_group, array(
+      'name'             => 'Post Type',
+	    'desc'             => '',
+	    'id'               => 'cdp_module',
+	    'type'             => 'select',
+	    'default'          => 'article-feed',
+      'options'          => array(
+        'article-feed'   => __( 'Article Feed', 'yali' )
+      )
+	  ));
 
+    $cb_box->add_group_field( $post_group, array(
+      'name'             => 'Number of posts',
+	    'id'               => 'cdp_num_posts',
+	    'type'             => 'text_small',
+      'default'           => 3
+	  ));
+
+     $cb_box->add_group_field( $post_group, array(
+      'name'             => 'Category',
+	    'id'               => 'cdp_category',
+	    'taxonomy'         => 'category',  // Enter Taxonomy Slug
+	    'type'             => 'taxonomy_select'
+	  ));
+
+    $cb_box->add_group_field( $post_group, array(
+      'name'            => 'Post layout',
+	    'desc'            => 'Default or Blog style',
+	    'id'              => 'cdp_ui_layout',
+	    'type'            => 'select',
+	    'default'         => 'default',
+      'options'         => array(
+        'default'       => __( 'Default', 'yali' ),
+        'blog'          => __( 'Blog', 'yali' )
+      )
+	  ));
+
+    $cb_box->add_group_field( $post_group, array(
+      'name'            => 'Post layout direction',
+	    'id'              => 'cdp_ui_direction',
+	    'type'            => 'select',
+	    'default'         => 'row',
+      'options'         => array(
+        'row'           => __( 'Horizontal', 'yali' ),
+        'column'        => __( 'Vertical', 'yali' )
+      )
+	  ));
+
+    $cb_box->add_group_field( $post_group, array(
+      'name'            => 'Image shape',
+	    'id'              => 'cdp_image_shape',
+	    'type'            => 'select',
+	    'default'         => 'rectangle',
+      'options'         => array(
+        'rectangle'     => __( 'Rectangle', 'yali' ),
+        'circle'        => __( 'Circle', 'yali' )
+      )
+	  )); 
+
+    $cb_box->add_group_field( $post_group, array(
+      'name'            => 'Image height',
+	    'id'              => 'cdp_image_height',
+	    'type'            => 'text_small',
+      'default'         => 220
+	  )); 
+
+    $cb_box->add_group_field( $post_group, array(
+      'name'            => 'Image border width',
+	    'id'              => 'cdp_border_width',
+	    'type'            => 'text_small',
+      'default'         => ''
+	  )); 
+
+    $cb_box->add_group_field( $post_group, array(
+      'name'               => 'Image border color',
+	    'id'                 => 'cdp_border_color',
+	    'type'               => 'colorpicker',
+	    'default'            => '#192856',
+      'attributes'         => array(
+        'data-colorpicker'  => json_encode( array(
+            'border'        => false,
+            'palettes'      => array( '#ffffff', '#eeeeee', '#f2d400', '#25ace2', '#174f9f', '#192856' ),
+        ))
+      )
+	  ));
+
+    $cb_box->add_group_field( $post_group, array(
+      'name'            => 'Image border style',
+	    'id'              => 'cdp_border_style',
+	    'type'            => 'select',
+	    'default'         => 'solid',
+      'options'         => array(
+        'solid'         => __( 'Solid', 'yali' ),
+        'dashed'        => __( 'Dashed', 'yali' ),
+        'dotted'        => __( 'Dotted', 'yali' ),
+        'double'        => __( 'Double', 'yali' ),
+        'groove'        => __( 'Groove', 'yali' ),
+        'ridge'         => __( 'Ridge', 'yali' ),
+        'inset'         => __( 'Inset', 'yali' ),
+        'outset'        => __( 'Outset', 'yali' )
+      )
+	  ));  
+
+
+    ///***  Button group  ***///
     $button_group = $cb_box->add_field( array(
       'id'                => $prefix . 'cb_button',
       'type'              => 'group',
       'description'       => __( '', 'yali' ),
       'repeatable'        => false, 
       'options'           => array(
-        'group_title'   => __( 'Button', 'yali' ),
+        'group_title'     => __( 'Button', 'yali' )
       )
     ));
 
@@ -172,9 +287,9 @@ class Content_Block {
       'attributes'          => array(
         'data-colorpicker'  => json_encode( array(
             'border'        => false,
-            'palettes'      => array( '#ffffff', '#eeeeee', '#f2d400', '#25ace2', '#174f9f', '#192856' ),
-        )),
-      ),
+            'palettes'      => array( '#ffffff', '#eeeeee', '#f2d400', '#25ace2', '#174f9f', '#192856' )
+        ))
+      )
 	  ));
 
     $cb_box->add_group_field( $button_group, array(
@@ -186,8 +301,8 @@ class Content_Block {
       'options'          => array(
         'left'           => __( 'Left', 'yali' ),
         'center'         => __( 'Center', 'yali' ),
-        'right'          => __( 'Right', 'yali' ),
-      ),
+        'right'          => __( 'Right', 'yali' )
+      )
 	  ));
 
     $cb_box->add_group_field( $button_group, array(
@@ -199,7 +314,7 @@ class Content_Block {
       'options'          => array(
         'before'         => __( 'Before content', 'yali' ),
         'after'          => __( 'After content', 'yali' )
-      ),
+      )
 	  ));
 
   }

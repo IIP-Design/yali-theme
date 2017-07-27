@@ -2,9 +2,9 @@
 
 <section class='content-block full-width' style="background-color: {{ block_bg_color }}">
 	<div class='ui container'>
-		<h2 style="text-align: {{ title_alignment }}">{{ title }}</h2>
+		<h2 class="{{ title_underline }}" style="text-align: {{ title_alignment }}">{{ title }}</h2>
     <div class="content-block--excerpt" style="text-align: {{ excerpt_alignment }}">{{ excerpt }} </div>
-    <div id="feed" style="margin-top: 2em; text-align: {{ text_alignment }}">LOADING Component...</div>
+    <div id="{{ selector }}" style="margin-top: 2em; text-align: {{ text_alignment }}">LOADING Component...</div>
     <div class="content-block--button" style="text-align: {{ btn_text_alignment }}">
       <a class="ui animated button" href="{{ btn_link }}" {{ btn_new_win }} style="background-color: {{ btn_bg_color }}" tabindex="0">
         <div class="visible content"> {{ btn_label }}</div>
@@ -20,21 +20,25 @@
 
 <script type="text/javascript" src="{{ widget_js }}"></script>
 <script>
-  if( CDP ) {
-    CDP.widgets.ArticleFeed.new({
-      selector: '#feed',
-      sites: 'share.america.gov', 
-      size: '3', 
+  if( CDP ) {  // add try catch here
+     CDP.widgets.ArticleFeed.new({
+      selector: '#{{ selector }}',
+      sites: '', 
+      size: '{{ cdp_num_posts }}', 
       types: 'post', 
       langs: 'en-US',
       tags: '',
       categories: '',
       ui: {
-        layout: 'default',
-        imageShape: 'circle',
-        direction: 'row',
-        imageBorderWidth: '10px',             
-        imageBorderColor: '#192856' 
+        layout: '{{ cdp_ui_layout }}',
+        direction: '{{ cdp_ui_direction }}',
+        image: {
+          shape: '{{ cdp_image_shape }}',
+          width: '{{ cdp_image_height }}',
+          borderWidth: '{{ cdp_border_width }}',             
+          borderColor: '{{ cdp_border_color }}',
+          borderStyle: '{{ cdp_border_style }}'
+        }
       }
     }).render();
   }

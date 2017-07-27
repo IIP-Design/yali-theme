@@ -52,14 +52,16 @@ class Content_Block_Shortcode {
 
   // WIDGET CONTENT BLOCK
   public function render_post_list( $id ) {
+    
     $meta = get_post_meta(  $id );
     $post = get_post( $id );
     $widget = get_post_meta( $id, 'yali_cb_widget', true );
     $button = get_post_meta( $id, 'yali_cb_button', true );
 
     $context = array(
+      "selector"          => 'feed' . $id,
       "title"             => $post->post_title,
-      "title_underline"   => get_post_meta( $id, 'yali_cb_title_underline', true ),
+      "title_underline"   => ( get_post_meta($id, 'yali_cb_title_underline', true) == 'on' ) ? 'content-block--h2_underline': '',
       "title_alignment"   => get_post_meta( $id, 'yali_cb_title_alignment', true ),
       "block_bg_color"    => get_post_meta( $id, 'yali_cb_bg_color', true ),
       "excerpt"           => $post->post_excerpt,
@@ -76,11 +78,24 @@ class Content_Block_Shortcode {
       $context['btn_text_alignment'] = $button[0]['h_alignment'];
     }
 
-    if( !empty($widget ) ) {
-      $path = "https://s3.amazonaws.com/iip-design-stage-modules/modules/cdp-module-{$widget}/";
-      $context['widget_css'] = $path . $widget . '.min.css';
-      $context['widget_js'] = $path . $widget . '.min.js';
-    } 
+    if( $widget && $widget[0]['cdp_module'] ) {
+      $w = $widget[0];
+      $cdp_widget = $widget[0]['cdp_module'];
+      $context['cdp_widget'] = $w['cdp_module'];
+      $context['cdp_num_posts'] = $w['cdp_num_posts'];
+      $context['cdp_ui_layout'] = $w['cdp_ui_layout'];
+      $context['cdp_ui_direction'] = $w['cdp_ui_direction'];
+      $context['cdp_image_height'] = $w['cdp_image_height'] . 'px';
+      $context['cdp_image_shape'] = $w['cdp_image_shape'];
+      $context['cdp_border_width'] = $w['cdp_border_width'] . 'px';
+      $context['cdp_border_color'] = $w['cdp_border_color'];
+      $context['cdp_border_style'] = $w['cdp_border_style'];
+
+      $path = "https://s3.amazonaws.com/iip-design-stage-modules/modules/cdp-module-{$cdp_widget}/";
+      $context['widget_css'] = $path . $cdp_widget . '.min.css';
+      $context['widget_js'] = $path . $cdp_widget . '.min.js';
+    }
+    // var_dump($$meta); die();
     return Twig::render( 'content_blocks/post-list.twig', $context );
   }
  
