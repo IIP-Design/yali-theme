@@ -1,0 +1,15 @@
+<div class='cb_post_wrapper'>
+	<h3>{{ title }}</h3>
+	<div class='ui stackable grid cb_post cb_post--single'>	
+		<div class='four wide column cb_post_img'>
+			<img src='{{ img_src }}'>
+		</div>
+		<div class='twelve wide column cb_post_content'>
+			<h4 class='cb_post_headline'>{{ headline }}</h4>
+			<p class='cb_post_excerpt'>{{ excerpt }}</p>
+			{% if cta_link %}
+			<a href='{{ cta_link }}' class='cta_link cb_post_link'>{{ cta_text }}</a>
+			{% endif %}
+		</div>
+	</div>
+</div>

@@ -22,6 +22,7 @@ Text Domain: yali
 
 @import 'assets/scss/layout/container';
 @import 'assets/scss/layout/content-block';
+@import 'assets/scss/layout/alignment';
 @import 'assets/scss/typography';
 @import 'assets/scss/base';
 @import 'assets/scss/accessibility';
@@ -34,6 +35,7 @@ Text Domain: yali
 
 // General helper elems - dropdown, placeholders, etc. 
 @import 'assets/scss/partials/helpers';
+@import 'assets/scss/partials/cta-link';
 
 // Footer
 @import 'assets/scss/partials/footer/footer';
@@ -51,6 +53,9 @@ Text Domain: yali
 // CONTENT BLOCKS
 // Social
 @import 'assets/scss/content-blocks/social';
+@import 'assets/scss/content-blocks/post-single';
+@import 'assets/scss/content-blocks/post-grid';
+@import 'assets/scss/content-blocks/honeycomb';
 
 // PAGE TEMPLATES
 @import 'assets/scss/page-templates/yali-learns/yali-learns';
@@ -58,3 +63,4 @@ Text Domain: yali
 @import 'assets/scss/page-templates/yali-learns/materials';
 @import 'assets/scss/page-templates/yali-learns/featured-course';
 
+@import 'assets/scss/page-templates/campaigns/yalistands4all/yalistands4all';

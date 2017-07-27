@@ -1,0 +1,48 @@
+.cb_honeycomb {	
+	text-align: center;	
+
+
+	&_wrapper {
+		padding: 50px 0;
+		@media screen and (max-width: 767px) {
+			padding: 35px 0;
+		}
+
+		&.lightblue {
+			color: $blue-navy;
+			background-color: $blue-bright;
+		}
+	}
+
+
+	&_subheadline {
+		margin: 0 0 2rem 0;
+	}
+	
+	
+	&_item {
+		margin: 0 auto;
+
+		&_title {
+
+			a {
+				color: $blue-navy;
+				&:hover {
+					text-decoration: none;
+				}
+			}
+		}
+
+		&_img {
+			width: 100%;
+			margin-bottom: 5px;
+			border: 3px solid $blue-navy;
+			border-radius: 50%;			
+			@media screen and (max-width: 767px) {
+				width: 250px;
+			}
+		}
+
+	}
+
+}

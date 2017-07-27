@@ -80,3 +80,58 @@ class YaliSite {
 }
 
 new YaliSite();
+
+
+/*
+* Add excerpt to pages
+*
+*/
+add_post_type_support( 'page', 'excerpt' );
+
+
+/*
+* Add Featured Image URL to JSON response
+*
+*/
+add_action('rest_api_init', 'featured_img_register_json');
+function featured_img_register_json() {
+	register_rest_field(array('post'), 'featured_img_url', array(
+		'get_callback' => 'featured_img_url'
+	));
+}
+
+function featured_img_url($post, $request) {
+	return ( has_post_thumbnail($post['id']) ) ? wp_get_attachment_url(get_post_thumbnail_id($post['id'])) : false;
+}
+
+
+/*
+* Add Post Tag Names to JSON Response
+*
+*/
+add_action('rest_api_init', 'tag_names_register_json');
+function tag_names_register_json() {
+	register_rest_field(array('post'), 'post_tag_names', array(
+		'get_callback' => 'post_tag_names'
+	));
+}
+
+function post_tag_names($post, $request) {	
+	return $post_tag_names = get_the_tags($post['id']);
+}
+
+
+/*
+* Add Post Category Names to JSON Response
+*
+*/
+add_action('rest_api_init', 'category_name_register_json');
+function category_name_register_json() {
+	register_rest_field(array('post'), 'post_category_names', array(
+		'get_callback' => 'post_category_names'
+	));
+}
+
+function post_category_names($post, $request) {	
+	return $post_tag_names = get_the_category($post['id']);
+}

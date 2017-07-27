@@ -2,16 +2,32 @@
 	display: block;
 	position: relative;
 	background-color: #fff;
+
+
+	&.ui.container {
+		@media screen and (min-width: 1025px) {
+			margin-top: -100px !important;
+
+			&.higher {
+				margin-top: -200px !important;			
+			}
+		}		
+	}	
+
 	
-	&_title { 
+	&_title { 		
 		text-align: center; 
 		color: $blue-navy;
-		@media screen and (min-width: 1024px) {
+		@media screen and (min-width: 1025px) {
+			padding-top: 32px;
+		}
+		/*@media screen and (min-width: 1024px) {
 			transform: translateY(-100px);
 			padding-top: 100px;
 			background-color: #fff;
-		}
+		}*/
 	}
+
 
 	.columns-text {
 		column-count: 1;
@@ -20,9 +36,9 @@
 		@include bp($tablet) {
 	    	column-count: 2;
 	  	}
-	  	@media screen and (min-width: 1024px) {
+	  	/*@media screen and (min-width: 1024px) {
 	  		transform: translateY(-50px);
-	  	}
+	  	}*/
 	  	@media screen and (max-width: 933px) {
 	  		font-size: em(16, $mobile);
 	  	}

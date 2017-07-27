@@ -31,6 +31,9 @@
 
 			img {
 				width: 100%;
+				@media screen and (max-width: 767px) {
+					max-width: 300px !important;
+				}
 			}
 
 			&_title {
@@ -51,12 +54,12 @@
 			box-shadow: none;
 
 			.title {
-				margin-bottom: 25px;
+				margin-bottom: 16px;
 				border: 8px solid $blue-navy;
-				font-size: em(45);
+				font-size: em(32);
 				color: $blue-navy;
 				@media screen and (min-width: 768px) and (max-width: 933px) {					
-					font-size: em(26, $mobile);					
+					font-size: em(24, $mobile);
 				}
 				@media screen and (max-width: 767px) {
 					margin-bottom: 12px;

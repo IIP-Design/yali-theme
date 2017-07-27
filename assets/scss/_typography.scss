@@ -10,6 +10,7 @@ html {
 
 body {
   font-size: $font-size + 0px;
+  color: $blue-navy;
   @media screen and (max-width: 933px) {
     font-size: $mobile + 0px;
   } 
@@ -17,55 +18,58 @@ body {
 
 
 h1 {
-  font-size: em(150);
+  font-size: em(112);
   font-weight: 900;
   @media screen and (max-width: 933px) {
-    font-size: em(75, $mobile);
+    font-size: em(72, $mobile);
   }
 }
 
 
 h2 {
-  font-size: em(86);
+  font-size: em(64);
   font-weight: 900;
   @media screen and (max-width: 933px) {
-    font-size: em(43, $mobile);
+    font-size: em(34, $mobile);
   }
 }
 
 
 h3 {
-  font-size: em(64);
-  font-weight: 900;
+  font-size: em(48);
+  font-weight: 700;
   @media screen and (max-width: 933px) {
-    font-size: em(32, $mobile);
+    font-size: em(28, $mobile);
   }
 }
 
 
 h4 {
-  font-size: em(45);
-  font-weight: 900;
+  font-size: em(32);
+  font-weight: 700;
   @media screen and (max-width: 933px) {
-    font-size: em(26, $mobile);
+    font-size: em(24, $mobile);
   }
 }
 
 
 h5 {
-  font-size: em(34);
-  font-weight: 900;
+  font-size: em(24);
+  font-weight: 700;
   @media screen and (max-width: 933px) {
-    font-size: em(20, $mobile);
+    font-size: em(16, $mobile);
   }
 }
 
 
 p, ol {
-  font-size: em(28); 
+  font-size: em(20); 
   font-weight: 300;
   @media screen and (max-width: 933px) {
-    font-size: em(16, $mobile);
+    font-size: em(18, $mobile);
+  }
+  @media screen and (max-width: 320px) {
+    font-size: em(14, $mobile);
   }
 }
 

@@ -1,0 +1,50 @@
+.cb_post_wrapper {
+	margin-bottom: 75px;
+	@media screen and (max-width: 767px) {
+		margin-bottom: 35px;
+	}
+}
+
+
+.cb_post.ui.stackable.grid {
+	margin: 0;
+
+
+	.cb_post {			
+
+		&_img {
+
+			&.wide.column {
+				padding: 0 !important;
+			}		
+
+			img {
+				width: 100%;
+				@media screen and (max-width: 767px) {
+					max-height: 250px;
+				}
+			}
+		}
+
+		&_headline {
+			@media screen and (max-width: 767px) {
+				margin-bottom: 8px;
+			}
+		}		
+
+		&_content {
+			padding: 0 0 0 16px;
+			@media screen and (max-width: 767px) {
+				padding: 16px 0 0 0 !important;
+			}
+		}
+
+		&_link {
+
+			&.cta_link {
+				background-color: $blue-navy;
+			}		
+		}
+	}
+
+}

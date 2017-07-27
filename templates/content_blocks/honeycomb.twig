@@ -1,0 +1,25 @@
+{% set current_page = page_data.title.rendered %}
+
+<section class='section full-width cb_honeycomb_wrapper {{ bg_color }}'>
+	<div class='ui container cb_honeycomb'>
+		<div class='inner-container'>
+			<h2 class='cb_honeycomb_headline'>{{ headline }}</h2>
+			<h5 class='cb_honeycomb_subheadline'>{{ subheadline }}</h5>
+			<div class='ui stackable grid cb_honeycomb_items'>
+				{% for campaign in content %}
+					{% if current_page != campaign.title.rendered %}
+					<div class='five wide column cb_honeycomb_item'>
+						<img class='cb_honeycomb_item_img' src='data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='>			
+						<div class='cb_honeycomb_item_text'>
+							<h4 class='cb_honeycomb_item_title'>
+								<a href='{{ campaign.link }}'>{{ campaign.title.rendered }}</a>
+							</h4>
+							<p class='cb_honeycomb_item_excerpt'>{{ campaign.excerpt.rendered }}</p>
+						</div>			
+					</div>
+					{% endif %}				
+				{% endfor %}			
+			</div><!-- cb_homeycomb_items -->
+		</div><!-- inner-container -->	
+	</div><!-- ui.container -->
+</section>
