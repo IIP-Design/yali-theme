@@ -9,11 +9,14 @@ html {
 
 
 body {
-  font-size: $font-size + 0px;
-  color: $blue-navy;
-  @media screen and (max-width: 933px) {
-    font-size: $mobile + 0px;
-  } 
+
+  &.page-template-default.page {
+    font-size: $font-size + 0px;
+    color: $blue-navy;
+    @media screen and (max-width: 933px) {
+      font-size: $mobile + 0px;
+    } 
+  }  
 }
 
 
