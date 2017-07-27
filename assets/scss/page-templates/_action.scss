@@ -1,18 +1,24 @@
 .action {
 	
 
-	.hero-inner {
+	/*.hero-inner {
 		bottom: 50px;
-	}
+	}*/
 
 
 	.campaigns_list {		
-		@media screen and (min-width: 767px) {
+		@media screen and (min-width: 768px) {
 			padding: 75px 0;			
 		}
 
 		&.ui.stackable.grid {
 			margin: 0;
+
+			.six.wide.column {
+				@media screen and (min-width: 768px) {
+					margin-right: 40px;			
+				}
+			}
 		}		
 	}
 
@@ -30,23 +36,33 @@
 			}
 			
 
-			&_img {
-
-				img {
-					width: 320px;
-					height: 320px;
-					border: 8px solid $blue-navy;
-					border-radius: 50%;
-					@media screen and (max-width: 330px) {
-						width: 250px;
-						height: 250px;
-					}
+			&_img {	
+				display: block;
+				box-sizing: border-box;
+				width: 340px;
+				height: 340px;
+				border: 8px solid $blue-navy;
+				border-radius: 50%;
+				background-position: 50%;
+				backgorund-repeat: no-repeat;
+				@media screen and (min-width: 768px) and (max-width: 1023px) {
+					width: 300px;
+					height: 300px;
+				}
+				@media screen and (max-width: 767px) {
+					margin: 0 auto;
+				}
+				@media screen and (max-width: 330px) {
+					width: 250px;
+					height: 250px;					
 				}
 			}
 
 			&_content {
-				@media screen and (min-width: 767px) {
-					transform: translateY(50%);
+				@media screen and (min-width: 768px) {
+					position: absolute;
+					top: 50%;
+					transform: translateY(-50%);
 				}
 			}
 

@@ -1,4 +1,4 @@
-x/*------------------------------------*\
+/*------------------------------------*\
   #HTML-ELEMENTS
 \*------------------------------------*/
 
@@ -14,10 +14,10 @@ main {
 
 
 .site-content {
-	// for mobile no margin, desktop em(74)
-	margin-top: em(74);
-	// temp
-	//height: 2500px;
+	margin-top: 90px;
+	@media screen and (max-width: 933px) {
+		margin-top: 62px;
+	}	
 }
 
 .ui.inverted.menu {

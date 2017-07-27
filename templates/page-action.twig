@@ -1,24 +1,26 @@
 {% extends 'base.twig' %}
 
 {% block content %}
-<div class='hero'>
-    <img class='ui fluid image' src='{{ header_url }}' srcset='{{ srcset }}' sizes='{{ size }}' alt='{{ header_url }}'>
-	    <div class='hero-inner'>
+<section class='hero hero--bg_img' style='background-image: url("{{ header_url }}"); background-size: cover;'>
+	<div class='hero-inner bottom_padd bottom_padd--thin'>
 	    <div class='hero-content ui container'>
-	        <h1 class="hero-h1">{{ page_data.title.rendered }}</h1>        
+	        <h1 class="hero-headline">{{ page_data.title.rendered }}</h1>        
 	        {{ page_data.content.rendered }}
 	    </div>
     </div>
-</div>
-<div class='ui container'>
+</section>
+<section class='ui container'>
 	<div class='inner-container'>
 		<div class='ui stackable grid campaigns_list'>
 			{% for campaign in campaigns %}
 			<div class='row list_item'>
-				<div class='six wide column list_item_img'>
-					<img class='' src='{{ campaign.featured_img_url }}'>
+				<div class='six wide column'>
+					<span 
+						class='list_item_img' 
+						style='background-image: url("{{ campaign.featured_img_url }}"); background-size: cover;'>
+					</span>					
 				</div>
-				<div class='ten wide column'>
+				<div class='nine wide column'>
 					<div class='list_item_content'>
 						<h3>
 							<a href='{{ campaign.link }}' class='list_item_link'>{{ campaign.title.rendered }}</a>
@@ -30,5 +32,8 @@
 			{% endfor %}
 		</div>
 	</div>
-</div>
+</section>
+<section class='social'>
+	{{ social_block }}
+</section>
 {% endblock %}

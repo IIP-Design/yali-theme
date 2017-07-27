@@ -1,22 +1,21 @@
 {% extends "base.twig" %}
 
 {% block content %}
-  <div class="hero">
-    <img class="ui fluid image" src="{{ header_url }}" srcset="{{ srcset }}" sizes="{{ size }}" alt="{{ header_url }}">
-    <div class="hero-inner w_padd">
+  <section class="hero hero--bg_img" style='background-image: url("{{ header_url }}"); background-size: cover;'>    
+    <div class="hero-inner bottom_padd bottom_padd--thick">
       <div class="hero-content ui container">
         <h1 class="hero-h1">Young African Leaders Initiative</h1>
         <h1 class="hero-h1_m">YALI</h1>
         <p>The Young African Leaders Initiative (YALI) is a signature effort to invest in the next generation of African leaders.</p>        
       </div>
     </div>
-  </div>
-  <div class="ui container title-overlay">
+  </section>
+  <section class="ui container title-overlay">
     <h2 class='title-overlay_title'>{{ page_data.title.rendered }}</h2> 
     <div class='inner-container'>           
       <div>
         {{ page_data.content.rendered }}          
       </div>
     </div>
-  </div>
+  </section>
 {% endblock %}

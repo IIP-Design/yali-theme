@@ -1,20 +1,32 @@
 .hero {
 	position: relative;
+	
 
-	&-inner {
-		position: absolute;
-		bottom: 0;
-		width: 100%;			
+	&--bg_img {
+		padding-top: 16.25%;	
+	}
+
+
+	&-inner {		
 		color: #fff;
-		@include bp($laptop) { bottom: 100px; }		
-
-		&.w_padd {
-			padding: 26px 0;
-			@media screen and (max-width: 933px) {
-				padding: 0;
-			}
+		@media screen and (max-width: 933px) {
+			padding: 0;
 		}
 
+		&.bottom_padd {
+			@media screen and (max-width: 1024px) {
+				padding-bottom: 16px !important;
+			}
+
+			&--thin {
+				padding-bottom: 26px;
+			}
+
+			&--thick {
+				padding-bottom: 150px;
+			}
+		}
+		
 		h1 {
 			line-height: 1;
 			color: #fff;
