@@ -1,5 +1,13 @@
 <?php
 
+/*
+* include Page Templates' CMB2 Fields
+*/
+foreach( glob(get_stylesheet_directory() . '/includes/wp_custom_tmpl_fields/*.php') as $custom_field_file ) {
+	require_once $custom_field_file;
+}
+
+
 require_once get_stylesheet_directory() . '/includes/autoloader.php';
 
 /**
