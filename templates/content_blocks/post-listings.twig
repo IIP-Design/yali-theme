@@ -1,0 +1,26 @@
+<section 
+	class='section full-width post_listings {% if background_color == "#192856" %}text_light{% endif %}' 
+	style='background-color: {{ background_color }}'>
+	<div class='inner-container'>
+		<h3 class='post_listings_headline'>{{ headline }}</h3>		
+		<div class='ui stackable grid'>
+			<div class='three column row post_listings_posts'>				
+				{% for post in posts %}
+				<div class='column post_listings_post'>						
+					<img src='{{ post.img_src }}' class='post_listings_post_img'>
+					<h5 class='post_listings_post_title'>{{ post.title }}</h5>			
+					<p class='post_listings_post_excerpt'>{{ post.excerpt }}</p>
+				</div>
+				{% endfor %}
+			</div><!-- row -->
+		</div><!-- grid -->
+		<p class='post_listings_cta'>		
+			<a 
+				href='{{ cta_url }}'
+				class='cta_link {% if cta_background_color == "#F2D400" %}text_dark{% endif %}' 
+				style='background-color: {{ cta_background_color }}'>
+				{{ cta_txt }} <i class='angle right icon'></i>
+			</a>
+		</p>
+	</div><!-- inner-container -->
+</section>

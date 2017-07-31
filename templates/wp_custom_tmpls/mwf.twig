@@ -7,9 +7,86 @@
 <section class="ui container title-overlay higher">
 	<h2 class='title-overlay_title'>{{ page_data.title.rendered }}</h2>
 	<div class='inner-container'>
-		<section class='mwf_intro'>
-			<p>{{ page_data.cmb2.mwf_intro.mwf_intro_content }}</p>
+		<section class='section mwf_intro'>
+			{% for text in page_data.cmb2.mwf_intro if text is not empty %}				
+			<p>{{ text }}</p>				
+			{% endfor %}
 		</section>
+
+		{% include 'content_blocks/cta.twig' with 
+			{
+				title: 'Achieve Your Goals',
+				excerpt: '',
+				cta_txt: 'Apply to the fellowship today!',
+				cta_url: '#',				
+				width: 'full-container-width',
+				text_align: 'center',
+				background_color: '#25ace2',								
+				background_img: ''
+			}
+		%}		
+
+		<section class='section section1'>
+			<h3>{{ page_data.cmb2.mwf_section1.mwf_section1_title }}</h3>
+			{% for key, text in page_data.cmb2.mwf_section1 if text is not empty and key != 'mwf_section1_title' %}
+			<p>{{ text }}</p>
+			{% endfor %}
+		</section>
+
+		<section class='section section2'>
+			<h3>{{ page_data.cmb2.mwf_section2.mwf_section2_title }}</h3>
+			{% for key, text in page_data.cmb2.mwf_section2 if text is not empty and key != 'mwf_section2_title' %}
+			<p>{{ text }}</p>
+			{% endfor %}
+		</section>
+
+		{% include 'content_blocks/post-listings.twig' with 
+			{
+				headline: 'Hear From Our Fellows',
+				cta_txt: 'Meet more Mandela Washington Fellowship alumni',
+				cta_url: '#',
+				background_color: '#192856',
+				cta_background_color: '#F2D400',		
+				posts: [
+					{
+						title: 'MWF Alumni Name Success Story',
+						excerpt: 'Lorem ipsum dolor sit amet, ea habeo error ubique vim, ex veniam docendi...',
+						img_src: 'data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==',
+					},
+					{
+						title: 'MWF Alumni Name Success Story',
+						excerpt: 'Lorem ipsum dolor sit amet, ea habeo error ubique vim, ex veniam docendi...',
+						img_src: 'data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='
+					},
+					{
+						title: 'MWF Alumni Name Success Story',
+						excerpt: 'Lorem ipsum dolor sit amet, ea habeo error ubique vim, ex veniam docendi...',
+						img_src: 'data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='
+					}
+				]
+			}
+		%}
+
+		<section class='section application'>
+			<h3 class='application_headline'>{{ page_data.cmb2.mwf_application.mwf_application_title }}</h3>
+			<p class='full-width application_status'>The 2017 Mandela Washington Fellowship application is now closed.</p>
+			<div class='section application_countdown'>
+				<p>APPLICATION COUNTDOWN</p>
+			</div>
+			<div class='section application_timeline'>
+				<h4>Application Process Timeline</h4>
+				<p>{{ page_data.cmb2.mwf_application.mwf_application_process_timeline }}<p>
+			</div>
+			<div class='section application_selection'>
+				<h4>Application Selection Process</h4>
+				<p>{{ page_data.cmb2.mwf_application.mwf_application_selection_process }}</p>
+			</div>
+			<div class='section application_eligibility'>
+				<h5>Who is eligible to apply?</h5>
+				<div>{{ page_data.cmb2.mwf_application.mwf_application_eligibility }}</div>
+			</div>
+		</section>
+
 	</div>
 </section>
 

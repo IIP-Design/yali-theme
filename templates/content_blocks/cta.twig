@@ -1,6 +1,13 @@
-<section class="content-block full-width" style="background-color: {{ block_bg_color }}">
-   <div class="ui container">
-    <h2>{{ title }}</h2>
-    <div style="text-align: {{ excerpt_alignment }}">{{ excerpt }}</div>
-   </div>
+<section 
+	class="section cta {{ width }} {{ text_align }} {% if background_img is not empty %}has_bg_img{% endif %}" 
+	style="background-color: {{ background_color }}; background-image: url({{ background_img }})"
+>
+    <h3 class="cta_title">{{ title }}</h3>
+    {% if not excerpt is not empty %}
+    <p class="cta_excerpt">{{ excerpt }}</P>
+    {% endif %}
+
+    {% if cta_txt is not empty %}
+    <p class='cta_link'><a href='{{ cta_url }}'>{{ cta_txt }}</a></p>
+    {% endif %}
 </section>

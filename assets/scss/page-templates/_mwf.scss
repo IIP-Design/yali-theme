@@ -1,0 +1,39 @@
+.mandela-washington-fellowship {
+	
+	
+	.section {
+		margin-bottom: 50px;
+		@media screen and (max-width: 767px) {
+			margin-bottom: 25px;
+		}
+	}
+
+
+	.application {
+
+		&_headline {
+			text-align: center;
+		}
+
+		&_status {
+			padding: 10px;
+			font-style: italic;
+			font-weight: 700;
+			text-align: center;
+			background-color: $red;
+			color: #fff;			
+		}
+
+		&_eligibility {
+			font-size: em(20); 
+			font-weight: 300;
+			@media screen and (max-width: 933px) {
+				font-size: em(18, $mobile);
+			}
+			@media screen and (max-width: 320px) {
+				font-size: em(14, $mobile);
+			}
+		}
+	}
+
+}

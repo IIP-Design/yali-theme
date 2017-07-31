@@ -56,6 +56,8 @@ Text Domain: yali
 @import 'assets/scss/content-blocks/post-single';
 @import 'assets/scss/content-blocks/post-grid';
 @import 'assets/scss/content-blocks/honeycomb';
+@import 'assets/scss/content-blocks/cta';
+@import 'assets/scss/content-blocks/post-listings';
 
 // PAGE TEMPLATES
 @import 'assets/scss/page-templates/yali-learns/yali-learns';
@@ -64,3 +66,4 @@ Text Domain: yali
 @import 'assets/scss/page-templates/yali-learns/featured-course';
 @import 'assets/scss/page-templates/action';
 @import 'assets/scss/page-templates/campaigns/yalistands4all/yalistands4all';
+@import 'assets/scss/page-templates/mwf';

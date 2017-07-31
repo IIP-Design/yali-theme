@@ -9,8 +9,9 @@ html {
 
 
 body {
-
-  &.page-template-default.page {
+  
+  &.page,
+  &.single {
     font-size: $font-size + 0px;
     color: $blue-navy;
     @media screen and (max-width: 933px) {
