@@ -80,9 +80,11 @@ class Content_Block_Shortcode {
 
     if( $widget && $widget[0]['cdp_module'] ) {
       $w = $widget[0];
+ 
       $cdp_widget = $widget[0]['cdp_module'];
       $context['cdp_widget'] = $w['cdp_module'];
       $context['cdp_num_posts'] = $w['cdp_num_posts'];
+      $context['cdp_category'] = ( empty( $w['cdp_category']) || $w['cdp_category'] == 'select' ) ?  '' : $w['cdp_category'] ;
       $context['cdp_ui_layout'] = $w['cdp_ui_layout'];
       $context['cdp_ui_direction'] = $w['cdp_ui_direction'];
       $context['cdp_image_height'] = $w['cdp_image_height'] . 'px';
