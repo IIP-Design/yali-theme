@@ -47,56 +47,6 @@
 
 
 	&--campaigns {
-
-		.ui.styled.accordion {
-			width: 100%;
-			text-align: left;
-			box-shadow: none;
-
-			.title {
-				margin-bottom: 16px;
-				border: 8px solid $blue-navy;
-				font-size: em(32);
-				color: $blue-navy;
-				@media screen and (min-width: 768px) and (max-width: 933px) {					
-					font-size: em(24, $mobile);
-				}
-				@media screen and (max-width: 767px) {
-					margin-bottom: 12px;
-					padding: 0.4em 1em;
-					font-size: em(20, $mobile);
-				}
-
-				&:hover {
-					border-color: $blue-medium;
-					color: $blue-medium;					
-				}
-
-				&.active {
-					border-color: $blue-medium;	
-					color: #fff;					
-					background-color: $blue-medium;
-				}
-			}
-
-			.content {
-				margin-left: 2em;
-				@media screen and (max-width: 767px) {
-					margin-left: 0;
-				}
-
-				h5 {
-					@media screen and (max-width: 767px) {
-						margin-bottom: 5px;
-					}
-				}
-
-				a {
-					font-weight: 400;
-					font-style: italic;
-					color: $blue-medium;
-				}
-			}
-		}
+			
 	}
 }

@@ -3,8 +3,12 @@
 	max-width: 400px;
 	padding: 25px;
 	text-align: center;
+	font-weight: 700;
 	color: #fff;
-	background-color: $blue-medium;
+	background-color: $blue-navy;
+	@media screen and (max-width: 425px) {
+		padding: 15px;
+	}
 
 	&:hover {
 		color: #fff;

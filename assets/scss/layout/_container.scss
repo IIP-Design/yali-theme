@@ -42,3 +42,12 @@
   }
 }
 
+
+.full-container-width {
+  margin-left: calc( (-1152px + 940px) / 2 );
+  margin-right: calc( (-1152px + 940px) / 2 );
+  @media screen and (max-width: 1024px) {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}

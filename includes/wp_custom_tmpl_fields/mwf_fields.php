@@ -150,6 +150,18 @@ function mwf_fields() {
 	) );
 
 	$mwf_application->add_field( array(    	
+    	'name'    => 'Upload Application Instructions PDF',
+	    'id'      => $prefix . 'application_instructions_pdf',
+	    'type'    => 'file'	    
+    ) );
+
+    $mwf_application->add_field( array(    	
+    	'name'    => 'Choose Application Open Date and Time',
+	    'id'      => $prefix . 'application_opens',
+	    'type'    => 'text_datetime_timestamp'	    
+    ) );
+
+	$mwf_application->add_field( array(    	
     	'name'    => 'Enter Application Section Title',
 	    'id'      => $prefix . 'application_title',
 	    'type'    => 'text'	    
@@ -173,5 +185,18 @@ function mwf_fields() {
     	'name'    => 'Who Is Eligible to Apply Section',
 	    'id'      => $prefix . 'application_eligibility',
 	    'type'    => 'wysiwyg'	    
+    ) );
+
+    $mwf_application->add_field( array(
+    	'name'    => 'Criteria Selection Section',
+	    'id'      => $prefix . 'application_criteria',
+	    'type'    => 'wysiwyg'	    
+    ) );
+
+    $mwf_application->add_field( array(
+    	'name'    => 'Application Information',
+	    'id'      => $prefix . 'application_info',
+	    'type'    => 'textarea',
+	    'options' => array( 'textarea_rows' => 10, )
     ) );
 }

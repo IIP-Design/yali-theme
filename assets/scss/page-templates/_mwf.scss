@@ -11,6 +11,17 @@
 
 	.application {
 
+		&_content {
+			font-size: em(20); 
+			font-weight: 300;
+			@media screen and (max-width: 933px) {
+				font-size: em(18, $mobile);
+			}
+			@media screen and (max-width: 320px) {
+				font-size: em(14, $mobile);
+			}
+		}
+
 		&_headline {
 			text-align: center;
 		}
@@ -25,13 +36,37 @@
 		}
 
 		&_eligibility {
-			font-size: em(20); 
-			font-weight: 300;
-			@media screen and (max-width: 933px) {
-				font-size: em(18, $mobile);
+			
+		}
+
+		&_resources {
+			padding: 50px;			
+			text-align: center;
+			background-color: $blue-bright;
+			@media screen and (max-width: 425px){
+				padding: 50px 25px;
 			}
-			@media screen and (max-width: 320px) {
-				font-size: em(14, $mobile);
+
+			.cta_link {
+				margin-right: auto;
+				margin-left: auto;
+				font-weight: 700;				
+
+				&:not(:last-child) {
+					margin-bottom: 16px;
+				}
+			}
+		}
+
+		&_faqs {
+
+			.application_faq {
+				margin-bottom: 16px;
+
+				&_q {
+					margin-bottom: 16px;
+					font-weight: 700;
+				}
 			}
 		}
 	}
