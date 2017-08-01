@@ -100,7 +100,7 @@ class API {
 	public static function get_menu( $id ) {
 		$request = new WP_REST_Request( 'GET', '/wp-api-menus/v2/menus/' . $id );
 		$menu = self::do_request( $request );
-		return $menu['items'];
+		return ( isset($menu['items']) ) ? $menu['items'] : '';
 	}
 
 	public static function get_featImg_obj($id) {

@@ -272,7 +272,7 @@ class Content_Block {
         'outset'        => __( 'Outset', 'yali' )
       )
 	  ));  
-   ///*** End Widget post group  ***///
+    ///*** End Widget post group  ***///
 
     ///***  Button group  ***///
     $button_group = $cb_box->add_field( array(
@@ -318,19 +318,6 @@ class Content_Block {
         'right'          => __( 'Right', 'yali' )
       )
 	  ));
-
-    $cb_box->add_group_field( $button_group, array(
-      'name'             => 'Button position',
-	    'desc'             => '',
-	    'id'               => 'position',
-	    'type'             => 'select',
-	    'default'          => 'after',
-      'options'          => array(
-        'before'         => __( 'Before content', 'yali' ),
-        'after'          => __( 'After content', 'yali' )
-      )
-	  ));
-
   }
 
 
