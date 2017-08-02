@@ -156,9 +156,22 @@ function mwf_fields() {
     ) );
 
     $mwf_application->add_field( array(    	
-    	'name'    => 'Choose Application Open Date and Time',
-	    'id'      => $prefix . 'application_opens',
-	    'type'    => 'text_datetime_timestamp'	    
+    	'name'    => 'Set Application Date, Time and Add To Calendar',
+	    'id'      => $prefix . 'application_date',
+	    'type'    => 'wysiwyg'
+    ) );
+
+    $mwf_application->add_field( array(    	
+    	'name'    => 'Choose Application Open Date',
+	    'id'      => $prefix . 'application_open_date',
+	    'type'    => 'text_date_timestamp'	    
+    ) );
+
+    $mwf_application->add_field( array(    	
+    	'name'    => 'Choose Application Open Time',
+	    'id'      => $prefix . 'application_open_time',
+	    'type'    => 'text_time',
+	    'time_format' => 'g:ia'    
     ) );
 
 	$mwf_application->add_field( array(    	
