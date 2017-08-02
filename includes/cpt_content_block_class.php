@@ -139,7 +139,7 @@ class Content_Block {
       )
 	  ));
 
-     ///*** Widget post group  ***///
+     ///*** Start Widget post group  ***///
     $post_group = $cb_box->add_field( array(
       'id'   => $prefix . 'cb_widget',
       'type' => 'group',
@@ -174,11 +174,25 @@ class Content_Block {
       'default'           => 3
 	  ));
 
-     $cb_box->add_group_field( $post_group, array(
-      'name'             => 'Category',
-	    'id'               => 'cdp_category',
-	    'taxonomy'         => 'category',  // Enter Taxonomy Slug
-	    'type'             => 'taxonomy_select'
+    //@todo Fetch from API or taxonomy type
+    global $cat_options;
+    $categories = get_categories( array(
+      'orderby' => 'name',
+      'order'   => 'ASC'
+    ));
+   
+    $cat_options['select'] = 'Select';
+    foreach( $categories as $category ) {
+      $cat_options[$category->name] = $category->name;
+    }
+
+    $cb_box->add_group_field( $post_group, array(
+      'name'            => 'Category',
+	    'desc'            => 'Select a category to display',
+	    'id'              => 'cdp_category',
+	    'type'            => 'select',
+	    'default'         => 'select',
+      'options'         => $cat_options
 	  ));
 
     $cb_box->add_group_field( $post_group, array(
@@ -226,7 +240,7 @@ class Content_Block {
       'name'            => 'Image border width',
 	    'id'              => 'cdp_border_width',
 	    'type'            => 'text_small',
-      'default'         => ''
+      'default'         => 0
 	  )); 
 
     $cb_box->add_group_field( $post_group, array(
@@ -258,7 +272,7 @@ class Content_Block {
         'outset'        => __( 'Outset', 'yali' )
       )
 	  ));  
-
+    ///*** End Widget post group  ***///
 
     ///***  Button group  ***///
     $button_group = $cb_box->add_field( array(
@@ -304,20 +318,9 @@ class Content_Block {
         'right'          => __( 'Right', 'yali' )
       )
 	  ));
-
-    $cb_box->add_group_field( $button_group, array(
-      'name'             => 'Button position',
-	    'desc'             => '',
-	    'id'               => 'position',
-	    'type'             => 'select',
-	    'default'          => 'after',
-      'options'          => array(
-        'before'         => __( 'Before content', 'yali' ),
-        'after'          => __( 'After content', 'yali' )
-      )
-	  ));
-
   }
+
+
 
   /**
    * Adds custom column headers to content block admin list
