@@ -88,3 +88,23 @@ blockquote {
     font-size: $mobile + 0px;
   }
 }
+
+
+.text_light {
+  color: #fff;
+}
+
+
+.text_dark,
+.cta_link.text_dark {
+  color: $blue-navy;
+
+  &:hover {
+    color: $blue-navy;  
+  }
+}
+
+
+.text_bold {
+    font-weight: 700;
+}

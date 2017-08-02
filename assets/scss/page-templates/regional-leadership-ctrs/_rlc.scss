@@ -1,0 +1,89 @@
+.regional-leadership-centers {
+	
+
+	.section {
+		margin-bottom: 50px;
+		@media screen and (max-width: 767px) {
+			margin-bottom: 25px;
+		}
+	}
+	
+
+	.rlc {
+
+		&_intro {
+
+			> h4 {
+				text-align: center;
+			}
+		}
+
+		&_centers {			
+			margin-top: 0;
+
+			&.ui.stackable.grid > .row > .column {
+				@media screen and (max-width: 767px) {
+					padding-right: 0 !important;
+					padding-left: 0 !important;
+				}
+			}
+
+			&_row {
+				margin-bottom: 35px;
+			}
+
+			&_center {
+
+				&.column {
+					
+				}				
+
+				&_headline {
+					margin-bottom: 10px;
+
+					&.w_sub {
+						margin-bottom: 0;
+					}
+				}
+
+				&_content {
+					margin-bottom: 16px;
+
+					p {
+						margin-bottom: 0;
+					}
+				}
+
+				&_link {					
+					margin-bottom: 16px;
+				}
+
+				&_cta {					
+
+					.cta_link {
+						max-width: none;
+						padding: 10px 20px;
+						@media screen and (max-width: 767px) {
+							max-width: 400px;
+						}
+					}
+				}
+			}
+		}
+
+		&_partner {
+
+			ul {
+				font-size: em(20); 				
+				@media screen and (max-width: 933px) {
+					font-size: em(18, $mobile);
+				}
+				@media screen and (max-width: 320px) {
+					font-size: em(14, $mobile);
+				}
+			}	
+
+		}
+	}
+
+}
