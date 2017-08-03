@@ -1,0 +1,29 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+<section class="hero">
+    <img class="ui fluid image" src="{{ header_url }}" srcset="{{ srcset }}" sizes="{{ size }}" alt="{{ header_url }}">
+</section>
+
+<section class="ui container title-overlay higher">
+	<h2 class='title-overlay_title'>{{ page_data.title.rendered }}</h2>
+	<div class='inner-container'>		      
+		<section class='page-content'>
+			{{ page_data.content.rendered }}          
+		</section>
+
+		<!-- TEMP - will be added to page via shortcodes on editor -->
+		{% include 'content_blocks/honeycomb.twig' with 
+			{ 				
+				headline: '',
+				subheadline: '',	
+				content: campaigns,
+				bg_color: ''
+			} 
+		%}
+
+		<section>{{ social_block }}</section>
+		
+	</div>
+</section>
+{% endblock %}

@@ -1,10 +1,14 @@
 {% set current_page = page_data.title.rendered %}
 
-<section class='section full-width cb_honeycomb_wrapper {{ bg_color }}'>
+<section class='section full-width cb_honeycomb_wrapper {{ bg_color ? bg_color: "" }}'>
 	<div class='ui container cb_honeycomb'>
 		<div class='inner-container'>
+			{% if headline is not empty %}
 			<h2 class='cb_honeycomb_headline'>{{ headline }}</h2>
+			{% endif %}
+			{% if subheadline is not empty %}
 			<h5 class='cb_honeycomb_subheadline'>{{ subheadline }}</h5>
+			{% endif %}
 			<div class='ui stackable grid cb_honeycomb_items'>
 				{% for campaign in content %}
 					{% if current_page != campaign.title.rendered %}

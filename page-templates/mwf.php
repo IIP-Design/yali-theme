@@ -18,6 +18,14 @@ $img_id = get_post_thumbnail_id( $post->ID );
 $srcset = wp_get_attachment_image_srcset($img_id, 'full');
 $size = wp_get_attachment_image_sizes($img_id, 'full');
 
+
+/**************
+REVISIT - compile shortcodes from cmb2 wysiwyg custom field
+- use for IIP-Interactive Plugin for countdown/add to calendar
+***************/
+$shortcodes = do_shortcode($page_data['cmb2']['mwf_application']['mwf_application_date']);
+
+
 // Data array for twig
 $context = array(
   "page_data"   => $page_data,
