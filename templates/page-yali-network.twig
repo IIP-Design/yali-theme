@@ -24,6 +24,102 @@
 
 		<section>{{ social_block }}</section>
 		
+		{% include 'content_blocks/post_listings_simple_filter.twig' with 
+			{
+				title: 'Related Content',
+				posts: [
+					{
+						link: 'http://yali.rebuild.local/wp/lorem-ipsum/',
+						headline: 'Post 1 Lorem ipsum set abet ipsum', 
+						excerpt: 'Lorem ipsum set abet ipsum Lorem ipsum set abet ipsum', 
+						tags: [
+							{ 'term_id': '4', name: 'tag 1' },
+							{ 'term_id': '5', name: 'tag 2' },
+							{ 'term_id': '6', name: 'tag 3' },
+						],
+						featured_img_url: 'data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='
+					},
+					{
+						link: 'http://yali.rebuild.local/wp/lorem-ipsum/',
+						headline: 'Post 2 Lorem ipsum set abet ipsum', 
+						excerpt: 'Lorem ipsum set abet ipsum Lorem ipsum set abet ipsum', 
+						tags: [
+							{ 'term_id': '4', name: 'tag 1' },
+							{ 'term_id': '5', name: 'tag 2' },
+							{ 'term_id': '6', name: 'tag 3' },
+						],
+						featured_img_url: 'data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='
+					},
+					{
+						link: 'http://yali.rebuild.local/wp/lorem-ipsum/',
+						headline: 'Post 3 Lorem ipsum set abet ipsum', 
+						excerpt: 'Lorem ipsum set abet ipsum Lorem ipsum set abet ipsum', 
+						tags: [
+							{ 'term_id': '4', name: 'tag 1' },
+							{ 'term_id': '5', name: 'tag 2' },
+							{ 'term_id': '6', name: 'tag 3' },
+						],
+						featured_img_url: 'data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='
+					},
+					{
+						link: 'http://yali.rebuild.local/wp/lorem-ipsum/',
+						headline: 'Post 4 Lorem ipsum set abet ipsum', 
+						excerpt: 'Lorem ipsum set abet ipsum Lorem ipsum set abet ipsum', 
+						tags: [
+							{ 'term_id': '4', name: 'tag 1' },
+							{ 'term_id': '5', name: 'tag 2' },
+							{ 'term_id': '6', name: 'tag 3' },
+						],
+						featured_img_url: 'data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='
+					},
+					{
+						link: 'http://yali.rebuild.local/wp/lorem-ipsum/',
+						headline: 'Post 5 Lorem ipsum set abet ipsum', 
+						excerpt: 'Lorem ipsum set abet ipsum Lorem ipsum set abet ipsum', 
+						tags: [
+							{ 'term_id': '4', name: 'tag 1' },
+							{ 'term_id': '5', name: 'tag 2' },
+							{ 'term_id': '6', name: 'tag 3' },
+						],
+						featured_img_url: 'data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='
+					},
+					{
+						link: 'http://yali.rebuild.local/wp/lorem-ipsum/',
+						headline: 'Post 6 Lorem ipsum set abet ipsum', 
+						excerpt: 'Lorem ipsum set abet ipsum Lorem ipsum set abet ipsum', 
+						tags: [
+							{ 'term_id': '4', name: 'tag 1' },
+							{ 'term_id': '5', name: 'tag 2' },
+							{ 'term_id': '6', name: 'tag 3' },
+						],
+						featured_img_url: 'data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='
+					},
+					{
+						link: 'http://yali.rebuild.local/wp/lorem-ipsum/',
+						headline: 'Post 7 Lorem ipsum set abet ipsum', 
+						excerpt: 'Lorem ipsum set abet ipsum Lorem ipsum set abet ipsum', 
+						tags: [
+							{ 'term_id': '4', name: 'tag 1' },
+							{ 'term_id': '5', name: 'tag 2' },
+							{ 'term_id': '6', name: 'tag 3' },
+						],
+						featured_img_url: 'data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='
+					},
+					{
+						link: 'http://yali.rebuild.local/wp/lorem-ipsum/',
+						headline: 'Post 8 Lorem ipsum set abet ipsum', 
+						excerpt: 'Lorem ipsum set abet ipsum Lorem ipsum set abet ipsum', 
+						tags: [
+							{ 'term_id': '4', name: 'tag 1' },
+							{ 'term_id': '5', name: 'tag 2' },
+							{ 'term_id': '6', name: 'tag 3' },
+						],
+						featured_img_url: 'data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='
+					}
+				]
+			}
+		%}
+
 	</div>
 </section>
 {% endblock %}
