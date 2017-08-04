@@ -32,11 +32,12 @@ Text Domain: yali
 // Hero/Page Title Elems
 @import 'assets/scss/partials/hero';
 @import 'assets/scss/partials/page-title-overlay';
-@import 'assets/scss/partials/accordion';
 
 // General helper elems - dropdown, placeholders, etc. 
+@import 'assets/scss/partials/accordion';
 @import 'assets/scss/partials/helpers';
 @import 'assets/scss/partials/cta-link';
+@import 'assets/scss/partials/page-media-element';
 
 // Footer
 @import 'assets/scss/partials/footer/footer';
@@ -72,3 +73,4 @@ Text Domain: yali
 @import 'assets/scss/page-templates/mwf/countdown';
 @import 'assets/scss/page-templates/regional-leadership-ctrs/rlc';
 @import 'assets/scss/page-templates/yali-network';
+@import 'assets/scss/page-templates/yali-is';

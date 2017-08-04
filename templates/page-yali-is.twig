@@ -1,0 +1,113 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+<section class="hero hero--bg_img" style='background-image: url("{{ header_url }}"); background-size: cover;'>
+    <div class="hero-inner bottom_padd bottom_padd--thick">
+    	<div class="hero-content ui container">
+    		<h1 class="hero-h1">{{ page_data.title.rendered }}...</h1>
+    	</div>
+    </div>
+</section>
+
+<section class="ui container">	
+	<div class='inner-container'>
+		<section class='section yali-is_intro'>
+			{{ page_data.content.rendered }}
+		</section>
+		<section class='section yali-is_elements'>
+			<h3>Elements of YALI</h3>
+			<p>Whatever part of YALI attracts your interest, you can be sure that by joining you'll become part
+				of something bigger!
+			</p>
+			<div class='accordion_layout yali-is_elements_accordion'>
+				<div class='ui styled accordion'>				
+					<h4 class='title'>Mandela Washington Fellowship</h4>
+					<div class='content'>
+						<p>Launched in 2014, the <a href="/mandela-washington-fellowship">Mandela Washington Fellowship</a> is YALI’s flagship program. It brings up to 1,000 African civic, business and community leaders aged 25–35 for six weeks of academic coursework, leadership training and networking at U.S. universities.</p>
+						<p>Follow the Mandela Washington Fellowship on <a href='https://www.facebook.com/MandelaWashingtonFellowship' target='_blank'>Facebook</a> and <a href='https://twitter.com/WashFellowship' target='_blank'>Twitter</a>.</p>
+					</div>
+
+					<h4 class='title'>YALI Network</h4>
+					<div class='content'>
+						<p>Through the YALI Network, young Africans can connect with other leaders in their community, access free online courses in topics ranging from climate change to entrepreneurship to human rights, and receive invitations to special events.</p>
+						<p>Follow the YALI Network on:</p>
+						<ul>							
+							<li><a href='#'>Facebook</a></li>
+							<li><a href='#'>Twitter</a></li>
+							<li><a href='#'>LinkedIn</a></li>
+							<li><a href='#'>Face2Face Facebook Group</a></li>
+						</ul>						
+					</div>
+
+					<h4 class='title'>YALI Regional Leaderhsip Centers</h4>
+					<div class='content'>
+						<p>The four <a href='/regional-leadership-centers'>YALI Regional Leadership Centers</a> — in Kenya, South Africa, Senegal and Ghana  — train young leaders in leadership, entrepreneurship and professional development. They also provide a great place to network.</p>
+						<div class='yali-is_center'>
+							<p class='text_bold'>East Africa:</p>
+							<p>
+								<span>Website: </span>
+								<a href='' target='_blank'></a>
+							</p>
+							<p>
+								<span>Facebook: </span>
+								<a href='' target='_blank'></a>
+							</p>
+							<p>
+								<span>Twitter: </span>
+								<a href='' target='_blank'></a>
+							</p>
+						</div>
+						<div class='yali-is_center'>
+							<p class='text_bold'>Southern Africa:</p>
+							<p>
+								<span>Website: </span>
+								<a href='' target='_blank'></a>
+							</p>
+							<p>
+								<span>Facebook: </span>
+								<a href='' target='_blank'></a>
+							</p>
+							<p>
+								<span>Twitter: </span>
+								<a href='' target='_blank'></a>
+							</p>
+						</div>
+						<div class='yali-is_center'>
+							<p class='text_bold'>West Africa - Accra:</p>
+							<p>
+								<span>Website: </span>
+								<a href='' target='_blank'></a>
+							</p>
+							<p>
+								<span>Facebook: </span>
+								<a href='' target='_blank'></a>
+							</p>
+							<p>
+								<span>Twitter: </span>
+								<a href='' target='_blank'></a>
+							</p>
+						</div>
+						<div class='yali-is_center'>
+							<p class='text_bold'>West Africa - Dakar:</p>
+							<p>
+								<span>Website: </span>
+								<a href='' target='_blank'></a>
+							</p>
+							<p>
+								<span>Facebook: </span>
+								<a href='' target='_blank'></a>
+							</p>
+							<p>
+								<span>Twitter: </span>
+								<a href='' target='_blank'></a>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+			
+	</div>
+</section>
+
+{% endblock %}

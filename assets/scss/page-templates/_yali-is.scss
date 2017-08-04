@@ -1,0 +1,57 @@
+.yali-is {
+	
+
+	.section {
+		margin-bottom: 50px;
+		@media screen and (max-width: 767px) {
+			margin-bottom: 25px;
+		}
+	}
+
+
+	&_intro {
+		margin-top: 50px;
+		@media screen and (max-width: 767px) {
+			margin-top: 25px;
+		}
+
+		h2 {
+			text-align: center;
+		}
+
+		.media-container.responsive {
+			margin-top: 50px;
+			@media screen and (max-width: 767px) {
+				margin-top: 25px;
+			}
+		}
+	}
+
+
+	&_elements {
+
+		&_accordion {
+
+			.content ul {
+				font-size: em(20); 
+				font-weight: 300;
+				@media screen and (max-width: 933px) {
+					font-size: em(18, $mobile);
+				}
+				@media screen and (max-width: 320px) {
+					font-size: em(14, $mobile);
+				}
+			}			
+		}
+	}
+
+
+	&_center {
+		margin-bottom: 25px;
+
+		p {
+			margin-bottom: 0;
+		}
+	}
+
+}

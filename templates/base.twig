@@ -33,7 +33,7 @@
 				{{ tha_content_top() }}
 
 				<!-- overrride default content block with page specifc content -->
-				<div class="{{ get_pagename() }}">
+				<div class="yali_page {{ get_pagename() }}">
 					{% block content %}
 						<section class="ui container">
 							<p>Content area</p>
