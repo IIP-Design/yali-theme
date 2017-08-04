@@ -1,4 +1,5 @@
 <?php
+
 use Yali\Twig as Twig;
 
 // Post Object
@@ -16,7 +17,16 @@ $size = wp_get_attachment_image_sizes($img_id, "full");
 
 // Temp
 $social_block = do_shortcode("[content_block id='86']");
-$campaigns = Yali\API::get_child_pages(8);
+
+/**
+* $campaigns set to child pages of Action page - using page id of Dev server otherwise 
+* set to page id of Action on Shawn localhost
+**/
+$check_host = $_SERVER['SERVER_NAME'];
+echo $check_host;
+$campaigns = ( $check_host == 'yali.dev.america.gov' ) ? Yali\API::get_child_pages(13) : Yali\API::get_child_pages(8);
+
+
 
 // Data array for twig
 $context = array(
