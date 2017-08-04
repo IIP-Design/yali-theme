@@ -16,13 +16,12 @@ $srcset = wp_get_attachment_image_srcset($img_id, "full");
 $size = wp_get_attachment_image_sizes($img_id, "full");
 
 // Temp
-$social_block = do_shortcode("[content_block id='86']");
-
 /**
-* $campaigns set to child pages of Action page - using page id of Dev server otherwise 
-* set to page id of Action on Shawn localhost
+* data (page id, content block shortcode) from dev server otherwise
+* from Shawn localhost
 **/
 $check_host = $_SERVER['SERVER_NAME'];
+$social_block = ( $check_host == 'yali.dev.america.gov' ) ? do_shortcode("[content_block id='242']") : do_shortcode("[content_block id='86']");
 $campaigns = ( $check_host == 'yali.dev.america.gov' ) ? Yali\API::get_child_pages(13) : Yali\API::get_child_pages(8);
 
 // Data array for twig
