@@ -46,66 +46,161 @@
 							<p class='text_bold'>East Africa:</p>
 							<p>
 								<span>Website: </span>
-								<a href='' target='_blank'></a>
+								<a href='http://www.yalieastafrica.org' target='_blank'>www.yalieastafrica.org</a>
 							</p>
 							<p>
 								<span>Facebook: </span>
-								<a href='' target='_blank'></a>
+								<a href='http://www.facebook.com/yalieastafrica' target='_blank'>www.facebook.com/yalieastafrica</a>
 							</p>
 							<p>
 								<span>Twitter: </span>
-								<a href='' target='_blank'></a>
+								<a href='http://twitter.com/yalirlcea' target='_blank'>twitter.com/yalirlcea</a>
 							</p>
 						</div>
 						<div class='yali-is_center'>
 							<p class='text_bold'>Southern Africa:</p>
 							<p>
 								<span>Website: </span>
-								<a href='' target='_blank'></a>
+								<a href='http://yalisouthernafrica.melimu.com' target='_blank'>yalisouthernafrica.melimu.com</a>
 							</p>
 							<p>
 								<span>Facebook: </span>
-								<a href='' target='_blank'></a>
+								<a href='http://www.facebook.com/yalirlcsa' target='_blank'>www.facebook.com/yalirlcsa</a>
 							</p>
 							<p>
 								<span>Twitter: </span>
-								<a href='' target='_blank'></a>
+								<a href='http://twitter.com/yali_safrica' target='_blank'>twitter.com/yali_safrica</a>
 							</p>
 						</div>
 						<div class='yali-is_center'>
 							<p class='text_bold'>West Africa - Accra:</p>
 							<p>
 								<span>Website: </span>
-								<a href='' target='_blank'></a>
+								<a href='http://www.yaliwestafrica.org' target='_blank'>www.yaliwestafrica.org</a>
 							</p>
 							<p>
 								<span>Facebook: </span>
-								<a href='' target='_blank'></a>
+								<a href='http://www.facebook.com/yaliwestafrica' target='_blank'>www.facebook.com/yaliwestafrica</a>
 							</p>
 							<p>
 								<span>Twitter: </span>
-								<a href='' target='_blank'></a>
+								<a href='http://twitter.com/yalirlcwa' target='_blank'>twitter.com/yalirlcwa</a>
 							</p>
 						</div>
 						<div class='yali-is_center'>
 							<p class='text_bold'>West Africa - Dakar:</p>
 							<p>
 								<span>Website: </span>
-								<a href='' target='_blank'></a>
+								<a href='http://www.yaliafriquedelouest.org' target='_blank'>www.yaliafriquedelouest.org</a>
 							</p>
 							<p>
 								<span>Facebook: </span>
-								<a href='' target='_blank'></a>
-							</p>
-							<p>
-								<span>Twitter: </span>
-								<a href='' target='_blank'></a>
-							</p>
+								<a href='http://www.facebook.com/crlyalidakar' target='_blank'>www.facebook.com/crlyalidakar</a>
+							</p>							
 						</div>
 					</div>
 				</div>
 			</div>
 		</section>
+
+		<section>{{ social_block }}</section>
+
+		{% include 'content_blocks/post_listings_simple_filter.twig' with 
+			{
+				title: 'Related Content',
+				show_more_block: 'true',
+				posts: [
+					{
+						link: 'http://yali.rebuild.local/wp/lorem-ipsum/',
+						headline: 'Post 1 Lorem ipsum set abet ipsum', 
+						excerpt: 'Lorem ipsum set abet ipsum Lorem ipsum set abet ipsum', 
+						tags: [
+							{ 'term_id': '4', name: 'tag 1' },
+							{ 'term_id': '5', name: 'tag 2' },
+							{ 'term_id': '6', name: 'tag 3' },
+						],
+						featured_img_url: 'data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='
+					},
+					{
+						link: 'http://yali.rebuild.local/wp/lorem-ipsum/',
+						headline: 'Post 2 Lorem ipsum set abet ipsum', 
+						excerpt: 'Lorem ipsum set abet ipsum Lorem ipsum set abet ipsum', 
+						tags: [
+							{ 'term_id': '4', name: 'tag 1' },
+							{ 'term_id': '5', name: 'tag 2' },
+							{ 'term_id': '6', name: 'tag 3' },
+						],
+						featured_img_url: 'data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='
+					},
+					{
+						link: 'http://yali.rebuild.local/wp/lorem-ipsum/',
+						headline: 'Post 3 Lorem ipsum set abet ipsum', 
+						excerpt: 'Lorem ipsum set abet ipsum Lorem ipsum set abet ipsum', 
+						tags: [
+							{ 'term_id': '4', name: 'tag 1' },
+							{ 'term_id': '5', name: 'tag 2' },
+							{ 'term_id': '6', name: 'tag 3' },
+						],
+						featured_img_url: 'data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='
+					},
+					{
+						link: 'http://yali.rebuild.local/wp/lorem-ipsum/',
+						headline: 'Post 4 Lorem ipsum set abet ipsum', 
+						excerpt: 'Lorem ipsum set abet ipsum Lorem ipsum set abet ipsum', 
+						tags: [
+							{ 'term_id': '4', name: 'tag 1' },
+							{ 'term_id': '5', name: 'tag 2' },
+							{ 'term_id': '6', name: 'tag 3' },
+						],
+						featured_img_url: 'data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='
+					},
+					{
+						link: 'http://yali.rebuild.local/wp/lorem-ipsum/',
+						headline: 'Post 5 Lorem ipsum set abet ipsum', 
+						excerpt: 'Lorem ipsum set abet ipsum Lorem ipsum set abet ipsum', 
+						tags: [
+							{ 'term_id': '4', name: 'tag 1' },
+							{ 'term_id': '5', name: 'tag 2' },
+							{ 'term_id': '6', name: 'tag 3' },
+						],
+						featured_img_url: 'data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='
+					},
+					{
+						link: 'http://yali.rebuild.local/wp/lorem-ipsum/',
+						headline: 'Post 6 Lorem ipsum set abet ipsum', 
+						excerpt: 'Lorem ipsum set abet ipsum Lorem ipsum set abet ipsum', 
+						tags: [
+							{ 'term_id': '4', name: 'tag 1' },
+							{ 'term_id': '5', name: 'tag 2' },
+							{ 'term_id': '6', name: 'tag 3' },
+						],
+						featured_img_url: 'data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='
+					},
+					{
+						link: 'http://yali.rebuild.local/wp/lorem-ipsum/',
+						headline: 'Post 7 Lorem ipsum set abet ipsum', 
+						excerpt: 'Lorem ipsum set abet ipsum Lorem ipsum set abet ipsum', 
+						tags: [
+							{ 'term_id': '4', name: 'tag 1' },
+							{ 'term_id': '5', name: 'tag 2' },
+							{ 'term_id': '6', name: 'tag 3' },
+						],
+						featured_img_url: 'data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='
+					},
+					{
+						link: 'http://yali.rebuild.local/wp/lorem-ipsum/',
+						headline: 'Post 8 Lorem ipsum set abet ipsum', 
+						excerpt: 'Lorem ipsum set abet ipsum Lorem ipsum set abet ipsum', 
+						tags: [
+							{ 'term_id': '4', name: 'tag 1' },
+							{ 'term_id': '5', name: 'tag 2' },
+							{ 'term_id': '6', name: 'tag 3' },
+						],
+						featured_img_url: 'data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='
+					}
+				]
+			}
+		%}
 			
 	</div>
 </section>

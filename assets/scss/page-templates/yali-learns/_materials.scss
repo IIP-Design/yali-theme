@@ -47,6 +47,12 @@
 
 
 	&--campaigns {
-			
+		
+		&.accordion_layout {
+
+			.ui.styled.accordion .content a {
+				font-style: italic;
+			}
+		}
 	}
 }
