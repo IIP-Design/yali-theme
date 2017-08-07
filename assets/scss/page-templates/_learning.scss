@@ -1,0 +1,47 @@
+.learning {
+	
+
+	&_wrapper {
+
+		.section {
+			margin: 50px 0;
+			@media screen and (max-width: 767px) {
+				margin-bottom: 25px 0;
+			}
+		}
+	}	
+
+
+	&_filter {
+
+		&_title {
+			text-align: center;
+
+			&:after {
+				content: '';
+				display: block;
+				height: 5px;				
+				background-color: $blue-navy;
+				@media screen and (min-width: 768px) {
+					margin: 0 16px;
+				}
+			}
+		}
+
+		&_menu {
+			margin-top: 25px;
+			text-align: center;
+
+			&_item {
+				display: inline-block;
+				min-width: 125px;
+				padding: 10px;
+				border: 5px solid $blue-navy;
+			}
+
+		}
+
+	}
+
+
+}
