@@ -1,0 +1,34 @@
+
+{% for post in posts %}
+
+{% if loop.index0 % 3 == 0 %}
+<div class='ui three column row posts_list_row'>
+{% endif %}
+
+	<article class='column pl_article'>
+		<img class='pl_article_img' src='{{ post.featured_img_url }}'>
+		<h5 class='pl_article_headline'><a href='{{ post.link }}'>{{ post.headline }}</a></h5>
+		<p class='pl_article_excerpt'>{{ post.excerpt }}</p>
+		
+		{% if post.tags is not empty %}
+		<div class='pl_article_tags'>					
+			{% for tag in post.tags  %}
+			<a class='pl_article_tags_tag' href='#'>{{ tag.name }}</a>			
+			{% endfor %}
+		</div>
+		{% endif %}
+
+		{% if post.course_cta is not empty %}
+		<div class='pl_article_cta'>
+			<a href='{{ post.link }}' class='cta_link'>Take Course</a>
+			<a href='#' class='cta_link'>Course en francais</a>
+		</div>
+		{% endif %}
+	</article>
+
+{% if loop.index is divisible by(3) %}
+</div>
+{% endif %}
+
+
+{% endfor %}
