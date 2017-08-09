@@ -36,10 +36,21 @@ function showMore() {
 			article.style.display = 'block';
 		});			
 	});
+}
 
+
+function displaySearchFilters() {
+	const refineSearchBtn = document.querySelector('.filter_mobile_search');
+	if( !refineSearchBtn ) return;
+
+	refineSearchBtn.addEventListener('click', function() {
+		let dropdownFilter = document.querySelector('.dropdown_filter');
+		dropdownFilter.classList.toggle('active');
+	});
 }
 
 export function init() {
 	displayMenu();
 	showMore();
+	displaySearchFilters();
 }

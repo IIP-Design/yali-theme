@@ -35,6 +35,13 @@
 	.posts_list {
 		margin: 0;
 
+		&.ui.stackable.grid > .column.row > .column.pl_article {
+			@media screen and (max-width: 767px) {
+				padding-left: 0 !important;
+				padding-right: 0 !important;
+			}
+		}
+
 		&_row {
 			margin-top: 25px;
 		}
@@ -42,7 +49,6 @@
 
 
 	.pl_article {
-
 		@media screen and (max-width: 767px) {
 			padding-left: 0 !important;
 			padding-right: 0 !important;				

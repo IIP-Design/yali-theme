@@ -64,9 +64,20 @@ function showMore() {
 	});
 }
 
+function displaySearchFilters() {
+	var refineSearchBtn = document.querySelector('.filter_mobile_search');
+	if (!refineSearchBtn) return;
+
+	refineSearchBtn.addEventListener('click', function () {
+		var dropdownFilter = document.querySelector('.dropdown_filter');
+		dropdownFilter.classList.toggle('active');
+	});
+}
+
 function init() {
 	displayMenu();
 	showMore();
+	displaySearchFilters();
 }
 
 },{}],3:[function(require,module,exports){
