@@ -1,7 +1,10 @@
 {% extends 'base.twig' %}
 
 {% block content %}
-<section class='hero hero--bg_img' style='background-image: url("{{ header_url }}"); background-size: cover;'>
+<section class='hero' data-responsive-background-image>
+	<img src="{{ header_url }}"
+      sizes="{{ sizes }}"
+      srcset="{{ srcset }}">
 	<div class='hero-inner bottom_padd bottom_padd--thin'>
 	    <div class='hero-content ui container'>
 	        <h1 class="hero-headline">{{ page_data.title.rendered }}</h1>        

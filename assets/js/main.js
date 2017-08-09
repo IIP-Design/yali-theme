@@ -4,6 +4,7 @@ import * as footer from './footer.js';
 import * as join_form from './join_form.js';
 import * as search from './search.js';
 import './date_countdown.js';
+import ResponsiveBackgroundImage from './ResponsiveBackgroundImage.js';
 
 (function($) {
  
@@ -15,4 +16,11 @@ import './date_countdown.js';
   // YALILearns Page
   $('.ui.accordion').accordion();
 
+  // initialize responsive background images
+  let elements = document.querySelectorAll('[data-responsive-background-image]');   
+  for ( let i = 0; i < elements.length; i++ ) {  
+    new ResponsiveBackgroundImage( elements[i] );
+  }
+ 
 })( jQuery ); 
+

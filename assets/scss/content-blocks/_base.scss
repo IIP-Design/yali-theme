@@ -1,20 +1,21 @@
-.content-block {
+.cb {
 	padding-top: em(50);
-	padding-bottom: em(50);
-}
+  padding-bottom: em(50);
+  
+  .cb_button {
+    margin-top: 2em;
+  }
 
-.content-block--button {
-  margin-top: 2em;
-}
+  .cb_excerpt {
+    font-size: em(20);
+    font-weight: 700;
+    max-width: 760px;
+    margin: 0 auto;
+  }
 
-.content-block--excerpt {
-  font-size: em(20);
-  font-weight: 700;
-  max-width: 760px;
-  margin: 0 auto;
-}
+  .cb_h2_underline {
+    border-bottom: 10px solid $darkblue;
+    padding-bottom: .2em;
+  }
 
-.content-block--h2_underline {
-  border-bottom: 10px solid $darkblue;
-  padding-bottom: .2em;
 }
