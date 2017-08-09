@@ -1,6 +1,55 @@
 .mandela-washington-fellowship .application { 
-
 	
+
+	#clockdiv {
+		width: auto !important;
+		font-family: $font-family;
+		font-size: inherit !important;
+
+		h1 {
+			font-size: em(32);
+			font-weight: 700;
+			color: $blue-navy;
+			@media screen and (max-width: 933px) {
+				font-size: em(24, $mobile);
+			}
+		}
+
+		> div {
+			background-color: #ccc;
+
+			.days,
+			.hours,
+			.minutes,
+			.seconds {
+				font-size: em(20); 
+				font-weight: 700;
+				background-color: $blue-navy;
+				@media screen and (max-width: 933px) {
+					font-size: em(18, $mobile);
+				}
+				@media screen and (max-width: 320px) {
+					font-size: em(14, $mobile);
+				}
+			}
+
+			.smalltext {
+				color: $blue-navy;
+			}				
+		}
+	}
+	
+
+	#iip_calendar {
+		margin: 20px 0;
+
+		.add-to-calendar-checkbox {
+			padding: 10px;
+			font-weight: 700;
+		}
+	}
+
+
 	&_countdown {
 		text-align: center;
 

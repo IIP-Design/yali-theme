@@ -4,7 +4,7 @@ import * as footer from './footer';
 import * as join_form from './join_form';
 import * as search from './search';
 import * as dropdown_filter from './dropdown_filter';
-import './date_countdown';
+import './application_status';
 
 (function($) {
  

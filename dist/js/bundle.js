@@ -5,15 +5,23 @@ Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 
-exports.default = function countdown(timestamp) {
-	if (!document.querySelector('[data-timestamp]')) return;
+exports.default = function application_status() {
+	var application_status_div = document.querySelector('.application_status');
 
-	var timestamp = document.querySelector('[data-timestamp]').dataset.timestamp,
-	    month = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-	    the_date = new Date(timestamp * 1000),
-	    formattedDate = month[the_date.getMonth()] + ' ' + the_date.getDate() + ', ' + the_date.getFullYear() + ' at ' + the_date.getHours() + 'am GMT';
+	if (!application_status_div) return;
 
-	console.log(formattedDate);
+	var application_open_date = new Date(document.querySelector('#caldatetime').value);
+	var today = new Date();
+
+	if (application_open_date.getFullYear() < today.getFullYear()) {
+		application_status_div.classList.add('app_closed');
+		return;
+	} else if (application_open_date.getFullYear() == today.getFullYear()) {
+		if (application_open_date.getMonth() < today.getMonth()) {
+			application_status_div.classList.add('app_closed');
+			return;
+		}
+	}
 }();
 
 },{}],2:[function(require,module,exports){
@@ -323,7 +331,7 @@ var _dropdown_filter = require('./dropdown_filter');
 
 var dropdown_filter = _interopRequireWildcard(_dropdown_filter);
 
-require('./date_countdown');
+require('./application_status');
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -339,7 +347,7 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
   $('.ui.accordion').accordion();
 })(jQuery);
 
-},{"../../node_modules/semantic-ui-sass/semantic-ui":32,"./date_countdown":1,"./dropdown_filter":2,"./footer":3,"./join_form":4,"./nav":6,"./search":7}],6:[function(require,module,exports){
+},{"../../node_modules/semantic-ui-sass/semantic-ui":32,"./application_status":1,"./dropdown_filter":2,"./footer":3,"./join_form":4,"./nav":6,"./search":7}],6:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {

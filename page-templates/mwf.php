@@ -23,7 +23,7 @@ $size = wp_get_attachment_image_sizes($img_id, 'full');
 REVISIT - compile shortcodes from cmb2 wysiwyg custom field
 - use for IIP-Interactive Plugin for countdown/add to calendar
 ***************/
-$shortcodes = do_shortcode($page_data['cmb2']['mwf_application']['mwf_application_date']);
+$countdown = do_shortcode($page_data['cmb2']['mwf_application']['mwf_application_date']);
 
 
 // Data array for twig
@@ -32,7 +32,8 @@ $context = array(
   "header_url"  => $header_url,  
   "feat_img"    => $feat_img_obj,
   "srcset"		=> $srcset,
-  "size"		=> $size
+  "size"		=> $size,
+  "countdown"   => $countdown
 );
 
 
