@@ -61,8 +61,11 @@ Text Domain: yali
 @import 'assets/scss/content-blocks/cta';
 @import 'assets/scss/content-blocks/post-listings';
 @import 'assets/scss/content-blocks/post-listings-simple-filter';
+@import 'assets/scss/content-blocks/all_posts_filter/dropdown-filter';
+@import 'assets/scss/content-blocks/all_posts_filter/posts_list';
 
 // PAGE TEMPLATES
+@import 'assets/scss/page-templates/home';
 @import 'assets/scss/page-templates/yali-learns/yali-learns';
 @import 'assets/scss/page-templates/yali-learns/step';
 @import 'assets/scss/page-templates/yali-learns/materials';
@@ -74,3 +77,4 @@ Text Domain: yali
 @import 'assets/scss/page-templates/regional-leadership-ctrs/rlc';
 @import 'assets/scss/page-templates/yali-network';
 @import 'assets/scss/page-templates/yali-is';
+@import 'assets/scss/page-templates/learning';

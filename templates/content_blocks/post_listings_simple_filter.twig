@@ -19,7 +19,7 @@
 			
 				<article class='column sf_article'>
 					<img class='sf_article_img' src='{{ post.featured_img_url }}'>
-					<h5 class='sf_article_headline'>{{ post.headline }}</h5>
+					<h5 class='sf_article_headline'><a href='{{ post.link }}'>{{ post.headline }}</a></h5>
 					<p class='sf_article_excerpt'>{{ post.excerpt }}</p>
 					{% if post.tags is not empty %}
 					<div class='sf_article_tags'>

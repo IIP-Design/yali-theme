@@ -48,6 +48,17 @@
 				font-weight: 700;				
 				color: $blue-medium;
 			}
+
+			ul {
+				font-size: em(20); 
+				font-weight: 300;
+				@media screen and (max-width: 933px) {
+					font-size: em(18, $mobile);
+				}
+				@media screen and (max-width: 320px) {
+					font-size: em(14, $mobile);
+				}
+			}
 		}
 	}
 }

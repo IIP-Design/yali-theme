@@ -88,6 +88,13 @@
 
 			&_headline {
 				margin: 10px 0 5px 0;
+
+				a {
+					color: $blue-navy;
+					&:hover {
+						color: $blue-navy;
+					}
+				}
 			}
 
 			&_excerpt {

@@ -69,6 +69,70 @@ Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 exports.init = init;
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+function displayMenu() {
+	var filter_type = document.querySelectorAll('.filter_type');
+
+	if (filter_type === null) return;
+
+	[].concat(_toConsumableArray(filter_type)).forEach(function (filter_item) {
+		filter_item.addEventListener('click', function () {
+			var filter = this.parentElement;
+			var menu = filter.querySelector('.filter_menu');
+
+			filter.classList.toggle('active');
+			menu.classList.toggle('active');
+		});
+	});
+}
+
+function showMore() {
+	var maxListLength = 12;
+	var articles = document.querySelectorAll('.pl_article'),
+	    showMoreBtn = document.querySelector('.all_posts_showmore');
+
+	if ([].concat(_toConsumableArray(articles)).length = 0 || showMoreBtn === null) return;
+
+	if (articles.length > maxListLength) {
+		[].concat(_toConsumableArray(articles)).slice(maxListLength).forEach(function (article) {
+			article.style.display = 'none';
+		});
+
+		showMoreBtn.style.display = 'block';
+	}
+
+	showMoreBtn.addEventListener('click', function () {
+		[].concat(_toConsumableArray(articles)).slice(maxListLength).forEach(function (article) {
+			article.style.display = 'block';
+		});
+	});
+}
+
+function displaySearchFilters() {
+	var refineSearchBtn = document.querySelector('.filter_mobile_search');
+	if (!refineSearchBtn) return;
+
+	refineSearchBtn.addEventListener('click', function () {
+		var dropdownFilter = document.querySelector('.dropdown_filter');
+		dropdownFilter.classList.toggle('active');
+	});
+}
+
+function init() {
+	displayMenu();
+	showMore();
+	displaySearchFilters();
+}
+
+},{}],3:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports.init = init;
 var search_input_div = document.querySelector('.footer_list_item--search .search_input_wrapper'),
     search_input = document.querySelector('.footer_list_item--search .search_input_wrapper > input'),
     search_open = document.querySelector('.footer_list_item--search .search.icon'),
@@ -285,23 +349,27 @@ function init() {
 
 require('../../node_modules/semantic-ui-sass/semantic-ui');
 
-var _nav = require('./nav.js');
+var _nav = require('./nav');
 
 var nav = _interopRequireWildcard(_nav);
 
-var _footer = require('./footer.js');
+var _footer = require('./footer');
 
 var footer = _interopRequireWildcard(_footer);
 
-var _join_form = require('./join_form.js');
+var _join_form = require('./join_form');
 
 var join_form = _interopRequireWildcard(_join_form);
 
-var _search = require('./search.js');
+var _search = require('./search');
 
 var search = _interopRequireWildcard(_search);
 
-require('./date_countdown.js');
+var _dropdown_filter = require('./dropdown_filter');
+
+var dropdown_filter = _interopRequireWildcard(_dropdown_filter);
+
+require('./date_countdown');
 
 var _ResponsiveBackgroundImage = require('./ResponsiveBackgroundImage.js');
 
@@ -317,6 +385,7 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
   footer.init();
   join_form.init();
   search.init();
+  dropdown_filter.init();
 
   // YALILearns Page
   $('.ui.accordion').accordion();
@@ -328,7 +397,11 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
   }
 })(jQuery);
 
+<<<<<<< HEAD
 },{"../../node_modules/semantic-ui-sass/semantic-ui":32,"./ResponsiveBackgroundImage.js":1,"./date_countdown.js":2,"./footer.js":3,"./join_form.js":4,"./nav.js":6,"./search.js":7}],6:[function(require,module,exports){
+=======
+},{"../../node_modules/semantic-ui-sass/semantic-ui":32,"./date_countdown":1,"./dropdown_filter":2,"./footer":3,"./join_form":4,"./nav":6,"./search":7}],6:[function(require,module,exports){
+>>>>>>> b870434a2976439c01b2d49f6932efeaff0ff7ad
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {

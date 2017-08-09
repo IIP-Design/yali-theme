@@ -1,0 +1,17 @@
+<section class='all_posts'>
+	<h2 class='all_posts_title'>{{ title }}</h2>
+
+	{% include '/content_blocks/all_posts_filter/dropdown_filter.twig' %}
+
+
+	<!-- POSTS -->
+	<div class='ui stackable grid posts_list'>
+		
+		{% include '/content_blocks/all_posts_filter/posts_list.twig' %}
+		
+	</div><!-- posts_list -->
+	<div class='cta_link all_posts_showmore'>
+		<h4>Show More <i class='caret down icon'></i></h4>
+	</div>
+</section>
+

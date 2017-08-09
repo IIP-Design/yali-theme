@@ -1,0 +1,37 @@
+.home {
+	
+
+	&_intro {
+		margin-bottom: 50px;
+		@media screen and (max-width: 767px) {
+			margin-bottom: 25px;
+		}		
+
+		&_items {
+
+			&.ui.stackable.grid > .column.row > .column.home_intro_item {
+				@media screen and (max-width: 767px) {
+					padding-right: 0 !important;
+					padding-left: 0 !important;
+				}
+			}
+
+		}
+	}
+
+
+	.item {
+
+		&_excerpt {
+			margin-bottom: 10px;
+		}
+
+		&_link {
+			
+			a {
+				color: $blue-medium;
+			}
+		}
+	}
+
+}

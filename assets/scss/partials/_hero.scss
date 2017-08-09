@@ -23,16 +23,7 @@
 		
 		h1 {
 			line-height: 1;
-			color: #fff;
-
-			&.hero-h1 {
-				display: none;
-				@include bp($tablet-sm) { display: block; }
-			}
-			&.hero-h1_m {
-				display: block;
-				@include bp($tablet-sm) { display: none; }
-			}
+			color: #fff;			
 		}	
 
 		p {		

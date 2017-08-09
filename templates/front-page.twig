@@ -7,8 +7,7 @@
       srcset="{{ srcset }}">
     <div class="hero-inner bottom_padd bottom_padd--thick">
       <div class="hero-content ui container">
-        <h1 class="hero-h1">Young African Leaders Initiative</h1>
-        <h1 class="hero-h1_m">YALI</h1>
+        <h1 class="hero-h1">Young African Leaders Initiative</h1>        
         <p>The Young African Leaders Initiative (YALI) is a signature effort to invest in the next generation of African leaders.</p>        
       </div>
     </div>
@@ -16,8 +15,55 @@
   <section class="ui container title-overlay">
     <h2 class='title-overlay_title'>{{ page_data.title.rendered }}</h2> 
     <div class='inner-container'>           
-      <div>
-        {{ page_data.content.rendered }}          
+      <div class='home'>
+        <section class='home_intro'>
+          <div class='ui stackable grid home_intro_items'>
+            <div class='ui three column row home_intro_items_row'>
+              <div class='column home_intro_item'>
+                <p class='text_bold item_headline'>Mandela Washington Fellowship</p>
+                <p class='item_excerpt'>
+                  Launched in 2014, the Mandela Washington Fellowship is YALI's flagship program. It brings up to
+                  1,000 African civic, business and community leaders aged 25-35 for six weeks of academic coursework,
+                  leadership training and networking at U.S. universities.
+                </p>
+                <p class='text_bold item_link'>
+                  <a href='/mandela-washington-fellowship'>More about the Mandela Washington Fellowship 
+                    <i class='angle right icon'></i>
+                  </a>
+                </p>
+              </div>
+              <div class='column home_intro_item'>
+                <p class='text_bold item_headline'>Regional Leadership Centers</p>
+                <p class='item_excerpt'>
+                  The four YALI Regional Leadership Centers &mdash; in Kenya, South Africa, Senegal and Ghana &mdash;
+                  train young leaders in leadership, entrepreneurship and professional development. They also provide 
+                  a great place to network.
+                </p>
+                <p class='text_bold item_link'>
+                  <a href='/regional-leadership-centers'>More about Regional Leadership Centers 
+                    <i class='angle right icon'></i>
+                  </a>
+                </p>
+              </div>
+              <div class='column home_intro_item'>
+                <p class='text_bold item_headline'>YALI Network</p>
+                <p class='item_excerpt'>
+                  Through the YALI Network, young Africans can connect with other leaders in their community, access
+                  free online courses in topics ranging from climate change to entrepreneurship to human rights, 
+                  and receive invitations to special events.
+                </p>
+                <p class='text_bold item_link'>
+                  <a href='/regional-leadership-centers'>More about the YALI Network 
+                    <i class='angle right icon'></i>
+                  </a>
+                </p>
+              </div>
+            </div>
+          </div>          
+        </section>
+        <section class='home_main'>
+          {{ page_data.content.rendered }}          
+        </section>
       </div>
     </div>
   </section>
