@@ -78,9 +78,11 @@
 			
 			<p class='full-width application_status'>The 2017 Mandela Washington Fellowship application is now closed.</p>
 			
+			{% if countdown %}
 			<div class='section application_countdown'>
 				{{ countdown }}
 			</div>
+			{% endif %}
 
 			<div class='section application_timeline'>
 				<h4>Application Process Timeline</h4>

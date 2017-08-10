@@ -142,3 +142,10 @@ function category_name_register_json() {
 function post_category_names($post, $request) {	
 	return $post_tag_names = get_the_category($post['id']);
 }
+
+
+/*
+* IIP Interactive Plugin Edits
+*
+*/
+require_once get_stylesheet_directory() . '/assets/edit-iip-interactive-plugin/edit-iip-interactive.php';
