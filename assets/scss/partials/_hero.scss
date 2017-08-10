@@ -1,11 +1,5 @@
 .hero {
 	position: relative;
-	
-
-	&--bg_img {
-		padding-top: 16.25%;	
-	}
-
 
 	&-inner {		
 		color: #fff;
@@ -23,7 +17,7 @@
 			}
 
 			&--thick {
-				padding-bottom: 150px;
+				padding-bottom: 120px;
 			}
 		}
 		
@@ -37,5 +31,3 @@
 		}
 	}
 }
-
-

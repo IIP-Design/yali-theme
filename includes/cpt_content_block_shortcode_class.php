@@ -23,6 +23,11 @@ class Content_Block_Shortcode {
   public function render_cta( $id ) {
     $meta = get_post_meta(  $id );
     $post = get_post( $id );
+
+    // $header_url = $feat_img_obj['source_url'];
+    // $img_id = get_post_thumbnail_id( $post->ID );
+    // $srcset = wp_get_attachment_image_srcset( $img_id, 'full' );
+    // $sizes = wp_get_attachment_image_sizes( $img_id, 'full' );
    
     $context = array(
       "title"             => $post->post_title,
@@ -34,7 +39,7 @@ class Content_Block_Shortcode {
       "image"             => get_the_post_thumbnail( $id )
     );
     
-    return Twig::render( 'content_blocks/cta.twig', $context );
+    return Twig::render( 'content_blocks/cta-static.twig', $context );
   }
 
   // SOCIAL CONTENT BLOCK
@@ -61,7 +66,7 @@ class Content_Block_Shortcode {
     $context = array(
       "selector"          => 'feed' . $id,
       "title"             => $post->post_title,
-      "title_underline"   => ( get_post_meta($id, 'yali_cb_title_underline', true) == 'on' ) ? 'content-block--h2_underline': '',
+      "title_underline"   => ( get_post_meta($id, 'yali_cb_title_underline', true) == 'on' ) ? 'cb_h2_underline': '',
       "title_alignment"   => get_post_meta( $id, 'yali_cb_title_alignment', true ),
       "block_bg_color"    => get_post_meta( $id, 'yali_cb_bg_color', true ),
       "excerpt"           => $post->post_excerpt,

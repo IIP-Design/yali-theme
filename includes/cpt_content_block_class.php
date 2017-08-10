@@ -345,7 +345,7 @@ class Content_Block {
 
     switch( $column ) {
       case 'display_shortcode':
-        echo '<input type="text" size="35" value="[content_block id=\'' . $post_id .  '\']" readonly/>';
+        echo '<input style="width:100%" type="text" size="35" value="[content_block id=\'' . $post_id .  '\' title=\'' . $post->post_title .  '\']" readonly/>';
         break;        
       default: 
         break;
