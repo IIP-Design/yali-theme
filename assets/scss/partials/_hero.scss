@@ -1,11 +1,17 @@
 .hero {
 	position: relative;
 
+
+	&--bg_img {
+		padding-top: 16.25%;
+	}
+
+
 	&-inner {		
 		color: #fff;
 		@media screen and (max-width: 933px) {
 			padding: 0;
-		}
+		}		
 
 		&.bottom_padd {
 			@media screen and (max-width: 1024px) {
