@@ -1,7 +1,7 @@
 .all_posts {
 	margin: 50px 0;
 	@media screen and (max-width: 767px) {
-		margin-bottom: 25px 0;
+		margin: 25px 0;
 	}	
 	
 
@@ -71,6 +71,16 @@
 
 			a {
 				color: $blue-navy;
+				
+				&:hover {
+					text-decoration: underline;
+					color: $blue-medium;
+				}
+
+				&:active {
+					color: $blue-navy;
+					background-color: $yellow;
+				}
 			}
 		}
 

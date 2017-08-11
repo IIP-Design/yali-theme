@@ -1,0 +1,11 @@
+.blog {
+	
+
+	.all_posts {
+		padding-top: 50px;
+		@media screen and (max-width: 933px) {
+			padding-top: 0;
+		}
+	}
+
+}

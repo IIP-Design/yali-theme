@@ -5,22 +5,12 @@
 			<p class='filter_type'>Type<i class='caret down icon'></i></p>
 			<div class='filter_menu'>
 				<span class='opaque_bg'></span>
-				<div class='filter_menu_item'>							
-					<input type='checkbox' name='article'>
-					<label>Article</label>
-				</div>
-				<div class='filter_menu_item'>							
-					<input type='checkbox' name='courses'>
-					<label>Courses</label>
-				</div>
-				<div class='filter_menu_item'>							
-					<input type='checkbox' name='podcast'>
-					<label>Podcast</label>
-				</div>
-				<div class='filter_menu_item'>							
-					<input type='checkbox' name='video'>
-					<label>Video</label>
-				</div>	
+				{% for type in post_types %}
+					<div class='filter_menu_item'>							
+						<input type='checkbox' name='article'>
+						<label>{{ type }}</label>
+					</div>
+				{% endfor %}				
 			</div><!-- .filter_menu -->
 		</div><!-- .filter -->
 		<div class='filter'>
