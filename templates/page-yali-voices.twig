@@ -1,0 +1,192 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+<section class="hero">
+    <img class="ui fluid image" src="{{ header_url }}" srcset="{{ srcset }}" sizes="{{ size }}" alt="{{ header_url }}">
+</section>
+<section class="ui container title-overlay higher">
+	<h2 class='title-overlay_title'>{{ page_data.title.rendered }}</h2>
+	<div class='inner-container campaign'>		      
+		<section class='page-content'>
+			{{ page_data.content.rendered }}          
+		</section>
+
+		{% include 'content_blocks/post-single.twig' with 
+			{
+				title: 'Read about (topic)',
+				img_src: 'data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==',
+				headline: 'Lorem Ipsum Dolor Sit Amet',
+				excerpt: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus nisi nisi, ullamcorper nec ornare eget, consectetur vitae dolor. Nam accumsan gravida turpis, at tempor nibh aliquam vitae.'
+			} 
+		%}
+
+		{% include 'content_blocks/post-single.twig' with 
+			{
+				title: 'Take the course(s)',
+				img_src: 'data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==',
+				headline: 'Lorem Ipsum Dolor Sit Amet',
+				excerpt: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus nisi nisi, ullamcorper nec ornare eget, consectetur vitae dolor. Nam accumsan gravida turpis, at tempor nibh aliquam vitae.'
+			} 
+		%}
+
+		<section class='section promote'>
+			<h3>Promote #YALIStands4All</h3>
+			<p>Share the #YALIStands4All announcement on Facebook or Twitter using the buttons below.</p>	
+			<div class='ui stackable grid promote_item'>
+				<div class='eight wide column'>
+					<a href='#' target='_blank' class='promote_item_share'>
+						<i class='facebook f icon'></i>
+						<span>Share on Facebook</span>
+					</a>
+					<img src='data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='>
+					<p>Share the #YALIStands4All sahre graphic on your social media pages! Click this preview image to 
+						download.</p>
+				</div>
+				<div class='eight wide column promote_item'>
+					<a href='#' target='_blank' class='promote_item_share'>
+						<i class='twitter icon'></i>
+						<span>Share on Twitter</span>
+					</a>
+					<img src='data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='>
+					<p>Update your Facebook profile with the #YALIStands4All profile banner! Click this preview to
+						download.</p>
+				</div>
+			</div>
+		</section>
+		
+		{% include 'content_blocks/post-single.twig' with 
+			{
+				title: 'Take the pledge',
+				img_src: 'data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==',
+				headline: 'Lorem Ipsum Dolor Sit Amet',
+				excerpt: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus nisi nisi, ullamcorper nec ornare eget, consectetur vitae dolor. Nam accumsan gravida turpis, at tempor nibh aliquam vitae.',
+				cta_link: '#',
+				cta_text: 'Take the pledge'
+			}
+		%}
+
+		<section class='section alumni'>
+			<h3>Hear from alumni</h3>
+			<p>Watch what (year) Mandela Washington Fellows have to say about (topic) for (campaign).</p>
+			<div class='ui stackable grid alumni_vids'>
+				<div class='eight wide column alumni_vid'>
+					<img src='data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='>
+				</div>
+				<div class='eight wide column alumni_vid'>
+					<img src='data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='>
+				</div>
+			</div>
+		</section>
+
+		<section class='section org_event'>
+			<h3>Organize an event</h3>
+			<p>Organize a #YALILearns event and facilitate understanding human rights to raise awareness and educate
+				your community about protecting human rights. Use our facilitation guide or presentation template to 
+				help.</p>
+			<div class='ui stackable grid org_event_items'>
+				<div class='eight wide column org_event_item'>
+					<a href="#" class='cta_link'>Facilitation Guide (PDF)</a>
+				</div>
+				<div class='eight wide column org_event_item'>
+					<a href="#" class='cta_link'>Presentation Template (PPTX)</a>
+				</div>
+			</div>												
+		</section>
+
+		<section class='section survey'>
+			<h3>Tell us about your #YALIStands4All event</h3>
+			<p>Take this short survey to let us know how your #YALIStands4All event turned out.</p>
+			<div class='ui stackable grid'>
+				<div class='eight wide column'>
+					<a href="#" class='cta_link'>Followup Event Report</a>
+				</div>
+			</div>			
+		</section>
+
+		{% include 'content_blocks/honeycomb.twig' with 
+			{ 				
+				headline: 'Stay Involved',
+				subheadline: 'Check out other YALI Network Campaigns',	
+				content: campaigns,
+				bg_color: 'lightblue'
+			} 
+		%}
+
+		{% include 'content_blocks/post-grid.twig' with 
+			{
+				headline: 'Suggested Content',
+				posts: [
+					{
+						link: 'http://yali.rebuild.local/wp/lorem-ipsum/',
+						title: 'Post 1 Lorem ipsum set abet ipsum', 
+						excerpt: 'Lorem ipsum set abet ipsum Lorem ipsum set abet ipsum', 
+						tags: [
+							{ 'term_id': '4', name: 'tag 1' },
+							{ 'term_id': '5', name: 'tag 2' },
+							{ 'term_id': '6', name: 'tag 3' },
+						],
+						featured_img_url: 'data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='
+					},
+					{
+						link: 'http://yali.rebuild.local/wp/lorem-ipsum/',
+						title: 'Post 2 Lorem ipsum set abet ipsum', 
+						excerpt: 'Lorem ipsum set abet ipsum Lorem ipsum set abet ipsum', 
+						tags: [
+							{ 'term_id': '4', name: 'tag 1' },
+							{ 'term_id': '5', name: 'tag 2' },
+							{ 'term_id': '6', name: 'tag 3' },
+						],
+						featured_img_url: 'data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='
+					},
+					{
+						link: 'http://yali.rebuild.local/wp/lorem-ipsum/',
+						title: 'Post 3 Lorem ipsum set abet ipsum', 
+						excerpt: 'Lorem ipsum set abet ipsum Lorem ipsum set abet ipsum', 
+						tags: [
+							{ 'term_id': '4', name: 'tag 1' },
+							{ 'term_id': '5', name: 'tag 2' },
+							{ 'term_id': '6', name: 'tag 3' },
+						],
+						featured_img_url: 'data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==',
+						featured_post: 'true'
+					},
+					{
+						link: 'http://yali.rebuild.local/wp/lorem-ipsum/',
+						title: 'Post 4 Lorem ipsum set abet ipsum', 
+						excerpt: 'Lorem ipsum set abet ipsum Lorem ipsum set abet ipsum', 
+						tags: [
+							{ 'term_id': '4', name: 'tag 1' },
+							{ 'term_id': '5', name: 'tag 2' },
+							{ 'term_id': '6', name: 'tag 3' },
+						],
+						featured_img_url: 'data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='
+					},
+					{
+						link: 'http://yali.rebuild.local/wp/lorem-ipsum/',
+						title: 'Post 5 Lorem ipsum set abet ipsum', 
+						excerpt: 'Lorem ipsum set abet ipsum Lorem ipsum set abet ipsum', 
+						tags: [
+							{ 'term_id': '4', name: 'tag 1' },
+							{ 'term_id': '5', name: 'tag 2' },
+							{ 'term_id': '6', name: 'tag 3' },
+						],
+						featured_img_url: 'data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='
+					},
+					{
+						link: 'http://yali.rebuild.local/wp/lorem-ipsum/',
+						title: 'Post 6 Lorem ipsum set abet ipsum', 
+						excerpt: 'Lorem ipsum set abet ipsum Lorem ipsum set abet ipsum', 
+						tags: [
+							{ 'term_id': '4', name: 'tag 1' },
+							{ 'term_id': '5', name: 'tag 2' },
+							{ 'term_id': '6', name: 'tag 3' },
+						],
+						featured_img_url: 'data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='
+					}
+				]
+			} 
+		%}
+
+	</div>
+</section>
+{% endblock %}
