@@ -22,11 +22,11 @@
 
     &_item {
       display: inline-block;
-      margin: 10px 15px;
+      margin: 0 15px;
       font-size: em(18);
       cursor: pointer;      
-      @media screen and (min-width: 934px) and (max-width: 1209px) {
-        margin: 10px 7.5px;       
+      @media screen and (min-width: 934px) and (max-width: 1209px) {        
+        margin: 0 7.5px;       
       }
       @media screen and (min-width: 1025px) and (max-width: 1200px) {
         font-size: em(16);

@@ -2,11 +2,27 @@
 
 {% block content %}
 
-  <div class="ui container">
-    <h2>{{ post_data.title.rendered }}</h2>
-    <div>
-      {{ post_data.content.rendered }}
-    </div>
-  </div>
+{% if parent_category is not empty %}
+<section 
+	class='hero {% if header_url is not empty %}hero--bg_img{% endif %}' 
+	{% if header_url is not empty %}style='background-image: url("{{ header_url }}"); background-size: cover;'{% endif %}>
+	<div class='hero-inner bottom_padd bottom_padd--thick'>
+		<div class='hero-content ui container'>
+			<h2 class='hero-h1'>{{ parent_category.name }}:</h2>
+			<h1>{{ post_data.post_category_names[0].cat_name }}</h1>
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut</p>
+		</div>
+	</div>
+</section>
+{% endif %}
 
+<section class='ui container title-overlay'>
+	<h2 class='title-overlay_title'>{{ post_data.title.rendered }}</h2> 
+	<div class='inner-container single_post'>
+		<section class='section'>
+			{{ post_data.content.rendered }}
+		</section>
+	</div>
+
+</section>  
 {% endblock %}
