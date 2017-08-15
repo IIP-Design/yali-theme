@@ -4,7 +4,35 @@
 	.section {
 		margin: 50px 0;
 		@media screen and (max-width: 767px) {
-			margin-bottom: 25px 0;
+			margin: 25px 0;
+		}
+	}
+
+
+	&_tax {
+		margin-top: 16px;
+		padding-top: 8px;
+		border-top: 1px solid #ccc;
+
+		.tax_term {
+			display: inline-block;
+			color: #cdcdcd;
+
+			a {
+				font-style: italic;
+				color: #cdcdcd;		
+
+				&:hover {
+					color: #000;
+				}	
+			}
+		}
+	}
+
+	.post_tags {		
+
+		&_tag {
+									
 		}
 	}
 

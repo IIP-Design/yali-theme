@@ -87,18 +87,3 @@ class Twig_YALI_Extension extends Twig_Extension implements Twig_Extension_Globa
 	public function tha_footer_bottom() { return tha_footer_bottom(); }
 }
 
-
-/*
-
-$twig_is_blog = new Twig_Function('is_blog', function() {
-	return is_page(602);
-});
-$twig->addFunction($twig_is_blog);
-
-
-$twig_header_img = new Twig_Function('header_img', function() {
-	return 'http://yali.rest.dev/wp-content/uploads/sites/4/2014/07/yali_network_banner.png';
-});
-$twig->addFunction($twig_header_img);
-
-*/

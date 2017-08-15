@@ -1,0 +1,21 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+
+<section class='ui container'>	
+	<div class='inner-container'>
+		<h2>{{ archive_query }} Posts</h2>	
+		<hr>
+		<section class='archive_posts'>
+			{% for post in blog_list.data %}
+			<article>
+				<h4><a href='{{ post.link }}'>{{ post.title.rendered }}</a></h4>
+				<p>{{ post.excerpt.rendered }}</p>
+			</article>
+			<hr>
+			{% endfor %}
+		</section>
+	</div>
+</section>
+
+{% endblock %}
