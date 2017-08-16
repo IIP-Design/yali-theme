@@ -132,10 +132,43 @@ function displaySearchFilters() {
 	});
 }
 
+function displayFilterSelection() {
+	var selections_div = document.querySelector('.filter_selections');
+	var filter_menu_items = document.querySelectorAll('.filter_menu_item input');
+
+	[].concat(_toConsumableArray(filter_menu_items)).forEach(function (item) {
+		item.addEventListener('change', function () {
+			if (this.checked === true) {
+				var fragment = document.createDocumentFragment();
+				var sel_filter = document.createElement('span');
+				var delete_icon = document.createElement('i');
+
+				sel_filter.setAttribute('class', 'ui label');
+				sel_filter.textContent = this.value;
+
+				delete_icon.setAttribute('class', 'delete icon');
+				sel_filter.appendChild(delete_icon);
+
+				fragment.appendChild(sel_filter);
+				selections_div.appendChild(fragment);
+			}
+		});
+	});
+
+	removeFilterSelections();
+}
+
+function removeFilterSelections() {
+	// document.addEventListener('click', function(e) {		
+	// 	if( e.className == 'delete icon' ) console.log(this);
+	// });
+}
+
 function init() {
 	displayMenu();
 	showMore();
 	displaySearchFilters();
+	displayFilterSelection();
 }
 
 },{}],4:[function(require,module,exports){

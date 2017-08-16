@@ -49,8 +49,44 @@ function displaySearchFilters() {
 	});
 }
 
+
+function displayFilterSelection() {
+	let selections_div = document.querySelector('.filter_selections');
+	let filter_menu_items = document.querySelectorAll('.filter_menu_item input');
+
+	[...filter_menu_items].forEach((item) => {
+		item.addEventListener('change', function() {
+			if( this.checked === true ) {
+				let fragment = document.createDocumentFragment();
+				let sel_filter = document.createElement('span');
+				let delete_icon = document.createElement('i');
+
+				sel_filter.setAttribute('class', 'ui label'); 
+				sel_filter.textContent = this.value;
+
+				delete_icon.setAttribute('class', 'delete icon');
+				sel_filter.appendChild(delete_icon);
+
+				fragment.appendChild(sel_filter);
+				selections_div.appendChild(fragment);
+			}
+		});
+	});
+
+	removeFilterSelections();
+}
+
+
+function removeFilterSelections() {
+	// document.addEventListener('click', function(e) {		
+	// 	if( e.className == 'delete icon' ) console.log(this);
+	// });
+}
+
+
 export function init() {
 	displayMenu();
 	showMore();
 	displaySearchFilters();
+	displayFilterSelection();
 }

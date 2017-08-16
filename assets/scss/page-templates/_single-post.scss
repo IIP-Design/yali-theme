@@ -16,11 +16,11 @@
 
 		.tax_term {
 			display: inline-block;
-			color: #cdcdcd;
+			color: #aaa;
 
 			a {
 				font-style: italic;
-				color: #cdcdcd;		
+				color: #aaa;		
 
 				&:hover {
 					color: #000;
@@ -29,12 +29,17 @@
 		}
 	}
 
-	.post_tags {		
+	.archive_link {
+		text-align: center;
 
-		&_tag {
-									
+		.cta_link {
+			display: inline-block;		
+			max-width: 100%;		
+			margin: 0 auto;
+			color: $blue-navy;
+			background-color: $yellow;
 		}
-	}
+	}	
 
 
 }

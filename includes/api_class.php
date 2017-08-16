@@ -64,6 +64,10 @@ class API {
 		if( $taxonomy == 'category' ) {
 			$request->set_param('categories', $filter);	
 		}
+
+		if( $taxonomy == 'series' ) {
+			$request->set_param('series', $filter);	
+		}
 		
 		$response = rest_do_request($request);
 		$responseArr = [];

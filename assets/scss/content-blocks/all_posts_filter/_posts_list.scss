@@ -32,6 +32,18 @@
 	}
 
 
+	.filter_selections {
+		margin: 15px 0;
+		@media screen and (min-width: 426px) {
+			text-align: center;
+		}		
+
+		.ui.label {
+			margin: 3px;
+		}
+	}
+
+
 	.posts_list {
 		margin: 0;
 

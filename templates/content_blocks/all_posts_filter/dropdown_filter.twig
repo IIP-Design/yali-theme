@@ -7,7 +7,7 @@
 				<span class='opaque_bg'></span>
 				{% for type in post_types %}
 					<div class='filter_menu_item'>							
-						<input type='checkbox' name='article'>
+						<input type='checkbox' name='{{ type | lower }}' value={{ type }}>
 						<label>{{ type }}</label>
 					</div>
 				{% endfor %}				
@@ -18,31 +18,31 @@
 			<div class='filter_menu'>
 				<span class='opaque_bg'></span>
 				<div class='filter_menu_item'>							
-					<input type='checkbox' name='article'>
+					<input type='checkbox' name='civil_society' value='Civil Society'>
 					<label>Civil Society</label>
 				</div>
 				<div class='filter_menu_item'>							
-					<input type='checkbox' name='courses'>
+					<input type='checkbox' name='business' value='Business'>
 					<label>Business</label>
 				</div>
 				<div class='filter_menu_item'>							
-					<input type='checkbox' name='podcast'>
+					<input type='checkbox' name='entrepreneurship' value='Entrepreneurship'>
 					<label>Entrepreneurship</label>
 				</div>
 				<div class='filter_menu_item'>							
-					<input type='checkbox' name='video'>
+					<input type='checkbox' name='environment' value='Environment'>
 					<label>Environment</label>
 				</div>	
 				<div class='filter_menu_item'>							
-					<input type='checkbox' name='video'>
+					<input type='checkbox' name='governance' value='Governance'>
 					<label>Governance</label>
 				</div>	
 				<div class='filter_menu_item'>							
-					<input type='checkbox' name='video'>
+					<input type='checkbox' name='health' value='Health'>
 					<label>Health</label>
 				</div>	
 				<div class='filter_menu_item'>							
-					<input type='checkbox' name='video'>
+					<input type='checkbox' name='leadership' value='Leadership'>
 					<label>Leadership</label>
 				</div>	
 			</div><!-- .filter_menu -->
@@ -52,19 +52,19 @@
 			<div class='filter_menu'>
 				<span class='opaque_bg'></span>
 				<div class='filter_menu_item'>							
-					<input type='checkbox' name='article'>
+					<input type='checkbox' name='series_1' value='Series 1'>
 					<label>Series 1</label>
 				</div>
 				<div class='filter_menu_item'>							
-					<input type='checkbox' name='courses'>
+					<input type='checkbox' name='series_2' value='Series 2'>
 					<label>Series 2</label>
 				</div>
 				<div class='filter_menu_item'>							
-					<input type='checkbox' name='podcast'>
+					<input type='checkbox' name='series_3' value='Series 3'>
 					<label>Series 3</label>
 				</div>
 				<div class='filter_menu_item'>							
-					<input type='checkbox' name='video'>
+					<input type='checkbox' name='series_4' value='Series 4'>
 					<label>Series 4</label>
 				</div>	
 			</div><!-- .filter_menu -->
@@ -74,11 +74,11 @@
 			<div class='filter_menu'>
 				<span class='opaque_bg'></span>
 				<div class='filter_menu_item'>							
-					<input type='checkbox' name='article'>
+					<input type='checkbox' name='english' value='English'>
 					<label>English</label>
 				</div>
 				<div class='filter_menu_item'>							
-					<input type='checkbox' name='courses'>
+					<input type='checkbox' name='francais' value='Francais'>
 					<label>Francais</label>
 				</div>						
 			</div><!-- .filter_menu -->
@@ -88,11 +88,11 @@
 			<div class='filter_menu'>
 				<span class='opaque_bg'></span>
 				<div class='filter_menu_item'>							
-					<input type='checkbox' name='article'>
+					<input type='checkbox' name='most_recent' value='Most Recent'>
 					<label>Most Recent</label>
 				</div>
 				<div class='filter_menu_item'>							
-					<input type='checkbox' name='courses'>
+					<input type='checkbox' name='a_z' value='A-Z'>
 					<label>A-Z</label>
 				</div>						
 			</div><!-- .filter_menu -->
