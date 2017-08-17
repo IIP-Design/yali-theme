@@ -143,7 +143,9 @@ function displayFilterSelection() {
 				var sel_filter = document.createElement('span');
 				var delete_icon = document.createElement('i');
 
-				sel_filter.setAttribute('class', 'ui label');
+				removeFilterSelection(delete_icon);
+
+				sel_filter.setAttribute('class', 'ui label ' + this.name);
 				sel_filter.textContent = this.value;
 
 				delete_icon.setAttribute('class', 'delete icon');
@@ -151,17 +153,19 @@ function displayFilterSelection() {
 
 				fragment.appendChild(sel_filter);
 				selections_div.appendChild(fragment);
+			} else if (this.checked === false) {
+				document.querySelector('.' + this.name).remove();
 			}
 		});
 	});
-
-	removeFilterSelections();
 }
 
-function removeFilterSelections() {
-	// document.addEventListener('click', function(e) {		
-	// 	if( e.className == 'delete icon' ) console.log(this);
-	// });
+function removeFilterSelection(delete_icon) {
+	delete_icon.addEventListener('click', function (e) {
+		var chkbx = document.querySelector('input[value="' + this.parentElement.textContent + '"]');
+		this.parentElement.remove();
+		chkbx.checked = false;
+	});
 }
 
 function init() {
