@@ -29,6 +29,7 @@ $campaigns = ( $check_host == 'yali.dev.america.gov' ) ? Yali\API::get_child_pag
 
 // Data array for twig
 $context = array(
+  "check_host"    => $check_host,
   "page_data"     => $page_data,
   "header_url"    => $header_url,  
   "feat_img"      => $feat_img_obj,

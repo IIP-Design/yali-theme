@@ -56,6 +56,8 @@ function displayFilterSelection() {
 
 	[...filter_menu_items].forEach((item) => {
 		item.addEventListener('change', function() {
+			let sel_name = ( this.name === 'video' ) ? 'video_type' : this.name;
+			
 			if( this.checked === true ) {
 				let fragment = document.createDocumentFragment();
 				let sel_filter = document.createElement('span');
@@ -63,7 +65,7 @@ function displayFilterSelection() {
 
 				removeFilterSelection(delete_icon);
 
-				sel_filter.setAttribute('class', 'ui label ' + this.name); 
+				sel_filter.setAttribute('class', 'ui label ' + sel_name); 
 				sel_filter.textContent = this.value;
 
 				delete_icon.setAttribute('class', 'delete icon');
@@ -73,7 +75,7 @@ function displayFilterSelection() {
 				selections_div.appendChild(fragment);
 			} 
 			else if( this.checked === false ) {
-				document.querySelector('.' + this.name).remove();				
+				document.querySelector('.' + sel_name).remove();				
 			}
 		});
 	});	
