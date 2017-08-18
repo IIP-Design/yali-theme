@@ -1,5 +1,7 @@
 	{{ tha_footer_top() }}
 
-	{% include "menu-footer.twig" with {'menu': site.get_menu(3)} %}
+	{% set footer_menu_id = (check_host == 'yali.rebuild.local') ? 3 : 166 %}
+
+	{% include "menu-footer.twig" with {'menu': site.get_menu(footer_menu_id)} %}
 
 	{{ tha_footer_bottom() }}
