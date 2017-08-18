@@ -311,7 +311,7 @@ class Content_Block {
 	    'desc'             => '',
 	    'id'               => 'h_alignment',
 	    'type'             => 'select',
-	    'default'          => 'left',
+	    'default'          => 'center',
       'options'          => array(
         'left'           => __( 'Left', 'yali' ),
         'center'         => __( 'Center', 'yali' ),

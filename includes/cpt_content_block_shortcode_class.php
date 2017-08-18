@@ -98,7 +98,7 @@ class Content_Block_Shortcode {
       $context['cdp_border_color'] = $w['cdp_border_color'];
       $context['cdp_border_style'] = $w['cdp_border_style'];
 
-      $path = "https://s3.amazonaws.com/iip-design-stage-modules/modules/cdp-module-{$cdp_widget}/";
+      $path = "https://s3.amazonaws.com/iip-design-stage-modules/modules/cdp-module-{$cdp_widget}/cdp-module-";
       $context['widget_css'] = $path . $cdp_widget . '.min.css';
       $context['widget_js'] = $path . $cdp_widget . '.min.js';
     }
