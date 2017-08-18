@@ -439,7 +439,7 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
   // YALILearns Page
   $('.ui.accordion').accordion();
 
-  // initialize responsive background images
+  // Initialize responsive background images
   var elements = document.querySelectorAll('[data-responsive-background-image]');
   for (var i = 0; i < elements.length; i++) {
     new _ResponsiveBackgroundImage2.default(elements[i]);

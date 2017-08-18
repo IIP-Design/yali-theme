@@ -18,7 +18,7 @@ import './application_status';
   // YALILearns Page
   $('.ui.accordion').accordion();
 
-  // initialize responsive background images
+  // Initialize responsive background images
   let elements = document.querySelectorAll('[data-responsive-background-image]');   
   for ( let i = 0; i < elements.length; i++ ) {  
     new ResponsiveBackgroundImage( elements[i] );
