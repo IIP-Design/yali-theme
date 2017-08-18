@@ -47,7 +47,8 @@
 					background-color: transparent;
 				}
 
-				&:hover {
+				&:hover,
+				&.active {
 
 					&:after {
 						background-color: $yellow;

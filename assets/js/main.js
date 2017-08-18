@@ -6,6 +6,7 @@ import * as search from './search.js';
 import ResponsiveBackgroundImage from './ResponsiveBackgroundImage.js';
 import * as dropdown_filter from './dropdown_filter';
 import './application_status';
+import './simple_filter.js';
 
 (function($) {
  

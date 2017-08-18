@@ -2,11 +2,8 @@
 
 {% block content %}
 
-{% if header_url is not empty %}
-	{% set title_overlay_class = 'title-overlay' %}
-{% else %}
-	{% set title_overlay_class = '' %}
-{% endif %}
+{% set title_overlay_class = (header_url is not empty) ? 'title-overlay' : '' %}
+{% set series_name = (post_data.post_series_names is not empty) ? post_data.post_series_names[0].name : '' %}
 
 {% if header_url is not empty %}
 <section 
@@ -23,7 +20,7 @@
 </section>
 {% endif %}
 
-<section class='ui container {{ title_overlay_class }}'>
+<section class='ui container {{ title_overlay_class }}'>	
 	<h2 class='title-overlay_title'>{{ post_data.title.rendered }}</h2> 
 	<div class='inner-container single_post'>
 		<section class='section single_post_content'>
@@ -50,14 +47,19 @@
 				</div>
 				{% endif %}				
 			</div>
-
-			{% if post_data.post_series_names is not empty %}
+			
 			<h4 class='archive_link'>
-				<a class='cta_link' href='/wp/{{ post_data.post_series_names[0].taxonomy }}/{{ post_data.post_series_names[0].slug }}'>
-					More from "{{ post_data.post_series_names[0].name }}" <i class='angle right icon'></i>
+				<a 
+					class='cta_link' 
+					{% if series_name is not empty %}
+					href='/wp/{{ post_data.post_series_names[0].taxonomy }}/{{ post_data.post_series_names[0].slug }}'
+					{% else %}
+					href='/wp/blog'
+					{% endif %}
+					>
+					More from "{{ (series_name is not empty ? series_name : 'YALI Network in Action') }}" <i class='angle right icon'></i>
 				</a>
-			</h4>
-			{% endif %}
+			</h4>			
 		</section>		
 
 		{% include 'content_blocks/post_listings_simple_filter.twig' with 
