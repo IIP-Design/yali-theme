@@ -25,7 +25,7 @@ $sizes = wp_get_attachment_image_sizes($img_id, "full");
 **/
 $check_host = $_SERVER['SERVER_NAME'];
 $social_block = ( $check_host == 'yali.dev.america.gov' ) ? do_shortcode("[content_block id='13313']") : do_shortcode("[content_block id='86']");
-$campaigns = ( $check_host == 'yali.dev.america.gov' ) ? Yali\API::get_child_pages(13) : Yali\API::get_child_pages(8);
+$campaigns = ( $check_host == 'yali.dev.america.gov' ) ? Yali\API::get_child_pages(13240) : Yali\API::get_child_pages(8);
 
 // Data array for twig
 $context = array(
