@@ -22,8 +22,11 @@ $img_id = get_post_thumbnail_id( $post->ID );
 $srcset = wp_get_attachment_image_srcset($img_id, 'full');
 $size = wp_get_attachment_image_sizes($img_id, 'full');
 
+$check_host = $_SERVER['SERVER_NAME'];
+
 // Data array for twig
 $context = array(
+  "check_host"  => $check_host,
   "page_data"   => $page_data,
   "header_url"  => $header_url,  
   "feat_img"    => $feat_img_obj,
