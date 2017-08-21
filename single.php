@@ -17,11 +17,15 @@ $category = $post_data['post_category_names'][0];
 $parent_cat_id = !empty($category) ? $category->parent : '';
 $parent_category_obj = !empty($parent_cat_id) ? Yali\API::get_category_info($parent_cat_id) : '';
 
+// TEMP
+$check_host = $_SERVER['SERVER_NAME'];
+
 
 $context = array(
-  'post_data' => $post_data,
-  'header_url' => $header_url,
-  'category' => $category,
+  'check_host'      => $check_host,
+  'post_data'       => $post_data,
+  'header_url'      => $header_url,
+  'category'        => $category,
   'parent_category' => $parent_category_obj
 );
 

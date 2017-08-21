@@ -1,4 +1,13 @@
-<section class='all_posts'>
+<section 
+	class='all_posts'
+	{% if taxonomy %}
+	data-archive-tax={{ taxonomy }} 
+	{% endif %}
+	
+	{% if filter_slug %}
+	data-archive-filter={{ filter_slug }}
+	{% endif %}
+>
 	<h2 class='all_posts_title'>{{ title }}</h2>
 
 	{% include '/content_blocks/all_posts_filter/dropdown_filter.twig' %}

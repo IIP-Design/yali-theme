@@ -1,4 +1,3 @@
-
 function displayMenu() {
 	let filter_type = document.querySelectorAll('.filter_type');
 
@@ -59,26 +58,31 @@ function displayFilterSelection() {
 			let sel_name = ( this.name === 'video' ) ? 'video_type' : this.name;
 			
 			if( this.checked === true ) {
-				let fragment = document.createDocumentFragment();
-				let sel_filter = document.createElement('span');
-				let delete_icon = document.createElement('i');
-
-				removeFilterSelection(delete_icon);
-
-				sel_filter.setAttribute('class', 'ui label ' + sel_name); 
-				sel_filter.textContent = this.value;
-
-				delete_icon.setAttribute('class', 'delete icon');
-				sel_filter.appendChild(delete_icon);
-
-				fragment.appendChild(sel_filter);
-				selections_div.appendChild(fragment);
+				addFilterSelection(this, sel_name, selections_div);
 			} 
 			else if( this.checked === false ) {
 				document.querySelector('.' + sel_name).remove();				
 			}
 		});
 	});	
+}
+
+
+function addFilterSelection(item, sel_name, selections_div) {
+	let fragment = document.createDocumentFragment();
+	let sel_filter = document.createElement('span');
+	let delete_icon = document.createElement('i');
+
+	removeFilterSelection(delete_icon);
+
+	sel_filter.setAttribute('class', 'ui label ' + sel_name); 
+	sel_filter.textContent = item.value;
+
+	delete_icon.setAttribute('class', 'delete icon');
+	sel_filter.appendChild(delete_icon);
+
+	fragment.appendChild(sel_filter);
+	selections_div.appendChild(fragment);
 }
 
 
@@ -91,9 +95,28 @@ function removeFilterSelection(delete_icon) {
 }
 
 
+// Archive pages - display taxonomy filter
+function archivePagesDisplayFilter() {
+	let archive_info = document.querySelector('[data-archive-tax]');
+	if( archive_info === null ) return;
+	
+	let archive_filter = archive_info.dataset.archiveFilter;	
+	let filter_item = document.querySelector(`[data-tax-item=${archive_filter}]`);
+	filter_item.checked = true;	
+
+	let sel_name = ( filter_item.name === 'video' ) ? 'video_type' : filter_item.name;
+	let selections_div = document.querySelector('.filter_selections');
+
+	addFilterSelection(filter_item, sel_name, selections_div);
+}
+
+
+
+
 export function init() {
 	displayMenu();
 	showMore();
 	displaySearchFilters();
 	displayFilterSelection();
+	archivePagesDisplayFilter();
 }
