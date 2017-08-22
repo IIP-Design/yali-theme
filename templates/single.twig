@@ -26,26 +26,18 @@
 		<section class='section single_post_content'>
 			<div>{{ post_data.content.rendered }}</div>
 			
-			<div class='single_post_tax'>
-				{% if post_data.post_category_names is not empty %}
-				<div class='post_cats'>
-					{% for cat in post_data.post_category_names if cat.name != 'Uncategorized' %}
-					<p class='post_cats_cat tax_term'>
-						<a href='/wp/category/{{ cat.slug }}'>{{ cat.name }}</a>
+			<div class='single_post_tax'>				
+				{% for term in taxonomy_terms %}
+					{% if term.taxonomy == 'post_tag' %}
+					<p class='tax_term'>
+						<a href='/wp/tag/{{ term.slug }}'>{{ term.name }}</a>{% if not loop.last %},{% endif %}
 					</p>
-					{% endfor %}
-				</div>
-				{% endif %}
-				
-				{% if post_data.post_tag_names is not empty %}
-				<div class='post_tags'>
-					{% for tag in post_data.post_tag_names %}
-					<p class='post_tags_tag tax_term'>
-						<a href='/wp/tag/{{ tag.slug }}'>{{ tag.name }}</a>{% if not loop.last %},{% endif %}
-					</p>
-					{% endfor %}
-				</div>
-				{% endif %}				
+					{% elseif term.name != 'Uncategorized' %}
+					<p class='tax_term'>
+						<a href='/wp/{{ term.taxonomy }}/{{ term.slug }}'>{{ term.name }}</a>{% if not loop.last %},{% endif %}
+					</p>					
+					{% endif %}
+				{% endfor %}			
 			</div>
 			
 			<h4 class='archive_link'>
@@ -60,7 +52,11 @@
 					More from "{{ (series_name is not empty ? series_name : 'YALI Network in Action') }}" <i class='angle right icon'></i>
 				</a>
 			</h4>			
-		</section>		
+		</section>
+
+		{% if post_data.post_content_type_names[0].name == 'Podcast' %}		
+		{{ social_block }}
+		{% endif %}
 
 		{% include 'content_blocks/post_listings_simple_filter.twig' with 
 			{

@@ -167,7 +167,30 @@ function post_series_names($post, $request) {
 
 
 /*
+* Add Content Type Custom Taxonomy Data to JSON Response
+*
+*/
+add_action('rest_api_init', 'content_type_name_register_json');
+function content_type_name_register_json() {
+	register_rest_field(array('post'), 'post_content_type_names', array(
+		'get_callback' => 'post_content_type_names'
+	));
+}
+
+function post_content_type_names($post, $request) {	
+	return $post_content_type_names = get_the_terms($post['id'], 'content_type');
+}
+
+
+/*
 * IIP Interactive Plugin Edits
 *
 */
 require_once get_stylesheet_directory() . '/assets/edit-iip-interactive-plugin/edit-iip-interactive.php';
+
+
+// Add SoundCloud oEmbed
+function add_oembed_soundcloud(){
+wp_oembed_add_provider( 'http://soundcloud.com/*', 'http://soundcloud.com/oembed' );
+}
+add_action('init','add_oembed_soundcloud');

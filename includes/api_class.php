@@ -5,18 +5,18 @@ namespace Yali;
 use WP_REST_Request;
 
 class API {
-  public static function do_request( $request ) {
+    public static function do_request( $request ) {
 		$response = rest_do_request( $request );
 		return $response->data;	
 	}
 
-  public static function debug( $obj ) {
+    public static function debug( $obj ) {
 	 	echo '<pre>'; 
 		var_dump( $obj );
 		echo '</pre>'; 
 	}
 
-  public static function get_page($id) {			
+    public static function get_page($id) {			
 		$request = new WP_REST_Request('GET', '/wp/v2/pages/' . $id);
 		$response = rest_do_request($request);
 		return $response->data;

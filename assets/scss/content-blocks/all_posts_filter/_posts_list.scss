@@ -1,5 +1,6 @@
 .all_posts {
 	margin: 50px 0;
+	color: $blue-navy;
 	@media screen and (max-width: 767px) {
 		margin: 25px 0;
 	}	
@@ -7,6 +8,7 @@
 
 	&_title {
 		text-align: center;
+
 
 		&:after {
 			content: '';

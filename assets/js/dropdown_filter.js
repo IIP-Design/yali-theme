@@ -102,6 +102,8 @@ function archivePagesDisplayFilter() {
 	
 	let archive_filter = archive_info.dataset.archiveFilter;	
 	let filter_item = document.querySelector(`[data-tax-item=${archive_filter}]`);
+
+	if( filter_item === null ) return;
 	filter_item.checked = true;	
 
 	let sel_name = ( filter_item.name === 'video' ) ? 'video_type' : filter_item.name;

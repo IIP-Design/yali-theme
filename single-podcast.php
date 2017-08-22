@@ -13,20 +13,20 @@ $header_url = $feat_img_obj !== null ? $feat_img_obj['source_url'] : null;
 wp_reset_postdata();
 
 
-$taxonomy_terms = wp_get_post_terms($post->ID, array('category', 'post_tag', 'series'));
-
+$category = $post_data['post_category_names'][0];
+$parent_cat_id = !empty($category) ? $category->parent : '';
+$parent_category_obj = !empty($parent_cat_id) ? Yali\API::get_category_info($parent_cat_id) : '';
 
 // TEMP
 $check_host = $_SERVER['SERVER_NAME'];
-$social_block = ( $check_host == 'yali.dev.america.gov' ) ? do_shortcode("[content_block id='13313']") : do_shortcode("[content_block id='86']");
 
 
 $context = array(
   'check_host'      => $check_host,
   'post_data'       => $post_data,
   'header_url'      => $header_url,
-  'social_block'    => $social_block,
-  'taxonomy_terms'  => $taxonomy_terms
+  'category'        => $category,
+  'parent_category' => $parent_category_obj
 );
 
 // Render template passing in data array

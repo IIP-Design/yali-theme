@@ -181,6 +181,8 @@ function archivePagesDisplayFilter() {
 
 	var archive_filter = archive_info.dataset.archiveFilter;
 	var filter_item = document.querySelector('[data-tax-item=' + archive_filter + ']');
+
+	if (filter_item === null) return;
 	filter_item.checked = true;
 
 	var sel_name = filter_item.name === 'video' ? 'video_type' : filter_item.name;
