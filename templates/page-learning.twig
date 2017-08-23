@@ -17,6 +17,7 @@
 		{% include '/content_blocks/all_posts_filter/all_posts_filter.twig' with			
 			{				
 				title: 'Learning with YALI',
+				filters: ['content_type', 'subject', 'series', 'language', 'sort'],
 				content_types: ['Article', 'Course', 'Podcast', 'Video'],		
 				posts: [
 					{
