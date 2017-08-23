@@ -1,0 +1,17 @@
+.courses {
+	
+	
+	&_intro {
+		margin-bottom: 50px;
+		@media screen and (max-width: 767px) {
+			margin-bottom: 25px;
+		}
+
+		a {			
+			font-weight: bold;
+			color: $blue-navy;
+		}
+
+	}
+
+}

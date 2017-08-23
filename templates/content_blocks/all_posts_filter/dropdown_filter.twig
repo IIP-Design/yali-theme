@@ -5,7 +5,7 @@
 			<p class='filter_type'>Type<i class='caret down icon'></i></p>
 			<div class='filter_menu'>
 				<span class='opaque_bg'></span>
-				{% for type in post_types %}
+				{% for type in content_types %}
 					<div class='filter_menu_item'>							
 						<input type='checkbox' name='{{ type | lower }}' value={{ type }}>
 						<label>{{ type }}</label>
