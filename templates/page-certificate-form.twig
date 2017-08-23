@@ -1,0 +1,87 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+
+<section class='ui container'>
+	<div class='inner-container certificate_form'>
+		<header class='form_header'>
+			<h2>Congratulations, you passed!</h2>
+			<h4>Complete the form below to get your certificate.</h4>
+		</header>	
+		<form class='ui form'>
+			<div class='required field'>
+				<label>Course</label>
+				<input type='text' placeholder='Management Strategies for People and Resources'>
+			</div>
+			<div class='required field'>
+				<label>First (Given) Name</label>
+				<input type='text'>
+			</div>
+			<div class='required field'>
+				<label>Last (Family) Name</label>
+				<input type='text'>
+			</div>
+			<div class='required field'>
+				<label>Full name as it should appear on certificate</label>
+				<input type='text'>
+			</div>
+			<div class='required field'>
+				<label>Email Address</label>
+				<input type='text'>
+			</div>
+			<div class='required field'>
+				<label>Confirm Email Address</label>
+				<input type='text'>
+			</div>
+			<div class='required field'>
+				<label>Date of Birth</label>
+				<input type='text' placeholder='YYYY/MM/DD'>
+			</div>
+			<div class='required field'>
+				<label>Gender</label>
+				<select>
+					<option selected='selected' disabled='disable'>Select Gender</option>
+					<option>Male</option>
+					<option>Female</option>
+				</select>
+			</div>
+			<div class='field'>
+				<label>City</label>
+				<input type='text'>
+			</div>			
+			<div class='required field'>
+				<label>Country</label>
+				<select>
+					<option>Country 1</option>					
+					<option>Country 2</option>	
+				</select>	
+			</div>
+			<div class='grouped fields'>
+				<div class='required field'>
+					<label>Click "Yes" to receive updates from the YALI Network</label>
+				</div>
+				<div class='field'>
+					<div class='ui radio checkbox'>
+						<input type='radio' name='yes' tabindex='0' class='hidden'>
+						<label>Yes</label>
+					</div>
+				</div>
+				<div class='field'>
+					<div class='ui radio checkbox'>
+						<input type='radio' name='no' tabindex='0' class='hidden'>
+						<label>No</label>
+					</div>
+				</div>
+				<div class='field'>
+					<div class='ui radio checkbox'>
+						<input type='radio' name='member' tabindex='0' class='hidden'>
+						<label>I am already a YALI Network member</label>
+					</div>
+				</div>
+			</div>
+			<p class='cta_link'>Submit</p>
+		</form>	
+	</div>
+</section>
+
+{% endblock %}

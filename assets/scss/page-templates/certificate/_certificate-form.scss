@@ -1,0 +1,53 @@
+.certificate_form {
+	
+
+	.form_header {
+		padding: 50px 0;
+		text-align: center;
+		@media screen and (max-width: 767px) {
+			padding: 25px 0;
+		}
+
+		h4 {
+			@media screen and (max-width: 767px) {
+				margin-top: 0;
+			}
+		}
+	}
+
+
+	.ui.form {
+		margin: 0 auto 50px auto;
+		@media screen and (min-width: 600px) {
+			max-width: 60%;
+		}
+		@media screen and (max-width: 767px) {
+
+		}
+
+		.field {			
+
+			> label,
+			input {
+				font-size: 20px; 
+				font-weight: 700;
+				color: $blue-navy;
+				@media screen and (max-width: 933px) {
+					font-size: 18px;
+				}				
+			}
+
+			select {
+				-webkit-appearance: none;
+				padding: 13.5714px 20px;
+			}				
+		}
+
+		.cta_link {
+			display: inline-block;
+			padding: 12px 24px;
+			color: $blue-navy;
+			background-color: $yellow;
+		}
+	}
+}
