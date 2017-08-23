@@ -7,6 +7,7 @@
 	{% include '/content_blocks/all_posts_filter/all_posts_filter.twig' with			
 		{				
 			title: 'YALI Network In Action',
+			filters: ['content_type', 'subject', 'series', 'language', 'sort'],
 			content_types: ['Article', 'Podcast', 'Video'],
 			posts: [
 				{
