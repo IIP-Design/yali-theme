@@ -1,0 +1,39 @@
+.certificate_confirmation {
+	
+
+	.section {
+		margin-bottom: 50px;
+		@media screen and (max-width: 767px) {
+			margin-bottom: 25px;
+		}
+	}
+	
+	
+	.conf {
+
+		&_title {
+			margin: 0;
+			padding: 50px 0;
+			text-align: center;
+			@media screen and (max-width: 767px) {
+				padding: 25px 0;
+			}
+		}
+
+		&_content {
+
+			&_wrapper {
+				margin-bottom: 50px;
+				@media screen and (max-width: 767px) {
+					margin-bottom: 25px;
+				}
+			}
+
+			&_headline {
+				text-align: center;
+			}			
+		}
+	}
+
+
+}

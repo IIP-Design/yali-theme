@@ -187,10 +187,3 @@ function post_content_type_names($post, $request) {
 *
 */
 require_once get_stylesheet_directory() . '/assets/edit-iip-interactive-plugin/edit-iip-interactive.php';
-
-
-// Add SoundCloud oEmbed
-function add_oembed_soundcloud(){
-wp_oembed_add_provider( 'http://soundcloud.com/*', 'http://soundcloud.com/oembed' );
-}
-add_action('init','add_oembed_soundcloud');

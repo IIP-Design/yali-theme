@@ -1,5 +1,44 @@
 .cb-post_grid {	
 	
+	// If layout is not full width, remove padding from containers
+	> .ui.container {
+		padding: 0;
+
+		.inner-container {
+			padding: 0;
+		}
+	}
+
+	
+	&.full-width {
+
+		// Add padding if full width
+		> .ui.container {
+			padding: 0 26px;
+			@media screen and (max-width: 933px) {
+				padding: 0 16px;
+			}
+
+			.inner-container {
+				padding: 0 50px;
+				@media screen and (max-width: 933px) {
+					padding: 0;
+				}
+			}
+		}
+
+		.suggest_content_item {
+			background-color: #fff;
+		}
+	}		
+
+	&.section {
+		padding: 50px 0;
+		@media screen and (max-width: 767px) {
+			padding: 25px 0;
+		}
+	}
+	
 	// Layout
 	.grid {
 
