@@ -26,7 +26,7 @@ if ( ! function_exists( 'content_type_taxonomy' ) ) {
 			'items_list_navigation'      => __( 'Content Type Items list navigation', 'text_domain' ),
 		);		
 		$rewrite = array(
-			'slug'       				 => 'type',
+			'slug'       				 => 'content-type',
 			'with_front' 				 => true,
 			'hierarchical'   			 => true,
 		);

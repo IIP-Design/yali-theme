@@ -9,7 +9,7 @@
 				<span class='opaque_bg'></span>
 				{% for type in content_types %}
 					<div class='filter_menu_item'>							
-						<input type='checkbox' name='{{ type | lower }}' value={{ type }}>
+						<input type='checkbox' name='{{ type | lower }}' value={{ type }} data-tax-item={{ type | lower }}>
 						<label>{{ type }}</label>
 					</div>
 				{% endfor %}				
