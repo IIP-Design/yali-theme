@@ -68,6 +68,31 @@ class API {
 		if( $taxonomy == 'series' ) {
 			$request->set_param('series', $filter);	
 		}
+
+		if( $taxonomy == 'content_type' ) {
+			$request->set_param('content_type', $filter);	
+		}		
+
+		// switch ($taxonomy) {
+		// 	case 'post_tag':
+		// 		$request->set_param('tags', $filter);
+		// 		break;
+
+		// 	case 'category':
+		// 		$request->set_param('categories', $filter);
+		// 		break;
+
+		// 	case 'series':
+		// 		$request->set_param('series', $filter);
+		// 		break;
+
+		// 	case 'content_type':
+		// 		$request->set_param('content_type', $filter);
+		// 		break;
+			
+		// 	default:				
+		// 		break;
+		// }
 		
 		$response = rest_do_request($request);
 		$responseArr = [];

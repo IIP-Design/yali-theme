@@ -31,8 +31,8 @@
 					{% if term.taxonomy == 'post_tag' %}
 					<p class='tax_term'>
 						<a href='/wp/tag/{{ term.slug }}'>{{ term.name }}</a>{% if not loop.last %},{% endif %}
-					</p>
-					{% elseif term.name != 'Uncategorized' %}
+					</p>					
+					{% else %}
 					<p class='tax_term'>
 						<a href='/wp/{{ term.taxonomy }}/{{ term.slug }}'>{{ term.name }}</a>{% if not loop.last %},{% endif %}
 					</p>					

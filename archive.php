@@ -4,9 +4,14 @@ use Yali\Twig as Twig;
 
 global $post;
 
+var_dump($post);
+
 $queried_object = get_queried_object();
 $filter = $queried_object->term_id;
 $taxonomy = $queried_object->taxonomy;
+
+var_dump($taxonomy);
+var_dump($filter);
 
 // TEMP
 $check_host = $_SERVER['SERVER_NAME'];

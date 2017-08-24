@@ -25,6 +25,11 @@ if ( ! function_exists( 'content_type_taxonomy' ) ) {
 			'items_list'                 => __( 'Content Type Items list', 'text_domain' ),
 			'items_list_navigation'      => __( 'Content Type Items list navigation', 'text_domain' ),
 		);		
+		$rewrite = array(
+			'slug'       				 => 'type',
+			'with_front' 				 => true,
+			'hierarchical'   			 => true,
+		);
 		$args = array(
 			'labels'                     => $labels,
 			'hierarchical'               => true,
@@ -33,7 +38,7 @@ if ( ! function_exists( 'content_type_taxonomy' ) ) {
 			'show_admin_column'          => true,
 			'show_in_nav_menus'          => true,
 			'show_tagcloud'              => true,			
-			'rewrite'    				 => false,
+			'rewrite'    				 => $rewrite,
 			'show_in_rest'               => true,			
 		);
 		register_taxonomy( 'content_type', array( 'post' ), $args );
