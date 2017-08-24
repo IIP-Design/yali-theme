@@ -5,23 +5,28 @@ var search_input_div = document.querySelector('.footer_list_item--search .search
 	footer_list_items = document.querySelectorAll('.footer_list .ui.item');
 
 function footer_search_display() {
-	search_open.addEventListener('click', function() {
-		search_input_div.classList.remove('hide');		
-		
-		setTimeout(function(){			
-			search_input_div.style.opacity = 1;
-			search_input.classList.remove('inactive');
-			search_input.classList.add('active');
-			search_open.classList.add('active');			
+	try {
+		search_open.addEventListener('click', function() {
+			search_input_div.classList.remove('hide');		
 			
-			footer_phablet_display();			
+			setTimeout(function(){			
+				search_input_div.style.opacity = 1;
+				search_input.classList.remove('inactive');
+				search_input.classList.add('active');
+				search_open.classList.add('active');			
+				
+				footer_phablet_display();			
 
-		}, 0);
-		
-	});
+			}, 0);
+			
+		});
+	} catch (e) {
+		console.log('DOM element search_open is not defined');
+	}
 }
 
 function footer_search_close() {	
+	try {
 	search_close.addEventListener('click', function() {
 		search_input.classList.remove('active');
 		search_input.classList.add('inactive');
@@ -32,6 +37,9 @@ function footer_search_close() {
 			search_open.classList.remove('active');
 		}, 250);
 	});
+	} catch (e) {
+		console.log('DOM element search_close is not defined');
+	}
 }
 
 function footer_phablet_display() {
