@@ -27,7 +27,7 @@
 			<div>{{ post_data.content.rendered }}</div>
 			
 			<div class='single_post_tax'>				
-				{% for term in taxonomy_terms %}
+				{% for term in taxonomy_terms %}										
 					{% if term.taxonomy == 'post_tag' %}
 					<p class='tax_term'>
 						<a href='/wp/tag/{{ term.slug }}'>{{ term.name }}</a>{% if not loop.last %},{% endif %}

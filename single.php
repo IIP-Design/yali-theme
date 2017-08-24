@@ -12,9 +12,13 @@ $header_url = $feat_img_obj !== null ? $feat_img_obj['source_url'] : null;
 // Reset post data back to single post query - above get_featImg_obj API request modifies $post global var
 wp_reset_postdata();
 
-
+// Get all post taxonomy & remove default 'Uncategorised' category
 $taxonomy_terms = wp_get_post_terms($post->ID, array('category', 'post_tag', 'series'));
-
+foreach($taxonomy_terms as $indx => $obj) {
+	if( $obj->name == 'Uncategorized' ){
+		unset($taxonomy_terms[$indx]);
+	}
+}
 
 // TEMP
 $check_host = $_SERVER['SERVER_NAME'];
