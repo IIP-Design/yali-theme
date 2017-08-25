@@ -1,0 +1,114 @@
+.yalivotes {
+
+		
+	.promote {		
+		
+		&_item {
+
+			&.ui.stackable.grid {
+
+				.eight.wide.column {
+					@media screen and (max-width: 767px) {
+						padding: 16px 0 !important;
+
+						img {
+							margin-bottom: 8px;
+						}
+					}
+				}				
+			}
+
+			&_share {
+				position: relative;
+				display: block;
+				padding: 25px;
+				margin-bottom: 25px;
+				font-size: em(28);				
+				font-weight: 900;
+				text-align: center;
+				color: #fff;
+				background-color: $blue-medium;
+				@media screen and (max-width: 767px) {
+					margin-bottom: 16px;
+				}
+
+				i {
+					float: left;
+					font-size: 2em;
+
+					&::before {
+						position: absolute;
+						top: 50%;
+						transform: translateY(-50%);
+					}
+				}
+			}
+
+			img {
+				width: 100%;
+				max-height: 300px;
+			}
+		}
+	}
+
+
+	.alumni {
+
+		&_vids {
+
+			&.ui.stackable.grid {
+				@media screen and (max-width: 767px) {
+					.eight.wide.column {
+						padding: 16px 0 !important;
+					}
+				}
+			}
+		}
+
+		&_vid {
+
+			img {
+				width: 100%;		
+				max-height: 300px;
+			}
+		}		
+	}
+
+
+	.org_event {
+
+		&_items {
+
+			&.ui.stackable.grid {
+				@media screen and (max-width: 767px) {
+					.eight.wide.column {
+						padding: 16px 0 !important;
+					}
+				}
+			}
+		}
+
+		&_item {
+
+			.cta_link {
+				max-width: 100%;
+			}
+		}
+	}
+	
+	
+	.survey {
+
+		.ui.stackable.grid {
+			@media screen and (max-width: 767px) {
+				.eight.wide.column {
+					padding: 16px 0 !important;
+				}
+			}
+		}
+
+		.cta_link {
+			max-width: 100%;
+		}
+	}
+}
