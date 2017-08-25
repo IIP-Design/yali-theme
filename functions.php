@@ -104,6 +104,20 @@ add_post_type_support( 'page', 'excerpt' );
 
 
 /*
+* Excerpt Read More
+*
+*/
+add_action('init', 'excerpt_more_override');
+function excerpt_more_override() {
+	remove_filter('excerpt_more', 'corona_excerpt_read_more');	
+	add_filter('excerpt_more', function($more) {
+		global $post;
+		return '&nbsp; <a href="' . get_permalink($post->ID) . '"> Read More...</a>';
+	});		
+}
+
+
+/*
 * Add Featured Image URL to JSON response
 *
 */

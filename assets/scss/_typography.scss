@@ -12,7 +12,8 @@ body {
   font-size: $font-size + 0px;
   
   &.page,
-  &.single {
+  &.single,
+  &.archive {
     font-size: $font-size + 0px;
     color: $blue-navy;
     @media screen and (max-width: 933px) {

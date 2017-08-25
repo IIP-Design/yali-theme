@@ -1,0 +1,33 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+
+<section class='ui container'>
+	<div class='inner-container tag_posts'>
+		<h2 class='title-overlay_title tag_posts_title'>{{ archive_query }} Posts</h2>		
+		<div class='ui stackable grid tag_posts_list'>
+
+			{% for post in blog_list.data %}
+
+			{% if loop.index0 % 3 == 0 %}
+			<div class='three column row'>
+			{% endif %}
+				
+				<article class='column tag_article'>
+					<h5 class='tag_article_title'><a href='{{ post.link }}'>{{ post.title.rendered }}</a></h5>
+					<div class='tag_article_content'>{{ post.excerpt.rendered }}</div>
+				</article>					
+
+			{% if loop.index is divisible by(3) %}
+			</div>
+			{% endif %}			
+
+			{% endfor %}
+
+		</div>
+	</div>
+</section>
+
+
+{% endblock %}
+
