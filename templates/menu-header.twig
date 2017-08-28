@@ -13,18 +13,21 @@
       {% if menu %}
       <ul class='nav_menu'>
         <span class='opaque_bg'></span>
-        {% for item in menu %}                    
+        {% for item in menu %}
+
+          {% set single_post = ( item.title == 'Learning' and is_single() == true ) ? "current_page" : "" %}          
+
           <li class='nav_menu_item ui {{ item.children ? "dropdown" : "" }} initial_wide'>					
-            <div class='nav_menu_item_title-wrapper {{ pagename == item.object_slug ? "current_page" : "" }}'>
+            <div class='nav_menu_item_title-wrapper {{ pagename == item.object_slug ? "current_page" : "" }} {{ single_post }}'>
               <a href="{{ item.url }}">{{ item.title }}</a>              
               {% if item.children %}
                 <span class='menuDropdown downArrow'></span>
               {% endif %}
             </div>
-            {% if item.children %}
+            {% if item.children %}            
               <ul class='nav_menu_submenu menu'>
-                {% for child in item.children %}
-                  <li class='nav_menu_submenu_item item'>
+                {% for child in item.children %}                  
+                  <li class='nav_menu_submenu_item item {{ pagename == child.object_slug ? "current_submenu_page" : "" }}'>
                     <span class='opaque_bg'></span>
                     <a href="{{ child.url }}">{{ child.title }}</a>
                   </li>
