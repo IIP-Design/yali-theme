@@ -129,7 +129,8 @@ class API {
 	}
 
 	public static function get_category_list() {
-		$request = new WP_REST_Request('GET', '/wp/v2/categories');		
+		$request = new WP_REST_Request('GET', '/wp/v2/categories');
+		$request->set_param('per_page', 100);
 		return self::do_request($request);
 	}
 
