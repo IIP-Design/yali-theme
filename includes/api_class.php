@@ -128,6 +128,11 @@ class API {
 		return self::do_request($request);
 	}
 
+	public static function get_category_list() {
+		$request = new WP_REST_Request('GET', '/wp/v2/categories');		
+		return self::do_request($request);
+	}
+
 	public static function get_category_info($category_id) {
 		$request = new WP_REST_Request('GET', '/wp/v2/categories/' . $category_id);		
 		return self::do_request($request);

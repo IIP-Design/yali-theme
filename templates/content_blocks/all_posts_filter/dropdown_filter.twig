@@ -22,34 +22,12 @@
 			<p class='filter_type'>Subject<i class='caret down icon'></i></p>
 			<div class='filter_menu'>
 				<span class='opaque_bg'></span>
+				{% for cat in category_list if cat.name != 'Uncategorized' %}
 				<div class='filter_menu_item'>							
-					<input type='checkbox' name='civil_society' value='Civil Society' data-tax-item='civil-society'>
-					<label>Civil Society</label>
+					<input type='checkbox' name='{{ cat.slug }}' value="{{ cat.name }}" data-tax-item='{{ cat.slug }}'>
+					<label>{{ cat.name }}</label>
 				</div>
-				<div class='filter_menu_item'>							
-					<input type='checkbox' name='business' value='Business' data-tax-item='business'>
-					<label>Business</label>
-				</div>
-				<div class='filter_menu_item'>							
-					<input type='checkbox' name='entrepreneurship' value='Entrepreneurship' data-tax-item='entrepreneurship'>
-					<label>Entrepreneurship</label>
-				</div>
-				<div class='filter_menu_item'>							
-					<input type='checkbox' name='environment' value='Environment' data-tax-item='environment'>
-					<label>Environment</label>
-				</div>	
-				<div class='filter_menu_item'>							
-					<input type='checkbox' name='governance' value='Governance' data-tax-item='governance'>
-					<label>Governance</label>
-				</div>	
-				<div class='filter_menu_item'>							
-					<input type='checkbox' name='health' value='Health' data-tax-item='health'>
-					<label>Health</label>
-				</div>	
-				<div class='filter_menu_item'>							
-					<input type='checkbox' name='leadership' value='Leadership' data-tax-item='leadership'>
-					<label>Leadership</label>
-				</div>	
+				{% endfor %}					
 			</div><!-- .filter_menu -->
 		</div><!-- .filter -->
 		{% endif %}
@@ -58,23 +36,13 @@
 		<div class='filter' data-tax='series'>
 			<p class='filter_type'>Series<i class='caret down icon'></i></p>
 			<div class='filter_menu'>
-				<span class='opaque_bg'></span>
+				<span class='opaque_bg'></span>		
+				{% for series in series_list %}
 				<div class='filter_menu_item'>							
-					<input type='checkbox' name='whats-the-harm' value="What's The Harm" data-tax-item='whats-the-harm'>
-					<label>What's The Harm?</label>
+					<input type='checkbox' name='{{ series.slug }}' value="{{ series.name }}" data-tax-item='{{ series.slug }}'>
+					<label>{{ series.name }}</label>
 				</div>
-				<div class='filter_menu_item'>							
-					<input type='checkbox' name='yali-voices' value='YALI Voices' data-tax-item='yali-voices'>
-					<label>YALI Voices</label>
-				</div>
-				<div class='filter_menu_item'>							
-					<input type='checkbox' name='series_3' value='Series 3' data-tax-item='series-3'>
-					<label>Series 3</label>
-				</div>
-				<div class='filter_menu_item'>							
-					<input type='checkbox' name='series_4' value='Series 4' data-tax-item='series-4'>
-					<label>Series 4</label>
-				</div>	
+				{% endfor %}				
 			</div><!-- .filter_menu -->
 		</div><!-- .filter -->	
 		{% endif %}

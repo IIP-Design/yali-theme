@@ -17,6 +17,8 @@ $img_id = get_post_thumbnail_id( $post->ID );
 $srcset = wp_get_attachment_image_srcset($img_id, "full");
 $sizes = wp_get_attachment_image_sizes($img_id, "full");
 
+// Taxonomy data
+$series = get_terms('series');
 
 // Temp
 /**
@@ -37,7 +39,9 @@ $context = array(
   "srcset"		  => $srcset,
   "sizes"		  => $sizes,
   "social_block"  => $social_block,
-  "campaigns"     => $campaigns
+  "campaigns"     => $campaigns,
+  'category_list' => Yali\API::get_category_list(),
+  'series_list'   => $series
 );
 
 
