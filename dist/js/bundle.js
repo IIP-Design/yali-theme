@@ -138,12 +138,12 @@ function displayFilterSelection() {
 
 	[].concat(_toConsumableArray(filter_menu_items)).forEach(function (item) {
 		item.addEventListener('change', function () {
-			var sel_name = this.name === 'video' ? 'video_type' : this.name;
+			var sel_name = this.name === 'Video' ? 'video_type' : this.name;
 
 			if (this.checked === true) {
 				addFilterSelection(this, sel_name, selections_div);
 			} else if (this.checked === false) {
-				document.querySelector('.' + sel_name).remove();
+				document.querySelector('[data-filter-item="' + sel_name + '"]').remove();
 			}
 		});
 	});
@@ -156,7 +156,8 @@ function addFilterSelection(item, sel_name, selections_div) {
 
 	removeFilterSelection(delete_icon);
 
-	sel_filter.setAttribute('class', 'ui label ' + sel_name);
+	sel_filter.setAttribute('class', 'ui label');
+	sel_filter.setAttribute('data-filter-item', sel_name);
 	sel_filter.textContent = item.value;
 
 	delete_icon.setAttribute('class', 'delete icon');
@@ -168,7 +169,7 @@ function addFilterSelection(item, sel_name, selections_div) {
 
 function removeFilterSelection(delete_icon) {
 	delete_icon.addEventListener('click', function (e) {
-		var chkbx = document.querySelector('input[value="' + this.parentElement.textContent + '"]');
+		var chkbx = document.querySelector('[data-tax-item="' + this.parentElement.dataset.filterItem + '"]');
 		this.parentElement.remove();
 		chkbx.checked = false;
 	});
