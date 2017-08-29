@@ -13,7 +13,7 @@
 		{% if post.tags is not empty %}
 		<div class='pl_article_tags'>					
 			{% for tag in post.tags  %}
-			<a class='pl_article_tags_tag' href='/wp/tag/{{ tag.slug }}'>{{ tag.name }}</a>			
+			<a class='pl_article_tags_tag' href='/tag/{{ tag.slug }}'>{{ tag.name }}</a>			
 			{% endfor %}
 		</div>
 		{% endif %}
