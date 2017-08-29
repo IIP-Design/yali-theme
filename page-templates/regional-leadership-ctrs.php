@@ -27,6 +27,7 @@ $check_host = $_SERVER['SERVER_NAME'];
 // Data array for twig
 $context = array(
   "check_host"  => $check_host,
+  "pagename"    => $pagename,
   "page_data"   => $page_data,
   "header_url"  => $header_url,  
   "feat_img"    => $feat_img_obj,

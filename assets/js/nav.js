@@ -5,6 +5,14 @@ var burger = document.querySelector('.burger'),
 	nav_menu = document.querySelectorAll('.nav_menu'),
 	nav_item = document.querySelectorAll('.nav_menu_item:not(.nav_menu_item--search):not(.nav_menu_item--social)');
 
+function highlightNavParent() {	
+	if( document.querySelector('.current_submenu_page') ){
+		let currentSubmenuPage = document.querySelector('.current_submenu_page');				
+		let parentNavItem = currentSubmenuPage.parentElement.parentElement;		
+		parentNavItem.querySelector('.nav_menu_item_title-wrapper').classList.add('current_page');
+	}
+}
+
 function mobile_menu() {
 	burger.addEventListener('click', function() {				
 		this.classList.toggle('active');
@@ -62,6 +70,7 @@ export function init ($) {
 	// Init Semantic dropdown menu
 	$('.ui.dropdown').dropdown({transition: 'drop'}).dropdown({on: 'hover'});
 
+	highlightNavParent();
 	set_title_text();
 	mobile_menu();
 	display_sub_menu();

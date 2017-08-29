@@ -55,13 +55,13 @@ function displayFilterSelection() {
 
 	[...filter_menu_items].forEach((item) => {
 		item.addEventListener('change', function() {
-			let sel_name = ( this.name === 'video' ) ? 'video_type' : this.name;
+			let sel_name = ( this.name === 'Video' ) ? 'video_type' : this.name;
 			
 			if( this.checked === true ) {
 				addFilterSelection(this, sel_name, selections_div);
 			} 
-			else if( this.checked === false ) {
-				document.querySelector('.' + sel_name).remove();				
+			else if( this.checked === false ) {					
+				document.querySelector(`[data-filter-item="${sel_name}"]`).remove();
 			}
 		});
 	});	
@@ -75,10 +75,11 @@ function addFilterSelection(item, sel_name, selections_div) {
 
 	removeFilterSelection(delete_icon);
 
-	sel_filter.setAttribute('class', 'ui label ' + sel_name); 
+	sel_filter.setAttribute('class', 'ui label'); 
+	sel_filter.setAttribute('data-filter-item', sel_name)
 	sel_filter.textContent = item.value;
 
-	delete_icon.setAttribute('class', 'delete icon');
+	delete_icon.setAttribute('class', 'delete icon');	
 	sel_filter.appendChild(delete_icon);
 
 	fragment.appendChild(sel_filter);
@@ -87,8 +88,8 @@ function addFilterSelection(item, sel_name, selections_div) {
 
 
 function removeFilterSelection(delete_icon) {
-	delete_icon.addEventListener('click', function(e) {		
-		let chkbx = document.querySelector('input[value="' + this.parentElement.textContent + '"]');
+	delete_icon.addEventListener('click', function(e) {
+		let chkbx = document.querySelector(`[data-tax-item="${this.parentElement.dataset.filterItem}"]`);
 		this.parentElement.remove();		
 		chkbx.checked = false;
 	});

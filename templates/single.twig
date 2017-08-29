@@ -11,7 +11,7 @@
 	{% if header_url is not empty %}style='background-image: url("{{ header_url }}"); background-size: cover;'{% endif %}
 >
 	<div class='hero-inner bottom_padd bottom_padd--thick'>
-		<div class='hero-content ui container'>
+		<div class='hero-content ui container'>			
 			<h2 class='hero-h1'>{{ post_data.post_series_names[0].taxonomy }}:</h2>
 			<h1>{{ post_data.post_series_names[0].name }}</h1>
 			<p>{{ post_data.post_series_names[0].description }}</p>
@@ -30,11 +30,11 @@
 				{% for term in taxonomy_terms %}										
 					{% if term.taxonomy == 'post_tag' %}
 					<p class='tax_term'>
-						<a href='/wp/tag/{{ term.slug }}'>{{ term.name }}</a>{% if not loop.last %},{% endif %}
+						<a href='/tag/{{ term.slug }}'>{{ term.name }}</a>{% if not loop.last %},{% endif %}
 					</p>					
 					{% else %}
 					<p class='tax_term'>
-						<a href='/wp/{{ term.taxonomy }}/{{ term.slug }}'>{{ term.name }}</a>{% if not loop.last %},{% endif %}
+						<a href='/{{ term.taxonomy }}/{{ term.slug }}'>{{ term.name }}</a>{% if not loop.last %},{% endif %}
 					</p>					
 					{% endif %}
 				{% endfor %}			
@@ -44,9 +44,9 @@
 				<a 
 					class='cta_link' 
 					{% if series_name is not empty %}
-					href='/wp/{{ post_data.post_series_names[0].taxonomy }}/{{ post_data.post_series_names[0].slug }}'
+					href='/{{ post_data.post_series_names[0].taxonomy }}/{{ post_data.post_series_names[0].slug }}'
 					{% else %}
-					href='/wp/blog'
+					href='/learning'
 					{% endif %}
 					>
 					More from "{{ (series_name is not empty ? series_name : 'YALI Network in Action') }}" <i class='angle right icon'></i>
@@ -69,8 +69,8 @@
 						excerpt: 'Lorem ipsum set abet ipsum Lorem ipsum set abet ipsum', 
 						tags: [
 							{ 'term_id': '4', name: 'tag 1', slug: 'tag-1' },
-							{ 'term_id': '5', name: 'tag 2', slug: 'tag-2' },
-							{ 'term_id': '6', name: 'tag 3', slug: 'tag-3' },
+							{ 'term_id': '5', name: 'tag 2', slug: 'lorem' },
+							{ 'term_id': '6', name: 'tag 3', slug: 'ipsum' },
 						],
 						featured_img_url: 'data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='
 					},
@@ -80,8 +80,8 @@
 						excerpt: 'Lorem ipsum set abet ipsum Lorem ipsum set abet ipsum', 
 						tags: [
 							{ 'term_id': '4', name: 'tag 1', slug: 'tag-1' },
-							{ 'term_id': '5', name: 'tag 2', slug: 'tag-2' },
-							{ 'term_id': '6', name: 'tag 3', slug: 'tag-3' },
+							{ 'term_id': '5', name: 'tag 2', slug: 'lorem' },
+							{ 'term_id': '6', name: 'tag 3', slug: 'ipsum' },
 						],
 						featured_img_url: 'data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='
 					},
@@ -91,8 +91,8 @@
 						excerpt: 'Lorem ipsum set abet ipsum Lorem ipsum set abet ipsum', 
 						tags: [
 							{ 'term_id': '4', name: 'tag 1', slug: 'tag-1' },
-							{ 'term_id': '5', name: 'tag 2', slug: 'tag-2' },
-							{ 'term_id': '6', name: 'tag 3', slug: 'tag-3' },
+							{ 'term_id': '5', name: 'tag 2', slug: 'lorem' },
+							{ 'term_id': '6', name: 'tag 3', slug: 'ipsum' },
 						],
 						featured_img_url: 'data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='
 					},
@@ -102,8 +102,8 @@
 						excerpt: 'Lorem ipsum set abet ipsum Lorem ipsum set abet ipsum', 
 						tags: [
 							{ 'term_id': '4', name: 'tag 1', slug: 'tag-1' },
-							{ 'term_id': '5', name: 'tag 2', slug: 'tag-2' },
-							{ 'term_id': '6', name: 'tag 3', slug: 'tag-3' },
+							{ 'term_id': '5', name: 'tag 2', slug: 'lorem' },
+							{ 'term_id': '6', name: 'tag 3', slug: 'ipsum' },
 						],
 						featured_img_url: 'data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='
 					},
@@ -113,8 +113,8 @@
 						excerpt: 'Lorem ipsum set abet ipsum Lorem ipsum set abet ipsum', 
 						tags: [
 							{ 'term_id': '4', name: 'tag 1', slug: 'tag-1' },
-							{ 'term_id': '5', name: 'tag 2', slug: 'tag-2' },
-							{ 'term_id': '6', name: 'tag 3', slug: 'tag-3' },
+							{ 'term_id': '5', name: 'tag 2', slug: 'lorem' },
+							{ 'term_id': '6', name: 'tag 3', slug: 'ipsum' },
 						],
 						featured_img_url: 'data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='
 					},
@@ -124,8 +124,8 @@
 						excerpt: 'Lorem ipsum set abet ipsum Lorem ipsum set abet ipsum', 
 						tags: [
 							{ 'term_id': '4', name: 'tag 1', slug: 'tag-1' },
-							{ 'term_id': '5', name: 'tag 2', slug: 'tag-2' },
-							{ 'term_id': '6', name: 'tag 3', slug: 'tag-3' },
+							{ 'term_id': '5', name: 'tag 2', slug: 'lorem' },
+							{ 'term_id': '6', name: 'tag 3', slug: 'ipsum' },
 						],
 						featured_img_url: 'data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='
 					},
@@ -135,8 +135,8 @@
 						excerpt: 'Lorem ipsum set abet ipsum Lorem ipsum set abet ipsum', 
 						tags: [
 							{ 'term_id': '4', name: 'tag 1', slug: 'tag-1' },
-							{ 'term_id': '5', name: 'tag 2', slug: 'tag-2' },
-							{ 'term_id': '6', name: 'tag 3', slug: 'tag-3' },
+							{ 'term_id': '5', name: 'tag 2', slug: 'lorem' },
+							{ 'term_id': '6', name: 'tag 3', slug: 'ipsum' },
 						],
 						featured_img_url: 'data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='
 					},
@@ -146,8 +146,8 @@
 						excerpt: 'Lorem ipsum set abet ipsum Lorem ipsum set abet ipsum', 
 						tags: [
 							{ 'term_id': '4', name: 'tag 1', slug: 'tag-1' },
-							{ 'term_id': '5', name: 'tag 2', slug: 'tag-2' },
-							{ 'term_id': '6', name: 'tag 3', slug: 'tag-3' },
+							{ 'term_id': '5', name: 'tag 2', slug: 'lorem' },
+							{ 'term_id': '6', name: 'tag 3', slug: 'ipsum' },
 						],
 						featured_img_url: 'data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='
 					}

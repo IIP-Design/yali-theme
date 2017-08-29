@@ -27,13 +27,13 @@
       cursor: pointer;      
       @media screen and (min-width: 934px) and (max-width: 1209px) {        
         margin: 0 7.5px;       
-      }
+      }      
       @media screen and (min-width: 1025px) and (max-width: 1200px) {
         font-size: em(16);
       }
       @media screen and (min-width: 934px) and (max-width: 1024px) {
         font-size: em(14);
-      }
+      }      
       @media screen and (max-width: 933px) {
         position: relative;
         display: block;
@@ -44,7 +44,7 @@
         &.ui.dropdown {
           display: block;          
         }                
-      }            
+      }                  
 
       &.initial_wide {        
         @media screen and (min-width: 934px) {
