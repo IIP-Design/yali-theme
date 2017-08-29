@@ -80,6 +80,7 @@ class Content_Block_Shortcode {
       $context['btn_link'] = $link['url'];
       $context['btn_new_win'] = ($link['blank'] == 'true') ? 'target="_blank"' : '';
       $context['btn_bg_color'] = $button[0]['bg_color'];
+      $context['btn_label_color'] = ($context['btn_bg_color'] == '#f2d400') ? '#192856': '#ffffff';
       $context['btn_text_alignment'] = $button[0]['h_alignment'];
     }
 
@@ -101,8 +102,8 @@ class Content_Block_Shortcode {
       $path = "https://s3.amazonaws.com/iip-design-stage-modules/modules/cdp-module-{$cdp_widget}/cdp-module-";
       $context['widget_css'] = $path . $cdp_widget . '.min.css';
       $context['widget_js'] = $path . $cdp_widget . '.min.js';
-    }
-    // var_dump($$meta); die();
+    } 
+    
     return Twig::render( 'content_blocks/post-list.twig', $context );
   }
  
