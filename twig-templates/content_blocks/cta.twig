@@ -1,31 +1,18 @@
-<section 
-	class="section cb_cta {{ width }} {{ text_align }} {% if background_img is not empty %}has_bg_img{% endif %}" 
-	style="{% if background_color is not empty %}
-		background-color: {{ background_color }};
-		{% endif %} 
-
-		{% if background_img is not empty %}
-		background-image: url({{ background_img }});
-		{% endif %};"
->
-	<div class='inner-container'>
-	    <h3 class="cb_cta_title">{{ title }}</h3>
-	    {% if excerpt is not empty %}
-	    <p class="cb_cta_excerpt">{{ excerpt }}</P>
-	    {% endif %}
-
-	    {% if cta_txt is not empty %}
-	    <p class='cb_cta_link'>
-	    	<a 
-	    		href='{{ cta_url }}' 
-	    		class='cta_link {% if cta_background_color == "#F2D400" %}text_dark{% endif %}'
-	    		{% if cta_background_color is not empty %}
-	    		style='background-color: {{ cta_background_color }};'
-	    		{% endif %}
-	    	>
-	    		{{ cta_txt }}
-	    	</a>
-	    </p>
-	    {% endif %}
+<section class='cb cb_cta full-width' style="background-color: {{ block_bg_color }}" data-responsive-background-image>
+  <img src="{{ header_url }}"
+      sizes="{{ sizes }}"
+      srcset="{{ srcset }}">
+	<div class='ui container'>
+		<h2 class="{{ title_underline }}" style="text-align: {{ title_alignment }}; color: {{ title_color }}">{{ title }}</h2>
+    <div class="cb_excerpt" style="text-align: {{ excerpt_alignment }}; color: {{ excerpt_color }}; font-weight: {{ excerpt_font_weight }}">{{ excerpt }} </div>
+    <div class="cb_button" style="text-align: {{ btn_text_alignment }}">
+      <a class="ui animated button" href="{{ btn_link }}" {{ btn_new_win }} style="background-color: {{ btn_bg_color }}" tabindex="0">
+        <div class="visible content"  style="color: {{ btn_label_color }}"> {{ btn_label }}</div>
+          <div class="hidden content">
+            <i class="right arrow icon"></i>
+          </div>
+        </a>
+      </div>
     </div>
+	</div>
 </section>

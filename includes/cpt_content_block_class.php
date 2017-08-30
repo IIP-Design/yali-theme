@@ -83,7 +83,7 @@ class Content_Block {
       'desc' => '',
       'id'   => $prefix . 'cb_title_underline',
       'type' => 'checkbox'
-    ) );
+    ));
 
 
     $cb_box->add_field( array(
@@ -96,6 +96,20 @@ class Content_Block {
         'left'           => __( 'Left', 'yali' ),
         'center'         => __( 'Center', 'yali' ),
         'right'          => __( 'Right', 'yali' )
+      )
+    ));
+    
+    $cb_box->add_field( array(
+      'name'               => 'Title color',
+	    'desc'                => '',
+	    'id'                  => $prefix . 'cb_title_color',
+	    'type'                => 'colorpicker',
+	    'default'             => '#192856',
+      'attributes'          => array(
+        'data-colorpicker'  => json_encode( array(
+            'border'        => false,
+            'palettes'      => array( '#ffffff','#192856' )
+        ))
       )
 	  ));
     
@@ -110,7 +124,34 @@ class Content_Block {
         'center'        => __( 'Center', 'yali' ),
         'right'         => __( 'Right', 'yali' )
       )
-	  ));
+    ));
+   
+    $cb_box->add_field( array(
+      'name'               => 'Excerpt color',
+	    'desc'                => '',
+	    'id'                  => $prefix . 'cb_excerpt_color',
+	    'type'                => 'colorpicker',
+	    'default'             => '#192856',
+      'attributes'          => array(
+        'data-colorpicker'  => json_encode( array(
+            'border'        => false,
+            'palettes'      => array( '#ffffff','#192856' )
+        ))
+      )
+    ));
+    
+    $cb_box->add_field( array(
+      'name'            => 'Excerpt font weight',
+	    'id'              => $prefix . 'cb_excerpt_font_weight',
+	    'type'            => 'select',
+	    'default'         => 'Normal',
+      'options'         => array(
+        '300'           => __( 'Light', 'yali' ),
+        '400'           => __( 'Normal', 'yali' ),
+        '500'           => __( 'Bold', 'yali' ),
+        '700'           => __( 'Heavy', 'yali' )
+      )
+    ));
 
     $cb_box->add_field( array(
       'name'            => 'Text alignment',
@@ -141,18 +182,13 @@ class Content_Block {
 
      ///*** Start Widget post group  ***///
     $post_group = $cb_box->add_field( array(
-      'id'   => $prefix . 'cb_widget',
+      'id'   => $prefix . 'cb_type_post_list',  // name is used to show/hide via wordaround in cmb2 conditionals
       'type' => 'group',
       'description'  => __( '', 'yali' ),
       'repeatable' => false, 
       'options' => array(
         'group_title'  => __( 'CDP Widget', 'yali' ),
-      ), 
-      'attributes' => array(
-        'required'               => true, // Will be required only if visible.
-        'data-conditional-id'    => $prefix . 'cb_type',
-        'data-conditional-value' => 'post_list'
-		  )
+      )
     ));
     
     // Id's for group's fields only need to be unique for the group. Prefix is not needed.
