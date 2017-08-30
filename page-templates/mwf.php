@@ -34,4 +34,4 @@ $context = array(
 );
 
 
-echo Twig::render( '/wp_custom_tmpls/mwf.twig', $context );
+echo Twig::render( 'pages/mwf.twig', $context );
