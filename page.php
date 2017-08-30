@@ -36,8 +36,8 @@ $context = array(
   "page_data"     => $page_data,
   "header_url"    => $header_url,  
   "feat_img"      => $feat_img_obj,
-  "srcset"		  => $srcset,
-  "sizes"		  => $sizes,
+  "srcset"		    => $srcset,
+  "sizes"		      => $sizes,
   "social_block"  => $social_block,
   "campaigns"     => $campaigns,
   'category_list' => Yali\API::get_category_list(),
@@ -45,4 +45,4 @@ $context = array(
 );
 
 
-echo Twig::render( array( "page-" . $pagename . ".twig", "page.twig" ), $context );
+echo Twig::render( array( "pages/page-" . $pagename . ".twig", "page.twig" ), $context );

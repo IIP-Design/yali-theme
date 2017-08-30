@@ -1,6 +1,6 @@
 {% block head_wrapper %}
 
-	{% include 'header.twig' %}
+	{% include 'partials/header.twig' %}
 	{% block head %}
 	{% endblock %}
 
@@ -22,7 +22,7 @@
 			<header id="masthead" class="site-header">
 				{% block header %}
 					{# <!--Global nav, search, join button-- > #}
-					{% include "menu-header.twig" with {'menu': site.get_menu(2)} %}
+					{% include "partials/menu-header.twig" with {'menu': site.get_menu(2)} %}
 				{% endblock %}
 			</header>
 
@@ -55,7 +55,7 @@
 
 			<footer class="footer ui inverted bottom menu segment">
 				{% block footer %}
-					{% include "footer.twig" %}
+					{% include "partials/footer.twig" %}
 				{% endblock %}
 			</footer>
 

@@ -36,4 +36,4 @@ $context = array(
 );
 
 
-echo Twig::render( '/wp_custom_tmpls/regional-leadership-centers.twig', $context );
+echo Twig::render( 'pages/regional-leadership-centers.twig', $context );

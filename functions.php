@@ -49,7 +49,7 @@ class YaliSite {
 	}
 
 	function twig_init() {
-		Twig::$locations = array( 'templates' );
+		Twig::$locations = array( 'twig-templates' );
 		Twig::init();
 	}
 
