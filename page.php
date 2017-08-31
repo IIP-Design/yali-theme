@@ -26,7 +26,8 @@ $series = get_terms('series');
 * from Shawn localhost
 **/
 $check_host = $_SERVER['SERVER_NAME'];
-$social_block = ( $check_host == 'yali.dev.america.gov' ) ? do_shortcode("[content_block id='13313']") : do_shortcode("[content_block id='86']");
+//$social_block = ( $check_host == 'yali.dev.america.gov' ) ? do_shortcode("[content_block id='13313']") : do_shortcode("[content_block id='86']");
+$social_block = do_shortcode("[content_block id='13313']");
 $campaigns = ( $check_host == 'yali.dev.america.gov' ) ? Yali\API::get_child_pages(13240) : Yali\API::get_child_pages(8);
 
 // Data array for twig

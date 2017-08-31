@@ -29,6 +29,9 @@ h1 {
   @media screen and (max-width: 933px) {
     font-size: em(72, $mobile);
   }
+  @media screen and (max-width: 330px) {
+    font-size: em(60, $mobile);
+  }
 }
 
 
