@@ -4,10 +4,13 @@
   
   .cb_button {
     margin-top: 2em;
+
+    .ui.button {
+      min-width: 0;
+    }
   }
 
   .cb_excerpt {
-    font-size: em(20);
     font-weight: 700;
     max-width: 760px;
     margin: 0 auto;

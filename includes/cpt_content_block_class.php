@@ -356,7 +356,8 @@ class Content_Block {
         'right'          => __( 'Right', 'yali' )
       )
 	  ));
-  }
+
+  }  
 
 
 
