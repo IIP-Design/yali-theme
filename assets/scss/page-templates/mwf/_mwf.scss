@@ -2,10 +2,14 @@
 	
 	
 	.section {
-		margin-bottom: 50px;
+		margin-bottom: 50px;		
 		@media screen and (max-width: 767px) {
 			margin-bottom: 25px;
 		}
+
+		&.cb_cta {
+			margin-bottom: 0;
+		}		
 	}
 
 
