@@ -19,26 +19,30 @@
 
 <script type="text/javascript" src="{{ widget_js }}"></script>
 <script>
-  if( CDP ) {  // add try catch here
-     CDP.widgets.ArticleFeed.new({
-      selector: '#{{ selector }}',
-      sites: 'yali.dev.america.gov', 
-      size: '{{ cdp_num_posts }}', 
-      types: 'post', 
-      langs: 'en-US',
-      tags: '',
-      categories: '{{ cdp_category }}',  
-      ui: {
-        layout: '{{ cdp_ui_layout }}',
-        direction: '{{ cdp_ui_direction }}',
-        image: {
-          shape: '{{ cdp_image_shape }}',
-          width: '{{ cdp_image_height }}',
-          borderWidth: '{{ cdp_border_width }}',             
-          borderColor: '{{ cdp_border_color }}',
-          borderStyle: '{{ cdp_border_style }}'
+  if( CDP ) {  
+    try {
+      CDP.widgets.ArticleFeed.new({
+        selector: '#{{ selector }}',
+        sites: 'yali.dev.america.gov', 
+        size: '{{ cdp_num_posts }}', 
+        types: 'post', 
+        langs: 'en-US',
+        tags: '',
+        categories: '{{ cdp_category }}',  
+        ui: {
+          layout: '{{ cdp_ui_layout }}',
+          direction: '{{ cdp_ui_direction }}',
+          image: {
+            shape: '{{ cdp_image_shape }}',
+            width: '{{ cdp_image_height }}',
+            borderWidth: '{{ cdp_border_width }}',             
+            borderColor: '{{ cdp_border_color }}',
+            borderStyle: '{{ cdp_border_style }}'
+          }
         }
-      }
-    }).render();
+      }).render();
+    } catch (e) {
+      console.log('Unable to add article feed.')
+    }
   }
 </script> 

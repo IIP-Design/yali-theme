@@ -8,8 +8,13 @@ class Content_Block {
 
   public function __construct() {
       add_action( 'cmb2_admin_init',                          array($this, 'content_block_fields') );  
+      add_action( 'admin_enqueue_scripts',                    array($this, 'admin_enqueue_scripts') );  
       add_filter( 'manage_edit-content_block_columns',        array($this, 'edit_content_block_post_columns') );
       add_filter( 'manage_content_block_posts_custom_column', array($this, 'manage_content_block_post_columns'), 10, 2 );  
+  }
+
+  public function admin_enqueue_scripts() {
+    wp_enqueue_script( 'cmb2-addon-js', get_stylesheet_directory_uri() . '/assets/admin/cmb2.js',array( 'jquery' ), '1.0.0', true );
   }
   
   /**
@@ -59,14 +64,18 @@ class Content_Block {
 
     $prefix = 'yali_';
     
+
+    //******  Start general fields  ******//
     $cb_box = new_cmb2_box( array(
       'id'           =>  $prefix . 'cb_box',
-      'title'        => __( 'Content Block Fields', 'yali' ),
-      'object_types' => array( 'content_block' )
+      'title'        => __( 'General fields', 'yali' ),
+      'object_types' => array( 'content_block' ),
+      'priority'     => 'high',
+      'closed'       => false
     ));
-    
+
     $cb_box->add_field( array(
-      'name'             => 'Type',
+      'name'             => 'Block Type',
 	    'desc'             => 'What type of content block',
 	    'id'               => $prefix . 'cb_type',
 	    'type'             => 'select',
@@ -108,7 +117,7 @@ class Content_Block {
       'attributes'          => array(
         'data-colorpicker'  => json_encode( array(
             'border'        => false,
-            'palettes'      => array( '#ffffff','#192856' )
+            'palettes'      => array( '#ffffff', '#eeeeee', '#192856' )
         ))
       )
 	  ));
@@ -135,7 +144,7 @@ class Content_Block {
       'attributes'          => array(
         'data-colorpicker'  => json_encode( array(
             'border'        => false,
-            'palettes'      => array( '#ffffff','#192856' )
+            'palettes'      => array( '#ffffff', '#eeeeee', '#192856' )
         ))
       )
     ));
@@ -180,22 +189,19 @@ class Content_Block {
       )
 	  ));
 
-     ///*** Start Widget post group  ***///
-    $post_group = $cb_box->add_field( array(
-      'id'   => $prefix . 'cb_type_post_list',  // name is used to show/hide via wordaround in cmb2 conditionals
-      'type' => 'group',
-      'description'  => __( '', 'yali' ),
-      'repeatable' => false, 
-      'options' => array(
-        'group_title'  => __( 'CDP Widget', 'yali' ),
-      )
+    //******  Start cdp widget fields  ******//
+    $cb_box_cdp = new_cmb2_box( array(
+      'id'           =>  $prefix . 'cb_box_cdp',
+      'title'        => __( 'Add CDP Widget', 'yali' ),
+      'object_types' => array( 'content_block' ),
+      'priority'     => 'low'
     ));
     
     // Id's for group's fields only need to be unique for the group. Prefix is not needed.
-    $cb_box->add_group_field( $post_group, array(
-      'name'             => 'Post Type',
+    $cb_box_cdp->add_field( array(
+      'name'             => 'Widget',
 	    'desc'             => '',
-	    'id'               => 'cdp_module',
+	    'id'               => $prefix . 'cdp_module',
 	    'type'             => 'select',
 	    'default'          => 'article-feed',
       'options'          => array(
@@ -203,9 +209,9 @@ class Content_Block {
       )
 	  ));
 
-    $cb_box->add_group_field( $post_group, array(
+    $cb_box_cdp->add_field(  array(
       'name'             => 'Number of posts',
-	    'id'               => 'cdp_num_posts',
+	    'id'               => $prefix . 'cdp_num_posts',
 	    'type'             => 'text_small',
       'default'           => 3
 	  ));
@@ -222,19 +228,19 @@ class Content_Block {
       $cat_options[$category->name] = $category->name;
     }
 
-    $cb_box->add_group_field( $post_group, array(
+    $cb_box_cdp->add_field( array(
       'name'            => 'Category',
 	    'desc'            => 'Select a category to display',
-	    'id'              => 'cdp_category',
+	    'id'              => $prefix . 'cdp_category',
 	    'type'            => 'select',
 	    'default'         => 'select',
       'options'         => $cat_options
 	  ));
 
-    $cb_box->add_group_field( $post_group, array(
+    $cb_box_cdp->add_field( array(
       'name'            => 'Post layout',
 	    'desc'            => 'Default or Blog style',
-	    'id'              => 'cdp_ui_layout',
+	    'id'              => $prefix . 'cdp_ui_layout',
 	    'type'            => 'select',
 	    'default'         => 'default',
       'options'         => array(
@@ -243,9 +249,9 @@ class Content_Block {
       )
 	  ));
 
-    $cb_box->add_group_field( $post_group, array(
+    $cb_box_cdp->add_field( array(
       'name'            => 'Post layout direction',
-	    'id'              => 'cdp_ui_direction',
+	    'id'              => $prefix . 'cdp_ui_direction',
 	    'type'            => 'select',
 	    'default'         => 'row',
       'options'         => array(
@@ -254,9 +260,9 @@ class Content_Block {
       )
 	  ));
 
-    $cb_box->add_group_field( $post_group, array(
+    $cb_box_cdp->add_field( array(
       'name'            => 'Image shape',
-	    'id'              => 'cdp_image_shape',
+	    'id'              => $prefix . 'cdp_image_shape',
 	    'type'            => 'select',
 	    'default'         => 'rectangle',
       'options'         => array(
@@ -265,23 +271,23 @@ class Content_Block {
       )
 	  )); 
 
-    $cb_box->add_group_field( $post_group, array(
+    $cb_box_cdp->add_field( array(
       'name'            => 'Image height',
-	    'id'              => 'cdp_image_height',
+	    'id'              => $prefix . 'cdp_image_height',
 	    'type'            => 'text_small',
       'default'         => 220
 	  )); 
 
-    $cb_box->add_group_field( $post_group, array(
+    $cb_box_cdp->add_field( array(
       'name'            => 'Image border width',
-	    'id'              => 'cdp_border_width',
+	    'id'              => $prefix . 'cdp_border_width',
 	    'type'            => 'text_small',
       'default'         => 0
 	  )); 
 
-    $cb_box->add_group_field( $post_group, array(
+    $cb_box_cdp->add_field( array(
       'name'               => 'Image border color',
-	    'id'                 => 'cdp_border_color',
+	    'id'                 => $prefix . 'cdp_border_color',
 	    'type'               => 'colorpicker',
 	    'default'            => '#192856',
       'attributes'         => array(
@@ -292,9 +298,9 @@ class Content_Block {
       )
 	  ));
 
-    $cb_box->add_group_field( $post_group, array(
+    $cb_box_cdp->add_field( array(
       'name'            => 'Image border style',
-	    'id'              => 'cdp_border_style',
+	    'id'              => $prefix . 'cdp_border_style',
 	    'type'            => 'select',
 	    'default'         => 'solid',
       'options'         => array(
@@ -308,30 +314,26 @@ class Content_Block {
         'outset'        => __( 'Outset', 'yali' )
       )
 	  ));  
-    ///*** End Widget post group  ***///
-
-    ///***  Button group  ***///
-    $button_group = $cb_box->add_field( array(
-      'id'                => $prefix . 'cb_button',
-      'type'              => 'group',
-      'description'       => __( '', 'yali' ),
-      'repeatable'        => false, 
-      'options'           => array(
-        'group_title'     => __( 'Button', 'yali' )
-      )
+  
+    //******  Start button fields  ******//
+    $cb_box_btn = new_cmb2_box( array(
+      'id'           =>  $prefix . 'cb_box_btn',
+      'title'        => __( 'Add button', 'yali' ),
+      'object_types' => array( 'content_block' ),
+      'priority'     => 'low'
     ));
-
-    // Id's for group's fields only need to be unique for the group. Prefix is not needed.
-    $cb_box->add_group_field( $button_group, array(
+  
+ 
+    $cb_box_btn->add_field( array(
       'name' => 'Link',
       'id'   => 'link',
       'type' => 'link_picker'
     ));
 
-    $cb_box->add_group_field( $button_group, array(
+    $cb_box_btn->add_field( array(
       'name'               => 'Background color',
 	    'desc'                => '',
-	    'id'                  => 'bg_color',
+	    'id'                  => $prefix . 'bg_color',
 	    'type'                => 'colorpicker',
 	    'default'             => '#ffffff',
       'attributes'          => array(
@@ -342,10 +344,10 @@ class Content_Block {
       )
 	  ));
 
-    $cb_box->add_group_field( $button_group, array(
+    $cb_box_btn->add_field( array(
       'name'             => 'Alignment',
 	    'desc'             => '',
-	    'id'               => 'h_alignment',
+	    'id'               => $prefix . 'h_alignment',
 	    'type'             => 'select',
 	    'default'          => 'center',
       'options'          => array(

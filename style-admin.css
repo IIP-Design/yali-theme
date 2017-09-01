@@ -17,3 +17,9 @@
 .wp-picker-input-wrap, .iris-picker-inner, .my-color-field {
     display: none !important;
 }
+
+/* hate to use !important here but it is the only way to overide the inline styles */
+.iris-palette-container .iris-palette{
+    width: 27px !important; 
+    height: 27px !important;
+}

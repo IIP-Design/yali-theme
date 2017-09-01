@@ -72,6 +72,23 @@ class Content_Block_Shortcode {
    
     return Twig::render( 'content_blocks/post-list.twig', $context );
   }
+  
+  private function fetch_base_config ( $id, $post ) {
+    $context = array(
+      "title"               => $post->post_title,
+      "title_underline"     => ( get_post_meta($id, 'yali_cb_title_underline', true) == 'on' ) ? 'cb_h2_underline': '',
+      "title_color"         => get_post_meta( $id, 'yali_cb_title_color', true ), 
+      "title_alignment"     => get_post_meta( $id, 'yali_cb_title_alignment', true ),
+      "block_bg_color"      => get_post_meta( $id, 'yali_cb_bg_color', true ),
+      "excerpt"             => $post->post_excerpt,
+      "excerpt_alignment"   => get_post_meta( $id, 'yali_cb_excerpt_alignment', true ),  
+      "excerpt_color"       => get_post_meta( $id, 'yali_cb_excerpt_color', true ), 
+      "excerpt_font_weight" => get_post_meta( $id, 'yali_cb_excerpt_font_weight', true ), 
+      "text_alignment"      => get_post_meta( $id, 'yali_cb_text_alignment', true )
+    );
+
+    return $context;
+  }
 
   private function fetch_widget_config ( &$context, $widget ) {
     $w = $widget[0];
@@ -94,22 +111,6 @@ class Content_Block_Shortcode {
     return $context;
   }
 
-  private function fetch_base_config ( $id, $post ) {
-    $context = array(
-      "title"               => $post->post_title,
-      "title_underline"     => ( get_post_meta($id, 'yali_cb_title_underline', true) == 'on' ) ? 'cb_h2_underline': '',
-      "title_color"         => get_post_meta( $id, 'yali_cb_title_color', true ), 
-      "title_alignment"     => get_post_meta( $id, 'yali_cb_title_alignment', true ),
-      "block_bg_color"      => get_post_meta( $id, 'yali_cb_bg_color', true ),
-      "excerpt"             => $post->post_excerpt,
-      "excerpt_alignment"   => get_post_meta( $id, 'yali_cb_excerpt_alignment', true ),  
-      "excerpt_color"       => get_post_meta( $id, 'yali_cb_excerpt_color', true ), 
-      "excerpt_font_weight" => get_post_meta( $id, 'yali_cb_excerpt_font_weight', true ), 
-      "text_alignment"      => get_post_meta( $id, 'yali_cb_text_alignment', true )
-    );
-
-    return $context;
-  }
 
   private function fetch_btn_config ( &$context, $button ) {
       $link = $button[0]['link'];
