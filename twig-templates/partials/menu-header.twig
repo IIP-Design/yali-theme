@@ -3,7 +3,7 @@
     <a href='{{ site.url }}' class='nav_siteurl'>
       <div class='img_placeholder'>
         <img src="{{ site.theme_url }}/assets/img/yali_logo_mark.svg">
-      </div>				
+      </div>
       <span href='/yalinav'>Young African Leaders Initiative</span>
     </a>
     <div class='nav_right'>
@@ -15,18 +15,18 @@
         <span class='opaque_bg'></span>
         {% for item in menu %}
 
-          {% set single_post = ( item.title == 'Learning' and is_single() == true ) ? "current_page" : "" %}          
+          {% set single_post = ( item.title == 'Learning' and is_single() == true ) ? "current_page" : "" %}
 
-          <li class='nav_menu_item ui {{ item.children ? "dropdown" : "" }} initial_wide'>					
+          <li class='nav_menu_item ui {{ item.children ? "dropdown" : "" }} initial_wide'>
             <div class='nav_menu_item_title-wrapper {{ pagename == item.object_slug ? "current_page" : "" }} {{ single_post }}'>
-              <a href="{{ item.url }}">{{ item.title }}</a>              
+              <a href="{{ item.url }}">{{ item.title }}</a>
               {% if item.children %}
                 <span class='menuDropdown downArrow'></span>
               {% endif %}
             </div>
-            {% if item.children %}            
+            {% if item.children %}
               <ul class='nav_menu_submenu menu'>
-                {% for child in item.children %}                  
+                {% for child in item.children %}
                   <li class='nav_menu_submenu_item item {{ pagename == child.object_slug ? "current_submenu_page" : "" }}'>
                     <span class='opaque_bg'></span>
                     <a href="{{ child.url }}">{{ child.title }}</a>
@@ -34,23 +34,23 @@
                  {% endfor %}
               </ul>
             {% endif %}
-          </li> 
+          </li>
         {% endfor %}
         <li class='nav_join nav_join--desktop'>
           <p>JOIN THE NETWORK</p>
-        </li>	
+        </li>
         <li class='nav_menu_item nav_menu_item--search ui search initial_wide'>
-          <div class='search_wrapper'>            
-            <div class='search_input hide'> 
-              <div class='search_input_wrapper'>             
-                <i class='search_input_close remove icon'></i>            
+          <div class='search_wrapper'>
+            <div class='search_input hide'>
+              <div class='search_input_wrapper'>
+                <i class='search_input_close remove icon'></i>
                 <input type='text' placeholder='Search Placeholder'>
               </div>
             </div>
             <span class='search-icon_wrapper'>
-              <i class='search icon'></i>	
-            </span>							
-          </div>						
+              <i class='search icon'></i>
+            </span>
+          </div>
         </li>
         <li class='nav_menu_item nav_menu_item--social'>
           <div>
@@ -59,15 +59,26 @@
             <i class='linkedin icon'></i>
             <i class='twitter icon'></i>
           </div>
-        </li>               
+        </li>
       </ul>
       {% endif %}
-    </div>                            
+    </div>
     <div class='burger'>
       <span></span>
       <span></span>
       <span></span>
     </div>
-    {% include 'partials/join-form.twig' %}
-  </div><!-- nav_wrapper -->  
+    <form class='ui form join'>
+    	<span class='upArrow upArrow--joinForm'></span>
+    	<div class='join_wrapper'>
+    		<h5 class='join_intro'>
+    			Join the YALI Network<span class='text_break--joinForm'> and receive updates and<span class='text_break--joinForm'> opportunities to<span class='text_break--joinForm'> collaborate with young<span class='text_break--joinForm'> leaders across Africa.
+    		</h5>
+    		<div class='formidable_embed'>
+    			 {{ formVar }}
+    		</div>
+    		<span class='close close--join_form'></span>
+    	</div>
+    </form>
+  </div><!-- nav_wrapper -->
 </nav>

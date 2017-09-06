@@ -30,20 +30,22 @@ $check_host = $_SERVER['SERVER_NAME'];
 $social_block = do_shortcode("[content_block id='13313']");
 $campaigns = ( $check_host == 'yali.dev.america.gov' ) ? Yali\API::get_child_pages(13240) : Yali\API::get_child_pages(8);
 
+$formVar = do_shortcode('[formidable id=6]');
+
 // Data array for twig
 $context = array(
   "check_host"    => $check_host,
-  "pagename"      => $pagename,  
+  "pagename"      => $pagename,
   "page_data"     => $page_data,
-  "header_url"    => $header_url,  
+  "header_url"    => $header_url,
   "feat_img"      => $feat_img_obj,
   "srcset"		    => $srcset,
   "sizes"		      => $sizes,
   "social_block"  => $social_block,
   "campaigns"     => $campaigns,
+  "formVar"       => $formVar,
   'category_list' => Yali\API::get_category_list(),
   'series_list'   => $series
 );
-
 
 echo Twig::render( array( "pages/page-" . $pagename . ".twig", "page.twig" ), $context );
