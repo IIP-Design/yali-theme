@@ -16,6 +16,7 @@
     &.mobile {
       position: absolute;
       right: 0;
+      z-index: 2;
       display: block;
     }
 
@@ -39,11 +40,7 @@
         display: block;
         width: 100%;
         padding: 10px 16px;
-        margin: 0;
-
-        &.ui.dropdown {
-          display: block;          
-        }                
+        margin: 0;               
       }                  
 
       &.initial_wide {        
@@ -67,7 +64,8 @@
       }      
 
       &_title-wrapper {
-          position: relative;    
+          position: relative;
+          z-index: 2;    
           display: inline-block;    
           @media screen and (max-width: 933px) {
             display: block;

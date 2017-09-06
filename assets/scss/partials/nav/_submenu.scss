@@ -14,22 +14,35 @@
 }
 
 .nav_menu_submenu {	
+	display: none;
+	position: absolute;
+	top: 0;
+	padding: 60px 10px 10px 10px;
+	list-style: none;
 	@media screen and (max-width: 933px) {		
+		position: relative;
+		top: 10px;
+		padding: 0;		
 
 		.opaque_bg {
 			display: none;
 		}
 	}
 
-	&_item {		
-		
-		&.item {
+	&.active {
+		display: block;
+	}
 
-			a {
-				font-size: em(14, $mobile);
-				font-weight: 700;
-				color: #fff;
-			}			
-		}
+	&_item {		
+
+		a {
+			display: block;
+			padding: 10px;			
+			font-weight: 700;
+			color: #fff;
+			@media screen and (max-width: 933px) {
+              font-size: em(14, $mobile);
+            }
+		}		
 	}
 }

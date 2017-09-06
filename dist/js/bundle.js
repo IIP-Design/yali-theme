@@ -506,7 +506,7 @@ function highlightNavParent() {
 	}
 }
 
-function mobile_menu() {
+function burger_mobile_menu() {
 	burger.addEventListener('click', function () {
 		this.classList.toggle('active');
 
@@ -524,20 +524,84 @@ function set_title_text() {
 	}
 }
 
-function display_sub_menu() {
-	nav_item.forEach(function (item) {
-		item.addEventListener('mouseover', function () {
-			var menuDropdown = this.getElementsByClassName('menuDropdown')[0];
-			menuDropdown.classList.remove('downArrow');
-			menuDropdown.classList.add('upArrow');
+function up_arrow_display(item) {
+	var menuDropdown = item.getElementsByClassName('menuDropdown')[0];
+	menuDropdown.classList.remove('downArrow');
+	menuDropdown.classList.add('upArrow');
+}
+
+function down_arrow_display(item) {
+	var menuDropdown = item.getElementsByClassName('menuDropdown')[0];
+	menuDropdown.classList.remove('upArrow');
+	menuDropdown.classList.add('downArrow');
+}
+
+function submenu_display() {
+	[].concat(_toConsumableArray(nav_item)).forEach(function (item) {
+		item.addEventListener('mouseenter', function () {
+			var submenu = this.querySelector('.nav_menu_submenu');
+			submenu.style.display = 'block';
+			// Toggle arrow display
+			up_arrow_display(item);
 		});
 
-		item.addEventListener('mouseout', function () {
-			var menuDropdown = this.getElementsByClassName('menuDropdown')[0];
-			menuDropdown.classList.remove('upArrow');
-			menuDropdown.classList.add('downArrow');
+		item.addEventListener('mouseleave', function () {
+			var submenu = this.querySelector('.nav_menu_submenu');
+			submenu.style.display = 'none';
+			// Toggle arrow display
+			down_arrow_display(item);
 		});
 	});
+}
+
+function mobile_submenu_display() {
+	[].concat(_toConsumableArray(nav_item)).forEach(function (item) {
+		item.addEventListener('touchstart', function (e) {
+
+			// Prevent touch event from bubbling except for links
+			if (e.target.tagName.toLowerCase() !== 'a') {
+				e.preventDefault();
+			}
+
+			// Toggle active class
+			if (document.querySelector('.nav_menu_item.active')) {
+				document.querySelector('.nav_menu_item.active').classList.remove('active');
+			}
+			this.classList.add('active');
+
+			// Hide any currently displayed submenus
+			if (document.querySelector('.nav_menu_submenu.active')) {
+				// Get parent element to toggle arrow
+				var currentActiveParentElem = document.querySelector('.nav_menu_submenu.active').parentElement;
+				down_arrow_display(currentActiveParentElem);
+				document.querySelector('.nav_menu_submenu.active').classList.remove('active');
+			}
+
+			// Display submenu for touch event item
+			var submenu = this.querySelector('.nav_menu_submenu');
+			submenu.classList.add('active');
+			up_arrow_display(item);
+		});
+	});
+}
+
+// Hide any displayed submenus on off touch for ipad landscape
+function ipadHideMenuOffClick() {
+	if (window.innerWidth === 1024) {
+		document.addEventListener('touchstart', function (e) {
+			if (!e.target.classList.contains('nav_menu_item') && !e.target.classList.contains('menuDropdown') && !e.target.classList.contains('nav_menu_item_title-wrapper')) {
+
+				var menuDisplaying = document.querySelector('.nav_menu_item.active') || null;
+
+				if (menuDisplaying) {
+					var submenuDisplaying = menuDisplaying.querySelector('.nav_menu_submenu.active');
+					down_arrow_display(menuDisplaying);
+					menuDisplaying.classList.remove('active');
+					submenuDisplaying.classList.remove('active');
+				}
+			}
+		});
+	}
 }
 
 function window_resize() {
@@ -553,6 +617,7 @@ function window_resize() {
 				if (burger.classList.contains('active')) burger.classList.remove('active');
 			}
 
+			ipadHideMenuOffClick();
 			set_title_text();
 		}, 250);
 	});
@@ -560,12 +625,17 @@ function window_resize() {
 
 function init($) {
 	// Init Semantic dropdown menu
-	$('.ui.dropdown').dropdown({ transition: 'drop' }).dropdown({ on: 'hover' });
+	$('.ui.dropdown').dropdown({
+		on: 'hover',
+		duration: 0
+	});
 
+	ipadHideMenuOffClick();
 	highlightNavParent();
 	set_title_text();
-	mobile_menu();
-	display_sub_menu();
+	burger_mobile_menu();
+	submenu_display();
+	mobile_submenu_display();
 	window_resize();
 }
 
