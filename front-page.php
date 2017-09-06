@@ -15,13 +15,16 @@ $sizes = wp_get_attachment_image_sizes( $img_id, 'full' );
 
 $check_host = $_SERVER['SERVER_NAME'];
 
+$formVar = do_shortcode('[formidable id=6]');
+
 $context = array(
   "check_host"  => $check_host,
   "page_data"   => $page_data,
-  "header_url"  => $header_url,  
+  "header_url"  => $header_url,
   "feat_img"    => $feat_img_obj,
-  "srcset"		=> $srcset,
-  "sizes"		=> $sizes
+  "srcset"      => $srcset,
+  "sizes"       => $sizes,
+  "formVar"     => $formVar
 );
 
 echo Twig::render( 'front-page.twig', $context );
