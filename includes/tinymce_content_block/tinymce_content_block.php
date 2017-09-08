@@ -30,4 +30,8 @@ if( !function_exists('cbl_register_buttons') ) {
 // HTTP Request - Populate active TinyMCE Editor w/ Content Block List
 add_action('admin_footer', function() {
 	wp_enqueue_script('tinymce_content_block_data_request', get_stylesheet_directory_uri() . '/includes/tinymce_content_block/content_block_data_request.js', array('jquery') );
+	wp_localize_script('tinymce_content_block_data_request', 'yaliContentBlocks', array(
+		'dataUrl' => get_site_url() . '/wp-json/wp/v2/content_block'		
+	));
 });
+
