@@ -97,6 +97,13 @@ new YaliSite();
 
 
 /*
+* Add Content Block Select List to TinyMCE - must be after Yali_Autoloader
+*
+*/
+require_once 'includes/tinymce_content_block/tinymce_content_block.php';
+
+
+/*
 * Add excerpt to pages
 *
 */
@@ -194,6 +201,22 @@ function content_type_name_register_json() {
 
 function post_content_type_names($post, $request) {	
 	return $post_content_type_names = get_the_terms($post['id'], 'content_type');
+}
+
+
+/*
+* Add Content Block Shortcode to JSON Response
+*
+*/
+add_action('rest_api_init', 'content_block_shortcode_json');
+function content_block_shortcode_json() {
+	register_rest_field(array('content_block'), 'display_shortcode', array(
+		'get_callback' => 'display_content_block_shortcode'
+	));
+}
+
+function display_content_block_shortcode($content_block, $request) {
+	return $display_shortcode = "[content_block id='" . $content_block['id'] . "' title='" . $content_block['title']['rendered'] . "']";	
 }
 
 
