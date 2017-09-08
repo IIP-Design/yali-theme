@@ -23,12 +23,8 @@ class Content_Block_Shortcode {
   public function render_cta( $id ) {
     $meta = get_post_meta(  $id );
     $post = get_post( $id );
-    $button = get_post_meta( $id, 'yali_cb_button', true );
     $context = $this->fetch_base_config( $id, $post );
-
-    if( $button && $button[0]['link'] ) {
-      $context = $this->fetch_btn_config( $context, $button );
-    }
+    $context = $this->fetch_btn_config( $context, $id, $meta );
 
     if( $meta["_thumbnail_id"][0] ) {
       $img_id = $meta["_thumbnail_id"][0];
@@ -36,7 +32,7 @@ class Content_Block_Shortcode {
       $context["srcset"] = wp_get_attachment_image_srcset( $img_id, 'full' );
       $context["sizes"] = wp_get_attachment_image_sizes( $img_id, 'full' );
     }
- 
+
     return Twig::render( 'content_blocks/cta.twig', $context );
   }
 
@@ -58,13 +54,9 @@ class Content_Block_Shortcode {
     $meta = get_post_meta(  $id );
     $post = get_post( $id );
     $widget = get_post_meta( $id, 'yali_cb_widget', true );
-    $button = get_post_meta( $id, 'yali_cb_button', true );
     $context = $this->fetch_base_config( $id, $post );
     $context["selector"] = 'feed' . $id;
-  
-    if( $button && $button[0]['link'] ) {
-      $context = $this->fetch_btn_config( $context, $button );
-    }
+    $context = $this->fetch_btn_config( $context, $id, $meta );
 
     if( $widget && $widget[0]['cdp_module'] ) {
       $context = $this->fetch_widget_config( $context, $widget );
@@ -112,14 +104,17 @@ class Content_Block_Shortcode {
   }
 
 
-  private function fetch_btn_config ( &$context, $button ) {
-      $link = $button[0]['link'];
-      $context['btn_label'] = $link['text'];
-      $context['btn_link'] = $link['url'];
-      $context['btn_new_win'] = ($link['blank'] == 'true') ? 'target="_blank"' : '';
-      $context['btn_bg_color'] = $button[0]['bg_color'];
+  private function fetch_btn_config ( &$context, $id, $meta ) {
+      $button = get_post_meta( $id, 'yali_cb_box_btn_link', true);
+      if( !$button ) {
+        return $context;
+      } 
+      $context['btn_label'] = $button['text'];
+      $context['btn_link'] = $button['url'];
+      $context['btn_new_win'] = ($button['blank'] == 'true') ? 'target="_blank"' : '';
+      $context['btn_bg_color'] = $meta['yali_cb_box_btn_bg_color'][0];
       $context['btn_label_color'] = ($context['btn_bg_color'] == '#f2d400') ? '#192856': '#ffffff';
-      $context['btn_text_alignment'] = $button[0]['h_alignment'];
+      $context['btn_text_alignment'] = $meta['yali_cb_box_btn_h_alignment'][0];
 
       return $context;
   }

@@ -326,14 +326,14 @@ class Content_Block {
  
     $cb_box_btn->add_field( array(
       'name' => 'Link',
-      'id'   => 'link',
+      'id'   =>  $prefix . 'cb_box_btn_link',
       'type' => 'link_picker'
     ));
 
     $cb_box_btn->add_field( array(
       'name'               => 'Background color',
 	    'desc'                => '',
-	    'id'                  => $prefix . 'bg_color',
+	    'id'                  => $prefix . 'cb_box_btn_bg_color',
 	    'type'                => 'colorpicker',
 	    'default'             => '#ffffff',
       'attributes'          => array(
@@ -347,7 +347,7 @@ class Content_Block {
     $cb_box_btn->add_field( array(
       'name'             => 'Alignment',
 	    'desc'             => '',
-	    'id'               => $prefix . 'h_alignment',
+	    'id'               => $prefix . 'cb_box_btn_h_alignment',
 	    'type'             => 'select',
 	    'default'          => 'center',
       'options'          => array(
