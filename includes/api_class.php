@@ -105,6 +105,15 @@ class API {
 		return $responseArr;
 	}
 
+	public static function get_all_contentblocks() {
+		$request = new WP_REST_Request('GET', '/wp/v2/content_block');
+		$response = rest_do_request($request);
+		$responseArr = [];
+		$responseArr['data'] = $response->data;
+		$responseArr['total_pages'] = $response->headers['X-WP-TotalPages'];
+		return $responseArr;
+	}
+
 	public static function get_sidebar($sidebar) {
 		$request = new WP_REST_Request('GET', '/wp-rest-api-sidebars/v1/sidebars/' . $sidebar);
 		return self::do_request( $request );
