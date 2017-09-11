@@ -26,6 +26,8 @@ YALI_Autoloader::register( get_stylesheet_directory() . '/includes/' );
 use Yali\Twig as Twig;
 use Yali\Content_Block as Content_Block;
 use Yali\Content_Block_Shortcode as Content_Block_Shortcode;
+use Yali\Custom_Button as Custom_Button;
+use Yali\Custom_Button_Shortcode as Custom_Button_Shortcode;
 
 class YaliSite {
 
@@ -42,9 +44,9 @@ class YaliSite {
 		add_action( 'init', array( $this, 'register_post_types' ) );
 		add_action( 'init', array( $this, 'register_taxonomies' ) );
 		add_action( 'init', array( $this, 'register_shortcodes' ) );
-		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) ); 
-		add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) ); 
-	
+		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
+
 		$this->twig_init();
 	}
 
@@ -68,6 +70,7 @@ class YaliSite {
      */
     function register_post_types() {
     	Content_Block::register();
+			Custom_Button::register();
 		}
 
 	function register_taxonomies() {
@@ -76,6 +79,7 @@ class YaliSite {
 
 	function register_shortcodes() {
 		Content_Block_Shortcode::register();
+		Custom_Button_Shortcode::register();
 	}
 
 	function enqueue_scripts() {
@@ -109,11 +113,11 @@ add_post_type_support( 'page', 'excerpt' );
 */
 add_action('init', 'excerpt_more_override');
 function excerpt_more_override() {
-	remove_filter('excerpt_more', 'corona_excerpt_read_more');	
+	remove_filter('excerpt_more', 'corona_excerpt_read_more');
 	add_filter('excerpt_more', function($more) {
 		global $post;
 		return '&nbsp; <a href="' . get_permalink($post->ID) . '"> Read More...</a>';
-	});		
+	});
 }
 
 
@@ -144,7 +148,7 @@ function tag_names_register_json() {
 	));
 }
 
-function post_tag_names($post, $request) {	
+function post_tag_names($post, $request) {
 	return $post_tag_names = get_the_tags($post['id']);
 }
 
@@ -160,7 +164,7 @@ function category_name_register_json() {
 	));
 }
 
-function post_category_names($post, $request) {	
+function post_category_names($post, $request) {
 	return $post_tag_names = get_the_category($post['id']);
 }
 
@@ -176,7 +180,7 @@ function series_name_register_json() {
 	));
 }
 
-function post_series_names($post, $request) {	
+function post_series_names($post, $request) {
 	return $post_series_names = get_the_terms($post['id'], 'series');
 }
 
@@ -192,7 +196,7 @@ function content_type_name_register_json() {
 	));
 }
 
-function post_content_type_names($post, $request) {	
+function post_content_type_names($post, $request) {
 	return $post_content_type_names = get_the_terms($post['id'], 'content_type');
 }
 
