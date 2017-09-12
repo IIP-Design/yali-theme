@@ -5,7 +5,8 @@
 body {
   background-color: #fff;
   color: $font-color;
-  line-height: 1.428;
+  line-height: 1.44;
+  letter-spacing: 0.3px;
 }
 
 main {
@@ -50,8 +51,7 @@ main {
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
-  display: block;
-  /*width: 100%;*/
+  display: block;  
 }
 
 
