@@ -100,6 +100,9 @@
 
 			&_excerpt {
 				margin-bottom: 5px;
+				@media screen and (min-width: 934px) {
+					font-size: em(17);
+				}				
 			}
 
 			&_tags {
@@ -112,7 +115,7 @@
 					font-style: italic;
 					font-weight: 300;					
 					color: $blue-navy;
-					@media screen and (max-width: 767px) {
+					@media screen and (max-width: 933px) {
 						font-size: em(12, $mobile);
 					}
 
