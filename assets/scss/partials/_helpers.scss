@@ -3,11 +3,11 @@
 	width: 0;
 	height: 0;
 	margin-left: 3px;
-	border-left: 8px solid transparent;
-	border-right: 8px solid transparent;
-	border-top: 8px solid $lightblue;
+	border-left: 6px solid transparent;
+	border-right: 6px solid transparent;
+	border-top: 6px solid $lightblue;
 	@media screen and (max-width: 933px) {
-		border-width: 0.8rem;
+		border-width: 0.6rem;
 	}
 }
 
@@ -16,11 +16,11 @@
 	width: 0;
 	height: 0;
 	margin-left: 3px;
-	border-left: 8px solid transparent;
-	border-right: 8px solid transparent;
-	border-bottom: 8px solid $lightblue;
+	border-left: 6px solid transparent;
+	border-right: 6px solid transparent;
+	border-bottom: 6px solid $lightblue;
 	@media screen and (max-width: 933px) {
-		border-width: 0.8rem;
+		border-width: 0.6rem;
 	}
 }
 

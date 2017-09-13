@@ -75,6 +75,7 @@ p,
 ol {
   font-size: em(20); 
   font-weight: 300;
+  line-height: 1.44;
   @media screen and (max-width: 933px) {
     font-size: em(18, $mobile);
   }

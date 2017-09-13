@@ -228,4 +228,5 @@ function display_content_block_shortcode($content_block, $request) {
 * IIP Interactive Plugin Edits
 *
 */
-require_once get_stylesheet_directory() . '/assets/edit-iip-interactive-plugin/edit-iip-interactive.php';
+
+require_once get_stylesheet_directory() . '/includes/edit-iip-interactive-plugin/edit-iip-interactive.php';
