@@ -84,6 +84,7 @@ ol {
   }
 }
 
+
 ul {
   font-weight: 300;
 }
@@ -114,4 +115,13 @@ blockquote {
 
 .text_bold {
     font-weight: 700;
+}
+
+
+.caption {
+  font-size: em(14);
+  font-style: italic;
+  @media screen and (max-width: 933px) {
+    font-size: em(12, $mobile);
+  }
 }

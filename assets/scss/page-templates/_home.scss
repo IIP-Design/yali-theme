@@ -22,12 +22,51 @@
 
 	.item {
 
-		&_excerpt {
-			margin-bottom: 10px;
+		&_headline {
+			@media screen and (min-width: 1101px) {
+				font-size: 20px;
+			}
+			@media screen and (max-width: 1100px) {
+				font-size: 18px;	
+			}
 		}
 
-		&_link {
-			
+		&_excerpt {
+			margin-bottom: 10px;		
+			@media screen and (min-width: 934px) {
+				font-size: 17px;
+			}
+			@media screen and (min-width: 768px) and (max-width: 900px) {
+				font-size: 16px;
+			}
+		}
+
+		&_link {			
+			@media screen and (min-width: 934px) {
+				font-size: 17px;
+			}			
+			@media screen and (min-width: 768px) and (max-width: 900px) {
+				font-size: 16px;
+			}
+
+			&_break {
+				@media screen and (min-width: 768px) {
+					display: block;
+				}
+
+				&--mwf {
+					@media screen and (min-width: 425px) and (max-width: 454px) {
+						display: block;		
+					}
+				}
+
+				&--network {
+					@media screen and (min-width: 977px) {
+						display: inline;	
+					}
+				}
+			}
+
 			a {
 				color: $blue-medium;
 			}
