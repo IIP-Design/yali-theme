@@ -18,8 +18,7 @@
 					height: 500,
 					buttons: [{
 						text: 'Insert Into Post',
-						onclick: function() {	
-							console.log('content block js: ', tinymce.activeEditor.selectedBlocks);
+						onclick: function() {
 							tinymce.activeEditor.selectedBlocks.map(function(block) {
 								tinymce.activeEditor.execCommand('mceInsertContent', false, '<p>' + block + '</p>') ;
 							});
