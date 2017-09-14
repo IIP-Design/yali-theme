@@ -23,6 +23,7 @@ class Content_Block_Shortcode {
   public function render_cta( $id ) {
     $meta = get_post_meta(  $id );
     $post = get_post( $id );
+
     $context = $this->fetch_base_config( $id, $post );
     $context = $this->fetch_btn_config( $context, $id, $meta );
 
@@ -49,19 +50,16 @@ class Content_Block_Shortcode {
     return Twig::render( 'content_blocks/social.twig', $context );
   }
 
-  // WIDGET CONTENT BLOCK
+  // POST LIST CONTENT BLOCK (CDP)
   public function render_post_list( $id ) {
-    $meta = get_post_meta(  $id );
+    $meta = get_post_meta( $id );
     $post = get_post( $id );
-    $widget = get_post_meta( $id, 'yali_cb_widget', true );
+
     $context = $this->fetch_base_config( $id, $post );
     $context["selector"] = 'feed' . $id;
+    $context = $this->fetch_module_config( $context, $meta );
     $context = $this->fetch_btn_config( $context, $id, $meta );
-
-    if( $widget && $widget[0]['cdp_module'] ) {
-      $context = $this->fetch_widget_config( $context, $widget );
-    } 
-   
+  
     return Twig::render( 'content_blocks/post-list.twig', $context );
   }
   
@@ -82,27 +80,29 @@ class Content_Block_Shortcode {
     return $context;
   }
 
-  private function fetch_widget_config ( &$context, $widget ) {
-    $w = $widget[0];
-    $cdp_widget = $widget[0]['cdp_module'];
-    $context['cdp_widget'] = $w['cdp_module'];
-    $context['cdp_num_posts'] = $w['cdp_num_posts'];
-    $context['cdp_category'] = ( empty( $w['cdp_category']) || $w['cdp_category'] == 'select' ) ?  '' : $w['cdp_category'] ;
-    $context['cdp_ui_layout'] = $w['cdp_ui_layout'];
-    $context['cdp_ui_direction'] = $w['cdp_ui_direction'];
-    $context['cdp_image_height'] = $w['cdp_image_height'] . 'px';
-    $context['cdp_image_shape'] = $w['cdp_image_shape'];
-    $context['cdp_border_width'] = $w['cdp_border_width'] . 'px';
-    $context['cdp_border_color'] = $w['cdp_border_color'];
-    $context['cdp_border_style'] = $w['cdp_border_style'];
+  private function fetch_module_config ( &$context, $meta ) {
+    $module = $meta['yali_cdp_module'][0];
+    if( !$module ) {
+      return $context;
+    } 
+   
+    $context['cdp_widget'] = $module;
+    $context['cdp_num_posts'] = $meta['yali_cdp_num_posts'][0];
+    $context['cdp_category'] = ( empty( $meta['yali_cdp_category'][0]) || $meta['yali_cdp_category'][0] == 'select' ) ?  '' : $meta['yali_cdp_category'][0] ;
+    $context['cdp_ui_layout'] = $meta['yali_cdp_ui_layout'][0];
+    $context['cdp_ui_direction'] = $meta['yali_cdp_ui_direction'][0];
+    $context['cdp_image_height'] = $meta['yali_cdp_image_height'][0] . 'px';
+    $context['cdp_image_shape'] = $meta['yali_cdp_image_shape'][0];
+    $context['cdp_border_width'] = $meta['yali_cdp_border_width'][0] . 'px';
+    $context['cdp_border_color'] = $meta['yali_cdp_border_color'][0];
+    $context['cdp_border_style'] = $meta['yali_cdp_border_style'][0];
 
-    $path = "https://s3.amazonaws.com/iip-design-stage-modules/modules/cdp-module-{$cdp_widget}/cdp-module-";
-    $context['widget_css'] = $path . $cdp_widget . '.min.css';
-    $context['widget_js'] = $path . $cdp_widget . '.min.js';
+    $path = "https://s3.amazonaws.com/iip-design-stage-modules/modules/cdp-module-{$module}/cdp-module-";
+    $context['widget_css'] = $path . $module . '.min.css';
+    $context['widget_js'] = $path . $module . '.min.js';
 
     return $context;
   }
-
 
   private function fetch_btn_config ( &$context, $id, $meta ) {
       $button = get_post_meta( $id, 'yali_cb_box_btn_link', true);
