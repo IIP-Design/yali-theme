@@ -32,10 +32,17 @@
 
 
 .tag_article {
-	
-	
+		
 	&_title {
 		margin-bottom: 10px;
 	}
 
+	&_content {
+
+		p {
+			@media screen and (min-width: 934px) {
+				font-size: em(17);
+			}
+		}
+	}
 }

@@ -61,6 +61,9 @@
 
 		&_excerpt {
 			margin-bottom: 5px;
+			@media screen and (min-width: 934px) {
+				font-size: em(17);
+			}
 			@media screen and (max-width: 767px) {
 				margin-bottom: 10px;
 			}

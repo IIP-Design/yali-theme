@@ -174,24 +174,27 @@
 				}
 			}
 
-			&_title {
-				font-size: em(24);				
-				font-weight: bold;
-				color: $blue-navy;
+			&_title {				
+				margin: 0;
+				
+				a {
+					color: $blue-navy;
 
+					&:hover {
+						text-decoration: underline;
+						color: $blue-medium;					
+					}
 
-				&:hover {
-					text-decoration: underline;
-					color: $blue-medium;					
-				}
-
-				&:active {
-					background-color: $yellow;
-				}
+					&:active {
+						background-color: $yellow;
+					}
+				}			
 			}
 
 			&_excerpt {
-
+				@media screen and (min-width: 934px) {
+					font-size: em(17);
+				}
 			}
 
 			&_tags {

@@ -14,11 +14,15 @@
 		padding-top: 8px;
 		border-top: 1px solid #ccc;
 
-		.tax_term {
+		.tax_term {			
 			display: inline-block;
+			font-size: em(14);
 			color: #aaa;
+			@media screen and (max-width: 933px) {
+				font-size: em(12, $mobile);
+			}
 
-			a {
+			a {				
 				font-style: italic;
 				color: #aaa;		
 
@@ -35,7 +39,7 @@
 		.cta_link {
 			display: inline-block;		
 			max-width: 100%;		
-			margin: 0 auto;
+			margin: 0 auto;			
 			color: $blue-navy;
 			background-color: $yellow;
 		}

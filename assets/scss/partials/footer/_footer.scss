@@ -45,7 +45,7 @@
 
 
   &_branding {        
-    font-weight: 700;
+    font-weight: 600;
     @media screen and (max-width: 589px) {
       padding-bottom: 18px;
     }
@@ -65,7 +65,7 @@
       display: inline-block;
       margin-top: 0;      
       font-size: em(24, $font-size);
-      font-weight: 700;
+      font-weight: 600;
       @media screen and (max-width: 933px) {
         margin-top: 3px;
         font-size: em(18, $mobile);
@@ -101,7 +101,7 @@
 
     &_item {
       font-size: em(18, $font-size);
-      font-weight: 700;
+      font-weight: 600;
       @media screen and (max-width: 933px) {
         font-size: em(14, $mobile);
       }
@@ -201,7 +201,7 @@
       vertical-align: top;
       display: inline-block;
       font-size: em(20, $font-size);
-      font-weight: 700;
+      font-weight: 600;
       @media screen and (min-width: 590px) and (max-width: 933px) {
         font-size: em(16, $mobile);
       }

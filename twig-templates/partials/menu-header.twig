@@ -24,9 +24,9 @@
             </div>
             {% if item.children %}              
               <ul class='nav_menu_submenu'>
+                <span class='opaque_bg'></span>
                 {% for child in item.children %}                  
-                  <li class='nav_menu_submenu_item {{ pagename == child.object_slug ? "current_submenu_page" : "" }}'>
-                    <span class='opaque_bg'></span>
+                  <li class='nav_menu_submenu_item {{ pagename == child.object_slug ? "current_submenu_page" : "" }}'>                    
                     <a href="{{ child.url }}">{{ child.title }}</a>
                   </li>
                  {% endfor %}

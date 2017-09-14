@@ -1,0 +1,165 @@
+<style type="text/css">
+
+	.hide {
+		display: none;
+	}
+
+	.show {
+		display: list-item;
+	}
+	
+	#cb_list {
+		padding: 15px;
+	}
+
+	#cb_list_search {
+		display: block;
+		height: 40px;
+		width: 100%;
+		font-size: 16px;
+	}	
+
+	#cb_list_items {
+		list-style: none;
+		max-height: 300px;		
+		padding: 0;
+		border: 1px solid #cdcdcd;
+		overflow: scroll;
+		font-family: 'system-ui';
+	}
+
+	.cb_list_item {
+		padding: 12px 5px;
+		cursor: pointer;
+	}
+
+	.highlight {
+		background-color: #0073aa;
+		color: #fff;
+	}
+
+</style>
+
+
+<div id='cb_list'>
+	<input id='cb_list_search' type='text' value='' placeholder='Search'>
+	<div id='items_wrapper'></div>	
+</div>
+
+
+<script>	
+	// Get content block list from main tinymce editor
+	var args = top.tinymce.activeEditor.windowManager.getParams();	
+
+	// DOM Elements
+	var listDiv = document.getElementById('items_wrapper');
+	var search = document.getElementById('cb_list_search');
+	var ul = document.createElement('ul');
+	ul.id = 'cb_list_items';
+	listDiv.appendChild(ul);
+
+	// Save selected content block list to main tinymce editor
+	var selectedBlocks = parent.tinymce.activeEditor.selectedBlocks = [];
+	
+	// Map over content block list & append to listDiv ul, add click event to update selected content block list
+	args.listItems.map(function(item){	
+		var li = document.createElement('li');		
+		li.innerHTML = item.text;
+		li.classList.add('cb_list_item');
+		li.dataset.shortcode = item.value;
+
+		ul.appendChild(li);
+
+		li.addEventListener('click', function() {
+			toggleHighlight(this);
+			updateSelectedBlocks(this);			
+		});		
+	});
+	
+	function toggleHighlight(listItem) {
+		if( listItem.classList.contains('highlight') ) {
+			listItem.classList.remove('highlight');
+		} else {
+			listItem.classList.add('highlight');
+		}
+	}
+
+	function updateSelectedBlocks(listItem) {		
+		if( !listItem.classList.contains('highlight') ) {
+			var blockIndex = selectedBlocks.indexOf(listItem.dataset.shortcode);
+			selectedBlocks.splice(blockIndex, 1);
+		} else {
+			selectedBlocks.push(listItem.dataset.shortcode);
+		}
+	}
+
+
+	/**
+	*	Search Feature 
+	**/
+
+	// Create Observable
+	function SearchFilter() {
+		this.inputText = '';
+		this.observers = [];
+	}
+
+	// Update search term and notify all observers
+	SearchFilter.prototype.inputTextUpdate = function(str) {
+		this.searchTerm = str.toLowerCase();		
+		this.notify();
+	}
+
+	// Add observer (function) to object
+	SearchFilter.prototype.addObserver = function(fn) {
+		this.observers.push(fn);
+	}
+
+	// Call each observer fn
+	SearchFilter.prototype.notify = function() {
+		this.observers.forEach(function(observer) {
+			observer.call();
+		});
+	}
+
+	function searchListItems(listItem) {
+		var text = listItem.textContent.toLowerCase();
+		
+		if( !(text.indexOf(searchBlocks.searchTerm) > -1) ) {				
+			hideListItem(listItem);
+		} else {
+			showListItem(listItem);
+		}
+		
+		if( searchBlocks.searchTerm == '' ) {
+			listItem.classList.remove('hide', 'show');
+		}
+	}
+
+	function hideListItem(listItem) {		
+		if( listItem.classList.contains('show') ) listItem.classList.remove('show');			
+		listItem.classList.add('hide');
+	}
+
+	function showListItem(listItem) {
+		if( listItem.classList.contains('hide') ) listItem.classList.remove('hide');
+		listItem.classList.add('show');		
+	}
+
+
+	// SearchFilter instance
+	var searchBlocks = new SearchFilter();
+
+	searchBlocks.addObserver(function() {
+		var blockList = document.querySelectorAll('.cb_list_item');		
+		for( var i = 0; i < blockList.length; i++ ) {
+			searchListItems(blockList[i]);
+		}		
+	});
+
+	// Search Input Change Event Listener
+	search.addEventListener('input', function(e){		
+		searchBlocks.inputTextUpdate(e.target.value);		
+	});
+	
+</script>

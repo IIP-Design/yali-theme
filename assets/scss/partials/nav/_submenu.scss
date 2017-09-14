@@ -1,28 +1,15 @@
-//Overwrite Semantic
-.ui.dropdown .menu {	
-	border: none;
-	border-radius: 0;
-	background: transparent;	
-	@media screen and (min-width: 934px) {
-		padding-top: 34px;
-	}
-	@media screen and (max-width: 933px) {
-		position: relative;
-		margin-top: 1em;
-		box-shadow: none;
-	}
-}
-
 .nav_menu_submenu {	
 	display: none;
 	position: absolute;
 	top: 0;
 	padding: 60px 10px 10px 10px;
+	margin-left: -20px;
 	list-style: none;
 	@media screen and (max-width: 933px) {		
 		position: relative;
 		top: 10px;
 		padding: 0;		
+		margin-left: 0;
 
 		.opaque_bg {
 			display: none;
@@ -33,16 +20,37 @@
 		display: block;
 	}
 
-	&_item {		
+	&_item {						
 
 		a {
-			display: block;
+			display: inline-block;
+			position: relative;
 			padding: 10px;			
-			font-weight: 700;
+			font-weight: 600;
 			color: #fff;
 			@media screen and (max-width: 933px) {
               font-size: em(14, $mobile);
             }
-		}		
+
+            &:after {			
+				content: '';
+	            position: absolute;
+	            left: 10px;
+	            bottom: 0;
+	            display: block;
+	            height: 0;
+	            width: 95%;
+	            background-color: $yellow;
+			}
+
+			&:hover {
+				
+				&:after {
+					height: 5px;
+				}
+			}
+		}
+
+
 	}
 }
