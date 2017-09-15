@@ -4,7 +4,7 @@ add_action('wp_enqueue_scripts', function(){ wp_enqueue_script('iip_interactive_
 
 add_action('admin_enqueue_scripts', function() {
   wp_dequeue_script('iip_interactive_script_admin');
-  wp_enqueue_script('edit-iip-interactive-admin', get_stylesheet_directory_uri() . '/assets/edit-iip-interactive-plugin/edit-iip-interactive-admin.js', array('jquery', 'jquery-ui-datepicker') );
+  wp_enqueue_script('edit-iip-interactive-admin', get_stylesheet_directory_uri() . '/includes/edit-iip-interactive-plugin/edit-iip-interactive-admin.js', array('jquery', 'jquery-ui-datepicker') );
 });
 
 add_action('init', function() { 

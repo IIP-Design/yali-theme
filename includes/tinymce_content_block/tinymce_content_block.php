@@ -28,15 +28,27 @@ if( !function_exists('cbl_register_buttons') ) {
 
 // HTTP Request - Populate active TinyMCE Editor w/ Content Block List
 add_action('admin_footer', function() {
-	wp_enqueue_script('tinymce_content_block_data_request', get_stylesheet_directory_uri() . '/includes/tinymce_content_block/js/content_block_data_request.js', array('jquery') );
-	wp_localize_script('tinymce_content_block_data_request', 'yaliContentBlocks', array(
-		'dataUrl' => get_site_url() . '/wp-json/wp/v2/content_block',
-		'contentBlockHtml' => get_stylesheet_directory_uri() . '/includes/tinymce_content_block/html/contentBlockList.html'
-	));
+
+	if( function_exists('get_current_screen') ) {
+		
+		$screen = get_current_screen();		
+		if( $screen->base == 'post' ) {
+			wp_enqueue_script('tinymce_content_block_data_request', get_stylesheet_directory_uri() . '/includes/tinymce_content_block/js/content_block_data_request.js', array('jquery') );
+			wp_localize_script('tinymce_content_block_data_request', 'yaliContentBlocks', array(
+				'dataUrl' => get_site_url() . '/wp-json/wp/v2/content_block',
+				'contentBlockHtml' => get_stylesheet_directory_uri() . '/includes/tinymce_content_block/html/contentBlockList.html'
+			));
+		}
+	}		
 });
 
 
 // Style tinymce button
 add_action('admin_head', function() {
-	wp_enqueue_style('yali_add_content_block_tinymce_button', get_stylesheet_directory_uri() . '/includes/tinymce_content_block/css/add_content_block_tinymce_button.css');
+	if( function_exists('get_current_screen') ) {
+		$screen = get_current_screen();		
+		if( $screen->base == 'post' ) {
+			wp_enqueue_style('yali_add_content_block_tinymce_button', get_stylesheet_directory_uri() . '/includes/tinymce_content_block/css/add_content_block_tinymce_button.css');
+		}
+	}
 });
