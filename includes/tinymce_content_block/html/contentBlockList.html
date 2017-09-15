@@ -62,19 +62,22 @@
 	var selectedBlocks = parent.tinymce.activeEditor.selectedBlocks = [];
 	
 	// Map over content block list & append to listDiv ul, add click event to update selected content block list
-	args.listItems.map(function(item){	
-		var li = document.createElement('li');		
-		li.innerHTML = item.text;
-		li.classList.add('cb_list_item');
-		li.dataset.shortcode = item.value;
+	if( args && args.listItems.length > 0 ){
+		args.listItems.map(function(item){	
+			var li = document.createElement('li');		
+			li.innerHTML = item.text;
+			li.classList.add('cb_list_item');
+			li.dataset.shortcode = item.value;
 
-		ul.appendChild(li);
+			ul.appendChild(li);
 
-		li.addEventListener('click', function() {
-			toggleHighlight(this);
-			updateSelectedBlocks(this);			
-		});		
-	});
+			li.addEventListener('click', function() {
+				toggleHighlight(this);
+				updateSelectedBlocks(this);			
+			});		
+		});	
+	}
+	
 	
 	function toggleHighlight(listItem) {
 		if( listItem.classList.contains('highlight') ) {
