@@ -16,7 +16,7 @@ class Content_Block {
   public function admin_enqueue_scripts() {
     wp_enqueue_script( 'cmb2-addon-js', get_stylesheet_directory_uri() . '/assets/admin/cmb2.js',array( 'jquery' ), '1.0.0', true );
   }
-  
+
   /**
    * Register the Content Block custom post type
    *
@@ -60,10 +60,9 @@ class Content_Block {
    *
    * @return void
    */
-  public function content_block_fields() {
+  public function content_block_fields() {    
 
-    $prefix = 'yali_';
-    
+    $prefix = 'yali_';    
 
     //******  Start general fields  ******//
     $cb_box = new_cmb2_box( array(
@@ -79,7 +78,7 @@ class Content_Block {
 	    'desc'             => 'What type of content block',
 	    'id'               => $prefix . 'cb_type',
 	    'type'             => 'select',
-	    'default'          => 'left',
+	    'default'          => 'cta',
       'options'          => array(
         'cta'            => __( 'Call To Action', 'yali' ),
         'social'         => __( 'Social Icons', 'yali' ),
@@ -188,13 +187,14 @@ class Content_Block {
         ))
       )
 	  ));
+    
 
     //******  Start cdp widget fields  ******//
     $cb_box_cdp = new_cmb2_box( array(
       'id'           =>  $prefix . 'cb_box_cdp',
       'title'        => __( 'Add CDP Widget', 'yali' ),
       'object_types' => array( 'content_block' ),
-      'priority'     => 'low'
+      'priority'     => 'low'      
     ));
     
     // Id's for group's fields only need to be unique for the group. Prefix is not needed.
@@ -355,10 +355,44 @@ class Content_Block {
         'center'         => __( 'Center', 'yali' ),
         'right'          => __( 'Right', 'yali' )
       )
-	  ));
+	  ));    
 
+    /*** Social Block - Link Fields ***/
+    $cb_social_links = new_cmb2_box( array(
+      'id'           =>  $prefix . 'cb_social_links',
+      'title'        => __( 'Edit Social Media Links', 'yali' ),
+      'object_types' => array( 'content_block' ),
+      'priority'     => 'low'
+    ));  
+
+    $cb_social_links->add_field( array(
+      'name'  => 'Title',
+      'id'    => $prefix . 'cb_social_links_title',
+      'type'  => 'text',
+      'default' => 'Stay connected with us:'
+    ));
+
+    $cb_social_links->add_field( array(
+      'name'  => 'Facebook',
+      'id'    => $prefix . 'cb_social_links_facebook',
+      'type'  => 'text',
+      'default' => 'https://www.facebook.com/YALINetwork'
+    ));
+
+    $cb_social_links->add_field( array(
+      'name'  => 'Twitter',
+      'id'    => $prefix . 'cb_social_links_twitter',
+      'type'  => 'text',
+      'default' => 'https://twitter.com/YALINetwork'
+    ));
+
+    $cb_social_links->add_field( array(
+      'name'  => 'LinkedIn',
+      'id'    => $prefix . 'cb_social_links_linkedin',
+      'type'  => 'text',
+      'default' => 'https://www.linkedin.com/groups/7425359/profile'
+    ));
   }  
-
 
 
   /**
