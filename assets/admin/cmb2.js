@@ -28,6 +28,14 @@
 	      	}
 		}
 
+		// Hide Conditional Boxes based on initial content type selection
+		var init_content_type_selection = $('#yali_cb_type').val();
+		if( conditionalMetaboxes[init_content_type_selection] !== undefined ) {
+	    	toggleConditionalMetaboxes(init_content_type_selection);			      	
+	    } else {
+			hideAllConditionalMetaboxes();
+	    }
+		
 
 		// Toggle Metabox display on content type selection
 	 	$('#yali_cb_type').change( function() {
