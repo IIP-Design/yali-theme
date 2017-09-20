@@ -19,7 +19,7 @@
 	.application {
 
 		&_content {
-			font-size: em(20); 
+			font-size: em(22); 
 			font-weight: 300;
 			@media screen and (max-width: 933px) {
 				font-size: em(18, $mobile);

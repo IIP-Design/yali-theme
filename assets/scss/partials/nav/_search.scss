@@ -42,7 +42,7 @@
 
         input {
           vertical-align: top;
-          height: 39px;          
+          height: 42px;          
           text-align: center;                    
           transition: width 0.5s ease-in, opacity 0.2s ease-in;
           @media screen and (min-width: 934px) {    
@@ -62,7 +62,7 @@
           position: absolute;
           left: 0;
           display: block;
-          height: 39px;          
+          height: 42px;          
           width: 39px;
           margin: 0 -4px 0 0;
           background-color: #fff;
@@ -79,7 +79,7 @@
     .search-icon_wrapper {
       vertical-align: top;
       display: inline-block;
-      height: 39px;          
+      height: 42px;          
       width: 39px;
       background-color: $darkblue;
       transition: background-color 0.2s ease-in;
