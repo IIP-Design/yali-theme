@@ -2,10 +2,14 @@
 
 {% block content %}
 
-<section class='content_block_preview'>
-	<p class='preview_text'><span class='preview_text_title'>Content Block Preview</span>: <span class='text_bold'>{{ post_data.title.rendered }}</span></p>
-	<div>{{ content_block }}</div>
-</section>
+<div class='ui container'>
+	<div class='inner-container'>
+		<section class='content_block_preview'>
+			<p class='preview_text'><span class='preview_text_title'>Content Block Preview</span>: <span class='text_bold'>{{ post_data.title.rendered }}</span></p>
+			<div>{{ content_block }}</div>
+		</section>
+	</div>
+</div>
 
 
 {% endblock %}

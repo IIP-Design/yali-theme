@@ -50,6 +50,27 @@ class Content_Block_Shortcode {
     return Twig::render( 'content_blocks/social.twig', $context );
   }
 
+
+  // ACCORDION CONTENT BLOCK
+  public function render_accordion( $id ) {
+    $items = array();
+    $meta_data = get_post_meta($id, 'accordion_repeat_group', true);
+
+    foreach ($meta_data as $item => $item_value) {
+      $item_value['item_content'] = wpautop($item_value['item_content']);
+      array_push($items, $item_value);
+    }
+
+    $context = array(
+      'title' => get_post_meta($id, 'yali_cb_accordion_headline', true),      
+      'meta_data' => $meta_data,
+      'items_array' => $items
+    );
+
+    return Twig::render( 'content_blocks/accordion.twig', $context );
+  }
+
+
   // POST LIST CONTENT BLOCK (CDP)
   public function render_post_list( $id ) {
     $meta = get_post_meta( $id );

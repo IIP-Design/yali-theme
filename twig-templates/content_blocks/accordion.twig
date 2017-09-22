@@ -1,0 +1,10 @@
+<div class='accordion_layout'>
+	{% if title %}<h3>{{ title }}</h3>{% endif %}
+	
+	<div class='ui styled accordion'>		
+		{% for item in items_array %}
+		<h4 class='title'>{{ item.item_title }}</h4>			
+		<div class='content'>{{ item.item_content }}</div>
+		{% endfor %}	
+	</div>
+</div>
