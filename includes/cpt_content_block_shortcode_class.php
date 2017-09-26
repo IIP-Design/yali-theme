@@ -4,6 +4,8 @@ namespace Yali;
 
 class Content_Block_Shortcode {
 
+  const WIDGET_ROOT = 'https://s3.amazonaws.com/iip-design-stage-modules/modules/';
+
   public static function register() {
     new self();
   }
@@ -12,8 +14,33 @@ class Content_Block_Shortcode {
      add_shortcode( 'content_block', array($this, 'render_content_block') );
   }
 
+  /**
+   * Takes in attributes from content bloack and calls the applicable content block render method
+   * The render method called is generated from appending the content block type to the 'render_' prefix
+   * For example, to render the 'cta' or Call to action block, the function appends 'cta to 'render_'
+   * and call the render_cta method.  To add a new content type, add it to the options attribute in
+   * 'Type of content block' CMB2 field under the General Box in the content_Block class:
+   * 
+   *  $cb_box->add_field( array(
+   *  'name'                => 'Block Type',
+	 *  'desc'                => 'Type of content block',
+	 * 'id'                  => $prefix . 'cb_type',
+	 *  'type'                => 'select',
+	 * 'default'             => 'left',
+   *  'options'             => array(
+   *     'cta'               => __( 'Call To Action', 'yali' ),
+   *     'social'            => __( 'Social Icons', 'yali' ),
+   *     'post_list'         => __( 'Standard Post List', 'yali' ),
+   *     'my_block'            => __( 'My Block', 'yali' )
+   *    )
+	 * ));
+   * 
+   *
+   * @param [array] $atts Attributes from content block
+   * @return void
+   */
   public function render_content_block ( $atts ) {
-    // check for id
+    // check for content block id
     $id = $atts['id'];
     $type = get_post_meta( $atts['id'], 'yali_cb_type', true );  
     return call_user_func( array($this, 'render_' . $type ), $id );
@@ -81,11 +108,8 @@ class Content_Block_Shortcode {
   }
 
   private function fetch_module_config ( &$context, $meta ) {
-    $module = $meta['yali_cdp_module'][0];
-    if( !$module ) {
-      return $context;
-    } 
-   
+    $module = 'article-feed';
+      
     $context['cdp_widget'] = $module;
     $context['cdp_num_posts'] = $meta['yali_cdp_num_posts'][0];
     $context['cdp_category'] = ( empty( $meta['yali_cdp_category'][0]) || $meta['yali_cdp_category'][0] == 'select' ) ?  '' : $meta['yali_cdp_category'][0] ;
@@ -97,7 +121,7 @@ class Content_Block_Shortcode {
     $context['cdp_border_color'] = $meta['yali_cdp_border_color'][0];
     $context['cdp_border_style'] = $meta['yali_cdp_border_style'][0];
 
-    $path = "https://s3.amazonaws.com/iip-design-stage-modules/modules/cdp-module-{$module}/cdp-module-";
+    $path = self::WIDGET_ROOT . "cdp-module-{$module}/cdp-module-";
     $context['widget_css'] = $path . $module . '.min.css';
     $context['widget_js'] = $path . $module . '.min.js';
 

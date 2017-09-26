@@ -3,6 +3,7 @@
 namespace Yali;
 
 use Twig_YALI_Extension;
+use Cmb2Grid\Grid\Cmb2Grid as CmbGrid;
 
 class Content_Block {
 
@@ -65,118 +66,34 @@ class Content_Block {
     $prefix = 'yali_';
     
 
-    //******  Start general fields  ******//
+    /*************************************************************************************************
+    *                                        GENERAL FIELDS                                          *
+    **************************************************************************************************/
     $cb_box = new_cmb2_box( array(
       'id'           =>  $prefix . 'cb_box',
-      'title'        => __( 'General fields', 'yali' ),
+      'title'        => __( 'General Fields', 'yali' ),
       'object_types' => array( 'content_block' ),
       'priority'     => 'high',
       'closed'       => false
     ));
-
-    $cb_box->add_field( array(
-      'name'             => 'Block Type',
-	    'desc'             => 'What type of content block',
-	    'id'               => $prefix . 'cb_type',
-	    'type'             => 'select',
-	    'default'          => 'left',
-      'options'          => array(
-        'cta'            => __( 'Call To Action', 'yali' ),
-        'social'         => __( 'Social Icons', 'yali' ),
-        'post_list'      => __( 'Post List', 'yali' )
-      )
-	  ));
-
-    $cb_box->add_field( array(
-      'name' => 'Underline title?',
-      'desc' => '',
-      'id'   => $prefix . 'cb_title_underline',
-      'type' => 'checkbox'
-    ));
-
-
-    $cb_box->add_field( array(
-      'name'             => 'Title alignment',
-	    'desc'             => 'How should the block title be aligned?',
-	    'id'               => $prefix . 'cb_title_alignment',
-	    'type'             => 'select',
-	    'default'          => 'left',
-      'options'          => array(
-        'left'           => __( 'Left', 'yali' ),
-        'center'         => __( 'Center', 'yali' ),
-        'right'          => __( 'Right', 'yali' )
-      )
-    ));
-    
-    $cb_box->add_field( array(
-      'name'               => 'Title color',
-	    'desc'                => '',
-	    'id'                  => $prefix . 'cb_title_color',
-	    'type'                => 'colorpicker',
-	    'default'             => '#192856',
-      'attributes'          => array(
-        'data-colorpicker'  => json_encode( array(
-            'border'        => false,
-            'palettes'      => array( '#ffffff', '#eeeeee', '#192856' )
-        ))
-      )
-	  ));
-    
-    $cb_box->add_field( array(
-      'name'            => 'Excerpt alignment',
-	    'desc'            => 'How should the excerpt be aligned?',
-	    'id'              => $prefix . 'cb_excerpt_alignment',
-	    'type'            => 'select',
-	    'default'         => 'left',
-      'options'         => array(
-        'left'          => __( 'Left', 'yali' ),
-        'center'        => __( 'Center', 'yali' ),
-        'right'         => __( 'Right', 'yali' )
-      )
-    ));
    
+    // Content block type
     $cb_box->add_field( array(
-      'name'               => 'Excerpt color',
-	    'desc'                => '',
-	    'id'                  => $prefix . 'cb_excerpt_color',
-	    'type'                => 'colorpicker',
-	    'default'             => '#192856',
-      'attributes'          => array(
-        'data-colorpicker'  => json_encode( array(
-            'border'        => false,
-            'palettes'      => array( '#ffffff', '#eeeeee', '#192856' )
-        ))
-      )
-    ));
-    
-    $cb_box->add_field( array(
-      'name'            => 'Excerpt font weight',
-	    'id'              => $prefix . 'cb_excerpt_font_weight',
-	    'type'            => 'select',
-	    'default'         => 'Normal',
-      'options'         => array(
-        '300'           => __( 'Light', 'yali' ),
-        '400'           => __( 'Normal', 'yali' ),
-        '500'           => __( 'Bold', 'yali' ),
-        '700'           => __( 'Heavy', 'yali' )
+      'name'                => 'Block Type',
+	    'desc'                => 'Type of content block',
+	    'id'                  => $prefix . 'cb_type',
+	    'type'                => 'select',
+	    'default'             => 'post_list',
+      'options'             => array(
+        'cta'               => __( 'Call To Action', 'yali' ),
+        'social'            => __( 'Social Icons', 'yali' ),
+        'post_list'         => __( 'Post List', 'yali' ),
       )
     ));
 
-    $cb_box->add_field( array(
-      'name'            => 'Text alignment',
-	    'desc'            => 'How should the remaining text be aligned?',
-	    'id'              => $prefix . 'cb_text_alignment',
-	    'type'            => 'select',
-	    'default'         => 'left',
-      'options'         => array(
-        'left'          => __( 'Left', 'yali' ),
-        'center'        => __( 'Center', 'yali' ),
-        'right'         => __( 'Right', 'yali' )
-      )
-	  ));
-
-    $cb_box->add_field( array(
-      'name'               => 'Background color',
+     // Content block background color
+     $cb_box->add_field( array(
+      'name'                => 'Block Background color',
 	    'desc'                => '',
 	    'id'                  => $prefix . 'cb_bg_color',
 	    'type'                => 'colorpicker',
@@ -188,151 +105,263 @@ class Content_Block {
         ))
       )
 	  ));
+    
+    // Underline title
+    $cb_box->add_field( array(
+      'name' => 'Underline title?',
+      'desc' => '',
+      'desc' => '',
+      'id'   => $prefix . 'cb_title_underline',
+      'type' => 'checkbox'
+    ));
 
-    //******  Start cdp widget fields  ******//
-    $cb_box_cdp = new_cmb2_box( array(
-      'id'           =>  $prefix . 'cb_box_cdp',
-      'title'        => __( 'Add CDP Widget', 'yali' ),
-      'object_types' => array( 'content_block' ),
-      'priority'     => 'low'
+    // Title alignment
+    $cb_box->add_field( array(
+      'name'             => 'Title alignment',
+	    'desc'             => 'Horizontal alignment of title within block',
+	    'id'               => $prefix . 'cb_title_alignment',
+	    'type'             => 'select',
+	    'default'          => 'left',
+      'options'          => array(
+        'left'           => __( 'Left', 'yali' ),
+        'center'         => __( 'Center', 'yali' ),
+        'right'          => __( 'Right', 'yali' )
+      )
     ));
     
-    // Id's for group's fields only need to be unique for the group. Prefix is not needed.
-    $cb_box_cdp->add_field( array(
-      'name'             => 'Widget',
-	    'desc'             => '',
-	    'id'               => $prefix . 'cdp_module',
-	    'type'             => 'select',
-	    'default'          => 'article-feed',
-      'options'          => array(
-        'article-feed'   => __( 'Article Feed', 'yali' )
+    // Title color
+    $cb_box->add_field( array(
+      'name'               => 'Title color',
+	    'desc'                => 'Content block title font color',
+	    'id'                  => $prefix . 'cb_title_color',
+	    'type'                => 'colorpicker',
+	    'default'             => '#192856',
+      'attributes'          => array(
+        'data-colorpicker'  => json_encode( array(
+            'border'        => false,
+            'palettes'      => array( '#ffffff', '#eeeeee', '#192856' )
+        ))
+      )
+	  ));
+    
+    // Excerpt alignment
+    $cb_box->add_field( array(
+      'name'            => 'Excerpt alignment',
+	    'desc'            => 'Horizontal alignment of excerpt within block',
+	    'id'              => $prefix . 'cb_excerpt_alignment',
+	    'type'            => 'select',
+	    'default'         => 'left',
+      'options'         => array(
+        'left'          => __( 'Left', 'yali' ),
+        'center'        => __( 'Center', 'yali' ),
+        'right'         => __( 'Right', 'yali' )
+      )
+    ));
+   
+    // Excerpt color
+    $cb_box->add_field( array(
+      'name'                => 'Excerpt color',
+	    'desc'                => 'Content block excerpt font color',
+	    'id'                  => $prefix . 'cb_excerpt_color',
+	    'type'                => 'colorpicker',
+	    'default'             => '#192856',
+      'attributes'          => array(
+        'data-colorpicker'  => json_encode( array(
+            'border'        => false,
+            'palettes'      => array( '#ffffff', '#eeeeee', '#192856' )
+        ))
+      )
+    ));
+    
+    // Excerpt font weight
+    $cb_box->add_field( array(
+      'name'            => 'Excerpt font weight',
+      'desc'            => 'Excerpt font color',
+	    'id'              => $prefix . 'cb_excerpt_font_weight',
+	    'type'            => 'select',
+	    'default'         => 'Normal',
+      'options'         => array(
+        '300'           => __( 'Light', 'yali' ),
+        '400'           => __( 'Normal', 'yali' ),
+        '500'           => __( 'Bold', 'yali' ),
+        '700'           => __( 'Heavy', 'yali' )
+      )
+    ));
+
+    // Remaining text alignment
+    $cb_box->add_field( array(
+      'name'            => 'Text alignment',
+	    'desc'            => 'Horizontal alignment of remaining text within block',
+	    'id'              => $prefix . 'cb_text_alignment',
+	    'type'            => 'select',
+	    'default'         => 'left',
+      'options'         => array(
+        'left'          => __( 'Left', 'yali' ),
+        'center'        => __( 'Center', 'yali' ),
+        'right'         => __( 'Right', 'yali' )
       )
 	  ));
 
-    $cb_box_cdp->add_field(  array(
-      'name'             => 'Number of posts',
-	    'id'               => $prefix . 'cdp_num_posts',
-	    'type'             => 'text_small',
-      'default'           => 3
-	  ));
 
-    //@todo Fetch from API or taxonomy type
-    global $cat_options;
-    $categories = get_categories( array(
-      'orderby' => 'name',
-      'order'   => 'ASC'
+
+    /*************************************************************************************************
+    *                                        POST LIST                                               *
+    **************************************************************************************************/
+    $cb_box_cdp = new_cmb2_box( array(
+      'id'           =>  $prefix . 'cb_box_cdp',
+      'title'        => __( 'Post List', 'america' ),
+      'object_types' => array( 'content_block' ),
+      'priority'     => 'low'
     ));
-   
-    $cat_options['select'] = 'Select';
-    foreach( $categories as $category ) {
-      $cat_options[$category->name] = $category->name;
-    }
 
-    $cb_box_cdp->add_field( array(
-      'name'            => 'Category',
-	    'desc'            => 'Select a category to display',
-	    'id'              => $prefix . 'cdp_category',
-	    'type'            => 'select',
-	    'default'         => 'select',
-      'options'         => $cat_options
+    // Select posts by
+    $cb_box_cdp->add_field(  array(
+      'name'             => __( 'Select posts by:', 'america' ),
+	    'id'               => $prefix . 'cdp_select_type_posts',
+	    'type'             => 'radio',
+      'default'          => 'recent',
+      'classes'          => 'cdp-select-posts-by',
+      'show_option_none' => false,
+      'options'          => array(
+        'recent'         => __( 'Displaying most recent or most recent in a category', 'america' ),
+        'custom'         => __( 'Choosing specifc posts', 'america' ),
+        'custom_link'    => __( 'Choosing specifc posts and adding a supplementary link', 'america' ),
+      ),
+      'desc'             =>  __( '', 'america' )
+	  ));
+    
+    // Number of posts
+    $cb_box_cdp->add_field(  array(
+      'name'                      => 'Number posts to show',
+	    'id'                        => $prefix . 'cdp_num_posts',
+	    'type'                      => 'text_small',
+      'default'                   => 3,
+      'attributes'                => array(
+        'data-conditional-id'     => $prefix . 'cdp_select_type_posts',
+        'data-conditional-value'  => 'recent'
+      )
 	  ));
 
+    // Category list
     $cb_box_cdp->add_field( array(
-      'name'            => 'Post layout',
-	    'desc'            => 'Default or Blog style',
+      'name'                      => 'Post Category',
+	    'desc'                      => 'Category from which posts will be pulled',
+	    'id'                        => $prefix . 'cdp_category',
+	    'type'                      => 'select',
+	    'default'                   => 'select',
+      'options'                   => $this->fetch_categories(),
+      'attributes'                => array(
+        'data-conditional-id'     => $prefix . 'cdp_select_type_posts',
+        'data-conditional-value'  => 'recent'
+      )
+    ));
+
+    // By selecting posts (CDP autocomplete)
+    $cb_box_cdp->add_field( array(
+      'name'                      => __( 'Posts', 'america' ),
+      'id'                        => $prefix . 'cdp_autocomplete',
+      'type'                      => 'cdp_autocomplete',
+      'repeatable'                => true,
+      'text'                      => array(
+        'add_row_text'            => 'Add Another Post',
+      )
+    ));
+
+    // By selecting individual posts with external link (group)
+    $cb_box_post_group = $cb_box_cdp->add_field( array(
+      'id'          => 'cdp_autocomplete_post_link_group',
+      'type'        => 'group',
+      'description' => __( '', 'america' ),
+      'options'     => array(
+        'group_title'   => __( 'Post {#}', 'america' ), // since version 1.1.4, {#} gets replaced by row number
+        'add_button'    => __( 'Add Another Post', 'america' ),
+        'remove_button' => __( 'Remove Post', 'america' )
+      )
+    ));
+
+    // Group : autocomplete 
+    $cb_box_cdp->add_group_field( $cb_box_post_group, array(
+      'name'  => __( 'Post', 'america' ),
+      'id'    => $prefix . 'cdp_autocomplete_post_link',
+      'type'  => 'cdp_autocomplete'
+    )); 
+    
+    // Group : external link
+    $cb_box_cdp->add_group_field( $cb_box_post_group, array(
+      'name'  => __( 'Additional Link', 'america' ),
+      'id'    => $prefix . 'cdp_post_link',
+      'type'  => 'cdp_post_link'
+    )); 
+    
+    // Tags, author and publish date
+    $cb_box_cdp->add_field( array(
+      'name'    => 'Post fields to show',
+      'desc'    => 'Check fields to include',
+      'id'      => $prefix . 'cdp_fields',
+      'type'    => 'multicheck_inline',
+      'select_all_button' => false,
+      'options' => array(
+        'tags' => 'Tags',
+        'author' => 'Author',
+        'date' => 'Publish Date',
+      ),
+    ));
+    
+    // Post layout
+    $cb_box_cdp->add_field( array(
+      'name'            => __( 'Post layout', 'america' ),
+	    'desc'            => __( 'Default (image above) or blog style (image to the left)', 'america' ),
 	    'id'              => $prefix . 'cdp_ui_layout',
 	    'type'            => 'select',
 	    'default'         => 'default',
       'options'         => array(
-        'default'       => __( 'Default', 'yali' ),
-        'blog'          => __( 'Blog', 'yali' )
+        'default'       => __( 'Default', 'america' ),
+        'blog'          => __( 'Blog', 'america' )
       )
 	  ));
 
+    // Post layout direction
     $cb_box_cdp->add_field( array(
       'name'            => 'Post layout direction',
+      'desc'            => '',
 	    'id'              => $prefix . 'cdp_ui_direction',
 	    'type'            => 'select',
 	    'default'         => 'row',
       'options'         => array(
-        'row'           => __( 'Horizontal', 'yali' ),
-        'column'        => __( 'Vertical', 'yali' )
+        'row'           => __( 'Horizontal', 'america' ),
+        'column'        => __( 'Vertical', 'america' )
       )
 	  ));
 
+    // Post image config
     $cb_box_cdp->add_field( array(
-      'name'            => 'Image shape',
-	    'id'              => $prefix . 'cdp_image_shape',
-	    'type'            => 'select',
-	    'default'         => 'rectangle',
-      'options'         => array(
-        'rectangle'     => __( 'Rectangle', 'yali' ),
-        'circle'        => __( 'Circle', 'yali' )
-      )
-	  )); 
-
-    $cb_box_cdp->add_field( array(
-      'name'            => 'Image height',
-	    'id'              => $prefix . 'cdp_image_height',
-	    'type'            => 'text_small',
-      'default'         => 220
-	  )); 
-
-    $cb_box_cdp->add_field( array(
-      'name'            => 'Image border width',
-	    'id'              => $prefix . 'cdp_border_width',
-	    'type'            => 'text_small',
-      'default'         => 0
-	  )); 
-
-    $cb_box_cdp->add_field( array(
-      'name'               => 'Image border color',
-	    'id'                 => $prefix . 'cdp_border_color',
-	    'type'               => 'colorpicker',
-	    'default'            => '#192856',
-      'attributes'         => array(
-        'data-colorpicker'  => json_encode( array(
-            'border'        => false,
-            'palettes'      => array( '#ffffff', '#eeeeee', '#f2d400', '#25ace2', '#174f9f', '#192856' ),
-        ))
-      )
-	  ));
-
-    $cb_box_cdp->add_field( array(
-      'name'            => 'Image border style',
-	    'id'              => $prefix . 'cdp_border_style',
-	    'type'            => 'select',
-	    'default'         => 'solid',
-      'options'         => array(
-        'solid'         => __( 'Solid', 'yali' ),
-        'dashed'        => __( 'Dashed', 'yali' ),
-        'dotted'        => __( 'Dotted', 'yali' ),
-        'double'        => __( 'Double', 'yali' ),
-        'groove'        => __( 'Groove', 'yali' ),
-        'ridge'         => __( 'Ridge', 'yali' ),
-        'inset'         => __( 'Inset', 'yali' ),
-        'outset'        => __( 'Outset', 'yali' )
-      )
-	  ));  
+      'name'  => __( 'Post Image', 'america' ),
+      'id'    => $prefix . 'cdp_image',
+      'type'  => 'cdp_image'
+    )); 
+    
   
-    //******  Start button fields  ******//
+    /*************************************************************************************************
+    *                                       CONTENT BLOCK BUTTON                                     *
+    **************************************************************************************************/
     $cb_box_btn = new_cmb2_box( array(
       'id'           =>  $prefix . 'cb_box_btn',
-      'title'        => __( 'Add button', 'yali' ),
+      'title'        => __( 'Button', 'yali' ),
       'object_types' => array( 'content_block' ),
       'priority'     => 'low'
     ));
-  
- 
+   
+    // Link
     $cb_box_btn->add_field( array(
       'name' => 'Link',
       'id'   =>  $prefix . 'cb_box_btn_link',
       'type' => 'link_picker'
     ));
 
+     // Button background color
     $cb_box_btn->add_field( array(
       'name'               => 'Background color',
-	    'desc'                => '',
+	    'desc'                => 'Background color of button',
 	    'id'                  => $prefix . 'cb_box_btn_bg_color',
 	    'type'                => 'colorpicker',
 	    'default'             => '#ffffff',
@@ -344,9 +373,10 @@ class Content_Block {
       )
 	  ));
 
+    // Horizontal alignment of button within block
     $cb_box_btn->add_field( array(
       'name'             => 'Alignment',
-	    'desc'             => '',
+	    'desc'             => 'Horizontal alignment of button within block',
 	    'id'               => $prefix . 'cb_box_btn_h_alignment',
 	    'type'             => 'select',
 	    'default'          => 'center',
@@ -356,10 +386,28 @@ class Content_Block {
         'right'          => __( 'Right', 'yali' )
       )
 	  ));
-
   }  
 
+  /**
+   * Fetch Wordpress categories
+   * @todo fetch from CDP
+   *
+   * @return void
+   */
+  public function fetch_categories() {
+     $cat_options =  array();
+     $categories = get_categories( array(
+       'orderby' => 'name',
+       'order'   => 'ASC'
+     ));
+    
+     $cat_options['select'] = 'Select';
+     foreach( $categories as $category ) {
+       $cat_options[$category->name] = $category->name;
+     }
 
+     return $cat_options;
+  }
 
   /**
    * Adds custom column headers to content block admin list
