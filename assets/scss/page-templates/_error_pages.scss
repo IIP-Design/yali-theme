@@ -1,0 +1,15 @@
+.error_404,
+.error_500 {
+	text-align: center;
+	@media screen and (min-width: 934px) {
+		margin-top: -88px;
+	}
+
+
+	&.hero--bg_img {
+		@media screen and (max-width: 1024px) {
+			padding-bottom: 16.25%;
+		}		
+	}
+
+}
