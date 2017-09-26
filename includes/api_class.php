@@ -105,6 +105,12 @@ class API {
 		return $responseArr;
 	}
 
+	public static function get_contentblock($id) {
+		$request = new WP_REST_Request('GET', '/wp/v2/content_block/' . $id);
+		$response = rest_do_request($request);
+		return $response->data;	
+	}
+
 	public static function get_all_contentblocks() {
 		$request = new WP_REST_Request('GET', '/wp/v2/content_block');
 		$response = rest_do_request($request);

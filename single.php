@@ -22,7 +22,7 @@ foreach($taxonomy_terms as $indx => $obj) {
 
 // TEMP
 $check_host = $_SERVER['SERVER_NAME'];
-$social_block = ( $check_host == 'yali.dev.america.gov' ) ? do_shortcode("[content_block id='13313']") : do_shortcode("[content_block id='86']");
+$social_block = do_shortcode("[content_block id='13313']");
 
 
 $context = array(

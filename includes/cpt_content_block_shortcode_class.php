@@ -67,10 +67,10 @@ class Content_Block_Shortcode {
   // SOCIAL CONTENT BLOCK
   public function render_social( $id ) {
     $context = array(
-      "title"           => "Stay connected with us:",
-      "facebook"        => "https://www.facebook.com/YALINetwork",
-      "twitter"         => "https://twitter.com/YALINetwork",
-      "linkedin"        => "https://www.linkedin.com/groups/7425359/profile",
+      "title"           => get_post_meta( $id, 'yali_cb_social_links_title', true ),
+      "facebook"        => get_post_meta( $id, 'yali_cb_social_links_facebook', true ),
+      "twitter"         => get_post_meta( $id, 'yali_cb_social_links_twitter', true ),
+      "linkedin"        => get_post_meta( $id, 'yali_cb_social_links_linkedin', true ),
       "block_bg_color"  => get_post_meta( $id, 'yali_cb_bg_color', true ),
     );
 

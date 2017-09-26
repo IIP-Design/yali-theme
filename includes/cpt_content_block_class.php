@@ -3,7 +3,6 @@
 namespace Yali;
 
 use Twig_YALI_Extension;
-use Cmb2Grid\Grid\Cmb2Grid as CmbGrid;
 
 class Content_Block {
 
