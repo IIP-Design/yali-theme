@@ -8,13 +8,21 @@ class Content_Block {
 
   public function __construct() {
       add_action( 'cmb2_admin_init',                          array($this, 'content_block_fields') );  
-      add_action( 'admin_enqueue_scripts',                    array($this, 'admin_enqueue_scripts') );  
+      add_action( 'admin_enqueue_scripts',                    array($this, 'cmb2_toggle_metaboxes_JS') );  
       add_filter( 'manage_edit-content_block_columns',        array($this, 'edit_content_block_post_columns') );
       add_filter( 'manage_content_block_posts_custom_column', array($this, 'manage_content_block_post_columns'), 10, 2 );  
   }
 
-  public function admin_enqueue_scripts() {
-    wp_enqueue_script( 'cmb2-addon-js', get_stylesheet_directory_uri() . '/assets/admin/cmb2.js',array( 'jquery' ), '1.0.0', true );
+  //public function admin_enqueue_scripts() {
+  public function cmb2_toggle_metaboxes_JS() {
+
+    if( function_exists('get_current_screen') ) {      
+      $screen = get_current_screen();      
+
+      if( $screen->base === 'post' && $screen->post_type === 'content_block' ) {        
+        wp_enqueue_script( 'cmb2-addon-js', get_stylesheet_directory_uri() . '/assets/admin/cmb2.js',array( 'jquery' ), '1.0.0', true );
+      }      
+    }  
   }
 
   /**
@@ -430,10 +438,7 @@ class Content_Block {
     $accordion->add_group_field( $accordion_group_field_id, array(
       'name'    => 'Item Content',
       'id'      => 'item_content',
-      'type'    => 'wysiwyg',
-      'options' => array(
-        'wpautop' => true
-      )
+      'type'    => 'wysiwyg'
     ));    
 
   }  

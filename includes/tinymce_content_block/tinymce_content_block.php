@@ -27,17 +27,29 @@ if( !function_exists('cbl_register_buttons') ) {
 }
 
 // HTTP Request - Populate active TinyMCE Editor w/ Content Block List
-add_action('admin_footer', function() {
+add_action('admin_footer', function() {			
 
 	if( function_exists('get_current_screen') ) {
 		
+		// check if post, page or content block edit screen
 		$screen = get_current_screen();		
 		if( $screen->base == 'post' ) {
-			wp_enqueue_script('tinymce_content_block_data_request', get_stylesheet_directory_uri() . '/includes/tinymce_content_block/js/content_block_data_request.js', array('jquery') );
-			wp_localize_script('tinymce_content_block_data_request', 'yaliContentBlocks', array(
-				'dataUrl' => get_site_url() . '/wp-json/wp/v2/content_block',
-				'contentBlockHtml' => get_stylesheet_directory_uri() . '/includes/tinymce_content_block/html/contentBlockList.html'
-			));
+			
+			// make http request for content block posts and store in var passed to content block data format file
+			$request = wp_remote_get(get_site_url() . '/wp-json/wp/v2/content_block');			
+			$content_blocks = json_decode($request['body']);
+
+			// check error status of request
+			$errorStatus = ( !empty($content_blocks->data) ) ? $content_blocks->data->status : null;			
+
+			// format content blocks data for use for tinymce in yaliContentBlocks global var
+			wp_enqueue_script('tinymce_content_block_data_format', get_stylesheet_directory_uri() . '/includes/tinymce_content_block/js/content_block_data_format.js', array('jquery') );
+			wp_localize_script('tinymce_content_block_data_format', 'yaliContentBlocks', array(		
+				'contentBlockHtml' => get_stylesheet_directory_uri() . '/includes/tinymce_content_block/html/contentBlockList.html',
+				'contentBlocks' => $content_blocks,
+				'errorStatus' => $errorStatus
+			));	
+			
 		}
 	}		
 });

@@ -57,13 +57,13 @@ class Content_Block_Shortcode {
     $meta_data = get_post_meta($id, 'accordion_repeat_group', true);
 
     foreach ($meta_data as $item => $item_value) {
+      // Add p tags to tinymce content
       $item_value['item_content'] = wpautop($item_value['item_content']);
       array_push($items, $item_value);
     }
 
     $context = array(
-      'title' => get_post_meta($id, 'yali_cb_accordion_headline', true),      
-      'meta_data' => $meta_data,
+      'headline' => get_post_meta($id, 'yali_cb_accordion_headline', true),
       'items_array' => $items
     );
 
@@ -102,10 +102,19 @@ class Content_Block_Shortcode {
   }
 
   private function fetch_module_config ( &$context, $meta ) {
+    /*
     $module = $meta['yali_cdp_module'][0];
     if( !$module ) {
       return $context;
-    } 
+    }
+    */
+
+    if( !empty($meta['yali_cdp_module']) ) {
+      $module = $meta['yali_cdp_module'][0];
+    } else {
+      return $context; 
+    }
+
    
     $context['cdp_widget'] = $module;
     $context['cdp_num_posts'] = $meta['yali_cdp_num_posts'][0];
