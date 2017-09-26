@@ -11,7 +11,6 @@ $content_block = do_shortcode($post_data['display_shortcode']);
 
 $context = array(  
   'post_data'       => $post_data,
-  'header_url'      => $header_url,
   'content_block'   => $content_block
 );
 

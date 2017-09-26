@@ -77,6 +77,27 @@ class Content_Block_Shortcode {
     return Twig::render( 'content_blocks/social.twig', $context );
   }
 
+
+  // ACCORDION CONTENT BLOCK
+  public function render_accordion( $id ) {
+    $items = array();
+    $meta_data = get_post_meta($id, 'accordion_repeat_group', true);
+
+    foreach ($meta_data as $item => $item_value) {
+      // Add p tags to tinymce content
+      $item_value['item_content'] = wpautop($item_value['item_content']);
+      array_push($items, $item_value);
+    }
+
+    $context = array(
+      'headline' => get_post_meta($id, 'yali_cb_accordion_headline', true),
+      'items_array' => $items
+    );
+
+    return Twig::render( 'content_blocks/accordion.twig', $context );
+  }
+
+
   // POST LIST CONTENT BLOCK (CDP)
   public function render_post_list( $id ) {
     $meta = get_post_meta( $id );
@@ -109,17 +130,17 @@ class Content_Block_Shortcode {
 
   private function fetch_module_config ( &$context, $meta ) {
     $module = 'article-feed';
-      
+
     $context['cdp_widget'] = $module;
-    $context['cdp_num_posts'] = $meta['yali_cdp_num_posts'][0];
+    $context['cdp_num_posts'] = ( !empty($meta['yali_cdp_num_posts']) ) ? $meta['yali_cdp_num_posts'][0] : '';
     $context['cdp_category'] = ( empty( $meta['yali_cdp_category'][0]) || $meta['yali_cdp_category'][0] == 'select' ) ?  '' : $meta['yali_cdp_category'][0] ;
-    $context['cdp_ui_layout'] = $meta['yali_cdp_ui_layout'][0];
-    $context['cdp_ui_direction'] = $meta['yali_cdp_ui_direction'][0];
-    $context['cdp_image_height'] = $meta['yali_cdp_image_height'][0] . 'px';
-    $context['cdp_image_shape'] = $meta['yali_cdp_image_shape'][0];
-    $context['cdp_border_width'] = $meta['yali_cdp_border_width'][0] . 'px';
-    $context['cdp_border_color'] = $meta['yali_cdp_border_color'][0];
-    $context['cdp_border_style'] = $meta['yali_cdp_border_style'][0];
+    $context['cdp_ui_layout'] = ( !empty($meta['yali_cdp_ui_layout']) ) ? $meta['yali_cdp_ui_layout'][0] : '';
+    $context['cdp_ui_direction'] = ( !empty($meta['yali_cdp_ui_direction']) ) ? $meta['yali_cdp_ui_direction'][0] : '';
+    $context['cdp_image_height'] = ( !empty($meta['yali_cdp_image_height']) ) ? $meta['yali_cdp_image_height'][0] . 'px' : '';
+    $context['cdp_image_shape'] = ( !empty($meta['yali_cdp_image_shape']) ) ? $meta['yali_cdp_image_shape'][0] : '';
+    $context['cdp_border_width'] = ( !empty($meta['yali_cdp_border_width']) ) ? $meta['yali_cdp_border_width'][0] . 'px' : '';
+    $context['cdp_border_color'] = ( !empty($meta['yali_cdp_border_color']) ) ? $meta['yali_cdp_border_color'][0] : '';
+    $context['cdp_border_style'] = ( !empty($meta['yali_cdp_border_style']) ) ? $meta['yali_cdp_border_style'][0] : '';
 
     $path = self::WIDGET_ROOT . "cdp-module-{$module}/cdp-module-";
     $context['widget_css'] = $path . $module . '.min.css';

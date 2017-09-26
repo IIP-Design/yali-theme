@@ -8,13 +8,21 @@ class Content_Block {
 
   public function __construct() {
       add_action( 'cmb2_admin_init',                          array($this, 'content_block_fields') );  
-      add_action( 'admin_enqueue_scripts',                    array($this, 'admin_enqueue_scripts') );  
+      add_action( 'admin_enqueue_scripts',                    array($this, 'cmb2_toggle_metaboxes_JS') );  
       add_filter( 'manage_edit-content_block_columns',        array($this, 'edit_content_block_post_columns') );
       add_filter( 'manage_content_block_posts_custom_column', array($this, 'manage_content_block_post_columns'), 10, 2 );  
   }
 
-  public function admin_enqueue_scripts() {
-    wp_enqueue_script( 'cmb2-addon-js', get_stylesheet_directory_uri() . '/assets/admin/cmb2.js',array( 'jquery' ), '1.0.0', true );
+  //public function admin_enqueue_scripts() {
+  public function cmb2_toggle_metaboxes_JS() {
+
+    if( function_exists('get_current_screen') ) {      
+      $screen = get_current_screen();      
+
+      if( $screen->base === 'post' && $screen->post_type === 'content_block' ) {        
+        wp_enqueue_script( 'cmb2-addon-js', get_stylesheet_directory_uri() . '/assets/admin/cmb2.js',array( 'jquery' ), '1.0.0', true );
+      }      
+    }  
   }
   
   /**
@@ -78,15 +86,17 @@ class Content_Block {
    
     // Content block type
     $cb_box->add_field( array(
-      'name'                => 'Block Type',
-	    'desc'                => 'Type of content block',
-	    'id'                  => $prefix . 'cb_type',
-	    'type'                => 'select',
-	    'default'             => 'post_list',
-      'options'             => array(
-        'cta'               => __( 'Call To Action', 'yali' ),
-        'social'            => __( 'Social Icons', 'yali' ),
-        'post_list'         => __( 'Post List', 'yali' ),
+
+      'name'             => 'Block Type',
+	    'desc'             => 'What type of content block',
+	    'id'               => $prefix . 'cb_type',
+	    'type'             => 'select',
+	    'default'          => 'cta',
+      'options'          => array(
+        'cta'            => __( 'Call To Action', 'yali' ),
+        'social'         => __( 'Social Icons', 'yali' ),
+        'post_list'      => __( 'Post List', 'yali' ),
+        'accordion'      => __( 'Accordion', 'yali' )
       )
     ));
 
@@ -421,6 +431,48 @@ class Content_Block {
         'right'          => __( 'Right', 'yali' )
       )
 	  ));
+
+
+    /*************************************************************************************************
+    *                                       ACCORDION                                                *
+    **************************************************************************************************/
+    $accordion = new_cmb2_box( array(
+      'id'           => $prefix . 'cb_accordion',
+      'title'        => __( 'Add Accordion Style Content Block', 'yali' ),
+      'object_types' => array('content_block'),
+      'priority'     => 'low'
+    ));
+
+    $accordion->add_field( array(
+      'name' => 'Accordion Headline (Optional)',
+      'id'   => $prefix . 'cb_accordion_headline',
+      'type' => 'text'
+    ));
+
+    $accordion_group_field_id = $accordion->add_field( array(
+      'id'            => 'accordion_repeat_group',
+      'type'          => 'group',
+      'description'   => __( 'Add Content Items for Accordion Display' ),
+      'options'       => array(
+        'group_title'     => __( 'Item {#}', 'yali' ),
+        'add_button'      => __( 'Add Another Item', 'yali' ),
+        'remove_button'   => __( 'Remove Item', 'yali' ),
+        'sortable'        => true
+      ),
+    ));
+
+    $accordion->add_group_field( $accordion_group_field_id, array(
+      'name'  => 'Item Title',
+      'id'    => 'item_title',
+      'type'  => 'text'
+    ));
+
+    $accordion->add_group_field( $accordion_group_field_id, array(
+      'name'    => 'Item Content',
+      'id'      => 'item_content',
+      'type'    => 'wysiwyg'
+    ));    
+
   }  
 
   /**
