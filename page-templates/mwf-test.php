@@ -28,7 +28,7 @@ $size = wp_get_attachment_image_sizes($img_id, 'full');
 
 
 // Custom Fields Content
-
+$intro = $page_data['cmb2']['mwf_test_intro'];
 
 
 
@@ -40,9 +40,9 @@ $context = array(
   "page_data"   => $page_data,
   "header_url"  => $header_url,  
   "feat_img"    => $feat_img_obj,
-  "srcset"		=> $srcset,
-  "size"		=> $size,
-  "countdown"   => $countdown 
+  "srcset"		  => $srcset,
+  "size"		    => $size,
+  "intro"       => $intro
 );
 
 
