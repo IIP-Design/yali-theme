@@ -1,7 +1,7 @@
 .cb_cta {
 	padding-top: 200px; 
-	padding-bottom: 50px;
-	margin-bottom: 50px;		
+	padding-bottom: 50px;	
+	margin-bottom: 50px;
 	@media screen and (max-width: 767px) {
 		margin-bottom: 25px;
 	}
@@ -9,6 +9,9 @@
 		padding: 50px 0;
 	}	
 	
+	&:last-child {
+		margin-bottom: 0;
+	}
 
 	&.has_bg_img {
 		padding-top: 33%;
