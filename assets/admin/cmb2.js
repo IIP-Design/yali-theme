@@ -2,9 +2,10 @@
   $(document).on("cmb_init", function() {
     // Metabox DOM Selections
     var widgetMetabox = document.getElementById("yali_cb_box_cdp"),
-      socialMetabox = document.getElementById("yali_cb_social_links"),
-      selectByPosts = $(".cmb-type-cdp-autocomplete.cmb-repeat"),
+      socialMetabox = document.getElementById("yali_cb_social_links"),      
       accordionMetaBox = document.getElementById('yali_cb_accordion'),
+      ctaLayoutWidth = document.getElementById('yali_cb_cta_width'),      
+      selectByPosts = $(".cmb-type-cdp-autocomplete.cmb-repeat"),
       selectByPostsLink = $(".cmb2-id-cdp-autocomplete-post-link-group");
 
 
@@ -12,7 +13,8 @@
     var conditionalMetaboxes = {
       post_list: widgetMetabox,
       social: socialMetabox,
-      accordion: accordionMetaBox
+      accordion: accordionMetaBox,
+      cta: ctaLayoutWidth
     };
 
 

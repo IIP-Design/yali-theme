@@ -1,6 +1,6 @@
 {% extends 'base.twig' %}
 
-{% block content %}
+{% block content %}	
 <section class="hero">
     <img class="ui fluid image" src="{{ header_url }}" srcset="{{ srcset }}" sizes="{{ size }}" alt="{{ header_url }}">
 </section>
@@ -13,18 +13,8 @@
 			{% endfor %}
 		</section>
 
-		{% include 'content_blocks/cta-static.twig' with 
-			{
-				title: 'Achieve Your Goals',
-				excerpt: '',
-				cta_txt: 'Apply to the fellowship today!',
-				cta_url: '#',				
-				width: 'full-container-width',
-				text_align: 'center',
-				background_color: '#25ace2',								
-				background_img: ''
-			}
-		%}		
+		<!-- CTA Content Block - Achieve Your Goals -->
+		{{ cta_achieve }}
 
 		<section class='section section1'>
 			<h3>{{ page_data.cmb2.mwf_section1.mwf_section1_title }}</h3>

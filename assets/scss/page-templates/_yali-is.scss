@@ -25,20 +25,16 @@
 				margin-top: 25px;
 			}
 		}
-	}
 
+		.accordion {
 
-	&_elements {
+			.content:last-child {
+				
+				p:not(:first-child) {
+					margin-bottom: 0;
+				}				
+			}
 
-	}
-
-
-	&_center {
-		margin-bottom: 25px;
-
-		p {
-			margin-bottom: 0;
 		}
-	}
-
+	}	
 }

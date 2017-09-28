@@ -1,4 +1,7 @@
-<section class='cb cb_cta full-width' style="background-color: {{ block_bg_color }}" data-responsive-background-image>  
+<section 
+  class='cb cb_cta {{ ( cta_layout[0] == "on" ) ? "full-width" : "full-container-width" }}' 
+  style="background-color: {{ block_bg_color }}" 
+  data-responsive-background-image>  
   <img src="{{ header_url }}"
       sizes="{{ sizes }}"
       srcset="{{ srcset }}">

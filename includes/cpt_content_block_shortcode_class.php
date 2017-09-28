@@ -54,12 +54,14 @@ class Content_Block_Shortcode {
     $context = $this->fetch_base_config( $id, $post );
     $context = $this->fetch_btn_config( $context, $id, $meta );
 
-    if( $meta["_thumbnail_id"][0] ) {
-      $img_id = $meta["_thumbnail_id"][0];
+    if( !empty($meta["_thumbnail_id"]) ) {
+      $img_id = $meta["_thumbnail_id"][0];      
       $context["header_url"] = wp_get_attachment_url( $img_id );
       $context["srcset"] = wp_get_attachment_image_srcset( $img_id, 'full' );
       $context["sizes"] = wp_get_attachment_image_sizes( $img_id, 'full' );
     }
+    
+    $context["cta_layout"] = get_post_meta( $id, 'yali_cb_cta_layout_width' );
 
     return Twig::render( 'content_blocks/cta.twig', $context );
   }
