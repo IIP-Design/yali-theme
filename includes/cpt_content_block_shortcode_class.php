@@ -113,6 +113,11 @@ class Content_Block_Shortcode {
     return Twig::render( 'content_blocks/post-list.twig', $context );
   }
   
+
+  // RELATED CONTENT BLOCK
+  
+
+  // Helpers
   private function fetch_base_config ( $id, $post ) {
     $context = array(
       "title"               => $post->post_title,
