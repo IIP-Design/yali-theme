@@ -20,6 +20,7 @@ $srcset = wp_get_attachment_image_srcset($img_id, "full");
 $sizes = wp_get_attachment_image_sizes($img_id, "full");
 
 // Taxonomy data
+$categories = Yali\API::get_category_list();
 $series = get_terms('series');
 
 // Temp
@@ -47,7 +48,7 @@ $context = array(
   "social_block"  => $social_block,
   "campaigns"     => $campaigns,
   "formVar"       => $formVar,
-  'category_list' => Yali\API::get_category_list(),
+  'category_list' => $categories,
   'series_list'   => $series,
   'campaign_materials_accordion'  => $campaign_materials_accordion
 );
