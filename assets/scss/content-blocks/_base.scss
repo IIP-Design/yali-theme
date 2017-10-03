@@ -6,7 +6,13 @@
     margin-top: 2em;
 
     .ui.button {
-      min-width: 0;
+      min-width: 100%;
+      font-size: 1.5em;
+
+      @media screen and (min-width: 767px) {
+        min-width: 60%;
+        font-size: 1.3em;
+			}
     }
   }
 

@@ -10,7 +10,11 @@
 				);
 			});
 
-			tinymce.activeEditor.settings.contentBlockValues = blockListArray;
-	  	});
+			try  {
+				tinymce.activeEditor.settings.contentBlockValues = blockListArray;
+			} catch(err) {
+				console.log('tinymce not loaded');
+			}
+	  });
 
 })(jQuery);	  

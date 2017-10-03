@@ -24,8 +24,7 @@ class Custom_Button_Shortcode {
 
   private function fetch_btn_config ( &$context, $id, $meta ) {
     $button = get_post_meta( $id, 'yali_cust_btn_link', true);
-
-
+    
     $context['btn_label'] = $button['text'];
     $context['btn_link'] = $button['url'];
     $context['btn_new_win'] = ($button['blank'] == 'true') ? 'target="_blank"' : '';

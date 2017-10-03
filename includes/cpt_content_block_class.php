@@ -75,7 +75,7 @@ class Content_Block {
       'priority'     => 'high',
       'closed'       => false
     ));
-   
+  
     // Content block type
     $cb_box->add_field( array(
       'name'                => 'Block Type',
@@ -259,15 +259,14 @@ class Content_Block {
       'show_option_none' => false,
       'options'          => array(
         'recent'         => __( 'Displaying most recent or most recent in a category', 'america' ),
-        'custom'         => __( 'Choosing specifc posts', 'america' ),
-        'custom_link'    => __( 'Choosing specifc posts and adding a supplementary link', 'america' ),
+        'custom'         => __( 'Choosing specifc posts and adding optional related link', 'america' )
       ),
       'desc'             =>  __( '', 'america' )
 	  ));
     
     // Number of posts
     $cb_box_cdp->add_field(  array(
-      'name'                      => 'Number posts to show',
+      'name'                      => __( 'Number posts to show', 'america' ),
 	    'id'                        => $prefix . 'cdp_num_posts',
 	    'type'                      => 'text_small',
       'default'                   => 3,
@@ -279,8 +278,8 @@ class Content_Block {
 
     // Category list
     $cb_box_cdp->add_field( array(
-      'name'                      => 'Post Category',
-	    'desc'                      => 'Category from which posts will be pulled',
+      'name'                      => __( 'Post Category', 'america' ),
+	    'desc'                      => __( 'Category from which posts will be pulled', 'america' ),
 	    'id'                        => $prefix . 'cdp_category',
 	    'type'                      => 'select',
 	    'default'                   => 'select',
@@ -296,38 +295,38 @@ class Content_Block {
       'name'                      => __( 'Posts', 'america' ),
       'id'                        => $prefix . 'cdp_autocomplete',
       'type'                      => 'cdp_autocomplete',
+      'desc'                      => __( '(Start typing title))', 'america' ),
       'repeatable'                => true,
       'text'                      => array(
         'add_row_text'            => 'Add Another Post',
       )
     ));
 
-    // By selecting individual posts with external link (group)
-    $cb_box_post_group = $cb_box_cdp->add_field( array(
-      'id'          => 'cdp_autocomplete_post_link_group',
-      'type'        => 'group',
-      'description' => __( '', 'america' ),
-      'options'     => array(
-        'group_title'   => __( 'Post {#}', 'america' ), // since version 1.1.4, {#} gets replaced by row number
-        'add_button'    => __( 'Add Another Post', 'america' ),
-        'remove_button' => __( 'Remove Post', 'america' )
+    $cb_box_cdp->add_field( array(
+      'name'                      => __( 'Related Links', 'america' ),
+      'id'                        => $prefix . 'cdp_autocomplete_related',
+      'type'                      => 'related_link',
+      'desc'                      => __( 'Each link selected below will appear underneath its associated post above. For example, put the link that you want to appear under the first post (number 1 above) in the number 1 slot.', 'america' ),
+      'repeatable'                => true,
+      'text'                      => array(
+        'add_row_text'            => 'Add Another Related Link',
       )
     ));
 
-    // Group : autocomplete 
-    $cb_box_cdp->add_group_field( $cb_box_post_group, array(
-      'name'  => __( 'Post', 'america' ),
-      'id'    => $prefix . 'cdp_autocomplete_post_link',
-      'type'  => 'cdp_autocomplete'
-    )); 
-    
-    // Group : external link
-    $cb_box_cdp->add_group_field( $cb_box_post_group, array(
-      'name'  => __( 'Additional Link', 'america' ),
-      'id'    => $prefix . 'cdp_post_link',
-      'type'  => 'cdp_post_link'
-    )); 
-    
+     // Display as link or button
+     $cb_box_cdp->add_field( array(
+      'name'    => __( 'Display related link as', 'america' ),
+      'desc'    => '',
+      'id'      => $prefix . 'cdp_autocomplete_links_display',
+      'type'    => 'radio_inline',
+      'select_all_button' => false,
+      'default'         => 'link',
+      'options' => array(
+        'link' => 'Link',
+        'button' => 'Button'
+      ),
+    ));
+  
     // Tags, author and publish date
     $cb_box_cdp->add_field( array(
       'name'    => 'Post fields to show',
