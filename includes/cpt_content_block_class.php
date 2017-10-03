@@ -8,13 +8,22 @@ class Content_Block {
 
   public function __construct() {
       add_action( 'cmb2_admin_init',                          array($this, 'content_block_fields') );  
-      add_action( 'admin_enqueue_scripts',                    array($this, 'admin_enqueue_scripts') );  
+      add_action( 'admin_enqueue_scripts',                    array($this, 'cmb2_toggle_metaboxes_JS') );  
       add_filter( 'manage_edit-content_block_columns',        array($this, 'edit_content_block_post_columns') );
       add_filter( 'manage_content_block_posts_custom_column', array($this, 'manage_content_block_post_columns'), 10, 2 );  
   }
 
-  public function admin_enqueue_scripts() {
+  //public function admin_enqueue_scripts() {
+  public function cmb2_toggle_metaboxes_JS() {
     wp_enqueue_script( 'cmb2-addon-js', get_stylesheet_directory_uri() . '/assets/admin/cmb2.js',array( 'jquery' ), '1.0.0', true );
+    
+    // if( function_exists('get_current_screen') ) {      
+    //   $screen = get_current_screen();      
+
+    //   if( $screen->base === 'post' && $screen->post_type === 'content_block' ) {        
+    //     wp_enqueue_script( 'cmb2-addon-js', get_stylesheet_directory_uri() . '/assets/admin/cmb2.js',array( 'jquery' ), '1.0.0', true );
+    //   }      
+    // }  
   }
   
   /**
@@ -64,6 +73,7 @@ class Content_Block {
 
     $prefix = 'yali_';
     
+<<<<<<< HEAD
 
     /*************************************************************************************************
     *                                        GENERAL FIELDS                                          *
@@ -420,6 +430,14 @@ class Content_Block {
         'right'          => __( 'Right', 'yali' )
       )
 	  ));
+=======
+    /****************************************************************
+      Include Content Block Metaboxes
+    *****************************************************************/    
+    foreach( glob(get_stylesheet_directory() . '/includes/content_block_metaboxes/*.php') as $block_file ) {
+      require_once $block_file;
+    }
+>>>>>>> 9f9c6578e581d460acc29157b61b077fcab44ac1
   }  
 
   /**
@@ -429,18 +447,20 @@ class Content_Block {
    * @return void
    */
   public function fetch_categories() {
-     $cat_options =  array();
-     $categories = get_categories( array(
-       'orderby' => 'name',
-       'order'   => 'ASC'
-     ));
-    
-     $cat_options['select'] = 'Select';
-     foreach( $categories as $category ) {
-       $cat_options[$category->name] = $category->name;
-     }
+    $cat_options =  array();
+    $categories = get_categories( array(
+     'orderby' => 'name',
+     'order'   => 'ASC',
+     'hide_empty' => '0'
+    ));
 
-     return $cat_options;
+    $cat_options['select'] = 'Select';
+    foreach( $categories as $category ) {
+      if( $category->name != 'Uncategorized' )
+      $cat_options[$category->name] = $category->name;
+    }
+
+    return $cat_options;
   }
 
   /**

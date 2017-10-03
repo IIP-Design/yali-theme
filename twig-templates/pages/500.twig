@@ -1,0 +1,13 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+<section class='hero hero--bg_img error_500' style='background-image: url("{{ background_img }}"); background-size: cover;'>
+    <div class='hero-inner bottom_padd bottom_padd--thick'>
+    	<div class='hero-content ui container'>
+    		<h1 class='hero-h1'>Oops!</h1>
+    		<h3>Looks like there is a server error.</h3>
+    		<p>Please use the navigation above.</p>
+    	</div>
+    </div>    
+</section>
+{% endblock %}

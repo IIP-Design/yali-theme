@@ -1,0 +1,13 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+<section class='hero hero--bg_img error_404' style='background-image: url("{{ background_img }}"); background-size: cover;'>
+    <div class='hero-inner bottom_padd bottom_padd--thick'>
+    	<div class='hero-content ui container'>
+    		<h1 class='hero-h1'>Oops!</h1>
+    		<h3>We can't find the page you were looking for.</h3>
+    		<p>Page not found /404/. Please use the navigation above.</p>
+    	</div>
+    </div>    
+</section>
+{% endblock %}

@@ -48,7 +48,8 @@
 
 	&--campaigns {
 		
-		&.accordion_layout {
+		.accordion_layout {
+			margin: 0;
 
 			.ui.styled.accordion .content a {
 				font-style: italic;

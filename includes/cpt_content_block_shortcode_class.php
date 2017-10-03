@@ -54,12 +54,14 @@ class Content_Block_Shortcode {
     $context = $this->fetch_base_config( $id, $post );
     $context = $this->fetch_btn_config( $context, $id, $meta );
 
-    if( $meta["_thumbnail_id"][0] ) {
-      $img_id = $meta["_thumbnail_id"][0];
+    if( !empty($meta["_thumbnail_id"]) ) {
+      $img_id = $meta["_thumbnail_id"][0];      
       $context["header_url"] = wp_get_attachment_url( $img_id );
       $context["srcset"] = wp_get_attachment_image_srcset( $img_id, 'full' );
       $context["sizes"] = wp_get_attachment_image_sizes( $img_id, 'full' );
     }
+    
+    $context["cta_layout"] = get_post_meta( $id, 'yali_cb_cta_layout_width' );
 
     return Twig::render( 'content_blocks/cta.twig', $context );
   }
@@ -77,6 +79,27 @@ class Content_Block_Shortcode {
     return Twig::render( 'content_blocks/social.twig', $context );
   }
 
+
+  // ACCORDION CONTENT BLOCK
+  public function render_accordion( $id ) {
+    $items = array();
+    $meta_data = get_post_meta($id, 'accordion_repeat_group', true);
+
+    foreach ($meta_data as $item => $item_value) {
+      // Add p tags to tinymce content
+      $item_value['item_content'] = wpautop($item_value['item_content']);
+      array_push($items, $item_value);
+    }
+
+    $context = array(
+      'headline' => get_post_meta($id, 'yali_cb_accordion_headline', true),
+      'items_array' => $items
+    );
+
+    return Twig::render( 'content_blocks/accordion.twig', $context );
+  }
+
+
   // POST LIST CONTENT BLOCK (CDP)
   public function render_post_list( $id ) {
     $meta = get_post_meta( $id );
@@ -90,6 +113,11 @@ class Content_Block_Shortcode {
     return Twig::render( 'content_blocks/post-list.twig', $context );
   }
   
+
+  // RELATED CONTENT BLOCK
+  
+
+  // Helpers
   private function fetch_base_config ( $id, $post ) {
     $context = array(
       "title"               => $post->post_title,

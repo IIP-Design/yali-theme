@@ -49,7 +49,7 @@
 
 <script>	
 	// Get content block list from main tinymce editor
-	var args = top.tinymce.activeEditor.windowManager.getParams();	
+	var args = top.tinymce.activeEditor.windowManager.getParams();
 
 	// DOM Elements
 	var listDiv = document.getElementById('items_wrapper');
@@ -63,7 +63,7 @@
 	
 	// Map over content block list & append to listDiv ul, add click event to update selected content block list
 	if( args && args.listItems.length > 0 ){
-		args.listItems.map(function(item){	
+		args.listItems.map(function(item){				
 			var li = document.createElement('li');		
 			li.innerHTML = item.text;
 			li.classList.add('cb_list_item');

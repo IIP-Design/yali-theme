@@ -1,8 +1,5 @@
 (function($) {	
 	
-	window.yali_cb_values = tinymce.activeEditor.settings.contentBlockValues;	
-
-
 	tinymce.PluginManager.add('yali_cb_list', function(editor, url) {
 		
 		editor.addButton('yali_cb_list', {			
@@ -29,8 +26,8 @@
 						onclick: 'close'
 					}]
 				},
-				{			
-					listItems: window.yali_cb_values
+				{
+					listItems: yaliContentBlocks.updatedBlocksArray
 				});
 			}			
 		});

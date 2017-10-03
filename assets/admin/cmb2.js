@@ -1,17 +1,23 @@
 (function($) {
   $(document).on('cmb_init', function() {
     // Metabox DOM Selections
-    var widgetMetabox = document.getElementById('yali_cb_box_cdp'),
-      socialMetabox = document.getElementById('yali_cb_social_links'),
+    var widgetMetabox = document.getElementById("yali_cb_box_cdp"),
+      socialMetabox = document.getElementById("yali_cb_social_links"),      
+      accordionMetaBox = document.getElementById('yali_cb_accordion'),
+      ctaLayoutWidth = document.getElementById('yali_cb_cta_width'),      
       selectByPosts = $('.cmb-type-cdp-autocomplete.cmb-repeat'),
       selectByPostsLink = $('.cmb2-id-yali-cdp-autocomplete-related.cmb-repeat'),
       selectByPostsDisplay = $('.cmb2-id-yali-cdp-autocomplete-links-display');
 
+
     // Metabox Object store for iterating
     var conditionalMetaboxes = {
       post_list: widgetMetabox,
-      social: socialMetabox
+      social: socialMetabox,
+      accordion: accordionMetaBox,
+      cta: ctaLayoutWidth
     };
+
 
     function toggleConditionalMetaboxes(blockTypeSelection) {
       try {
@@ -34,7 +40,11 @@
     }
 
     // Hide Conditional Boxes based on initial content type selection
-    var init_content_type_selection = $('#yali_cb_type').val();
+    var init_content_type_selection = $("#yali_cb_type").val();
+    if( init_content_type_selection === undefined ) {
+      return;
+    }
+    
     if (conditionalMetaboxes[init_content_type_selection] !== undefined) {
       toggleConditionalMetaboxes(init_content_type_selection);
     } else {

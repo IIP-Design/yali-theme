@@ -6,6 +6,8 @@ use Yali\Twig as Twig;
 global $post;
 $pagename = get_query_var("pagename");
 
+$check_host = $_SERVER['SERVER_NAME'];
+
 // Page data
 $page_data = Yali\API::get_page($post->ID);
 $feat_img_obj = !empty($page_data["featured_media"]) ? Yali\API::get_featImg_obj($page_data["featured_media"]) : null;
@@ -18,6 +20,7 @@ $srcset = wp_get_attachment_image_srcset($img_id, "full");
 $sizes = wp_get_attachment_image_sizes($img_id, "full");
 
 // Taxonomy data
+$categories = Yali\API::get_category_list();
 $series = get_terms('series');
 
 // Temp
@@ -25,11 +28,13 @@ $series = get_terms('series');
 * data (page id, content block shortcode) from dev server otherwise
 * from Shawn localhost
 **/
-$check_host = $_SERVER['SERVER_NAME'];
+// Data for certain pages or shared
 $social_block = do_shortcode("[content_block id='13313']");
 $campaigns = ( $check_host == 'yali.dev.america.gov' ) ? Yali\API::get_child_pages(13240) : Yali\API::get_child_pages(8);
-
 $formVar = do_shortcode('[formidable id=6]');
+
+// Yali Learns - Campaign Materials Accordion
+$campaign_materials_accordion = do_shortcode("[content_block id='13615' title='Yali Learns Campaign Materials']");
 
 // Data array for twig
 $context = array(
@@ -43,8 +48,9 @@ $context = array(
   "social_block"  => $social_block,
   "campaigns"     => $campaigns,
   "formVar"       => $formVar,
-  'category_list' => Yali\API::get_category_list(),
-  'series_list'   => $series
+  'category_list' => $categories,
+  'series_list'   => $series,
+  'campaign_materials_accordion'  => $campaign_materials_accordion
 );
 
 echo Twig::render( array( "pages/page-" . $pagename . ".twig", "page.twig" ), $context );

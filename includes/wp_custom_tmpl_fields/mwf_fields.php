@@ -30,112 +30,21 @@ add_action('cmb2_init', 'mwf_fields');
 function mwf_fields() {
 	$prefix = 'mwf_';
 
-	// Intro
-	$mwf_intro = new_cmb2_box( array(
-		'id'           =>  $prefix . 'intro',
+	// Intro Test
+	$mwf_introduction = new_cmb2_box( array(
+		'id'           =>  $prefix . 'introduction',
     	'title'        => __( 'Enter Intro Content', 'mwf' ),
     	'object_types' => array( 'page' ),
     	'context'      => 'advanced',
     	'priority'     => 'high',
     	'show_on'      => array('key' => 'page-template', 'value' => 'page-templates/mwf.php'),
     	'show_in_rest' => true
-	) );	
-
-    $mwf_intro->add_field( array(    	
-    	'name'    => 'Enter Paragraph 1 Text',
-	    'id'      => $prefix . 'intro_content_txt1',
-	    'type'    => 'textarea',
-	    'options' => array( 'textarea_rows' => 10, )
-    ) );
-
-    $mwf_intro->add_field( array(    	
-    	'name'    => 'Enter Paragraph 2 Text (Optional)',
-	    'id'      => $prefix . 'intro_content_txt2',
-	    'type'    => 'textarea',
-	    'options' => array( 'textarea_rows' => 10, )
-    ) );
-
-    $mwf_intro->add_field( array(    	
-    	'name'    => 'Enter Paragraph 3 Text (Optional)',
-	    'id'      => $prefix . 'intro_content_txt3',
-	    'type'    => 'textarea',
-	    'options' => array( 'textarea_rows' => 10, )
-    ) );
-
-	// Section 1
-    $mwf_section1 = new_cmb2_box( array(
-		'id'           =>  $prefix . 'section1',
-    	'title'        => __( 'Enter Section 1 Content', 'mwf' ),
-    	'object_types' => array( 'page' ),
-    	'context'      => 'advanced',
-    	'priority'     => 'high',
-    	'show_on'      => array('key' => 'page-template', 'value' => 'page-templates/mwf.php'),
-    	'show_in_rest' => true
 	) );
 
-	$mwf_section1->add_field( array(    	
-    	'name'    => 'Enter Section 1 Title',
-	    'id'      => $prefix . 'section1_title',
-	    'type'    => 'text'	    
-    ) );
-
-	$mwf_section1->add_field( array(    	
-    	'name'    => 'Enter Paragraph 1 Text',
-	    'id'      => $prefix . 'section1_content_txt1',
-	    'type'    => 'textarea',
-	    'options' => array( 'textarea_rows' => 10, )
-    ) );	
-
-	$mwf_section1->add_field( array(    	
-    	'name'    => 'Enter Paragraph 2 Text (Optional)',
-	    'id'      => $prefix . 'section1_content_txt2',
-	    'type'    => 'textarea',
-	    'options' => array( 'textarea_rows' => 10, )
-    ) );
-
-	$mwf_section1->add_field( array(    	
-    	'name'    => 'Enter Paragraph 3 Text (Optional)',
-	    'id'      => $prefix . 'section1_content_txt3',
-	    'type'    => 'textarea',
-	    'options' => array( 'textarea_rows' => 10, )
-    ) );
-
-    // Section 2
-    $mwf_section2 = new_cmb2_box( array(
-		'id'           =>  $prefix . 'section2',
-    	'title'        => __( 'Enter Section 2 Content', 'mwf' ),
-    	'object_types' => array( 'page' ),
-    	'context'      => 'advanced',
-    	'priority'     => 'high',
-    	'show_on'      => array('key' => 'page-template', 'value' => 'page-templates/mwf.php'),
-    	'show_in_rest' => true
-	) );
-
-	$mwf_section2->add_field( array(    	
-    	'name'    => 'Enter Section 2 Title',
-	    'id'      => $prefix . 'section2_title',
-	    'type'    => 'text'	    
-    ) );
-
-	$mwf_section2->add_field( array(    	
-    	'name'    => 'Enter Paragraph 1 Text',
-	    'id'      => $prefix . 'section2_content_txt1',
-	    'type'    => 'textarea',
-	    'options' => array( 'textarea_rows' => 10, )
-    ) );	
-
-	$mwf_section2->add_field( array(    	
-    	'name'    => 'Enter Paragraph 2 Text (Optional)',
-	    'id'      => $prefix . 'section2_content_txt2',
-	    'type'    => 'textarea',
-	    'options' => array( 'textarea_rows' => 10, )
-    ) );
-
-	$mwf_section2->add_field( array(    	
-    	'name'    => 'Enter Paragraph 3 Text (Optional)',
-	    'id'      => $prefix . 'section2_content_txt3',
-	    'type'    => 'textarea',
-	    'options' => array( 'textarea_rows' => 10, )
+	$mwf_introduction->add_field( array(    	
+    	'name'    => 'Intro Content',
+	    'id'      => $prefix . 'introduction_content',
+	    'type'    => 'wysiwyg',	    
     ) );
 
     // Application Section
@@ -161,20 +70,7 @@ function mwf_fields() {
 	    'type'    => 'wysiwyg'
     ) );
 
-    $mwf_application->add_field( array(    	
-    	'name'    => 'Choose Application Open Date',
-	    'id'      => $prefix . 'application_open_date',
-	    'type'    => 'text_date_timestamp'	    
-    ) );
-
-    $mwf_application->add_field( array(    	
-    	'name'    => 'Choose Application Open Time',
-	    'id'      => $prefix . 'application_open_time',
-	    'type'    => 'text_time',
-	    'time_format' => 'g:ia'    
-    ) );
-
-	$mwf_application->add_field( array(    	
+	$mwf_application->add_field( array( 
     	'name'    => 'Enter Application Section Title',
 	    'id'      => $prefix . 'application_title',
 	    'type'    => 'text'	    
@@ -211,5 +107,22 @@ function mwf_fields() {
 	    'id'      => $prefix . 'application_info',
 	    'type'    => 'textarea',
 	    'options' => array( 'textarea_rows' => 10, )
+    ) );
+
+    // Additional Content Section
+    $mwf_addtl = new_cmb2_box( array(
+		'id'           =>  $prefix . 'addtl',
+    	'title'        => __( 'Enter Additional Content', 'mwf' ),
+    	'object_types' => array( 'page' ),
+    	'context'      => 'advanced',
+    	'priority'     => 'high',
+    	'show_on'      => array('key' => 'page-template', 'value' => 'page-templates/mwf.php'),
+    	'show_in_rest' => true
+	) );
+
+	$mwf_addtl->add_field( array(
+    	'name'    => 'Add Additional Content',
+	    'id'      => $prefix . 'addtl_content',
+	    'type'    => 'wysiwyg'	    
     ) );
 }
