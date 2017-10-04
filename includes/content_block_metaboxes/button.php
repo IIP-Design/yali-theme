@@ -1,5 +1,8 @@
 <?php
 
+/*************************************************************************************************
+*                                       CONTENT BLOCK BUTTON                                     *
+**************************************************************************************************/
 $cb_box_btn = new_cmb2_box( array(
   'id'           =>  $prefix . 'cb_box_btn',
   'title'        => __( 'Button', 'yali' ),
@@ -14,7 +17,7 @@ $cb_box_btn->add_field( array(
   'type' => 'link_picker'
 ));
 
- // Button background color
+  // Button background color
 $cb_box_btn->add_field( array(
   'name'               => 'Background color',
   'desc'                => 'Background color of button',

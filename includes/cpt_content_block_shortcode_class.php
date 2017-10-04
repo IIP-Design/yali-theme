@@ -158,15 +158,13 @@ class Content_Block_Shortcode {
     $category_field = get_post_meta( $id, 'yali_cdp_category', true);
     $select_by =  get_post_meta( $id, 'yali_cdp_select_type_posts', true );
     $post_links = get_post_meta( $id, 'yali_cdp_autocomplete_post_link_group', true );
-    
-    //$this->get_posts( $select_by, $post_links );
-    // $this->debug($post_links);
-
+    $post_meta = get_post_meta( $id, 'yali_cdp_fields', true );
+ 
     $context['cdp_widget'] = $module;
     $context['cdp_post_select_by'] = get_post_meta( $id, 'yali_cdp_select_type_posts', true );
-    $context['cdp_post_meta_fields_to_show'] = implode( ',', get_post_meta( $id, 'yali_cdp_fields', true ));
+    $context['cdp_post_meta_fields_to_show'] =  get_post_meta( $id, 'yali_cdp_fields', true );
     $context['cdp_posts_links'] = get_post_meta( $id, 'yali_cdp_autocomplete_post_link_group', true );
-    $context['cdp_posts'] = implode( ',', get_post_meta( $id, 'yali_cdp_autocomplete', true ));
+    $context['cdp_posts'] = get_post_meta( $id, 'yali_cdp_autocomplete', true );
     $context['cdp_num_posts'] = get_post_meta( $id, 'yali_cdp_num_posts', true );
     $context['cdp_category'] = ( empty($category_field) || $category_field == 'select' ) ?  '' : $category_field;
     

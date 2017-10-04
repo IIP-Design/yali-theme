@@ -1,8 +1,12 @@
 <?php
 
+/*************************************************************************************************
+ *                                        ACCORDION                                              *
+ *************************************************************************************************/
+
 $accordion = new_cmb2_box( array(
   'id'           => $prefix . 'cb_accordion',
-  'title'        => __( 'Add Accordion Style Content Block', 'yali' ),
+  'title'        => __( 'Accordion', 'yali' ),
   'object_types' => array('content_block'),
   'priority'     => 'low'
 ));

@@ -1,5 +1,8 @@
 <?php
 
+/*************************************************************************************************
+*                                       GENERAL FIELDS                                           *
+**************************************************************************************************/
 $cb_box = new_cmb2_box( array(
   'id'           =>  $prefix . 'cb_box',
   'title'        => __( 'General Fields', 'yali' ),
@@ -10,7 +13,6 @@ $cb_box = new_cmb2_box( array(
 
 // Content block type
 $cb_box->add_field( array(
-
   'name'             => 'Block Type',
     'desc'             => 'What type of content block',
     'id'               => $prefix . 'cb_type',
@@ -37,7 +39,16 @@ $cb_box->add_field( array(
         'palettes'      => array( '#ffffff', '#eeeeee', '#f2d400', '#25ace2', '#174f9f', '#192856' )
     ))
   )
-  ));
+));
+
+// Full screen width 
+$cb_box->add_field( array(
+  'name' => 'Full Screen Width?',      
+  'id'   => $prefix . 'cb_layout_width',
+  'desc' => '',
+  'default' => true,
+  'type' => 'checkbox'
+));
 
 // Underline title
 $cb_box->add_field( array(
