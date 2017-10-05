@@ -4,7 +4,9 @@
     var widgetMetabox = document.getElementById("yali_cb_box_cdp"),
       socialMetabox = document.getElementById("yali_cb_social_links"),      
       accordionMetaBox = document.getElementById('yali_cb_accordion'),
-      ctaLayoutWidth = document.getElementById('yali_cb_cta_width'),      
+      ctaLayoutWidth = document.getElementById('yali_cb_cta_width'),   
+      selectByPostsNum = $('.cmb2-id-yali-cdp-num-posts'),   
+      selectByPostsCategory = $('.cmb2-id-yali-cdp-category'), 
       selectByPosts = $('.cmb-type-cdp-autocomplete.cmb-repeat'),
       selectByPostsLink = $('.cmb2-id-yali-cdp-autocomplete-related.cmb-repeat'),
       selectByPostsDisplay = $('.cmb2-id-yali-cdp-autocomplete-links-display');
@@ -67,21 +69,39 @@
       }
     });
 
-    // toggle select post by within posts box
+    // Set initial state of post list selection type within the Post List meta box
+    var select =  $('.cdp-select-posts-by input[type=radio]:checked').val();
+    togglePostListFields( select );
+
+    // Toggle post list selection type (by recent or custom) when selection is changed
     $('.cdp-select-posts-by input[type=radio]').change(function() {
       var selectBy = $(this).val();
+      togglePostListFields( selectBy );
+    });
+
+    /**
+     * 
+     * @param {string} selectBy  how will posts be queried, either by most recent or by individual post selections
+     */
+    function togglePostListFields( selectBy ) {
       if (selectBy === 'custom') {
+        selectByPostsNum.hide();
+        selectByPostsCategory.hide();
         selectByPosts.show();
         selectByPostsLink.show();
         selectByPostsDisplay.show();
       } else {
+        selectByPostsNum.show();
+        selectByPostsCategory.show();
         selectByPosts.hide();
         selectByPostsLink.hide();
         selectByPostsDisplay.hide();
       }
-    });
+    }
 
-    /**
+   
+
+    /** @todo toggle bind related links to its correpsonding post
      * Add a corresponding link chooser if a post autocomplete field is added
      */
     // $('.cmb2-id-yali-cdp-autocomplete').on('cmb2_add_row', function(e) {

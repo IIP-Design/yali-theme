@@ -17,12 +17,12 @@ $cb_box->add_field( array(
     'desc'             => 'What type of content block',
     'id'               => $prefix . 'cb_type',
     'type'             => 'select',
-    'default'          => 'cta',
+    'default'          => 'post_list',
   'options'          => array(
+    'accordion'      => __( 'Accordion', 'yali' ),
     'cta'            => __( 'Call To Action', 'yali' ),
-    'social'         => __( 'Social Icons', 'yali' ),
     'post_list'      => __( 'Post List', 'yali' ),
-    'accordion'      => __( 'Accordion', 'yali' )
+    'social'         => __( 'Social Icons', 'yali' )
   )
 ));
 
