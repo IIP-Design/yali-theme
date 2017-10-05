@@ -1,6 +1,6 @@
 (function($) {	
 
-	$.get(yaliContentBlocks.dataUrl)
+	$.get(yaliContentBlocks.dataURL)	
 		.then(function(blockList){
 			var blockListArray = [];
 
