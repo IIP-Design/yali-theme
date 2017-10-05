@@ -30,11 +30,7 @@ $cb_box_cdp->add_field(  array(
   'name'                      => __( 'Number posts to show', 'america' ),
   'id'                        => $prefix . 'cdp_num_posts',
   'type'                      => 'text_small',
-  'default'                   => 3,
-  'attributes'                => array(
-    'data-conditional-id'     => $prefix . 'cdp_select_type_posts',
-    'data-conditional-value'  => 'recent'
-  )
+  'default'                   => 3
 ));
 
 // Category list
@@ -44,11 +40,7 @@ $cb_box_cdp->add_field( array(
   'id'                        => $prefix . 'cdp_category',
   'type'                      => 'select',
   'default'                   => 'select',
-  'options'                   => $this->fetch_categories(),
-  'attributes'                => array(
-    'data-conditional-id'     => $prefix . 'cdp_select_type_posts',
-    'data-conditional-value'  => 'recent'
-  )
+  'options'                   => $this->fetch_categories()
 ));
 
 // By selecting posts (CDP autocomplete)
