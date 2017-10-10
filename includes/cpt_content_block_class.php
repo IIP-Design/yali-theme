@@ -15,15 +15,7 @@ class Content_Block {
 
   //public function admin_enqueue_scripts() {
   public function cmb2_toggle_metaboxes_JS() {
-    wp_enqueue_script( 'cmb2-addon-js', get_stylesheet_directory_uri() . '/assets/admin/cmb2.js',array( 'jquery' ), '1.0.0', true );
-    
-    // if( function_exists('get_current_screen') ) {      
-    //   $screen = get_current_screen();      
-
-    //   if( $screen->base === 'post' && $screen->post_type === 'content_block' ) {        
-    //     wp_enqueue_script( 'cmb2-addon-js', get_stylesheet_directory_uri() . '/assets/admin/cmb2.js',array( 'jquery' ), '1.0.0', true );
-    //   }      
-    // }  
+    wp_enqueue_script( 'cmb2-addon-js', get_stylesheet_directory_uri() . '/assets/admin/cmb2.js',array( 'jquery' ), '1.0.0', true );        
   }
   
   /**

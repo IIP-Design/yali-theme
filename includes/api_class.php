@@ -5,6 +5,7 @@ namespace Yali;
 use WP_REST_Request;
 
 class API {
+
     public static function do_request( $request ) {
 		$response = rest_do_request( $request );
 		return $response->data;	

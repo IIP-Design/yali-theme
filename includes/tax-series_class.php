@@ -1,8 +1,10 @@
-<?php 
-if ( ! function_exists( 'series_taxonomy' ) ) {
-	// Register Series Taxonomy
-	function series_taxonomy() {
+<?php
 
+namespace Yali;
+
+class Series_Tax {
+
+	public static function register() {
 		$labels = array(
 			'name'                       => _x( 'Series', 'Taxonomy General Name', 'text_domain' ),
 			'singular_name'              => _x( 'Series', 'Taxonomy Singular Name', 'text_domain' ),
@@ -25,11 +27,13 @@ if ( ! function_exists( 'series_taxonomy' ) ) {
 			'items_list'                 => __( 'Series Items list', 'text_domain' ),
 			'items_list_navigation'      => __( 'Series Items list navigation', 'text_domain' ),
 		);
+		
 		$rewrite = array(
 			'slug'       				 => 'series',
 			'with_front' 				 => true,
 			'hierarchical'   			 => true,
 		);
+		
 		$args = array(
 			'labels'                     => $labels,
 			'hierarchical'               => true,
@@ -41,8 +45,7 @@ if ( ! function_exists( 'series_taxonomy' ) ) {
 			'rewrite'    				 => $rewrite,
 			'show_in_rest'               => true,			
 		);
+		
 		register_taxonomy( 'series', array( 'post' ), $args );
-
 	}
-	add_action( 'init', 'series_taxonomy', 0 );
 }
