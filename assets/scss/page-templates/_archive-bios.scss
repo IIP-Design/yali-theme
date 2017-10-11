@@ -1,0 +1,31 @@
+.archive_bios {
+	padding-top: 2em;
+	@media screen and (max-width: 933px) {
+		padding-top: 1em;
+	}
+
+	.bios_list {
+		border-top: 1px solid #ccc;
+
+		&.ui.stackable.grid {
+			margin-bottom: 0;			
+
+			> .column.row > .column {
+				@media screen and (max-width: 767px) {
+					padding-right: 0 !important;
+					padding-left: 0 !important;
+				}
+			}
+		}
+	}
+
+
+	.bio {
+
+		&_name {
+			margin: 0;
+		}
+
+	}
+
+}

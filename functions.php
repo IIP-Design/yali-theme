@@ -1,21 +1,5 @@
 <?php
 
-/*
-* Include Page Templates' CMB2 Fields
-*/
-foreach( glob(get_stylesheet_directory() . '/includes/wp_custom_tmpl_fields/*.php') as $custom_field_file ) {
-	require_once $custom_field_file;
-}
-
-
-/*
-* Include Custom Taxonomies
-*/
-foreach( glob(get_stylesheet_directory() . '/includes/wp_custom_tax/*.php') as $custom_tax_file ) {
-	require_once $custom_tax_file;
-}
-
-
 /**
  * Autoload classes - any class that is in the includes dir with a '[NAME]_class.php file format will be autoloaded'
  */
@@ -28,6 +12,9 @@ use Yali\Content_Block as Content_Block;
 use Yali\Content_Block_Shortcode as Content_Block_Shortcode;
 use Yali\Custom_Button as Custom_Button;
 use Yali\Custom_Button_Shortcode as Custom_Button_Shortcode;
+use Yali\Bios as Bios;
+use Yali\Content_Type_Tax as Content_Type_Tax;
+use Yali\Series_Tax as Series_Tax;
 
 class YaliSite {
 
@@ -48,6 +35,45 @@ class YaliSite {
 		add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
 
 		$this->twig_init();
+
+		/*
+		* Register JSON Data to WP API
+		*/
+		require_once 'includes/wp_api_register_json.php';
+
+		/*
+		* Include Page Templates' CMB2 Fields
+		*/
+		foreach( glob(get_stylesheet_directory() . '/includes/wp_custom_tmpl_fields/*.php') as $custom_field_file ) {
+			require_once $custom_field_file;
+		}
+
+		/*
+		* Add Content Block Select List to TinyMCE - must be after Yali_Autoloader
+		*/
+		require_once 'includes/tinymce_content_block/tinymce_content_block.php';
+
+		/*
+		* Add excerpt to pages
+		*/
+		add_post_type_support( 'page', 'excerpt' );
+
+		/*
+		* Excerpt Read More
+		*/
+		add_action('init', 'excerpt_more_override');
+		function excerpt_more_override() {
+			remove_filter('excerpt_more', 'corona_excerpt_read_more');
+			add_filter('excerpt_more', function($more) {
+				global $post;
+				return '&nbsp; <a href="' . get_permalink($post->ID) . '"> Read More...</a>';
+			});
+		}
+
+		/*
+		* IIP Interactive Plugin Edits
+		*/
+		require_once get_stylesheet_directory() . '/includes/edit-iip-interactive-plugin/edit-iip-interactive.php';		
 	}
 
 	function twig_init() {
@@ -70,11 +96,14 @@ class YaliSite {
      */
     function register_post_types() {
     	Content_Block::register();
-			Custom_Button::register();
-		}
+		Custom_Button::register();
+		Bios::register();
+	}
 
 	function register_taxonomies() {
-		// this is where you can register custom taxonomies
+		// this is where you can register custom taxonomies		
+		Content_Type_Tax::register();
+		Series_Tax::register();
 	}
 
 	function register_shortcodes() {
@@ -98,135 +127,3 @@ class YaliSite {
 }
 
 new YaliSite();
-
-
-/*
-* Add Content Block Select List to TinyMCE - must be after Yali_Autoloader
-*
-*/
-require_once 'includes/tinymce_content_block/tinymce_content_block.php';
-
-
-/*
-* Add excerpt to pages
-*
-*/
-add_post_type_support( 'page', 'excerpt' );
-
-
-/*
-* Excerpt Read More
-*
-*/
-add_action('init', 'excerpt_more_override');
-function excerpt_more_override() {
-	remove_filter('excerpt_more', 'corona_excerpt_read_more');
-	add_filter('excerpt_more', function($more) {
-		global $post;
-		return '&nbsp; <a href="' . get_permalink($post->ID) . '"> Read More...</a>';
-	});
-}
-
-
-/*
-* Add Featured Image URL to JSON response
-*
-*/
-add_action('rest_api_init', 'featured_img_register_json');
-function featured_img_register_json() {
-	register_rest_field(array('post', 'page'), 'featured_img_url', array(
-		'get_callback' => 'featured_img_url'
-	));
-}
-
-function featured_img_url($post, $request) {
-	return ( has_post_thumbnail($post['id']) ) ? wp_get_attachment_url(get_post_thumbnail_id($post['id'])) : false;
-}
-
-
-/*
-* Add Post Tag Names to JSON Response
-*
-*/
-add_action('rest_api_init', 'tag_names_register_json');
-function tag_names_register_json() {
-	register_rest_field(array('post'), 'post_tag_names', array(
-		'get_callback' => 'post_tag_names'
-	));
-}
-
-function post_tag_names($post, $request) {
-	return $post_tag_names = get_the_tags($post['id']);
-}
-
-
-/*
-* Add Post Category Names to JSON Response
-*
-*/
-add_action('rest_api_init', 'category_name_register_json');
-function category_name_register_json() {
-	register_rest_field(array('post'), 'post_category_names', array(
-		'get_callback' => 'post_category_names'
-	));
-}
-
-function post_category_names($post, $request) {
-	return $post_tag_names = get_the_category($post['id']);
-}
-
-
-/*
-* Add Series Custom Taxonomy Data to JSON Response
-*
-*/
-add_action('rest_api_init', 'series_name_register_json');
-function series_name_register_json() {
-	register_rest_field(array('post'), 'post_series_names', array(
-		'get_callback' => 'post_series_names'
-	));
-}
-
-function post_series_names($post, $request) {
-	return $post_series_names = get_the_terms($post['id'], 'series');
-}
-
-
-/*
-* Add Content Type Custom Taxonomy Data to JSON Response
-*
-*/
-add_action('rest_api_init', 'content_type_name_register_json');
-function content_type_name_register_json() {
-	register_rest_field(array('post'), 'post_content_type_names', array(
-		'get_callback' => 'post_content_type_names'
-	));
-}
-
-function post_content_type_names($post, $request) {
-	return $post_content_type_names = get_the_terms($post['id'], 'content_type');
-}
-
-
-/*
-* Add Content Block Shortcode to JSON Response
-*
-*/
-add_action('rest_api_init', 'content_block_shortcode_json');
-function content_block_shortcode_json() {
-	register_rest_field(array('content_block'), 'display_shortcode', array(
-		'get_callback' => 'display_content_block_shortcode'
-	));
-}
-
-function display_content_block_shortcode($content_block, $request) {
-	return $display_shortcode = "[content_block id='" . $content_block['id'] . "' title='" . $content_block['title']['rendered'] . "']";	
-}
-
-
-/*
-* IIP Interactive Plugin Edits
-*
-*/
-
-require_once get_stylesheet_directory() . '/includes/edit-iip-interactive-plugin/edit-iip-interactive.php';

@@ -6,39 +6,16 @@
 </section>
 <section class="ui container title-overlay higher">
 	<h2 class='title-overlay_title'>{{ page_data.title.rendered }}</h2>
-	<div class='inner-container'>
+	<div class='inner-container'>		
 		<section class='section mwf_intro'>
 			{{ intro }}
-		</section>
-
-		<section class='section mwf_intro'>
-			{% for text in page_data.cmb2.mwf_intro if text is not empty %}				
-			<p>{{ text }}</p>				
-			{% endfor %}
-		</section>
-
-		<!-- CTA Content Block - Achieve Your Goals -->
-		{{ cta_achieve }}
-
-		<section class='section section1'>
-			<h3>{{ page_data.cmb2.mwf_section1.mwf_section1_title }}</h3>
-			{% for key, text in page_data.cmb2.mwf_section1 if text is not empty and key != 'mwf_section1_title' %}
-			<p>{{ text }}</p>
-			{% endfor %}
-		</section>
-
-		<section class='section section2'>
-			<h3>{{ page_data.cmb2.mwf_section2.mwf_section2_title }}</h3>
-			{% for key, text in page_data.cmb2.mwf_section2 if text is not empty and key != 'mwf_section2_title' %}
-			<p>{{ text }}</p>
-			{% endfor %}
-		</section>
+		</section>						
 
 		{% include 'content_blocks/post-listings.twig' with 
 			{
 				headline: 'Hear From Our Fellows',
 				cta_txt: 'Meet more Mandela Washington Fellowship alumni',
-				cta_url: '#',
+				cta_url: '',
 				background_color: '#192856',
 				cta_background_color: '#F2D400',		
 				posts: [

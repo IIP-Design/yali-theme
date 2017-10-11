@@ -1,0 +1,32 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+
+<section class='ui container'>	
+	<div class='inner-container archive_bios'>
+		<h3>Mandela Washington Fellowship Alumni</h3>
+
+		<div class='ui stackable grid bios_list'>
+			{% for bio in bios %}
+
+			{% if loop.index0 % 3 == 0 %}
+			<div class='three column row'>
+			{% endif %}
+
+				<article class='column bio'>
+					<img src='{{ bio.featured_img_url }}'>
+					<h5 class='bio_name'><a href='{{ bio.link }}'>{{ bio.title.rendered }}</a></h5>
+					<p class='caption bio_title'>{{ bio.bio_title }}</p>					
+				</article>
+
+			{% if loop.index is divisible by(3) %}
+			</div>
+			{% endif %}
+
+			{% endfor %}
+		</div>
+
+	</div>
+</section>
+
+{% endblock %}

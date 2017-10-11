@@ -1,0 +1,20 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+
+<div class='ui container'>
+	<div class='inner-container'>
+		<section class='ui grid stackable single_bio'>
+			<div class='six wide column single_bio_img'>
+				<img src='{{ bio_image }}'>
+			</div>
+			<div class='ten wide column single_bio_content'>
+				<h5 class='single_bio_content_name'>{{ post_data.title.rendered }}</h5>
+				<p class='caption single_bio_content_title'>{{ post_data.bio_title }}</p>
+				<p>{{ post_data.content.rendered }}</p>
+			</div>		
+		</section>
+	</div>
+</div>
+
+{% endblock %}

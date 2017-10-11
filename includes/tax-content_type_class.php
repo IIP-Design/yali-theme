@@ -1,8 +1,10 @@
-<?php 
-if ( ! function_exists( 'content_type_taxonomy' ) ) {
-	// Register Content Type Taxonomy
-	function content_type_taxonomy() {
+<?php
 
+namespace Yali;
+
+class Content_Type_Tax {
+
+	public static function register() {
 		$labels = array(
 			'name'                       => _x( 'Content Type', 'Taxonomy General Name', 'text_domain' ),
 			'singular_name'              => _x( 'Content Type', 'Taxonomy Singular Name', 'text_domain' ),
@@ -25,11 +27,13 @@ if ( ! function_exists( 'content_type_taxonomy' ) ) {
 			'items_list'                 => __( 'Content Type Items list', 'text_domain' ),
 			'items_list_navigation'      => __( 'Content Type Items list navigation', 'text_domain' ),
 		);		
+		
 		$rewrite = array(
 			'slug'       				 => 'content-type',
 			'with_front' 				 => true,
 			'hierarchical'   			 => true,
 		);
+		
 		$args = array(
 			'labels'                     => $labels,
 			'hierarchical'               => true,
@@ -41,8 +45,7 @@ if ( ! function_exists( 'content_type_taxonomy' ) ) {
 			'rewrite'    				 => $rewrite,
 			'show_in_rest'               => true,			
 		);
-		register_taxonomy( 'content_type', array( 'post' ), $args );
-
+		
+		register_taxonomy( 'content_type', array( 'post' ), $args );	
 	}
-	add_action( 'init', 'content_type_taxonomy', 0 );
 }
