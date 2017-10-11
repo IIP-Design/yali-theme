@@ -58,7 +58,7 @@
       &.active {
         .nav_menu_item_title-wrapper {
           @media screen and (max-width: 933px) {
-            background-color: $blue;
+            background-color: $blue-medium;
           }            
         }
       }      
@@ -109,7 +109,7 @@
           display: block;          
           text-align: center;          
           background-color: #fff;
-          color: $darkblue;
+          color: $blue-navy;
         }
 
         i {
@@ -117,7 +117,7 @@
           width: 25px;
           height: 25px;
           border-radius: 50%;
-          background-color: $darkblue;
+          background-color: $blue-navy;
           color: #fff;
 
           &::before {

@@ -5,7 +5,7 @@
     color: #000;
     @media screen and (max-width: 933px) {
       background-color: #fff;
-      color: $darkblue;
+      color: $blue-navy;
     }
 
 
@@ -81,7 +81,7 @@
       display: inline-block;
       height: 42px;          
       width: 39px;
-      background-color: $darkblue;
+      background-color: $blue-navy;
       transition: background-color 0.2s ease-in;
       @media screen and (max-width: 933px) {
         height: 44px;          
@@ -91,7 +91,7 @@
 
       &.search_displaying {
         @media screen and (min-width: 934px) {
-          background-color: $blue;
+          background-color: $blue-medium;
           border-top-right-radius: 3px;
           border-bottom-right-radius: 3px;
         }            

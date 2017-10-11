@@ -6,7 +6,7 @@
 	}
 
 	&.lightblue {
-		background-color: $lightblue;
+		background-color: $blue-bright;
 	}
 
 
@@ -33,8 +33,8 @@
 			width: 2em;
 			border-radius: 50%;
 			font-size: 1em;
-			color: $lightblue;
-			background-color: $darkblue;			
+			color: $blue-bright;
+			background-color: $blue-navy;			
 
 			&:before {
 				position: absolute;

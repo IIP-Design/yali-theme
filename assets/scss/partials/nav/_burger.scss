@@ -15,7 +15,7 @@
 	span {
 		display: block;
 		margin-bottom: 5px;
-		border-bottom: 3px solid $lightblue;
+		border-bottom: 3px solid $blue-bright;
 		transition: all 0.5s ease;
 
 		&:first-child,
@@ -41,7 +41,7 @@
 
 			&:first-child {
 				width: 25px;
-				border-bottom: 5px solid $lightblue;
+				border-bottom: 5px solid $blue-bright;
 				transform: rotate(45deg);
 			}
 
@@ -51,7 +51,7 @@
 
 			&:last-child {
 				width: 25px;
-				border-bottom: 5px solid $lightblue;
+				border-bottom: 5px solid $blue-bright;
 				transform: rotate(-45deg);
 			}
 		}
