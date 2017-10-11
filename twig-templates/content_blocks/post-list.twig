@@ -24,34 +24,95 @@
 
 <script type="text/javascript" src="{{ widget_js }}"></script>
 <script>
-    
-  var posts = {{ cdp_posts|json_encode() }}
-  console.dir( posts )
+
+  var selectBy = '{{ cdp_post_select_by }}';
+  var indexes = '{{ cdp_indexes }}';
+
+  // if article feed widget see post ids then it will render individual posts 
+  // else will fall back to using most recent and a category if sent
+  var postIds = ( selectBy === 'recent') ? '' : {{ cdp_post_ids|json_encode() }}
+  var postsRelated = {{ cdp_posts_related|json_encode() }}
+  var postsMeta = {{ cdp_post_meta_fields_to_show|json_encode() }}
+  var image = {{ cdp_image|json_encode() }}
+
+  var intervalId;
+
   if( CDP ) {  
-    try {
-      CDP.widgets.ArticleFeed.new({
-        selector: '#{{ selector }}',
-        sites: 'yali.dev.america.gov',  
-        size: '{{ cdp_num_posts }}', 
-        types: 'post', 
-        langs: 'en-US',
-        tags: '',
-        meta: '{{ cdp_post_meta_fields_to_show }}',
-        categories: '{{ cdp_category }}',  
-        ui: {
-          layout: '{{ cdp_ui_layout }}',
-          direction: '{{ cdp_ui_direction }}',
-          image: {
-            shape: '{{ cdp_image_shape }}',
-            width: '{{ cdp_image_height }}',
-            borderWidth: '{{ cdp_border_width }}',             
-            borderColor: '{{ cdp_border_color }}',
-            borderStyle: '{{ cdp_border_style }}'
+    function renderArticleFeed() {
+      try {
+        CDP.widgets.ArticleFeed.new({
+          selector: '#{{ selector }}',
+          sites: ( indexes ) ? indexes : 'yali.dev.america.gov',  
+          size: '{{ cdp_num_posts }}', 
+          types: 'post', 
+          ids: postIds,
+          langs: 'en-US',
+          tags: '',
+          categories: '{{ cdp_category }}', 
+          meta: postsMeta, 
+          ui: {
+            layout: '{{ cdp_ui_layout }}',
+            direction: '{{ cdp_ui_direction }}',
+            image: {
+              shape: image['image-shape'], 
+              width:  image['image-height'],
+              borderWidth: image['image-border-width'],             
+              borderColor: image['image-border-color'],
+              borderStyle: image['image-border-style']
+            }
           }
-        }
-      }).render();
-    } catch (e) {
-      console.log('Unable to add article feed.')
+        }).render();
+      } catch (e) {
+        console.log('Unable to add article feed.')
+      }
     }
+
+    function shouldDisplayRelatedLinks( selectBy ) {
+      if( selectBy === 'custom' ) {
+        if( postIds ) {
+          // this is a workaround, better to add an event dispatch from React component
+          // essentailly, we need to wait until the articles are attached to the DOM
+          // before we can append any supplemental links
+          intervalId = setInterval( addRelatedLinks, 200 ); 
+        }
+      }
+    }
+      
+    function addRelatedLinks() {
+      var items = document.getElementsByClassName( 'article-item' );
+      if( items.length ) {
+        clearInterval( intervalId );
+        [].forEach.call( items, function(item) {  // Convert HTMLCollection before iterating
+          lookUpItem(item);
+      });
+      }
+    }
+
+    function lookUpItem( item ) {
+      if( item.dataset.id ) {
+        postIds.map( (post, index ) => {
+          if( post === item.dataset.id ) {
+            let related = postsRelated[index];
+            if( related )  {
+              appendItem( item, related);
+            } 
+          }
+        }); 
+      }
+    }
+
+    function appendItem( item, related ) {
+      var div = document.createElement('div');  
+      div.setAttribute( 'class', 'cb_button' )
+      var a = document.createElement('a');  
+      a.setAttribute( 'href', related.link );
+      a.setAttribute( 'class', 'ui button item' ); 
+      a.innerText = related.label;
+      div.appendChild( a )
+      item.appendChild( div );
+    }
+
+    renderArticleFeed();
+    shouldDisplayRelatedLinks( selectBy );
   }
 </script> 

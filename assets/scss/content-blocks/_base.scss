@@ -9,6 +9,17 @@
       min-width: 100%;
       font-size: 1.5em;
 
+      &.item {
+        background-color: $red;
+        min-width: 60%;
+        font-size: 1.25em;
+
+        @media screen and (min-width: 767px) {
+          min-width: 100%;
+          font-size: .9em;
+        }
+      }
+      
       @media screen and (min-width: 767px) {
         min-width: 60%;
         font-size: 1.3em;
@@ -26,5 +37,6 @@
     border-bottom: 10px solid $darkblue;
     padding-bottom: .2em;
   }
+
 
 }
