@@ -67,8 +67,9 @@
   }
 
   function shouldDisplayRelatedLinks() {
-    console.log(selectBy)
-    if( selectBy === 'custom' ) {
+    console.log((selectBy === 'custom'))
+    if( selectBy == 'custom' ) {
+      console.log( 'continue' )
       if( Array.isArray(postIds) && Array.isArray(postsRelated) ) {
         // this is a workaround, better to add an event dispatch from React component
         // essentailly, we need to wait until the articles are attached to the DOM
