@@ -69,11 +69,13 @@
 
     function shouldDisplayRelatedLinks( selectBy ) {
       if( selectBy === 'custom' ) {
-        if( postIds ) {
+        if( Array.isArray(postIds) && Array.isArray(postsRelated) ) {
           // this is a workaround, better to add an event dispatch from React component
           // essentailly, we need to wait until the articles are attached to the DOM
           // before we can append any supplemental links
-          intervalId = setInterval( addRelatedLinks, 200 ); 
+          if( postIds.length && postsRelated.length ) {
+            intervalId = setInterval( addRelatedLinks, 200 ); 
+          }
         }
       }
     }
