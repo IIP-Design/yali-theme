@@ -31,6 +31,10 @@ $countdown = do_shortcode($page_data['cmb2']['mwf_application']['mwf_application
 $addtl_content = do_shortcode($page_data['cmb2']['mwf_addtl']['mwf_addtl_content']);
 
 
+// Temp - add Bios Archive page link
+$bios_archive = get_site_url() . '/bios';
+
+
 // Data array for twig
 $context = array(
   "check_host"  => $check_host,
@@ -42,7 +46,8 @@ $context = array(
   "size"		=> $size,
   "intro"		=> $formatted_intro,
   "countdown"   => $countdown,
-  "addtl_content" => $addtl_content  
+  "addtl_content" => $addtl_content,
+  "bios_archive"  => $bios_archive
 );
 
 

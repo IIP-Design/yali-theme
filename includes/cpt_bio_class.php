@@ -37,11 +37,12 @@ class Bios {
 			'show_ui'             => true,
 			'show_in_rest'        => true,
 			'query_var'           => true,			
-			'rewrite'      		  => array( 'slug' => 'bios', 'with_front' => false ),
+			'rewrite'      		  => true,
 			'capability_type'     => 'post',
 			'hierarchical'        => false,
 			'menu_position'       => 5,
-			'supports'            => array('title','thumbnail','editor')
+			'supports'            => array('title','thumbnail','editor'),
+			'has_archive'         => true
 		);
 		
 		register_post_type( 'bios', $args );
@@ -58,29 +59,10 @@ class Bios {
 		) );
 
 		$bio_box->add_field( array(
-			'id'   => $prefix . 'bio_position',
-			'name' => __( 'Position', 'yali' ),
+			'id'   => $prefix . 'bio_title',
+			'name' => __( 'Bio Position Title', 'yali' ),
 			'type' => 'text'
-		) );
-
-		$bio_box->add_field( array(
-			'id'   => $prefix . 'bio_organization',
-			'name' => __( 'Organization', 'yali' ),
-			'type' => 'text'
-		) );
-
-		$bio_box->add_field( array(
-			'id'         => $prefix . 'bio_contact',
-			'name'       => __( 'Best Ways to Contact Me', 'yali' ),
-			'type'       => 'text',
-			'repeatable' => true,
-			'attributes' => array(
-				'placeholder' => 'Enter an email address or social media profile URL'
-			),
-			'options'    => array(
-				'add_row_text' => __( 'Add contact method', 'yali' )
-			)
-		) );
+		) );		
 	}
 }
 

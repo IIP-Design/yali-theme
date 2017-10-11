@@ -6,7 +6,7 @@
 */
 add_action('rest_api_init', 'featured_img_register_json');
 function featured_img_register_json() {
-	register_rest_field(array('post', 'page'), 'featured_img_url', array(
+	register_rest_field(array('post', 'page', 'bios'), 'featured_img_url', array(
 		'get_callback' => 'featured_img_url'
 	));
 }
@@ -95,3 +95,18 @@ function display_content_block_shortcode($content_block, $request) {
 	return $display_shortcode = "[content_block id='" . $content_block['id'] . "' title='" . $content_block['title']['rendered'] . "']";	
 }
 
+
+/*
+* Add Bios Title field to JSON Response
+*
+*/
+add_action('rest_api_init', 'bios_title_json');
+function bios_title_json() {
+	register_rest_field(array('bios'), 'bio_title', array(
+		'get_callback' => 'bio_title_field'
+	));	
+}
+
+function bio_title_field($bio, $request) {
+	return $bio_title = get_post_meta($bio['id'], 'yali_bio_title', true);
+}

@@ -1,0 +1,37 @@
+.single_bio {	
+
+
+	&.ui.stackable.grid {
+		margin-top: 0;
+		padding-top: 2em;
+
+		>.wide.column {
+			@media screen and (max-width: 767px) {				
+				padding: 5px 0 15px 0 !important;
+
+				&.six {
+					padding: 0 !important;				
+				}
+			}
+		}		
+	}	
+
+	
+	&_img {
+
+		img {
+			width: 100%;
+		}
+
+	}
+
+
+	&_content {
+
+		&_name {
+			margin: 0;
+		}
+
+	}
+
+}

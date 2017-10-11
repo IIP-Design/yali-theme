@@ -121,6 +121,18 @@ class API {
 		return $responseArr;
 	}
 
+	public static function get_bio($id) {
+		$request = new WP_REST_Request('GET', '/wp/v2/bios/' . $id);
+		$response = rest_do_request($request);
+		return $response->data;	
+	}
+
+	public static function get_all_bios() {
+		$request = new WP_REST_Request('GET', '/wp/v2/bios');
+		$response = rest_do_request($request);		
+		return $response->data;;
+	}
+
 	public static function get_sidebar($sidebar) {
 		$request = new WP_REST_Request('GET', '/wp-rest-api-sidebars/v1/sidebars/' . $sidebar);
 		return self::do_request( $request );
