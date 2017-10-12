@@ -117,6 +117,8 @@
           a.setAttribute( 'href', related.link );
           if( postsRelatedLinkDisplay === 'button' ) {
               a.setAttribute( 'class', 'ui button item' ); 
+          } else {
+             a.setAttribute( 'class', 'item-link' ); 
           }
           a.innerText = related.label;
           div.appendChild( a )

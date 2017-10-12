@@ -1,0 +1,26 @@
+.cb .article-item-group {
+  font-family: "Source Sans Pro", "Helvetica Neue", Arial, Helvetica, sans-serif;
+  color: $font-color;
+}
+
+.cb .article-content   {
+  p {
+    font-size: 1.2rem;
+    line-height: 1.5;
+  }
+  
+  h3.article-title {
+    font-size: 2rem;
+    text-decoration:  none;
+    color: $darkblue;
+  }
+
+  .article-title_link {
+    color: $darkblue;
+  }
+
+  div.article-meta {
+    span {  color: $darkblue; }
+    color: lighten($darkblue, 10%);
+  }
+}
