@@ -13,7 +13,7 @@ function mwf_remove_meta_boxes() {
 		$pageTemplate = get_post_meta($post->ID, '_wp_page_template', true);		
 		if( $pageTemplate == 'page-templates/mwf.php' ) {
 			remove_post_type_support('page', 'editor');
-			remove_meta_box('postexcerpt', 'page', 'normal');
+			//remove_meta_box('postexcerpt', 'page', 'normal');
 		}
 	}
 }
