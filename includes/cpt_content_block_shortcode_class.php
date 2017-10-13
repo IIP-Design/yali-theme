@@ -4,6 +4,7 @@ namespace Yali;
 
 class Content_Block_Shortcode {
 
+  // @todo Fetch this from options table (move the cdp fields plugin options to here)
   const WIDGET_ROOT = 'https://s3.amazonaws.com/iip-design-stage-modules/modules/';
 
   public static function register() {
@@ -61,7 +62,7 @@ class Content_Block_Shortcode {
       $context["sizes"] = wp_get_attachment_image_sizes( $img_id, 'full' );
     }
     
-    $context["cta_layout"] = get_post_meta( $id, 'yali_cb_cta_layout_width' );
+    $context["cb_layout_width"] = get_post_meta( $id, 'yali_cb_layout_width' );
 
     return Twig::render( 'content_blocks/cta.twig', $context );
   }
@@ -104,17 +105,15 @@ class Content_Block_Shortcode {
   public function render_post_list( $id ) {
     $meta = get_post_meta( $id );
     $post = get_post( $id );
-    
+   
     $context = $this->fetch_base_config( $id, $post );
     $context["selector"] = 'feed' . $id;
     $context = $this->fetch_module_config( $context, $id );
     $context = $this->fetch_btn_config( $context, $id, $meta );
-  //$this->debug($context );
+    
+    //$this->debug($context );
     return Twig::render( 'content_blocks/post-list.twig', $context );
   }
-  
-
-  // RELATED CONTENT BLOCK
   
 
   // Helpers
@@ -135,47 +134,26 @@ class Content_Block_Shortcode {
     return $context;
   }
 
-  private function get_posts( $select_by, $post_links ) {
-    if( $select_by == 'custom' ) {
-      return implode( ',', get_post_meta( $id, 'yali_cdp_autocomplete', true ));
-    } else if( $select_by == 'custom_link' ) {
-     
-      $posts = array();
-      $links = array();
-      foreach( $post_links as $post_link ) {
-        $posts[] = $post_link['yali_cdp_autocomplete_post_link'];
-        $this->debug($post_link['yali_cdp_post_link']);
-      }
-    }
-    $this->debug($posts);
-    exit;
-  }
-
   private function fetch_module_config ( &$context, $id ) {
-    $module = 'article-feed';
+    //$this->debug( get_post_meta( $id));exit;
 
-    $image_field = get_post_meta( $id, 'yali_cdp_image', true);
-    $category_field = get_post_meta( $id, 'yali_cdp_category', true);
-    $select_by =  get_post_meta( $id, 'yali_cdp_select_type_posts', true );
-    $post_links = get_post_meta( $id, 'yali_cdp_autocomplete_post_link_group', true );
-    $post_meta = get_post_meta( $id, 'yali_cdp_fields', true );
- 
-    $context['cdp_widget'] = $module;
-    $context['cdp_post_select_by'] = get_post_meta( $id, 'yali_cdp_select_type_posts', true );
-    $context['cdp_post_meta_fields_to_show'] =  get_post_meta( $id, 'yali_cdp_fields', true );
-    $context['cdp_posts_links'] = get_post_meta( $id, 'yali_cdp_autocomplete_post_link_group', true );
-    $context['cdp_posts'] = get_post_meta( $id, 'yali_cdp_autocomplete', true );
-    $context['cdp_num_posts'] = get_post_meta( $id, 'yali_cdp_num_posts', true );
-    $context['cdp_category'] = ( empty($category_field) || $category_field == 'select' ) ?  '' : $category_field;
+    $module                                     = 'article-feed';
+    $category_field                             = get_post_meta( $id, 'yali_cdp_category', true);
+
+    $context['cdp_widget']                      = $module;
+    $context['cdp_indexes']                     = $this->cdp_get_option('cdp_indexes');
+    $context['cdp_post_select_by']              = get_post_meta( $id, 'yali_cdp_select_type_posts', true );
+   
+    $context['cdp_post_ids']                    = get_post_meta( $id, 'yali_cdp_autocomplete', true );
+    $context['cdp_posts_related']               = get_post_meta( $id, 'yali_cdp_autocomplete_related', true );
+    $context['cdp_posts_related_link_display']  = get_post_meta( $id, 'yali_cdp_autocomplete_links_display', true );
+    $context['cdp_post_meta_fields_to_show']    = get_post_meta( $id, 'yali_cdp_fields', true );
+    $context['cdp_num_posts']                   = get_post_meta( $id, 'yali_cdp_num_posts', true );
+    $context['cdp_category']                    = ( empty($category_field) || $category_field == 'select' ) ?  '' : $category_field;
     
-    $context['cdp_ui_layout'] = get_post_meta( $id, 'yali_cdp_ui_layout', true);
-    $context['cdp_ui_direction'] = get_post_meta( $id, 'yali_cdp_ui_direction', true);
-    
-    $context['cdp_image_height'] = $image_field['image-height'] . 'px';
-    $context['cdp_image_shape'] = $image_field['image-shape'];
-    $context['cdp_border_width'] = $image_field['image-border-width'] . 'px';
-    $context['cdp_border_color'] = $image_field['image-border-color'];
-    $context['cdp_border_style'] = $image_field['image-border-style'];
+    $context['cdp_ui_layout']                   = get_post_meta( $id, 'yali_cdp_ui_layout', true);
+    $context['cdp_ui_direction']                = get_post_meta( $id, 'yali_cdp_ui_direction', true);
+    $context['cdp_image']                       = get_post_meta( $id, 'yali_cdp_image', true);
 
     $path = self::WIDGET_ROOT . "cdp-module-{$module}/cdp-module-";
     $context['widget_css'] = $path . $module . '.min.css';
@@ -189,19 +167,45 @@ class Content_Block_Shortcode {
       if( !$button ) {
         return $context;
       } 
-      $context['btn_label'] = $button['text'];
-      $context['btn_link'] = $button['url'];
-      $context['btn_new_win'] = ($button['blank'] == 'true') ? 'target="_blank"' : '';
-      $context['btn_bg_color'] = $meta['yali_cb_box_btn_bg_color'][0];
-      $context['btn_label_color'] = ($context['btn_bg_color'] == '#f2d400') ? '#192856': '#ffffff';
-      $context['btn_text_alignment'] = $meta['yali_cb_box_btn_h_alignment'][0];
+      $context['btn_label']           = $button['text'];
+      $context['btn_link']            = $button['url'];
+      $context['btn_new_win']         = ($button['blank'] == 'true') ? 'target="_blank"' : '';
+      $context['btn_bg_color']        = $meta['yali_cb_box_btn_bg_color'][0];
+      $context['btn_label_color']     = ($context['btn_bg_color'] == '#f2d400') ? '#192856': '#ffffff';
+      $context['btn_text_alignment']  = $meta['yali_cb_box_btn_h_alignment'][0];
 
       return $context;
   }
 
+    /**
+    * Wrapper function around cmb2_get_option
+    * @since  0.1.0
+    * @param  string $key     Options array key
+    * @param  mixed  $default Optional default value
+    * @return mixed           Option value
+    */
+  private function cdp_get_option( $key = '', $default = false ) {
+    if ( function_exists( 'cmb2_get_option' ) ) {
+      // Use cmb2_get_option as it passes through some key filters.
+      return cmb2_get_option( 'cdp_options', $key, $default );
+    }
+  
+    // Fallback to get_option if CMB2 is not loaded yet.
+    $opts = get_option( 'cdp_options', $default );
+    $val = $default;
+  
+    if ( 'all' == $key ) {
+      $val = $opts;
+    } elseif ( is_array( $opts ) && array_key_exists( $key, $opts ) && false !== $opts[ $key ] ) {
+      $val = $opts[ $key ];
+    }
+  
+    return $val;
+  }
+
   private function debug( $obj ) {
     echo '<pre>';
-    var_dump( $obj );
+    print_r( $obj );
     echo '</pre>';
   }
   
