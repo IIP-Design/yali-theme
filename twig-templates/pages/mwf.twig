@@ -4,12 +4,35 @@
 <section class="hero">
     <img class="ui fluid image" src="{{ header_url }}" srcset="{{ srcset }}" sizes="{{ size }}" alt="{{ header_url }}">
 </section>
-<section class="ui container title-overlay higher">
+<section class="ui container">
 	<h2 class='title-overlay_title'>{{ page_data.title.rendered }}</h2>
 	<div class='inner-container'>		
 		<section class='section mwf_intro'>
-			{{ intro }}
+			{{ intro }}						
 		</section>						
+
+		<section class='section learn-more'>			
+			<div class='learn-more_links'>
+				<h4>Learn more about the Fellowship</h4>
+				<a href='#about' class='cta_link'><span class='text_break'>Program Overview</span> and Components</a>
+				<a href='#' class='cta_link'><span class='text_break'>Applications for</span> the Fellowship</a>
+				<a href='#' class='cta_link'><span class='text_break'>Information for</span> U.S. Audiences</a>
+			</div>
+		</section>
+
+		<section class='section full-width mwf_social'>
+			<h4>Stay connected with the Fellowship:</h4>
+			<div class='ui container'>
+				<a href='https://www.facebook.com/MandelaWashingtonFellowship/' target='_blank' class='mwf_social_link mwf_social_link--facebook'></a>
+				<a href='https://twitter.com/WashFellowship' target='_blank' class='mwf_social_link mwf_social_link--twitter'></a>
+				<a href='https://www.flickr.com/photos/washingtonfellowship/' target='_blank' class='mwf_social_link mwf_social_link--flickr'></a>
+			</div>
+		</section>
+
+		<section id='about' class='section'>
+			{{ about }}
+		</section>
+		
 
 		{% include 'content_blocks/post-listings.twig' with 
 			{
@@ -56,8 +79,33 @@
 			{% endif %}
 
 			<div class='section application_timeline'>
-				<h4>Application Process Timeline</h4>
+				<h4>Timeline</h4>
 				<div class='application_content'>{{ page_data.cmb2.mwf_application.mwf_application_process_timeline }}</div>
+			</div>
+			<div class='section full-container-width application_resources'>
+				<div class='inner-container'>
+					<h4>Application Resources</h4>
+					<div class='ui two column grid'>
+						<a 
+							href="{{ page_data.cmb2.mwf_application.mwf_application_instructions_pdf }}" 
+							target='_blank'
+							class='application_content cta_link'
+						>
+							<span class='application_resources_resource'>Download the 2017 Application Instructions (PDF)</span>
+						</a>	
+						<a href="#" class='application_content cta_link'>
+							<span class='application_resources_resource'>Read the 2018 Frequently Asked Questions</span>
+						</a>
+					</div>
+					<div class='ui two column grid'>
+						<a href="#" class='application_content cta_link'>
+							<span class='application_resources_resource'>Go to Application Tips <i class='angle right icon'></i></span>
+						</a>
+						<a href="#" class='application_content cta_link'>
+							<span class='application_resources_resource'>View the application <i class='angle right icon'></i></span>
+						</a>
+					</div>										
+				</div>				
 			</div>
 			<div class='section application_selection'>
 				<h4>Application Selection Process</h4>
@@ -74,21 +122,7 @@
 			<div class='section application_info'>
 				<h5>Application Information</h5>
 				<div class='application_content'>{{ page_data.cmb2.mwf_application.mwf_application_info }}</div>
-			</div>
-			<div class='section full-container-width application_resources'>
-				<div class='inner-container'>
-					<h4>Application Resources</h4>
-					<a 
-						href="{{ page_data.cmb2.mwf_application.mwf_application_instructions_pdf }}" 
-						target='_blank'
-						class='application_content cta_link'
-					>
-						Download the 2017 Application Instructions (PDF)
-					</a>
-					<a href="#" class='application_content cta_link'>Go to Application Tips <i class='angle right icon'></i></a>
-					<a href="#" class='application_content cta_link'>Apply Now <i class='angle right icon'></i></a>
-				</div>				
-			</div>
+			</div>			
 		</section>
 
 		{% include 'content_blocks/post-listings.twig' with 

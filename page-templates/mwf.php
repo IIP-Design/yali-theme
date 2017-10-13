@@ -27,6 +27,8 @@ $size = wp_get_attachment_image_sizes($img_id, 'full');
 // Custom Fields Content
 $intro = wpautop($page_data['cmb2']['mwf_introduction']['mwf_introduction_content']);
 $formatted_intro = do_shortcode($intro);
+$about = wpautop($page_data['cmb2']['mwf_about']['mwf_about_fellowship']);
+$formatted_about = do_shortcode($about);
 $countdown = do_shortcode($page_data['cmb2']['mwf_application']['mwf_application_date']);
 $addtl_content = do_shortcode($page_data['cmb2']['mwf_addtl']['mwf_addtl_content']);
 
@@ -37,15 +39,16 @@ $bios_archive = get_site_url() . '/bios';
 
 // Data array for twig
 $context = array(
-  "check_host"  => $check_host,
-  "pagename"    => $pagename,
-  "page_data"   => $page_data,
-  "header_url"  => $header_url,  
-  "feat_img"    => $feat_img_obj,
-  "srcset"		=> $srcset,
-  "size"		=> $size,
-  "intro"		=> $formatted_intro,
-  "countdown"   => $countdown,
+  "check_host"    => $check_host,
+  "pagename"      => $pagename,
+  "page_data"     => $page_data,
+  "header_url"    => $header_url,  
+  "feat_img"      => $feat_img_obj,
+  "srcset"		    => $srcset,
+  "size"		      => $size,
+  "intro"		      => $formatted_intro,
+  "about"         => $formatted_about,
+  "countdown"     => $countdown,
   "addtl_content" => $addtl_content,
   "bios_archive"  => $bios_archive
 );

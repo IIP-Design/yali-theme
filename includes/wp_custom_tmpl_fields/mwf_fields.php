@@ -29,7 +29,7 @@ add_action('cmb2_init', 'mwf_fields');
 function mwf_fields() {
 	$prefix = 'mwf_';
 
-	// Intro Test
+	// Intro Content
 	$mwf_introduction = new_cmb2_box( array(
 		'id'           =>  $prefix . 'introduction',
     	'title'        => __( 'Enter Intro Content', 'mwf' ),
@@ -44,6 +44,23 @@ function mwf_fields() {
     	'name'    => 'Intro Content',
 	    'id'      => $prefix . 'introduction_content',
 	    'type'    => 'wysiwyg',	    
+    ) );
+
+    // About the Fellowhsip
+    $mwf_introduction = new_cmb2_box( array(
+        'id'           =>  $prefix . 'about',
+        'title'        => __( 'Enter About the Fellowship Content', 'mwf' ),
+        'object_types' => array( 'page' ),
+        'context'      => 'advanced',
+        'priority'     => 'high',
+        'show_on'      => array('key' => 'page-template', 'value' => 'page-templates/mwf.php'),
+        'show_in_rest' => true
+    ) );
+
+    $mwf_introduction->add_field( array(        
+        'name'    => 'About Content',
+        'id'      => $prefix . 'about_fellowship',
+        'type'    => 'wysiwyg',     
     ) );
 
     // Application Section
