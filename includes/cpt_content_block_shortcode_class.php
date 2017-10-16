@@ -92,7 +92,11 @@ class Content_Block_Shortcode {
       array_push($items, $item_value);
     }
 
+    $post = get_post($id);
+    $slug = $post->post_name;
+
     $context = array(
+      'id'  => $slug,
       'headline' => get_post_meta($id, 'yali_cb_accordion_headline', true),
       'items_array' => $items
     );

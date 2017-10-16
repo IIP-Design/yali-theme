@@ -6,7 +6,8 @@ import * as search from './search.js';
 import ResponsiveBackgroundImage from './ResponsiveBackgroundImage.js';
 import * as dropdown_filter from './dropdown_filter';
 import './application_status';
-import './simple_filter.js';
+import './simple_filter';
+import scroll_to_elem from './scrollTo';
 
 (function($) {
  
@@ -17,13 +18,16 @@ import './simple_filter.js';
   dropdown_filter.init();
 
   // YALILearns Page
-  $('.ui.accordion').accordion();
+  $('.ui.accordion').accordion();  
 
   // Initialize responsive background images
   let elements = document.querySelectorAll('[data-responsive-background-image]');   
   for ( let i = 0; i < elements.length; i++ ) {  
     new ResponsiveBackgroundImage( elements[i] );
   }
+
+  // MWF Links - Page Scroll
+  scroll_to_elem('.scroll_link');
  
 })( jQuery ); 
 
