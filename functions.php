@@ -96,8 +96,8 @@ class YaliSite {
      */
     function register_post_types() {
     	Content_Block::register();
-		Custom_Button::register();
-		Bios::register();
+			Custom_Button::register();
+			Bios::register();
 	}
 
 	function register_taxonomies() {

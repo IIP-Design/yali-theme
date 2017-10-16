@@ -33,11 +33,11 @@ class Bios {
 			'labels'              => $labels,
 			'menu_icon'    		  => 'dashicons-id-alt',
 			'public'              => true,
-	      	'publicly_queryable'  => true,
+	    'publicly_queryable'  => true,
 			'show_ui'             => true,
 			'show_in_rest'        => true,
 			'query_var'           => true,			
-			'rewrite'      		  => true,
+			'rewrite'      		  	=> true,
 			'capability_type'     => 'post',
 			'hierarchical'        => false,
 			'menu_position'       => 5,
@@ -60,9 +60,9 @@ class Bios {
 
 		$bio_box->add_field( array(
 			'id'   => $prefix . 'bio_title',
-			'name' => __( 'Bio Position Title', 'yali' ),
+			'name' => __( 'Title', 'yali' ),
 			'type' => 'text'
-		) );		
+		));		
 	}
 }
 
