@@ -1,0 +1,77 @@
+{% extends 'base.twig' %}
+
+{% block content %}	
+
+<section class="hero">
+    <img class="ui fluid image" src="{{ header_url }}" srcset="{{ srcset }}" sizes="{{ size }}" alt="{{ header_url }}">
+</section>
+<section class="ui container">
+	<h2 class='title-overlay_title'>{{ page_data.title.rendered }}</h2>
+	<div class='inner-container'>		
+		<section class='section'>
+			{{ page_data.content.rendered }}						
+
+			<div class='partners'>
+				<h3>2017 Partners</h3>
+				<div class='institute_partners'>
+					<h4>Institute Partners:</h4>
+					<ul class='list_column'>
+						<li><a href="http://www.appstate.edu/" target="_blank">Appalachian State University</a></li>
+						<li><a href="http://www.asu.edu/" target="_blank">Arizona State University</a></li>
+						<li><a href="https://www.bgsu.edu/" target="_blank">Bowling Green State University</a></li>
+						<li><a href="http://www.bridgew.edu/" target="_blank">Bridgewater State University</a></li>
+						<li><a href="http://www.case.edu/" target="_blank">Case Western Reserve University</a></li>
+						<li><a href="http://www.cau.edu/" target="_blank">Clark Atlanta University</a></li>
+						<li><a href="http://dartmouth.edu/" target="_blank">Dartmouth College</a></li>
+						<li><a href="http://www.drake.edu/" target="_blank">Drake University</a></li>
+						<li><a href="http://drexel.edu/" target="_blank">Drexel University</a></li>
+						<li><a href="http://www.duq.edu/" target="_blank">Duquesne University</a></li>
+						<li><a href="http://www.fiu.edu/" target="_blank">Florida International University</a></li>
+						<li><a href="http://www.gsu.edu/" target="_blank">Georgia State University</a></li>
+						<li><a href="http://www2.howard.edu/" target="_blank">Howard University</a></li>
+						<li><a href="https://www.indiana.edu/" target="_blank">Indiana University</a></li>
+					</ul>
+					<ul class='list_column'>
+						<li><a href="http://www.k-state.edu/" target="_blank">Kansas State University</a></li>
+						<li><a href="http://www1.lehigh.edu/" target="_blank">Lehigh University</a></li>
+						<li><a href="http://www.northwestern.edu/" target="_blank">Northwestern University</a></li>
+						<li><a href="https://www.osu.edu/" target="_blank">The Ohio State University</a></li>
+						<li><a href="http://go.okstate.edu/" target="_blank">Oklahoma State University</a></li>
+						<li><a href="http://presidentialprecinct.org/" target="_blank">Presidential Precinct</a> (consortium with the <a href="http://www.virginia.edu/" target="_blank">University of Virginia</a> and the <a href="http://www.wm.edu/" target="_blank">College of William &amp; Mary</a>)</li>
+						<li><a href="http://www.purdue.edu/" target="_blank">Purdue University</a></li>
+						<li><a href="http://www.rutgers.edu/" target="_blank">Rutgers, The State University of New Jersey</a></li>
+						<li><a href="http://www.skylinecollege.edu/" target="_blank">Skyline College</a></li>
+						<li><a href="http://www.syr.edu/" target="_blank">Syracuse University</a></li>
+						<li><a href="https://www.ttu.edu/" target="_blank">Texas Tech University</a></li>
+					</ul>
+					<ul class='list_column'>
+						<li><a href="https://www.ucdavis.edu/" target="_blank">University of California, Davis</a></li>
+						<li><a href="http://www.udel.edu/" target="_blank">University of Delaware</a></li>
+						<li><a href="http://www.uiowa.edu/" target="_blank">University of Iowa</a></li>
+						<li><a href="https://umaine.edu/" target="_blank">University of Maine</a></li>
+						<li><a href="http://twin-cities.umn.edu/" target="_blank">University of Minnesota</a></li>
+						<li><a href="http://www.unl.edu/" target="_blank">University of Nebraska-Lincoln</a></li>
+						<li><a href="http://www.unr.edu/" target="_blank">University of Nevada, Reno</a></li>
+						<li><a href="https://www.unm.edu/" target="_blank">University of New Mexico</a></li>
+						<li><a href="http://www.nd.edu/" target="_blank">University of Notre Dame</a></li>
+						<li><a href="http://www.sandiego.edu/" target="_blank">University of San Diego</a></li>
+						<li><a href="http://www.utexas.edu/" target="_blank">The University of Texas at Austin</a></li>
+						<li><a href="http://www.wisc.edu/" target="_blank">University of Wisconsin-Madison</a></li>
+						<li><a href="http://wagner.edu/" target="_blank">Wagner College</a></li>
+					</ul>
+				</div>
+
+				<div class='experience_hosts'>
+					<h4>2016 Professional Development Experience Hosts (U.S.-based individualized placements):</h4>
+				</div>
+
+				<div class='host_partners'>
+					<h4>Professional Practicum Host Partners (Africa-based individualized placements)</h4>
+				</div>
+			</div>
+
+		</section>		
+	</div>	
+</section>
+
+{% endblock %}

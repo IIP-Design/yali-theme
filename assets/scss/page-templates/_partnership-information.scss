@@ -1,0 +1,50 @@
+.partnership-information {
+	
+	
+	ul {
+		font-size: em(22); 
+		font-weight: 300;
+		@media screen and (max-width: 933px) {
+			font-size: em(18, $mobile);
+		}
+		@media screen and (max-width: 320px) {
+			font-size: em(14, $mobile);
+		}
+
+
+		&.list_column {		
+			vertical-align: top;
+			margin: 0;
+			padding: 0 15px 0 0;
+			list-style: none;			
+			font-weight: 600;
+			font-size: em(18); 			
+			@media screen and (min-width: 934px) {
+				display: inline-block;
+				max-width: 33.33%;
+			}
+			@media screen and (min-width: 934px) and (max-width: 1003px) {
+				max-width: 30%;
+			}
+			@media screen and (max-width: 933px) {
+				font-size: em(14, $mobile);
+			}			
+
+			a {
+				color: $blue-medium;
+			}
+		}
+	}
+
+
+	.partners {
+
+		> div {
+			margin-bottom: 50px;
+			@media screen and (max-width: 767px) {
+				margin-bottom: 25px;
+			}
+		}
+	}
+
+}

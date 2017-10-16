@@ -8,6 +8,7 @@ import * as dropdown_filter from './dropdown_filter';
 import './application_status';
 import './simple_filter';
 import scroll_to_elem from './scrollTo';
+import './partners_display';
 
 (function($) {
  
@@ -17,7 +18,7 @@ import scroll_to_elem from './scrollTo';
   search.init();  
   dropdown_filter.init();
 
-  // YALILearns Page
+  // Init Accordions
   $('.ui.accordion').accordion();  
 
   // Initialize responsive background images
