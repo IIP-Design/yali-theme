@@ -20,7 +20,8 @@ $context = array(
 	'filter_slug'     => $queried_object->slug,
 	'blog_list'       => Yali\API::get_archive_posts($filter, $taxonomy),
 	'category_list'   => Yali\API::get_category_list(),
-	'series_list'     => $series
+	'series_list'     => $series,
+	'header_url'	  => get_stylesheet_directory_uri() . '/assets/img/placeholder_img_3x1.png'
 );
 
 echo Twig::render('archive.twig', $context);

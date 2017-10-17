@@ -31,6 +31,8 @@ $series = get_terms('series');
 // Data for certain pages or shared
 $social_block = do_shortcode("[content_block id='13313']");
 $campaigns = ( $check_host == 'yali.dev.america.gov' ) ? Yali\API::get_child_pages(13240) : Yali\API::get_child_pages(8);
+wp_reset_postdata();
+
 $formVar = do_shortcode('[formidable id=6]');
 
 // Yali Learns - Campaign Materials Accordion
