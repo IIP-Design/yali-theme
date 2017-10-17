@@ -128,8 +128,10 @@ class YaliSite {
 	}
 
 	function admin_remove_corona_shortcode_button(){
-	  $instance = TinyMce_Btn_Shortcode::instance();
-	  remove_filter("mce_external_plugins", array ( $instance, 'corona_add_js_to_load' ) );
+		if ( is_admin() ) {
+	  	$instance = TinyMce_Btn_Shortcode::instance();
+	  	remove_filter("mce_external_plugins", array ( $instance, 'corona_add_js_to_load' ) );
+	  }
 	}
 
 	function add_to_twig( $twig ) {
