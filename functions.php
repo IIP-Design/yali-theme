@@ -32,7 +32,7 @@ class YaliSite {
 		add_action( 'init', array( $this, 'register_taxonomies' ) );
 		add_action( 'init', array( $this, 'register_shortcodes' ) );
 		add_action( 'admin_init', array( $this, 'admin_remove_menu_pages' ) );
-		add_action( 'after_setup_theme', array( $this, 'admin_remove_corona_shortcode_button') );
+		add_action( 'admin_init', array( $this, 'admin_remove_corona_shortcode_button') );
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
 
@@ -128,10 +128,8 @@ class YaliSite {
 	}
 
 	function admin_remove_corona_shortcode_button(){
-		if ( is_admin() ) {
-	  	$instance = TinyMce_Btn_Shortcode::instance();
-	  	remove_filter("mce_external_plugins", array ( $instance, 'corona_add_js_to_load' ) );
-	  }
+		$instance = TinyMce_Btn_Shortcode::instance();
+		remove_filter("mce_external_plugins", array ( $instance, 'corona_add_js_to_load' ) );
 	}
 
 	function add_to_twig( $twig ) {
