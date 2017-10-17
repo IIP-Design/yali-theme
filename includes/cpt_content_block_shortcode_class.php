@@ -4,9 +4,6 @@ namespace Yali;
 
 class Content_Block_Shortcode {
 
-  // @todo Fetch this from options table (move the cdp fields plugin options to here)
-  const WIDGET_ROOT = 'https://s3.amazonaws.com/iip-design-stage-modules/modules/';
-
   public static function register() {
     new self();
   }
@@ -14,6 +11,7 @@ class Content_Block_Shortcode {
   public function __construct() {
      add_shortcode( 'content_block', array($this, 'render_content_block') );
   }
+
 
   /**
    * Takes in attributes from content bloack and calls the applicable content block render method
@@ -121,6 +119,32 @@ class Content_Block_Shortcode {
   
 
   // Helpers
+   /**
+   * Wrapper function around cmb2_get_option
+   * @since  0.1.0
+   * @param  string $key     Options array key
+   * @param  mixed  $default Optional default value
+   * @return mixed           Option value
+   */
+  private function cdp_get_option( $key = '', $default = false ) {
+    if ( function_exists( 'cmb2_get_option' ) ) {
+      // Use cmb2_get_option as it passes through some key filters.
+      return cmb2_get_option( 'cdp_options', $key, $default );
+    }
+
+    // Fallback to get_option if CMB2 is not loaded yet.
+    $opts = get_option( 'cdp_options', $default );
+    $val = $default;
+
+    if ( 'all' == $key ) {
+      $val = $opts;
+    } elseif ( is_array( $opts ) && array_key_exists( $key, $opts ) && false !== $opts[ $key ] ) {
+      $val = $opts[ $key ];
+    }
+
+    return $val;
+  }
+  
   private function fetch_base_config ( $id, $post ) {
     $context = array(
       "title"               => $post->post_title,
@@ -159,7 +183,8 @@ class Content_Block_Shortcode {
     $context['cdp_ui_direction']                = get_post_meta( $id, 'yali_cdp_ui_direction', true);
     $context['cdp_image']                       = get_post_meta( $id, 'yali_cdp_image', true);
 
-    $path = self::WIDGET_ROOT . "cdp-module-{$module}/cdp-module-";
+    // option 'cdp_module_url' is set in the cdp-cmb2-fields plugin
+    $path = $this->cdp_get_option('cdp_module_url') . "cdp-module-{$module}/cdp-module-";
     $context['widget_css'] = $path . $module . '.min.css';
     $context['widget_js'] = $path . $module . '.min.js';
     
@@ -181,31 +206,7 @@ class Content_Block_Shortcode {
       return $context;
   }
 
-    /**
-    * Wrapper function around cmb2_get_option
-    * @since  0.1.0
-    * @param  string $key     Options array key
-    * @param  mixed  $default Optional default value
-    * @return mixed           Option value
-    */
-  private function cdp_get_option( $key = '', $default = false ) {
-    if ( function_exists( 'cmb2_get_option' ) ) {
-      // Use cmb2_get_option as it passes through some key filters.
-      return cmb2_get_option( 'cdp_options', $key, $default );
-    }
-  
-    // Fallback to get_option if CMB2 is not loaded yet.
-    $opts = get_option( 'cdp_options', $default );
-    $val = $default;
-  
-    if ( 'all' == $key ) {
-      $val = $opts;
-    } elseif ( is_array( $opts ) && array_key_exists( $key, $opts ) && false !== $opts[ $key ] ) {
-      $val = $opts[ $key ];
-    }
-  
-    return $val;
-  }
+
 
   private function debug( $obj ) {
     echo '<pre>';
