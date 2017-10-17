@@ -17,7 +17,7 @@ import scroll_to_elem from './scrollTo';
   search.init();  
   dropdown_filter.init();
 
-  // YALILearns Page
+  // Init Accordions
   $('.ui.accordion').accordion();  
 
   // Initialize responsive background images

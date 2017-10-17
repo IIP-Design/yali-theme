@@ -206,6 +206,16 @@ function init() {
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
+var experience_hosts = ['Ability360', 'Africa Venture Partners', 'Atlas Corps', 'Brookings Institution', 'Brooklyn Academy of Music', 'California Energy Commission', 'Catholic Relief Services', 'Center for International Private Enterprise', 'City of Cincinnati, OH – Department of Public Health', 'City of Cincinnati, OH – Metropolitan Sewer District', 'City of Columbus Department of Public Health', 'City of Philadelphia, PA – Department of Behavioral Health and Intellectual Disability Services', 'City of Phoenix Public Works', 'Coca-Cola', 'Community Living & Support Services (CLASS)', 'Creative Associates', 'Deloitte', 'Echoing Green', 'El Pomar Foundation', 'Equal Rights Washington', 'Federal Communications Commission', 'First Solar', 'Franklin County, OH – Department of Public Health', 'Gallaudet University', 'Global Entrepreneurship Network', 'Global Integrity', 'Hennepin County, MN', 'Hennepin County, MN- Medical Center', 'International Executive Service Corps (IESC)', 'International Republican Institute', 'Juvenile Law Center', 'Lutheran World Relief', 'Maricopa County, AZ – Department of Public Health', 'Maricopa County, AZ – Planning & Development Department', 'Maryland Department of Health and Mental Hygiene', 'Maternity Care Coalition', 'Matter Chicago', 'Mercy Corps DC', 'Miami Parent to Parent', 'Microsoft', 'Miller Poultry', 'Montgomery County, OH – Department of the Environment', 'Montgomery County, OH – Human Services Planning and Development', 'National Center for Lesbian Rights', 'National Endowment for Democracy', 'National Parks Service', 'Netter Center for Community Partnerships', 'New American Pathways (Refugee Family Services)', 'NHS Human Services', 'Office of Mayor Muriel Bowser', 'Office of Senator Chris Coons', 'Ohio State University – Office of the Registrar', 'Partnership Against Domestic Violence', 'PeaceTech Lab', 'Pikes Peak United Way', 'Premise', 'Prince George’s County, MD Economic Development Commission', 'Project CURE', 'Public Health Management Corporation', 'Roosevelt Row Community Development Corporation', 'Rotary International', 'Seattle Public Schools', 'Sheladia Associates', 'Standard Chartered Bank', 'Starbucks', 'The Food Trust', 'The Nature Conservancy', 'The Wilderness Technology Alliance', 'Theo Chocolate', 'Thrive SW Pennsylvania', 'United Cerebral Palsy', 'United Way of Central Ohio', 'University of Maryland LGBTQ Resource Center', 'University of Pittsburgh Medical Center -Magee Women’s Hospital', 'University of Pittsburgh Nursing School', 'US Africa Development Foundation', 'US Department of Agriculture – Columbia, SC', 'US Department of Transportation', 'US Institute of Peace', 'US Peace Corps', 'USGBC Colorado', 'Vitalyst Health Foundation', 'Voice of America', 'Walton Sustainability Solutions Initiatives', 'Western Union', 'Women’s Campaign International', 'World Institute on Disability', 'World Resources Institute', 'Youth Sentencing and Reentry Project'];
+
+exports.default = experience_hosts;
+
+},{}],5:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
 exports.init = init;
 var search_input_div = document.querySelector('.footer_list_item--search .search_input_wrapper'),
     search_input = document.querySelector('.footer_list_item--search .search_input_wrapper > input'),
@@ -265,7 +275,7 @@ function init() {
 	footer_search_close();
 }
 
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -426,7 +436,7 @@ function init() {
 	window.addEventListener('scroll', on_scroll, false);
 }
 
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 'use strict';
 
 require('../../node_modules/semantic-ui-sass/semantic-ui');
@@ -475,7 +485,7 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
   search.init();
   dropdown_filter.init();
 
-  // YALILearns Page
+  // Init Accordions
   $('.ui.accordion').accordion();
 
   // Initialize responsive background images
@@ -488,7 +498,7 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
   (0, _scrollTo2.default)('.scroll_link');
 })(jQuery);
 
-},{"../../node_modules/semantic-ui-sass/semantic-ui":35,"./ResponsiveBackgroundImage.js":1,"./application_status":2,"./dropdown_filter":3,"./footer.js":4,"./join_form.js":5,"./nav.js":7,"./scrollTo":8,"./search.js":9,"./simple_filter":10}],7:[function(require,module,exports){
+},{"../../node_modules/semantic-ui-sass/semantic-ui":38,"./ResponsiveBackgroundImage.js":1,"./application_status":2,"./dropdown_filter":3,"./footer.js":5,"./join_form.js":6,"./nav.js":8,"./scrollTo":11,"./search.js":12,"./simple_filter":13}],8:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -666,7 +676,70 @@ function init($) {
 	window_resize();
 }
 
-},{}],8:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+var partner_hosts = ['Accountability Lab', 'Anza-Social Business', 'Center for Youth Dialogue (CYD)', 'Champs Botswana', 'Cipher 256 Co. Ltd', 'EbolaAlert', 'FACE Initiative', 'FHI 360-Kenya', 'FinMark Trust', 'Green Cities Inc', 'HACEY HEALTH INITIATIVE', 'KAYEC', 'Kenya National Commission on Human Rights', 'Lwala Community Alliance', 'Medilab Diagnostics Services Ltd', 'Microsoft', 'Moremi Initiative', 'Multikids Inclusive Academy Ghana', 'National Gay and Lesbians Human Rights Commission', 'NOPE', 'Plumtree Development Trust', 'Southern Africa Trust', 'Springboard Organic Farms', 'Totohealth', 'VSO Ethiopia', 'VSO Uganda', 'West African Vocational Education (WAVE)', 'Witzing Group Nigeria', 'WOFAK Kenya', 'Women for Change Cameroon', 'World Vision', 'Youth Initiative for Sustainable Human Development in Africa', 'Zimbabwe Chamber of Informal Economy Association', 'Zimbabwe Coalition on Debt and Development'];
+
+exports.default = partner_hosts;
+
+},{}],10:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _partner_hosts_list = require('./partner_hosts_list');
+
+var _partner_hosts_list2 = _interopRequireDefault(_partner_hosts_list);
+
+var _experience_hosts_list = require('./experience_hosts_list');
+
+var _experience_hosts_list2 = _interopRequireDefault(_experience_hosts_list);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = function () {
+
+	if (location.pathname.includes('partnership-information')) {
+		var list_display = function list_display(list_data, dom_elem) {
+			var num_of_cols = 3,
+			    data_length = list_data.length,
+			    items_per_col = Math.ceil(data_length / num_of_cols),
+			    exp_host_dom = document.querySelector(dom_elem);
+
+			var _loop = function _loop() {
+				var fragment = document.createDocumentFragment(),
+				    upd_arr = list_data.splice(i, items_per_col),
+				    list = document.createElement('ul');
+
+				list.classList.add('list_column');
+
+				upd_arr.forEach(function (link) {
+					var list_item = document.createElement('li');
+					list_item.innerHTML = link;
+					list.appendChild(list_item);
+				});
+
+				fragment.appendChild(list);
+				exp_host_dom.appendChild(fragment);
+			};
+
+			for (var i = 0; i < num_of_cols; i++) {
+				_loop();
+			}
+		};
+
+		list_display(_partner_hosts_list2.default, '.host_partners');
+		list_display(_experience_hosts_list2.default, '.experience_hosts');
+	}
+}();
+
+},{"./experience_hosts_list":4,"./partner_hosts_list":9}],11:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -697,7 +770,7 @@ function scroll_to_elem(elem_class) {
 	});
 };
 
-},{}],9:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -753,7 +826,7 @@ function init() {
 	on_resize();
 }
 
-},{}],10:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -778,7 +851,7 @@ exports.default = function () {
 	}
 }();
 
-},{}],11:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 'use strict';
 
 /**
@@ -815,7 +888,7 @@ exports.default = function () {
 	}
 })();
 
-},{}],12:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 /*!
  * # Semantic UI - Accordion
  * http://github.com/semantic-org/semantic-ui/
@@ -1427,7 +1500,7 @@ $.extend( $.easing, {
 })( jQuery, window, document );
 
 
-},{}],13:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 /*!
  * # Semantic UI - API
  * http://github.com/semantic-org/semantic-ui/
@@ -2596,7 +2669,7 @@ $.api.settings = {
 
 })( jQuery, window, document );
 
-},{}],14:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 /*!
  * # Semantic UI - Checkbox
  * http://github.com/semantic-org/semantic-ui/
@@ -3429,7 +3502,7 @@ $.fn.checkbox.settings = {
 
 })( jQuery, window, document );
 
-},{}],15:[function(require,module,exports){
+},{}],18:[function(require,module,exports){
 /*!
  * # Semantic UI - Colorize
  * http://github.com/semantic-org/semantic-ui/
@@ -3711,7 +3784,7 @@ $.fn.colorize.settings = {
 
 })( jQuery, window, document );
 
-},{}],16:[function(require,module,exports){
+},{}],19:[function(require,module,exports){
 /*!
  * # Semantic UI - Dimmer
  * http://github.com/semantic-org/semantic-ui/
@@ -4421,7 +4494,7 @@ $.fn.dimmer.settings = {
 
 })( jQuery, window, document );
 
-},{}],17:[function(require,module,exports){
+},{}],20:[function(require,module,exports){
 /*!
  * # Semantic UI - Dropdown
  * http://github.com/semantic-org/semantic-ui/
@@ -8205,7 +8278,7 @@ $.fn.dropdown.settings.templates = {
 
 })( jQuery, window, document );
 
-},{}],18:[function(require,module,exports){
+},{}],21:[function(require,module,exports){
 /*!
  * # Semantic UI - Embed
  * http://github.com/semantic-org/semantic-ui/
@@ -8903,7 +8976,7 @@ $.fn.embed.settings = {
 
 })( jQuery, window, document );
 
-},{}],19:[function(require,module,exports){
+},{}],22:[function(require,module,exports){
 /*!
  * # Semantic UI - Form Validation
  * http://github.com/semantic-org/semantic-ui/
@@ -10511,7 +10584,7 @@ $.fn.form.settings = {
 
 })( jQuery, window, document );
 
-},{}],20:[function(require,module,exports){
+},{}],23:[function(require,module,exports){
 /*!
  * # Semantic UI - Modal
  * http://github.com/semantic-org/semantic-ui/
@@ -11434,7 +11507,7 @@ $.fn.modal.settings = {
 
 })( jQuery, window, document );
 
-},{}],21:[function(require,module,exports){
+},{}],24:[function(require,module,exports){
 /*!
  * # Semantic UI - Nag
  * http://github.com/semantic-org/semantic-ui/
@@ -11943,7 +12016,7 @@ $.extend( $.easing, {
 
 })( jQuery, window, document );
 
-},{}],22:[function(require,module,exports){
+},{}],25:[function(require,module,exports){
 /*!
  * # Semantic UI - Popup
  * http://github.com/semantic-org/semantic-ui/
@@ -13420,7 +13493,7 @@ $.fn.popup.settings = {
 
 })( jQuery, window, document );
 
-},{}],23:[function(require,module,exports){
+},{}],26:[function(require,module,exports){
 /*!
  * # Semantic UI - Progress
  * http://github.com/semantic-org/semantic-ui/
@@ -14353,7 +14426,7 @@ $.fn.progress.settings = {
 
 })( jQuery, window, document );
 
-},{}],24:[function(require,module,exports){
+},{}],27:[function(require,module,exports){
 /*!
  * # Semantic UI - Rating
  * http://github.com/semantic-org/semantic-ui/
@@ -14863,7 +14936,7 @@ $.fn.rating.settings = {
 
 })( jQuery, window, document );
 
-},{}],25:[function(require,module,exports){
+},{}],28:[function(require,module,exports){
 /*!
  * # Semantic UI - Search
  * http://github.com/semantic-org/semantic-ui/
@@ -16307,7 +16380,7 @@ $.fn.search.settings = {
 
 })( jQuery, window, document );
 
-},{}],26:[function(require,module,exports){
+},{}],29:[function(require,module,exports){
 /*!
  * # Semantic UI - Shape
  * http://github.com/semantic-org/semantic-ui/
@@ -17230,7 +17303,7 @@ $.fn.shape.settings = {
 
 })( jQuery, window, document );
 
-},{}],27:[function(require,module,exports){
+},{}],30:[function(require,module,exports){
 /*!
  * # Semantic UI - Sidebar
  * http://github.com/semantic-org/semantic-ui/
@@ -18268,7 +18341,7 @@ $.fn.sidebar.settings = {
 
 })( jQuery, window, document );
 
-},{}],28:[function(require,module,exports){
+},{}],31:[function(require,module,exports){
 /*!
  * # Semantic UI - Site
  * http://github.com/semantic-org/semantic-ui/
@@ -18757,7 +18830,7 @@ $.extend($.expr[ ":" ], {
 
 })( jQuery, window, document );
 
-},{}],29:[function(require,module,exports){
+},{}],32:[function(require,module,exports){
 /*!
  * # Semantic UI - State
  * http://github.com/semantic-org/semantic-ui/
@@ -19467,7 +19540,7 @@ $.fn.state.settings = {
 
 })( jQuery, window, document );
 
-},{}],30:[function(require,module,exports){
+},{}],33:[function(require,module,exports){
 /*!
  * # Semantic UI - Sticky
  * http://github.com/semantic-org/semantic-ui/
@@ -20411,7 +20484,7 @@ $.fn.sticky.settings = {
 
 })( jQuery, window, document );
 
-},{}],31:[function(require,module,exports){
+},{}],34:[function(require,module,exports){
 /*!
  * # Semantic UI - Tab
  * http://github.com/semantic-org/semantic-ui/
@@ -21365,7 +21438,7 @@ $.fn.tab.settings = {
 
 })( jQuery, window, document );
 
-},{}],32:[function(require,module,exports){
+},{}],35:[function(require,module,exports){
 /*!
  * # Semantic UI - Transition
  * http://github.com/semantic-org/semantic-ui/
@@ -22462,7 +22535,7 @@ $.fn.transition.settings = {
 
 })( jQuery, window, document );
 
-},{}],33:[function(require,module,exports){
+},{}],36:[function(require,module,exports){
 /*!
  * # Semantic UI - Visibility
  * http://github.com/semantic-org/semantic-ui/
@@ -23775,7 +23848,7 @@ $.fn.visibility.settings = {
 
 })( jQuery, window, document );
 
-},{}],34:[function(require,module,exports){
+},{}],37:[function(require,module,exports){
 /*!
  * # Semantic UI - Visit
  * http://github.com/semantic-org/semantic-ui/
@@ -24302,7 +24375,7 @@ $.fn.visit.settings = {
 
 })( jQuery, window, document );
 
-},{}],35:[function(require,module,exports){
+},{}],38:[function(require,module,exports){
 require('./js/api');
 require('./js/colorize');
 require('./js/form');
@@ -24327,4 +24400,4 @@ require('./js/sticky');
 require('./js/tab');
 require('./js/transition');
 
-},{"./js/accordion":12,"./js/api":13,"./js/checkbox":14,"./js/colorize":15,"./js/dimmer":16,"./js/dropdown":17,"./js/embed":18,"./js/form":19,"./js/modal":20,"./js/nag":21,"./js/popup":22,"./js/progress":23,"./js/rating":24,"./js/search":25,"./js/shape":26,"./js/sidebar":27,"./js/site":28,"./js/state":29,"./js/sticky":30,"./js/tab":31,"./js/transition":32,"./js/visibility":33,"./js/visit":34}]},{},[1,2,3,4,5,6,7,8,9,10,11]);
+},{"./js/accordion":15,"./js/api":16,"./js/checkbox":17,"./js/colorize":18,"./js/dimmer":19,"./js/dropdown":20,"./js/embed":21,"./js/form":22,"./js/modal":23,"./js/nag":24,"./js/popup":25,"./js/progress":26,"./js/rating":27,"./js/search":28,"./js/shape":29,"./js/sidebar":30,"./js/site":31,"./js/state":32,"./js/sticky":33,"./js/tab":34,"./js/transition":35,"./js/visibility":36,"./js/visit":37}]},{},[1,2,3,4,5,6,7,8,9,10,11,12,13,14]);

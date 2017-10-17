@@ -2,15 +2,13 @@
 
 {% block content %}
 
-{% set title_overlay_class = (header_url is not empty) ? 'title-overlay' : '' %}
-
 {% if header_url is not empty %}
 <section class="hero">
     <img class="ui fluid image" src="{{ header_url }}" srcset="{{ srcset }}" sizes="{{ sizes }}" alt="{{ header_url }}">
 </section>
 {% endif %}
 
-<section class='ui container {{ title_overlay_class }}'>
+<section class='ui container'>
 	<h2 class='title-overlay_title'>{{ page_data.title.rendered }}</h2>
 	<div class='inner-container'>
 		<div class='page-content'>
