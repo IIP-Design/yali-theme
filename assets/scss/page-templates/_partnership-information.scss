@@ -17,21 +17,29 @@
 			margin: 0;
 			padding: 0 15px 0 0;
 			list-style: none;			
-			font-weight: 600;
+			font-weight: 300;
 			font-size: em(18); 			
 			@media screen and (min-width: 934px) {
 				display: inline-block;
-				max-width: 33.33%;
+				max-width: 33%;
 			}
 			@media screen and (min-width: 934px) and (max-width: 1003px) {
 				max-width: 30%;
 			}
 			@media screen and (max-width: 933px) {
 				font-size: em(14, $mobile);
-			}			
+			}
+
+			&--bold {
+				font-weight: 600;
+			}
 
 			a {
 				color: $blue-medium;
+			}
+
+			.lightweight {
+				font-weight: 300;
 			}
 		}
 	}

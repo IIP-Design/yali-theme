@@ -8,7 +8,6 @@ import * as dropdown_filter from './dropdown_filter';
 import './application_status';
 import './simple_filter';
 import scroll_to_elem from './scrollTo';
-import './partners_display';
 
 (function($) {
  
