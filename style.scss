@@ -33,7 +33,7 @@ Text Domain: yali
 @import 'assets/scss/partials/hero';
 @import 'assets/scss/partials/page-title-overlay';
 
-// General helper elems - dropdown, placeholders, etc. 
+// General helper elems - dropdown, placeholders, etc.
 @import 'assets/scss/partials/helpers';
 @import 'assets/scss/partials/cta-link';
 @import 'assets/scss/partials/page-media-element';
@@ -50,6 +50,9 @@ Text Domain: yali
 
 // Join Form
 @import 'assets/scss/partials/join-form/join-form';
+
+// Courses
+@import 'assets/scss/partials/courses';
 
 // CONTENT BLOCKS
 @import 'assets/scss/content-blocks/base';
@@ -100,4 +103,3 @@ Text Domain: yali
 @import 'assets/scss/page-templates/tag';
 @import 'assets/scss/page-templates/error_pages';
 @import 'assets/scss/page-templates/partnership-information';
-
