@@ -1,0 +1,62 @@
+.course-intro-text {
+
+  > h1 {
+    font-size: em(50);
+    @media screen and (max-width: 933px) {
+      font-size: em(35, $mobile);
+    }
+    @media screen and (max-width: 330px) {
+      font-size: em(30, $mobile);
+    }
+  }
+
+  > p {
+    font-size: em(18);
+    @media screen and (max-width: 933px) {
+      font-size: em(16, $mobile);
+    }
+    @media screen and (max-width: 330px) {
+      font-size: em(14, $mobile);
+    }
+  }
+}
+
+.lessons-list {
+
+  > header > h3 {
+    font-size: em(30);
+  }
+}
+
+.media-object-title {
+  font-size: em(24);
+}
+
+.media-object-subtitle {
+  font-size: em(20);
+}
+
+.media-object-description {
+
+  > p {
+    font-size: em(16);
+  }
+}
+
+.lessons-list-item {
+
+  > a {
+    font-size: em(16);
+  }
+}
+
+.instructors-list {
+
+  > header > h3 {
+    font-size: em(30);
+  }
+}
+
+.instructors-list .media-object {
+  margin-bottom: 20px !important;
+}
