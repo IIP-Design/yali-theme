@@ -1,12 +1,20 @@
 {% extends 'base.twig' %}
 
 {% block content %}
+<section class='hero hero--bg_img' style='background-image: url("{{ header_url }}"); background-size: cover;'>
+    <div class='hero-inner bottom_padd bottom_padd--thin'>
+    	<div class='hero-content ui container'>
+    		<h1 class='hero-h1'>Learning</h1>
+    		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+    	</div>
+    </div>
+</section>
 
 <section class='ui container'>	
 	<div class='inner-container archive_posts'>				
 	{% include '/content_blocks/all_posts_filter/all_posts_filter.twig' with			
 		{				
-			title: 'YALI Network In Action',
+			title: 'Learning with YALI',
 			filters: ['content_type', 'subject', 'series', 'language', 'sort'],
 			content_types: ['Article', 'Podcast', 'Video'],
 			posts: [
