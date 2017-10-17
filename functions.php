@@ -32,6 +32,7 @@ class YaliSite {
 		add_action( 'init', array( $this, 'register_taxonomies' ) );
 		add_action( 'init', array( $this, 'register_shortcodes' ) );
 		add_action( 'admin_init', array( $this, 'admin_remove_menu_pages' ) );
+		add_action( 'after_setup_theme', array( $this, 'admin_remove_corona_shortcode_button') );
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
 
@@ -124,6 +125,11 @@ class YaliSite {
 		if ( !current_user_can( 'manage_sites' ) ) {
 			remove_menu_page('vc-welcome');
 		}
+	}
+
+	function admin_remove_corona_shortcode_button(){
+	  $instance = TinyMce_Btn_Shortcode::instance();
+	  remove_filter("mce_external_plugins", array ( $instance, 'corona_add_js_to_load' ) );
 	}
 
 	function add_to_twig( $twig ) {
