@@ -1,5 +1,7 @@
 <section class='cb_post_wrapper'>
+	{% if title %}
 	<h3>{{ title }}</h3>
+	{% endif %}
 	<div class='ui stackable grid cb_post cb_post--single'>	
 		<div class='four wide column cb_post_img'>
 			<img src='{{ img_src }}'>

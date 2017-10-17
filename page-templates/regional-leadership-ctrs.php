@@ -34,7 +34,7 @@ $context = array(
   "header_url"  => $header_url,  
   "feat_img"    => $feat_img_obj,
   "srcset"		=> $srcset,
-  "size"		=> $size
+  "size"		=> $sizes
 );
 
 

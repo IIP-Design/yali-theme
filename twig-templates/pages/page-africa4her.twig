@@ -13,10 +13,12 @@
 
 		{% include 'content_blocks/post-single.twig' with 
 			{
-				title: 'Read about (topic)',
+				title: 'Read about the important issues facing women and girls around the world',
 				img_src: 'data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==',
 				headline: 'Lorem Ipsum Dolor Sit Amet',
-				excerpt: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus nisi nisi, ullamcorper nec ornare eget, consectetur vitae dolor. Nam accumsan gravida turpis, at tempor nibh aliquam vitae.'
+				excerpt: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus nisi nisi, ullamcorper nec ornare eget, consectetur vitae dolor. Nam accumsan gravida turpis, at tempor nibh aliquam vitae.',
+				cta_link: '#',
+				cta_text: 'Read more about women and girls <i class="chevron right icon"></i>'
 			} 
 		%}
 
@@ -31,41 +33,40 @@
 
 		<section class='section promote'>
 			<h3>Promote {{ page_data.title.rendered }}</h3>
-			<p>Share the {{ page_data.title.rendered }} announcement on Facebook or Twitter using the buttons below.</p>	
+			<p>Download, use and share these graphics on social media.</p>	
+			
 			<div class='ui stackable grid promote_item'>
-				<div class='eight wide column'>
-					<a href='#' target='_blank' class='promote_item_share'>
-						<i class='facebook f icon'></i>
-						<span>Share on Facebook</span>
-					</a>
-					<img src='data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='>
-					<p>Share the {{ page_data.title.rendered }} sahre graphic on your social media pages! Click this preview image to 
-						download.</p>
-				</div>
 				<div class='eight wide column promote_item'>
-					<a href='#' target='_blank' class='promote_item_share'>
+					<!-- <a href='#' target='_blank' class='promote_item_share'>
 						<i class='twitter icon'></i>
 						<span>Share on Twitter</span>
-					</a>
+					</a> -->
 					<img src='data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='>
 					<p>Update your Facebook profile with the {{ page_data.title.rendered }} profile banner! Click this preview to
 						download.</p>
 				</div>
+				<div class='eight wide column'>
+					<!-- <a href='#' target='_blank' class='promote_item_share'>
+						<i class='facebook f icon'></i>
+						<span>Share on Facebook</span>
+					</a> -->
+					<img src='data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='>
+					<p>Share the {{ page_data.title.rendered }} share graphic on your social media pages! Click this preview image to 
+						download.</p>
+				</div>
+				<div class='eight wide column'>
+					<!-- <a href='#' target='_blank' class='promote_item_share'>
+						<i class='facebook f icon'></i>
+						<span>Share on Facebook</span>
+					</a> -->
+					<img src='data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='>
+					<p>Share the {{ page_data.title.rendered }} share graphic on your social media pages! Click this preview image to 
+						download.</p>
+				</div>				
 			</div>
 		</section>
-		
-		{% include 'content_blocks/post-single.twig' with 
-			{
-				title: 'Take the pledge',
-				img_src: 'data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==',
-				headline: 'Lorem Ipsum Dolor Sit Amet',
-				excerpt: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus nisi nisi, ullamcorper nec ornare eget, consectetur vitae dolor. Nam accumsan gravida turpis, at tempor nibh aliquam vitae.',
-				cta_link: '#',
-				cta_text: 'Take the pledge'
-			}
-		%}
-
-		<section class='section alumni'>
+				
+		<!-- <section class='section alumni'>
 			<h3>Hear from alumni</h3>
 			<p>Watch what (year) Mandela Washington Fellows have to say about (topic) for (campaign).</p>
 			<div class='ui stackable grid alumni_vids'>
@@ -76,7 +77,7 @@
 					<img src='data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='>
 				</div>
 			</div>
-		</section>
+		</section> -->
 
 		<section class='section org_event'>
 			<h3>Organize an event</h3>
@@ -93,7 +94,7 @@
 			</div>												
 		</section>
 
-		<section class='section survey'>
+		<!-- <section class='section survey'>
 			<h3>Tell us about your {{ page_data.title.rendered }} event</h3>
 			<p>Take this short survey to let us know how your {{ page_data.title.rendered }} event turned out.</p>
 			<div class='ui stackable grid'>
@@ -101,16 +102,10 @@
 					<a href="#" class='cta_link'>Followup Event Report</a>
 				</div>
 			</div>			
-		</section>
+		</section> -->		
 
-		{% include 'content_blocks/honeycomb.twig' with 
-			{ 				
-				headline: 'Stay Involved',
-				subheadline: 'Check out other YALI Network Campaigns',	
-				content: campaigns,
-				bg_color: 'lightblue'
-			} 
-		%}
+		{{ social_block }}
+
 
 		{% include 'content_blocks/post-grid.twig' with 
 			{
@@ -149,41 +144,17 @@
 						],
 						featured_img_url: 'data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==',
 						featured_post: 'true'
-					},
-					{
-						link: 'http://yali.rebuild.local/wp/lorem-ipsum/',
-						title: 'Post 4 Lorem ipsum set abet ipsum', 
-						excerpt: 'Lorem ipsum set abet ipsum Lorem ipsum set abet ipsum', 
-						tags: [
-							{ 'term_id': '4', name: 'tag 1', slug: 'tag-1' },
-							{ 'term_id': '5', name: 'tag 2', slug: 'lorem' },
-							{ 'term_id': '6', name: 'tag 3', slug: 'ipsum' }
-						],
-						featured_img_url: 'data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='
-					},
-					{
-						link: 'http://yali.rebuild.local/wp/lorem-ipsum/',
-						title: 'Post 5 Lorem ipsum set abet ipsum', 
-						excerpt: 'Lorem ipsum set abet ipsum Lorem ipsum set abet ipsum', 
-						tags: [
-							{ 'term_id': '4', name: 'tag 1', slug: 'tag-1' },
-							{ 'term_id': '5', name: 'tag 2', slug: 'lorem' },
-							{ 'term_id': '6', name: 'tag 3', slug: 'ipsum' }
-						],
-						featured_img_url: 'data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='
-					},
-					{
-						link: 'http://yali.rebuild.local/wp/lorem-ipsum/',
-						title: 'Post 6 Lorem ipsum set abet ipsum', 
-						excerpt: 'Lorem ipsum set abet ipsum Lorem ipsum set abet ipsum', 
-						tags: [
-							{ 'term_id': '4', name: 'tag 1', slug: 'tag-1' },
-							{ 'term_id': '5', name: 'tag 2', slug: 'lorem' },
-							{ 'term_id': '6', name: 'tag 3', slug: 'ipsum' }
-						],
-						featured_img_url: 'data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='
 					}
 				]
+			} 
+		%}
+
+		{% include 'content_blocks/honeycomb.twig' with 
+			{ 				
+				headline: 'Stay Involved',
+				subheadline: 'Check out other YALI Network Campaigns',	
+				content: campaigns,
+				bg_color: 'lightblue'
 			} 
 		%}
 

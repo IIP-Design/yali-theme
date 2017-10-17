@@ -8,6 +8,10 @@
 			padding: 35px 0;
 		}
 
+		&:last-child {
+    		margin-bottom: 0 !important;
+		}
+
 		&.lightblue {
 			color: $blue-navy;
 			background-color: $blue-bright;
