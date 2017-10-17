@@ -31,6 +31,7 @@ class YaliSite {
 		add_action( 'init', array( $this, 'register_post_types' ) );
 		add_action( 'init', array( $this, 'register_taxonomies' ) );
 		add_action( 'init', array( $this, 'register_shortcodes' ) );
+		add_action( 'admin_init', array( $this, 'admin_remove_menu_pages' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
 
@@ -117,6 +118,12 @@ class YaliSite {
 
 	function admin_enqueue_scripts() {
 			wp_enqueue_style( 'yali-admin-css', get_stylesheet_directory_uri() . '/style-admin.css' );
+	}
+
+	function admin_remove_menu_pages() {
+		if ( !current_user_can( 'manage_sites' ) ) {
+			remove_menu_page('vc-welcome');
+		}
 	}
 
 	function add_to_twig( $twig ) {
