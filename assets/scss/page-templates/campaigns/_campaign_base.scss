@@ -13,4 +13,47 @@
 		}
 	}
 
+
+	.promote {		
+		
+		&_item {
+
+			&.ui.stackable.grid {
+
+				.eight.wide.column {
+					@media screen and (max-width: 767px) {
+						padding: 16px 0 !important;
+
+						img {
+							margin-bottom: 8px;
+						}
+					}
+				}				
+			}
+
+			&_img {
+				width: 100%;
+				min-height: 300px;
+				background-size: cover;
+			}
+
+			&_text {
+				margin-top: 10px;
+			}
+		}		
+	}
+
+
+	.org_event {
+
+		&_item {			
+
+			.cta_link {
+				@media screen and (max-width: 767px) {
+					margin: 0 auto;
+				}
+			}
+		}
+	}
+
 }

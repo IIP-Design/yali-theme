@@ -6,7 +6,7 @@
 </section>
 <section class="ui container">
 	<h2 class='title-overlay_title'>{{ page_data.title.rendered }}</h2>
-	<div class='inner-container campaign'>		      
+	<div class='inner-container campaign'>		
 		<section class='page-content'>
 			{{ page_data.content.rendered }}          
 		</section>
@@ -33,57 +33,30 @@
 
 		<section class='section promote'>
 			<h3>Promote {{ page_data.title.rendered }}</h3>
-			<p>Download, use and share these graphics on social media.</p>	
-			
+			<p>Download, use and share these graphics on social media.</p>						
 			<div class='ui stackable grid promote_item'>
+
+				{% for promo in promo_data %}
 				<div class='eight wide column promote_item'>
-					<!-- <a href='#' target='_blank' class='promote_item_share'>
-						<i class='twitter icon'></i>
-						<span>Share on Twitter</span>
-					</a> -->
-					<img src='data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='>
-					<p>Update your Facebook profile with the {{ page_data.title.rendered }} profile banner! Click this preview to
-						download.</p>
-				</div>
-				<div class='eight wide column'>
-					<!-- <a href='#' target='_blank' class='promote_item_share'>
-						<i class='facebook f icon'></i>
-						<span>Share on Facebook</span>
-					</a> -->
-					<img src='data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='>
-					<p>Share the {{ page_data.title.rendered }} share graphic on your social media pages! Click this preview image to 
-						download.</p>
-				</div>
-				<div class='eight wide column'>
-					<!-- <a href='#' target='_blank' class='promote_item_share'>
-						<i class='facebook f icon'></i>
-						<span>Share on Facebook</span>
-					</a> -->
-					<img src='data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='>
-					<p>Share the {{ page_data.title.rendered }} share graphic on your social media pages! Click this preview image to 
-						download.</p>
+					<div class='promote_item_img' data-preview-image='{{ promo.image_url }}' style='background-image: url({{ promo.image_url }}); background-size: cover;'></div>
+					<p class='promote_item_text'>{{ promo.image_text }}</p>
 				</div>				
+				{% endfor %}
 			</div>
 		</section>
-				
-		<!-- <section class='section alumni'>
-			<h3>Hear from alumni</h3>
-			<p>Watch what (year) Mandela Washington Fellows have to say about (topic) for (campaign).</p>
-			<div class='ui stackable grid alumni_vids'>
-				<div class='eight wide column alumni_vid'>
-					<img src='data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='>
-				</div>
-				<div class='eight wide column alumni_vid'>
-					<img src='data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='>
-				</div>
-			</div>
-		</section> -->
 
 		<section class='section org_event'>
 			<h3>Organize an event</h3>
 			<p>Organize a #YALILearns event and facilitate understanding human rights to raise awareness and educate
 				your community about protecting human rights. Use our facilitation guide or presentation template to 
 				help.</p>
+
+			<br>
+			<br>
+			{{ dump(orgevent_arr) }}
+			<br>
+			<br>
+
 			<div class='ui stackable grid org_event_items'>
 				<div class='eight wide column org_event_item'>
 					<a href="#" class='cta_link'>Facilitation Guide (PDF)</a>
@@ -94,18 +67,7 @@
 			</div>												
 		</section>
 
-		<!-- <section class='section survey'>
-			<h3>Tell us about your {{ page_data.title.rendered }} event</h3>
-			<p>Take this short survey to let us know how your {{ page_data.title.rendered }} event turned out.</p>
-			<div class='ui stackable grid'>
-				<div class='eight wide column'>
-					<a href="#" class='cta_link'>Followup Event Report</a>
-				</div>
-			</div>			
-		</section> -->		
-
 		{{ social_block }}
-
 
 		{% include 'content_blocks/post-grid.twig' with 
 			{
