@@ -47,8 +47,25 @@ $cb_box->add_field( array(
   'name' => 'Full Screen Width?',      
   'id'   => $prefix . 'cb_layout_width',
   'desc' => '',
-  'default' => true,
-  'type' => 'checkbox'
+  'type' => 'radio_inline',
+  'options' => array(
+		'yes' => __( 'Yes', 'yali' ),
+		'no'   => __( 'No', 'yali' )
+	),
+	'default' => 'yes'
+));
+
+// Show block title
+$cb_box->add_field( array(
+  'name' => 'Show block title?',      
+  'id'   => $prefix . 'cb_show_title',
+  'desc' => '',
+  'type' => 'radio_inline',
+  'options' => array(
+		'yes'   => __( 'Yes', 'yali' ),
+		'no'    => __( 'No', 'yali' )
+	),
+	'default' => 'yes'
 ));
 
 // Underline title
@@ -56,7 +73,12 @@ $cb_box->add_field( array(
   'name' => 'Underline title?',      
   'id'   => $prefix . 'cb_title_underline',
   'desc' => '',
-  'type' => 'checkbox'
+  'type' => 'radio_inline',
+  'options' => array(
+		'yes'   => __( 'Yes', 'yali' ),
+		'no'    => __( 'No', 'yali' )
+	),
+	'default' => 'yes'
 ));
 
 // Title alignment
