@@ -116,6 +116,20 @@ class Content_Block_Shortcode {
     //$this->debug($context );
     return Twig::render( 'content_blocks/post-list.twig', $context );
   }
+
+  // FILTERED LIST CONTENT BLOCK (CDP)
+  public function render_filtered_list( $id ) {
+    $meta = get_post_meta( $id );
+    $post = get_post( $id );
+   
+    $context = $this->fetch_base_config( $id, $post );
+    $context["selector"] = 'feed' . $id;
+   //$context = $this->fetch_module_config( $context, $id );
+    $context = $this->fetch_btn_config( $context, $id, $meta );
+    
+    //$this->debug($context);
+    return Twig::render( 'content_blocks/filtered_list.twig', $context );
+  }
   
 
   // Helpers

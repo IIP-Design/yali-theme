@@ -5,6 +5,7 @@
       socialMetabox = document.getElementById("yali_cb_social_links"),      
       accordionMetaBox = document.getElementById('yali_cb_accordion'),
       ctaLayoutWidth = document.getElementById('yali_cb_cta_width'),   
+      filteredListMetaBox = document.getElementById('yali_cb_box_filter'),   
       selectByPostsNum = $('.cmb2-id-yali-cdp-num-posts'),   
       selectByPostsCategory = $('.cmb2-id-yali-cdp-category'), 
       selectByPosts = $('.cmb-type-cdp-autocomplete.cmb-repeat'),
@@ -14,6 +15,7 @@
 
     // Metabox Object store for iterating
     var conditionalMetaboxes = {
+      filtered_list: filteredListMetaBox,
       post_list: widgetMetabox,
       social: socialMetabox,
       accordion: accordionMetaBox,

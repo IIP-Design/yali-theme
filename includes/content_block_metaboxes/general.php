@@ -22,6 +22,7 @@ $cb_box->add_field( array(
     'accordion'      => __( 'Accordion', 'yali' ),
     'cta'            => __( 'Call To Action', 'yali' ),
     'post_list'      => __( 'Post List', 'yali' ),
+    'filtered_list'  => __( 'Post List with Filters', 'yali' ),
     'social'         => __( 'Social Icons', 'yali' )
   )
 ));
