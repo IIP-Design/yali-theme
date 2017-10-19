@@ -5,6 +5,32 @@
  */
 require_once get_stylesheet_directory() . '/includes/autoloader.php';
 
+/**
+ * Require badge generation class
+ */
+include( get_stylesheet_directory() . '/badge/class-america-badge-generation.php');
+
+/**
+ * Add attachment using the Formidable 'frm_notification_attachment' hook
+ *
+ */
+
+function yali_add_attachment( $attachments, $form, $args ) {
+	if ( $form->form_key == 'get_pledge' || $form->form_key == 'get_earthday' || $form->form_key == 'get_yalilearns2016' || $form->form_key == 'get_certificate2' || $form->form_key == 'get_4all2') {
+
+		$params = array (
+			'key'				=>  $form->form_key,				// form identifier (i.e. project id used to find config)
+			'metas'			=>  $args['entry']->metas		// formidable metas passed in via $args that hold field values
+		);
+
+		$generator = new America_Badge_Generation ();
+		$attachments[] =  $generator->create_image( $params );
+ }
+	return $attachments;
+}
+
+add_filter( 'frm_notification_attachment', 'yali_add_attachment', 10, 3 );
+
 YALI_Autoloader::register( get_stylesheet_directory() . '/includes/' );
 
 use Yali\Twig as Twig;
@@ -75,7 +101,7 @@ class YaliSite {
 		/*
 		* IIP Interactive Plugin Edits
 		*/
-		require_once get_stylesheet_directory() . '/includes/edit-iip-interactive-plugin/edit-iip-interactive.php';		
+		require_once get_stylesheet_directory() . '/includes/edit-iip-interactive-plugin/edit-iip-interactive.php';
 	}
 
 	function twig_init() {
@@ -103,7 +129,7 @@ class YaliSite {
 	}
 
 	function register_taxonomies() {
-		// this is where you can register custom taxonomies		
+		// this is where you can register custom taxonomies
 		Content_Type_Tax::register();
 		Series_Tax::register();
 	}
@@ -136,6 +162,7 @@ class YaliSite {
 		/* add additional contextual functions to twig */
 		return $twig;
 	}
+
 
 }
 
