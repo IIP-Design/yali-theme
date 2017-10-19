@@ -1,3 +1,4 @@
+// Course pages
 .course-intro-text {
 
   > h1 {
@@ -50,6 +51,11 @@
   }
 }
 
+.lessons-list-item::before {
+  left: -2.4em !important;
+  top: 33.5% !important;
+}
+
 .instructors-list {
 
   > header > h3 {
@@ -57,6 +63,119 @@
   }
 }
 
-.instructors-list .media-object {
-  margin-bottom: 20px !important;
+h5.media-object-subtitle {
+  font-weight: 400;
+}
+
+// Lessons pages
+.lesson .lesson-title {
+  font-size: em(50);
+  @media screen and (max-width: 933px) {
+    font-size: em(35, $mobile);
+  }
+  @media screen and (max-width: 330px) {
+    font-size: em(30, $mobile);
+  }
+}
+
+.lesson .glossary {
+  @media screen and (min-width: 1024px) {
+    margin-left: 1em !important;
+  }
+}
+
+ul.collapse.glossary-content {
+  padding-left: 0;
+}
+
+
+.glossary-title {
+  font-size: em(40);
+  @media screen and (max-width: 933px) {
+    font-size: em(30, $mobile);
+  }
+  @media screen and (max-width: 330px) {
+    font-size: em(25, $mobile);
+  }
+
+  margin-left: 0 !important;
+  line-height: 1.2em !important;
+}
+
+li.glossary-item {
+
+  > p {
+    font-size: em(18);
+    @media screen and (max-width: 933px) {
+      font-size: em(16, $mobile);
+    }
+    @media screen and (max-width: 330px) {
+      font-size: em(14, $mobile);
+    }
+  }
+}
+
+.ReactTabs__TabPanel {
+
+  div > p {
+    font-size: em(18);
+    @media screen and (max-width: 933px) {
+      font-size: em(16, $mobile);
+    }
+    @media screen and (max-width: 330px) {
+      font-size: em(14, $mobile);
+    }
+  }
+}
+
+#course-container ul.lesson-pagination {
+  margin-top: 5px;
+}
+
+// Quiz page
+h3.quiz-instructions {
+  font-size: em(30);
+}
+
+.quiz-question-text > p {
+    font-size: em(18);
+    @media screen and (max-width: 933px) {
+      font-size: em(16, $mobile);
+    }
+    @media screen and (max-width: 330px) {
+      font-size: em(14, $mobile);
+    }
+}
+
+ol.quiz-questions {
+  font-size: em(16);
+  @media screen and (max-width: 933px) {
+    font-size: em(14, $mobile);
+  }
+  @media screen and (max-width: 330px) {
+    font-size: em(12, $mobile);
+  }
+}
+
+#formQuiz input[type="submit"] {
+  background-color: #192856 !important;
+  border: none;
+  padding: 5px;
+}
+
+// Instructor page
+h1.instructor-title {
+  font-size: em(50);
+}
+
+h3.instructor-subtitle {
+  font-size: em(30);
+}
+
+.instructor-image {
+  margin-top: 12px !important;
+}
+
+.instructor-description > p {
+  font-size: em(18);
 }

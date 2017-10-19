@@ -3,7 +3,7 @@
   bottom: 0;
   left: 0;
   width: 100%;
-  color: #fff;  
+  color: #fff;
 
 
   &.ui.segment {
@@ -20,10 +20,11 @@
     background-color: $blue-navy;
     margin: 0;
     border-radius: 0;
+    top: 20px;
 
     .ui.item:before {
       display: none;
-    }    
+    }
   }
 
 
@@ -44,14 +45,14 @@
   }
 
 
-  &_branding {        
+  &_branding {
     font-weight: 600;
     @media screen and (max-width: 589px) {
       padding-bottom: 18px;
     }
 
     a {
-      color: #fff;      
+      color: #fff;
     }
 
     &_title, .img_placeholder {
@@ -63,29 +64,29 @@
     &_title {
       vertical-align: top;
       display: inline-block;
-      margin-top: 0;      
+      margin-top: 0;
       font-size: em(24, $font-size);
       font-weight: 600;
       @media screen and (max-width: 933px) {
         margin-top: 3px;
         font-size: em(18, $mobile);
       }
-    }    
+    }
   }
 
 
   &_list {
     padding: 30px 0;
-    @media screen and (max-width: 589px) {      
-      padding: 0 0 18px 0;      
-    }    
+    @media screen and (max-width: 589px) {
+      padding: 0 0 18px 0;
+    }
 
     .ui.grid {
       @media screen and (max-width: 589px) {
         -webkit-flex-direction: column;
         -ms-flex-direction: column;
         flex-direction: column;
-        margin: 0;        
+        margin: 0;
       }
     }
 
@@ -95,8 +96,8 @@
         justify-content: center;
         &:last-child {
           padding-bottom: 0;
-        }        
-      }      
+        }
+      }
     }
 
     &_item {
@@ -106,8 +107,8 @@
         font-size: em(14, $mobile);
       }
 
-      a {      
-        color: #fff;        
+      a {
+        color: #fff;
       }
 
       &--search {
@@ -126,7 +127,7 @@
           }
 
           &.hide {
-            display: none;            
+            display: none;
           }
 
         }
@@ -136,7 +137,7 @@
           vertical-align: top;
           height: 35px;
           width: 35px;
-          margin: 0 -3px 0 0;          
+          margin: 0 -3px 0 0;
 
           &::before {
             position: absolute;
@@ -166,10 +167,10 @@
               background-color: #fff;
             }
           }
-        }        
+        }
 
         input {
-          height: 35px;          
+          height: 35px;
           border: none;
           text-align: center;
           color: #000;
@@ -183,16 +184,16 @@
             width: 200px;
             @media screen and (max-width: 589px) {
               width: 200px !important;
-            }            
+            }
           }
         }
       }
-    }    
-  }  
+    }
+  }
 
 
   &_bureau {
-    padding: 30px 0;    
+    padding: 30px 0;
     @media screen and (max-width: 589px) {
       padding: 18px 0 12px 0;
     }
@@ -208,7 +209,7 @@
       @media screen and (max-width: 589px) {
         display: none;
       }
-    }    
+    }
   }
 
 
@@ -216,6 +217,6 @@
 
     &_txt {
       font-size: em(18, $font-size);
-    }    
+    }
   }
 }
