@@ -83,4 +83,10 @@ function campaigns_template_fields() {
 		)
 	));
 
+	$campaigns_orgevent->add_group_field( $campaigns_group_field_orgevent, array(
+	 	'name'  => 'File Name Text',
+		'id'    => 'file_name',
+		'type'  => 'text'
+	));
+
 }	

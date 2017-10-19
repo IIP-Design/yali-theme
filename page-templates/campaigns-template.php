@@ -27,23 +27,23 @@ $campaigns = ( $check_host == 'yali.dev.america.gov' ) ? Yali\API::get_child_pag
 wp_reset_postdata();
 
 // Promo Items
-$promo_arr = get_post_meta($post->ID, 'campaigns_promo_repeat_group', true);
+$promo_data = get_post_meta($post->ID, 'campaigns_promo_repeat_group', true);
 
 // Organize an Event Files
-$orgevent_arr = get_post_meta($post->ID, 'campaigns_orgevent_repeat_group', true);
+$orgevent_data = get_post_meta($post->ID, 'campaigns_orgevent_repeat_group', true);
 
 // Data array for twig
 $context = array(
-  "pagename"    	=> $pagename,
-  "page_data"   	=> $page_data,
-  "header_url"  	=> $header_url,  
-  "feat_img"    	=> $feat_img_obj,
-  "srcset"			=> $srcset,
-  "size"			=> $sizes,
+  "pagename"    	  => $pagename,
+  "page_data"   	  => $page_data,
+  "header_url"  	  => $header_url,  
+  "feat_img"    	  => $feat_img_obj,
+  "srcset"			    => $srcset,
+  "size"			      => $sizes,
   "social_block"  	=> $social_block,
-  "campaigns"		=> $campaigns,
-  "promo_data"		=> $promo_arr,
-  "orgevent_data"	=> $orgevent_arr
+  "campaigns"		    => $campaigns,
+  "promo_data"	 	  => $promo_data,
+  "orgevent_data"	  => $orgevent_data
 );
 
 

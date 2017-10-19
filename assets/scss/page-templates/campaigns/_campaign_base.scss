@@ -49,9 +49,17 @@
 		&_item {			
 
 			.cta_link {
+				background-color: $blue-medium;
 				@media screen and (max-width: 767px) {
 					margin: 0 auto;
 				}
+			}
+		}
+
+		&_text {
+
+			a {
+				font-weight: 600;
 			}
 		}
 	}
