@@ -55,7 +55,7 @@ return array(
 	'get_pledge' 	=>  array (   					// Form that is sending certificate -- MUST match form key
 		'prefix'					=> 'yali_pledge_',
 		'src_path'				=> 'images/yali_pledge_bkgrd.png',
-		'save_path'				=> '../../../uploads/sites/4/generated-images/',
+		'save_path'				=> '../../../uploads/generated-images/',
 		'font'	  				=> 'fonts/Futuri Condensed Extra Bold.ttf',
 		'font_size'				=> 50,
 		'color'						=> '#314071',
@@ -91,7 +91,7 @@ return array(
 	'get_earthday' 	=>  array (   					// Form that is sending certificate -- MUST match form key
 		'prefix'					=> 'yali_earthday_',
 		'src_path'				=> 'images/yali_earth_day_bkgrd.png',
-		'save_path'				=> '../../../uploads/sites/4/generated-images/',
+		'save_path'				=> '../../../uploads/generated-images/',
 		'font'	  				=> 'fonts/Lato-Regular.ttf',
 		'font_size'				=> 32,
 		'color'						=> '#bbd485',
@@ -125,7 +125,7 @@ return array(
 	'get_yalilearns2016' 	=>  array (   					// Form that is sending certificate -- MUST match form key
 		'prefix'					=> 'yali_learns_',
 		'src_path'				=> 'images/ ',
-		'save_path'				=> '../../../uploads/sites/4/generated-images/',
+		'save_path'				=> '../../../uploads/generated-images/',
 		'font'	  				=> 'fonts/AvenirNextCondensed-Heavy.ttf',
 		'font_size'				=> 44,
 		'color'						=> '#218b43',
@@ -159,7 +159,7 @@ return array(
 	'get_certificate2' 	=>  array (   					// Form that is sending certificate -- MUST match form key
 		'prefix'					=> 'yali_courses_',
 		'src_path'				=> 'images/yali_course_bkgrd.png',
-		'save_path'				=> '../../../uploads/sites/4/generated-images/',
+		'save_path'				=> '../../../uploads/generated-images/',
 		'font'	  				=> 'fonts/Lato-Regular.ttf',
 		'font_size'				=> 50,
 		'color'						=> '#003d7d',
@@ -191,7 +191,7 @@ return array(
 	'get_4all2' 	=>  array (   					// Form that is sending certificate -- MUST match form key
 		'prefix'					=> 'yali_4all_',
 		'src_path'				=> 'images/yali_4all_bkgrd.png',
-		'save_path'				=> '../../../uploads/sites/4/generated-images/',
+		'save_path'				=> '../../../uploads/generated-images/',
 		'font'	  				=> 'fonts/avenir-light-webfont.ttf',
 		'font_size'				=> 40,
 		'color'						=> '#ffffff',
