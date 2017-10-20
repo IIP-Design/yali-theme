@@ -1,0 +1,43 @@
+
+
+<section class='cb full-width' style="background-color: {{ block_bg_color }}">
+	<div class='ui container'>
+    <div class='inner-container'>
+  		<h2 class="{{ title_underline }}" style="text-align: {{ title_alignment }}">{{ title }}</h2>
+      <p class="cb_excerpt" style="text-align: {{ excerpt_alignment }}">{{ excerpt }} </p>
+      
+      <!-- attach filters -->
+      <div class="cb_dropdown cb-cdp-filters" data-target="{{ selector }}">
+      {% for filter in filters %}
+        <select name="{{ filter }}" multiple="" class="ui dropdown" aria-label="{{ filter }}">
+          <option value="">{{ filter |capitalize }}</option>
+          <option value="angular">Angular</option>
+          <option value="css">CSS</option>
+          <option value="design">Graphic Design</option>
+        </select>
+      {% endfor %}
+      </div>
+      <!-- attach article feed module -->
+      <div id="{{ selector }}" style="margin-top: 2em; text-align: {{ text_alignment }}">LOADING Component...</div>
+    
+      {% if btn_label is not empty or btn_link is not empty %}
+      <div class="cb_button" style="text-align: {{ btn_text_alignment }}">
+        <button class="ui button" style="background-color: {{ btn_bg_color }}" tabindex="0">
+          <div style="color: {{ btn_label_color }}"> {{ btn_label }}
+            <i style="color:  {{ btn_label_color }}" class="caret down icon"></i>
+          </div>
+        </button>
+      </div>
+      {% endif %}
+
+    </div><!-- inner-container -->
+  </div>
+</section>
+
+
+<script>
+
+
+</script>
+
+  

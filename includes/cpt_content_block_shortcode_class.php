@@ -118,17 +118,14 @@ class Content_Block_Shortcode {
   }
 
   // FILTERED LIST CONTENT BLOCK (CDP)
-  public function render_filtered_list( $id ) {
-    $meta = get_post_meta( $id );
-    $post = get_post( $id );
-   
-    $context = $this->fetch_base_config( $id, $post );
+  public function render_filtered_list( $id ) {  
+    $context = $this->fetch_base_config( $id, get_post( $id ) );
     $context["selector"] = 'feed' . $id;
-   //$context = $this->fetch_module_config( $context, $id );
-    $context = $this->fetch_btn_config( $context, $id, $meta );
-    
-    //$this->debug($context);
-    return Twig::render( 'content_blocks/filtered_list.twig', $context );
+    $context["filters"] = get_post_meta( $id, 'yali_list_filters', true);
+    $context["types"] = get_post_meta( $id, 'yali_list_filters_types', true);
+    $context = $this->fetch_btn_config( $context, $id, get_post_meta( $id ) );
+
+    return Twig::render( 'content_blocks/post-filtered-list.twig', $context );
   }
   
 
@@ -140,24 +137,7 @@ class Content_Block_Shortcode {
    * @param  mixed  $default Optional default value
    * @return mixed           Option value
    */
-  private function cdp_get_option( $key = '', $default = false ) {
-    if ( function_exists( 'cmb2_get_option' ) ) {
-      // Use cmb2_get_option as it passes through some key filters.
-      return cmb2_get_option( 'cdp_options', $key, $default );
-    }
-
-    // Fallback to get_option if CMB2 is not loaded yet.
-    $opts = get_option( 'cdp_options', $default );
-    $val = $default;
-
-    if ( 'all' == $key ) {
-      $val = $opts;
-    } elseif ( is_array( $opts ) && array_key_exists( $key, $opts ) && false !== $opts[ $key ] ) {
-      $val = $opts[ $key ];
-    }
-
-    return $val;
-  }
+  
   
   private function fetch_base_config ( $id, $post ) {
     //$this->debug( get_post_meta( $id));
@@ -186,7 +166,7 @@ class Content_Block_Shortcode {
     $category_field                             = get_post_meta( $id, 'yali_cdp_category', true);
 
     $context['cdp_widget']                      = $module;
-    $context['cdp_indexes']                     = $this->cdp_get_option('cdp_indexes');
+    $context['cdp_indexes']                     = cdp_get_option('cdp_indexes');
     $context['cdp_post_select_by']              = get_post_meta( $id, 'yali_cdp_select_type_posts', true );
    
     $context['cdp_post_ids']                    = get_post_meta( $id, 'yali_cdp_autocomplete', true );
@@ -199,12 +179,9 @@ class Content_Block_Shortcode {
     $context['cdp_ui_layout']                   = get_post_meta( $id, 'yali_cdp_ui_layout', true);
     $context['cdp_ui_direction']                = get_post_meta( $id, 'yali_cdp_ui_direction', true);
     $context['cdp_image']                       = get_post_meta( $id, 'yali_cdp_image', true);
-
-    // option 'cdp_module_url' is set in the cdp-cmb2-fields plugin
-    $path = $this->cdp_get_option('cdp_module_url') . "cdp-module-{$module}/cdp-module-";
-    $context['widget_css'] = $path . $module . '.min.css';
-    $context['widget_js'] = $path . $module . '.min.js';
     
+    //$this->debug($context);exit;
+
     return $context;
   }
 

@@ -16,6 +16,7 @@ use Yali\Bios as Bios;
 use Yali\Content_Type_Tax as Content_Type_Tax;
 use Yali\Series_Tax as Series_Tax;
 
+
 class YaliSite {
 
 	/**
@@ -92,14 +93,14 @@ class YaliSite {
 	}
 
 	/**
-     * Registers custom post types
-     *
-     * @return void
-     */
-    function register_post_types() {
-    	Content_Block::register();
-			Custom_Button::register();
-			Bios::register();
+	 * Registers custom post types
+	 *
+	 * @return void
+	 */
+	function register_post_types() {
+		Content_Block::register();
+		Custom_Button::register();
+		Bios::register();
 	}
 
 	function register_taxonomies() {
@@ -114,7 +115,14 @@ class YaliSite {
 	}
 
 	function enqueue_scripts() {
-		 	wp_enqueue_script( 'yali-js', get_stylesheet_directory_uri() . '/dist/js/bundle.min.js', array('jquery'), CHILD_THEME_VERSION, true );
+		$module_url = self::cdp_get_option('cdp_module_url');
+		$article_feed_js = $module_url . "cdp-module-article-feed/cdp-module-article-feed.min.js";
+		$article_feed_css = $module_url . "cdp-module-article-feed/cdp-module-article-feed.min.css";
+
+		wp_enqueue_script( 'artice-feed-js', $article_feed_js, null, '1.0.0', true );   
+		wp_enqueue_style( 'artice-feed-css', $article_feed_css, null, '1.0.0' );
+
+		wp_enqueue_script( 'yali-js', get_stylesheet_directory_uri() . '/dist/js/bundle.min.js', array('jquery', 'artice-feed-js'), CHILD_THEME_VERSION, true );
 	}
 
 	function admin_enqueue_scripts() {
@@ -136,6 +144,26 @@ class YaliSite {
 		/* add additional contextual functions to twig */
 		return $twig;
 	}
+
+	// Helpers
+	public static function cdp_get_option( $key = '', $default = false ) {
+    if ( function_exists( 'cmb2_get_option' ) ) {
+      // Use cmb2_get_option as it passes through some key filters.
+      return cmb2_get_option( 'cdp_options', $key, $default );
+    }
+
+    // Fallback to get_option if CMB2 is not loaded yet.
+    $opts = get_option( 'cdp_options', $default );
+    $val = $default;
+
+    if ( 'all' == $key ) {
+      $val = $opts;
+    } elseif ( is_array( $opts ) && array_key_exists( $key, $opts ) && false !== $opts[ $key ] ) {
+      $val = $opts[ $key ];
+    }
+
+    return $val;
+  }
 
 }
 

@@ -1,4 +1,4 @@
-export default class ResponsiveBackgroundImage {
+class ResponsiveBackgroundImage {
 
   constructor(element) {
     this.element = element;
@@ -26,3 +26,11 @@ export default class ResponsiveBackgroundImage {
   }
 }
 
+
+export function init() {
+    // Initialize responsive background images
+    let elements = document.querySelectorAll('[data-responsive-background-image]');   
+    for ( let i = 0; i < elements.length; i++ ) {  
+      new ResponsiveBackgroundImage( elements[i] );
+    }
+}

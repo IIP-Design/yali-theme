@@ -1,50 +1,4 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var ResponsiveBackgroundImage = function () {
-  function ResponsiveBackgroundImage(element) {
-    var _this = this;
-
-    _classCallCheck(this, ResponsiveBackgroundImage);
-
-    this.element = element;
-    this.img = element.querySelector("img");
-    this.src = "";
-
-    this.img.addEventListener("load", function () {
-      _this.update();
-    });
-
-    if (this.img.complete) {
-      this.update();
-    }
-  }
-
-  _createClass(ResponsiveBackgroundImage, [{
-    key: "update",
-    value: function update() {
-      var src = typeof this.img.currentSrc !== "undefined" ? this.img.currentSrc : this.img.src;
-      if (this.src !== src) {
-        this.src = src;
-        this.element.style.backgroundImage = 'url("' + this.src + '")';
-      }
-    }
-  }]);
-
-  return ResponsiveBackgroundImage;
-}();
-
-exports.default = ResponsiveBackgroundImage;
-
-},{}],2:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -73,6 +27,171 @@ exports.default = function application_status() {
 		application_status_div.classList.add('app_closed');
 	}
 }();
+
+},{}],2:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.init = init;
+function initializeFilters() {}
+
+/**
+ * Render all article feeds to the page
+ */
+function initializeArticleFeed() {
+  var feeds = document.querySelectorAll("[data-content-type='cdp-article-feed']");
+  forEach(feeds, function (index, feed) {
+    renderArticleFeed(feed);
+  });
+}
+
+/**
+ * Render a specific article feed to the page
+ * The post-list.twig file passess configuration props to the 
+ * feed widget via the cdpFeedConfig object declared in that page
+ * cdpFeedConfig is a hash which stores each article feed config by its feed id
+ * 
+ * @param {object} feed Configuration object
+ */
+function renderArticleFeed(feed) {
+  var config = cdpFeedConfig[feed.id];
+
+  shouldDisplayRelatedLinks(config);
+
+  try {
+    CDP.widgets.ArticleFeed.new({
+      selector: '#' + feed.id,
+      sites: config.indexes, // need to have a default
+      size: config.numPosts,
+      types: '',
+      ids: config.ids,
+      langs: '',
+      tags: '',
+      categories: config.categories,
+      meta: config.postMeta,
+      ui: {
+        layout: config.uiLayout,
+        direction: config.uiDirection,
+        openLinkInNewWin: 'no',
+        image: {
+          shape: config.image['image-shape'],
+          width: config.image['image-height'],
+          borderWidth: config.image['image-border-width'],
+          borderColor: config.image['image-border-color'],
+          borderStyle: config.image['image-border-style']
+        }
+      }
+    }).render();
+  } catch (e) {
+    console.log('Unable to article feed: ' + e.message);
+  }
+}
+
+/**
+ * Determines whether a related link should be added to each article
+ * by checking to see if there are relatedPosts.  If there is
+ * we wait for the 'onReadyFeed' event to be dispatched by the
+ * React component to ensure the component is available before 
+ * appending link
+ * 
+ * @param {object} config  Configuration object
+ */
+function shouldDisplayRelatedLinks(config) {
+  var selectBy = config.selectBy,
+      ids = config.ids,
+      relatedPosts = config.relatedPosts;
+
+
+  if (selectBy === 'custom') {
+    if (Array.isArray(ids) && Array.isArray(relatedPosts)) {
+      if (ids.length && relatedPosts.length) {
+        // react component dispatches custom 'onReadyFeed' after articles are added to the DOM
+        window.addEventListener('onReadyFeed', function (e) {
+          var list = document.querySelector(e.detail);
+          if (list) {
+            var items = list.getElementsByClassName('article-item');
+            if (items.length) {
+              forEach(items, function (index, item) {
+                lookUpItem(item, config);
+              });
+            }
+          }
+        });
+      }
+    }
+  }
+}
+
+/**
+ * Figure out what DOM element to append to by using the relatedPosts
+ * array to look up item by index. The related posts array indexes correspond
+ * to the main ids index
+ * i.e. id of article to add is ids[index] 
+ * and its correspinding related link is at same index in realtedPosts[index]
+ * 
+ * @param {*} item  li.article-item DOM element
+ * @param {*} config  Configuration object
+ */
+function lookUpItem(item, config) {
+  var ids = config.ids,
+      relatedPosts = config.relatedPosts,
+      relatedDisplay = config.relatedDisplay;
+
+
+  if (item.dataset.id) {
+    ids.map(function (id, index) {
+      if (id === item.dataset.id) {
+        var related = relatedPosts[index];
+        if (related) {
+          appendItem(item, related, relatedDisplay);
+        }
+      }
+    });
+  }
+}
+
+/**
+ * Append link 
+ * @param {*} item  li.article-item DOM element
+ * @param {object} related Link config
+ * @param {string} relatedDisplay Display 'link' as link or 'button'
+ */
+function appendItem(item, related, relatedDisplay) {
+  if (item) {
+    var contentDiv = item.getElementsByClassName('article-content');
+    if (contentDiv && contentDiv.length) {
+      var div = document.createElement('div');
+      div.setAttribute('class', 'cb_button');
+
+      var a = document.createElement('a');
+      a.setAttribute('href', related.link);
+
+      if (relatedDisplay === 'button') {
+        a.setAttribute('class', 'ui button item');
+      } else {
+        a.setAttribute('class', 'item-link');
+      }
+
+      a.innerText = related.label;
+      div.appendChild(a);
+      contentDiv[0].appendChild(div);
+    }
+  }
+}
+
+// Helper method that creates forEach method to loop over NodeList
+var forEach = function forEach(array, callback, scope) {
+  for (var i = 0; i < array.length; i++) {
+    callback.call(scope, i, array[i]);
+  }
+};
+
+function init() {
+  initializeFilters();
+  initializeArticleFeed();
+}
 
 },{}],3:[function(require,module,exports){
 'use strict';
@@ -457,9 +576,13 @@ var _search = require('./search.js');
 
 var search = _interopRequireWildcard(_search);
 
-var _ResponsiveBackgroundImage = require('./ResponsiveBackgroundImage.js');
+var _cdp = require('./cdp');
 
-var _ResponsiveBackgroundImage2 = _interopRequireDefault(_ResponsiveBackgroundImage);
+var cdp = _interopRequireWildcard(_cdp);
+
+var _responsive_background_image = require('./responsive_background_image.js');
+
+var responsiveImages = _interopRequireWildcard(_responsive_background_image);
 
 var _dropdown_filter = require('./dropdown_filter');
 
@@ -484,21 +607,17 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
   join_form.init();
   search.init();
   dropdown_filter.init();
+  cdp.init();
+  responsiveImages.init();
 
   // Init Accordions
   $('.ui.accordion').accordion();
-
-  // Initialize responsive background images
-  var elements = document.querySelectorAll('[data-responsive-background-image]');
-  for (var i = 0; i < elements.length; i++) {
-    new _ResponsiveBackgroundImage2.default(elements[i]);
-  }
 
   // MWF Links - Page Scroll
   (0, _scrollTo2.default)('.scroll_link');
 })(jQuery);
 
-},{"../../node_modules/semantic-ui-sass/semantic-ui":38,"./ResponsiveBackgroundImage.js":1,"./application_status":2,"./dropdown_filter":3,"./footer.js":5,"./join_form.js":6,"./nav.js":8,"./scrollTo":11,"./search.js":12,"./simple_filter":13}],8:[function(require,module,exports){
+},{"../../node_modules/semantic-ui-sass/semantic-ui":39,"./application_status":1,"./cdp":2,"./dropdown_filter":3,"./footer.js":5,"./join_form.js":6,"./nav.js":8,"./responsive_background_image.js":11,"./scrollTo":12,"./search.js":13,"./simple_filter":14}],8:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -740,6 +859,60 @@ exports.default = function () {
 }();
 
 },{"./experience_hosts_list":4,"./partner_hosts_list":9}],11:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+exports.init = init;
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var ResponsiveBackgroundImage = function () {
+  function ResponsiveBackgroundImage(element) {
+    var _this = this;
+
+    _classCallCheck(this, ResponsiveBackgroundImage);
+
+    this.element = element;
+    this.img = element.querySelector("img");
+    this.src = "";
+
+    this.img.addEventListener("load", function () {
+      _this.update();
+    });
+
+    if (this.img.complete) {
+      this.update();
+    }
+  }
+
+  _createClass(ResponsiveBackgroundImage, [{
+    key: "update",
+    value: function update() {
+      var src = typeof this.img.currentSrc !== "undefined" ? this.img.currentSrc : this.img.src;
+      if (this.src !== src) {
+        this.src = src;
+        this.element.style.backgroundImage = 'url("' + this.src + '")';
+      }
+    }
+  }]);
+
+  return ResponsiveBackgroundImage;
+}();
+
+function init() {
+  // Initialize responsive background images
+  var elements = document.querySelectorAll('[data-responsive-background-image]');
+  for (var i = 0; i < elements.length; i++) {
+    new ResponsiveBackgroundImage(elements[i]);
+  }
+}
+
+},{}],12:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -770,7 +943,7 @@ function scroll_to_elem(elem_class) {
 	});
 };
 
-},{}],12:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -826,7 +999,7 @@ function init() {
 	on_resize();
 }
 
-},{}],13:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -851,7 +1024,7 @@ exports.default = function () {
 	}
 }();
 
-},{}],14:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 'use strict';
 
 /**
@@ -888,7 +1061,7 @@ exports.default = function () {
 	}
 })();
 
-},{}],15:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 /*!
  * # Semantic UI - Accordion
  * http://github.com/semantic-org/semantic-ui/
@@ -1500,7 +1673,7 @@ $.extend( $.easing, {
 })( jQuery, window, document );
 
 
-},{}],16:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 /*!
  * # Semantic UI - API
  * http://github.com/semantic-org/semantic-ui/
@@ -2669,7 +2842,7 @@ $.api.settings = {
 
 })( jQuery, window, document );
 
-},{}],17:[function(require,module,exports){
+},{}],18:[function(require,module,exports){
 /*!
  * # Semantic UI - Checkbox
  * http://github.com/semantic-org/semantic-ui/
@@ -3502,7 +3675,7 @@ $.fn.checkbox.settings = {
 
 })( jQuery, window, document );
 
-},{}],18:[function(require,module,exports){
+},{}],19:[function(require,module,exports){
 /*!
  * # Semantic UI - Colorize
  * http://github.com/semantic-org/semantic-ui/
@@ -3784,7 +3957,7 @@ $.fn.colorize.settings = {
 
 })( jQuery, window, document );
 
-},{}],19:[function(require,module,exports){
+},{}],20:[function(require,module,exports){
 /*!
  * # Semantic UI - Dimmer
  * http://github.com/semantic-org/semantic-ui/
@@ -4494,7 +4667,7 @@ $.fn.dimmer.settings = {
 
 })( jQuery, window, document );
 
-},{}],20:[function(require,module,exports){
+},{}],21:[function(require,module,exports){
 /*!
  * # Semantic UI - Dropdown
  * http://github.com/semantic-org/semantic-ui/
@@ -8278,7 +8451,7 @@ $.fn.dropdown.settings.templates = {
 
 })( jQuery, window, document );
 
-},{}],21:[function(require,module,exports){
+},{}],22:[function(require,module,exports){
 /*!
  * # Semantic UI - Embed
  * http://github.com/semantic-org/semantic-ui/
@@ -8976,7 +9149,7 @@ $.fn.embed.settings = {
 
 })( jQuery, window, document );
 
-},{}],22:[function(require,module,exports){
+},{}],23:[function(require,module,exports){
 /*!
  * # Semantic UI - Form Validation
  * http://github.com/semantic-org/semantic-ui/
@@ -10584,7 +10757,7 @@ $.fn.form.settings = {
 
 })( jQuery, window, document );
 
-},{}],23:[function(require,module,exports){
+},{}],24:[function(require,module,exports){
 /*!
  * # Semantic UI - Modal
  * http://github.com/semantic-org/semantic-ui/
@@ -11507,7 +11680,7 @@ $.fn.modal.settings = {
 
 })( jQuery, window, document );
 
-},{}],24:[function(require,module,exports){
+},{}],25:[function(require,module,exports){
 /*!
  * # Semantic UI - Nag
  * http://github.com/semantic-org/semantic-ui/
@@ -12016,7 +12189,7 @@ $.extend( $.easing, {
 
 })( jQuery, window, document );
 
-},{}],25:[function(require,module,exports){
+},{}],26:[function(require,module,exports){
 /*!
  * # Semantic UI - Popup
  * http://github.com/semantic-org/semantic-ui/
@@ -13493,7 +13666,7 @@ $.fn.popup.settings = {
 
 })( jQuery, window, document );
 
-},{}],26:[function(require,module,exports){
+},{}],27:[function(require,module,exports){
 /*!
  * # Semantic UI - Progress
  * http://github.com/semantic-org/semantic-ui/
@@ -14426,7 +14599,7 @@ $.fn.progress.settings = {
 
 })( jQuery, window, document );
 
-},{}],27:[function(require,module,exports){
+},{}],28:[function(require,module,exports){
 /*!
  * # Semantic UI - Rating
  * http://github.com/semantic-org/semantic-ui/
@@ -14936,7 +15109,7 @@ $.fn.rating.settings = {
 
 })( jQuery, window, document );
 
-},{}],28:[function(require,module,exports){
+},{}],29:[function(require,module,exports){
 /*!
  * # Semantic UI - Search
  * http://github.com/semantic-org/semantic-ui/
@@ -16380,7 +16553,7 @@ $.fn.search.settings = {
 
 })( jQuery, window, document );
 
-},{}],29:[function(require,module,exports){
+},{}],30:[function(require,module,exports){
 /*!
  * # Semantic UI - Shape
  * http://github.com/semantic-org/semantic-ui/
@@ -17303,7 +17476,7 @@ $.fn.shape.settings = {
 
 })( jQuery, window, document );
 
-},{}],30:[function(require,module,exports){
+},{}],31:[function(require,module,exports){
 /*!
  * # Semantic UI - Sidebar
  * http://github.com/semantic-org/semantic-ui/
@@ -18341,7 +18514,7 @@ $.fn.sidebar.settings = {
 
 })( jQuery, window, document );
 
-},{}],31:[function(require,module,exports){
+},{}],32:[function(require,module,exports){
 /*!
  * # Semantic UI - Site
  * http://github.com/semantic-org/semantic-ui/
@@ -18830,7 +19003,7 @@ $.extend($.expr[ ":" ], {
 
 })( jQuery, window, document );
 
-},{}],32:[function(require,module,exports){
+},{}],33:[function(require,module,exports){
 /*!
  * # Semantic UI - State
  * http://github.com/semantic-org/semantic-ui/
@@ -19540,7 +19713,7 @@ $.fn.state.settings = {
 
 })( jQuery, window, document );
 
-},{}],33:[function(require,module,exports){
+},{}],34:[function(require,module,exports){
 /*!
  * # Semantic UI - Sticky
  * http://github.com/semantic-org/semantic-ui/
@@ -20484,7 +20657,7 @@ $.fn.sticky.settings = {
 
 })( jQuery, window, document );
 
-},{}],34:[function(require,module,exports){
+},{}],35:[function(require,module,exports){
 /*!
  * # Semantic UI - Tab
  * http://github.com/semantic-org/semantic-ui/
@@ -21438,7 +21611,7 @@ $.fn.tab.settings = {
 
 })( jQuery, window, document );
 
-},{}],35:[function(require,module,exports){
+},{}],36:[function(require,module,exports){
 /*!
  * # Semantic UI - Transition
  * http://github.com/semantic-org/semantic-ui/
@@ -22535,7 +22708,7 @@ $.fn.transition.settings = {
 
 })( jQuery, window, document );
 
-},{}],36:[function(require,module,exports){
+},{}],37:[function(require,module,exports){
 /*!
  * # Semantic UI - Visibility
  * http://github.com/semantic-org/semantic-ui/
@@ -23848,7 +24021,7 @@ $.fn.visibility.settings = {
 
 })( jQuery, window, document );
 
-},{}],37:[function(require,module,exports){
+},{}],38:[function(require,module,exports){
 /*!
  * # Semantic UI - Visit
  * http://github.com/semantic-org/semantic-ui/
@@ -24375,7 +24548,7 @@ $.fn.visit.settings = {
 
 })( jQuery, window, document );
 
-},{}],38:[function(require,module,exports){
+},{}],39:[function(require,module,exports){
 require('./js/api');
 require('./js/colorize');
 require('./js/form');
@@ -24400,4 +24573,4 @@ require('./js/sticky');
 require('./js/tab');
 require('./js/transition');
 
-},{"./js/accordion":15,"./js/api":16,"./js/checkbox":17,"./js/colorize":18,"./js/dimmer":19,"./js/dropdown":20,"./js/embed":21,"./js/form":22,"./js/modal":23,"./js/nag":24,"./js/popup":25,"./js/progress":26,"./js/rating":27,"./js/search":28,"./js/shape":29,"./js/sidebar":30,"./js/site":31,"./js/state":32,"./js/sticky":33,"./js/tab":34,"./js/transition":35,"./js/visibility":36,"./js/visit":37}]},{},[1,2,3,4,5,6,7,8,9,10,11,12,13,14]);
+},{"./js/accordion":16,"./js/api":17,"./js/checkbox":18,"./js/colorize":19,"./js/dimmer":20,"./js/dropdown":21,"./js/embed":22,"./js/form":23,"./js/modal":24,"./js/nag":25,"./js/popup":26,"./js/progress":27,"./js/rating":28,"./js/search":29,"./js/shape":30,"./js/sidebar":31,"./js/site":32,"./js/state":33,"./js/sticky":34,"./js/tab":35,"./js/transition":36,"./js/visibility":37,"./js/visit":38}]},{},[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]);

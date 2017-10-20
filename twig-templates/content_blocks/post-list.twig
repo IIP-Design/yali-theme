@@ -1,11 +1,15 @@
-<link rel="stylesheet" href="{{ widget_css }}" type="text/css" media="all">
 
 <section class='cb full-width' style="background-color: {{ block_bg_color }}">
 	<div class='ui container'>
     <div class='inner-container'>
-  		<h2 class="{{ title_underline }}" style="text-align: {{ title_alignment }}">{{ title }}</h2>
+      {% if show_title == 'yes' %}
+  		  <h2 class="{{ title_underline }}" style="text-align: {{ title_alignment }}">{{ title }}</h2>
+      {% endif %}
       <p class="cb_excerpt" style="text-align: {{ excerpt_alignment }}">{{ excerpt }} </p>
-      <div id="{{ selector }}" style="margin-top: 2em; text-align: {{ text_alignment }}">LOADING Component...</div>
+      
+      <!-- attach article feed module -->
+      <div id='{{ selector }}' style="margin-top: 2em; text-align: {{ text_alignment }}"
+        data-content-type='cdp-article-feed' data-id=''>LOADING Component...</div>
       
       {% if btn_label is not empty or btn_link is not empty %}
       <div class="cb_button" style="text-align: {{ btn_text_alignment }}">
@@ -22,116 +26,23 @@
   </div>
 </section>
 
-<script type="text/javascript" src="{{ widget_js }}"></script>
+
 <script>
 
-  (function () {
-    var selectBy = '{{ cdp_post_select_by }}';
-    var indexes = '{{ cdp_indexes }}';
-
-    // if article feed widget see post ids then it will render individual posts 
-    // else will fall back to using most recent and a category if sent
-    var postIds = ( selectBy === 'recent' ) ? '' : {{ cdp_post_ids|json_encode() }}
-    var postsRelated = {{ cdp_posts_related|json_encode() }}
+  // pass php config to js
+  var cdpFeedConfig = cdpFeedConfig || {};  // do not put obj in global namespace
+  cdpFeedConfig['{{ selector }}'] = {
+    selectBy: '{{ cdp_post_select_by }}',
+    indexes: '{{ cdp_indexes }}',
+    ids:  {{ cdp_post_ids|json_encode() }},
+    relatedPosts:  {{ cdp_posts_related|json_encode() }},
+    relatedDisplay: '{{ cdp_posts_related_link_display }}',
+    image:  {{ cdp_image|json_encode() }},
+    numPosts: {{ cdp_num_posts }},
+    categories: '{{ cdp_category }}',
+    postMeta: {{ cdp_post_meta_fields_to_show|json_encode() }},
+    uiLayout: '{{ cdp_ui_layout }}',
+    uiDirection:  '{{ cdp_ui_direction }}',
+  }
   
-    var postsMeta = {{ cdp_post_meta_fields_to_show|json_encode() }}
-    var image = {{ cdp_image|json_encode() }}
-
-    var intervalId;
-    var postsRelatedLinkDisplay = '{{ cdp_posts_related_link_display }}'; 
- 
-    function renderArticleFeed() {
-      try {
-        CDP.widgets.ArticleFeed.new({
-          selector: '#{{ selector }}',
-          sites: ( indexes ) ? indexes : 'yali.dev.america.gov',  
-          size: '{{ cdp_num_posts }}', 
-          types: '', 
-          ids: postIds,
-          langs: 'en-US',
-          tags: '',
-          categories: '{{ cdp_category }}', 
-          meta: postsMeta, 
-          ui: {
-            layout: '{{ cdp_ui_layout }}',
-            direction: '{{ cdp_ui_direction }}',
-            openLinkInNewWin: "no",
-            image: {
-              shape: image['image-shape'], 
-              width:  image['image-height'],
-              borderWidth: image['image-border-width'],             
-              borderColor: image['image-border-color'],
-              borderStyle: image['image-border-style']
-            }
-          }
-        }).render();
-      } catch (e) {
-        console.log('Unable to add article feed.')
-      }
-    }
-
-    function shouldDisplayRelatedLinks() {
-      if( selectBy === 'custom' ) {
-        if( Array.isArray(postIds) && Array.isArray(postsRelated) ) {
-          // this is a workaround, better to add an event dispatch from React component
-          // essentailly, we need to wait until the articles are attached to the DOM
-          // before we can append any supplemental links
-          if( postIds.length && postsRelated.length ) {
-            intervalId = setInterval( addRelatedLinks, 200 ); 
-          }
-        }
-      }
-    }
-      
-    function addRelatedLinks() {
-      var items = document.getElementsByClassName( 'article-item' );
-      if( items.length ) {
-        clearInterval( intervalId );
-        [].forEach.call( items, function(item) {  // Convert HTMLCollection before iterating
-          lookUpItem(item);
-      });
-      }
-    }
-
-    function lookUpItem( item ) {
-      if( item.dataset.id ) {
-        
-        postIds.map( (post, index ) => {
-          if( post === item.dataset.id ) {
-            let related = postsRelated[index];
-            if( related )  {
-              appendItem( item, related);
-            } 
-          }
-        }); 
-      }
-    }
-
-    function appendItem( item, related ) {
-      if( item ) {
-        var contentDiv = item.getElementsByClassName('article-content');
-        if( contentDiv && contentDiv.length )  {
-          var div = document.createElement('div');  
-          div.setAttribute( 'class', 'cb_button' )
-          var a = document.createElement('a');  
-          a.setAttribute( 'href', related.link );
-          if( postsRelatedLinkDisplay === 'button' ) {
-              a.setAttribute( 'class', 'ui button item' ); 
-          } else {
-             a.setAttribute( 'class', 'item-link' ); 
-          }
-          a.innerText = related.label;
-          div.appendChild( a )
-          contentDiv[0].appendChild( div );
-        }
-      }
-    }
-
-    if( CDP ) {  
-      renderArticleFeed();
-      shouldDisplayRelatedLinks();
-    }
-  })();
-  
-    
-</script> 
+ </script>  
