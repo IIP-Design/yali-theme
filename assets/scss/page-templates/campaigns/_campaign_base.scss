@@ -11,6 +11,58 @@
 		@media screen and (max-width: 767px) {
 			margin-bottom: 35px;
 		}
+
+		&.cb-post_grid {
+			margin-bottom: 0;
+		}
+	}
+
+
+	.courses {
+
+		.ui.stackable.grid {
+
+			>.column.row > .column {
+				@media screen and (max-width: 767px) {
+					padding-right: 0 !important;
+					padding-left: 0 !important;
+				}				
+			}
+		}
+
+	}
+
+	.course {	
+
+		&_img {
+			width: 100%;
+			@media screen and (min-width: 425px) and (max-width: 767px) {
+				width: 50%;
+			}
+		}
+
+		&_title {		
+			margin: 5px 0;
+			@media screen and (max-width: 767px) {
+				margin: 10px 0;
+			}
+
+			a {
+				color: $blue-navy;
+			}			
+		}
+
+		&_links {			
+
+			.cta_link {
+				display: inline-block;
+				width: 49%;
+				background-color: $red;
+				@media screen and (min-width: 934px) and (max-width: 1023px) {
+					font-size: 15px;
+				}
+			}
+		}
 	}
 
 

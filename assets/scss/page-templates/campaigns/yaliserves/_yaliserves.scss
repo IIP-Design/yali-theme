@@ -1,0 +1,60 @@
+.yaliserves-mandela-day {
+	
+
+	.volunteer {
+		margin-bottom: 50px;
+		@media screen and (max-width: 767px) {
+			margin-bottom: 25px;
+		}
+
+		&_post {
+
+			&.ui.stackable.grid {
+				margin: 0;
+			}
+
+			&_img {
+
+				&.wide.column {
+					padding: 0 !important;
+				}		
+
+				img {
+					width: 100%;
+					@media screen and (max-width: 767px) {
+						max-height: 250px;
+					}
+				}
+			}
+
+			&_headline {			
+				@media screen and (max-width: 767px) {
+					margin-bottom: 8px;
+				}
+
+				a {
+					color: $blue-navy;
+				}
+			}
+
+			&_content {
+				padding: 0 0 0 16px;
+				@media screen and (max-width: 767px) {
+					padding: 16px 0 0 0 !important;
+				}
+			}
+
+			&_link {
+
+				&.cta_link {
+					display: inline-block;
+					max-width: 100%;
+					margin: 0;
+					background-color: $blue-medium;
+				}
+			}
+
+		}
+	}
+
+}

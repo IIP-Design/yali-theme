@@ -11,55 +11,56 @@
 			{{ page_data.content.rendered }}          
 		</section>
 
+		<section class='volunteer'>		
+			<h3>Learn what volunteering can do for you</h3>			
+			<article class='ui stackable grid volunteer_post'>	
+				<div class='four wide column volunteer_post_img'>
+					<img src='data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='>
+				</div>
+				<div class='twelve wide column volunteer_post_content'>
+					<h4 class='volunteer_post_headline'>What does it mean to volunteer?</h4>
+					<p class='volunteer_post_excerpt'>
+						Volunteering is the act of rendering selfless service to a cause, oftentimes for free and without
+						coercion. It is about giving time to a good cause, sepcifically to help an organization, your 
+						community or an individual you are not related to. People who engage in this type of activity are
+						known as volunteers.
+					</p>																			
+				</div>
+				<a href='#' class='cta_link volunteer_post_link'>
+					Watch more from YALI Voices: The Joy of Volunteering <i class='icon chevron right'></i>
+				</a>
+			</article>
+		</section>
+
 		{% include 'content_blocks/post-single.twig' with 
 			{
-				title: 'Read about ways to go green in your community',
+				title: 'Take the course(s)',
 				img_src: 'data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==',
-				headline: 'To protect the planet, we can all do our part',
-				excerpt: 'Did you know small changes in your daily routines can make a huge difference to your health, the health of your neighbors and the future of the planet? Read more to find ways you can start today!'
-			} 
+				headline: 'Community Organizing for Action',
+				excerpt: 'Grassroots campaigns and volunteers are essential to the success of most nongovernmental organizations involved in community development. Learn how to inspire and engage volunteers to be proactive in their communities and organize grassroots campaigns.',
+				cta_link: '#',
+				course: 'true'
+			}
 		%}
 
-		<section class='section courses'>
-			<h3>Take the courses</h3>
-			<div class='ui stackable grid'>
-				<div class='two column row'>
-					<div class='column course'>
-						<img class='course_img' src='data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='>
-						<h5 class='course_title'>
-							<a href='#'>Understanding Renewable Energy</a>							
-						</h5>
-						<p class='course_excerpt'>This course will take a look at how existing power systems work and can be adapted to a renewable 
-								energy future, and talks about what you can do to make an impact.
-						</p>
-						<div class='course_links'>
-							<a href='#' class='cta_link'>Take Course</a>
-							<a href='#' class='cta_link'>Course en francais</a>
-						</div>
-					</div>
-					<div class='column course'>
-						<img class='course_img' src='data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='>
-						<h5 class='course_title'>
-							<a href=''>Understanding Climate Change</a>							
-						</h5>
-						<p class='course_excerpt'>This course focuses on the science of how climate change occurs, the impact on the environment and
-							human development, and practical and innovative solutions to address the causes of climate change while
-							meeting the needs of the world.
-						</p>
-						<div class='course_links'>
-							<a href='#' class='cta_link'>Take Course</a>
-							<a href='#' class='cta_link'>Course en francais</a>
-						</div>
-					</div>
-				</div>
+		<section class='section promote'>
+			<h3>Promote #YALIServes</h3>
+			<p>Download, use and share these graphics on social media.</p>						
+			<div class='ui stackable grid promote_item'>
+
+				{% for promo in promo_data %}
+				<div class='eight wide column promote_item'>
+					<div class='promote_item_img' data-preview-image='{{ promo.image_url }}' style='background-image: url({{ promo.image_url }}); background-size: cover;'></div>
+					<p class='promote_item_text'>{{ promo.image_text }}</p>
+				</div>				
+				{% endfor %}
 			</div>
 		</section>
 
 		<section class='section org_event'>
 			<h3>Organize an event</h3>
-			<p class='org_event_text'>Organize a <a href='#'>#YALILearns</a> event and facilitate <a href='#'><em>Understanding Climate Change</em></a> 
-				 or <a href='#'><em>Understanding Renewable Energy</em></a> to share your knowledge with your community. Plan 
-				 your event using our facilitation guide.</p>
+			<p class='org_event_text'>Organize a <a href='#'>#YALILearns</a> event and facilitate <a href='#'><em>Community Organizing for Action</em></a> 
+				 to raise awareness for volunteering in your community. Use our facilitation toolkit to get started.</p>
 			<div class='ui stackable grid org_event_items'>
 				{% for file in orgevent_data %}
 				<div class='eight wide column org_event_item'>
@@ -73,7 +74,7 @@
 
 		{% include 'content_blocks/post-grid.twig' with 
 			{
-				headline: 'Learn more about going green',
+				headline: 'Learn more about volunteering',
 				posts: [
 					{
 						link: 'http://yali.rebuild.local/wp/lorem-ipsum/',
