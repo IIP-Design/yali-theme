@@ -23,6 +23,7 @@
 				{% endfor %}
 			</div><!-- row -->
 		</div><!-- grid -->
+		{% if cta_url %}
 		<p class='post_listings_cta'>		
 			<a 
 				href='{{ cta_url }}'
@@ -31,5 +32,6 @@
 				{{ cta_txt }} <i class='angle right icon'></i>
 			</a>
 		</p>
+		{% endif %}
 	</div><!-- inner-container -->
 </section>
