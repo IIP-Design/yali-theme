@@ -69,7 +69,7 @@ class YaliSite {
 				return '&nbsp; <a href="' . get_permalink($post->ID) . '"> Read More...</a>';
 			});
 		}
-
+		
 		/*
 		* IIP Interactive Plugin Edits
 		*/

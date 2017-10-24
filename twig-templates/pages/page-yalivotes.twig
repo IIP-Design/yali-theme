@@ -69,14 +69,25 @@
 		
 		<section class='section alumni'>
 			<h3>Hear from alumni</h3>
-			<p>Watch what (year) Mandela Washington Fellows have to say about (topic) for (campaign).</p>
-			<div class='ui stackable grid alumni_vids'>
+			<p>Watch what 2016 Mandela Washington Fellows have to say about (topic) for (campaign).</p>
+
+			<p class='cta_link lang-btn' data-lang='french'>View French</p>
+			<p class='cta_link lang-btn hide' data-lang='english'>View English</p>
+
+			<div class='ui stackable grid alumni_vids alumni_vids--english'>
+				{% for vid in alumni_vids %}
 				<div class='eight wide column alumni_vid'>
-					<img src='data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='>
+					{{ vid.english }}
 				</div>
+				{% endfor %}
+			</div>
+
+			<div class='ui stackable grid alumni_vids alumni_vids--french hide'>
+				{% for vid in alumni_vids %}
 				<div class='eight wide column alumni_vid'>
-					<img src='data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='>
+					{{ vid.french }}
 				</div>
+				{% endfor %}
 			</div>
 		</section>
 	

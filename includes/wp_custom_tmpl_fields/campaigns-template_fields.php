@@ -89,4 +89,40 @@ function campaigns_template_fields() {
 		'type'  => 'text'
 	));
 
+	/*************************
+	 Alumni Videos
+	**************************/
+	$campaigns_alumnvids = new_cmb2_box( array(
+		'id'           =>  $prefix . 'alumnvids',
+		'title'        => __( 'Alumni Videos', 'campaigns' ),
+		'object_types' => array( 'page' ),
+		'context'      => 'normal',
+		'priority'     => 'low',
+		'show_on'      => array('key' => 'page-template', 'value' => 'page-templates/campaigns-template.php'),
+		'show_in_rest' => true
+	));
+
+	$campaigns_group_field_alumnvids = $campaigns_alumnvids->add_field( array(
+		'id'		=>	'campaigns_alumnvids_repeat_group',
+		'type'  	=> 'group',
+		'description'   => __( 'Add Alumni Youtube Video Embed Links' ),
+		'options'       => array(
+		    'group_title'     => __( 'Video {#}', 'campaigns' ),
+		    'add_button'      => __( 'Add Another Video', 'campaigns' ),
+		    'remove_button'   => __( 'Remove Video', 'campaigns' ),
+		    'sortable'        => true
+		)
+	));
+
+	$campaigns_alumnvids->add_group_field( $campaigns_group_field_alumnvids, array(
+		'name'  => 'Add Youtube Video URL Link',
+		'id'    => 'youtube_video',
+		'type'  => 'oembed'
+	));
+
+	$campaigns_alumnvids->add_group_field( $campaigns_group_field_alumnvids, array(
+		'name'  => 'Add FRENCH Youtube Video URL Link',
+		'id'    => 'youtube_french_video',
+		'type'  => 'oembed'
+	));
 }	

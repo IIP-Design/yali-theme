@@ -32,6 +32,19 @@ $promo_data = get_post_meta($post->ID, 'campaigns_promo_repeat_group', true);
 // Organize an Event Files
 $orgevent_data = get_post_meta($post->ID, 'campaigns_orgevent_repeat_group', true);
 
+// Alumni Vids
+$alumni_vids = get_post_meta($post->ID, 'campaigns_alumnvids_repeat_group', true);
+$alumni_vids_formatted = [];
+if( !empty($alumni_vids) ) {  
+  foreach ($alumni_vids as $vid => $value) {
+      $temp = [];
+      $temp['english'] = wp_oembed_get($value['youtube_video']);
+      $temp['french'] = wp_oembed_get($value['youtube_french_video']);
+
+    array_push($alumni_vids_formatted, $temp);
+  }
+}
+
 // Data array for twig
 $context = array(
   "pagename"    	  => $pagename,
@@ -43,7 +56,8 @@ $context = array(
   "social_block"  	=> $social_block,
   "campaigns"		    => $campaigns,
   "promo_data"	 	  => $promo_data,
-  "orgevent_data"	  => $orgevent_data
+  "orgevent_data"	  => $orgevent_data,
+  "alumni_vids"     => $alumni_vids_formatted
 );
 
 
