@@ -7,10 +7,219 @@
 	
 
 	.section {
-		margin-bottom: 75px;
+		margin-bottom: 50px;
 		@media screen and (max-width: 767px) {
-			margin-bottom: 35px;
+			margin-bottom: 25px;
+		}
+
+		&.cb-post_grid {
+			margin-bottom: 0;
 		}
 	}
+
+
+	.courses,
+	.videos {
+
+		.ui.stackable.grid {
+
+			>.column.row > .column {
+				@media screen and (max-width: 767px) {
+					padding-right: 0 !important;
+					padding-left: 0 !important;
+				}				
+			}
+		}
+
+		.cta_link {
+
+			&--videos {
+				max-width: 100%;				
+				background-color: $blue-medium;
+				@media screen and (min-width: 768px) {
+					margin-left: 1em;
+				}
+			}
+		}
+	}
+
+
+	.course,
+	.video {	
+
+		&_img {
+			width: 100%;
+			@media screen and (min-width: 425px) and (max-width: 767px) {
+				width: 50%;
+			}
+		}
+
+		&_title {		
+			margin: 5px 0;
+			@media screen and (max-width: 767px) {
+				margin: 10px 0;
+			}
+
+			a {
+				color: $blue-navy;
+			}			
+		}
+
+		&_links {			
+
+			.cta_link {
+				display: inline-block;
+				width: 49%;
+				background-color: $red;
+				@media screen and (min-width: 934px) and (max-width: 1023px) {
+					font-size: 15px;
+				}
+			}
+		}
+	}
+
+
+	.promote {		
+		
+		&_item {
+
+			&.ui.stackable.grid {
+
+				.eight.wide.column {
+					@media screen and (max-width: 767px) {
+						padding: 16px 0 !important;
+
+						img {
+							margin-bottom: 8px;
+						}
+					}
+				}				
+			}
+
+			&_share {
+				position: relative;
+				display: block;
+				padding: 20px;
+				margin-bottom: 25px;
+				font-size: em(28);				
+				font-weight: 900;
+				text-align: center;
+				color: #fff;
+				background-color: $blue-medium;
+				@media screen and (max-width: 767px) {
+					margin-bottom: 0;
+				}
+
+				&--twitter {
+					background-color: $blue-bright;
+				}
+
+				.link {
+					display: inline-block;
+					height: 40px;
+					width: 40px;
+					margin-right: 15px;					
+					background: url('../yali/assets/img/social_sprite.png') center no-repeat;
+					@media screen and (max-width: 933px) {
+						height: 20px;
+						width: 20px;
+						margin: 0 5px -5px 0;
+						background-size: 350%;						
+					}
+					
+					&--facebook {
+						background-position: 0 0;
+					}
+
+					&--text {
+						vertical-align: top;
+					}
+				}
+			}
+
+			&_img {
+				width: 100%;
+				min-height: 300px;
+				background-size: cover;
+			}
+
+			&_text {
+				margin-top: 10px;
+			}
+		}		
+	}
+
+
+	.org_event {
+
+		&_item {			
+
+			.cta_link {
+				background-color: $blue-medium;
+				@media screen and (max-width: 767px) {
+					margin: 0 auto;
+				}
+			}
+		}
+
+		&_text {
+
+			a {
+				font-weight: 600;
+			}
+		}
+	}
+
+
+	.survey {
+
+		.ui.stackable.grid {
+			@media screen and (max-width: 767px) {
+				.eight.wide.column {
+					padding: 16px 0 !important;
+				}
+			}
+		}
+
+		.cta_link {
+			max-width: 100%;
+			background-color: $blue-medium;
+		}
+	}
+
+
+	.alumni {
+
+		.hide {
+			display: none;
+		}
+
+		.transitioning {			
+			opacity: 0;
+		}
+
+		.lang-btn {
+			cursor: pointer;
+		}
+
+		&_vids {
+			margin-top: 0;			
+			opacity: 1;
+			transition: opacity 1s ease;
+		}
+
+		&_vid {
+
+			iframe {
+				width: 100%;
+				height: 100%;
+				@media screen and (min-width: 768px) {
+					min-height: 300px;
+				}			
+			}
+		}
+
+	}
+
 
 }

@@ -5,6 +5,42 @@ Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+exports.default = function () {
+	// Language Toggle Buttons
+	var lang_btns = [].concat(_toConsumableArray(document.querySelectorAll('.lang-btn')));
+
+	// Toggle Vids on click
+	lang_btns.forEach(function (btn) {
+
+		btn.addEventListener('click', function () {
+			var langBtnToDisplay = document.querySelector('.lang-btn.hide'),
+			    alumniVidsToDisplay = document.querySelector('.alumni_vids.hide'),
+			    currentAlumniVids = document.querySelector('.alumni_vids:not(.hide)');
+
+			this.classList.add('hide');
+			langBtnToDisplay.classList.remove('hide');
+
+			currentAlumniVids.classList.add('hide');
+			alumniVidsToDisplay.classList.remove('hide');
+
+			// Set opacity to 0, then remove so user notices video change
+			alumniVidsToDisplay.classList.add('transitioning');
+			setTimeout(function () {
+				alumniVidsToDisplay.classList.remove('transitioning');
+			}, 250);
+		});
+	});
+}();
+
+},{}],2:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
 exports.default = function application_status() {
 	var application_status_div = document.querySelector('.application_status');
 	var application_open_date = document.querySelector('#countdatetime') ? new Date(document.querySelector('#countdatetime').value) : null;
@@ -28,7 +64,7 @@ exports.default = function application_status() {
 	}
 }();
 
-},{}],2:[function(require,module,exports){
+},{}],3:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -193,7 +229,7 @@ function init() {
   initializeArticleFeed();
 }
 
-},{}],3:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -319,7 +355,7 @@ function init() {
 	archivePagesDisplayFilter();
 }
 
-},{}],4:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -329,7 +365,7 @@ var experience_hosts = ['Ability360', 'Africa Venture Partners', 'Atlas Corps', 
 
 exports.default = experience_hosts;
 
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -394,7 +430,68 @@ function init() {
 	footer_search_close();
 }
 
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+exports.default = function () {
+	// Store imgs w/ preview data attr
+	var imgs = [].concat(_toConsumableArray(document.querySelectorAll('[data-preview-image]')));
+	if (imgs.length < 1) return; // return fn if no preview imgs
+
+	imgs.forEach(function (img) {
+		// Add click event for display
+		img.addEventListener('click', function () {
+			var
+			// use fragment to add to DOM (faster, no repaint)
+			fragment = document.createDocumentFragment(),
+
+			// div to append to body, img, close elems
+			img_preview_div = document.createElement('div'),
+			    img_wrapper = document.createElement('div'),
+			    img = document.createElement('img'),
+			    close_wrapper = document.createElement('div'),
+			    close = document.createElement('i');
+
+			// add classes to each elem	
+			img_preview_div.classList.add('image_preview');
+			img_wrapper.classList.add('img_wrapper');
+			close_wrapper.classList.add('close_preview');
+			close.classList.add('remove', 'icon');
+
+			// Set img src to clicked image
+			img.src = this.dataset.previewImage;
+
+			// add text to Close btn and add click event to close preview
+			close_wrapper.innerHTML = 'CLOSE';
+			close_wrapper.appendChild(close);
+			close_preview(close_wrapper);
+
+			// Append elems and add fragment to DOM
+			img_wrapper.appendChild(img);
+			img_wrapper.appendChild(close_wrapper);
+
+			img_preview_div.appendChild(img_wrapper);
+
+			fragment.appendChild(img_preview_div);
+			document.body.appendChild(fragment);
+		});
+	});
+
+	// Close Preview
+	function close_preview(close_elem) {
+		close_elem.addEventListener('click', function () {
+			document.querySelector('.image_preview').remove();
+		});
+	}
+}();
+
+},{}],8:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -555,7 +652,7 @@ function init() {
 	window.addEventListener('scroll', on_scroll, false);
 }
 
-},{}],7:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 'use strict';
 
 require('../../node_modules/semantic-ui-sass/semantic-ui');
@@ -617,7 +714,7 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
   (0, _scrollTo2.default)('.scroll_link');
 })(jQuery);
 
-},{"../../node_modules/semantic-ui-sass/semantic-ui":39,"./application_status":1,"./cdp":2,"./dropdown_filter":3,"./footer.js":5,"./join_form.js":6,"./nav.js":8,"./responsive_background_image.js":11,"./scrollTo":12,"./search.js":13,"./simple_filter":14}],8:[function(require,module,exports){
+},{"../../node_modules/semantic-ui-sass/semantic-ui":42,"./application_status":2,"./cdp":3,"./dropdown_filter":4,"./footer.js":6,"./join_form.js":8,"./nav.js":10,"./responsive_background_image.js":13,"./scrollTo":14,"./search.js":15,"./simple_filter":16}],10:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -795,7 +892,7 @@ function init($) {
 	window_resize();
 }
 
-},{}],9:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -805,7 +902,7 @@ var partner_hosts = ['Accountability Lab', 'Anza-Social Business', 'Center for Y
 
 exports.default = partner_hosts;
 
-},{}],10:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -858,7 +955,7 @@ exports.default = function () {
 	}
 }();
 
-},{"./experience_hosts_list":4,"./partner_hosts_list":9}],11:[function(require,module,exports){
+},{"./experience_hosts_list":5,"./partner_hosts_list":11}],13:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -912,7 +1009,7 @@ function init() {
   }
 }
 
-},{}],12:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -943,7 +1040,7 @@ function scroll_to_elem(elem_class) {
 	});
 };
 
-},{}],13:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -999,7 +1096,7 @@ function init() {
 	on_resize();
 }
 
-},{}],14:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1024,7 +1121,7 @@ exports.default = function () {
 	}
 }();
 
-},{}],15:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 'use strict';
 
 /**
@@ -1061,7 +1158,10 @@ exports.default = function () {
 	}
 })();
 
-},{}],16:[function(require,module,exports){
+},{}],18:[function(require,module,exports){
+"use strict";
+
+},{}],19:[function(require,module,exports){
 /*!
  * # Semantic UI - Accordion
  * http://github.com/semantic-org/semantic-ui/
@@ -1673,7 +1773,7 @@ $.extend( $.easing, {
 })( jQuery, window, document );
 
 
-},{}],17:[function(require,module,exports){
+},{}],20:[function(require,module,exports){
 /*!
  * # Semantic UI - API
  * http://github.com/semantic-org/semantic-ui/
@@ -2842,7 +2942,7 @@ $.api.settings = {
 
 })( jQuery, window, document );
 
-},{}],18:[function(require,module,exports){
+},{}],21:[function(require,module,exports){
 /*!
  * # Semantic UI - Checkbox
  * http://github.com/semantic-org/semantic-ui/
@@ -3675,7 +3775,7 @@ $.fn.checkbox.settings = {
 
 })( jQuery, window, document );
 
-},{}],19:[function(require,module,exports){
+},{}],22:[function(require,module,exports){
 /*!
  * # Semantic UI - Colorize
  * http://github.com/semantic-org/semantic-ui/
@@ -3957,7 +4057,7 @@ $.fn.colorize.settings = {
 
 })( jQuery, window, document );
 
-},{}],20:[function(require,module,exports){
+},{}],23:[function(require,module,exports){
 /*!
  * # Semantic UI - Dimmer
  * http://github.com/semantic-org/semantic-ui/
@@ -4667,7 +4767,7 @@ $.fn.dimmer.settings = {
 
 })( jQuery, window, document );
 
-},{}],21:[function(require,module,exports){
+},{}],24:[function(require,module,exports){
 /*!
  * # Semantic UI - Dropdown
  * http://github.com/semantic-org/semantic-ui/
@@ -8451,7 +8551,7 @@ $.fn.dropdown.settings.templates = {
 
 })( jQuery, window, document );
 
-},{}],22:[function(require,module,exports){
+},{}],25:[function(require,module,exports){
 /*!
  * # Semantic UI - Embed
  * http://github.com/semantic-org/semantic-ui/
@@ -9149,7 +9249,7 @@ $.fn.embed.settings = {
 
 })( jQuery, window, document );
 
-},{}],23:[function(require,module,exports){
+},{}],26:[function(require,module,exports){
 /*!
  * # Semantic UI - Form Validation
  * http://github.com/semantic-org/semantic-ui/
@@ -10757,7 +10857,7 @@ $.fn.form.settings = {
 
 })( jQuery, window, document );
 
-},{}],24:[function(require,module,exports){
+},{}],27:[function(require,module,exports){
 /*!
  * # Semantic UI - Modal
  * http://github.com/semantic-org/semantic-ui/
@@ -11680,7 +11780,7 @@ $.fn.modal.settings = {
 
 })( jQuery, window, document );
 
-},{}],25:[function(require,module,exports){
+},{}],28:[function(require,module,exports){
 /*!
  * # Semantic UI - Nag
  * http://github.com/semantic-org/semantic-ui/
@@ -12189,7 +12289,7 @@ $.extend( $.easing, {
 
 })( jQuery, window, document );
 
-},{}],26:[function(require,module,exports){
+},{}],29:[function(require,module,exports){
 /*!
  * # Semantic UI - Popup
  * http://github.com/semantic-org/semantic-ui/
@@ -13666,7 +13766,7 @@ $.fn.popup.settings = {
 
 })( jQuery, window, document );
 
-},{}],27:[function(require,module,exports){
+},{}],30:[function(require,module,exports){
 /*!
  * # Semantic UI - Progress
  * http://github.com/semantic-org/semantic-ui/
@@ -14599,7 +14699,7 @@ $.fn.progress.settings = {
 
 })( jQuery, window, document );
 
-},{}],28:[function(require,module,exports){
+},{}],31:[function(require,module,exports){
 /*!
  * # Semantic UI - Rating
  * http://github.com/semantic-org/semantic-ui/
@@ -15109,7 +15209,7 @@ $.fn.rating.settings = {
 
 })( jQuery, window, document );
 
-},{}],29:[function(require,module,exports){
+},{}],32:[function(require,module,exports){
 /*!
  * # Semantic UI - Search
  * http://github.com/semantic-org/semantic-ui/
@@ -16553,7 +16653,7 @@ $.fn.search.settings = {
 
 })( jQuery, window, document );
 
-},{}],30:[function(require,module,exports){
+},{}],33:[function(require,module,exports){
 /*!
  * # Semantic UI - Shape
  * http://github.com/semantic-org/semantic-ui/
@@ -17476,7 +17576,7 @@ $.fn.shape.settings = {
 
 })( jQuery, window, document );
 
-},{}],31:[function(require,module,exports){
+},{}],34:[function(require,module,exports){
 /*!
  * # Semantic UI - Sidebar
  * http://github.com/semantic-org/semantic-ui/
@@ -18514,7 +18614,7 @@ $.fn.sidebar.settings = {
 
 })( jQuery, window, document );
 
-},{}],32:[function(require,module,exports){
+},{}],35:[function(require,module,exports){
 /*!
  * # Semantic UI - Site
  * http://github.com/semantic-org/semantic-ui/
@@ -19003,7 +19103,7 @@ $.extend($.expr[ ":" ], {
 
 })( jQuery, window, document );
 
-},{}],33:[function(require,module,exports){
+},{}],36:[function(require,module,exports){
 /*!
  * # Semantic UI - State
  * http://github.com/semantic-org/semantic-ui/
@@ -19713,7 +19813,7 @@ $.fn.state.settings = {
 
 })( jQuery, window, document );
 
-},{}],34:[function(require,module,exports){
+},{}],37:[function(require,module,exports){
 /*!
  * # Semantic UI - Sticky
  * http://github.com/semantic-org/semantic-ui/
@@ -20657,7 +20757,7 @@ $.fn.sticky.settings = {
 
 })( jQuery, window, document );
 
-},{}],35:[function(require,module,exports){
+},{}],38:[function(require,module,exports){
 /*!
  * # Semantic UI - Tab
  * http://github.com/semantic-org/semantic-ui/
@@ -21611,7 +21711,7 @@ $.fn.tab.settings = {
 
 })( jQuery, window, document );
 
-},{}],36:[function(require,module,exports){
+},{}],39:[function(require,module,exports){
 /*!
  * # Semantic UI - Transition
  * http://github.com/semantic-org/semantic-ui/
@@ -22708,7 +22808,7 @@ $.fn.transition.settings = {
 
 })( jQuery, window, document );
 
-},{}],37:[function(require,module,exports){
+},{}],40:[function(require,module,exports){
 /*!
  * # Semantic UI - Visibility
  * http://github.com/semantic-org/semantic-ui/
@@ -24021,7 +24121,7 @@ $.fn.visibility.settings = {
 
 })( jQuery, window, document );
 
-},{}],38:[function(require,module,exports){
+},{}],41:[function(require,module,exports){
 /*!
  * # Semantic UI - Visit
  * http://github.com/semantic-org/semantic-ui/
@@ -24548,7 +24648,7 @@ $.fn.visit.settings = {
 
 })( jQuery, window, document );
 
-},{}],39:[function(require,module,exports){
+},{}],42:[function(require,module,exports){
 require('./js/api');
 require('./js/colorize');
 require('./js/form');
@@ -24573,4 +24673,4 @@ require('./js/sticky');
 require('./js/tab');
 require('./js/transition');
 
-},{"./js/accordion":16,"./js/api":17,"./js/checkbox":18,"./js/colorize":19,"./js/dimmer":20,"./js/dropdown":21,"./js/embed":22,"./js/form":23,"./js/modal":24,"./js/nag":25,"./js/popup":26,"./js/progress":27,"./js/rating":28,"./js/search":29,"./js/shape":30,"./js/sidebar":31,"./js/site":32,"./js/state":33,"./js/sticky":34,"./js/tab":35,"./js/transition":36,"./js/visibility":37,"./js/visit":38}]},{},[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]);
+},{"./js/accordion":19,"./js/api":20,"./js/checkbox":21,"./js/colorize":22,"./js/dimmer":23,"./js/dropdown":24,"./js/embed":25,"./js/form":26,"./js/modal":27,"./js/nag":28,"./js/popup":29,"./js/progress":30,"./js/rating":31,"./js/search":32,"./js/shape":33,"./js/sidebar":34,"./js/site":35,"./js/state":36,"./js/sticky":37,"./js/tab":38,"./js/transition":39,"./js/visibility":40,"./js/visit":41}]},{},[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18]);

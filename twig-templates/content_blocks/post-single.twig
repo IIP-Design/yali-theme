@@ -1,15 +1,27 @@
 <section class='cb_post_wrapper'>
+	{% if title %}
 	<h3>{{ title }}</h3>
-	<div class='ui stackable grid cb_post cb_post--single'>	
+	{% endif %}
+	<article class='ui stackable grid cb_post cb_post--single'>	
 		<div class='four wide column cb_post_img'>
 			<img src='{{ img_src }}'>
 		</div>
 		<div class='twelve wide column cb_post_content'>
-			<h4 class='cb_post_headline'>{{ headline }}</h4>
+			<h4 class='cb_post_headline'><a href='{{ cta_link }}'>{{ headline }}</a></h4>
 			<p class='cb_post_excerpt'>{{ excerpt }}</p>
+			
+			{% if course is not empty %}
+			<div class='cb_post_course'>
+				<a href='{{ cta_link }}' class='cta_link cb_post_link cb_post_link--course'>Take Course</a>
+				<a href='{{ cta_link }}' class='cta_link cb_post_link cb_post_link--course'>Course en francais</a>				
+			</div>
+			{% else %}
+
 			{% if cta_link %}
 			<a href='{{ cta_link }}' class='cta_link cb_post_link'>{{ cta_text }}</a>
 			{% endif %}
+
+			{% endif %}						
 		</div>
-	</div>
+	</article>
 </section>

@@ -11,106 +11,87 @@
 			{{ page_data.content.rendered }}          
 		</section>
 
-		{% include 'content_blocks/post-single.twig' with 
+		{% include 'content_blocks/post-listings.twig' with 
 			{
-				title: 'Read about (topic)',
-				img_src: 'data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==',
-				headline: 'Lorem Ipsum Dolor Sit Amet',
-				excerpt: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus nisi nisi, ullamcorper nec ornare eget, consectetur vitae dolor. Nam accumsan gravida turpis, at tempor nibh aliquam vitae.'
-			} 
+				headline: 'Read about elections and civic responsibility',						
+				posts: [
+					{
+						title: 'When Enough is Enough: Urban Guerilla Poetry',
+						excerpt: "'Abdoulaye, faut pas forcer!' Loud but nonviolent, Y'en a Marre redefined political activism in Senegal...",
+						img_src: 'data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==',
+						post_url: '#',
+						tags: []
+					},
+					{
+						title: 'Election Time: Lessons from Young Leaders',
+						excerpt: 'The election was going to be too close to call. The mood at campaign headquarters - "headquarteres"...',
+						img_src: 'data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==',
+						post_url: '#',
+						tags: []				
+					},
+					{
+						title: 'Want to energize young voters? Look beyond elections',
+						excerpt: "In the run-up to Senegal's 2012 elections, Sobel Aziz Ngom and his friends mounted a voter education...",
+						img_src: 'data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==',
+						post_url: '#',
+						tags: []
+					}
+				]
+			}
 		%}
 
 		{% include 'content_blocks/post-single.twig' with 
 			{
-				title: 'Take the course(s)',
+				title: 'Take the course',
 				img_src: 'data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==',
-				headline: 'Lorem Ipsum Dolor Sit Amet',
-				excerpt: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus nisi nisi, ullamcorper nec ornare eget, consectetur vitae dolor. Nam accumsan gravida turpis, at tempor nibh aliquam vitae.'
+				headline: 'Understanding Elections and Civic Responsibility',
+				excerpt: 'This three-part course seeks to educate and inform on the role of citizens in the electoral process, and provide guidance on how to exercise civic responsibility and hold candidates and officials accountable - before, during, and after elections.',
+				course: 'true'
 			} 
 		%}
 
 		<section class='section promote'>
-			<h3>Promote {{ page_data.title.rendered }}</h3>
-			<p>Share the {{ page_data.title.rendered }} announcement on Facebook or Twitter using the buttons below.</p>	
-			<div class='ui stackable grid promote_item'>
-				<div class='eight wide column'>
-					<a href='#' target='_blank' class='promote_item_share'>
-						<i class='facebook f icon'></i>
-						<span>Share on Facebook</span>
-					</a>
-					<img src='data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='>
-					<p>Share the {{ page_data.title.rendered }} sahre graphic on your social media pages! Click this preview image to 
-						download.</p>
-				</div>
+			<h3>Promote #YALIStands4All</h3>
+			<p>
+				Show your community that #YALIVotes to bring about a more prosperous, democratic and peaceful Africa.
+				Tweet or share on Facebook what you believe is important about Africa's upcoming elections with the 
+				hashtag #YALIVotes.
+			</p>	
+			<div class='ui stackable grid promote_item'>				
 				<div class='eight wide column promote_item'>
-					<a href='#' target='_blank' class='promote_item_share'>
-						<i class='twitter icon'></i>
-						<span>Share on Twitter</span>
-					</a>
-					<img src='data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='>
-					<p>Update your Facebook profile with the {{ page_data.title.rendered }} profile banner! Click this preview to
-						download.</p>
+					<a href='#' target='_blank' class='promote_item_share promote_item_share--twitter'>						
+						<span class='link link--twitter'></span>
+						<span class='link--text'>Share on Twitter</span>
+					</a>					
 				</div>
 			</div>
 		</section>
 		
-		{% include 'content_blocks/post-single.twig' with 
-			{
-				title: 'Take the pledge',
-				img_src: 'data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==',
-				headline: 'Lorem Ipsum Dolor Sit Amet',
-				excerpt: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus nisi nisi, ullamcorper nec ornare eget, consectetur vitae dolor. Nam accumsan gravida turpis, at tempor nibh aliquam vitae.',
-				cta_link: '#',
-				cta_text: 'Take the pledge'
-			}
-		%}
-
 		<section class='section alumni'>
 			<h3>Hear from alumni</h3>
-			<p>Watch what (year) Mandela Washington Fellows have to say about (topic) for (campaign).</p>
-			<div class='ui stackable grid alumni_vids'>
+			<p>Watch what 2016 Mandela Washington Fellows have to say about (topic) for (campaign).</p>
+
+			<p class='cta_link lang-btn' data-lang='french'>View French</p>
+			<p class='cta_link lang-btn hide' data-lang='english'>View English</p>
+
+			<div class='ui stackable grid alumni_vids alumni_vids--english'>
+				{% for vid in alumni_vids %}
 				<div class='eight wide column alumni_vid'>
-					<img src='data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='>
+					{{ vid.english }}
 				</div>
+				{% endfor %}
+			</div>
+
+			<div class='ui stackable grid alumni_vids alumni_vids--french hide'>
+				{% for vid in alumni_vids %}
 				<div class='eight wide column alumni_vid'>
-					<img src='data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='>
+					{{ vid.french }}
 				</div>
+				{% endfor %}
 			</div>
 		</section>
-
-		<section class='section org_event'>
-			<h3>Organize an event</h3>
-			<p>Organize a #YALILearns event and facilitate understanding human rights to raise awareness and educate
-				your community about protecting human rights. Use our facilitation guide or presentation template to 
-				help.</p>
-			<div class='ui stackable grid org_event_items'>
-				<div class='eight wide column org_event_item'>
-					<a href="#" class='cta_link'>Facilitation Guide (PDF)</a>
-				</div>
-				<div class='eight wide column org_event_item'>
-					<a href="#" class='cta_link'>Presentation Template (PPTX)</a>
-				</div>
-			</div>												
-		</section>
-
-		<section class='section survey'>
-			<h3>Tell us about your {{ page_data.title.rendered }} event</h3>
-			<p>Take this short survey to let us know how your {{ page_data.title.rendered }} event turned out.</p>
-			<div class='ui stackable grid'>
-				<div class='eight wide column'>
-					<a href="#" class='cta_link'>Followup Event Report</a>
-				</div>
-			</div>			
-		</section>
-
-		{% include 'content_blocks/honeycomb.twig' with 
-			{ 				
-				headline: 'Stay Involved',
-				subheadline: 'Check out other YALI Network Campaigns',	
-				content: campaigns,
-				bg_color: 'lightblue'
-			} 
-		%}
+	
+		{{ social_block }}
 
 		{% include 'content_blocks/post-grid.twig' with 
 			{
@@ -149,41 +130,17 @@
 						],
 						featured_img_url: 'data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==',
 						featured_post: 'true'
-					},
-					{
-						link: 'http://yali.rebuild.local/wp/lorem-ipsum/',
-						title: 'Post 4 Lorem ipsum set abet ipsum', 
-						excerpt: 'Lorem ipsum set abet ipsum Lorem ipsum set abet ipsum', 
-						tags: [
-							{ 'term_id': '4', name: 'tag 1', slug: 'tag-1' },
-							{ 'term_id': '5', name: 'tag 2', slug: 'lorem' },
-							{ 'term_id': '6', name: 'tag 3', slug: 'ipsum' }
-						],
-						featured_img_url: 'data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='
-					},
-					{
-						link: 'http://yali.rebuild.local/wp/lorem-ipsum/',
-						title: 'Post 5 Lorem ipsum set abet ipsum', 
-						excerpt: 'Lorem ipsum set abet ipsum Lorem ipsum set abet ipsum', 
-						tags: [
-							{ 'term_id': '4', name: 'tag 1', slug: 'tag-1' },
-							{ 'term_id': '5', name: 'tag 2', slug: 'lorem' },
-							{ 'term_id': '6', name: 'tag 3', slug: 'ipsum' }
-						],
-						featured_img_url: 'data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='
-					},
-					{
-						link: 'http://yali.rebuild.local/wp/lorem-ipsum/',
-						title: 'Post 6 Lorem ipsum set abet ipsum', 
-						excerpt: 'Lorem ipsum set abet ipsum Lorem ipsum set abet ipsum', 
-						tags: [
-							{ 'term_id': '4', name: 'tag 1', slug: 'tag-1' },
-							{ 'term_id': '5', name: 'tag 2', slug: 'lorem' },
-							{ 'term_id': '6', name: 'tag 3', slug: 'ipsum' }
-						],
-						featured_img_url: 'data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='
 					}
 				]
+			} 
+		%}
+
+		{% include 'content_blocks/honeycomb.twig' with 
+			{ 				
+				headline: 'Stay Involved',
+				subheadline: 'Check out other YALI Network Campaigns',	
+				content: campaigns,
+				bg_color: 'lightblue'
 			} 
 		%}
 

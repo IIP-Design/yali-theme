@@ -146,11 +146,12 @@ class YaliSite {
 				return '&nbsp; <a href="' . get_permalink($post->ID) . '"> Read More...</a>';
 			});
 		}
-
+		
 		/*
 		* IIP Interactive Plugin Edits
 		*/
-		require_once get_stylesheet_directory() . '/includes/edit-iip-interactive-plugin/edit-iip-interactive.php';
+
+		require_once get_stylesheet_directory() . '/includes/edit-iip-interactive-plugin/edit-iip-interactive.php';		
 	}
 
 	function twig_init() {
