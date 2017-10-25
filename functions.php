@@ -142,13 +142,21 @@ class YaliSite {
 
 	function enqueue_scripts() {
 		$module_url = self::cdp_get_option('cdp_module_url');
+		$public_api = self::cdp_get_option('cdp_public_url');
+		$search_indexes = self::cdp_get_option('cdp_indexes');
+
 		$article_feed_js = $module_url . "cdp-module-article-feed/cdp-module-article-feed.min.js";
 		$article_feed_css = $module_url . "cdp-module-article-feed/cdp-module-article-feed.min.css";
 
 		wp_enqueue_script( 'artice-feed-js', $article_feed_js, null, '1.0.0', true );   
 		wp_enqueue_style( 'artice-feed-css', $article_feed_css, null, '1.0.0' );
 
-		wp_enqueue_script( 'yali-js', get_stylesheet_directory_uri() . '/dist/js/bundle.min.js', array('jquery', 'artice-feed-js'), CHILD_THEME_VERSION, true );
+		wp_register_script( 'yali-js', get_stylesheet_directory_uri() . '/dist/js/bundle.min.js', array('jquery', 'artice-feed-js'), CHILD_THEME_VERSION, true );
+		wp_localize_script( 'yali-js', 'cdp', array(
+			'publicAPI'  => $public_api,
+			'searchIndexes'  => $search_indexes
+		)); 
+		wp_enqueue_script( 'yali-js' );
 	}
 
 	function admin_enqueue_scripts() {

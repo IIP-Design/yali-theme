@@ -9,20 +9,26 @@
       <!-- attach filters -->
       <div class="cb_dropdown cb-cdp-filters" data-target="{{ selector }}">
       {% for filter in filters %}
-        <select name="{{ filter }}" multiple="" class="ui dropdown" aria-label="{{ filter }}">
-          <option value="">{{ filter |capitalize }}</option>
-          <option value="angular">Angular</option>
-          <option value="css">CSS</option>
-          <option value="design">Graphic Design</option>
-        </select>
+        {% if filter == 'sort' %}
+          <select name="sort" multiple="" class="ui dropdown" aria-label="sort">
+            <option value="">Sort By</option>
+            <option value="recent">Most Recent</option>
+            <option value="recent">A-Z</option>
+          </select>
+        {% else %}
+         <select name="{{ filter }}" multiple="" class="ui loading dropdown" aria-label="{{ filter }}">
+            <option value="">{{ filter |capitalize }}</option>
+          </select>
+        {% endif %}
       {% endfor %}
       </div>
       <!-- attach article feed module -->
-      <div id="{{ selector }}" style="margin-top: 2em; text-align: {{ text_alignment }}">LOADING Component...</div>
+      <div id="{{ selector }}" data-content-type='cdp-filtered-list'  style="margin-top: 2em; text-align: {{ text_alignment }}">LOADING Component...</div>
     
+       <!-- ashow more button -->
       {% if btn_label is not empty or btn_link is not empty %}
       <div class="cb_button" style="text-align: {{ btn_text_alignment }}">
-        <button class="ui button" style="background-color: {{ btn_bg_color }}" tabindex="0">
+        <button id="btn-{{ selector }}" class="ui button" style="background-color: {{ btn_bg_color }}" tabindex="0">
           <div style="color: {{ btn_label_color }}"> {{ btn_label }}
             <i style="color:  {{ btn_label_color }}" class="caret down icon"></i>
           </div>
@@ -33,11 +39,3 @@
     </div><!-- inner-container -->
   </div>
 </section>
-
-
-<script>
-
-
-</script>
-
-  

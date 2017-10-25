@@ -108,22 +108,24 @@ class Content_Block_Shortcode {
     $meta = get_post_meta( $id );
     $post = get_post( $id );
    
-    $context = $this->fetch_base_config( $id, $post );
-    $context["selector"] = 'feed' . $id;
-    $context = $this->fetch_module_config( $context, $id );
-    $context = $this->fetch_btn_config( $context, $id, $meta );
+    $context              = $this->fetch_base_config( $id, $post );
+    $context["selector"]  = 'feed' . $id;
+    $context              = $this->fetch_module_config( $context, $id );
+    $context              = $this->fetch_btn_config( $context, $id, $meta );
     
     //$this->debug($context );
     return Twig::render( 'content_blocks/post-list.twig', $context );
   }
 
-  // FILTERED LIST CONTENT BLOCK (CDP)
+  // FILTERED POST LIST CONTENT BLOCK (CDP)
   public function render_filtered_list( $id ) {  
-    $context = $this->fetch_base_config( $id, get_post( $id ) );
-    $context["selector"] = 'feed' . $id;
-    $context["filters"] = get_post_meta( $id, 'yali_list_filters', true);
-    $context["types"] = get_post_meta( $id, 'yali_list_filters_types', true);
-    $context = $this->fetch_btn_config( $context, $id, get_post_meta( $id ) );
+    $context                = $this->fetch_base_config( $id, get_post( $id ) );
+    $context["selector"]    = 'feed' . $id;
+    $context['cdp_indexes'] = cdp_get_option('cdp_indexes');
+    $context["filters"]     = get_post_meta( $id, 'yali_list_filters', true);
+    $context["types"]       = get_post_meta( $id, 'yali_list_filters_types', true);
+    $context                = $this->fetch_btn_config( $context, $id, get_post_meta( $id ) );
+
 
     return Twig::render( 'content_blocks/post-filtered-list.twig', $context );
   }

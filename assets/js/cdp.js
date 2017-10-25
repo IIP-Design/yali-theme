@@ -1,9 +1,100 @@
+import * as query from './query';
+
+var cdpFilterFeedConfig = cdpFilterFeedConfig || {};
+
 function initializeFilters() {
+  let filters = document.querySelectorAll('.cb-cdp-filters select');
+  forEach(filters, function(index, filter) {
+    switch ( filter.name ) {
+      case 'type':
+        query.getTypes( filter, addOptions );
+      break;
+
+      case 'subject':
+       query.getCategories( filter, addOptions );
+      break;
+
+      case 'series':
+        query.getSeries( filter, addOptions );
+      break;
+
+      case 'language':
+        query.getLanguages( filter, addOptions );
+      break;
+
+      case 'sort':
+      break;
+    }
+  });
+
+  // if filters then init list
+  displayFilterFeed();
+  enableFilterButton();
+}
+
+function displayFilterFeed() {
+  let filteredFeed = document.querySelectorAll(
+    "[data-content-type='cdp-filtered-list']"
+  );
   
+  forEach(filteredFeed, function(index, feed) {
+    cdpFilterFeedConfig[feed.id] = {
+      selector: `#${feed.id}`,
+      sites: cdp.searchIndexes,  
+      from: 0,
+      size: 9,
+      types: '',
+      langs: '',
+      tags: '',
+      categories: '',
+      ui: { openLinkInNewWin: 'no' }
+    };
+
+    try {
+      CDP.widgets.ArticleFeed.new( cdpFilterFeedConfig[feed.id] ).render();
+    } catch( err ) {
+      console.log('Unable to article feed: ' + err.message)
+    }
+  });
+}
+
+function enableFilterButton() {
+  let filteredFeed = document.querySelectorAll("[data-content-type='cdp-filtered-list']");
+  forEach(filteredFeed, function(index, feed) {
+    let btn = `btn-${feed.id}`;
+    document.getElementById(btn).addEventListener('click', addToList, false);
+  });
+}
+
+function addToList(e) {
+  console.log(e.currentTarget)
+  console.log('button clicked')
 }
 
 /**
- * Render all article feeds to the page
+ * Add <option> to select
+ * 
+ * @param {*} select DOM element to append option to
+ * @param {*} options  options data
+ */
+function addOptions( select, options ) {
+  if( options ) {
+    var fragment = document.createDocumentFragment();
+    options.forEach(function(option) {
+        var el = document.createElement('option');
+        el.value = option.key;
+        el.textContent = option.display;
+        fragment.appendChild(el);
+    });
+    
+    select.appendChild(fragment);
+  }
+  select.parentNode.classList.remove('loading');
+}
+
+/**
+ * Render all article feeds to the page if
+ * a data-cdp-article-feed exists
  */
 function initializeArticleFeed() {
   let feeds = document.querySelectorAll(
@@ -12,7 +103,6 @@ function initializeArticleFeed() {
   forEach(feeds, function(index, feed) {
     renderArticleFeed(feed);
   });
-
 }
 
 /**
@@ -53,8 +143,8 @@ function renderArticleFeed( feed ) {
       }
     }).render();
 
-  } catch (e) {
-    console.log('Unable to article feed: ' + e.message)
+  } catch (err) {
+    console.log('Unable to article feed: ' + err.message)
   }
 }
 
