@@ -24,9 +24,11 @@ foreach($taxonomy_terms as $indx => $obj) {
 $check_host = $_SERVER['SERVER_NAME'];
 $social_block = do_shortcode("[content_block id='13313']");
 
+$formVar = do_shortcode('[formidable id=6]');
 
 $context = array(
   'check_host'      => $check_host,
+  'formVar'       	=> $formVar,
   'post_data'       => $post_data,
   'header_url'      => $header_url,
   'social_block'    => $social_block,
