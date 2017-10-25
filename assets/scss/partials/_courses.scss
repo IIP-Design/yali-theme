@@ -2,21 +2,15 @@
 .course-intro-text {
 
   > h1 {
-    font-size: em(50);
+    font-size: em(30);
     @media screen and (max-width: 933px) {
-      font-size: em(35, $mobile);
-    }
-    @media screen and (max-width: 330px) {
-      font-size: em(30, $mobile);
+      font-size: em(25, $mobile);
     }
   }
 
   > p {
-    font-size: em(18);
+    font-size: em(16);
     @media screen and (max-width: 933px) {
-      font-size: em(16, $mobile);
-    }
-    @media screen and (max-width: 330px) {
       font-size: em(14, $mobile);
     }
   }
@@ -25,23 +19,44 @@
 .lessons-list {
 
   > header > h3 {
-    font-size: em(30);
+    font-size: em(25);
+  }
+}
+
+.lessons-list-item .media-object header {
+  display: block;
+}
+
+.lessons-list-item .media-object .media-object-description p:nth-child(2),
+.lessons-list-item .media-object .media-object-description p:nth-child(3),
+.lessons-list-item .media-object .media-object-description p:nth-child(4) {
+  display: none;
+}
+
+.media-object {
+
+  > a > img {
+    margin-top: 1em;
   }
 }
 
 .media-object-title {
-  font-size: em(24);
+  font-size: em(20);
 }
 
 .media-object-subtitle {
-  font-size: em(20);
+  font-size: em(18);
 }
 
 .media-object-description {
 
   > p {
-    font-size: em(16);
+    font-size: em(14);
   }
+}
+
+li.lessons-list-item {
+  margin-bottom: 0;
 }
 
 .lessons-list-item {
@@ -63,18 +78,23 @@
   }
 }
 
+.instructors-list > div.media-object {
+  margin-bottom: 20px;
+}
+
 h5.media-object-subtitle {
+  font-size: em(16);
+  @media screen and (max-width: 933px) {
+    font-size: em(14, $mobile);
+  }
   font-weight: 400;
 }
 
 // Lessons pages
 .lesson .lesson-title {
-  font-size: em(50);
+  font-size: em(30);
   @media screen and (max-width: 933px) {
-    font-size: em(35, $mobile);
-  }
-  @media screen and (max-width: 330px) {
-    font-size: em(30, $mobile);
+    font-size: em(25, $mobile);
   }
 }
 
@@ -84,19 +104,16 @@ h5.media-object-subtitle {
   }
 }
 
+.lesson .glossary {
+  margin-bottom: 1em !important;
+}
+
 ul.collapse.glossary-content {
   padding-left: 0;
 }
 
-
 .glossary-title {
-  font-size: em(40);
-  @media screen and (max-width: 933px) {
-    font-size: em(30, $mobile);
-  }
-  @media screen and (max-width: 330px) {
-    font-size: em(25, $mobile);
-  }
+  font-size: em(25);
 
   margin-left: 0 !important;
   line-height: 1.2em !important;
@@ -116,6 +133,7 @@ li.glossary-item {
 }
 
 .ReactTabs__TabPanel {
+  margin-bottom: 20px;
 
   div > p {
     font-size: em(18);
@@ -132,6 +150,10 @@ li.glossary-item {
   margin-top: 5px;
 }
 
+.page-content > #course-container {
+  bottom: 20px;
+}
+
 // Quiz page
 h3.quiz-instructions {
   font-size: em(30);
@@ -139,20 +161,11 @@ h3.quiz-instructions {
 
 .quiz-question-text > p {
     font-size: em(18);
-    @media screen and (max-width: 933px) {
-      font-size: em(16, $mobile);
-    }
-    @media screen and (max-width: 330px) {
-      font-size: em(14, $mobile);
-    }
 }
 
 ol.quiz-questions {
   font-size: em(16);
   @media screen and (max-width: 933px) {
-    font-size: em(14, $mobile);
-  }
-  @media screen and (max-width: 330px) {
     font-size: em(12, $mobile);
   }
 }
@@ -165,15 +178,19 @@ ol.quiz-questions {
 
 // Instructor page
 h1.instructor-title {
-  font-size: em(50);
+  font-size: em(30);
 }
 
 h3.instructor-subtitle {
-  font-size: em(30);
+  font-size: em(20);
 }
 
 .instructor-image {
   margin-top: 12px !important;
+}
+
+div.instructor-description {
+  margin-bottom: 20px;
 }
 
 .instructor-description > p {

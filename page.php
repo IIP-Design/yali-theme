@@ -23,20 +23,19 @@ $sizes = wp_get_attachment_image_sizes($img_id, "full");
 $categories = Yali\API::get_category_list();
 $series = get_terms('series');
 
-// Temp
-/**
-* data (page id, content block shortcode) from dev server otherwise
-* from Shawn localhost
-**/
+
 // Data for certain pages or shared
 $social_block = do_shortcode("[content_block id='13313']");
-$campaigns = ( $check_host == 'yali.dev.america.gov' ) ? Yali\API::get_child_pages(13240) : Yali\API::get_child_pages(8);
-wp_reset_postdata();
 
 $formVar = do_shortcode('[formidable id=6]');
 
 // Yali Learns - Campaign Materials Accordion
 $campaign_materials_accordion = do_shortcode("[content_block id='13615' title='Yali Learns Campaign Materials']");
+
+if( $pagename === 'action' ) {
+  $campaigns = ( $check_host == 'yali.dev.america.gov' ) ? Yali\API::get_child_pages(13240) : Yali\API::get_child_pages(8);
+  wp_reset_postdata(); 
+}
 
 // Data array for twig
 $context = array(
@@ -48,11 +47,11 @@ $context = array(
   "srcset"		    => $srcset,
   "sizes"		      => $sizes,
   "social_block"  => $social_block,
-  "campaigns"     => $campaigns,
   "formVar"       => $formVar,
   'category_list' => $categories,
   'series_list'   => $series,
-  'campaign_materials_accordion'  => $campaign_materials_accordion
+  'campaign_materials_accordion'  => $campaign_materials_accordion,
+  "campaigns"       => ( $pagename === 'action' ) ? $campaigns : null
 );
 
 echo Twig::render( array( "pages/page-" . $pagename . ".twig", "page.twig" ), $context );

@@ -23,3 +23,11 @@
     width: 27px !important; 
     height: 27px !important;
 }
+
+/*
+* for Alumni Videos on Campaigns Page Template
+*/
+.cmb2-oembed.embed-status iframe {
+    width: 100%;
+    height: 100%;
+}

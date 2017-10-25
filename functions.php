@@ -12,11 +12,10 @@ include( get_stylesheet_directory() . '/badge/class-america-badge-generation.php
 
 /**
  * Add attachment using the Formidable 'frm_notification_attachment' hook
- *
  */
 
 function yali_add_attachment( $attachments, $form, $args ) {
-	if ( $form->form_key == 'get_pledge' || $form->form_key == 'get_earthday' || $form->form_key == 'get_yalilearns2016' || $form->form_key == 'get_certificate2' || $form->form_key == 'get_4all2') {
+	if ( $form->form_key == 'get_pledge' || $form->form_key == 'get_earthday' || $form->form_key == 'get_yalilearns2016' || $form->form_key == 'get_certificate2' || $form->form_key == 'get_4all') {
 
 		$params = array (
 			'key'				=>  $form->form_key,				// form identifier (i.e. project id used to find config)
@@ -30,6 +29,55 @@ function yali_add_attachment( $attachments, $form, $args ) {
 }
 
 add_filter( 'frm_notification_attachment', 'yali_add_attachment', 10, 3 );
+
+/**
+  * Send token data for Course
+  */
+
+function localize_nonce() {
+
+  include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+  $requiredplugin = 'wp-simple-nonce/wp-simple-nonce.php';
+
+  if ( is_plugin_active($requiredplugin) ) {
+    global $post;
+
+    if ( is_a( $post, 'WP_Post' ) && has_shortcode( $post->post_content, 'course' ) ) {
+      $nonce = WPSimpleNonce::init( 'certificate', 2592000, true );
+      wp_enqueue_script( 'token-js', get_stylesheet_directory_uri() . '/assets/js/token.js', array() );
+      wp_localize_script( 'token-js', 'token', $nonce );
+    }
+  }
+}
+
+add_action('wp_enqueue_scripts', 'localize_nonce');
+
+/**
+  * Validate token data for Course
+  */
+
+add_filter('frm_validate_entry', 'check_nonce', 20, 2);
+function check_nonce( $errors, $values ) {
+
+  include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+  $requiredplugin = 'wp-simple-nonce/wp-simple-nonce.php';
+
+  if ( is_plugin_active($requiredplugin) ) {
+
+    if( $values['form_key'] == 'get_certificate2' && strpos($_POST["_wp_http_referer"], 'get-quiz-certificate') !== false && empty($errors) ) {
+
+      $result = WPSimpleNonce::checkNonce($_GET['tokenName'], $_GET['tokenValue']);
+
+      if ( ! $result ) {
+         $errors['my_error'] = 'This certificate page has expired. Please return to the quiz and complete it again to generate your certificate.';
+      }
+
+    }
+
+  }
+
+  return $errors;
+}
 
 YALI_Autoloader::register( get_stylesheet_directory() . '/includes/' );
 
@@ -98,11 +146,12 @@ class YaliSite {
 				return '&nbsp; <a href="' . get_permalink($post->ID) . '"> Read More...</a>';
 			});
 		}
-
+		
 		/*
 		* IIP Interactive Plugin Edits
 		*/
-		require_once get_stylesheet_directory() . '/includes/edit-iip-interactive-plugin/edit-iip-interactive.php';
+
+		require_once get_stylesheet_directory() . '/includes/edit-iip-interactive-plugin/edit-iip-interactive.php';		
 	}
 
 	function twig_init() {
@@ -148,7 +197,7 @@ class YaliSite {
 		$article_feed_js = $module_url . "cdp-module-article-feed/cdp-module-article-feed.min.js";
 		$article_feed_css = $module_url . "cdp-module-article-feed/cdp-module-article-feed.min.css";
 
-		wp_enqueue_script( 'artice-feed-js', $article_feed_js, null, '1.0.0', true );   
+		wp_enqueue_script( 'artice-feed-js', $article_feed_js, null, '1.0.0', true );
 		wp_enqueue_style( 'artice-feed-css', $article_feed_css, null, '1.0.0' );
 
 		wp_register_script( 'yali-js', get_stylesheet_directory_uri() . '/dist/js/bundle.min.js', array('jquery', 'artice-feed-js'), CHILD_THEME_VERSION, true );

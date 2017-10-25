@@ -26,9 +26,13 @@
 			}
 		}
 
-		&_headline {
+		&_headline {			
 			@media screen and (max-width: 767px) {
 				margin-bottom: 8px;
+			}
+
+			a {
+				color: $blue-navy;
 			}
 		}		
 
@@ -43,8 +47,17 @@
 
 			&.cta_link {
 				margin: 0;
-				background-color: $blue-navy;
+				background-color: $blue-medium;
 			}		
+
+			&--course {
+				display: inline-block;
+				width: 49%;
+
+				&.cta_link {
+					background-color: $red;
+				}				
+			}
 		}
 	}
 

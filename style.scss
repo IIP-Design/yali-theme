@@ -32,6 +32,7 @@ Text Domain: yali
 // Hero/Page Title Elems
 @import 'assets/scss/partials/hero';
 @import 'assets/scss/partials/page-title-overlay';
+@import 'assets/scss/partials/image-preview';
 
 // General helper elems - dropdown, placeholders, etc.
 @import 'assets/scss/partials/helpers';
@@ -48,8 +49,9 @@ Text Domain: yali
 @import 'assets/scss/partials/nav/burger';
 @import 'assets/scss/partials/nav/search';
 
-// Join Form
-@import 'assets/scss/partials/join-form/join-form';
+// Forms
+@import 'assets/scss/partials/forms/join-form';
+@import 'assets/scss/partials/forms/screendoor';
 
 // Courses
 @import 'assets/scss/partials/courses';
@@ -76,10 +78,7 @@ Text Domain: yali
 @import 'assets/scss/page-templates/yali-learns/featured-course';
 @import 'assets/scss/page-templates/action';
 @import 'assets/scss/page-templates/campaigns/campaign_base';
-@import 'assets/scss/page-templates/campaigns/africa4her/africa4her';
-@import 'assets/scss/page-templates/campaigns/yaligoesgreen/yaligoesgreen';
-@import 'assets/scss/page-templates/campaigns/yalistands4all/yalistands4all';
-@import 'assets/scss/page-templates/campaigns/yaliunites/yaliunites';
+@import 'assets/scss/page-templates/campaigns/yaliserves/yaliserves';
 @import 'assets/scss/page-templates/campaigns/yalivotes/yalivotes';
 @import 'assets/scss/page-templates/professional-development';
 @import 'assets/scss/page-templates/professional-path';

@@ -1,0 +1,73 @@
+.fr_form a {
+  border-bottom: 0;
+}
+
+.fr_form label {
+  line-height: 2em;
+}
+
+.fr_form abbr[title] {
+  border-bottom: 0;
+}
+
+.fr_form .button {
+  width: auto;
+}
+
+.fr_form input[type='radio'],
+.fr_form input[type='checkbox'] {
+  bottom: 1px;
+  margin: .5em;
+  position: relative;
+}
+
+.fr_pagination li::before {
+  content:"";
+  padding: 0;
+}
+
+.fr_pagination li a, .fr_pagination li span {
+  padding-left: 75px;
+}
+
+.fr_response_field_dropdown .fr_field_wrapper select {
+  width: 100%;
+  border: 1px solid #dedede;
+  height: 34px;
+  margin: 0;
+}
+
+.fr_form input[type='text'],
+.fr_form textarea.size_medium,
+.fr_form textarea {
+  border: 1px solid #dedede;
+  background-color: #ffffff;
+  padding: 6px 8px;
+  border-radius: 0;
+  box-shadow: none;
+  box-sizing: border-box;
+  width: 100%;
+  height: auto;
+}
+
+.fr_other_option > input[type='text'] {
+  margin-top: em(5);
+}
+
+.fr_bottom {
+  background-color: #ffffff;
+}
+
+.fr_bottom_r {
+  text-align: center;
+}
+
+.fr_bottom_r button {
+	background-color: #192856;
+	color: #ffffff;
+}
+
+.fr_button {
+  padding: .5em 1em;
+  font-size: 100%;
+}
