@@ -19,11 +19,15 @@
 			}
 
 			&--thin {
-				padding-bottom: 26px;
+				padding-bottom: 85px;
 			}
 
 			&--thick {
-				padding-bottom: 120px;
+				padding-bottom: 200px;
+
+				&_home {
+					padding-bottom: 120px;					
+				}
 			}
 		}
 		
