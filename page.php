@@ -26,6 +26,8 @@ $series = get_terms('series');
 
 // Data for certain pages or shared
 $social_block = do_shortcode("[content_block id='13313']");
+$courses_faq = do_shortcode("[content_block id='13942']");
+$featured_course = do_shortcode("[content_block id='13772']");
 
 $formVar = do_shortcode('[formidable id=6]');
 
@@ -34,24 +36,26 @@ $campaign_materials_accordion = do_shortcode("[content_block id='13615' title='Y
 
 if( $pagename === 'action' ) {
   $campaigns = ( $check_host == 'yali.dev.america.gov' ) ? Yali\API::get_child_pages(13240) : Yali\API::get_child_pages(8);
-  wp_reset_postdata(); 
+  wp_reset_postdata();
 }
 
 // Data array for twig
 $context = array(
-  "check_host"    => $check_host,
-  "pagename"      => $pagename,
-  "page_data"     => $page_data,
-  "header_url"    => $header_url,
-  "feat_img"      => $feat_img_obj,
-  "srcset"		    => $srcset,
-  "sizes"		      => $sizes,
-  "social_block"  => $social_block,
-  "formVar"       => $formVar,
+  'check_host'    => $check_host,
+  'pagename'      => $pagename,
+  'page_data'     => $page_data,
+  'header_url'    => $header_url,
+  'feat_img'      => $feat_img_obj,
+  'srcset'		    => $srcset,
+  'sizes'		      => $sizes,
+  'social_block'  => $social_block,
+  'formVar'       => $formVar,
   'category_list' => $categories,
   'series_list'   => $series,
+  'courses_faq'   => $courses_faq,
+  'featured_course' => $featured_course,
   'campaign_materials_accordion'  => $campaign_materials_accordion,
-  "campaigns"       => ( $pagename === 'action' ) ? $campaigns : null
+  'campaigns'       => ( $pagename === 'action' ) ? $campaigns : null
 );
 
 echo Twig::render( array( "pages/page-" . $pagename . ".twig", "page.twig" ), $context );
