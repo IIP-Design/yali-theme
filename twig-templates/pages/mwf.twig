@@ -1,17 +1,17 @@
 {% extends 'base.twig' %}
 
-{% block content %}	
+{% block content %}
 <section class="hero">
     <img class="ui fluid image" src="{{ header_url }}" srcset="{{ srcset }}" sizes="{{ size }}" alt="{{ header_url }}">
 </section>
 <section class="ui container">
 	<h2 class='title-overlay_title'>{{ page_data.title.rendered }}</h2>
-	<div class='inner-container'>		
+	<div class='inner-container'>
 		<section class='section mwf_intro'>
-			{{ intro }}						
-		</section>						
+			{{ intro }}
+		</section>
 
-		<section class='section learn-more'>			
+		<section class='section learn-more'>
 			<div class='learn-more_links'>
 				<h4>Learn more about the Fellowship</h4>
 				<a href='#about' class='cta_link scroll_link'><span class='text_break'>Program Overview</span> and Components</a>
@@ -32,15 +32,15 @@
 		<section id='about' class='section'>
 			{{ about }}
 		</section>
-		
 
-		{% include 'content_blocks/post-listings.twig' with 
+
+		{% include 'content_blocks/post-listings.twig' with
 			{
-				headline: 'Hear From Our Fellows',
+				headline: 'Hear From Former Fellows',
 				cta_txt: 'Meet more Mandela Washington Fellowship alumni',
 				cta_url: '/bios',
 				background_color: '#192856',
-				cta_background_color: '#F2D400',		
+				cta_background_color: '#F2D400',
 				posts: [
 					{
 						title: 'MWF Alumni Name Success Story',
@@ -54,7 +54,7 @@
 						excerpt: 'Lorem ipsum dolor sit amet, ea habeo error ubique vim, ex veniam docendi...',
 						img_src: 'data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==',
 						post_url: '#',
-						tags: []				
+						tags: []
 					},
 					{
 						title: 'MWF Alumni Name Success Story',
@@ -69,9 +69,9 @@
 
 		<section id='fellowship_application' class='section application'>
 			<h3 class='application_headline'>{{ page_data.cmb2.mwf_application.mwf_application_title }}</h3>
-			
+
 			<p class='full-width application_status'>The 2017 Mandela Washington Fellowship application is now closed.</p>
-			
+
 			{% if countdown %}
 			<div class='section application_countdown'>
 				{{ countdown }}
@@ -86,13 +86,13 @@
 				<div class='inner-container'>
 					<h4>Application Resources</h4>
 					<div class='ui two column grid'>
-						<a 
-							href="{{ page_data.cmb2.mwf_application.mwf_application_instructions_pdf }}" 
+						<a
+							href="{{ page_data.cmb2.mwf_application.mwf_application_instructions_pdf }}"
 							target='_blank'
 							class='application_content cta_link'
 						>
 							<span class='application_resources_resource'>Download the 2017 Application Instructions (PDF)</span>
-						</a>	
+						</a>
 						<a href='#mandela-washington-fellowship-faqs' class='application_content cta_link scroll_link'>
 							<span class='application_resources_resource'>Read the 2018 Frequently Asked Questions</span>
 						</a>
@@ -104,8 +104,8 @@
 						<a href='http://yaliapp.irex.org' target='_blank' class='application_content cta_link'>
 							<span class='application_resources_resource'>View the application <i class='angle right icon'></i></span>
 						</a>
-					</div>										
-				</div>				
+					</div>
+				</div>
 			</div>
 			<div class='section application_selection'>
 				<h4>Application Selection Process</h4>
@@ -122,16 +122,16 @@
 			<div class='section application_info'>
 				<h5>Application Information</h5>
 				<div class='application_content'>{{ page_data.cmb2.mwf_application.mwf_application_info }}</div>
-			</div>			
+			</div>
 		</section>
 
-		{% include 'content_blocks/post-listings.twig' with 
+		{% include 'content_blocks/post-listings.twig' with
 			{
 				headline: 'YALI Features',
 				cta_txt: 'More from YALI Network In Action',
 				cta_url: '#',
 				background_color: '#192856',
-				cta_background_color: '#F2D400',		
+				cta_background_color: '#F2D400',
 				posts: [
 					{
 						title: 'Lorem ipsum dolor sit amet',
@@ -153,7 +153,7 @@
 							{ 'term_id': '4', name: 'tag 1', slug: 'tag-1' },
 							{ 'term_id': '5', name: 'tag 2', slug: 'lorem' },
 							{ 'term_id': '6', name: 'tag 3', slug: 'ipsum' },
-						]						
+						]
 					},
 					{
 						title: 'Lorem ipsum dolor sit amet',
