@@ -150,8 +150,13 @@ class YaliSite {
 		/*
 		* IIP Interactive Plugin Edits
 		*/
-
 		require_once get_stylesheet_directory() . '/includes/edit-iip-interactive-plugin/edit-iip-interactive.php';		
+
+		/*
+		* Qzzr Shortcode
+		*/
+		require_once get_stylesheet_directory() . '/includes/yali_shortcodes/qzzr_shortcode.php';
+
 	}
 
 	function twig_init() {
@@ -205,7 +210,7 @@ class YaliSite {
 			'publicAPI'  => $public_api,
 			'searchIndexes'  => $search_indexes
 		)); 
-		wp_enqueue_script( 'yali-js' );
+		wp_enqueue_script( 'yali-js' );		
 	}
 
 	function admin_enqueue_scripts() {

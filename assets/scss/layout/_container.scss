@@ -43,9 +43,10 @@
 }
 
 
-.full-container-width {
-  margin-left: calc( (-1152px + 940px) / 2 );
-  margin-right: calc( (-1152px + 940px) / 2 );
+.full-container-width {  
+  max-width: 1300px;
+  margin-left: -50px;
+  margin-right: -50px;  
   @media screen and (max-width: 1024px) {
     margin-left: 0;
     margin-right: 0;

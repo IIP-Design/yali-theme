@@ -3,19 +3,29 @@
 {% block content %}
 
 {% if header_url is not empty %}
-<section class="hero">
-    <img class="ui fluid image" src="{{ header_url }}" srcset="{{ srcset }}" sizes="{{ sizes }}" alt="{{ header_url }}">
-</section>
+  {% if ( hero_title_display == 'yes' ) or ( hero_title_display == 'no') %}
+  <section class='hero hero--bg_img' style='background-image: url("{{ header_url }}"); background-size: cover;'>
+      <div class='hero-inner bottom_padd {{ hero_title_display == "yes" ? "bottom_padd--thin" : "bottom_padd--thick" }} '>
+      	{% if hero_title_display == 'yes' %}
+      	<div class='hero-content ui container'>
+      		<h1 class='hero-h1'>{{ page_data.title.rendered }}</h1>
+      	</div>
+      	{% endif %}
+      </div>
+  </section>
+  {% endif %}
 {% endif %}
 
 <section class='ui container'>
+	{% if ( hero_title_display == 'no' ) or ( hero_title_display == 'hide' )%}
 	<h2 class='title-overlay_title'>{{ page_data.title.rendered }}</h2>
+	{% endif %}
 	<div class='inner-container'>
 		<div class='page-content'>
 			{{ page_data.content.rendered }}
 		</div>
 	</div>
-	
+
 </section>
 
 {% endblock %}

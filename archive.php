@@ -13,8 +13,11 @@ $series = get_terms('series');
 // TEMP
 $check_host = $_SERVER['SERVER_NAME'];
 
+$formVar = do_shortcode('[formidable id=6]');
+
 $context = array(
 	'check_host'      => $check_host,
+	'formVar'         => $formVar,
 	'archive_query'   => $queried_object->name,
 	'taxonomy'        => ( $taxonomy == 'post_tag' ) ? 'tag' : $taxonomy,
 	'filter_slug'     => $queried_object->slug,

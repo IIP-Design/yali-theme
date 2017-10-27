@@ -2,7 +2,6 @@
 
 {% block content %}
 
-{% set title_overlay_class = (header_url is not empty) ? 'title-overlay' : '' %}
 {% set series_name = (post_data.post_series_names is not empty) ? post_data.post_series_names[0].name : '' %}
 
 {% if header_url is not empty %}
@@ -20,7 +19,7 @@
 </section>
 {% endif %}
 
-<section class='ui container {{ title_overlay_class }}'>	
+<section class='ui container'>	
 	<h2 class='title-overlay_title'>{{ post_data.title.rendered }}</h2> 
 	<div class='inner-container single_post'>
 		<section class='section single_post_content'>

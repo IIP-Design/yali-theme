@@ -6,80 +6,48 @@
 </section>
 <section class="ui container">
 	<h2 class='title-overlay_title'>{{ page_data.title.rendered }}</h2>
-	<div class='inner-container campaign'>		      
+	<div class='inner-container campaign'>
 		<section class='page-content'>
-			{{ page_data.content.rendered }}          
+			{{ page_data.content.rendered }}
 		</section>
-
-		<section class='section volunteer'>		
-			<h3>Learn what volunteering can do for you</h3>			
-			<article class='ui stackable grid volunteer_post'>	
-				<div class='four wide column volunteer_post_img'>
-					<img src='data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='>
-				</div>
-				<div class='twelve wide column volunteer_post_content'>
-					<h4 class='volunteer_post_headline'>What does it mean to volunteer?</h4>
-					<p class='volunteer_post_excerpt'>
-						Volunteering is the act of rendering selfless service to a cause, oftentimes for free and without
-						coercion. It is about giving time to a good cause, sepcifically to help an organization, your 
-						community or an individual you are not related to. People who engage in this type of activity are
-						known as volunteers.
-					</p>																			
-				</div>
-				<a href='#' class='cta_link volunteer_post_link'>
-					Watch more from YALI Voices: The Joy of Volunteering <i class='icon chevron right'></i>
-				</a>
-			</article>
-		</section>
-
-		{% include 'content_blocks/post-single.twig' with 
-			{
-				title: 'Take the course(s)',
-				img_src: 'data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==',
-				headline: 'Community Organizing for Action',
-				excerpt: 'Grassroots campaigns and volunteers are essential to the success of most nongovernmental organizations involved in community development. Learn how to inspire and engage volunteers to be proactive in their communities and organize grassroots campaigns.',
-				cta_link: '#',
-				course: 'true'
-			}
-		%}
 
 		<section class='section promote'>
 			<h3>Promote #YALIServes</h3>
-			<p>Download, use and share these graphics on social media.</p>						
+			<p>Download, use and share these graphics on social media.</p>
 			<div class='ui stackable grid promote_item'>
 
 				{% for promo in promo_data %}
 				<div class='eight wide column promote_item'>
 					<div class='promote_item_img' data-preview-image='{{ promo.image_url }}' style='background-image: url({{ promo.image_url }}); background-size: cover;'></div>
 					<p class='promote_item_text'>{{ promo.image_text }}</p>
-				</div>				
+				</div>
 				{% endfor %}
 			</div>
 		</section>
 
 		<section class='section org_event'>
 			<h3>Organize an event</h3>
-			<p class='org_event_text'>Organize a <a href='#'>#YALILearns</a> event and facilitate <a href='#'><em>Community Organizing for Action</em></a> 
+			<p class='org_event_text'>Organize a <a href='#'>#YALILearns</a> event and facilitate <a href='#'><em>Community Organizing for Action</em></a>
 				 to raise awareness for volunteering in your community. Use our facilitation toolkit to get started.</p>
 			<div class='ui stackable grid org_event_items'>
 				{% for file in orgevent_data %}
 				<div class='eight wide column org_event_item'>
 					<a href='{{ file.file_url }}' target='target_blank' class='cta_link'>{{ file.file_name }}</a>
 				</div>
-				{% endfor %}				
-			</div>												
-		</section>		
+				{% endfor %}
+			</div>
+		</section>
 
 		{{ social_block }}
 
-		{% include 'content_blocks/post-grid.twig' with 
+		{% include 'content_blocks/post-grid.twig' with
 			{
 				headline: 'Learn more about volunteering',
 				posts: [
 					{
 						link: 'http://yali.rebuild.local/wp/lorem-ipsum/',
-						title: 'Post 1 Lorem ipsum set abet ipsum', 
-						excerpt: 'Lorem ipsum set abet ipsum Lorem ipsum set abet ipsum', 
+						title: 'Post 1 Lorem ipsum set abet ipsum',
+						excerpt: 'Lorem ipsum set abet ipsum Lorem ipsum set abet ipsum',
 						tags: [
 							{ 'term_id': '4', name: 'tag 1', slug: 'tag-1' },
 							{ 'term_id': '5', name: 'tag 2', slug: 'lorem' },
@@ -89,8 +57,8 @@
 					},
 					{
 						link: 'http://yali.rebuild.local/wp/lorem-ipsum/',
-						title: 'Post 2 Lorem ipsum set abet ipsum', 
-						excerpt: 'Lorem ipsum set abet ipsum Lorem ipsum set abet ipsum', 
+						title: 'Post 2 Lorem ipsum set abet ipsum',
+						excerpt: 'Lorem ipsum set abet ipsum Lorem ipsum set abet ipsum',
 						tags: [
 							{ 'term_id': '4', name: 'tag 1', slug: 'tag-1' },
 							{ 'term_id': '5', name: 'tag 2', slug: 'lorem' },
@@ -100,8 +68,8 @@
 					},
 					{
 						link: 'http://yali.rebuild.local/wp/lorem-ipsum/',
-						title: 'Post 3 Lorem ipsum set abet ipsum', 
-						excerpt: 'Lorem ipsum set abet ipsum Lorem ipsum set abet ipsum', 
+						title: 'Post 3 Lorem ipsum set abet ipsum',
+						excerpt: 'Lorem ipsum set abet ipsum Lorem ipsum set abet ipsum',
 						tags: [
 							{ 'term_id': '4', name: 'tag 1', slug: 'tag-1' },
 							{ 'term_id': '5', name: 'tag 2', slug: 'lorem' },
@@ -109,19 +77,19 @@
 						],
 						featured_img_url: 'data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==',
 						featured_post: 'true'
-					}					
+					}
 				]
-			} 
+			}
 		%}
 
-		{% include 'content_blocks/honeycomb.twig' with 
-			{ 				
+		{% include 'content_blocks/honeycomb.twig' with
+			{
 				headline: 'Stay Involved',
-				subheadline: 'Check out other YALI Network Campaigns',	
+				subheadline: 'Check out other YALI Network Campaigns',
 				content: campaigns,
 				bg_color: 'lightblue'
-			} 
-		%}		
+			}
+		%}
 
 	</div>
 </section>

@@ -40,14 +40,11 @@
 		&_img {
 			width: 250px;
 			height: 250px;
-			margin-bottom: 5px;
-			border: 3px solid $blue-navy;
+			margin: 0 auto 5px auto;
+			border: 10px solid $blue-navy;
 			border-radius: 50%;			
 			background-size: cover;
-			background-position: 50%;
-			@media screen and (max-width: 933px) {
-				margin: 0 auto 5px auto;
-			}
+			background-position: 50%;			
 			@media screen and (min-width: 768px) and (max-width: 933px) {
 				width: 200px;
 				height: 200px;

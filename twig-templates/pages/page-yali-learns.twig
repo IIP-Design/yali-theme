@@ -8,17 +8,17 @@
 <section class="ui container intro">
 	<h2 class='title-overlay_title'>{{ page_data.title.rendered }}</h2>
 	<div class='inner-container'>
-		<p>{{ page_data.content.rendered }}</p>	
+		<p>{{ page_data.content.rendered }}</p>
 	</div>
 </section>
 
-<section class='section step'>	
+<section class='section step'>
 	<div class='step_content step_content--one'>
 		<div class='ui container'>
-			<div class='inner-container'>		
+			<div class='inner-container'>
 				<h3>Step One</h3>
 				<h4>Take a #YALILearns Course</h4>
-				<p>With topics ranging from business & entrepreneurship to climate change to civic leadership, there is sure to 
+				<p>With topics ranging from business & entrepreneurship to climate change to civic leadership, there is sure to
 				a course (or several!!) that you are interested in. Take a <b>YALI Network online course</b>, pass the quiz, and get
 				your certificate. You are now ready to plan an event and teach the course to others.
 				</p>
@@ -44,7 +44,7 @@
 				</div>
 			</div>
 		</div>
-	</div>	
+	</div>
 </section>
 
 <section class='section step'>
@@ -54,10 +54,10 @@
 				<h3>Step Two</h3>
 				<h4>Plan Your Event</h4>
 				<ol>
-					<li>Decide which <b>YALI Network Course</b> you would like to facilitate and where you would like to 
+					<li>Decide which <b>YALI Network Course</b> you would like to facilitate and where you would like to
 						hold your event.</li>
 					<li>Promote you event through social media (like an event on YALI Network face2face) or send email,
-						WhatsApp message, or SMS to firends, family, and those in your network inviting them to your 
+						WhatsApp message, or SMS to firends, family, and those in your network inviting them to your
 						#YALILearns event. Be sure to provide all the relevant details.</li>
 					<li>Decide how you will present the YALI Network Online Course, you have three options:
 						<ul>
@@ -101,7 +101,7 @@
 				<ol>
 					<li>Introduce the topic and present your chosen YALI Network Online Course.</li>
 					<li>Lead a review of each lesson and solicit questions and comments from the audience.</li>
-					<li>Be sure to create an inclusive environment that allows for positive, constructive conversation. 
+					<li>Be sure to create an inclusive environment that allows for positive, constructive conversation.
 						You can do so with some of the following techniques:
 						<ul>
 							<li>Have participants introduce themselves.</li>
@@ -113,7 +113,7 @@
 					<li>Use the Lesson Discussion Guide (available under the Resources tab for each YALI Network Online Course lesson)
 					 to facilitate a group conversation on the topic:
 					 	<ul>
-					 		<li>The Learning Objectives are a good way to clarify terms.</li>				 		
+					 		<li>The Learning Objectives are a good way to clarify terms.</li>
 					 		<li>The Discussion Questions are a useful resource for questions to ask the group to start dialogue.</li>
 					 		<li>The Developmental Actions will assist in putting the lesson material into practice.</li>
 					 	</ul>
@@ -184,33 +184,15 @@
 			<h3>Campaign Materials</h3>
 			<p>Download handouts, discussion guides, Powerpoints and more for all the YALI Network Online Courses.</p>
 
-			{{ campaign_materials_accordion }}			
+			{{ campaign_materials_accordion }}
 		</div>
 
 
 	</div>
 </section>
 
-<section class='ui container section feat_course'>
-	<div class='inner-container'>
-		<h2 class='feat_course_title'>Featured Online Course</h2>
-		<div class='ui grid feat_course_content'>
-			<div class='four wide column feat_course_thumb'>
-				<img src='data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='>
-			</div>
-			<div class='twelve wide column feat_course_excerpt'>
-				<h4>Lorem Ipsum Dolor Sit Amet</h4>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam egestas malesuada neque a finibus. 
-					Donec turpis est, viverra vitae elit vel, dignissim lobortis elit. Donec feugiat orci at enim iaculis, 
-					ut porta dui placerat. Donec posuere tellus in est cursus vestibulum. Aenean eu leo elementum, rutrum 
-					odio ut, iaculis magna. Aliquam tempor sapien ut dui pellentesque, vitae lobortis ante aliquet. 
-					Curabitur vulputate tempus lobortis.
-				</p>
-				<p class='feat_course_cta'><a href="#">Take this course</a></p>
-				<p class='feat_course_cta'><a href="#">Cours en francais</a></p>
-			</div>
-		</div>
-	</div>
+<section class='section feat_course'>
+	{{ featured_course }}
 </section>
 
 <section class='section social'>

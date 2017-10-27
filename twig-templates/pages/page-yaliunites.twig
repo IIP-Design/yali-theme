@@ -81,16 +81,15 @@
 
 		<section class='section org_event'>
 			<h3>Organize an event</h3>
-			<p>Organize a #YALILearns event and facilitate understanding human rights to raise awareness and educate
-				your community about protecting human rights. Use our facilitation guide or presentation template to 
-				help.</p>
+			<p class='org_event_text'>Organize a <a href='#'>#YALILearns</a> event using <a href='#'><em>Responsible Leadership on Transparency 
+				and Good Governance</em></a>. Use the materials below to help plan your event.
+			</p>
 			<div class='ui stackable grid org_event_items'>
+				{% for file in orgevent_data %}
 				<div class='eight wide column org_event_item'>
-					<a href="#" class='cta_link'>Facilitation Guide (PDF)</a>
+					<a href='{{ file.file_url }}' target='target_blank' class='cta_link'>{{ file.file_name }}</a>
 				</div>
-				<div class='eight wide column org_event_item'>
-					<a href="#" class='cta_link'>Presentation Template (PPTX)</a>
-				</div>
+				{% endfor %}
 			</div>												
 		</section>
 

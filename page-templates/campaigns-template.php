@@ -26,6 +26,9 @@ $social_block = do_shortcode("[content_block id='13313']");
 $campaigns = ( $check_host == 'yali.dev.america.gov' ) ? Yali\API::get_child_pages(13240) : Yali\API::get_child_pages(8);
 wp_reset_postdata();
 
+// Yali Learns - Campaign Materials Accordion
+$campaign_materials_accordion = do_shortcode("[content_block id='13615' title='Yali Learns Campaign Materials']");
+
 // Promo Items
 $promo_data = get_post_meta($post->ID, 'campaigns_promo_repeat_group', true);
 
@@ -57,7 +60,8 @@ $context = array(
   "campaigns"		    => $campaigns,
   "promo_data"	 	  => $promo_data,
   "orgevent_data"	  => $orgevent_data,
-  "alumni_vids"     => $alumni_vids_formatted
+  "alumni_vids"     => $alumni_vids_formatted,
+  'campaign_materials_accordion'  => $campaign_materials_accordion
 );
 
 
