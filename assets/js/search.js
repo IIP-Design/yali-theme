@@ -1,7 +1,9 @@
-var nav_search = document.querySelector('.search-icon_wrapper i'),
+var 
+	nav_search = document.querySelector('.search-icon_wrapper i'),
 	search_input = document.querySelector('.search_wrapper input'),
 	search_input_wrapper = document.querySelector('.search_input'),
 	search_icon_wrapper = document.querySelector('.search-icon_wrapper'),
+	search_submit = document.querySelector('#searchsubmit'),
 	search_close = document.querySelector('.search_input_close');
 
 function display_search_input() {
@@ -9,7 +11,9 @@ function display_search_input() {
 	search_input.style.width = nav_menu_width - 39 + 'px';
 
 	search_input_wrapper.classList.remove('hide');
-	search_icon_wrapper.classList.add('search_displaying');	
+	search_icon_wrapper.classList.add('search_displaying');
+
+	search_submit.style.zIndex = '2';
 }
 
 function close_search_input() {
@@ -17,6 +21,7 @@ function close_search_input() {
 		search_input_wrapper.classList.add('hide');
 		search_icon_wrapper.classList.remove('search_displaying');
 		search_input.style.width = 0;
+		search_submit.style.zIndex = '-1';
 	});
 }
 

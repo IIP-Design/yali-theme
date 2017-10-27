@@ -1,0 +1,19 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+
+
+
+<section class='ui container'>		
+	<div class='inner-container search_results'>
+		<h2>Searching: {{ search_term }}</h2>
+
+		{% for post in search_results %}
+		<article>
+			<h5>{{ post.post_title }}</h5>
+			<p>{{ post.post_excerpt }}</p>
+		</article>	
+		{% endfor %}
+	</div>	
+</section>	
+{% endblock %}

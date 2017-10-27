@@ -1,7 +1,9 @@
-var search_input_div = document.querySelector('.footer_list_item--search .search_input_wrapper'),
+var 
+	search_input_div = document.querySelector('.footer_list_item--search .search_input_wrapper'),
 	search_input = document.querySelector('.footer_list_item--search .search_input_wrapper > input'),
 	search_open = document.querySelector('.footer_list_item--search .search.icon'),
 	search_close = document.querySelector('.footer_list_item--search .remove.icon'),
+	search_submit = document.querySelector('#searchsubmit_footer'),
 	footer_list_items = document.querySelectorAll('.footer_list .ui.item');
 
 function footer_search_display() {
@@ -9,6 +11,8 @@ function footer_search_display() {
 		search_open.addEventListener('click', function() {
 			search_input_div.classList.remove('hide');		
 			
+			search_submit.style.zIndex = '2';
+
 			setTimeout(function(){			
 				search_input_div.style.opacity = 1;
 				search_input.classList.remove('inactive');
@@ -30,6 +34,8 @@ function footer_search_close() {
 	search_close.addEventListener('click', function() {
 		search_input.classList.remove('active');
 		search_input.classList.add('inactive');
+
+		search_submit.style.zIndex = '-1';
 
 		setTimeout(function(){
 			search_input_div.style.opacity = 0;

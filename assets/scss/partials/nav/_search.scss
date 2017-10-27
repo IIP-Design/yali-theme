@@ -96,6 +96,17 @@
           border-bottom-right-radius: 3px;
         }            
       }
+
+      #searchsubmit {
+        position: absolute;
+        z-index: -1;
+        width: 100%;
+        height: 100%;
+        opacity: 0; 
+        @media screen and (max-width: 933px) {
+          z-index: 2 !important;
+        }
+      }
     }
 
 
