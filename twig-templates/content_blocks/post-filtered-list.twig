@@ -10,15 +10,27 @@
       <div class="cb_dropdown cb-cdp-filters" data-target="{{ selector }}">
       {% for filter in filters %}
         {% if filter == 'sort' %}
-          <select name="sort" multiple="" class="ui dropdown" aria-label="sort">
-            <option value="">Sort By</option>
-            <option value="recent">Most Recent</option>
-            <option value="recent">A-Z</option>
-          </select>
+          <div id="{{ filter }}" class="ui dropdown single fluid">
+            <input type="hidden" name="{{ filter }}" value="recent">
+            <div class="default text">Sort by</div>
+            <i class="dropdown icon"></i>
+            <div class="menu">
+              <div class="item" data-value="recent">Most Recent</div>
+              <div class="item" data-value="az">A-Z</div>
+            </div>
+          </div>
         {% else %}
-         <select name="{{ filter }}" multiple="" class="ui loading dropdown" aria-label="{{ filter }}">
-            <option value="">{{ filter |capitalize }}</option>
-          </select>
+          <div id="{{ filter }}" class="ui dropdown multiple loading fluid scrolling">
+            <input type="hidden" name="{{ filter }}">
+            <div class="default text">{{ filter |capitalize }}</div>
+            <i class="dropdown icon"></i>
+            <div class="menu">
+              {# <div class="ui icon search input">
+                <i class="search icon"></i>
+                <input type="text" placeholder="Search {{ filter }}...">
+              </div> #}
+            </div>
+          </div>
         {% endif %}
       {% endfor %}
       </div>

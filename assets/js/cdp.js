@@ -1,11 +1,27 @@
 import * as query from './query';
 
+var $;
 var cdpFilterFeedConfig = cdpFilterFeedConfig || {};
+var filterHash = {
+  'type': 'types',
+  'subject': 'categories',
+  'language': 'langs',
+  'series': 'series'
+}
 
 function initializeFilters() {
-  let filters = document.querySelectorAll('.cb-cdp-filters select');
+  // @todo need loop thru .cb-cdp-filters if mulitple filter menus are added to the page
+  let filters = document.querySelectorAll('.cb-cdp-filters div.ui.dropdown'); 
+  
+  let config = {
+    useLabels: false,
+    onChange: function( value, text, selectedItem ) {
+      updateFeed();
+    }
+  }
+  
   forEach(filters, function(index, filter) {
-    switch ( filter.name ) {
+    switch ( filter.id ) {
       case 'type':
         query.getTypes( filter, addOptions );
       break;
@@ -21,18 +37,53 @@ function initializeFilters() {
       case 'language':
         query.getLanguages( filter, addOptions );
       break;
-
-      case 'sort':
-      break;
     }
+
+    $( filter ).dropdown( config );
   });
 
   // if filters then init list
-  displayFilterFeed();
-  enableFilterButton();
+  addAllFeeds();
+  enableFeedButton();
 }
 
-function displayFilterFeed() {
+function updateFeed() {
+  let dropdown = document.querySelector('.cb-cdp-filters');
+  let target = dropdown.dataset.target;
+  if( target ) {
+    let config = cdpFilterFeedConfig[target];
+    if( config ) {
+      let filters = dropdown.querySelectorAll('div.ui.dropdown input');
+      forEach(filters, function(index, filter) {
+        if( filter.name !== 'sort' ) {
+          config[filterHash[filter.name]] = filter.value;
+        }
+      });
+
+      removeFeed( target );
+      addFeed( config );
+      // addFeed({
+      //   selector: config.selector,
+      //   ui: config.ui,
+      //   query: query.builder(config)
+      // });
+    }
+  }
+}
+
+function removeFeed( feed ) {
+  $(`#${feed}`).empty();
+}
+
+function addFeed( config ) {
+  try {
+    CDP.widgets.ArticleFeed.new( config ).render();
+  } catch( err ) {
+    console.log('Unable to article feed: ' + err.message)
+  }
+}
+
+function addAllFeeds() {
   let filteredFeed = document.querySelectorAll(
     "[data-content-type='cdp-filtered-list']"
   );
@@ -42,33 +93,40 @@ function displayFilterFeed() {
       selector: `#${feed.id}`,
       sites: cdp.searchIndexes,  
       from: 0,
-      size: 9,
+      size: 12,
       types: '',
       langs: '',
       tags: '',
       categories: '',
+      meta: ['date'],
       ui: { openLinkInNewWin: 'no' }
     };
 
-    try {
-      CDP.widgets.ArticleFeed.new( cdpFilterFeedConfig[feed.id] ).render();
-    } catch( err ) {
-      console.log('Unable to article feed: ' + err.message)
+    addFeed( cdpFilterFeedConfig[feed.id] );
+  });
+}
+
+function enableFeedButton() {
+  let filteredFeed = document.querySelectorAll("[data-content-type='cdp-filtered-list']");
+  forEach(filteredFeed, function(index, feed) {
+    let btnId = `btn-${feed.id}`;
+    let btn = document.getElementById(btnId);
+    if( btn ) {
+      btn.addEventListener('click', feedButtonOnClick, false);
     }
   });
 }
 
-function enableFilterButton() {
-  let filteredFeed = document.querySelectorAll("[data-content-type='cdp-filtered-list']");
-  forEach(filteredFeed, function(index, feed) {
-    let btn = `btn-${feed.id}`;
-    document.getElementById(btn).addEventListener('click', addToList, false);
-  });
-}
-
-function addToList(e) {
-  console.log(e.currentTarget)
-  console.log('button clicked')
+function feedButtonOnClick(e) {
+  let btn = e.currentTarget;
+  if( btn.id ) {
+    let id = btn.id.replace( 'btn-', '' );
+    console.log(id)
+    let div = document.getElementById( id );
+    if( div ) {
+      console.log(div)
+    }
+  }
 }
 
 /**
@@ -78,19 +136,21 @@ function addToList(e) {
  * @param {*} options  options data
  */
 function addOptions( select, options ) {
-  if( options ) {
+  let menu = select.querySelector('.menu');
+  if( menu && options ) {
     var fragment = document.createDocumentFragment();
     options.forEach(function(option) {
-        var el = document.createElement('option');
-        el.value = option.key;
-        el.textContent = option.display;
+        var el = document.createElement('div');
+        el.className = 'item';
+        el.dataset.value = option.key;
+        el.innerHTML = `<i class='checkmark icon'></i>${ option.display }`;
         fragment.appendChild(el);
     });
-    
-    select.appendChild(fragment);
+    menu.appendChild(fragment);
   }
-  select.parentNode.classList.remove('loading');
+  select.classList.remove('loading');
 }
+
 
 /**
  * Render all article feeds to the page if
@@ -115,37 +175,32 @@ function initializeArticleFeed() {
  */
 function renderArticleFeed( feed ) {
   let config = cdpFeedConfig[feed.id];
+  let configObj = {
+    selector: `#${feed.id}`,
+    sites: config.indexes,  // need to have a default
+    size: config.numPosts,
+    types: '',
+    ids: config.ids,
+    langs: '',
+    tags: '',
+    categories: config.categories,
+    meta: config.postMeta,
+    ui: {
+      layout: config.uiLayout,
+      direction: config.uiDirection,
+      openLinkInNewWin: 'no',
+      image: {
+        shape: config.image['image-shape'],
+        width:  config.image['image-height'],
+        borderWidth: config.image['image-border-width'],
+        borderColor: config.image['image-border-color'],
+        borderStyle: config.image['image-border-style']
+      }
+    }
+  }
 
   shouldDisplayRelatedLinks( config );
-
-  try {
-    CDP.widgets.ArticleFeed.new({
-      selector: `#${feed.id}`,
-      sites: config.indexes,  // need to have a default
-      size: config.numPosts,
-      types: '',
-      ids: config.ids,
-      langs: '',
-      tags: '',
-      categories: config.categories,
-      meta: config.postMeta,
-      ui: {
-        layout: config.uiLayout,
-        direction: config.uiDirection,
-        openLinkInNewWin: 'no',
-        image: {
-          shape: config.image['image-shape'],
-          width:  config.image['image-height'],
-          borderWidth: config.image['image-border-width'],
-          borderColor: config.image['image-border-color'],
-          borderStyle: config.image['image-border-style']
-        }
-      }
-    }).render();
-
-  } catch (err) {
-    console.log('Unable to article feed: ' + err.message)
-  }
+  addFeed( configObj );
 }
 
 /**
@@ -241,7 +296,8 @@ const forEach = function(array, callback, scope) {
   }
 };
 
-export function init() {
+export function init( jQuery ) {
+  $ = jQuery;
   initializeFilters();
   initializeArticleFeed();
 }

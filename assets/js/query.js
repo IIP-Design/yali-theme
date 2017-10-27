@@ -5,8 +5,9 @@ import axios from 'axios';
 // https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-terms-aggregation.html
 
 const API = ( cdp.publicAPI ) ? cdp.publicAPI : 'https://api.america.gov/v1/search';  
-const INDEXES = (cdp.searchIndexes) ? fetchIndexes(cdp.searchIndexes) : 'yali.dev.america.gov';
+const INDEXES = (cdp.searchIndexes) ? fetchArray(cdp.searchIndexes) : 'yali.dev.america.gov';
 
+// Populate dropdown filters
 export function getTypes( select, cb ) { 
   axios.post( API, {
     body: bodybuilder()
@@ -14,8 +15,7 @@ export function getTypes( select, cb ) {
       .query('terms', 'site', INDEXES )
       .agg('terms', 'type.keyword', {  
         'size': 50, 
-        'order': { '_term' : 'asc' }  }, 'type'
-      )
+        'order': { '_term' : 'asc' }  }, 'type')
       .build(),
   }).then( (response) => {
     let data = formatResponse( response, 'type' ) 
@@ -50,8 +50,7 @@ export function getSeries( select, cb ) {
       .agg( 'terms', 'taxonomies.series.name.keyword', { 
         'size': 1000,  
         'order': { '_term' : 'asc' } 
-      }, 
-      'distinct_series')
+        }, 'distinct_series')
       .build(),
   }).then( (response) => {
     let data = formatResponse( response, 'distinct_series' );
@@ -79,6 +78,35 @@ export function getLanguages( select, cb ) {
 
 }
 
+export function builder ( params )  {
+  let body = new bodybuilder();
+
+  INDEXES.forEach( (item) => {
+    body.orFilter('term', 'site', item )
+  });
+
+  // becomes a MUST if there is only 1 site
+  body.filterMinimumShouldMatch(1)  
+  
+  let qry = [];
+  qry.push( ...appendArray(params.langs, 'language.locale') );
+  qry.push( ...appendArray(params.categories, 'categories.name') );
+  qry.push( ...appendArray(params.tags, 'tags.name') );
+  qry.push( ...appendArray(params.types, 'type') );
+   
+  let qryStr  = reduceArray( qry );
+  body.query( 'query_string', 'query', qryStr );
+ 
+  body.from( params.from ); 
+  body.size( params.size ); 
+  
+  body.sort( 'published', 'desc' )
+
+  return body.build();
+};
+
+
+// Helpers
 function formatResponse( response, type ) {
   if( !response.data.aggregations[type] ) { return null; }
 
@@ -96,7 +124,6 @@ function formatResponse( response, type ) {
   });
 }
 
-// Helpers
 function getDisplayName( bucket ) {
   let display = bucket.display;
   if( display &&  display.buckets && display.buckets[0] && display.buckets[0].key ) {
@@ -106,10 +133,29 @@ function getDisplayName( bucket ) {
   }
  }
 
-function capitalize(string) {
+
+ function capitalize(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-function fetchIndexes( str ) {
-  return str.split(',').map( item => item.trim() );
+function fetchArray( str ) {
+  return str.split(',').filter( item => item.trim() ).map( item => item );
+}
+
+function appendArray ( val, field )  {
+  let items = ( typeof val == 'string') ? fetchArray( val ) : val;
+  return items.map( item => `${field}: ${item}` );
+}
+
+function reduceArray ( qry )  {
+ let qryStr = qry.reduce((acc, value, index, arr) => {
+   if (index === (arr.length - 1)) {
+     acc += value;
+   } else {
+     acc += `${value} AND `;
+   }
+   return acc;
+ }, '');
+
+ return qryStr;
 }

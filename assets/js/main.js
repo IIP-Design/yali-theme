@@ -18,7 +18,7 @@ import scroll_to_elem from './scrollTo';
   join_form.init();
   search.init();  
   dropdown_filter.init();
-  cdp.init();
+  cdp.init($);
   responsiveImages.init();
 
   // Init Accordions

@@ -1,5 +1,16 @@
+$filter-bp: 890px; //50em;
+
+// @todo - put all article feed styles in one scss partial
+.article-no-results{
+  font-size: 1rem;
+
+  @include bp($filter-bp) {
+    font-size: 1.2rem;
+  }
+}
+
 .cb {
-	padding-top: em(50);
+	padding-top: em(49em);
   padding-bottom: em(50);  
 
   .item-link {
@@ -45,52 +56,80 @@
     padding-bottom: .2em;
   }
 
+  .cb-nowrap {
+    white-space: nowrap;
+  }
+
   .cb_dropdown {
     display: flex;
+    flex-wrap: wrap;
 
-    .ui.dropdown .menu {
-      background-color: $blue-medium;
-      border: 1px solid $blue-medium;
-      opacity: .85;
-      left: -3px;
-      width: calc(100% + 8px);
+    @include bp($filter-bp) {
+      flex-wrap: nowrap;
     }
     
-    .ui.dropdown.selection {  
-      flex: 1;
-      min-width: auto;
+    .ui.dropdown {
       border: 5px solid $blue-navy;
-      border-radius: 0;
+      padding-left: 10px;
+      padding-right: 10px;
       margin-right: 5px;
+      margin-bottom: 5px;
+      font-size: 1.2rem;
 
-      &:hover {
+      .text { 
+        color: $blue-navy; 
+        margin-left: 0;
+      }
+
+      .icon {
+        margin-top: .8em;
+      }
+
+      .menu {
         background-color: $blue-medium;
-        border: 5px solid $blue-medium;
-        
-        .dropdown.icon, .default.text {
+        border: 1px solid $blue-medium;
+        border-radius: 0;
+        opacity: .95; 
+        left: -5px;
+        right: -5px;
+        width: 100%;
+      
+
+        @include bp($filter-bp) {
+           width: calc(100% + 8px);
+           right: auto;
+           opacity: .85; 
+        } 
+
+        > .item {
           color: #fff;
+          border: none;
+          border-top: 1px solid transparent; 
+
+          i {
+            visibility: hidden;
+          }
+
+          &.active i {
+            visibility: visible;
+          }
         }
       }
 
-      .menu >.item {
+      &:hover {
+        border: 5px solid $blue-medium;
+        background-color: $blue-medium;
         color: #fff;
-        border: none;
-        border-top: 1px solid transparent; 
-      }
-    
-      a.ui.label {
-        font-size: .7em;
-        font-weight: 400;
+        .text { color: #fff; }
       }
 
-      .default.text {
-        color: $blue-navy;
-        font-weight: 300;
+      &.single {
+        padding: 0.22619048em 10px 0.22619048em 10px;
+        
+        .text { 
+         margin: 0.45238095em 0 0.45238095em 0;
+        }
       }
     }
-    
   }
-
-  
-  
 }
