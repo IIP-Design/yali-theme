@@ -214,12 +214,13 @@ function renderArticleFeed( feed ) {
  */
 function shouldDisplayRelatedLinks( config ) {
   const { selectBy, ids, relatedPosts } = config;
-
   if ( selectBy === 'custom' ) {
     if ( Array.isArray(ids) && Array.isArray(relatedPosts) ) {
+     console.log('adding listener')
       if (ids.length && relatedPosts.length) {
         // react component dispatches custom 'onReadyFeed' after articles are added to the DOM
         window.addEventListener('onReadyFeed', function(e) { 
+          console.log('on ready feed')
           var list = document.querySelector( e.detail );
           if(list) {
             var items = list.getElementsByClassName('article-item');

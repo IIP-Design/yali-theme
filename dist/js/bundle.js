@@ -78,12 +78,28 @@ var query = _interopRequireWildcard(_query);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
+var $;
 var cdpFilterFeedConfig = cdpFilterFeedConfig || {};
+var filterHash = {
+  'type': 'types',
+  'subject': 'categories',
+  'language': 'langs',
+  'series': 'series'
+};
 
 function initializeFilters() {
-  var filters = document.querySelectorAll('.cb-cdp-filters select');
+  // @todo need loop thru .cb-cdp-filters if mulitple filter menus are added to the page
+  var filters = document.querySelectorAll('.cb-cdp-filters div.ui.dropdown');
+
+  var config = {
+    useLabels: false,
+    onChange: function onChange(value, text, selectedItem) {
+      updateFeed();
+    }
+  };
+
   forEach(filters, function (index, filter) {
-    switch (filter.name) {
+    switch (filter.id) {
       case 'type':
         query.getTypes(filter, addOptions);
         break;
@@ -99,18 +115,53 @@ function initializeFilters() {
       case 'language':
         query.getLanguages(filter, addOptions);
         break;
-
-      case 'sort':
-        break;
     }
+
+    $(filter).dropdown(config);
   });
 
   // if filters then init list
-  displayFilterFeed();
-  enableFilterButton();
+  addAllFeeds();
+  enableFeedButton();
 }
 
-function displayFilterFeed() {
+function updateFeed() {
+  var dropdown = document.querySelector('.cb-cdp-filters');
+  var target = dropdown.dataset.target;
+  if (target) {
+    var config = cdpFilterFeedConfig[target];
+    if (config) {
+      var filters = dropdown.querySelectorAll('div.ui.dropdown input');
+      forEach(filters, function (index, filter) {
+        if (filter.name !== 'sort') {
+          config[filterHash[filter.name]] = filter.value;
+        }
+      });
+
+      removeFeed(target);
+      addFeed(config);
+      // addFeed({
+      //   selector: config.selector,
+      //   ui: config.ui,
+      //   query: query.builder(config)
+      // });
+    }
+  }
+}
+
+function removeFeed(feed) {
+  $('#' + feed).empty();
+}
+
+function addFeed(config) {
+  try {
+    CDP.widgets.ArticleFeed.new(config).render();
+  } catch (err) {
+    console.log('Unable to article feed: ' + err.message);
+  }
+}
+
+function addAllFeeds() {
   var filteredFeed = document.querySelectorAll("[data-content-type='cdp-filtered-list']");
 
   forEach(filteredFeed, function (index, feed) {
@@ -118,33 +169,40 @@ function displayFilterFeed() {
       selector: '#' + feed.id,
       sites: cdp.searchIndexes,
       from: 0,
-      size: 9,
+      size: 12,
       types: '',
       langs: '',
       tags: '',
       categories: '',
+      meta: ['date'],
       ui: { openLinkInNewWin: 'no' }
     };
 
-    try {
-      CDP.widgets.ArticleFeed.new(cdpFilterFeedConfig[feed.id]).render();
-    } catch (err) {
-      console.log('Unable to article feed: ' + err.message);
+    addFeed(cdpFilterFeedConfig[feed.id]);
+  });
+}
+
+function enableFeedButton() {
+  var filteredFeed = document.querySelectorAll("[data-content-type='cdp-filtered-list']");
+  forEach(filteredFeed, function (index, feed) {
+    var btnId = 'btn-' + feed.id;
+    var btn = document.getElementById(btnId);
+    if (btn) {
+      btn.addEventListener('click', feedButtonOnClick, false);
     }
   });
 }
 
-function enableFilterButton() {
-  var filteredFeed = document.querySelectorAll("[data-content-type='cdp-filtered-list']");
-  forEach(filteredFeed, function (index, feed) {
-    var btn = 'btn-' + feed.id;
-    document.getElementById(btn).addEventListener('click', addToList, false);
-  });
-}
-
-function addToList(e) {
-  console.log(e.currentTarget);
-  console.log('button clicked');
+function feedButtonOnClick(e) {
+  var btn = e.currentTarget;
+  if (btn.id) {
+    var id = btn.id.replace('btn-', '');
+    console.log(id);
+    var div = document.getElementById(id);
+    if (div) {
+      console.log(div);
+    }
+  }
 }
 
 /**
@@ -154,18 +212,19 @@ function addToList(e) {
  * @param {*} options  options data
  */
 function addOptions(select, options) {
-  if (options) {
+  var menu = select.querySelector('.menu');
+  if (menu && options) {
     var fragment = document.createDocumentFragment();
     options.forEach(function (option) {
-      var el = document.createElement('option');
-      el.value = option.key;
-      el.textContent = option.display;
+      var el = document.createElement('div');
+      el.className = 'item';
+      el.dataset.value = option.key;
+      el.innerHTML = '<i class=\'checkmark icon\'></i>' + option.display;
       fragment.appendChild(el);
     });
-
-    select.appendChild(fragment);
+    menu.appendChild(fragment);
   }
-  select.parentNode.classList.remove('loading');
+  select.classList.remove('loading');
 }
 
 /**
@@ -189,36 +248,32 @@ function initializeArticleFeed() {
  */
 function renderArticleFeed(feed) {
   var config = cdpFeedConfig[feed.id];
+  var configObj = {
+    selector: '#' + feed.id,
+    sites: config.indexes, // need to have a default
+    size: config.numPosts,
+    types: '',
+    ids: config.ids,
+    langs: '',
+    tags: '',
+    categories: config.categories,
+    meta: config.postMeta,
+    ui: {
+      layout: config.uiLayout,
+      direction: config.uiDirection,
+      openLinkInNewWin: 'no',
+      image: {
+        shape: config.image['image-shape'],
+        width: config.image['image-height'],
+        borderWidth: config.image['image-border-width'],
+        borderColor: config.image['image-border-color'],
+        borderStyle: config.image['image-border-style']
+      }
+    }
+  };
 
   shouldDisplayRelatedLinks(config);
-
-  try {
-    CDP.widgets.ArticleFeed.new({
-      selector: '#' + feed.id,
-      sites: config.indexes, // need to have a default
-      size: config.numPosts,
-      types: '',
-      ids: config.ids,
-      langs: '',
-      tags: '',
-      categories: config.categories,
-      meta: config.postMeta,
-      ui: {
-        layout: config.uiLayout,
-        direction: config.uiDirection,
-        openLinkInNewWin: 'no',
-        image: {
-          shape: config.image['image-shape'],
-          width: config.image['image-height'],
-          borderWidth: config.image['image-border-width'],
-          borderColor: config.image['image-border-color'],
-          borderStyle: config.image['image-border-style']
-        }
-      }
-    }).render();
-  } catch (err) {
-    console.log('Unable to article feed: ' + err.message);
-  }
+  addFeed(configObj);
 }
 
 /**
@@ -235,12 +290,13 @@ function shouldDisplayRelatedLinks(config) {
       ids = config.ids,
       relatedPosts = config.relatedPosts;
 
-
   if (selectBy === 'custom') {
     if (Array.isArray(ids) && Array.isArray(relatedPosts)) {
+      console.log('adding listener');
       if (ids.length && relatedPosts.length) {
         // react component dispatches custom 'onReadyFeed' after articles are added to the DOM
         window.addEventListener('onReadyFeed', function (e) {
+          console.log('on ready feed');
           var list = document.querySelector(e.detail);
           if (list) {
             var items = list.getElementsByClassName('article-item');
@@ -320,7 +376,8 @@ var forEach = function forEach(array, callback, scope) {
   }
 };
 
-function init() {
+function init(jQuery) {
+  $ = jQuery;
   initializeFilters();
   initializeArticleFeed();
 }
@@ -800,7 +857,7 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
   join_form.init();
   search.init();
   dropdown_filter.init();
-  cdp.init();
+  cdp.init($);
   responsiveImages.init();
 
   // Init Accordions
@@ -1061,6 +1118,7 @@ exports.getTypes = getTypes;
 exports.getCategories = getCategories;
 exports.getSeries = getSeries;
 exports.getLanguages = getLanguages;
+exports.builder = builder;
 
 var _bodybuilder = require('bodybuilder');
 
@@ -1072,12 +1130,15 @@ var _axios2 = _interopRequireDefault(_axios);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
 // NOTE: using ElasticSearch terms aggregations to find distinct values
 // https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-terms-aggregation.html
 
 var API = cdp.publicAPI ? cdp.publicAPI : 'https://api.america.gov/v1/search';
-var INDEXES = cdp.searchIndexes ? fetchIndexes(cdp.searchIndexes) : 'yali.dev.america.gov';
+var INDEXES = cdp.searchIndexes ? fetchArray(cdp.searchIndexes) : 'yali.dev.america.gov';
 
+// Populate dropdown filters
 function getTypes(select, cb) {
   _axios2.default.post(API, {
     body: (0, _bodybuilder2.default)().size(0).query('terms', 'site', INDEXES).agg('terms', 'type.keyword', {
@@ -1129,6 +1190,34 @@ function getLanguages(select, cb) {
   });
 }
 
+function builder(params) {
+  var body = new _bodybuilder2.default();
+
+  INDEXES.forEach(function (item) {
+    body.orFilter('term', 'site', item);
+  });
+
+  // becomes a MUST if there is only 1 site
+  body.filterMinimumShouldMatch(1);
+
+  var qry = [];
+  qry.push.apply(qry, _toConsumableArray(appendArray(params.langs, 'language.locale')));
+  qry.push.apply(qry, _toConsumableArray(appendArray(params.categories, 'categories.name')));
+  qry.push.apply(qry, _toConsumableArray(appendArray(params.tags, 'tags.name')));
+  qry.push.apply(qry, _toConsumableArray(appendArray(params.types, 'type')));
+
+  var qryStr = reduceArray(qry);
+  body.query('query_string', 'query', qryStr);
+
+  body.from(params.from);
+  body.size(params.size);
+
+  body.sort('published', 'desc');
+
+  return body.build();
+};
+
+// Helpers
 function formatResponse(response, type) {
   if (!response.data.aggregations[type]) {
     return null;
@@ -1152,7 +1241,6 @@ function formatResponse(response, type) {
   });
 }
 
-// Helpers
 function getDisplayName(bucket) {
   var display = bucket.display;
   if (display && display.buckets && display.buckets[0] && display.buckets[0].key) {
@@ -1166,10 +1254,32 @@ function capitalize(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-function fetchIndexes(str) {
-  return str.split(',').map(function (item) {
+function fetchArray(str) {
+  return str.split(',').filter(function (item) {
     return item.trim();
+  }).map(function (item) {
+    return item;
   });
+}
+
+function appendArray(val, field) {
+  var items = typeof val == 'string' ? fetchArray(val) : val;
+  return items.map(function (item) {
+    return field + ': ' + item;
+  });
+}
+
+function reduceArray(qry) {
+  var qryStr = qry.reduce(function (acc, value, index, arr) {
+    if (index === arr.length - 1) {
+      acc += value;
+    } else {
+      acc += value + ' AND ';
+    }
+    return acc;
+  }, '');
+
+  return qryStr;
 }
 
 },{"axios":20,"bodybuilder":47}],14:[function(require,module,exports){
