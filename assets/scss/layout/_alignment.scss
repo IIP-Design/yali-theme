@@ -1,3 +1,15 @@
 .center_content {
 	text-align: center;
 }
+
+/*------------------------------------*\
+  #		IMAGES ALIGNMENTS
+\*------------------------------------*/
+
+.alignleft   { float: left; }
+.alignright  { float: right; }
+.aligncenter { display: block; margin-left: auto; margin-right: auto; }
+
+img.alignleft   { margin: 12px 24px 12px 0; }
+img.alignright  { margin: 12px 0 12px 24px; }
+img.aligncenter { margin-top: 12px; margin-bottom: 12px; }
