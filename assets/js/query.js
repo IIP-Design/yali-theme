@@ -79,29 +79,65 @@ export function getLanguages( select, cb ) {
 }
 
 export function builder ( params )  {
-  let body = new bodybuilder();
+  let config = {
+    meta: params.meta,
+    selector: params.selector,
+    ui: params.ui,
+    query: generateBodyQry({
+      sites: INDEXES,
+      langs: params.langs,
+      categories: params.categories,
+      types: params.types,
+      series: params.series,
+      from: params.from,
+      size: params.size,
+    })
+  }
 
-  INDEXES.forEach( (item) => {
+  return config;
+}
+
+export const generateBodyQry = ( params ) => {
+  let body = new bodybuilder();
+  let qry = [];
+
+  params.sites.forEach( (item) => {
     body.orFilter('term', 'site', item )
   });
 
   // becomes a MUST if there is only 1 site
   body.filterMinimumShouldMatch(1)  
-  
-  let qry = [];
-  qry.push( ...appendArray(params.langs, 'language.locale') );
-  qry.push( ...appendArray(params.categories, 'categories.name') );
-  qry.push( ...appendArray(params.tags, 'tags.name') );
-  qry.push( ...appendArray(params.types, 'type') );
-   
-  let qryStr  = reduceArray( qry );
-  body.query( 'query_string', 'query', qryStr );
- 
+
+  if ( params.series ) {
+    body.filter('term', 'taxonomies.series.name.keyword', params.series ) // need exact match
+  }
+
+  if ( params.langs ) {
+    qry.push( ...appendQry(params.langs, 'language.locale') );
+  }
+
+  if ( params.categories ) {
+    qry.push( ...appendQry(params.categories, 'categories.name') );
+  }
+
+  if ( params.types ) {
+    qry.push( ...appendQry(params.types, 'type') );
+  }
+
+  let qryStr  = reduceQry( qry );
+  if( qryStr.trim() !== '' ) {
+    body.query( 'query_string', 'query', qryStr );
+  }
+
   body.from( params.from ); 
   body.size( params.size ); 
   
-  body.sort( 'published', 'desc' )
-
+  if( params.sort === 'recent' ) {
+    body.sort( 'published', 'desc' );
+  } else {
+    body.sort( 'title.keyword', 'asc' );
+  }
+ 
   return body.build();
 };
 
@@ -142,20 +178,20 @@ function fetchArray( str ) {
   return str.split(',').filter( item => item.trim() ).map( item => item );
 }
 
-function appendArray ( val, field )  {
-  let items = ( typeof val == 'string') ? fetchArray( val ) : val;
-  return items.map( item => `${field}: ${item}` );
+const appendQry = ( str, field ) => {
+   let items = fetchArray( str );
+   return items.map( item => `${field}: ${item}` );
 }
+ 
+const reduceQry = ( qry ) => {
+  let qryStr = qry.reduce((acc, value, index, arr) => {
+    if (index === (arr.length - 1)) {
+      acc += value;
+    } else {
+      acc += `${value} AND `;
+    }
+    return acc;
+  }, '');
 
-function reduceArray ( qry )  {
- let qryStr = qry.reduce((acc, value, index, arr) => {
-   if (index === (arr.length - 1)) {
-     acc += value;
-   } else {
-     acc += `${value} AND `;
-   }
-   return acc;
- }, '');
-
- return qryStr;
+  return qryStr;
 }

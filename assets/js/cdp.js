@@ -6,20 +6,52 @@ var filterHash = {
   'type': 'types',
   'subject': 'categories',
   'language': 'langs',
-  'series': 'series'
+  'series': 'series',
+  'sort': 'sort'
 }
 
+function addOnFeedReadyHandler( id ) {
+  let el = $(`#${id}`);
+  let btn = document.querySelector(`#btn-${id}`);
+  
+  window.addEventListener('onReadyFeed', function(e) {
+    let items = el.find('.article-item');
+    el.css( 'min-height', '200px' );
+    if ( items.length ) {
+      items.addClass('animate-in').fadeIn().promise().done( () => {
+        //window.removeEventListener('onReadyFeed');
+      });
+      btn.style.visibility = 'visible';
+    } else {
+      let noResults = el.find('.article-no-results');
+      noResults.css('display', 'block');
+      btn.style.visibility = 'hidden';  // should this be hidden for non filter content blocks?
+    }
+  });
+}
+
+/**
+ * Populate dropdown filter menus.  The type of filter is found
+ * in the id attribute of the dropdown element
+ */
 function initializeFilters() {
   // @todo need loop thru .cb-cdp-filters if mulitple filter menus are added to the page
   let filters = document.querySelectorAll('.cb-cdp-filters div.ui.dropdown'); 
-  
+  if ( filters.length ) {
+    populateDropDownSelects( filters );
+    addAllFeeds();
+    enableFeedButton();
+  }
+}
+
+function populateDropDownSelects( filters ) {
   let config = {
     useLabels: false,
     onChange: function( value, text, selectedItem ) {
-      updateFeed();
+      updateFeed();  // add debounce, or do check in article feed
     }
   }
-  
+
   forEach(filters, function(index, filter) {
     switch ( filter.id ) {
       case 'type':
@@ -27,7 +59,7 @@ function initializeFilters() {
       break;
 
       case 'subject':
-       query.getCategories( filter, addOptions );
+      query.getCategories( filter, addOptions );
       break;
 
       case 'series':
@@ -41,12 +73,11 @@ function initializeFilters() {
 
     $( filter ).dropdown( config );
   });
-
-  // if filters then init list
-  addAllFeeds();
-  enableFeedButton();
 }
 
+/**
+ * update the feed when a filter changes
+ */
 function updateFeed() {
   let dropdown = document.querySelector('.cb-cdp-filters');
   let target = dropdown.dataset.target;
@@ -55,26 +86,32 @@ function updateFeed() {
     if( config ) {
       let filters = dropdown.querySelectorAll('div.ui.dropdown input');
       forEach(filters, function(index, filter) {
-        if( filter.name !== 'sort' ) {
-          config[filterHash[filter.name]] = filter.value;
-        }
+        config[filterHash[filter.name]] = filter.value;
       });
-
-      removeFeed( target );
-      addFeed( config );
-      // addFeed({
-      //   selector: config.selector,
-      //   ui: config.ui,
-      //   query: query.builder(config)
-      // });
+     
+      removeFeed( target, config );
     }
   }
 }
 
-function removeFeed( feed ) {
-  $(`#${feed}`).empty();
+/**
+ * Remove feed list from the DOM
+ * @param {string} feed DOM id of parant containing feed list
+ */
+function removeFeed( feed, config ) {
+  let el = $(`#${feed}`);
+  let items = el.find('.article-item');
+  el.css('min-height', el.height() );
+  items.addClass('animate-out').promise().done(function() {
+    el.empty();
+    addFeed( query.builder(config) );
+  });
 }
 
+/**
+ * Add a feed
+ * @param {Object} config Configuration object that is sent to feed widget
+ */
 function addFeed( config ) {
   try {
     CDP.widgets.ArticleFeed.new( config ).render();
@@ -94,14 +131,16 @@ function addAllFeeds() {
       sites: cdp.searchIndexes,  
       from: 0,
       size: 12,
+      sort: 'recent',
       types: '',
       langs: '',
-      tags: '',
+      series: '',
       categories: '',
       meta: ['date'],
       ui: { openLinkInNewWin: 'no' }
     };
-
+    
+    addOnFeedReadyHandler( feed.id );
     addFeed( cdpFilterFeedConfig[feed.id] );
   });
 }
@@ -167,7 +206,7 @@ function initializeArticleFeed() {
 
 /**
  * Render a specific article feed to the page
- * The post-list.twig file passess configuration props to the 
+ * The post-list.twig file passess php configuration props to the 
  * feed widget via the cdpFeedConfig object declared in that page
  * cdpFeedConfig is a hash which stores each article feed config by its feed id
  * 
@@ -203,6 +242,18 @@ function renderArticleFeed( feed ) {
   addFeed( configObj );
 }
 
+function addRelatedLinksToArticle(e, config) {
+  var list = document.querySelector( e.detail );
+  if(list) {
+    var items = list.getElementsByClassName('article-item');
+    if ( items.length ) { 
+      forEach(items, function(index, item) {
+        lookUpItem( item, config );
+      });
+    }
+  }
+}
+
 /**
  * Determines whether a related link should be added to each article
  * by checking to see if there are relatedPosts.  If there is
@@ -216,20 +267,10 @@ function shouldDisplayRelatedLinks( config ) {
   const { selectBy, ids, relatedPosts } = config;
   if ( selectBy === 'custom' ) {
     if ( Array.isArray(ids) && Array.isArray(relatedPosts) ) {
-     console.log('adding listener')
       if (ids.length && relatedPosts.length) {
         // react component dispatches custom 'onReadyFeed' after articles are added to the DOM
-        window.addEventListener('onReadyFeed', function(e) { 
-          console.log('on ready feed')
-          var list = document.querySelector( e.detail );
-          if(list) {
-            var items = list.getElementsByClassName('article-item');
-            if ( items.length ) { 
-              forEach(items, function(index, item) {
-                lookUpItem( item, config );
-              });
-            }
-          }
+        window.addEventListener('onReadyFeed', function(e) {
+          addRelatedLinksToArticle(e, config )
         });
       }
     }

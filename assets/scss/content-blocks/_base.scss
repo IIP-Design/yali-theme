@@ -1,7 +1,8 @@
 $filter-bp: 890px; //50em;
 
 // @todo - put all article feed styles in one scss partial
-.article-no-results{
+.article-no-results {
+  display: none;
   font-size: 1rem;
 
   @include bp($filter-bp) {
@@ -132,4 +133,31 @@ $filter-bp: 890px; //50em;
       }
     }
   }
+}
+
+/* Animations */
+@keyframes zoom-in {
+  0% {
+   transform: scale(.1);
+  }
+  100% {
+    transform: none;
+  }
+}
+
+@keyframes zoom-out {
+  0% {
+   transform: none;
+  }
+  100% {
+    transform: scale(.1);
+  }
+}
+
+.animate-in {
+  animation: .2s zoom-in;
+}
+
+.animate-out {
+  animation: .2s zoom-out;
 }
