@@ -5,12 +5,12 @@
 {% set series_name = (post_data.post_series_names is not empty) ? post_data.post_series_names[0].name : '' %}
 
 {% if header_url is not empty %}
-<section 
-	class='hero {% if header_url is not empty %}hero--bg_img{% endif %}' 
+<section
+	class='hero {% if header_url is not empty %}hero--bg_img{% endif %}'
 	{% if header_url is not empty %}style='background-image: url("{{ header_url }}"); background-size: cover;'{% endif %}
 >
 	<div class='hero-inner bottom_padd bottom_padd--thick'>
-		<div class='hero-content ui container'>			
+		<div class='hero-content ui container'>
 			<h2 class='hero-h1'>{{ post_data.post_series_names[0].taxonomy }}:</h2>
 			<h1>{{ post_data.post_series_names[0].name }}</h1>
 			<p>{{ post_data.post_series_names[0].description }}</p>
@@ -19,29 +19,29 @@
 </section>
 {% endif %}
 
-<section class='ui container'>	
-	<h2 class='title-overlay_title'>{{ post_data.title.rendered }}</h2> 
+<section class='ui container'>
+	<h2 class='title-overlay_title'>{{ post_data.title.rendered }}</h2>
 	<div class='inner-container single_post'>
 		<section class='section single_post_content'>
 			<div>{{ post_data.content.rendered }}</div>
-			
-			<div class='single_post_tax'>				
-				{% for term in taxonomy_terms %}										
+
+			<div class='single_post_tax'>
+				{% for term in taxonomy_terms %}
 					{% if term.taxonomy == 'post_tag' %}
 					<p class='tax_term'>
 						<a href='/tag/{{ term.slug }}'>{{ term.name }}</a>{% if not loop.last %},{% endif %}
-					</p>					
+					</p>
 					{% else %}
 					<p class='tax_term'>
 						<a href='/{{ term.taxonomy }}/{{ term.slug }}'>{{ term.name }}</a>{% if not loop.last %},{% endif %}
-					</p>					
+					</p>
 					{% endif %}
-				{% endfor %}			
+				{% endfor %}
 			</div>
-			
+
 			<h4 class='archive_link'>
-				<a 
-					class='cta_link' 
+				<a
+					class='cta_link'
 					{% if series_name is not empty %}
 					href='/{{ post_data.post_series_names[0].taxonomy }}/{{ post_data.post_series_names[0].slug }}'
 					{% else %}
@@ -50,22 +50,24 @@
 					>
 					More from "{{ (series_name is not empty ? series_name : 'YALI Network in Action') }}" <i class='angle right icon'></i>
 				</a>
-			</h4>			
+			</h4>
 		</section>
 
-		{% if post_data.post_content_type_names[0].name == 'Podcast' %}		
+		{% if post_data.post_content_type_names[0].name == 'Podcast' %}
 		{{ social_block }}
 		{% endif %}
 
-		{% include 'content_blocks/post_listings_simple_filter.twig' with 
+
+{% if related_content_display == 'yes' %}
+		{% include 'content_blocks/post_listings_simple_filter.twig' with
 			{
 				title: 'Related Content',
 				show_more_block: 'true',
 				posts: [
 					{
 						link: 'http://yali.rebuild.local/wp/lorem-ipsum/',
-						headline: 'Post 1 Lorem ipsum set abet ipsum', 
-						excerpt: 'Lorem ipsum set abet ipsum Lorem ipsum set abet ipsum', 
+						headline: 'Post 1 Lorem ipsum set abet ipsum',
+						excerpt: 'Lorem ipsum set abet ipsum Lorem ipsum set abet ipsum',
 						tags: [
 							{ 'term_id': '4', name: 'tag 1', slug: 'tag-1' },
 							{ 'term_id': '5', name: 'tag 2', slug: 'lorem' },
@@ -75,8 +77,8 @@
 					},
 					{
 						link: 'http://yali.rebuild.local/wp/lorem-ipsum/',
-						headline: 'Post 2 Lorem ipsum set abet ipsum', 
-						excerpt: 'Lorem ipsum set abet ipsum Lorem ipsum set abet ipsum', 
+						headline: 'Post 2 Lorem ipsum set abet ipsum',
+						excerpt: 'Lorem ipsum set abet ipsum Lorem ipsum set abet ipsum',
 						tags: [
 							{ 'term_id': '4', name: 'tag 1', slug: 'tag-1' },
 							{ 'term_id': '5', name: 'tag 2', slug: 'lorem' },
@@ -86,8 +88,8 @@
 					},
 					{
 						link: 'http://yali.rebuild.local/wp/lorem-ipsum/',
-						headline: 'Post 3 Lorem ipsum set abet ipsum', 
-						excerpt: 'Lorem ipsum set abet ipsum Lorem ipsum set abet ipsum', 
+						headline: 'Post 3 Lorem ipsum set abet ipsum',
+						excerpt: 'Lorem ipsum set abet ipsum Lorem ipsum set abet ipsum',
 						tags: [
 							{ 'term_id': '4', name: 'tag 1', slug: 'tag-1' },
 							{ 'term_id': '5', name: 'tag 2', slug: 'lorem' },
@@ -97,8 +99,8 @@
 					},
 					{
 						link: 'http://yali.rebuild.local/wp/lorem-ipsum/',
-						headline: 'Post 4 Lorem ipsum set abet ipsum', 
-						excerpt: 'Lorem ipsum set abet ipsum Lorem ipsum set abet ipsum', 
+						headline: 'Post 4 Lorem ipsum set abet ipsum',
+						excerpt: 'Lorem ipsum set abet ipsum Lorem ipsum set abet ipsum',
 						tags: [
 							{ 'term_id': '4', name: 'tag 1', slug: 'tag-1' },
 							{ 'term_id': '5', name: 'tag 2', slug: 'lorem' },
@@ -108,8 +110,8 @@
 					},
 					{
 						link: 'http://yali.rebuild.local/wp/lorem-ipsum/',
-						headline: 'Post 5 Lorem ipsum set abet ipsum', 
-						excerpt: 'Lorem ipsum set abet ipsum Lorem ipsum set abet ipsum', 
+						headline: 'Post 5 Lorem ipsum set abet ipsum',
+						excerpt: 'Lorem ipsum set abet ipsum Lorem ipsum set abet ipsum',
 						tags: [
 							{ 'term_id': '4', name: 'tag 1', slug: 'tag-1' },
 							{ 'term_id': '5', name: 'tag 2', slug: 'lorem' },
@@ -119,8 +121,8 @@
 					},
 					{
 						link: 'http://yali.rebuild.local/wp/lorem-ipsum/',
-						headline: 'Post 6 Lorem ipsum set abet ipsum', 
-						excerpt: 'Lorem ipsum set abet ipsum Lorem ipsum set abet ipsum', 
+						headline: 'Post 6 Lorem ipsum set abet ipsum',
+						excerpt: 'Lorem ipsum set abet ipsum Lorem ipsum set abet ipsum',
 						tags: [
 							{ 'term_id': '4', name: 'tag 1', slug: 'tag-1' },
 							{ 'term_id': '5', name: 'tag 2', slug: 'lorem' },
@@ -130,8 +132,8 @@
 					},
 					{
 						link: 'http://yali.rebuild.local/wp/lorem-ipsum/',
-						headline: 'Post 7 Lorem ipsum set abet ipsum', 
-						excerpt: 'Lorem ipsum set abet ipsum Lorem ipsum set abet ipsum', 
+						headline: 'Post 7 Lorem ipsum set abet ipsum',
+						excerpt: 'Lorem ipsum set abet ipsum Lorem ipsum set abet ipsum',
 						tags: [
 							{ 'term_id': '4', name: 'tag 1', slug: 'tag-1' },
 							{ 'term_id': '5', name: 'tag 2', slug: 'lorem' },
@@ -141,8 +143,8 @@
 					},
 					{
 						link: 'http://yali.rebuild.local/wp/lorem-ipsum/',
-						headline: 'Post 8 Lorem ipsum set abet ipsum', 
-						excerpt: 'Lorem ipsum set abet ipsum Lorem ipsum set abet ipsum', 
+						headline: 'Post 8 Lorem ipsum set abet ipsum',
+						excerpt: 'Lorem ipsum set abet ipsum Lorem ipsum set abet ipsum',
 						tags: [
 							{ 'term_id': '4', name: 'tag 1', slug: 'tag-1' },
 							{ 'term_id': '5', name: 'tag 2', slug: 'lorem' },
@@ -153,7 +155,8 @@
 				]
 			}
 		%}
+	{% endif %}
 	</div>
-</section>  
+</section>
 
 {% endblock %}
