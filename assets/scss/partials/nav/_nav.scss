@@ -1,7 +1,7 @@
 .nav {
   width: 100%;
   padding: 26px;
-  color: #fff; 
+  color: #fff;
   @media screen and (max-width: 933px) {
     padding: 16px;
   }
@@ -28,21 +28,21 @@
 
   &_siteurl {
     position: relative;
-    float: left;    
+    float: left;
     @media screen and (max-width: 933px) {
       margin-top: 0;
       margin-right: 10px;
     }
 
-    &.mobile {      
+    &.mobile {
       display: inline-block;
       float: none;
     }
 
     span {
       position: absolute;
-      top: 15px;   
-      left: 35px;  
+      top: 15px;
+      left: 35px;
       transform: translateY(-50%);
       width: 335px;
       font-size: em(24);
@@ -53,7 +53,7 @@
         font-size: em(20);
       }
       @media screen and (min-width: 934px) and (max-width: 1024px) {
-        top: 13px;        
+        top: 13px;
         font-size: em(16);
       }
       @media screen and (max-width: 1024px) {
@@ -69,7 +69,7 @@
         text-decoration: none;
       }
     }
-  }  
+  }
 
 
   &_right {
@@ -77,17 +77,17 @@
     @media screen and (max-width: 933px) {
       float: none;
       vertical-align: top;
-      display: inline-block;      
+      display: inline-block;
     }
   }
 
 
-  &_join {    
+  &_join {
     display: none;
     margin: 0 15px;
     padding: 7px 23px;
     color: $blue-navy;
-    background-color: $yellow;    
+    background-color: $yellow;
     cursor: pointer;
     transition: opacity 2s ease;
 
@@ -98,21 +98,21 @@
     &--mobile {
       @media screen and (min-width: 934px) {
         display: none !important;
-      }       
+      }
 
       @media screen and (max-width: 933px) {
         position: absolute;
         left: 50%;
         transform: translateX(-50%);
         margin: 0 0 0 23px;
-      }      
+      }
 
       @media screen and (max-width: 425px) {
         margin: 0 0 0 14px;
         padding: 7px 14px;
       }
 
-      @media screen and (max-width: 470px) {
+      @media screen and (max-width: 497px) {
         margin: 0 0 0 14px;
         padding: 7px 14px;
 
@@ -121,49 +121,49 @@
         }
       }
 
-      @media screen and (max-width: 365px) {
+      @media screen and (max-width: 372px) {
 
         p {
           font-size: em(12, $mobile);
         }
       }
 
-      @media screen and (max-width: 330px) {
+      @media screen and (max-width: 337px) {
         margin: 0 0 0 10px;
-        padding: 7px 10px;        
-      }      
+        padding: 7px 10px;
+      }
     }
 
-    &--desktop {      
+    &--desktop {
       @media screen and (max-width: 933px) {
         display: none !important;
-      }            
+      }
       @media screen and (min-width: 934px) and (max-width: 1209px) {
-        margin: 0 7.5px;        
+        margin: 0 7.5px;
       }
       @media screen and (min-width: 1025px) and (max-width: 1200px) {
         p {
           font-size: em(16);
-        }        
+        }
       }
       @media screen and (min-width: 934px) and (max-width: 1024px) {
         p {
           font-size: em(14);
-        }        
+        }
       }
       @media screen and (min-width: 1201px) {
         p {
           font-size: em(18);
         }
-      }            
+      }
     }
 
     &.no_show {
       opacity: 0;
     }
 
-    &.fade_in {      
-      opacity: 1; 
+    &.fade_in {
+      opacity: 1;
     }
   }
 
