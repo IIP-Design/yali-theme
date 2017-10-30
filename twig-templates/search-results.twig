@@ -1,19 +1,29 @@
 {% extends 'base.twig' %}
 
 {% block content %}
-
-
-
 <section class='ui container'>		
 	<div class='inner-container search_results'>
-		<h2>Searching: {{ search_term }}</h2>
+		<h2 class='title-overlay_title search_results_title'>Search results for: '{{ search_term }}'</h2>
+		<div class='ui stackable grid search_results_list'>			
+			{% for post in search_results %}
 
-		{% for post in search_results %}
-		<article>
-			<h5>{{ post.post_title }}</h5>
-			<p>{{ post.post_excerpt }}</p>
-		</article>	
-		{% endfor %}
+			{% if loop.index0 % 3 == 0 %}
+			<div class='three column row'>
+			{% endif %}
+				
+				<article class='column results_article'>
+					<h5 class='results_article_title'>
+						<a href='{{ post.guid }}'>{{ post.post_title }}</a>
+					</h5>
+					<p class='results_article_excerpt'>{{ post.yali_excerpt }}</p>
+				</article>	
+
+			{% if loop.index is divisible by(3) %}
+			</div>
+			{% endif %}	
+			
+			{% endfor %}		
+		</div>
 	</div>	
 </section>	
 {% endblock %}
