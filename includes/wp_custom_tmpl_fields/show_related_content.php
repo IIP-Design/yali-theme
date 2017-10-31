@@ -1,12 +1,11 @@
 <?php
 
-// Add option to include page title as overlay in hero section otherwise default to
-// under hero (in .ui.container)
+// Add option to toggle related content post list on or off
 
 add_action('cmb2_init', 'related_content_option');
 function related_content_option() {
 
-	$hero_title  = new_cmb2_box( array(
+	$related_content  = new_cmb2_box( array(
 		'id'           =>  'related_content',
     	'title'        => __( 'Related content', 'default-post' ),
     	'object_types' => array( 'post' ),
@@ -15,7 +14,7 @@ function related_content_option() {
     	'show_in_rest' => true
 	) );
 
-	$hero_title->add_field( array(
+	$related_content->add_field( array(
 		'name' => '',
 		'id'   => 'related_content_option',
 		'desc' => 'Show additional content related to this story.',

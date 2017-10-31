@@ -34,6 +34,9 @@ $formVar = do_shortcode('[formidable id=6]');
 // Hero Title Display
 $hero_title_display = get_post_meta($post->ID, 'hero_title_option', true);
 
+// Do not index to CDP option
+$donot_index_display = get_post_meta($post->ID, 'donot_index_option', true);
+
 
 if( $pagename === 'action' ) {
   $campaigns = ( $check_host == 'yali.dev.america.gov' ) ? Yali\API::get_child_pages(13240) : Yali\API::get_child_pages(8);
@@ -50,6 +53,7 @@ $context = array(
   'srcset'		    => $srcset,
   'sizes'		      => $sizes,
   'hero_title_display' => $hero_title_display,
+  'donot_index_display' => $donot_index_display,
   'social_block'  => $social_block,
   'formVar'       => $formVar,
   'category_list' => $categories,
