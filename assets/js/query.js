@@ -28,7 +28,7 @@ export function getCategories( select, cb ) {
     body: bodybuilder()
       .size(0)
       .query('terms', 'site', INDEXES )
-      .agg( 'terms', 'categories.slug.keyword', { 
+      .agg( 'terms', 'categories.name.keyword', { 
           'size': 1000,  
           'order': { '_term' : 'asc' } 
         }, 

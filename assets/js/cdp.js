@@ -44,7 +44,7 @@ function addOnFeedReadyHandler( id ) {
         noResults.css('display', 'block');
       }
     }
-  
+
     feedButtonSetState( id, itemLen );
   });
 }
@@ -282,6 +282,7 @@ function feedButtonSetState( id, itemLen ) {
  * @param {*} options  filter value
  */
 function addOptions( select, options ) {
+  console.dir(options)
   let menu = select.querySelector('.menu');
   if( menu && options ) {
     var fragment = document.createDocumentFragment();
@@ -289,7 +290,8 @@ function addOptions( select, options ) {
         var el = document.createElement('div');
         el.className = 'item';
         el.dataset.value = option.key;
-        el.innerHTML = `<i class='checkmark icon'></i>${ option.display }`;
+       // el.innerHTML = `<i class='checkmark icon'></i>${ option.display }`; (adds checkbox for mulit select)
+        el.textContent = option.display; 
         fragment.appendChild(el);
     });
     menu.appendChild(fragment);

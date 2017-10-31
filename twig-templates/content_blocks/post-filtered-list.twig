@@ -20,11 +20,12 @@
             </div>
           </div>
         {% else %}
-          <div id="{{ filter }}" class="ui dropdown multiple loading fluid scrolling">
+          <div id="{{ filter }}" class="ui dropdown single loading fluid scrolling">
             <input type="hidden" name="{{ filter }}">
             <div class="default text">{{ filter |capitalize }}</div>
             <i class="dropdown icon"></i>
             <div class="menu">
+              <div class="item" data-value="">{{ filter |capitalize }}: All </div>
               {# <div class="ui icon search input">
                 <i class="search icon"></i>
                 <input type="text" placeholder="Search {{ filter }}...">
@@ -35,9 +36,9 @@
       {% endfor %}
       </div>
       <!-- attach article feed module -->
-      <div id="{{ selector }}" data-content-type='cdp-filtered-list'  style="margin-top: 2em; text-align: {{ text_alignment }}">LOADING Component...</div>
+      <div id="{{ selector }}" data-content-type='cdp-filtered-list' style="margin-top: 2em; text-align: {{ text_alignment }}">LOADING Component...</div>
     
-       <!-- ashow more button -->
+       <!-- show more button -->
       {% if btn_label is not empty or btn_link is not empty %}
       <div class="cb_button" style="text-align: {{ btn_text_alignment }}">
         <button id="btn-{{ selector }}" class="ui button" style="background-color: {{ btn_bg_color }}" tabindex="0">

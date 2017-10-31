@@ -356,6 +356,7 @@ function feedButtonSetState(id, itemLen) {
  * @param {*} options  filter value
  */
 function addOptions(select, options) {
+  console.dir(options);
   var menu = select.querySelector('.menu');
   if (menu && options) {
     var fragment = document.createDocumentFragment();
@@ -363,7 +364,8 @@ function addOptions(select, options) {
       var el = document.createElement('div');
       el.className = 'item';
       el.dataset.value = option.key;
-      el.innerHTML = '<i class=\'checkmark icon\'></i>' + option.display;
+      // el.innerHTML = `<i class='checkmark icon'></i>${ option.display }`; (adds checkbox for mulit select)
+      el.textContent = option.display;
       fragment.appendChild(el);
     });
     menu.appendChild(fragment);
@@ -1310,7 +1312,7 @@ function getTypes(select, cb) {
 
 function getCategories(select, cb) {
   _axios2.default.post(API, {
-    body: (0, _bodybuilder2.default)().size(0).query('terms', 'site', INDEXES).agg('terms', 'categories.slug.keyword', {
+    body: (0, _bodybuilder2.default)().size(0).query('terms', 'site', INDEXES).agg('terms', 'categories.name.keyword', {
       'size': 1000,
       'order': { '_term': 'asc' }
     }, 'distinct_categories', function (a) {

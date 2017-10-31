@@ -109,7 +109,7 @@ class Content_Block_Shortcode {
     $post = get_post( $id );
    
     $context              = $this->fetch_base_config( $id, $post );
-    $context["selector"]  = 'feed' . $id;
+    $context['selector']  = 'feed' . $id;
     $context              = $this->fetch_module_config( $context, $id );
     $context              = $this->fetch_btn_config( $context, $id, $meta );
     
@@ -120,10 +120,10 @@ class Content_Block_Shortcode {
   // FILTERED POST LIST CONTENT BLOCK (CDP)
   public function render_filtered_list( $id ) {  
     $context                = $this->fetch_base_config( $id, get_post( $id ) );
-    $context["selector"]    = 'feed' . $id;
+    $context['selector']    = 'feed' . $id;
     $context['cdp_indexes'] = cdp_get_option('cdp_indexes');
-    $context["filters"]     = get_post_meta( $id, 'yali_list_filters', true);
-    $context["types"]       = get_post_meta( $id, 'yali_list_filters_types', true);
+    $context['filters']     = get_post_meta( $id, 'yali_list_filters', true);
+    $context['types']       = get_post_meta( $id, 'yali_list_filters_types', true);
     $context                = $this->fetch_btn_config( $context, $id, get_post_meta( $id ) );
 
 

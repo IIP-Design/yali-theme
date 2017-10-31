@@ -16,7 +16,6 @@ $cb_box_filter->add_field( array(
 	'desc'    => '',
 	'id'      => $prefix . 'list_filters',
   'type'    => 'multicheck_inline',
-  //'select_all_button' => false,
 	'options' => array(
 		'type'      => 'Type',
 		'subject'   => 'Subject',
@@ -31,7 +30,6 @@ $cb_box_filter->add_field( array(
 	'desc'    => '',
 	'id'      => $prefix . 'list_filters_types',
   'type'    => 'multicheck_inline',
-  //'select_all_button' => false,
 	'options' => array(
 		'article'   => 'Article',
 		'course'    => 'Course',
