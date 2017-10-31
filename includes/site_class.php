@@ -19,6 +19,7 @@ class Site {
 	public $url;
 	public $site_url;   // wp core file location
 	public $theme_url;
+	public $check_host;
 
 	public function __construct() {
     $this->init();
@@ -35,6 +36,7 @@ class Site {
 		$this->language = get_bloginfo( 'language' );
 		$this->charset = get_bloginfo( 'charset' );
 		$this->pingback = $this->pingback_url = get_bloginfo( 'pingback_url' );	
+		$this->check_host = $_SERVER['SERVER_NAME'];
 	}
   
   /**

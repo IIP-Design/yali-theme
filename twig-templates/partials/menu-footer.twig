@@ -6,6 +6,7 @@
 				<img src="{{ site.theme_url }}/assets/img/yali_logo_mark.svg">
 			</div>			
 			<span class="footer_branding_title">Young African Leaders Initiative</span>
+			<h3>{{ check_host }}</h3>
 		</a>
 	</div>
 	
@@ -18,13 +19,17 @@
 		    </div>
 			{% endfor %}
 			<div class="ui item">
-				<div class="footer_list_item footer_list_item--search">					
+				<form role='search' method='get' id='searchform_footer' action='/' class="footer_list_item footer_list_item--search">					
 					<div class="search_input_wrapper hide">
 						<i class="remove icon"></i>
-						<input type="text" placeholder="Search Stuff" class="inactive">
-					</div>					
-					<i class="search icon"></i>
-				</div>
+						<input type='text' value='' name='s' id='s2' placeholder='Search' class='inactive'>
+					</div>
+					<div class='search_submit_wrapper'>
+						<input type='submit' id='searchsubmit_footer'>
+						<i class="search icon"></i>
+					</div>
+					
+				</form>
 			</div>
 		</div>
 	</div>
