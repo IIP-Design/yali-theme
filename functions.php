@@ -238,7 +238,8 @@ class YaliSite {
 	*/
 	function search_filter($query) {
 		if( $query->is_main_query() && $query->is_search() ) {
-			$query->set('post_type', array('post', 'page'));	
+			$query->set('post_type', array('post', 'page'));
+			$query->set('posts_per_page', '-1');
 		}	
 	}
 

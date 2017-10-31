@@ -10,7 +10,20 @@
 		padding: 15px;
 	}
 
+
 	&:hover {
 		color: #fff;
 	}
+
+
+	&--showmore {
+		margin: 15px auto 0 auto;
+		color: $blue-navy;
+		background-color: $yellow;
+
+		&:hover {
+			color: $blue-navy;
+		}
+	}
+
 }

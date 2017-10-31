@@ -19,7 +19,6 @@
 		&.ui.stackable.grid {
 			margin-bottom: 50px;
 			@media screen and (max-width: 767px) {
-				margin-bottom: 0;
 
 				> .column.row > .column.results_article {
 					padding-left: 0 !important;
@@ -27,6 +26,14 @@
 				}
 			}
 		}		
+	}
+
+
+	.results_list_row {
+
+		&.hidden {
+			display: none;
+		}
 	}
 
 

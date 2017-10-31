@@ -15,8 +15,6 @@ foreach ($search_results as $post) {
 	$post->yali_excerpt = formatted_excerpt($content);
 }
 
-//var_dump($search_results);
-
 function formatted_excerpt($post_content) {
 	$word_length = 35;
 	
@@ -31,7 +29,6 @@ function formatted_excerpt($post_content) {
 	}
 
 	$the_excerpt = implode(' ', $words);
-
 	return $the_excerpt;
 }
 

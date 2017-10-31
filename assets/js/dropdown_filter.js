@@ -20,7 +20,7 @@ function showMore() {
 	let articles = document.querySelectorAll('.pl_article'),
 		showMoreBtn = document.querySelector('.all_posts_showmore');
 
-	if( [...articles].length = 0 || showMoreBtn === null )	return;
+	if( [...articles].length = 0 || showMoreBtn === null ) return;
 
 	if( articles.length > maxListLength ) {
 		[...articles].slice(maxListLength).forEach(article => {
