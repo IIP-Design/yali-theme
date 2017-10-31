@@ -340,7 +340,7 @@ function feedButtonSetState(id, itemLen) {
 
   var btn = document.querySelector('#btn-' + id);
   var config = cdpFilterFeedConfig[id];
-  var total = grp.dataset.total;
+  var total = grp && grp.dataset.total ? grp.dataset.total : config.size;
 
   if (itemLen < config.size || config.size >= total || config.from + config.size >= total) {
     btn.style.visibility = 'hidden'; // should this be hidden for non filter content blocks?
