@@ -90,22 +90,38 @@ var filterHash = {
 
 function addOnFeedReadyHandler(id) {
   var el = $('#' + id);
-  var btn = document.querySelector('#btn-' + id);
 
   window.addEventListener('onReadyFeed', function (e) {
     var items = el.find('.article-item');
+    forEach(items, function (index, item) {
+      if (item.dataset.type === 'courses') {
+        addLinkToCoursePage(item);
+      }
+    });
+    var itemLen = items.length;
     el.css('min-height', '200px');
-    if (items.length) {
+    if (itemLen) {
       items.addClass('animate-in').fadeIn().promise().done(function () {
         //window.removeEventListener('onReadyFeed');
       });
-      btn.style.visibility = 'visible';
     } else {
       var noResults = el.find('.article-no-results');
-      noResults.css('display', 'block');
-      btn.style.visibility = 'hidden'; // should this be hidden for non filter content blocks?
+      if (noResults) {
+        noResults.css('display', 'block');
+      }
     }
+
+    feedButtonSetState(id, itemLen);
   });
+}
+
+function addLinkToCoursePage(article) {
+  var el = article.querySelector('.article-content');
+  var a = document.createElement('a');
+  var url = window.location.protocol + '//' + window.location.host + '/courses/course-' + article.dataset.id;
+  a.setAttribute('href', url);
+  a.innerHTML = 'Take the Course';
+  el.appendChild(a);
 }
 
 /**
@@ -118,7 +134,7 @@ function initializeFilters() {
   if (filters.length) {
     populateDropDownSelects(filters);
     addAllFeeds();
-    enableFeedButton();
+    feedButtonEnable();
   }
 }
 
@@ -182,6 +198,8 @@ function removeFeed(feed, config) {
   el.css('min-height', el.height());
   items.addClass('animate-out').promise().done(function () {
     el.empty();
+    config.selector = '#' + feed;
+    config.from = 0;
     addFeed(query.builder(config));
   });
 }
@@ -221,7 +239,8 @@ function addAllFeeds() {
   });
 }
 
-function enableFeedButton() {
+/* Button functions */
+function feedButtonEnable() {
   var filteredFeed = document.querySelectorAll("[data-content-type='cdp-filtered-list']");
   forEach(filteredFeed, function (index, feed) {
     var btnId = 'btn-' + feed.id;
@@ -236,11 +255,37 @@ function feedButtonOnClick(e) {
   var btn = e.currentTarget;
   if (btn.id) {
     var id = btn.id.replace('btn-', '');
-    console.log(id);
     var div = document.getElementById(id);
     if (div) {
-      console.log(div);
+      var config = cdpFilterFeedConfig[id];
+      var from = config.from + config.size;
+      var cls = 'from-' + from;
+
+      var el = document.createElement('div');
+      el.className = cls;
+      div.appendChild(el);
+      config.selector = '.' + cls;
+      config.from = from;
+      addFeed(query.builder(config));
     }
+  }
+}
+
+function feedButtonSetState(id, itemLen) {
+  var el = document.getElementById(id),
+      grp = void 0;
+  if (el) {
+    grp = el.querySelector('.article-item-group');
+  }
+
+  var btn = document.querySelector('#btn-' + id);
+  var config = cdpFilterFeedConfig[id];
+  var total = grp.dataset.total;
+
+  if (itemLen < config.size || config.size >= total || config.from + config.size >= total) {
+    btn.style.visibility = 'hidden'; // should this be hidden for non filter content blocks?
+  } else {
+    btn.style.visibility = 'visible';
   }
 }
 
@@ -1244,7 +1289,8 @@ function builder(params) {
       types: params.types,
       series: params.series,
       from: params.from,
-      size: params.size
+      size: params.size,
+      sort: params.sort
     })
   };
 

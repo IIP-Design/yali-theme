@@ -91,6 +91,7 @@ export function builder ( params )  {
       series: params.series,
       from: params.from,
       size: params.size,
+      sort: params.sort
     })
   }
 
