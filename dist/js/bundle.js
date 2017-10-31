@@ -80,15 +80,26 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 var $;
 var cdpFilterFeedConfig = cdpFilterFeedConfig || {};
+
+/**
+ * Hash is needed as the cdp article feed module is expecting
+ * types, categories, etc for its search.  The hash maps the 
+ * properties to the filter values
+ */
 var filterHash = {
   'type': 'types',
   'subject': 'categories',
   'language': 'langs',
   'series': 'series',
   'sort': 'sort'
-};
 
-function addOnFeedReadyHandler(id) {
+  /**
+   * Adds 'onReadyFeed' listener to list. 'onReadyFeed' is fired from react module
+   * to indicate that the articles have been added to the DOM.  Processing that 
+   * needs the article DOM ready are handled within listener
+   * @param {string} id id of feed list
+   */
+};function addOnFeedReadyHandler(id) {
   var el = $('#' + id);
 
   window.addEventListener('onReadyFeed', function (e) {
@@ -115,27 +126,34 @@ function addOnFeedReadyHandler(id) {
   });
 }
 
+/**
+ * Convert title of courses to a link (courses type is just data so we are using the naming 
+ * convention for course pages of ''/course-[id of data course] to dynamically create links)
+ * Pages that contain a course MUST adhere to this or the link will not work
+ * @param {object} article article element
+ */
 function addLinkToCoursePage(article) {
-  var link = article.querySelector('.article-title_link');
-  if (!link) {
-    var el = article.querySelector('.article-title');
-    var text = el.textContent;
-    el.textContent = '';
-    var a = document.createElement('a');
-    var url = window.location.protocol + '//' + window.location.host + '/course-' + article.dataset.id;
-    a.className = 'article-title_link'; //'item-link';
-    a.setAttribute('href', url);
-    a.textContent = text;
-    el.append(a);
-    // let el = article.querySelector( '.article-content' );
-    // a.innerHTML = 'Take the Course';
-    // el.appendChild(a);
+  if (article) {
+    var link = article.querySelector('.article-title_link');
+    if (!link) {
+      var el = article.querySelector('.article-title');
+      var text = el.textContent;
+      el.textContent = '';
+      var a = document.createElement('a');
+      var url = window.location.protocol + '//' + window.location.host + '/course-' + article.dataset.id;
+      a.className = 'article-title_link'; //'item-link';
+      a.setAttribute('href', url);
+      a.textContent = text;
+      el.append(a);
+      // let el = article.querySelector( '.article-content' );
+      // a.innerHTML = 'Take the Course';
+      // el.appendChild(a);
+    }
   }
 }
 
 /**
- * Populate dropdown filter menus.  The type of filter is found
- * in the id attribute of the dropdown element
+ * Initialisze dropdowns, feeds and "Show More" button.
  */
 function initializeFilters() {
   // @todo need loop thru .cb-cdp-filters if mulitple filter menus are added to the page
@@ -147,6 +165,10 @@ function initializeFilters() {
   }
 }
 
+/**
+ * Populate dropdown filter menus.  The type of filter is found
+ * in the id attribute of the dropdown element
+ */
 function populateDropDownSelects(filters) {
   var config = {
     useLabels: false,
@@ -179,7 +201,8 @@ function populateDropDownSelects(filters) {
 }
 
 /**
- * update the feed when a filter changes
+ * update the feed when a filter changes. The feed config is stored in
+ * the cdpFilterFeedConfig object by feeds id for reference
  */
 function updateFeed() {
   var dropdown = document.querySelector('.cb-cdp-filters');
@@ -198,7 +221,8 @@ function updateFeed() {
 }
 
 /**
- * Remove feed list from the DOM
+ * Remove feed list from the DOM and reset 'from' and selector.  Reset
+ * is needed as additional feeds may have been added by clicking 'Show More'
  * @param {string} feed DOM id of parant containing feed list
  */
 function removeFeed(feed, config) {
@@ -225,6 +249,11 @@ function addFeed(config) {
   }
 }
 
+/**
+ * Add all filtered feeds (may be more than 1 filtered list on the page) to
+ * the DOM. Set an initial search config and store it in the cdpFilterFeedConfig 
+ * object
+ */
 function addAllFeeds() {
   var filteredFeed = document.querySelectorAll("[data-content-type='cdp-filtered-list']");
 
@@ -249,6 +278,10 @@ function addAllFeeds() {
 }
 
 /* Button functions */
+
+/**
+ * Add 'click' listener to 'Show More' button if present
+ */
 function feedButtonEnable() {
   var filteredFeed = document.querySelectorAll("[data-content-type='cdp-filtered-list']");
   forEach(filteredFeed, function (index, feed) {
@@ -260,6 +293,14 @@ function feedButtonEnable() {
   });
 }
 
+/**
+ * Added additional search results to the DOM when 'Show More'
+ * is clicked.  Update search config to reflect 'from' position
+ * Create a div to attached next group of results.  New div is 
+ * added to the current feed so that it will be removed upon
+ * filter change
+ * @param {event object} e 
+ */
 function feedButtonOnClick(e) {
   var btn = e.currentTarget;
   if (btn.id) {
@@ -275,11 +316,21 @@ function feedButtonOnClick(e) {
       div.appendChild(el);
       config.selector = '.' + cls;
       config.from = from;
+
       addFeed(query.builder(config));
     }
   }
 }
 
+/**
+ * Hide/show 'Show More' button based on search results
+ * The button will be hidden if:
+ * 1. Number of search results within intial return < number of results requested by size param
+ * 2. Requested size param >= total elastic hit count (i.e. there may be 100 total results, by config only wants 10 shown)
+ * 3. Exhausted all results by clicking 'Show More'
+ * @param {*} id id of feed
+ * @param {number} itemLen Number of search results within intial return
+ */
 function feedButtonSetState(id, itemLen) {
   var el = document.getElementById(id),
       grp = void 0;
@@ -299,10 +350,10 @@ function feedButtonSetState(id, itemLen) {
 }
 
 /**
- * Add <option> to select
+ * Add <div> for each filter value to dropdown
  * 
- * @param {*} select DOM element to append option to
- * @param {*} options  options data
+ * @param {*} select DOM element to append div to
+ * @param {*} options  filter value
  */
 function addOptions(select, options) {
   var menu = select.querySelector('.menu');
@@ -369,6 +420,13 @@ function renderArticleFeed(feed) {
   addFeed(configObj);
 }
 
+/**
+ * Attaches supplemental link under article content. detail prop of e
+ * event object is added in article module and contains the id list
+ * contiaining the items. 
+ * @param {event object} e 
+ * @param {*} config Configuration obj passed in via post-list.twig file
+ */
 function addRelatedLinksToArticle(e, config) {
   var list = document.querySelector(e.detail);
   if (list) {
@@ -471,6 +529,10 @@ var forEach = function forEach(array, callback, scope) {
   }
 };
 
+/**
+ * Entry point
+ * @param {object} jQuery Reference to jquery
+ */
 function init(jQuery) {
   $ = jQuery;
   initializeFilters();
