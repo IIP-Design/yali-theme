@@ -24,6 +24,10 @@
 		&:hover {
 			color: $blue-navy;
 		}
+
+		i.icon {
+			vertical-align: baseline;
+		}
 	}
 
 }
