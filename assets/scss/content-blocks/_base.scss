@@ -14,7 +14,7 @@ $filter-bp: 890px; //50em;
 	padding-top: em(49em);
   padding-bottom: em(50);  
 
-  .item-link {
+  .item-link { 
     color: $blue-medium;
     font-weight: 600;
     font-size: 1.15em;
@@ -132,6 +132,10 @@ $filter-bp: 890px; //50em;
         }
       }
     }
+  }
+
+  div[data-content-type='cdp-filtered-list'] .article-item {
+      flex-grow: 0;
   }
 }
 

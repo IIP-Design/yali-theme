@@ -38,12 +38,21 @@ function addOnFeedReadyHandler( id ) {
 }
 
 function addLinkToCoursePage( article ) {
-  let el = article.querySelector( '.article-content' );
-  let a = document.createElement('a');
-  let url = window.location.protocol + '//' + window.location.host + '/courses/course-' + article.dataset.id;
-  a.setAttribute( 'href', url );
-  a.innerHTML = 'Take the Course';
-  el.appendChild(a);
+  let link = article.querySelector( '.article-title_link' );
+  if( !link ) {
+    let el = article.querySelector( '.article-title' );
+    let text  = el.textContent;
+    el.textContent = '';
+    let a = document.createElement('a');
+    let url = window.location.protocol + '//' + window.location.host + '/course-' + article.dataset.id;
+    a.className = 'article-title_link'; //'item-link';
+    a.setAttribute( 'href', url );
+    a.textContent = text;
+    el.append(a);
+    // let el = article.querySelector( '.article-content' );
+    // a.innerHTML = 'Take the Course';
+    // el.appendChild(a);
+  }
 }
 
 /**

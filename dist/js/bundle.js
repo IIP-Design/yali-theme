@@ -116,12 +116,21 @@ function addOnFeedReadyHandler(id) {
 }
 
 function addLinkToCoursePage(article) {
-  var el = article.querySelector('.article-content');
-  var a = document.createElement('a');
-  var url = window.location.protocol + '//' + window.location.host + '/courses/course-' + article.dataset.id;
-  a.setAttribute('href', url);
-  a.innerHTML = 'Take the Course';
-  el.appendChild(a);
+  var link = article.querySelector('.article-title_link');
+  if (!link) {
+    var el = article.querySelector('.article-title');
+    var text = el.textContent;
+    el.textContent = '';
+    var a = document.createElement('a');
+    var url = window.location.protocol + '//' + window.location.host + '/course-' + article.dataset.id;
+    a.className = 'article-title_link'; //'item-link';
+    a.setAttribute('href', url);
+    a.textContent = text;
+    el.append(a);
+    // let el = article.querySelector( '.article-content' );
+    // a.innerHTML = 'Take the Course';
+    // el.appendChild(a);
+  }
 }
 
 /**
