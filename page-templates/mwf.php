@@ -29,6 +29,7 @@ $intro = wpautop($page_data['cmb2']['mwf_introduction']['mwf_introduction_conten
 $formatted_intro = do_shortcode($intro);
 $about = wpautop($page_data['cmb2']['mwf_about']['mwf_about_fellowship']);
 $formatted_about = do_shortcode($about);
+$addtl_content = do_shortcode($page_data['cmb2']['mwf_addtl']['mwf_addtl_content']);
 
 // Data array for twig
 $context = array(
@@ -37,10 +38,11 @@ $context = array(
   "page_data"     => $page_data,
   "header_url"    => $header_url,  
   "feat_img"      => $feat_img_obj,
-  "srcset"		    => $srcset,
-  "size"		      => $size,
-  "intro"		      => $formatted_intro,
+  "srcset"		  => $srcset,
+  "size"		  => $size,
+  "intro"		  => $formatted_intro,
   "about"         => $formatted_about,  
+  "addtl_content" => $addtl_content
 );
 
 
