@@ -22,7 +22,7 @@ foreach($taxonomy_terms as $indx => $obj) {
 
 // TEMP
 $check_host = $_SERVER['SERVER_NAME'];
-$social_block = do_shortcode("[content_block id='13313']");
+$social_block = do_shortcode("[content_block id='14264']");
 
 $formVar = do_shortcode('[formidable id=6]');
 $related_content_display = get_post_meta($post->ID, 'related_content_option', true);

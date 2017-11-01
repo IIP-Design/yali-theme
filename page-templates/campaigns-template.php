@@ -22,7 +22,7 @@ $img_id = get_post_thumbnail_id( $post->ID );
 $srcset = wp_get_attachment_image_srcset($img_id, "full");
 $sizes = wp_get_attachment_image_sizes($img_id, "full");
 
-$social_block = do_shortcode("[content_block id='13313']");
+$social_block = do_shortcode("[content_block id='14264']");
 $campaigns = ( $check_host == 'yali.dev.america.gov' ) ? Yali\API::get_child_pages(13240) : Yali\API::get_child_pages(8);
 wp_reset_postdata();
 
@@ -38,7 +38,7 @@ $orgevent_data = get_post_meta($post->ID, 'campaigns_orgevent_repeat_group', tru
 // Alumni Vids
 $alumni_vids = get_post_meta($post->ID, 'campaigns_alumnvids_repeat_group', true);
 $alumni_vids_formatted = [];
-if( !empty($alumni_vids) ) {  
+if( !empty($alumni_vids) ) {
   foreach ($alumni_vids as $vid => $value) {
       $temp = [];
       $temp['english'] = wp_oembed_get($value['youtube_video']);
@@ -52,7 +52,7 @@ if( !empty($alumni_vids) ) {
 $context = array(
   "pagename"    	  => $pagename,
   "page_data"   	  => $page_data,
-  "header_url"  	  => $header_url,  
+  "header_url"  	  => $header_url,
   "feat_img"    	  => $feat_img_obj,
   "srcset"			    => $srcset,
   "size"			      => $sizes,
