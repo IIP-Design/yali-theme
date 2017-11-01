@@ -1,6 +1,6 @@
 <?php
 /*
-Template Name: Mandela Washington Fellowship
+Template Name: MWF Application Information Page
 */
 
 use Yali\Twig as Twig;
@@ -25,10 +25,8 @@ $srcset = wp_get_attachment_image_srcset($img_id, 'full');
 $size = wp_get_attachment_image_sizes($img_id, 'full');
 
 // Custom Fields Content
-$intro = wpautop($page_data['cmb2']['mwf_introduction']['mwf_introduction_content']);
-$formatted_intro = do_shortcode($intro);
-$about = wpautop($page_data['cmb2']['mwf_about']['mwf_about_fellowship']);
-$formatted_about = do_shortcode($about);
+$countdown = do_shortcode($page_data['cmb2']['mwf_app_application']['mwf_app_application_date']);
+$addtl_content = do_shortcode($page_data['cmb2']['mwf_app_application']['mwf_app_addtl_content']);
 
 // Data array for twig
 $context = array(
@@ -39,9 +37,9 @@ $context = array(
   "feat_img"      => $feat_img_obj,
   "srcset"		    => $srcset,
   "size"		      => $size,
-  "intro"		      => $formatted_intro,
-  "about"         => $formatted_about,  
+  "countdown"     => $countdown,
+  "addtl_content" => $addtl_content
 );
 
 
-echo Twig::render( 'pages/mwf.twig', $context );
+echo Twig::render( 'pages/mwf-application.twig', $context );

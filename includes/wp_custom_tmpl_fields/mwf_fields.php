@@ -64,66 +64,66 @@ function mwf_fields() {
     ) );
 
     // Application Section
-    $mwf_application = new_cmb2_box( array(
-		'id'           =>  $prefix . 'application',
-    	'title'        => __( 'Enter Application Content', 'mwf' ),
-    	'object_types' => array( 'page' ),
-    	'context'      => 'advanced',
-    	'priority'     => 'high',
-    	'show_on'      => array('key' => 'page-template', 'value' => 'page-templates/mwf.php'),
-    	'show_in_rest' => true
-	) );
+ //    $mwf_application = new_cmb2_box( array(
+	// 	'id'           =>  $prefix . 'application',
+ //    	'title'        => __( 'Enter Application Content', 'mwf' ),
+ //    	'object_types' => array( 'page' ),
+ //    	'context'      => 'advanced',
+ //    	'priority'     => 'high',
+ //    	'show_on'      => array('key' => 'page-template', 'value' => 'page-templates/mwf.php'),
+ //    	'show_in_rest' => true
+	// ) );
 
-	$mwf_application->add_field( array(    	
-    	'name'    => 'Upload Application Instructions PDF',
-	    'id'      => $prefix . 'application_instructions_pdf',
-	    'type'    => 'file'	    
-    ) );
+	// $mwf_application->add_field( array(    	
+ //    	'name'    => 'Upload Application Instructions PDF',
+	//     'id'      => $prefix . 'application_instructions_pdf',
+	//     'type'    => 'file'	    
+ //    ) );
 
-    $mwf_application->add_field( array(    	
-    	'name'    => 'Set Application Date, Time and Add To Calendar',
-	    'id'      => $prefix . 'application_date',
-	    'type'    => 'wysiwyg'
-    ) );
+ //    $mwf_application->add_field( array(    	
+ //    	'name'    => 'Set Application Date, Time and Add To Calendar',
+	//     'id'      => $prefix . 'application_date',
+	//     'type'    => 'wysiwyg'
+ //    ) );
 
-	$mwf_application->add_field( array( 
-    	'name'    => 'Enter Application Section Title',
-	    'id'      => $prefix . 'application_title',
-	    'type'    => 'text'	    
-    ) );
+	// $mwf_application->add_field( array( 
+ //    	'name'    => 'Enter Application Section Title',
+	//     'id'      => $prefix . 'application_title',
+	//     'type'    => 'text'	    
+ //    ) );
 
-    $mwf_application->add_field( array(
-    	'name'    => 'Application Process Timeline',
-	    'id'      => $prefix . 'application_process_timeline',
-	    'type'    => 'textarea',
-	    'options' => array( 'textarea_rows' => 10, )
-    ) );
+ //    $mwf_application->add_field( array(
+ //    	'name'    => 'Application Process Timeline',
+	//     'id'      => $prefix . 'application_process_timeline',
+	//     'type'    => 'textarea',
+	//     'options' => array( 'textarea_rows' => 10, )
+ //    ) );
 
-    $mwf_application->add_field( array(
-    	'name'    => 'Application Selection Process',
-	    'id'      => $prefix . 'application_selection_process',
-	    'type'    => 'textarea',
-	    'options' => array( 'textarea_rows' => 10, )
-    ) );
+ //    $mwf_application->add_field( array(
+ //    	'name'    => 'Application Selection Process',
+	//     'id'      => $prefix . 'application_selection_process',
+	//     'type'    => 'textarea',
+	//     'options' => array( 'textarea_rows' => 10, )
+ //    ) );
 
-    $mwf_application->add_field( array(
-    	'name'    => 'Who Is Eligible to Apply Section',
-	    'id'      => $prefix . 'application_eligibility',
-	    'type'    => 'wysiwyg'	    
-    ) );
+ //    $mwf_application->add_field( array(
+ //    	'name'    => 'Who Is Eligible to Apply Section',
+	//     'id'      => $prefix . 'application_eligibility',
+	//     'type'    => 'wysiwyg'	    
+ //    ) );
 
-    $mwf_application->add_field( array(
-    	'name'    => 'Criteria Selection Section',
-	    'id'      => $prefix . 'application_criteria',
-	    'type'    => 'wysiwyg'	    
-    ) );
+ //    $mwf_application->add_field( array(
+ //    	'name'    => 'Criteria Selection Section',
+	//     'id'      => $prefix . 'application_criteria',
+	//     'type'    => 'wysiwyg'	    
+ //    ) );
 
-    $mwf_application->add_field( array(
-    	'name'    => 'Application Information',
-	    'id'      => $prefix . 'application_info',
-	    'type'    => 'textarea',
-	    'options' => array( 'textarea_rows' => 10, )
-    ) );
+ //    $mwf_application->add_field( array(
+ //    	'name'    => 'Application Information',
+	//     'id'      => $prefix . 'application_info',
+	//     'type'    => 'textarea',
+	//     'options' => array( 'textarea_rows' => 10, )
+ //    ) );
 
     // Additional Content Section
     $mwf_addtl = new_cmb2_box( array(
