@@ -74,7 +74,8 @@ h5 {
 
 
 p, 
-ol {
+ol,
+.page-content > ul {
   font-size: em(22); 
   font-weight: 300;
   line-height: 1.44;
