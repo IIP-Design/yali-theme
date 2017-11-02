@@ -35,7 +35,7 @@ $formVar = do_shortcode('[formidable id=6]');
 $hero_title_display = get_post_meta($post->ID, 'hero_title_option', true);
 
 // Do not index to CDP option
-$donot_index_display = get_post_meta($post->ID, 'donot_index_option', true);
+$donot_index = get_post_meta($post->ID, 'donot_index_option', true);
 
 
 if( $pagename === 'action' ) {
@@ -53,7 +53,7 @@ $context = array(
   'srcset'		    => $srcset,
   'sizes'		      => $sizes,
   'hero_title_display' => $hero_title_display,
-  'donot_index_display' => $donot_index_display,
+  'donot_index'   => $donot_index,
   'social_block'  => $social_block,
   'formVar'       => $formVar,
   'category_list' => $categories,
