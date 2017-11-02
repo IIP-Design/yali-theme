@@ -23,8 +23,29 @@ $srcset = wp_get_attachment_image_srcset($img_id, "full");
 $sizes = wp_get_attachment_image_sizes($img_id, "full");
 
 $social_block = do_shortcode("[content_block id='14264']");
-$campaigns = ( $check_host == 'yali.dev.america.gov' ) ? Yali\API::get_child_pages(13240) : Yali\API::get_child_pages(8);
+
+// Query for all Campaign Pages
+$args = array(
+  'post_type' => 'page',
+  'meta_key' => 'campaign_page',
+  'meta_value' => 'true'
+);
+
+$get_campaign_pages = new WP_Query($args);
 wp_reset_postdata();
+
+$campaign_pages = $get_campaign_pages->posts;
+foreach ($campaign_pages as $item) {
+  $item_id = $item->ID;
+
+  if( has_post_thumbnail($item_id) ) {
+    $image_arr = wp_get_attachment_image_src( get_post_thumbnail_id($item_id), 'full' );
+    $image_src = $image_arr[0];
+    $item->featured_image_src = $image_src;
+  } else {
+    return;
+  }
+}
 
 // Yali Learns - Campaign Materials Accordion
 $campaign_materials_accordion = do_shortcode("[content_block id='13615' title='Yali Learns Campaign Materials']");
@@ -57,7 +78,7 @@ $context = array(
   "srcset"			    => $srcset,
   "size"			      => $sizes,
   "social_block"  	=> $social_block,
-  "campaigns"		    => $campaigns,
+  "campaign_pages"	=> $campaign_pages,
   "promo_data"	 	  => $promo_data,
   "orgevent_data"	  => $orgevent_data,
   "alumni_vids"     => $alumni_vids_formatted,

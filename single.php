@@ -27,6 +27,9 @@ $social_block = do_shortcode("[content_block id='14264']");
 $formVar = do_shortcode('[formidable id=6]');
 $related_content_display = get_post_meta($post->ID, 'related_content_option', true);
 
+// Hero Title Display
+$hero_title_display = get_post_meta($post->ID, 'hero_title_option', true);
+
 // Do not index to CDP option
 $donot_index = get_post_meta($post->ID, 'donot_index_option', true);
 
@@ -34,6 +37,7 @@ $context = array(
   'check_host'      => $check_host,
   'formVar'       	=> $formVar,
 	'related_content_display' => $related_content_display,
+	'hero_title_display' => $hero_title_display,
 	'donot_index' 		=> $donot_index,
   'post_data'       => $post_data,
   'header_url'      => $header_url,

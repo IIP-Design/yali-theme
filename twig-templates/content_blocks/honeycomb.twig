@@ -11,14 +11,14 @@
 			{% endif %}
 			<div class='ui stackable grid cb_honeycomb_items'>
 				{% for campaign in content %}
-					{% if current_page != campaign.title.rendered %}
+					{% if current_page != campaign.post_title %}
 					<div class='five wide column cb_honeycomb_item'>						
-						<div class='cb_honeycomb_item_img' style='background-image: url({{ campaign.featured_img_url }})'></div>
+						<div class='cb_honeycomb_item_img' style='background-image: url({{ campaign.featured_image_src }})'></div>
 						<div class='cb_honeycomb_item_text'>
 							<h4 class='cb_honeycomb_item_title'>
-								<a href='{{ campaign.link }}'>{{ campaign.title.rendered }}</a>
+								<a href='{{ campaign.post_name }}'>{{ campaign.post_title }}</a>
 							</h4>
-							<p class='cb_honeycomb_item_excerpt'>{{ campaign.excerpt.rendered }}</p>
+							<p class='cb_honeycomb_item_excerpt'>{{ campaign.post_excerpt }}</p>
 						</div>			
 					</div>
 					{% endif %}				

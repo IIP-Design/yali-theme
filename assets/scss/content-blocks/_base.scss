@@ -11,15 +11,15 @@ $filter-bp: 890px; //50em;
 }
 
 .cb {
-	padding-top: em(49em);
-  padding-bottom: em(50);  
+	padding-top: em(45);
+  padding-bottom: em(45);
 
-  .item-link { 
+  .item-link {
     color: $blue-medium;
     font-weight: 600;
     font-size: 1.15em;
   }
-  
+
   .cb_button {
     margin-top: 2em;
 
@@ -37,7 +37,7 @@ $filter-bp: 890px; //50em;
          font-size: 1.2em;
         }
       }
-      
+
       @media screen and (min-width: 48em) {
         min-width: 60%;
         font-size: 1.5em;
@@ -68,7 +68,7 @@ $filter-bp: 890px; //50em;
     @include bp($filter-bp) {
       flex-wrap: nowrap;
     }
-    
+
     .ui.dropdown {
       border: 5px solid $blue-navy;
       padding-left: 10px;
@@ -77,8 +77,8 @@ $filter-bp: 890px; //50em;
       margin-bottom: 5px;
       font-size: 1.2rem;
 
-      .text { 
-        color: $blue-navy; 
+      .text {
+        color: $blue-navy;
         margin-left: 0;
       }
 
@@ -90,22 +90,22 @@ $filter-bp: 890px; //50em;
         background-color: $blue-medium;
         border: 1px solid $blue-medium;
         border-radius: 0;
-        opacity: .95; 
+        opacity: .95;
         left: -5px;
         right: -5px;
         width: 100%;
-      
+
 
         @include bp($filter-bp) {
            width: calc(100% + 8px);
            right: auto;
-           opacity: .85; 
-        } 
+           opacity: .85;
+        }
 
         > .item {
           color: #fff;
           border: none;
-          border-top: 1px solid transparent; 
+          border-top: 1px solid transparent;
 
           i {
             visibility: hidden;
@@ -126,8 +126,8 @@ $filter-bp: 890px; //50em;
 
       &.single {
         padding: 0.22619048em 10px 0.22619048em 10px;
-        
-        .text { 
+
+        .text {
          margin: 0.45238095em 0 0.45238095em 0;
         }
       }
@@ -149,7 +149,7 @@ $filter-bp: 890px; //50em;
   }
 }
 
-@keyframes zoom-out { 
+@keyframes zoom-out {
   0% {
    transform: none;
   }

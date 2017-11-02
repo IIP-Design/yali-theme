@@ -35,13 +35,33 @@ $formVar = do_shortcode('[formidable id=6]');
 $hero_title_display = get_post_meta($post->ID, 'hero_title_option', true);
 
 // Do not index to CDP option
-$donot_index_display = get_post_meta($post->ID, 'donot_index_option', true);
+$donot_index = get_post_meta($post->ID, 'donot_index_option', true);
 
+// Query for all Campaign Pages
+if( $pagename === 'action' ) {  
+  $args = array(
+    'post_type' => 'page',
+    'meta_key' => 'campaign_page',
+    'meta_value' => 'true'
+  );
 
-if( $pagename === 'action' ) {
-  $campaigns = ( $check_host == 'yali.dev.america.gov' ) ? Yali\API::get_child_pages(13240) : Yali\API::get_child_pages(8);
+  $get_campaign_pages = new WP_Query($args);
   wp_reset_postdata();
 }
+
+$campaign_pages = $get_campaign_pages->posts;
+foreach ($campaign_pages as $item) {
+  $item_id = $item->ID;
+
+  if( has_post_thumbnail($item_id) ) {
+    $image_arr = wp_get_attachment_image_src( get_post_thumbnail_id($item_id), 'full' );
+    $image_src = $image_arr[0];
+    $item->featured_image_src = $image_src;
+  } else {
+    return;
+  }
+}
+
 
 // Data array for twig
 $context = array(
@@ -53,15 +73,15 @@ $context = array(
   'srcset'		    => $srcset,
   'sizes'		      => $sizes,
   'hero_title_display' => $hero_title_display,
-  'donot_index_display' => $donot_index_display,
+  'donot_index'   => $donot_index,
   'social_block'  => $social_block,
   'formVar'       => $formVar,
   'category_list' => $categories,
   'series_list'   => $series,
   'courses_faq'   => $courses_faq,
   'featured_course' => $featured_course,
-  'campaign_materials_accordion'  => $campaign_materials_accordion,
-  'campaigns'       => ( $pagename === 'action' ) ? $campaigns : null
+  'campaign_materials_accordion'  => $campaign_materials_accordion,  
+  'campaign_pages'       => ( $pagename === 'action' ) ? $campaign_pages : null
 );
 
 echo Twig::render( array( "pages/page-" . $pagename . ".twig", "page.twig" ), $context );
