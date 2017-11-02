@@ -4,10 +4,11 @@
 
 add_action('cmb2_init', 'donot_index_option');
 function donot_index_option() {
+	$prefix = '_iip_';
 
 	$donot_index  = new_cmb2_box( array(
 		'id'           => 'donot_index',
-    'title'        => 'Do Not Index',
+    'title'        => 'Index Post to CDP',
     'object_types' => array( 'page', 'post' ),
     'context'      => 'side',
     'priority'     => 'high',
@@ -16,9 +17,15 @@ function donot_index_option() {
 
 	$donot_index->add_field( array(
 		'name' => '',
-		'id'   => 'donot_index_option',
-		'desc' => 'Don\'t index this post into the CDP.',
-		'type' => 'checkbox',
+		'id'   => $prefix . 'index_post_to_cdp_option',
+		'desc' => '',
+		'type'    => 'radio_inline',
+		'default' => 'yes',
+		'show_option_none' => false,
+		'options' => array(
+			'yes' => __( 'Yes', 'yali' ),
+			'no'  => __( 'No', 'yali' )
+		)
 	));
 
 
