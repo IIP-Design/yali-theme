@@ -226,7 +226,7 @@ class YaliSite {
 	 */
 	function register_post_types() {
 		Content_Block::register();
-		Custom_Button::register();
+		// Custom_Button::register();
 		Bios::register();
 	}
 
@@ -238,7 +238,7 @@ class YaliSite {
 
 	function register_shortcodes() {
 		Content_Block_Shortcode::register();
-		Custom_Button_Shortcode::register();
+		// Custom_Button_Shortcode::register();
 	}
 
 	function enqueue_scripts() {

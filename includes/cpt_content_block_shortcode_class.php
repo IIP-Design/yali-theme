@@ -42,6 +42,9 @@ class Content_Block_Shortcode {
     // check for content block id
     $id = $atts['id'];
     $type = get_post_meta( $atts['id'], 'yali_cb_type', true );  
+    if( empty($type) ) {
+      return;
+    }
     return call_user_func( array($this, 'render_' . $type ), $id );
   }
 
@@ -123,9 +126,8 @@ class Content_Block_Shortcode {
     $context['selector']    = 'feed' . $id;
     $context['cdp_indexes'] = cdp_get_option('cdp_indexes');
     $context['filters']     = get_post_meta( $id, 'yali_list_filters', true);
-    $context['types']       = get_post_meta( $id, 'yali_list_filters_types', true);
+    $context['types']       = $this->convertToStr( get_post_meta( $id, 'yali_list_filters_types', true) );
     $context                = $this->fetch_btn_config( $context, $id, get_post_meta( $id ) );
-
 
     return Twig::render( 'content_blocks/post-filtered-list.twig', $context );
   }
@@ -202,7 +204,12 @@ class Content_Block_Shortcode {
       return $context;
   }
 
-
+  private function convertToStr( $value ) {
+    if( gettype($value) === 'array' ) {
+      return implode(',', $value);
+    } 
+    return $value;
+  }
 
   private function debug( $obj ) {
     echo '<pre>';

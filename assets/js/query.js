@@ -8,7 +8,7 @@ const API = ( cdp.publicAPI ) ? cdp.publicAPI : 'https://api.america.gov/v1/sear
 const INDEXES = (cdp.searchIndexes) ? fetchArray(cdp.searchIndexes) : 'yali.dev.america.gov';
 
 // Populate dropdown filters
-export function getTypes( select, cb ) { 
+export function getTypes( filter, cb ) { 
   axios.post( API, {
     body: bodybuilder()
       .size(0)
@@ -19,11 +19,11 @@ export function getTypes( select, cb ) {
       .build(),
   }).then( (response) => {
     let data = formatResponse( response, 'type' ) 
-    cb( select, data )
+    cb( filter, data )
   });
 }
 
-export function getCategories( select, cb ) {
+export function getCategories( filter, cb ) {
   axios.post(API , {
     body: bodybuilder()
       .size(0)
@@ -38,11 +38,11 @@ export function getCategories( select, cb ) {
       .build(),
   }).then( (response) => {
     let data = formatResponse( response, 'distinct_categories' ) 
-    cb( select, data )
+    cb( filter, data )
   });
 }
 
-export function getSeries( select, cb ) {
+export function getSeries( filter, cb ) {
   axios.post(API , {
     body: bodybuilder()
       .size(0)
@@ -54,11 +54,11 @@ export function getSeries( select, cb ) {
       .build(),
   }).then( (response) => {
     let data = formatResponse( response, 'distinct_series' );
-    cb( select, data )
+    cb( filter, data )
   });
 }
 
-export function getLanguages( select, cb ) {
+export function getLanguages( filter, cb ) {
   axios.post(API, {
     body: bodybuilder()
       .size(0)
@@ -73,7 +73,7 @@ export function getLanguages( select, cb ) {
       .build(),
   }).then( (response) =>{
     let data = formatResponse( response, 'distinct_languages' ) 
-    cb( select, data )
+    cb( filter, data, { key: 'en', value: 'English'} )
   });
 
 }
@@ -176,7 +176,8 @@ function getDisplayName( bucket ) {
 }
 
 function fetchArray( str ) {
-  return str.split(',').filter( item => item.trim() ).map( item => item );
+  //console.log(str.split(',').filter( item => item.trim()) );
+  return str.split(',').map( item => item.trim() );
 }
 
 const appendQry = ( str, field ) => {

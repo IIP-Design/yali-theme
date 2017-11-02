@@ -36,7 +36,7 @@
       {% endfor %}
       </div>
       <!-- attach article feed module -->
-      <div id="{{ selector }}" data-content-type='cdp-filtered-list' style="margin-top: 2em; text-align: {{ text_alignment }}">LOADING Component...</div>
+      <div id="{{ selector }}" data-content-type='cdp-filtered-list' data-types={{ types|json_encode() }} style="margin-top: 2em; text-align: {{ text_alignment }}">LOADING Component...</div>
     
        <!-- show more button -->
       {% if btn_label is not empty or btn_link is not empty %}

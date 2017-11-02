@@ -258,14 +258,18 @@ function addAllFeeds() {
   var filteredFeed = document.querySelectorAll("[data-content-type='cdp-filtered-list']");
 
   forEach(filteredFeed, function (index, feed) {
+    // Types allows search to only search specific types (generally for cases where there
+    // is not a fliter for a specifc type, i.e. featured courses page)
+    var types = feed.dataset.types ? feed.dataset.types : '';
+
     cdpFilterFeedConfig[feed.id] = {
       selector: '#' + feed.id,
       sites: cdp.searchIndexes,
       from: 0,
       size: 12,
       sort: 'recent',
-      types: '',
-      langs: '',
+      types: types,
+      langs: 'en',
       series: '',
       categories: '',
       meta: ['date'],
@@ -342,10 +346,12 @@ function feedButtonSetState(id, itemLen) {
   var config = cdpFilterFeedConfig[id];
   var total = grp && grp.dataset.total ? grp.dataset.total : config.size;
 
-  if (itemLen < config.size || config.size >= total || config.from + config.size >= total) {
-    btn.style.visibility = 'hidden'; // should this be hidden for non filter content blocks?
-  } else {
-    btn.style.visibility = 'visible';
+  if (btn) {
+    if (itemLen < config.size || config.size >= total || config.from + config.size >= total) {
+      btn.style.visibility = 'hidden'; // should this be hidden for non filter content blocks?
+    } else {
+      btn.style.visibility = 'visible';
+    }
   }
 }
 
@@ -355,9 +361,8 @@ function feedButtonSetState(id, itemLen) {
  * @param {*} select DOM element to append div to
  * @param {*} options  filter value
  */
-function addOptions(select, options) {
-  console.dir(options);
-  var menu = select.querySelector('.menu');
+function addOptions(filter, options, selected) {
+  var menu = filter.querySelector('.menu');
   if (menu && options) {
     var fragment = document.createDocumentFragment();
     options.forEach(function (option) {
@@ -370,7 +375,22 @@ function addOptions(select, options) {
     });
     menu.appendChild(fragment);
   }
-  select.classList.remove('loading');
+
+  filter.classList.remove('loading');
+  filterSetSelected(filter, selected);
+}
+
+function filterSetSelected(filter, selected) {
+  if (selected) {
+    var input = filter.querySelector('input[type=hidden]');
+    var div = filter.querySelector('.text');
+    if (input) {
+      input.value = selected.key;
+    }
+    if (div) {
+      div.textContent = selected.value;
+    }
+  }
 }
 
 /**
@@ -1311,18 +1331,18 @@ var API = cdp.publicAPI ? cdp.publicAPI : 'https://api.america.gov/v1/search';
 var INDEXES = cdp.searchIndexes ? fetchArray(cdp.searchIndexes) : 'yali.dev.america.gov';
 
 // Populate dropdown filters
-function getTypes(select, cb) {
+function getTypes(filter, cb) {
   _axios2.default.post(API, {
     body: (0, _bodybuilder2.default)().size(0).query('terms', 'site', INDEXES).agg('terms', 'type.keyword', {
       'size': 50,
       'order': { '_term': 'asc' } }, 'type').build()
   }).then(function (response) {
     var data = formatResponse(response, 'type');
-    cb(select, data);
+    cb(filter, data);
   });
 }
 
-function getCategories(select, cb) {
+function getCategories(filter, cb) {
   _axios2.default.post(API, {
     body: (0, _bodybuilder2.default)().size(0).query('terms', 'site', INDEXES).agg('terms', 'categories.name.keyword', {
       'size': 1000,
@@ -1332,11 +1352,11 @@ function getCategories(select, cb) {
     }).build()
   }).then(function (response) {
     var data = formatResponse(response, 'distinct_categories');
-    cb(select, data);
+    cb(filter, data);
   });
 }
 
-function getSeries(select, cb) {
+function getSeries(filter, cb) {
   _axios2.default.post(API, {
     body: (0, _bodybuilder2.default)().size(0).query('terms', 'site', INDEXES).agg('terms', 'taxonomies.series.name.keyword', {
       'size': 1000,
@@ -1344,11 +1364,11 @@ function getSeries(select, cb) {
     }, 'distinct_series').build()
   }).then(function (response) {
     var data = formatResponse(response, 'distinct_series');
-    cb(select, data);
+    cb(filter, data);
   });
 }
 
-function getLanguages(select, cb) {
+function getLanguages(filter, cb) {
   _axios2.default.post(API, {
     body: (0, _bodybuilder2.default)().size(0).query('terms', 'site', INDEXES).agg('terms', 'language.locale.keyword', {
       'size': 200,
@@ -1358,7 +1378,7 @@ function getLanguages(select, cb) {
     }).build()
   }).then(function (response) {
     var data = formatResponse(response, 'distinct_languages');
-    cb(select, data);
+    cb(filter, data, { key: 'en', value: 'English' });
   });
 }
 
@@ -1394,8 +1414,7 @@ var generateBodyQry = exports.generateBodyQry = function generateBodyQry(params)
   body.filterMinimumShouldMatch(1);
 
   if (params.series) {
-    body.filter('term', 'taxonomies.series.name.keyword', params.series // need exact match
-    );
+    body.filter('term', 'taxonomies.series.name.keyword', params.series); // need exact match
   }
 
   if (params.langs) {
@@ -1465,10 +1484,9 @@ function capitalize(string) {
 }
 
 function fetchArray(str) {
-  return str.split(',').filter(function (item) {
+  //console.log(str.split(',').filter( item => item.trim()) );
+  return str.split(',').map(function (item) {
     return item.trim();
-  }).map(function (item) {
-    return item;
   });
 }
 

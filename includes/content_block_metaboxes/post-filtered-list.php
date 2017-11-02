@@ -32,7 +32,7 @@ $cb_box_filter->add_field( array(
   'type'    => 'multicheck_inline',
 	'options' => array(
 		'article'   => 'Article',
-		'course'    => 'Course',
+		'courses'   => 'Course',
     'podcast'   => 'Podcast',
     'video'     => 'Video',
 	),

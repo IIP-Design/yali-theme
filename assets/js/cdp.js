@@ -182,16 +182,20 @@ function addAllFeeds() {
   let filteredFeed = document.querySelectorAll(
     "[data-content-type='cdp-filtered-list']"
   );
-  
+
   forEach(filteredFeed, function(index, feed) {
+    // Types allows search to only search specific types (generally for cases where there
+    // is not a fliter for a specifc type, i.e. featured courses page)
+    let types = ( feed.dataset.types ) ? feed.dataset.types : '';
+
     cdpFilterFeedConfig[feed.id] = {
       selector: `#${feed.id}`,
       sites: cdp.searchIndexes,  
       from: 0,
       size: 12,
       sort: 'recent',
-      types: '',
-      langs: '',
+      types: types,
+      langs: 'en',
       series: '',
       categories: '',
       meta: ['date'],
@@ -202,7 +206,6 @@ function addAllFeeds() {
     addFeed( cdpFilterFeedConfig[feed.id] );
   });
 }
-
 
 /* Button functions */
 
@@ -268,10 +271,12 @@ function feedButtonSetState( id, itemLen ) {
   let config = cdpFilterFeedConfig[id];
   let total = ( grp && grp.dataset.total ) ? grp.dataset.total : config.size;
 
-  if( itemLen < config.size || config.size >= total || (config.from + config.size) >= total ) {
-    btn.style.visibility = 'hidden';  // should this be hidden for non filter content blocks?
-  } else {
-    btn.style.visibility = 'visible'; 
+  if( btn ) {
+    if( itemLen < config.size || config.size >= total || (config.from + config.size) >= total ) {
+      btn.style.visibility = 'hidden';  // should this be hidden for non filter content blocks?
+    } else {
+      btn.style.visibility = 'visible'; 
+    }
   }
 }
 
@@ -281,9 +286,8 @@ function feedButtonSetState( id, itemLen ) {
  * @param {*} select DOM element to append div to
  * @param {*} options  filter value
  */
-function addOptions( select, options ) {
-  console.dir(options)
-  let menu = select.querySelector('.menu');
+function addOptions( filter, options, selected ) {
+  let menu = filter.querySelector('.menu');
   if( menu && options ) {
     var fragment = document.createDocumentFragment();
     options.forEach(function(option) {
@@ -296,9 +300,24 @@ function addOptions( select, options ) {
     });
     menu.appendChild(fragment);
   }
-  select.classList.remove('loading');
+ 
+  filter.classList.remove( 'loading' );
+  filterSetSelected( filter, selected );
 }
 
+
+function filterSetSelected( filter, selected ) {
+  if ( selected ) {
+    let input = filter.querySelector( 'input[type=hidden]');
+    let div = filter.querySelector( '.text' );
+    if( input ) {
+      input.value = selected.key;
+    }
+    if (div) {
+      div.textContent = selected.value;
+    }
+  }
+}
 
 /**
  * Render all article feeds to the page if
@@ -453,6 +472,7 @@ const forEach = function(array, callback, scope) {
     callback.call(scope, i, array[i]);
   }
 };
+
 
 /**
  * Entry point
