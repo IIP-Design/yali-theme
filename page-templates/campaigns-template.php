@@ -48,6 +48,9 @@ if( !empty($alumni_vids) ) {
   }
 }
 
+// 'Join the Network' Form
+$formVar = do_shortcode('[formidable id=6]');
+
 // Data array for twig
 $context = array(
   "pagename"    	  => $pagename,
@@ -61,7 +64,8 @@ $context = array(
   "promo_data"	 	  => $promo_data,
   "orgevent_data"	  => $orgevent_data,
   "alumni_vids"     => $alumni_vids_formatted,
-  'campaign_materials_accordion'  => $campaign_materials_accordion
+  'campaign_materials_accordion'  => $campaign_materials_accordion,
+  'formVar'         => $formVar
 );
 
 

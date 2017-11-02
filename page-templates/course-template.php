@@ -22,8 +22,8 @@ $img_id = get_post_thumbnail_id( $post->ID );
 $srcset = wp_get_attachment_image_srcset($img_id, "full");
 $sizes = wp_get_attachment_image_sizes($img_id, "full");
 
-$campaigns = ( $check_host == 'yali.dev.america.gov' ) ? Yali\API::get_child_pages(13240) : Yali\API::get_child_pages(8);
-wp_reset_postdata();
+// 'Join the Network' Form
+$formVar = do_shortcode('[formidable id=6]');
 
 // Data array for twig
 $context = array(
@@ -32,7 +32,8 @@ $context = array(
   "header_url"  	  => $header_url,
   "feat_img"    	  => $feat_img_obj,
   "srcset"			    => $srcset,
-  "size"			      => $sizes
+  "size"			      => $sizes,
+  'formVar'         => $formVar
 );
 
 

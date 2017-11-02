@@ -3,7 +3,7 @@
 Template Name: Regional Leadership Center
 */
 
-// Using custom wordpress template so content block (RLC Participants, Related Content sections) 
+// Using custom wordpress template so content block (RLC Participants, Related Content sections)
 // data can be passed to $context array
 // (content block data not added below)
 
@@ -26,15 +26,19 @@ $sizes = wp_get_attachment_image_sizes($img_id, 'full');
 
 $check_host = $_SERVER['SERVER_NAME'];
 
+// 'Join the Network' Form
+$formVar = do_shortcode('[formidable id=6]');
+
 // Data array for twig
 $context = array(
-  "check_host"  => $check_host,
-  "pagename"    => $pagename,
-  "page_data"   => $page_data,
-  "header_url"  => $header_url,  
-  "feat_img"    => $feat_img_obj,
-  "srcset"		=> $srcset,
-  "sizes"		=> $sizes
+  'check_host'  => $check_host,
+  'pagename'    => $pagename,
+  'page_data'   => $page_data,
+  'header_url'  => $header_url,  
+  'feat_img'    => $feat_img_obj,
+  'srcset'		  => $srcset,
+  'sizes'		    => $sizes,
+  'formVar'     => $formVar,
 );
 
 

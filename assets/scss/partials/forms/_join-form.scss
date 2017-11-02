@@ -1,8 +1,8 @@
-.join {				
-	text-align: center;	
+.join {
+	text-align: center;
 	color: $blue-navy;
 	transition: all 0.5s ease;
-	
+
 
 	&.ui.form {
 		position: absolute;
@@ -10,17 +10,18 @@
 		right: 0;
 		display: none;
 		max-height: 1000px;
-		max-width: 533px;
+		max-width: 500px;
 		width: 100%;
 		font-family: $font-family;
 		background-color: $yellow;
 		opacity: 1;
+		box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
 		@media screen and (max-width: 1400px) {
 			top: 200%;
 			max-width: 400px;
 			font-size: 12px;
 		}
-		@media screen and (max-width: 933px) {			
+		@media screen and (max-width: 933px) {
 			right: 50%;
 			transform: translate(50%);
 		}
@@ -49,12 +50,12 @@
 				display: none;
 			}
 		}
-	}	
+	}
 
 
 	&.fade_out.ui.form {
 		top: 0;
-		opacity: 0;	
+		opacity: 0;
 	}
 
 
@@ -68,7 +69,7 @@
 			border-width: 20px;
 			border-bottom-color: $yellow;
 			@media screen and (min-width: 934px) {
-				display: none !important; 
+				display: none !important;
 			}
 			@media screen and (max-width: 425px) {
 				margin-left: -10px;
@@ -95,9 +96,9 @@
 		}
 	}
 
-	
+
 	&_select {
-		margin-bottom: 20px;						
+		margin-bottom: 20px;
 	}
 
 
@@ -125,7 +126,7 @@
 			&:first-of-type {
 				@media screen and (min-width: 501px) {
 					margin-right: 125px;
-				}				
+				}
 			}
 
 			&:last-child {
@@ -159,7 +160,7 @@
 	}
 
 
-	&_submit {		
+	&_submit {
 		width: 100%;
 		height: em(60);
 		font-family: $font-family;
@@ -175,4 +176,25 @@
 		}
 	}
 
+}
+
+#frm_form_6_container {
+
+	fieldset > input {
+		border-radius: none;
+	}
+
+	&.frm_forms > fieldset {
+
+		&.frm_submit > button {
+		width: 100%;
+		height: em(60);
+		font-family: $font-family;
+		font-size: em(20) !important;
+		@media screen and (max-width: 1400px) {
+			padding: 15px;
+			font-size: 1.5em;
+			}
+		}
+	}
 }

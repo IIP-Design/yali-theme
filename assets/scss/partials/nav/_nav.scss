@@ -90,6 +90,12 @@
     background-color: $yellow;
     cursor: pointer;
     transition: opacity 2s ease;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+
+    &:hover {
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+      filter: grayscale(30%);
+    }
 
     p {
       font-weight: 700;
@@ -167,6 +173,22 @@
     }
   }
 
+}
+
+ul.nav_menu, ul.nav_menu_submenu {
+  font-size: em(18);
+}
+
+li.nav_menu_item, li.nav_menu_submenu_item {
+  font-size: em(18);
+}
+
+li.nav_menu_submenu_item:first-of-type {
+  margin-top: 10px;
+}
+
+a.nav_siteurl:active {
+    background-color: $blue-navy;
 }
 
 .admin-bar .nav.ui.menu {
