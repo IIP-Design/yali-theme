@@ -1,0 +1,44 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+
+<section class='ui container'>		
+	
+	<div class='inner-container search_results'>
+		<h2 class='title-overlay_title search_results_title'>Search results for: '{{ search_term }}'</h2>
+		<div class='ui stackable grid search_results_list'>			
+			{% for post in search_results %}
+
+			{% if loop.index0 % 3 == 0 %}
+			<div class='three column row results_list_row {% if loop.index > 12 %} hidden {% endif %}'>
+			{% endif %}
+				
+				<article class='column results_article'>
+					<h5 class='results_article_title'>
+						<a href='{{ post.post_name }}'>{{ post.post_title }}</a>
+					</h5>
+					<p class='results_article_excerpt'>
+						{% if post.post_excerpt is not empty %}
+							{{ post.post_excerpt }}
+						{% else %}
+							{{ post.yali_excerpt }}
+						{% endif %}
+					</p>
+				</article>	
+
+			{% if (loop.index is divisible by(3)) or (loop.last) %}
+			</div>
+			{% endif %}	
+			
+			{% endfor %}		
+
+			{% if search_results|length > 12 %}
+			<div class='cta_link cta_link--showmore'>
+				<h4>Show More <i class='caret down icon'></i></h4>
+			</div>
+			{% endif %}
+		</div>		
+	</div>		
+
+</section>	
+{% endblock %}

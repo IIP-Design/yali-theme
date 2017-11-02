@@ -1,7 +1,9 @@
-.tag_posts {
-	
+.search_results {
+		
 
 	&_title {
+		width: 100%;
+		text-align: left;
 
 		&:after {
 			content: '';
@@ -17,30 +19,35 @@
 		&.ui.stackable.grid {
 			margin-bottom: 50px;
 			@media screen and (max-width: 767px) {
-				margin-bottom: 0;
 
-				> .column.row > .column.tag_article {
+				> .column.row > .column.results_article {
 					padding-left: 0 !important;
 					padding-right: 0 !important;
 				}
 			}
 		}		
 	}
-}
 
 
-.tag_article {
-		
-	&_title {
-		margin-bottom: 10px;
+	.results_list_row {
+
+		&.hidden {
+			display: none;
+		}
 	}
 
-	&_content {
 
-		p {
+	.results_article {
+
+    	&_title {
+			margin-bottom: 10px;
+		}
+
+		&_excerpt {
 			@media screen and (min-width: 934px) {
 				font-size: em(17);
 			}
 		}
 	}
+
 }

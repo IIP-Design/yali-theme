@@ -1,0 +1,71 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+<section class="hero">
+    <img class="ui fluid image" src="{{ header_url }}" srcset="{{ srcset }}" sizes="{{ size }}" alt="{{ header_url }}">
+</section>
+<section class="ui container">	
+	<div class='inner-container'>
+		<section id='fellowship_application' class='section application'>
+			<h3 class='application_headline'>{{ page_data.cmb2.mwf_app_application.mwf_app_application_title }}</h3>
+
+			<p class='full-width application_status'>The 2017 Mandela Washington Fellowship application is now closed.</p>
+
+			{% if countdown %}
+			<div class='section application_countdown'>
+				{{ countdown }}
+			</div>
+			{% endif %}
+
+			<div class='section application_timeline'>
+				<h4>Timeline</h4>
+				<div class='application_content'>{{ page_data.cmb2.mwf_app_application.mwf_app_application_process_timeline }}</div>
+			</div>
+			<div class='section full-container-width application_resources'>
+				<div class='inner-container'>
+					<h4>Application Resources</h4>
+					<div class='ui two column grid'>
+						<a
+							href="{{ page_data.cmb2.mwf_app_application.mwf_app_application_instructions_pdf }}"
+							target='_blank'
+							class='application_content cta_link'
+						>
+							<span class='application_resources_resource'>Download the 2017 Application Instructions (PDF)</span>
+						</a>
+						<a href='#mandela-washington-fellowship-faqs' class='application_content cta_link scroll_link'>
+							<span class='application_resources_resource'>Read the 2018 Frequently Asked Questions</span>
+						</a>
+					</div>
+					<div class='ui two column grid'>
+						<a href='/category/application-tips' class='application_content cta_link'>
+							<span class='application_resources_resource'>Go to Application Tips <i class='angle right icon'></i></span>
+						</a>
+						<a href='http://yaliapp.irex.org' target='_blank' class='application_content cta_link'>
+							<span class='application_resources_resource'>View the application <i class='angle right icon'></i></span>
+						</a>
+					</div>
+				</div>
+			</div>
+			<div class='section application_selection'>
+				<h4>Application Selection Process</h4>
+				<div class='application_content'>{{ page_data.cmb2.mwf_app_application.mwf_app_application_selection_process }}</div>
+			</div>
+			<div class='section application_eligibility'>
+				<h5>Who is eligible to apply?</h5>
+				<div class='application_content'>{{ page_data.cmb2.mwf_app_application.mwf_app_application_eligibility }}</div>
+			</div>
+			<div class='section application_criteria'>
+				<h5>What are the criteria for selection?</h5>
+				<div class='application_content'>{{ page_data.cmb2.mwf_app_application.mwf_app_application_criteria }}</div>
+			</div>
+			<div class='section application_info'>
+				<h5>Application Information</h5>
+				<div class='application_content'>{{ page_data.cmb2.mwf_app_application.mwf_app_application_info }}</div>
+			</div>
+		</section>
+
+		{{ addtl_content }}
+
+	</div>
+</section>
+{% endblock %}

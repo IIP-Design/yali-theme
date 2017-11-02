@@ -8,8 +8,8 @@ import * as responsiveImages from './responsive_background_image.js';
 import * as dropdown_filter from './dropdown_filter';
 import './application_status';
 import './simple_filter';
-
 import scroll_to_elem from './scrollTo';
+import show_more_posts from './show_more';
 
 (function($) {
  
@@ -24,8 +24,10 @@ import scroll_to_elem from './scrollTo';
   // Init Accordions
   $('.ui.accordion').accordion();  
 
-
   // MWF Links - Page Scroll
   scroll_to_elem('.scroll_link');
+
+  // Search Results Page
+  show_more_posts('.results_list_row.hidden');
  
 })( jQuery ); 

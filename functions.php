@@ -164,10 +164,12 @@ class YaliSite {
 		add_action( 'init', array( $this, 'register_post_types' ) );
 		add_action( 'init', array( $this, 'register_taxonomies' ) );
 		add_action( 'init', array( $this, 'register_shortcodes' ) );
+		add_action( 'init', array(  $this, 'excerpt_more_override') );
 		add_action( 'admin_init', array( $this, 'admin_remove_menu_pages' ) );
 		add_action( 'admin_init', array( $this, 'admin_remove_corona_shortcode_button') );
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
+		add_action('pre_get_posts', array( $this, 'search_filter') );
 
 		$this->twig_init();
 
@@ -194,18 +196,6 @@ class YaliSite {
 		add_post_type_support( 'page', 'excerpt' );
 
 		/*
-		* Excerpt Read More
-		*/
-		add_action('init', 'excerpt_more_override');
-		function excerpt_more_override() {
-			remove_filter('excerpt_more', 'corona_excerpt_read_more');
-			add_filter('excerpt_more', function($more) {
-				global $post;
-				return '&nbsp; <a href="' . get_permalink($post->ID) . '"> Read More...</a>';
-			});
-		}
-
-		/*
 		* IIP Interactive Plugin Edits
 		*/
 		require_once get_stylesheet_directory() . '/includes/edit-iip-interactive-plugin/edit-iip-interactive.php';
@@ -213,8 +203,7 @@ class YaliSite {
 		/*
 		* Qzzr Shortcode
 		*/
-		require_once get_stylesheet_directory() . '/includes/yali_shortcodes/qzzr_shortcode.php';
-
+		require_once get_stylesheet_directory() . '/includes/yali_shortcodes/qzzr_shortcode.php';				
 	}
 
 	function twig_init() {
@@ -272,7 +261,7 @@ class YaliSite {
 	}
 
 	function admin_enqueue_scripts() {
-			wp_enqueue_style( 'yali-admin-css', get_stylesheet_directory_uri() . '/style-admin.css' );
+		wp_enqueue_style( 'yali-admin-css', get_stylesheet_directory_uri() . '/style-admin.css' );
 	}
 
 	function admin_remove_menu_pages() {
@@ -291,25 +280,46 @@ class YaliSite {
 		return $twig;
 	}
 
+	/*
+	* Excerpt Read More Edit
+	*/
+	function excerpt_more_override() {
+		remove_filter('excerpt_more', 'corona_excerpt_read_more');
+		add_filter('excerpt_more', function($more) {
+			global $post;
+			return '&nbsp; <a href="' . get_permalink($post->ID) . '"> Read More...</a>';
+		});
+	}
+
+	/*
+	* Edit Search Query - Query only Posts
+	*/
+	function search_filter($query) {
+		if( $query->is_main_query() && $query->is_search() ) {
+			$query->set('post_type', array('post', 'page'));
+			$query->set('posts_per_page', '-1');
+		}	
+	}
+
 	// Helpers
 	public static function cdp_get_option( $key = '', $default = false ) {
-    if ( function_exists( 'cmb2_get_option' ) ) {
-      // Use cmb2_get_option as it passes through some key filters.
-      return cmb2_get_option( 'cdp_options', $key, $default );
-    }
+	    if ( function_exists( 'cmb2_get_option' ) ) {
+	      // Use cmb2_get_option as it passes through some key filters.
+	      return cmb2_get_option( 'cdp_options', $key, $default );
+	    }
 
-    // Fallback to get_option if CMB2 is not loaded yet.
-    $opts = get_option( 'cdp_options', $default );
-    $val = $default;
+	    // Fallback to get_option if CMB2 is not loaded yet.
+	    $opts = get_option( 'cdp_options', $default );
+	    $val = $default;
 
-    if ( 'all' == $key ) {
-      $val = $opts;
-    } elseif ( is_array( $opts ) && array_key_exists( $key, $opts ) && false !== $opts[ $key ] ) {
-      $val = $opts[ $key ];
-    }
+	    if ( 'all' == $key ) {
+	      $val = $opts;
+	    } elseif ( is_array( $opts ) && array_key_exists( $key, $opts ) && false !== $opts[ $key ] ) {
+	      $val = $opts[ $key ];
+	    }
 
-    return $val;
-  }
+	    return $val;
+  	}
 
 }
 

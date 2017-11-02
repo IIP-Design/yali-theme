@@ -1,3 +1,18 @@
+// Styling for courses page template
+.lead-in {
+  max-width: 1300px;
+  padding: 0 50px;
+  @media screen and (max-width: 933px) {
+    padding: 0;
+  }
+}
+
+.course-page-lead-in {
+  padding-top: 22px;
+  margin-bottom: 0px;
+}
+
+// Styling for embedded Courses Module
 // Course pages
 .course-intro-text {
 
@@ -42,6 +57,7 @@
 
 .media-object-title {
   font-size: em(20);
+  padding-top: 22px;
 }
 
 .media-object-subtitle {

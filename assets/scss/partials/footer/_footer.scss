@@ -186,6 +186,20 @@
             }
           }
         }
+
+        .search_submit_wrapper {        
+          display: inline-block;
+          position: relative;
+          vertical-align: top;
+
+          #searchsubmit_footer {
+            position: absolute;
+            z-index: -1;
+            width: 100%;
+            opacity: 0;
+          }
+        }
+
       }
     }
   }

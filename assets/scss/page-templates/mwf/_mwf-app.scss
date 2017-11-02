@@ -1,4 +1,4 @@
-.mandela-washington-fellowship {
+.application-information {
 	
 	
 	.section {
@@ -16,81 +16,14 @@
 	}
 
 
-	.learn-more {
-
-		&_links {
-			text-align: center;
-			
-			.cta_link {
-				display: inline-block;
-				width: 33%;
-				max-width: 100%;
-				font-weight: 600;
-				background-color: $blue-medium;
-				@media screen and (max-width: 635px) {
-					width: 100%;
-					margin-bottom: 5px;
-				}
-				@media screen and (min-width: 321px) and (max-width: 933px) {
-					font-size: 18px;
-				}
-				@media screen and (max-width: 320px) {
-					font-size: 14px;
-				}
-
-			}
-
-		}
-
-	}
-
-
-	.mwf_social {
-		padding: 35px 0;
-		text-align: center;
-		color: #fff;
-		background-color: $blue-navy;
-
-		&_link {
-			display: inline-block;
-			height: 40px;
-			width: 40px;
-			background: url('../yali/assets/img/social_sprite.png') center no-repeat;						
-
-			&--facebook {
-				background-position: 0 0;
-			}						
-
-			&--flickr {
-				background-position: -110px 0;
-			}
-
-			&:not(:last-child) {
-				margin-right: 15px;
-			}
-		}
-
-		i.icon {
-			position: relative;			
-			font-size: 2em;
-			color: $blue-navy;
-			background-color: #fff;						
-
-			&.facebook, 
-			&.twitter {
-				margin-right: 15px;
-			}
-
-			&::before {
-				position: absolute;
-				top: -4px;
-				left: 50%;
-				transform: translateX(-50%);
-			}
+	#fellowship_application {
+		margin-top: 50px;
+		@media screen and (max-width: 767px) {
+			margin-top: 25px;
 		}
 	}
 
-	/*
+
 	.application {
 
 		&_content {
@@ -190,6 +123,5 @@
 			}
 		}
 	}
-	*/
 
 }

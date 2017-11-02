@@ -1,0 +1,20 @@
+{% extends "base.twig" %}
+
+{% block content %}
+
+
+<section class='ui container'>
+  <div class='lead-in'>
+    <h4 class='course-page-lead-in'>Course:</h4>
+    <h3 class='course-page-title'>{{ page_data.title.rendered }}</h3>
+  </div>
+
+  <div class='inner-container'>
+		<div class='page-content'>
+			{{ page_data.content.rendered }}
+		</div>
+	</div>
+
+</section>
+
+{% endblock %}

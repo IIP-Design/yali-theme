@@ -24,7 +24,7 @@ $categories = Yali\API::get_category_list();
 $series = get_terms('series');
 
 // Data for certain pages or shared
-$social_block = do_shortcode("[content_block id='13313']");
+$social_block = do_shortcode("[content_block id='14264']");
 $courses_faq = do_shortcode("[content_block id='13942']");
 $featured_course = do_shortcode("[content_block id='13772']");
 
