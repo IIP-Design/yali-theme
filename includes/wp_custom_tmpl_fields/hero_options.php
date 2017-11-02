@@ -8,8 +8,8 @@ function hero_title_option() {
 
 	$hero_title  = new_cmb2_box( array(
 		'id'           =>  'hero_title',
-    	'title'        => __( 'Display Title as Overlay in Hero Image Section?', 'default-page' ),
-    	'object_types' => array( 'page' ),
+    	'title'        => 'Display Title as Overlay in Hero Image Section?',
+    	'object_types' => array( 'page', 'post'),
     	'context'      => 'advanced',
     	'priority'     => 'high',
     	'show_in_rest' => true
@@ -21,9 +21,9 @@ function hero_title_option() {
 		'desc' => 'Default display is below the hero image.',
 		'type' => 'radio_inline',
 		'options' => array(
-			'yes'   => __( 'Yes', 'default-page' ),
-			'no'    => __( 'No', 'default-page' ),
-			'hide'	=> __( 'Hide Image', 'default-page')
+			'yes'   => __( 'Yes' ),
+			'no'    => __( 'No' ),
+			'hide'	=> __( 'Hide Image' )
 		),
 		'default' => 'no'
 	));
