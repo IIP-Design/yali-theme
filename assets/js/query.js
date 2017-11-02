@@ -62,7 +62,8 @@ export function getLanguages( filter, cb ) {
   axios.post(API, {
     body: bodybuilder()
       .size(0)
-      .query('terms', 'site', INDEXES )
+      .query( 'terms', 'site', INDEXES )
+      .notFilter( 'term', 'language.locale', 'es')
       .agg('terms', 'language.locale.keyword', {
           'size': 200,  
           'order': { '_term' : 'asc' } 

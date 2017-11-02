@@ -101,7 +101,7 @@ function populateDropDownSelects( filters ) {
     }
   }
 
-  forEach(filters, function(index, filter) {
+  forEach( filters, function(index, filter ) {
     switch ( filter.id ) {
       case 'type':
         query.getTypes( filter, addOptions );
@@ -197,8 +197,8 @@ function addAllFeeds() {
       types: types,
       langs: 'en',
       series: '',
-      categories: '',
       meta: ['date'],
+      categories: '',
       ui: { openLinkInNewWin: 'no' }
     };
     

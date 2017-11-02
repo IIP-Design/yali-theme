@@ -271,8 +271,8 @@ function addAllFeeds() {
       types: types,
       langs: 'en',
       series: '',
-      categories: '',
       meta: ['date'],
+      categories: '',
       ui: { openLinkInNewWin: 'no' }
     };
 
@@ -1370,7 +1370,7 @@ function getSeries(filter, cb) {
 
 function getLanguages(filter, cb) {
   _axios2.default.post(API, {
-    body: (0, _bodybuilder2.default)().size(0).query('terms', 'site', INDEXES).agg('terms', 'language.locale.keyword', {
+    body: (0, _bodybuilder2.default)().size(0).query('terms', 'site', INDEXES).notFilter('term', 'language.locale', 'es').agg('terms', 'language.locale.keyword', {
       'size': 200,
       'order': { '_term': 'asc' }
     }, 'distinct_languages', function (a) {
