@@ -39,7 +39,7 @@ $donot_index = get_post_meta($post->ID, 'donot_index_option', true);
 
 
 if( $pagename === 'action' ) {
-  $campaigns = ( $check_host == 'yali.dev.america.gov' || $check_host == 'yalibeta.edit.america.gov' || 'yali.state.gov' ) ? Yali\API::get_child_pages(13240) : Yali\API::get_child_pages(8);
+  $campaigns = ( $check_host == 'yali.dev.america.gov' || $check_host == 'yalibeta.edit.america.gov' || $check_host == 'yali.state.gov' ) ? Yali\API::get_child_pages(13240) : Yali\API::get_child_pages(8);
   wp_reset_postdata();
 }
 
