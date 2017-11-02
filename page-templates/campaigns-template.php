@@ -23,7 +23,7 @@ $srcset = wp_get_attachment_image_srcset($img_id, "full");
 $sizes = wp_get_attachment_image_sizes($img_id, "full");
 
 $social_block = do_shortcode("[content_block id='14264']");
-$campaigns = ( $check_host == 'yali.dev.america.gov' ) ? Yali\API::get_child_pages(13240) : Yali\API::get_child_pages(8);
+$campaigns = ( $check_host == 'yali.dev.america.gov' || $check_host == 'yalibeta.edit.america.gov' || 'yali.state.gov' ) ? Yali\API::get_child_pages(13240) : Yali\API::get_child_pages(8);
 wp_reset_postdata();
 
 // Yali Learns - Campaign Materials Accordion
