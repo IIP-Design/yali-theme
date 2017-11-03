@@ -92,14 +92,28 @@ var filterHash = {
   'language': 'langs',
   'series': 'series',
   'sort': 'sort'
+};
 
-  /**
-   * Adds 'onReadyFeed' listener to list. 'onReadyFeed' is fired from react module
-   * to indicate that the articles have been added to the DOM.  Processing that 
-   * needs the article DOM ready are handled within listener
-   * @param {string} id id of feed list
-   */
-};function addOnFeedReadyHandler(id) {
+var defaultFilterConfig = {
+  sites: cdp.searchIndexes,
+  from: 0,
+  size: 12,
+  sort: 'recent',
+  types: '',
+  langs: 'en',
+  series: '',
+  meta: ['date'],
+  categories: '',
+  ui: { openLinkInNewWin: 'no' }
+};
+
+/**
+ * Adds 'onReadyFeed' listener to list. 'onReadyFeed' is fired from react module
+ * to indicate that the articles have been added to the DOM.  Processing that 
+ * needs the article DOM ready are handled within listener
+ * @param {string} id id of feed list
+ */
+function addOnFeedReadyHandler(id) {
   var el = $('#' + id);
 
   window.addEventListener('onReadyFeed', function (e) {
@@ -156,20 +170,23 @@ function addLinkToCoursePage(article) {
  * Initialisze dropdowns, feeds and "Show More" button.
  */
 function initializeFilters() {
-  // @todo need loop thru .cb-cdp-filters if mulitple filter menus are added to the page
-  var filters = document.querySelectorAll('.cb-cdp-filters div.ui.dropdown');
-  if (filters.length) {
-    populateDropDownSelects(filters);
-    addAllFeeds();
-    feedButtonEnable();
-  }
+  var filterGroup = document.querySelectorAll('.cb-cdp-filters');
+  forEach(filterGroup, function (index, group) {
+    var feed = document.querySelector('#' + group.dataset.target);
+    var filters = group.querySelectorAll('div.ui.dropdown');
+    if (filters.length) {
+      initializeDropDownSelects(filters, feed);
+      initializeFeed(feed);
+      initializeFeedButton(feed);
+    }
+  });
 }
 
 /**
  * Populate dropdown filter menus.  The type of filter is found
  * in the id attribute of the dropdown element
  */
-function populateDropDownSelects(filters) {
+function initializeDropDownSelects(filters, feed) {
   var config = {
     useLabels: false,
     onChange: function onChange(value, text, selectedItem) {
@@ -214,7 +231,6 @@ function updateFeed() {
       forEach(filters, function (index, filter) {
         config[filterHash[filter.name]] = filter.value;
       });
-
       removeFeed(target, config);
     }
   }
@@ -254,47 +270,37 @@ function addFeed(config) {
  * the DOM. Set an initial search config and store it in the cdpFilterFeedConfig 
  * object
  */
-function addAllFeeds() {
-  var filteredFeed = document.querySelectorAll("[data-content-type='cdp-filtered-list']");
+function initializeFeed(feed) {
+  // Types allows search to only search specific types (generally for cases where there
+  // is not a fliter for a specifc type, i.e. featured courses page)
+  var types = feed.dataset.types ? feed.dataset.types : '',
+      id = feed.id;
 
-  forEach(filteredFeed, function (index, feed) {
-    // Types allows search to only search specific types (generally for cases where there
-    // is not a fliter for a specifc type, i.e. featured courses page)
-    var types = feed.dataset.types ? feed.dataset.types : '';
+  cdpFilterFeedConfig[id] = deepClone(defaultFilterConfig);
+  cdpFilterFeedConfig[id].selector = '#' + id;
 
-    cdpFilterFeedConfig[feed.id] = {
-      selector: '#' + feed.id,
-      sites: cdp.searchIndexes,
-      from: 0,
-      size: 12,
-      sort: 'recent',
-      types: types,
-      langs: 'en',
-      series: '',
-      meta: ['date'],
-      categories: '',
-      ui: { openLinkInNewWin: 'no' }
-    };
+  if (types) {
+    cdpFilterFeedConfig[id].types = types;
+  }
 
-    addOnFeedReadyHandler(feed.id);
-    addFeed(cdpFilterFeedConfig[feed.id]);
-  });
+  addOnFeedReadyHandler(id);
+  addFeed(query.builder(cdpFilterFeedConfig[id]));
 }
 
-/* Button functions */
+/****** Button functions ********/
 
 /**
  * Add 'click' listener to 'Show More' button if present
  */
-function feedButtonEnable() {
-  var filteredFeed = document.querySelectorAll("[data-content-type='cdp-filtered-list']");
-  forEach(filteredFeed, function (index, feed) {
-    var btnId = 'btn-' + feed.id;
-    var btn = document.getElementById(btnId);
-    if (btn) {
-      btn.addEventListener('click', feedButtonOnClick, false);
-    }
-  });
+function initializeFeedButton(feed) {
+  //let filteredFeed = document.querySelectorAll("[data-content-type='cdp-filtered-list']");
+  // forEach(filteredFeed, function(index, feed) {
+  var btnId = 'btn-' + feed.id;
+  var btn = document.getElementById(btnId);
+  if (btn) {
+    btn.addEventListener('click', feedButtonOnClick, false);
+  }
+  // });
 }
 
 /**
@@ -330,7 +336,7 @@ function feedButtonOnClick(e) {
  * Hide/show 'Show More' button based on search results
  * The button will be hidden if:
  * 1. Number of search results within intial return < number of results requested by size param
- * 2. Requested size param >= total elastic hit count (i.e. there may be 100 total results, by config only wants 10 shown)
+ * 2. Requested size param >= total elastic hit count (i.e. there may be 100 total results, by config only shows config.size)
  * 3. Exhausted all results by clicking 'Show More'
  * @param {*} id id of feed
  * @param {number} itemLen Number of search results within intial return
@@ -549,6 +555,17 @@ var forEach = function forEach(array, callback, scope) {
   for (var i = 0; i < array.length; i++) {
     callback.call(scope, i, array[i]);
   }
+};
+
+/**
+ * Recursively copy object.
+ * Need to recursively copy (deep clone) as the UI prop is an object.
+ * Cannot usesObject.assign() as it only copies property values.
+ * If the source value is a reference to an object (i.e. ui prop), it only copies that reference value
+ * @param {*} obj 
+ */
+var deepClone = function deepClone(obj) {
+  return JSON.parse(JSON.stringify(obj));
 };
 
 /**
@@ -1332,14 +1349,7 @@ var INDEXES = cdp.searchIndexes ? fetchArray(cdp.searchIndexes) : 'yali.dev.amer
 
 // Populate dropdown filters
 function getTypes(filter, cb) {
-  _axios2.default.post(API, {
-    body: (0, _bodybuilder2.default)().size(0).query('terms', 'site', INDEXES).agg('terms', 'type.keyword', {
-      'size': 50,
-      'order': { '_term': 'asc' } }, 'type').build()
-  }).then(function (response) {
-    var data = formatResponse(response, 'type');
-    cb(filter, data);
-  });
+  cb(filter, [{ key: 'article', display: 'Article' }, { key: 'courses', display: 'Course' }, { key: 'podcast', display: 'Podcast' }, { key: 'video', display: 'Video' }]);
 }
 
 function getCategories(filter, cb) {
@@ -1404,14 +1414,19 @@ function builder(params) {
 
 var generateBodyQry = exports.generateBodyQry = function generateBodyQry(params) {
   var body = new _bodybuilder2.default();
-  var qry = [];
+  var qry = [],
+      str = void 0;
 
   params.sites.forEach(function (item) {
     body.orFilter('term', 'site', item);
   });
 
-  // becomes a MUST if there is only 1 site
+  // Becomes a MUST if there is only 1 site
   body.filterMinimumShouldMatch(1);
+
+  // Remove pages that house courses. Actual course data will link to course page ( Course page have naming convention course-[id]) 
+  // so we do not want both the course and the course page to appear in search results
+  body.notQuery('match', 'slug', 'course-*');
 
   if (params.series) {
     body.filter('term', 'taxonomies.series.name.keyword', params.series); // need exact match
@@ -1426,7 +1441,26 @@ var generateBodyQry = exports.generateBodyQry = function generateBodyQry(params)
   }
 
   if (params.types) {
-    qry.push.apply(qry, _toConsumableArray(appendQry(params.types, 'type')));
+    switch (params.types) {
+      case 'article':
+        str = 'type: post OR type: page';
+        qry.push(str);
+        break;
+
+      case 'courses':
+        str = 'type: courses AND branded: yes';
+        qry.push(str);
+        break;
+
+      case 'podcast':
+      case 'video':
+        str = 'taxonomies.content_type.slug:  ' + params.types;
+        qry.push(str);
+        break;
+
+      default:
+        qry.push.apply(qry, _toConsumableArray(appendQry(params.types, 'type')));
+    }
   }
 
   var qryStr = reduceQry(qry);

@@ -16,6 +16,20 @@ var filterHash = {
   'sort': 'sort'
 }
 
+var defaultFilterConfig = {
+  sites: cdp.searchIndexes,
+  from: 0,
+  size: 12,
+  sort: 'recent',
+  types: '',
+  langs: 'en',
+  series: '',
+  meta: ['date'],
+  categories: '',
+  ui: { openLinkInNewWin: 'no' }
+};
+
+
 /**
  * Adds 'onReadyFeed' listener to list. 'onReadyFeed' is fired from react module
  * to indicate that the articles have been added to the DOM.  Processing that 
@@ -85,9 +99,9 @@ function initializeFilters() {
     let feed = document.querySelector( `#${group.dataset.target}` );
     let filters = group.querySelectorAll( 'div.ui.dropdown' ); 
        if ( filters.length ) {
-         initializeDropDownSelects(filters);
+         initializeDropDownSelects( filters, feed );
          initializeFeed( feed ) ;
-         initializeFeedButton(feed);
+         initializeFeedButton( feed );
        }
    });
 }
@@ -96,7 +110,7 @@ function initializeFilters() {
  * Populate dropdown filter menus.  The type of filter is found
  * in the id attribute of the dropdown element
  */
-function initializeDropDownSelects( filters ) {
+function initializeDropDownSelects( filters, feed ) {
   let config = {
     useLabels: false,
     onChange: function(value, text, selectedItem) {
@@ -141,7 +155,6 @@ function updateFeed() {
       forEach(filters, function(index, filter) {
         config[filterHash[filter.name]] = filter.value;
       });
-     
       removeFeed( target, config );
     }
   }
@@ -172,7 +185,7 @@ function addFeed( config ) {
   try {
     CDP.widgets.ArticleFeed.new( config ).render();
   } catch( err ) {
-    console.log('Unable to article feed: ' + err.message)
+    console.log( 'Unable to article feed: ' + err.message );
   }
 }
 
@@ -184,24 +197,18 @@ function addFeed( config ) {
 function initializeFeed( feed ) {
   // Types allows search to only search specific types (generally for cases where there
   // is not a fliter for a specifc type, i.e. featured courses page)
-  let types = feed.dataset.types ? feed.dataset.types : '';
+  let types = feed.dataset.types ? feed.dataset.types : '',
+        id = feed.id;
 
-  cdpFilterFeedConfig[feed.id] = {
-    selector: `#${feed.id}`,
-    sites: cdp.searchIndexes,
-    from: 0,
-    size: 12,
-    sort: 'recent',
-    types: types,
-    langs: 'en',
-    series: '',
-    meta: ['date'],
-    categories: '',
-    ui: { openLinkInNewWin: 'no' }
-  };
+  cdpFilterFeedConfig[id] = deepClone( defaultFilterConfig );
+  cdpFilterFeedConfig[id].selector = `#${id}`;
 
-  addOnFeedReadyHandler(feed.id);
-  addFeed(cdpFilterFeedConfig[feed.id]);
+  if( types ) {
+     cdpFilterFeedConfig[id].types = types;
+  }
+   
+  addOnFeedReadyHandler( id );
+  addFeed( query.builder(cdpFilterFeedConfig[id]) );
 
 }
 
@@ -470,6 +477,17 @@ const forEach = function(array, callback, scope) {
     callback.call(scope, i, array[i]);
   }
 };
+
+/**
+ * Recursively copy object.
+ * Need to recursively copy (deep clone) as the UI prop is an object.
+ * Cannot usesObject.assign() as it only copies property values.
+ * If the source value is a reference to an object (i.e. ui prop), it only copies that reference value
+ * @param {*} obj 
+ */
+const deepClone = function ( obj ) {
+  return JSON.parse( JSON.stringify(obj) );
+}
 
 
 /**
