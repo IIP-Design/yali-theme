@@ -80,47 +80,50 @@ function addLinkToCoursePage( article ) {
  * Initialisze dropdowns, feeds and "Show More" button.
  */
 function initializeFilters() {
-  // @todo need loop thru .cb-cdp-filters if mulitple filter menus are added to the page
-  let filters = document.querySelectorAll('.cb-cdp-filters div.ui.dropdown'); 
-  if ( filters.length ) {
-    populateDropDownSelects( filters );
-    addAllFeeds();
-    feedButtonEnable();
-  }
+  let filterGroup = document.querySelectorAll( '.cb-cdp-filters' );
+   forEach( filterGroup, function(index, group ) {
+    let feed = document.querySelector( `#${group.dataset.target}` );
+    let filters = group.querySelectorAll( 'div.ui.dropdown' ); 
+       if ( filters.length ) {
+         initializeDropDownSelects(filters);
+         initializeFeed( feed ) ;
+         initializeFeedButton(feed);
+       }
+   });
 }
 
 /**
  * Populate dropdown filter menus.  The type of filter is found
  * in the id attribute of the dropdown element
  */
-function populateDropDownSelects( filters ) {
+function initializeDropDownSelects( filters ) {
   let config = {
     useLabels: false,
-    onChange: function( value, text, selectedItem ) {
-      updateFeed();  // add debounce, or do check in article feed
+    onChange: function(value, text, selectedItem) {
+      updateFeed(); // add debounce, or do check in article feed
     }
-  }
+  };
 
-  forEach( filters, function(index, filter ) {
-    switch ( filter.id ) {
+  forEach(filters, function(index, filter) {
+    switch (filter.id) {
       case 'type':
-        query.getTypes( filter, addOptions );
-      break;
+        query.getTypes(filter, addOptions);
+        break;
 
       case 'subject':
-      query.getCategories( filter, addOptions );
-      break;
+        query.getCategories(filter, addOptions);
+        break;
 
       case 'series':
-        query.getSeries( filter, addOptions );
-      break;
+        query.getSeries(filter, addOptions);
+        break;
 
       case 'language':
-        query.getLanguages( filter, addOptions );
-      break;
+        query.getLanguages(filter, addOptions);
+        break;
     }
 
-    $( filter ).dropdown( config );
+    $(filter).dropdown(config);
   });
 }
 
@@ -178,49 +181,44 @@ function addFeed( config ) {
  * the DOM. Set an initial search config and store it in the cdpFilterFeedConfig 
  * object
  */
-function addAllFeeds() {
-  let filteredFeed = document.querySelectorAll(
-    "[data-content-type='cdp-filtered-list']"
-  );
+function initializeFeed( feed ) {
+  // Types allows search to only search specific types (generally for cases where there
+  // is not a fliter for a specifc type, i.e. featured courses page)
+  let types = feed.dataset.types ? feed.dataset.types : '';
 
-  forEach(filteredFeed, function(index, feed) {
-    // Types allows search to only search specific types (generally for cases where there
-    // is not a fliter for a specifc type, i.e. featured courses page)
-    let types = ( feed.dataset.types ) ? feed.dataset.types : '';
+  cdpFilterFeedConfig[feed.id] = {
+    selector: `#${feed.id}`,
+    sites: cdp.searchIndexes,
+    from: 0,
+    size: 12,
+    sort: 'recent',
+    types: types,
+    langs: 'en',
+    series: '',
+    meta: ['date'],
+    categories: '',
+    ui: { openLinkInNewWin: 'no' }
+  };
 
-    cdpFilterFeedConfig[feed.id] = {
-      selector: `#${feed.id}`,
-      sites: cdp.searchIndexes,  
-      from: 0,
-      size: 12,
-      sort: 'recent',
-      types: types,
-      langs: 'en',
-      series: '',
-      meta: ['date'],
-      categories: '',
-      ui: { openLinkInNewWin: 'no' }
-    };
-    
-    addOnFeedReadyHandler( feed.id );
-    addFeed( cdpFilterFeedConfig[feed.id] );
-  });
+  addOnFeedReadyHandler(feed.id);
+  addFeed(cdpFilterFeedConfig[feed.id]);
+
 }
 
-/* Button functions */
+/****** Button functions ********/
 
 /**
  * Add 'click' listener to 'Show More' button if present
  */
-function feedButtonEnable() {
-  let filteredFeed = document.querySelectorAll("[data-content-type='cdp-filtered-list']");
-  forEach(filteredFeed, function(index, feed) {
-    let btnId = `btn-${feed.id}`;
-    let btn = document.getElementById(btnId);
-    if( btn ) {
-      btn.addEventListener('click', feedButtonOnClick, false);
-    }
-  });
+function initializeFeedButton( feed ) {
+  //let filteredFeed = document.querySelectorAll("[data-content-type='cdp-filtered-list']");
+  // forEach(filteredFeed, function(index, feed) {
+  let btnId = `btn-${feed.id}`;
+  let btn = document.getElementById(btnId);
+  if (btn) {
+    btn.addEventListener('click', feedButtonOnClick, false);
+  }
+  // });
 }
 
 /**
@@ -256,7 +254,7 @@ function feedButtonOnClick(e) {
  * Hide/show 'Show More' button based on search results
  * The button will be hidden if:
  * 1. Number of search results within intial return < number of results requested by size param
- * 2. Requested size param >= total elastic hit count (i.e. there may be 100 total results, by config only wants 10 shown)
+ * 2. Requested size param >= total elastic hit count (i.e. there may be 100 total results, by config only shows config.size)
  * 3. Exhausted all results by clicking 'Show More'
  * @param {*} id id of feed
  * @param {number} itemLen Number of search results within intial return

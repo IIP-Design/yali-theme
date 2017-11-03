@@ -114,8 +114,9 @@ export const generateBodyQry = ( params ) => {
     body.filter('term', 'taxonomies.series.name.keyword', params.series ) // need exact match
   }
 
-  if ( params.langs ) {
-    qry.push( ...appendQry(params.langs, 'language.locale') );
+  if (params.langs) {
+    qry.push(...appendQry(params.langs, 'language.locale'));
+    //body.filter('term', 'language.locale.keyword', params.langs); // need exact match
   }
 
   if ( params.categories ) {
