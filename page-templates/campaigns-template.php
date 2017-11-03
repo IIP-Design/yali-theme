@@ -83,6 +83,10 @@ $africa4her_post_list = do_shortcode("[content_block id='14637' title='Learn mor
 $yaliunites_course = do_shortcode("[content_block id='14706' title='Take the course']");
 $yaliunites_post_list = do_shortcode("[content_block id='14666' title='What's the harm?']");
 
+// YALIServes
+$yaliserves_course = do_shortcode("");
+$yaliserves_post_list = do_shortcode("[content_block id='14002' title='Make everyday Mandela Day']");
+
 
 // Data array for twig
 $context = array(
@@ -102,7 +106,9 @@ $context = array(
   "africa4her_course" => $africa4her_course,
   "africa4her_post_list" => $africa4her_post_list,
   "yaliunites_course" => $yaliunites_course,
-  "yaliunites_post_list"  => $yaliunites_post_list
+  "yaliunites_post_list"  => $yaliunites_post_list,
+  "yaliserves_course" => $yaliserves_course,
+  "yaliserves_post_list" => $yaliserves_post_list
 );
 
 

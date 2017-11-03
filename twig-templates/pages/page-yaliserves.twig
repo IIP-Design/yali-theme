@@ -11,11 +11,44 @@
 			{{ page_data.content.rendered }}
 		</section>
 
+		{{ yaliserves_post_list }}		
+
+		<!-- COURSE BLOCK NEEDED
+		{{ yaliserves_course }} -->
+		{% include 'content_blocks/post-single.twig' with 
+			{
+				title: 'Take the course - PLACEHOLDER',
+				img_src: 'data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==',
+				headline: 'Lorem ipsum dolor sit amet',
+				excerpt: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas lacinia magna vel lacus malesuada gravida.',
+				course: 'true'
+			} 
+		%}
+
+		<section class='section org_event'>
+			<h3>Organize an event</h3>
+			<p class='org_event_text'>Organize a <a href='#'>#YALIServes</a> event 
+				using <a href='https://yalibeta.edit.america.gov/course-942/#/?_k=exd71y'><em>Community Organizing for Action</em></a>. 
+				Use the materials below to help plan your event.
+			</p>
+			<div class='ui stackable grid org_event_items'>
+				{% for file in orgevent_data %}
+				<div class='eight wide column org_event_item'>
+					<a href='{{ file.file_url }}' target='target_blank' class='cta_link'>{{ file.file_name }}</a>
+				</div>
+				{% endfor %}
+			</div>
+			<br>
+			<p>Already held a YALIServes event? Tell us about it using this report form: <a href='Already held a YALIServes event? Tell us about it using this report form: YALILearns Report'>YALILearns Report</a></p>
+			<br>
+			<p>Find inspiration in one of the 1,000 #YALIServes events organized by YALI Network members across 47 sub-Saharan African countries from July 2017. Click and drag the map below to zoom in and explore. Click on a pin to see event details.</p>
+			<iframe width="100%" height="500" scrolling="no" frameborder="no" src="https://fusiontables.google.com/embedviz?q=select+col13+from+17SmvE3CleIxR1X3Ir6JaQ7mJijDowxjJk9TYitbh&viz=MAP&h=false&lat=5.1965272263266575&lng=25.15862979999997&t=1&z=4&l=col13&y=2&tmplt=2&hml=GEOCODABLE"></iframe>
+		</section>
+
 		<section class='section promote'>
 			<h3>Promote #YALIServes</h3>
-			<p>Download, use and share these graphics on social media.</p>
+			<p>Download and share these graphics on social media to show your commitment to volunteerism!</p>
 			<div class='ui stackable grid promote_item'>
-
 				{% for promo in promo_data %}
 				<div class='eight wide column promote_item'>
 					<div class='promote_item_img' data-preview-image='{{ promo.image_url }}' style='background-image: url({{ promo.image_url }}); background-size: cover;'></div>
@@ -25,25 +58,9 @@
 			</div>
 		</section>
 
-		<section class='section org_event'>
-			<h3>Organize an event</h3>
-			<p class='org_event_text'>Organize a <a href='#'>#YALILearns</a> event and facilitate <a href='#'><em>Community Organizing for Action</em></a>
-				 to raise awareness for volunteering in your community. Use our facilitation toolkit to get started.</p>
-			<div class='ui stackable grid org_event_items'>
-				{% for file in orgevent_data %}
-				<div class='eight wide column org_event_item'>
-					<a href='{{ file.file_url }}' target='target_blank' class='cta_link'>{{ file.file_name }}</a>
-				</div>
-				{% endfor %}
-			</div>
-		</section>
-
-		{{ social_block }}
-
 		{% include 'content_blocks/honeycomb.twig' with
 			{
 				headline: 'Stay Involved',
-				subheadline: 'Check out other YALI Network Campaigns',
 				content: campaign_pages,
 				bg_color: 'lightblue'
 			}
