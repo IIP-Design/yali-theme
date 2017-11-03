@@ -11,47 +11,13 @@
 			{{ page_data.content.rendered }}          
 		</section>
 
-		{% include 'content_blocks/post-single.twig' with 
-			{
-				title: 'Read about the important issues facing women and girls around the world',
-				img_src: 'data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==',
-				headline: 'Lorem Ipsum Dolor Sit Amet',
-				excerpt: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus nisi nisi, ullamcorper nec ornare eget, consectetur vitae dolor. Nam accumsan gravida turpis, at tempor nibh aliquam vitae.',
-				cta_link: '#',
-				cta_text: 'Read more about women and girls <i class="chevron right icon"></i>'
-			} 
-		%}
-
-		{% include 'content_blocks/post-single.twig' with 
-			{
-				title: 'Take the course',
-				img_src: 'data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==',
-				headline: 'Understanding the Human Rights of Women and Girls',
-				excerpt: 'This three-lesson course addresses the marginalization and unique challenges facing women and girls - from gender discrimination and inequality in education to a lack of opportunity in business to assaults on their safety and dignity from gender based violence.',
-				cta_link: '#',
-				course: 'true'
-			} 
-		%}
-
-		<section class='section promote'>
-			<h3>Promote {{ page_data.title.rendered }}</h3>
-			<p>Download, use and share these graphics on social media.</p>						
-			<div class='ui stackable grid promote_item'>
-
-				{% for promo in promo_data %}
-				<div class='eight wide column promote_item'>
-					<div class='promote_item_img' data-preview-image='{{ promo.image_url }}' style='background-image: url({{ promo.image_url }}); background-size: cover;'></div>
-					<p class='promote_item_text'>{{ promo.image_text }}</p>
-				</div>				
-				{% endfor %}
-			</div>
-		</section>
+		{{ africa4her_course }}		
 
 		<section class='section org_event'>
-			<h3>Organize an event</h3>
-			<p class='org_event_text'>Organize a <a href='#'>#YALILearns</a> event and facilitate <a href='#'><em>Understanding the Rights of Women and Girls</em></a> 
-				to raise awareness and educate your community about alleviating these challenges, and empower female populations
-				politically, socially and economically. Use our facilitation guide or presentation template to help you get started.</p>
+			<h3>Share your knowledge</h3>
+			<p class='org_event_text'>Once you’ve taken the course, organize a YALILearns session using <a href='https://yalibeta.edit.america.gov/course-436/#/?_k=u20xk4'><em>Understanding the Rights of Women and Girls</em></a>. 
+				Use the materials below to help plan your session.
+			</p>			
 			<div class='ui stackable grid org_event_items'>
 				{% for file in orgevent_data %}
 				<div class='eight wide column org_event_item'>
@@ -61,7 +27,20 @@
 			</div>												
 		</section>
 
-		{{ social_block }}
+		<section class='section promote'>
+			<h3>Promote {{ page_data.title.rendered }}</h3>
+			<p>Download and share these graphics on social media to show your investment in women and girls around the world!</p>						
+			<div class='ui stackable grid promote_item'>
+				{% for promo in promo_data %}
+				<div class='eight wide column promote_item'>
+					<div class='promote_item_img' data-preview-image='{{ promo.image_url }}' style='background-image: url({{ promo.image_url }}); background-size: cover;'></div>
+					<p class='promote_item_text'>{{ promo.image_text }}</p>
+				</div>				
+				{% endfor %}
+			</div>
+		</section>
+
+		{{ africa4her_post_list }}
 
 		{% include 'content_blocks/honeycomb.twig' with 
 			{ 				

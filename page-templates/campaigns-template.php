@@ -47,6 +47,9 @@ foreach ($campaign_pages as $item) {
   }
 }
 
+// 'Join the Network' Form
+$formVar = do_shortcode('[formidable id=6]');
+
 // Yali Learns - Campaign Materials Accordion
 $campaign_materials_accordion = do_shortcode("[content_block id='13615' title='Yali Learns Campaign Materials']");
 
@@ -69,8 +72,14 @@ if( !empty($alumni_vids) ) {
   }
 }
 
-// 'Join the Network' Form
-$formVar = do_shortcode('[formidable id=6]');
+/********************************** 
+    CAMPAIGN SPECIFIC BLOCKS 
+***********************************/
+// Africa4Her specific
+$africa4her_course = do_shortcode("[content_block id='14592' title='Take the course - Africa4Her']");
+$africa4her_post_list = do_shortcode("[content_block id='14637' title='Learn more about the rights of women and girls']");
+
+
 
 // Data array for twig
 $context = array(
@@ -85,8 +94,10 @@ $context = array(
   "promo_data"	 	  => $promo_data,
   "orgevent_data"	  => $orgevent_data,
   "alumni_vids"     => $alumni_vids_formatted,
-  'campaign_materials_accordion'  => $campaign_materials_accordion,
-  'formVar'         => $formVar
+  "campaign_materials_accordion"  => $campaign_materials_accordion,
+  "formVar"         => $formVar,
+  "africa4her_course" => ( !$africa4her_course ) ? $africa4her_course : null,
+  "africa4her_post_list" => $africa4her_post_list
 );
 
 
