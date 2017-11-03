@@ -11,60 +11,20 @@
 			{{ page_data.content.rendered }}          
 		</section>
 
-		{% include 'content_blocks/post-listings.twig' with 
-			{
-				headline: 'Read about elections and civic responsibility',						
-				posts: [
-					{
-						title: 'When Enough is Enough: Urban Guerilla Poetry',
-						excerpt: "'Abdoulaye, faut pas forcer!' Loud but nonviolent, Y'en a Marre redefined political activism in Senegal...",
-						img_src: 'data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==',
-						post_url: '#',
-						tags: []
-					},
-					{
-						title: 'Election Time: Lessons from Young Leaders',
-						excerpt: 'The election was going to be too close to call. The mood at campaign headquarters - "headquarteres"...',
-						img_src: 'data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==',
-						post_url: '#',
-						tags: []				
-					},
-					{
-						title: 'Want to energize young voters? Look beyond elections',
-						excerpt: "In the run-up to Senegal's 2012 elections, Sobel Aziz Ngom and his friends mounted a voter education...",
-						img_src: 'data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==',
-						post_url: '#',
-						tags: []
-					}
-				]
-			}
-		%}
-
-		{% include 'content_blocks/post-single.twig' with 
-			{
-				title: 'Take the course',
-				img_src: 'data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==',
-				headline: 'Understanding Elections and Civic Responsibility',
-				excerpt: 'This three-part course seeks to educate and inform on the role of citizens in the electoral process, and provide guidance on how to exercise civic responsibility and hold candidates and officials accountable - before, during, and after elections.',
-				course: 'true'
-			} 
-		%}
-
-		<section class='section promote'>
-			<h3>Promote #YALIStands4All</h3>
-			<p>
-				Show your community that #YALIVotes to bring about a more prosperous, democratic and peaceful Africa.
-				Tweet or share on Facebook what you believe is important about Africa's upcoming elections with the 
-				hashtag #YALIVotes.
-			</p>	
-			<div class='ui stackable grid promote_item'>				
-				<div class='eight wide column promote_item'>
-					<a href='#' target='_blank' class='promote_item_share promote_item_share--twitter'>						
-						<span class='link link--twitter'></span>
-						<span class='link--text'>Share on Twitter</span>
-					</a>					
+		<section class='section org_event'>
+			<h3>Share your knowledge</h3>
+			<p class='org_event_text'>
+				Organize a #YALILearns session using <a href='https://yalibeta.edit.america.gov/course-714/#/?_k=gnnn28'><em>Understanding Elections and Civic Responsibility</em></a>
+				to raise awareness and educate your community about the importance of civic participation. Use the facilitation guide to get started.
+			</p>			
+			<div class='ui stackable grid org_event_items'>
+				{% for file in orgevent_data %}
+				<div class='eight wide column org_event_item'>
+					<a href='{{ file.file_url }}' target='target_blank' class='cta_link'>{{ file.file_name }}</a>
 				</div>
-			</div>
+				{% endfor %}
+			</div>	
+			<p>Already held a YALILearns session? Tell us about it using this report form: <a href='https://yalibeta.edit.america.gov/in-person/yali-learns/eventreport/'>YALILearns Report</a></p>		
 		</section>
 		
 		<section class='section alumni'>
@@ -90,8 +50,6 @@
 				{% endfor %}
 			</div>
 		</section>
-	
-		{{ social_block }}
 
 		{% include 'content_blocks/honeycomb.twig' with 
 			{ 				
