@@ -79,6 +79,9 @@ if( !empty($alumni_vids) ) {
 $africa4her_course = do_shortcode("[content_block id='14592' title='Take the course']");
 $africa4her_post_list = do_shortcode("[content_block id='14637' title='Learn more about the rights of women and girls']");
 
+// YALIUnites
+$yaliunites_course = do_shortcode("[content_block id='14706' title='Take the course']");
+$yaliunites_post_list = do_shortcode("[content_block id='14666' title='What's the harm?']");
 
 
 // Data array for twig
@@ -97,7 +100,9 @@ $context = array(
   "campaign_materials_accordion"  => $campaign_materials_accordion,
   "formVar"         => $formVar,
   "africa4her_course" => $africa4her_course,
-  "africa4her_post_list" => $africa4her_post_list
+  "africa4her_post_list" => $africa4her_post_list,
+  "yaliunites_course" => $yaliunites_course,
+  "yaliunites_post_list"  => $yaliunites_post_list
 );
 
 

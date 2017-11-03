@@ -11,64 +11,29 @@
 			{{ page_data.content.rendered }}          
 		</section>
 
-		<section class='section videos'>
-			<h3>Test your knowledge about accountability</h3>
-			<p>Watch the videos and take a short quiz to see if you can determine what harm can come from these scenarios:</p>
-			<div class='ui stackable grid'>
-				<div class='two column row'>
-					<div class='column video'>
-						<img class='video_img' src='data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='>
-						<h5 class='video_title'>
-							<a href='#'>A security official accepts money to smuggle goods.</a>	
-						</h5>
-						<p class='video_excerpt'>
-							An airport security employee plans to accept money to allow his cousin's friend
-							"Paul" to smuggle materials in a suitcase.
-						</p>						
-					</div>
-					<div class='column video'>
-						<img class='video_img' src='data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='>
-						<h5 class='video_title'>
-							<a href='#'>A police officer accepts a tip.</a>							
-						</h5>
-						<p class='video_excerpt'>
-							The police officer in the video thinks accepting a "tip" from a woman
-							running late is merely a mutually beneficial arrangement.							
-						</p>						
-					</div>
+		{{ yaliunites_post_list }}		
+
+		{{ yaliunites_course }}
+
+		<section class='section org_event'>
+			<h3>Share your knowledge</h3>
+			<p class='org_event_text'>
+				Organize a #YALILearns session using <a href='https://yalibeta.edit.america.gov/course-266/#/?_k=flgfuu'><em>Responsible Leadership on Transparency and Good Governance</a>.
+				Use the materials below to help plan your session, and for even more #YALILearns resources visit 
+				<a href='https://ali.state.gov/learns'>yali.state.gov/learns</a>.
+			</p>			
+			<div class='ui stackable grid org_event_items'>
+				{% for file in orgevent_data %}
+				<div class='eight wide column org_event_item'>
+					<a href='{{ file.file_url }}' target='target_blank' class='cta_link'>{{ file.file_name }}</a>
 				</div>
-				<a href='#' class='cta_link cta_link--videos'>More What's the Harm? quizzes and scenarios <i class='icon chevron right'></i></a>
-			</div>
+				{% endfor %}
+			</div>	
+			<p>Already held a YALILearns session? Tell us about it using this report form: <a href='https://yalibeta.edit.america.gov/in-person/yali-learns/eventreport/'>YALILearns Report</a></p>		
 		</section>
 
-		{% include 'content_blocks/post-single.twig' with 
-			{
-				title: 'Take the course',
-				img_src: 'data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==',
-				headline: 'Responsible Leadership on Transparency and Good Governance',
-				excerpt: 'This three-part course examines the concepts of transparency and good governance and how their lack in both the public and private sectors can lead to devastating consequences for people and institutions.',
-				course: 'true'
-			} 
-		%}
-
 		<section class='section promote'>
-			<h3>Promote #YALIUnites</h3>
-			<p>Share the #YALIUnites announcement on Facebook or Twitter using the buttons below.</p>	
-			<div class='ui stackable grid promote_item'>
-				<div class='eight wide column'>
-					<a href='#' target='_blank' class='promote_item_share promote_item_share--facebook'>						
-						<span class='link link--facebook'></span>
-						<span class='link--text'>Share on Facebook</span>
-					</a>					
-				</div>
-				<div class='eight wide column promote_item'>
-					<a href='#' target='_blank' class='promote_item_share promote_item_share--twitter'>						
-						<span class='link link--twitter'></span>
-						<span class='link--text'>Share on Twitter</span>
-					</a>					
-				</div>
-			</div>
-			<p>Download, use and share these graphics on social media.</p>
+			<h3>Promote #YALIUnites</h3>			
 			<div class='ui stackable grid promote_item'>
 				{% for promo in promo_data %}
 				<div class='eight wide column promote_item'>
@@ -79,36 +44,9 @@
 			</div>
 		</section>
 
-		<section class='section org_event'>
-			<h3>Organize an event</h3>
-			<p class='org_event_text'>Organize a <a href='#'>#YALILearns</a> event using <a href='#'><em>Responsible Leadership on Transparency 
-				and Good Governance</em></a>. Use the materials below to help plan your event.
-			</p>
-			<div class='ui stackable grid org_event_items'>
-				{% for file in orgevent_data %}
-				<div class='eight wide column org_event_item'>
-					<a href='{{ file.file_url }}' target='target_blank' class='cta_link'>{{ file.file_name }}</a>
-				</div>
-				{% endfor %}
-			</div>												
-		</section>
-
-		<section class='section survey'>
-			<h3>Tell us about your #YALIUnites event</h3>
-			<p>Take this short survey to let us know how your {{ page_data.title.rendered }} event turned out.</p>
-			<div class='ui stackable grid'>
-				<div class='eight wide column'>
-					<a href="#" class='cta_link'>Followup Event Report</a>
-				</div>
-			</div>			
-		</section>
-
-		{{ social_block }}		
-
 		{% include 'content_blocks/honeycomb.twig' with 
 			{ 				
-				headline: 'Stay Involved',
-				subheadline: 'Check out other YALI Network Campaigns',	
+				headline: 'Stay Involved',				
 				content: campaign_pages,
 				bg_color: 'lightblue'
 			} 
