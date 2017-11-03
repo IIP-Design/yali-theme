@@ -28,17 +28,21 @@ $size = wp_get_attachment_image_sizes($img_id, 'full');
 $countdown = do_shortcode($page_data['cmb2']['mwf_app_application']['mwf_app_application_date']);
 $addtl_content = do_shortcode($page_data['cmb2']['mwf_app_application']['mwf_app_addtl_content']);
 
+// 'Join the Network' Form
+$formVar = do_shortcode('[formidable id=6]');
+
 // Data array for twig
 $context = array(
-  "check_host"    => $check_host,
-  "pagename"      => $pagename,
-  "page_data"     => $page_data,
-  "header_url"    => $header_url,  
-  "feat_img"      => $feat_img_obj,
-  "srcset"		    => $srcset,
-  "size"		      => $size,
-  "countdown"     => $countdown,
-  "addtl_content" => $addtl_content
+  'check_host '   => $check_host,
+  'pagename '     => $pagename,
+  'page_data'     => $page_data,
+  'header_url'    => $header_url,
+  'feat_img'      => $feat_img_obj,
+  'srcset'		    => $srcset,
+  'size'		      => $size,
+  'formVar'       => $formVar,
+  'countdown'     => $countdown,
+  'addtl_content' => $addtl_content
 );
 
 

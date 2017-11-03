@@ -4,13 +4,13 @@
 
 
 html {
-  font-size: 100%;  
+  font-size: 100%;
 }
 
 
 body {
   font-size: $font-size + 0px;
-  
+
   &.page,
   &.single,
   &.archive,
@@ -20,8 +20,8 @@ body {
     color: $blue-navy;
     @media screen and (max-width: 933px) {
       font-size: $mobile + 0px;
-    } 
-  }  
+    }
+  }
 }
 
 
@@ -73,10 +73,38 @@ h5 {
 }
 
 
-p, 
-ol,
-.page-content > ul {
-  font-size: em(22); 
+a {
+
+  &:hover {
+    color: $blue-medium;
+    text-decoration: underline;
+  }
+
+  &:active {
+    background-color: $yellow;
+  }
+}
+
+
+h1, h2, h3, h4, h5, {
+
+  > a {
+
+    color: $blue-navy;
+
+    &:hover {
+      text-decoration: none;
+    }
+
+    &:active {
+      color: $blue-navy;
+    }
+  }
+}
+
+
+p, ol, ul {
+  font-size: em(22);
   font-weight: 300;
   line-height: 1.44;
   @media screen and (max-width: 933px) {
@@ -85,11 +113,6 @@ ol,
   @media screen and (max-width: 320px) {
     font-size: em(14, $mobile);
   }
-}
-
-
-ul {
-  font-weight: 300;
 }
 
 
@@ -111,7 +134,7 @@ blockquote {
   color: $blue-navy;
 
   &:hover {
-    color: $blue-navy;  
+    color: $blue-navy;
   }
 }
 

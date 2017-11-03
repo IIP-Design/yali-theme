@@ -31,18 +31,22 @@ $about = wpautop($page_data['cmb2']['mwf_about']['mwf_about_fellowship']);
 $formatted_about = do_shortcode($about);
 $addtl_content = do_shortcode($page_data['cmb2']['mwf_addtl']['mwf_addtl_content']);
 
+// 'Join the Network' Form
+$formVar = do_shortcode('[formidable id=6]');
+
 // Data array for twig
 $context = array(
   "check_host"    => $check_host,
   "pagename"      => $pagename,
   "page_data"     => $page_data,
-  "header_url"    => $header_url,  
+  "header_url"    => $header_url,
   "feat_img"      => $feat_img_obj,
-  "srcset"		  => $srcset,
-  "size"		  => $size,
-  "intro"		  => $formatted_intro,
-  "about"         => $formatted_about,  
-  "addtl_content" => $addtl_content
+  "srcset"		    => $srcset,
+  "size"		      => $size,
+  "intro"		      => $formatted_intro,
+  "about"         => $formatted_about,
+  "addtl_content" => $addtl_content,
+  'formVar'       => $formVar
 );
 
 

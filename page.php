@@ -72,6 +72,7 @@ $context = array(
   'feat_img'      => $feat_img_obj,
   'srcset'		    => $srcset,
   'sizes'		      => $sizes,
+  'formVar'       => $formVar,
   'hero_title_display' => $hero_title_display,
   'donot_index'   => $donot_index,
   'social_block'  => $social_block,
