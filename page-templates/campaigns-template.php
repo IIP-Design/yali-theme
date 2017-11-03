@@ -96,7 +96,7 @@ $context = array(
   "alumni_vids"     => $alumni_vids_formatted,
   "campaign_materials_accordion"  => $campaign_materials_accordion,
   "formVar"         => $formVar,
-  "africa4her_course" => ( !$africa4her_course ) ? $africa4her_course : null,
+  "africa4her_course" => $africa4her_course,
   "africa4her_post_list" => $africa4her_post_list
 );
 
