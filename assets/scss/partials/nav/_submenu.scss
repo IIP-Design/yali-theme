@@ -39,6 +39,10 @@
 			@media screen and (max-width: 933px) {
 				font-size: em(14, $mobile);
       }
+
+			&:active {
+				background-color: $blue-medium;
+			}
 		}
 	}
 }
