@@ -6,6 +6,7 @@
 	font-weight: 700;
 	color: #fff;
 	background-color: $blue-navy;
+	box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
 	@media screen and (max-width: 425px) {
 		padding: 15px;
 	}
@@ -13,6 +14,7 @@
 
 	&:hover {
 		color: #fff;
+		filter: grayscale(30%);
 	}
 
 
