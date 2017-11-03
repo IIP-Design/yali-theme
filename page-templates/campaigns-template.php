@@ -76,7 +76,7 @@ if( !empty($alumni_vids) ) {
     CAMPAIGN SPECIFIC BLOCKS 
 ***********************************/
 // Africa4Her specific
-$africa4her_course = do_shortcode("[content_block id='14592' title='Take the course - Africa4Her']");
+$africa4her_course = do_shortcode("[content_block id='14592' title='Take the course']");
 $africa4her_post_list = do_shortcode("[content_block id='14637' title='Learn more about the rights of women and girls']");
 
 
