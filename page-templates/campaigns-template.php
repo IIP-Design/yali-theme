@@ -87,6 +87,9 @@ $yaliunites_post_list = do_shortcode("[content_block id='14666' title='What's th
 $yaliserves_course = do_shortcode("");
 $yaliserves_post_list = do_shortcode("[content_block id='14002' title='Make everyday Mandela Day']");
 
+// YALIGoesGreen
+$yaligoesgreen_course = do_shortcode("[content_block id='14730' title='Take the courses']");
+$yaligoesgreen_post_list = do_shortcode("[content_block id='14725' title='Read about ways to go green in your community']");
 
 // Data array for twig
 $context = array(
@@ -108,7 +111,9 @@ $context = array(
   "yaliunites_course" => $yaliunites_course,
   "yaliunites_post_list"  => $yaliunites_post_list,
   "yaliserves_course" => $yaliserves_course,
-  "yaliserves_post_list" => $yaliserves_post_list
+  "yaliserves_post_list" => $yaliserves_post_list,
+  "yaligoesgreen_course" => $yaligoesgreen_course,
+  "yaligoesgreen_post_list" => $yaligoesgreen_post_list
 );
 
 

@@ -11,65 +11,25 @@
 			{{ page_data.content.rendered }}          
 		</section>
 
-		{% include 'content_blocks/post-single.twig' with 
-			{
-				title: 'Read about ways to go green in your community',
-				img_src: 'data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==',
-				headline: 'To protect the planet, we can all do our part',
-				excerpt: 'Did you know small changes in your daily routines can make a huge difference to your health, the health of your neighbors and the future of the planet? Read more to find ways you can start today!'
-			} 
-		%}
+		{{ yaligoesgreen_post_list }}
 
-		<section class='section courses'>
-			<h3>Take the courses</h3>
-			<div class='ui stackable grid'>
-				<div class='two column row'>
-					<div class='column course'>
-						<img class='course_img' src='data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='>
-						<h5 class='course_title'>
-							<a href='#'>Understanding Renewable Energy</a>							
-						</h5>
-						<p class='course_excerpt'>This course will take a look at how existing power systems work and can be adapted to a renewable 
-								energy future, and talks about what you can do to make an impact.
-						</p>
-						<div class='course_links'>
-							<a href='#' class='cta_link'>Take Course</a>
-							<a href='#' class='cta_link'>Course en francais</a>
-						</div>
-					</div>
-					<div class='column course'>
-						<img class='course_img' src='data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='>
-						<h5 class='course_title'>
-							<a href=''>Understanding Climate Change</a>							
-						</h5>
-						<p class='course_excerpt'>This course focuses on the science of how climate change occurs, the impact on the environment and
-							human development, and practical and innovative solutions to address the causes of climate change while
-							meeting the needs of the world.
-						</p>
-						<div class='course_links'>
-							<a href='#' class='cta_link'>Take Course</a>
-							<a href='#' class='cta_link'>Course en francais</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
+		{{ yaligoesgreen_course }}
 
 		<section class='section org_event'>
 			<h3>Organize an event</h3>
-			<p class='org_event_text'>Organize a <a href='#'>#YALILearns</a> event and facilitate <a href='#'><em>Understanding Climate Change</em></a> 
-				 or <a href='#'><em>Understanding Renewable Energy</em></a> to share your knowledge with your community. Plan 
-				 your event using our facilitation guide.</p>
+			<p class='org_event_text'>Organize a <a href='#'>#YALILearns</a> session and facilitate <a href='https://yalibeta.edit.america.gov/course-157/#/?_k=k8wkku'><em>Understanding Renewable Energy</em></a> 
+				 or <a href=''><em>Understanding Climate Change</em></a> to share your knowledge with your community. Plan 
+				 your event using our facilitation guides below.</p>
 			<div class='ui stackable grid org_event_items'>
 				{% for file in orgevent_data %}
 				<div class='eight wide column org_event_item'>
 					<a href='{{ file.file_url }}' target='target_blank' class='cta_link'>{{ file.file_name }}</a>
 				</div>
 				{% endfor %}				
-			</div>												
-		</section>		
-
-		{{ social_block }}
+			</div>
+			<br>
+			<p>Already held a #YALILearns session? Tell us about it using this report form: <a href='https://yalibeta.edit.america.gov/in-person/yali-learns/eventreport/'>YALILearns Report</a></p>												
+		</section>
 
 		{% include 'content_blocks/honeycomb.twig' with 
 			{ 				
