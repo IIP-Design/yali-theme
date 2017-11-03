@@ -6,18 +6,15 @@
   		  <h2 class="{{ title_underline }}" style="text-align: {{ title_alignment }}">{{ title }}</h2>
       {% endif %}
       <p class="cb_excerpt" style="text-align: {{ excerpt_alignment }}">{{ excerpt }} </p>
-      
+
       <!-- attach article feed module -->
       <div id='{{ selector }}' style="margin-top: 2em; text-align: {{ text_alignment }}"
         data-content-type='cdp-article-feed' data-id=''>LOADING Component...</div>
-      
+
       {% if btn_label is not empty or btn_link is not empty %}
       <div class="cb_button" style="text-align: {{ btn_text_alignment }}">
-        <a class="ui animated button" href="{{ btn_link }}" {{ btn_new_win }} style="background-color: {{ btn_bg_color }}" tabindex="0">
-          <div class="visible content"  style="color: {{ btn_label_color }}"> {{ btn_label }}</div>
-          <div class="hidden content">
-            <i style="color:  {{ btn_label_color }}" class="right arrow icon"></i>
-          </div>
+        <a class="ui button" href="{{ btn_link }}" {{ btn_new_win }} style="background-color: {{ btn_bg_color }}" tabindex="0">
+          <div style="color: {{ btn_label_color }}"> {{ btn_label }}</div>
         </a>
       </div>
       {% endif %}
@@ -44,5 +41,5 @@
     uiLayout: '{{ cdp_ui_layout }}',
     uiDirection:  '{{ cdp_ui_direction }}',
   }
-  
- </script>  
+
+ </script>
