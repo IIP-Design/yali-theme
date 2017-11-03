@@ -80,9 +80,6 @@ a {
     text-decoration: underline;
   }
 
-  &:active {
-    background-color: $yellow;
-  }
 }
 
 
@@ -98,11 +95,19 @@ h1, h2, h3, h4, h5, {
 
     &:active {
       color: $blue-navy;
+      background-color: $yellow;
     }
   }
 }
 
+p {
 
+  > a {
+    &:active {
+      background-color: $yellow;
+    }
+  }
+}
 p, ol, ul {
   font-size: em(22);
   font-weight: 300;
@@ -114,7 +119,6 @@ p, ol, ul {
     font-size: em(14, $mobile);
   }
 }
-
 
 blockquote {
   font-size: $font-size + 0px;
