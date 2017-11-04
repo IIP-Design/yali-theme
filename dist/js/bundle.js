@@ -1361,7 +1361,7 @@ function getCategories(filter, cb) {
       return a.aggregation('terms', 'categories.name.keyword', { 'size': 1 }, 'display');
     }).build()
   }).then(function (response) {
-    var data = formatResponse(response, 'distinct_categories');
+    var data = formatResponse(response, 'distinct_categories', ['Uncategorized']);
     cb(filter, data);
   });
 }
@@ -1429,7 +1429,8 @@ var generateBodyQry = exports.generateBodyQry = function generateBodyQry(params)
   body.notQuery('match', 'slug', 'course-*');
 
   if (params.series) {
-    body.filter('term', 'taxonomies.series.name.keyword', params.series); // need exact match
+    // need exact match so use term filter
+    body.filter('term', 'taxonomies.series.name.keyword', params.series);
   }
 
   if (params.langs) {
@@ -1481,7 +1482,7 @@ var generateBodyQry = exports.generateBodyQry = function generateBodyQry(params)
 };
 
 // Helpers
-function formatResponse(response, type) {
+function formatResponse(response, type, itemsToRemove) {
   if (!response.data.aggregations[type]) {
     return null;
   }
@@ -1496,6 +1497,14 @@ function formatResponse(response, type) {
     return bucket.key;
   });
 
+  if (itemsToRemove) {
+    if (Array.isArray(itemsToRemove)) {
+      buckets = buckets.filter(function (bucket) {
+        return !itemsToRemove.includes(bucket.key);
+      });
+    }
+  }
+
   return buckets.map(function (bucket) {
     return {
       key: bucket.key,
@@ -1507,7 +1516,8 @@ function formatResponse(response, type) {
 function getDisplayName(bucket) {
   var display = bucket.display;
   if (display && display.buckets && display.buckets[0] && display.buckets[0].key) {
-    return bucket.display.buckets[0].key;
+    var key = bucket.display.buckets[0].key;
+    return key.replace('&amp;', '&');
   } else {
     return capitalize(bucket.key);
   }
@@ -1516,6 +1526,8 @@ function getDisplayName(bucket) {
 function capitalize(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
+
+function removeItems(data, itemsToRemove) {}
 
 function fetchArray(str) {
   //console.log(str.split(',').filter( item => item.trim()) );

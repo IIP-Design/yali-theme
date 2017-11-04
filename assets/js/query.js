@@ -31,12 +31,12 @@ export function getCategories( filter, cb ) {
         })
       .build(),
   }).then( (response) => {
-    let data = formatResponse( response, 'distinct_categories' ) 
+    let data = formatResponse( response, 'distinct_categories', ['Uncategorized'] ) 
     cb( filter, data )
   });
 }
 
-export function getSeries( filter, cb ) {
+export function getSeries( filter, cb ) { 
   axios.post(API , {
     body: bodybuilder()
       .size(0)
@@ -72,6 +72,8 @@ export function getLanguages( filter, cb ) {
   });
 
 }
+
+
 
 export function builder ( params )  {
   let config = {
@@ -109,7 +111,8 @@ export const generateBodyQry = ( params ) => {
   body.notQuery( 'match', 'slug', 'course-*' );
 
   if ( params.series ) {
-    body.filter('term', 'taxonomies.series.name.keyword', params.series ) // need exact match
+    // need exact match so use term filter
+    body.filter( 'term', 'taxonomies.series.name.keyword', params.series ); 
   }
 
   if ( params.langs ) {
@@ -121,25 +124,25 @@ export const generateBodyQry = ( params ) => {
   }
 
   if ( params.types ) {
-    switch (params.types) {
+    switch ( params.types ) {
       case 'article':
         str = 'type: post OR type: page';
-        qry.push(str);
+        qry.push( str );
         break;
 
       case 'courses':
         str = 'type: courses AND branded: yes';
-        qry.push(str);
+        qry.push( str );
         break;
 
       case 'podcast':
       case 'video':
         str = `taxonomies.content_type.slug:  ${params.types}`;
-        qry.push(str);
+        qry.push( str );
         break;
 
       default:
-        qry.push(...appendQry(params.types, 'type'));
+        qry.push( ...appendQry(params.types, 'type') );
     }
   }
 
@@ -162,7 +165,7 @@ export const generateBodyQry = ( params ) => {
 
 
 // Helpers
-function formatResponse( response, type ) {
+function formatResponse( response, type, itemsToRemove ) {
   if( !response.data.aggregations[type] ) { return null; }
 
   let buckets = response.data.aggregations[type].buckets;
@@ -170,11 +173,17 @@ function formatResponse( response, type ) {
 
   // only return buckets with valid key
   buckets = buckets.filter( bucket => bucket.key );
+
+  if ( itemsToRemove ) {
+    if (Array.isArray(itemsToRemove) ) {
+      buckets = buckets.filter( bucket => !itemsToRemove.includes(bucket.key) );
+    }
+  }
  
   return buckets.map( bucket => {
     return { 
       key: bucket.key,
-      display: getDisplayName( bucket )
+      display: getDisplayName( bucket )    
     }
   });
 }
@@ -182,7 +191,8 @@ function formatResponse( response, type ) {
 function getDisplayName( bucket ) {
   let display = bucket.display;
   if( display &&  display.buckets && display.buckets[0] && display.buckets[0].key ) {
-    return bucket.display.buckets[0].key;
+    let key = bucket.display.buckets[0].key;
+    return key.replace( '&amp;', '&' );
   } else {
     return capitalize( bucket.key );
   }
@@ -191,6 +201,10 @@ function getDisplayName( bucket ) {
 
  function capitalize(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+function removeItems( data, itemsToRemove ) {
+
 }
 
 function fetchArray( str ) {
