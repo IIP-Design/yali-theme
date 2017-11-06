@@ -5,7 +5,15 @@
 
 <section class='ui container'>
   <div class='lead-in'>
-    <h4 class='course-page-lead-in'>Course:</h4>
+    {% if course_language == 'en' %}
+	    <h4 class='course-page-lead-in'>Course:</h4>
+    {% endif %}
+    {% if course_language == 'fr' %}
+      <h4 class='course-page-lead-in'>Cours:</h4>
+    {% endif %}
+    {% if ( course_language == 'pt' ) or ( course_language == 'es' ) %}
+      <h4 class='course-page-lead-in'>Curso:</h4>
+    {% endif %}
     <h3 class='course-page-title'>{{ page_data.title.rendered }}</h3>
   </div>
 
