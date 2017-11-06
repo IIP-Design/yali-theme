@@ -18,6 +18,10 @@ $filter-bp: 890px; //50em;
     color: $blue-medium;
     font-weight: 600;
     font-size: 1.15em;
+
+    &:active {
+      background-color: $yellow;
+    }
   }
 
   .cb_button {
