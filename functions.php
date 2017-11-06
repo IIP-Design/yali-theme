@@ -132,6 +132,16 @@ function check_nonce( $errors, $values ) {
 
     }
 
+		if( $values['form_key'] == 'get_certificate_fr' && strpos($_POST["_wp_http_referer"], 'obtenez-votre-certificat') !== false && empty($errors) ) {
+
+      $result = WPSimpleNonce::checkNonce($_GET['tokenName'], $_GET['tokenValue']);
+
+      if ( ! $result ) {
+         $errors['my_error'] = 'Cette page a expiré. Veuillez repasser le quiz pour générer votre certificat.';
+      }
+
+    }
+
   }
 
   return $errors;
