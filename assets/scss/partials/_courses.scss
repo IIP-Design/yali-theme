@@ -31,6 +31,10 @@
   }
 }
 
+ul.steps-list {
+  font-size: em(18);
+}
+
 .lessons-list {
 
   > header > h3 {
@@ -126,6 +130,7 @@ h5.media-object-subtitle {
 
 ul.collapse.glossary-content {
   padding-left: 0;
+  font-size: em(18);
 }
 
 .glossary-title {
@@ -162,6 +167,17 @@ li.glossary-item {
   }
 }
 
+ul {
+
+  &.lesson-pagination {
+    font-size: em(18);
+  }
+
+  &.ReactTabs__TabList {
+    font-size: em(18);
+  }
+}
+
 #course-container ul.lesson-pagination {
   margin-top: 5px;
 }
@@ -176,7 +192,7 @@ h3.quiz-instructions {
 }
 
 .quiz-question-text > p {
-    font-size: em(18);
+    font-size: em(22);
 }
 
 ol.quiz-questions {
@@ -189,7 +205,8 @@ ol.quiz-questions {
 #formQuiz input[type="submit"] {
   background-color: #192856 !important;
   border: none;
-  padding: 5px;
+  padding: 15px;
+  font-size: em(20);
 }
 
 // Instructor page
