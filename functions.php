@@ -165,7 +165,7 @@ class YaliSite {
 		add_action( 'init', array( $this, 'register_taxonomies' ) );
 		add_action( 'init', array( $this, 'register_shortcodes' ) );
 		add_action( 'init', array(  $this, 'excerpt_more_override') );
-		add_action( 'admin_init', array( $this, 'admin_remove_menu_pages' ) );
+		add_action( 'admin_menu', array( $this, 'admin_remove_menu_pages' ) );
 		add_action( 'admin_init', array( $this, 'admin_remove_corona_shortcode_button') );
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
