@@ -32,13 +32,14 @@ $featured_course = do_shortcode("[content_block id='13772']");
 $formVar = do_shortcode('[formidable id=6]');
 
 // Hero Title Display
-$hero_title_display = get_post_meta($post->ID, 'hero_title_option', true);
+$hero_title_display = get_post_meta($post->ID, '_yali_hero_title_option', true);
+$hero_subtitle = get_post_meta($post->ID, '_yali_hero_subtitle_option', true);
 
 // Do not index to CDP option
-$donot_index = get_post_meta($post->ID, 'donot_index_option', true);
+$donot_index = get_post_meta($post->ID, '_iip_donot_index_option', true);
 
 // Query for all Campaign Pages
-if( $pagename === 'action' || $pagename === 'yali-network' ) {  
+if( $pagename === 'action' || $pagename === 'yali-network' ) {
   $args = array(
     'post_type' => 'page',
     'meta_key' => 'campaign_page',
@@ -74,6 +75,7 @@ $context = array(
   'sizes'		      => $sizes,
   'formVar'       => $formVar,
   'hero_title_display' => $hero_title_display,
+  'hero_subtitle' => $hero_subtitle,
   'donot_index'   => $donot_index,
   'social_block'  => $social_block,
   'formVar'       => $formVar,
@@ -81,7 +83,7 @@ $context = array(
   'series_list'   => $series,
   'courses_faq'   => $courses_faq,
   'featured_course' => $featured_course,
-  'campaign_materials_accordion'  => $campaign_materials_accordion,  
+  'campaign_materials_accordion'  => $campaign_materials_accordion,
   'campaign_pages'       => ( $pagename === 'action' || $pagename === 'yali-network' ) ? $campaign_pages : null
 );
 

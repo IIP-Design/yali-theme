@@ -11,6 +11,7 @@
       	{% if hero_title_display == 'yes' %}
       	<div class='hero-content ui container'>
       		<h2 class='hero-h1'>{{ post_data.title.rendered }}</h1>
+          <p class='subtitle'>{{ hero_subtitle }}</p>
       	</div>
       	{% endif %}
       </div>
@@ -25,6 +26,7 @@
 
 	<div class='inner-container single_post'>
 		<section class='section single_post_content'>
+      <h5 class='subtitle'>{{ hero_subtitle }}</h5>
 			<div>{{ post_data.content.rendered }}</div>
 
 			<div class='single_post_tax'>

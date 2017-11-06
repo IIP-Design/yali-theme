@@ -9,6 +9,7 @@
       	{% if hero_title_display == 'yes' %}
       	<div class='hero-content ui container'>
       		<h1 class='hero-h1'>{{ page_data.title.rendered }}</h1>
+          <p class='subtitle'>{{ hero_subtitle }}</p>
       	</div>
       	{% endif %}
       </div>
@@ -18,10 +19,11 @@
 
 <section class='ui container'>
 	{% if ( hero_title_display == 'no' ) or ( hero_title_display == 'hide' )%}
-	<h2 class='title-overlay_title'>{{ page_data.title.rendered }}</h2>
+  	<h2 class='title-overlay_title'>{{ page_data.title.rendered }}</h2>
 	{% endif %}
 	<div class='inner-container'>
 		<div class='page-content'>
+      <h5 class='subtitle'>{{ hero_subtitle }}</h5>
 			{{ page_data.content.rendered }}
 		</div>
 	</div>

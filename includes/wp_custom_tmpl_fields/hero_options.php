@@ -5,6 +5,7 @@
 
 add_action('cmb2_init', 'hero_title_option');
 function hero_title_option() {
+	$prefix = '_yali_';
 
 	$hero_title  = new_cmb2_box( array(
 		'id'           =>  'hero_title',
@@ -17,7 +18,7 @@ function hero_title_option() {
 
 	$hero_title->add_field( array(
 		'name' => '',
-		'id'   => 'hero_title_option',
+		'id'   => $prefix . 'hero_title_option',
 		'desc' => 'Default display is below the hero image.',
 		'type' => 'radio_inline',
 		'options' => array(
@@ -28,5 +29,11 @@ function hero_title_option() {
 		'default' => 'no'
 	));
 
+	$hero_title->add_field( array(
+		'name' => 'Add a subtitle',
+		'id'   => $prefix . 'hero_subtitle_option',
+		'desc' => 'Enter your subtitle text here (optional)',
+		'type'    => 'textarea_small',
+	));
 
 }

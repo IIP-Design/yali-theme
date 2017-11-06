@@ -28,16 +28,18 @@ $formVar = do_shortcode('[formidable id=6]');
 $related_content_display = get_post_meta($post->ID, 'related_content_option', true);
 
 // Hero Title Display
-$hero_title_display = get_post_meta($post->ID, 'hero_title_option', true);
+$hero_title_display = get_post_meta($post->ID, '_yali_hero_title_option', true);
+$hero_subtitle = get_post_meta($post->ID, '_yali_hero_subtitle_option', true);
 
 // Do not index to CDP option
-$donot_index = get_post_meta($post->ID, 'donot_index_option', true);
+$donot_index = get_post_meta($post->ID, '_iip_donot_index_option', true);
 
 $context = array(
   'check_host'      => $check_host,
   'formVar'       	=> $formVar,
 	'related_content_display' => $related_content_display,
 	'hero_title_display' => $hero_title_display,
+	'hero_subtitle' 	=> $hero_subtitle,
 	'donot_index' 		=> $donot_index,
   'post_data'       => $post_data,
   'header_url'      => $header_url,
