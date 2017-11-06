@@ -32,7 +32,7 @@
 }
 
 
-.inner-container {
+.inner-container, .subtitle-container {
   width: 100%;
   max-width: 1300px;
   padding: 0 50px;
@@ -43,10 +43,10 @@
 }
 
 
-.full-container-width {  
+.full-container-width {
   max-width: 1300px;
   margin-left: -50px;
-  margin-right: -50px;  
+  margin-right: -50px;
   @media screen and (max-width: 1024px) {
     margin-left: 0;
     margin-right: 0;

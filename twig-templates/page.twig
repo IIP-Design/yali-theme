@@ -20,10 +20,10 @@
 <section class='ui container'>
 	{% if ( hero_title_display == 'no' ) or ( hero_title_display == 'hide' )%}
   	<h2 class='title-overlay_title'>{{ page_data.title.rendered }}</h2>
+    <h5 class='subtitle-container'>{{ hero_subtitle }}</h5>
 	{% endif %}
 	<div class='inner-container'>
 		<div class='page-content'>
-      <h5 class='subtitle'>{{ hero_subtitle }}</h5>
 			{{ page_data.content.rendered }}
 		</div>
 	</div>

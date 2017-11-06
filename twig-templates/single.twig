@@ -21,12 +21,12 @@
 
 <section class='ui container'>
 	{% if ( hero_title_display == 'no' ) or ( hero_title_display == 'hide' )%}
-	<h2 class='title-overlay_title'>{{ post_data.title.rendered }}</h2>
+  	<h2 class='title-overlay_title'>{{ post_data.title.rendered }}</h2>
+    <h5 class='subtitle-container'>{{ hero_subtitle }}</h5>
 	{% endif %}
 
 	<div class='inner-container single_post'>
 		<section class='section single_post_content'>
-      <h5 class='subtitle'>{{ hero_subtitle }}</h5>
 			<div>{{ post_data.content.rendered }}</div>
 
 			<div class='single_post_tax'>
