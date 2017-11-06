@@ -15,7 +15,7 @@
 			<div class='learn-more_links'>
 				<h4>Learn more about the Fellowship</h4>
 				<a href='#about' class='cta_link scroll_link'><span class='text_break'>Program Overview</span> and Components</a>
-				<a href='/yali-is/mandela-washington-fellowship/application-information/' class='cta_link'><span class='text_break'>Application for</span> the Fellowship</a>
+				<a href='/mandela-washington-fellowship/application-information/' class='cta_link'><span class='text_break'>Application for</span> the Fellowship</a>
 				<a href='/partnership-information' class='cta_link'><span class='text_break'>Information for</span> U.S. Audiences</a>
 			</div>
 		</section>
@@ -32,85 +32,6 @@
 		<section id='about' class='section'>
 			{{ about }}
 		</section>
-
-
-		{% include 'content_blocks/post-listings.twig' with
-			{
-				headline: 'Hear From Former Fellows',
-				cta_txt: 'Meet more Mandela Washington Fellowship alumni',
-				cta_url: '/bios',
-				background_color: '#192856',
-				cta_background_color: '#F2D400',
-				posts: [
-					{
-						title: 'MWF Alumni Name Success Story',
-						excerpt: 'Lorem ipsum dolor sit amet, ea habeo error ubique vim, ex veniam docendi...',
-						img_src: 'data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==',
-						post_url: '#',
-						tags: []
-					},
-					{
-						title: 'MWF Alumni Name Success Story',
-						excerpt: 'Lorem ipsum dolor sit amet, ea habeo error ubique vim, ex veniam docendi...',
-						img_src: 'data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==',
-						post_url: '#',
-						tags: []
-					},
-					{
-						title: 'MWF Alumni Name Success Story',
-						excerpt: 'Lorem ipsum dolor sit amet, ea habeo error ubique vim, ex veniam docendi...',
-						img_src: 'data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==',
-						post_url: '#',
-						tags: []
-					}
-				]
-			}
-		%}
-
-		{% include 'content_blocks/post-listings.twig' with
-			{
-				headline: 'YALI Features',
-				cta_txt: 'More from YALI Network In Action',
-				cta_url: '#',
-				background_color: '#192856',
-				cta_background_color: '#F2D400',
-				posts: [
-					{
-						title: 'Lorem ipsum dolor sit amet',
-						excerpt: 'Lorem ipsum dolor sit amet, ea habeo error ubique vim, ex veniam docendi...',
-						img_src: 'data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==',
-						post_url: '#',
-						tags: [
-							{ 'term_id': '4', name: 'tag 1', slug: 'tag-1' },
-							{ 'term_id': '5', name: 'tag 2', slug: 'lorem' },
-							{ 'term_id': '6', name: 'tag 3', slug: 'ipsum' },
-						]
-					},
-					{
-						title: 'Lorem ipsum dolor sit amet',
-						excerpt: 'Lorem ipsum dolor sit amet, ea habeo error ubique vim, ex veniam docendi...',
-						img_src: 'data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==',
-						post_url: '#',
-						tags: [
-							{ 'term_id': '4', name: 'tag 1', slug: 'tag-1' },
-							{ 'term_id': '5', name: 'tag 2', slug: 'lorem' },
-							{ 'term_id': '6', name: 'tag 3', slug: 'ipsum' },
-						]
-					},
-					{
-						title: 'Lorem ipsum dolor sit amet',
-						excerpt: 'Lorem ipsum dolor sit amet, ea habeo error ubique vim, ex veniam docendi...',
-						img_src: 'data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==',
-						post_url: '#',
-						tags: [
-							{ 'term_id': '4', name: 'tag 1', slug: 'tag-1' },
-							{ 'term_id': '5', name: 'tag 2', slug: 'lorem' },
-							{ 'term_id': '6', name: 'tag 3', slug: 'ipsum' },
-						]
-					}
-				]
-			}
-		%}
 
 		{{ addtl_content }}
 

@@ -10,6 +10,13 @@ $cb_box_cdp = new_cmb2_box( array(
   'priority'     => 'low'
 ));
 
+// Add Content Block Title
+$cb_box_cdp->add_field(  array(
+  'name'             => __( 'Add Post List Headline:', 'america' ),
+  'id'               => $prefix . 'cdp_post_list_headline',
+  'type'             => 'text' 
+));
+
 // Select posts by
 $cb_box_cdp->add_field(  array(
   'name'             => __( 'Select posts by:', 'america' ),
@@ -66,8 +73,8 @@ $cb_box_cdp->add_field( array(
   )
 ));
 
-  // Display as link or button
-  $cb_box_cdp->add_field( array(
+// Display as link or button
+$cb_box_cdp->add_field( array(
   'name'    => __( 'Display related link as', 'america' ),
   'desc'    => '',
   'id'      => $prefix . 'cdp_autocomplete_links_display',
