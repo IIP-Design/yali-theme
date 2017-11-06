@@ -73,7 +73,7 @@ include( get_stylesheet_directory() . '/badge/class-america-badge-generation.php
  */
 
 function yali_add_attachment( $attachments, $form, $args ) {
-	if ( $form->form_key == 'get_pledge' || $form->form_key == 'get_earthday' || $form->form_key == 'get_yalilearns2016' || $form->form_key == 'get_certificate2' || $form->form_key == 'get_4all') {
+	if ( $form->form_key == 'get_pledge' || $form->form_key == 'get_earthday' || $form->form_key == 'get_yalilearns2016' || $form->form_key == 'get_certificate2' || $form->form_key == 'get_certificate_fr' || $form->form_key == 'get_certificate_pt' || $form->form_key == 'get_4all') {
 
 		$params = array (
 			'key'				=>  $form->form_key,				// form identifier (i.e. project id used to find config)
@@ -203,7 +203,7 @@ class YaliSite {
 		/*
 		* Qzzr Shortcode
 		*/
-		require_once get_stylesheet_directory() . '/includes/yali_shortcodes/qzzr_shortcode.php';				
+		require_once get_stylesheet_directory() . '/includes/yali_shortcodes/qzzr_shortcode.php';
 	}
 
 	function twig_init() {
@@ -298,7 +298,7 @@ class YaliSite {
 		if( $query->is_main_query() && $query->is_search() ) {
 			$query->set('post_type', array('post', 'page'));
 			$query->set('posts_per_page', '-1');
-		}	
+		}
 	}
 
 	// Helpers

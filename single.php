@@ -29,6 +29,10 @@ $related_content_display = get_post_meta($post->ID, 'related_content_option', tr
 
 // Hero Title Display
 $hero_title_display = get_post_meta($post->ID, '_yali_hero_title_option', true);
+if( empty($hero_title_display) ) {
+	update_post_meta($post->ID, '_yali_hero_title_option', 'hide');
+	$hero_title_display = get_post_meta($post->ID, '_yali_hero_title_option', true);
+}
 $hero_subtitle = get_post_meta($post->ID, '_yali_hero_subtitle_option', true);
 
 // Do not index to CDP option

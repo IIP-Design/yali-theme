@@ -189,6 +189,70 @@ return array(
 			)
 		)
 	),
+	'get_certificate_fr' 	=>  array (   					// Form that is sending certificate -- MUST match form key
+		'prefix'					=> 'yali_courses_fr_',
+		'src_path'				=> 'images/yali_course_fr_bkgrd.jpg',
+		'save_path'				=> '../../../uploads/generated-images/',
+		'font'	  				=> 'fonts/Lato-Regular.ttf',
+		'font_size'				=> 50,
+		'color'						=> '#003d7d',
+		'align'						=> 'center',
+		'line_max_chars' 	=> 40,
+		'line_height' 		=> 60,
+		'text'						=> array (
+			array (
+				'content' 		=> 'FIELD',
+				'field_id'		=> 'course_name_fr', 			// Course name (formidable field key) -- MUST match
+				'x'		  			=> 550,
+				'y'		  			=> 360
+			),
+			array (
+				'content' 		=> 'FIELD',
+				'field_id'		=> 'full_name_course_fr', 	// Name to appear on certificate (formidable field key)  -- MUST match
+				'x'		  			=> 550,
+				'y'		  			=> 580,
+				'font_size'		=> 36
+			),
+			array (
+				'content' 		=> date("d/m/Y"),      // Date, static field
+				'x'		  			=> 215,
+				'y'		  			=> 670,
+				'font_size' 	=> 20
+			)
+		)
+	),
+	'get_certificate_pt' 	=>  array (   					// Form that is sending certificate -- MUST match form key
+		'prefix'					=> 'yali_courses_pt_',
+		'src_path'				=> 'images/yali_course_pt_bkgrd.jpg',
+		'save_path'				=> '../../../uploads/generated-images/',
+		'font'	  				=> 'fonts/Lato-Regular.ttf',
+		'font_size'				=> 50,
+		'color'						=> '#003d7d',
+		'align'						=> 'center',
+		'line_max_chars' 	=> 40,
+		'line_height' 		=> 60,
+		'text'						=> array (
+			array (
+				'content' 		=> 'FIELD',
+				'field_id'		=> 'course_name_pt', 			// Course name (formidable field key) -- MUST match
+				'x'		  			=> 550,
+				'y'		  			=> 360
+			),
+			array (
+				'content' 		=> 'FIELD',
+				'field_id'		=> 'full_name_course_pt', 	// Name to appear on certificate (formidable field key)  -- MUST match
+				'x'		  			=> 550,
+				'y'		  			=> 580,
+				'font_size'		=> 36
+			),
+			array (
+				'content' 		=> date("d/m/Y"),      // Date, static field
+				'x'		  			=> 215,
+				'y'		  			=> 670,
+				'font_size' 	=> 20
+			)
+		)
+	),
 	'get_4all' 	=>  array (   					// Form that is sending certificate -- MUST match form key
 		'prefix'					=> 'yali_4all_',
 		'src_path'				=> 'images/yali_4all_bkgrd.png',
