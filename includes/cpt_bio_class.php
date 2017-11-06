@@ -2,7 +2,7 @@
 
 namespace Yali;
 
-class Bios {
+class Bio {
 
 	public function __construct() {
 		add_action( 'cmb2_admin_init', array($this, 'content_block_fields') );
@@ -41,11 +41,11 @@ class Bios {
 			'capability_type'     => 'post',
 			'hierarchical'        => false,
 			'menu_position'       => 5,
-			'supports'            => array('title','thumbnail','editor'),
+			'supports'            => array('title','thumbnail', 'excerpt', 'editor'),
 			'has_archive'         => true
 		);
 		
-		register_post_type( 'bios', $args );
+		register_post_type( 'bio', $args );
 	}
 
 	public function content_block_fields() {
@@ -66,4 +66,4 @@ class Bios {
 	}
 }
 
-new Bios();
+new Bio();

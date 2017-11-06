@@ -144,7 +144,7 @@ use Yali\Content_Block as Content_Block;
 use Yali\Content_Block_Shortcode as Content_Block_Shortcode;
 use Yali\Custom_Button as Custom_Button;
 use Yali\Custom_Button_Shortcode as Custom_Button_Shortcode;
-use Yali\Bios as Bios;
+use Yali\Bio as Bio;
 use Yali\Content_Type_Tax as Content_Type_Tax;
 use Yali\Series_Tax as Series_Tax;
 
@@ -227,7 +227,7 @@ class YaliSite {
 	function register_post_types() {
 		Content_Block::register();
 		// Custom_Button::register();
-		Bios::register();
+		Bio::register();
 	}
 
 	function register_taxonomies() {
