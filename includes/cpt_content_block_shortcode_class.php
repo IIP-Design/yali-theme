@@ -150,6 +150,7 @@ class Content_Block_Shortcode {
 
     $context = array(
       "title"               => empty( $block_title ) ? $post->post_title : $block_title,
+      "title_size"          => get_post_meta($id, 'yali_cb_block_title_size', true),
       "show_title"          => get_post_meta($id, 'yali_cb_show_title', true),
       "title_underline"     => ( get_post_meta($id, 'yali_cb_title_underline', true) == 'yes' ) ? 'cb_h2_underline': '',
       "title_color"         => get_post_meta( $id, 'yali_cb_title_color', true ), 
