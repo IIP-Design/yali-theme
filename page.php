@@ -51,18 +51,19 @@ if( $pagename === 'action' || $pagename === 'yali-network' ) {
 }
 
 $campaign_pages = $get_campaign_pages->posts;
-foreach ($campaign_pages as $item) {
-  $item_id = $item->ID;
+if( !empty($campaign_pages) ) {
+  foreach ($campaign_pages as $item) {
+    $item_id = $item->ID;
 
-  if( has_post_thumbnail($item_id) ) {
-    $image_arr = wp_get_attachment_image_src( get_post_thumbnail_id($item_id), 'full' );
-    $image_src = $image_arr[0];
-    $item->featured_image_src = $image_src;
-  } else {
-    return;
+    if( has_post_thumbnail($item_id) ) {
+      $image_arr = wp_get_attachment_image_src( get_post_thumbnail_id($item_id), 'full' );
+      $image_src = $image_arr[0];
+      $item->featured_image_src = $image_src;
+    } else {
+      return;
+    }
   }
 }
-
 
 // Data array for twig
 $context = array(
