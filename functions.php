@@ -179,7 +179,8 @@ class YaliSite {
 		add_action( 'admin_init', array( $this, 'admin_remove_corona_shortcode_button') );
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
-		add_action('pre_get_posts', array( $this, 'search_filter') );
+		add_action( 'pre_get_posts', array( $this, 'search_filter') );
+		add_filter( 'wpseo_metabox_prio', array( $this, 'yoasttobottom' ) );
 
 		$this->twig_init();
 
@@ -313,23 +314,28 @@ class YaliSite {
 
 	// Helpers
 	public static function cdp_get_option( $key = '', $default = false ) {
-	    if ( function_exists( 'cmb2_get_option' ) ) {
-	      // Use cmb2_get_option as it passes through some key filters.
-	      return cmb2_get_option( 'cdp_options', $key, $default );
-	    }
+    if ( function_exists( 'cmb2_get_option' ) ) {
+      // Use cmb2_get_option as it passes through some key filters.
+      return cmb2_get_option( 'cdp_options', $key, $default );
+    }
 
-	    // Fallback to get_option if CMB2 is not loaded yet.
-	    $opts = get_option( 'cdp_options', $default );
-	    $val = $default;
+    // Fallback to get_option if CMB2 is not loaded yet.
+    $opts = get_option( 'cdp_options', $default );
+    $val = $default;
 
-	    if ( 'all' == $key ) {
-	      $val = $opts;
-	    } elseif ( is_array( $opts ) && array_key_exists( $key, $opts ) && false !== $opts[ $key ] ) {
-	      $val = $opts[ $key ];
-	    }
+    if ( 'all' == $key ) {
+      $val = $opts;
+    } elseif ( is_array( $opts ) && array_key_exists( $key, $opts ) && false !== $opts[ $key ] ) {
+      $val = $opts[ $key ];
+    }
 
-	    return $val;
-  	}
+    return $val;
+  }
+
+  // Move Yoast to bottom
+  function yoasttobottom() {
+    return 'low';
+  }
 
 }
 
