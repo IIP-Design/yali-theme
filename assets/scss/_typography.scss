@@ -100,6 +100,7 @@ h1, h2, h3, h4, h5, {
   }
 }
 
+
 p {
 
   > a {
@@ -108,13 +109,12 @@ p {
     }
   }
 }
+
+
 p, ol, ul {
-  font-size: em(22);
+  font-size: em(18);
   font-weight: 300;
   line-height: 1.44;
-  @media screen and (max-width: 933px) {
-    font-size: em(18, $mobile);
-  }
   @media screen and (max-width: 320px) {
     font-size: em(14, $mobile);
   }

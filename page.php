@@ -27,6 +27,7 @@ $series = get_terms('series');
 $social_block = do_shortcode("[content_block id='14264']");
 $courses_faq = do_shortcode("[content_block id='13942']");
 $featured_course = do_shortcode("[content_block id='13772']");
+$campaign_materials_accordion = do_shortcode("[content_block id='13615']");
 
 // 'Join the Network' Form
 $formVar = do_shortcode('[formidable id=6]');
