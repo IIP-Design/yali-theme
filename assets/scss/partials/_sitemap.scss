@@ -1,0 +1,7 @@
+ul.simple-sitemap-page {
+  font-size: em(18);
+
+  & ul.children {
+    font-size: em(18);
+  }
+}
