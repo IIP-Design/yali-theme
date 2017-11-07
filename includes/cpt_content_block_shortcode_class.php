@@ -146,9 +146,10 @@ class Content_Block_Shortcode {
   private function fetch_base_config ( $id, $post ) {
     //$this->debug( get_post_meta( $id));
 
+    $block_title = get_post_meta( $id, 'yali_block_title', true);
+
     $context = array(
-      "title"               => $post->post_title,
-      "headline"            => get_post_meta($id, 'yali_cdp_post_list_headline', true),
+      "title"               => empty( $block_title ) ? $post->post_title : $block_title,
       "show_title"          => get_post_meta($id, 'yali_cb_show_title', true),
       "title_underline"     => ( get_post_meta($id, 'yali_cb_title_underline', true) == 'yes' ) ? 'cb_h2_underline': '',
       "title_color"         => get_post_meta( $id, 'yali_cb_title_color', true ), 

@@ -11,10 +11,18 @@ $cb_box = new_cmb2_box( array(
   'closed'       => false
 ));
 
+// Add Content Block Title
+$cb_box->add_field(  array(
+  'name'    => __( 'Block Title', 'america' ),
+  'id'      => $prefix . 'block_title',
+  'type'    => 'text' ,
+  'desc'    => 'Block tttle that displays. If nothing is entered then the page title will display'
+));
+
 // Content block type
 $cb_box->add_field( array(
   'name'             => 'Block Type',
-    'desc'             => 'What type of content block',
+    'desc'             => 'Content block type',
     'id'               => $prefix . 'cb_type',
     'type'             => 'select',
     'default'          => 'post_list',
