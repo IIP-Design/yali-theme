@@ -73,10 +73,10 @@ $cb_box_cdp->add_field( array(
   'id'      => $prefix . 'cdp_autocomplete_links_display',
   'type'    => 'radio_inline',
   'select_all_button' => false,
-  'default'         => 'link',
+  'default'         => 'display_as_link',
   'options' => array(
-    'link' => 'Link',
-    'button' => 'Button'
+    'display_as_link' => 'Link',
+    'display_as_button' => 'Button'
   ),
 ));
 

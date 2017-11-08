@@ -537,7 +537,7 @@ function appendItem(item, related, relatedDisplay) {
       var a = document.createElement('a');
       a.setAttribute('href', related.link);
 
-      if (relatedDisplay === 'button') {
+      if (relatedDisplay === 'display_as_button') {
         a.setAttribute('class', 'ui button item');
       } else {
         a.setAttribute('class', 'item-link');
