@@ -184,7 +184,9 @@ li.nav_menu_item, li.nav_menu_submenu_item {
 }
 
 li.nav_menu_submenu_item:first-of-type {
-  margin-top: 10px;
+  @media screen and (min-width: 934px) {
+    margin-top: 10px;
+  }
 }
 
 a.nav_siteurl:active {
