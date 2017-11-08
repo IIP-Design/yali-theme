@@ -24,9 +24,9 @@
   }
 
   > p {
-    font-size: em(16);
+    font-size: em(18);
     @media screen and (max-width: 933px) {
-      font-size: em(14, $mobile);
+      font-size: em(16, $mobile);
     }
   }
 }
@@ -71,7 +71,7 @@ ul.steps-list {
 .media-object-description {
 
   > p {
-    font-size: em(14);
+    font-size: em(18);
   }
 }
 
