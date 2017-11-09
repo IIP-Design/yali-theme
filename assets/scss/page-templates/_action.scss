@@ -1,9 +1,9 @@
 .action {
-	
 
-	.campaigns_list {		
+
+	.campaigns_list {
 		@media screen and (min-width: 768px) {
-			padding: 75px 0;			
+			padding: 75px 0;
 		}
 
 		&.ui.stackable.grid {
@@ -11,10 +11,10 @@
 
 			.six.wide.column {
 				@media screen and (min-width: 768px) {
-					margin-right: 40px;			
+					margin-right: 40px;
 				}
 			}
-		}		
+		}
 	}
 
 
@@ -29,13 +29,13 @@
 				padding-top: 32px;
 				padding-bottom: 32px;
 			}
-			
 
-			&_img {	
+
+			&_img {
 				display: block;
 				box-sizing: border-box;
-				width: 340px;
-				height: 340px;
+				width: 300px;
+				height: 300px;
 				border: 10px solid $blue-navy;
 				border-radius: 50%;
 				background-position: 50%;
@@ -49,7 +49,7 @@
 				}
 				@media screen and (max-width: 330px) {
 					width: 250px;
-					height: 250px;					
+					height: 250px;
 				}
 			}
 
@@ -64,6 +64,6 @@
 			&_link {
 				color: $blue-navy;
 			}
-		}		
+		}
 	}
 }

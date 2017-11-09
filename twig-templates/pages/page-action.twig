@@ -7,21 +7,30 @@
       srcset="{{ srcset }}">
 	<div class='hero-inner bottom_padd bottom_padd--thin'>
 	    <div class='hero-content ui container'>
-	        <h1 class="hero-headline">{{ page_data.title.rendered }}</h1>        
+	        <h1 class="hero-headline">{{ page_data.title.rendered }}</h1>
 	        {{ page_data.content.rendered }}
 	    </div>
     </div>
 </section>
 <section class='ui container'>
-	<div class='inner-container'>		
-		<div class='ui stackable grid campaigns_list'>			
+	<div class='inner-container'>
+
+		{{ action_postlist }}
+	  {{ action_course }}
+	  {{ action_fellowship }}
+
+		<h2>Get Started</h2>
+		<div class='ui stackable grid campaigns_list'>
 			{% for campaign in campaign_pages %}
+			<h3>Get engaged with more YALI Network Initiatives:</h3>
 			<div class='row list_item'>
 				<div class='six wide column'>
-					<span 
-						class='list_item_img' 
+					<a href='{{ campaign.post_name }}'>
+					<span
+						class='list_item_img'
 						style='background-image: url("{{ campaign.featured_image_src }}"); background-size: cover;'>
-					</span>					
+					</span>
+					</a>
 				</div>
 				<div class='nine wide column'>
 					<div class='list_item_content'>
@@ -32,7 +41,7 @@
 					</div>
 				</div>
 			</div>
-			{% endfor %}			
+			{% endfor %}
 		</div>
 	</div>
 </section>

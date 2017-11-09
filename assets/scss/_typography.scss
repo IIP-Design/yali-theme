@@ -76,7 +76,6 @@ h5 {
 a {
 
   color: $blue-medium;
-  font-weight: 600;
 
   &:hover {
     color: $blue-medium;
@@ -107,6 +106,7 @@ h1, h2, h3, h4, h5, {
 p {
 
   > a {
+
     &:active {
       background-color: $yellow;
     }
@@ -121,8 +121,15 @@ p, ol, ul {
   @media screen and (max-width: 933px) {
     font-size: 1em;
   }
+
+  > a {
+    font-weight: 600;
+  }
 }
 
+li > a {
+  font-weight: 600;
+}
 
 ul {
 
