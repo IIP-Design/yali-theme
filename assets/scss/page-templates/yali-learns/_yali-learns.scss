@@ -30,6 +30,10 @@
 	.learns-link {
 		color: #fff;
 		font-weight: 700;
+
+		&--cta {
+			color: $blue-navy;
+		}
 	}
 
 }
