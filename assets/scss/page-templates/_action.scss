@@ -39,7 +39,8 @@
 				border: 10px solid $blue-navy;
 				border-radius: 50%;
 				background-position: 50%;
-				backgorund-repeat: no-repeat;
+				margin-left: 40px;
+				background-repeat: no-repeat;
 				@media screen and (min-width: 768px) and (max-width: 1023px) {
 					width: 300px;
 					height: 300px;

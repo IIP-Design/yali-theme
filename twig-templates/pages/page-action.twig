@@ -14,15 +14,15 @@
 </section>
 <section class='ui container'>
 	<div class='inner-container'>
+		<h2>Get Started</h2>
 
 		{{ action_postlist }}
 	  {{ action_course }}
 	  {{ action_fellowship }}
 
-		<h2>Get Started</h2>
 		<div class='ui stackable grid campaigns_list'>
-			{% for campaign in campaign_pages %}
 			<h3>Get engaged with more YALI Network Initiatives:</h3>
+			{% for campaign in campaign_pages %}
 			<div class='row list_item'>
 				<div class='six wide column'>
 					<a href='{{ campaign.post_name }}'>
