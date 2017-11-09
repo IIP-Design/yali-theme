@@ -54,15 +54,8 @@
 			}
 
 			ul {
-				font-size: em(22); 
+				font-size: 1em; 
 				font-weight: 300;
-
-				@media screen and (max-width: 933px) {
-					font-size: em(18, $mobile);
-				}
-				@media screen and (max-width: 320px) {
-					font-size: em(14, $mobile);
-				}
 			}
 		}
 	}
