@@ -75,20 +75,6 @@
 				}
 			}
 		}
-
-		&_partner {
-
-			ul {
-				font-size: em(22); 				
-				@media screen and (max-width: 933px) {
-					font-size: em(18, $mobile);
-				}
-				@media screen and (max-width: 320px) {
-					font-size: em(14, $mobile);
-				}
-			}	
-
-		}
 	}
 
 }
