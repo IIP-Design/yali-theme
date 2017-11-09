@@ -6,7 +6,6 @@ import * as search from './search.js';
 import * as cdp from './cdp';
 import * as responsiveImages from './responsive_background_image.js';
 import * as dropdown_filter from './dropdown_filter';
-import './application_status';
 import './simple_filter';
 import scroll_to_elem from './scrollTo';
 import show_more_posts from './show_more';

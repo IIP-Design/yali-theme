@@ -40,8 +40,8 @@ exports.default = function () {
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
-
-exports.default = function application_status() {
+exports.default = application_status;
+function application_status() {
 	var application_status_div = document.querySelector('.application_status');
 	var application_open_date = document.querySelector('#countdatetime') ? new Date(document.querySelector('#countdatetime').value) : null;
 
@@ -62,7 +62,7 @@ exports.default = function application_status() {
 	} else if (app_month == today_month && app_date < today_date) {
 		application_status_div.classList.add('app_closed');
 	}
-}();
+};
 
 },{}],3:[function(require,module,exports){
 'use strict';
@@ -1039,8 +1039,6 @@ var _dropdown_filter = require('./dropdown_filter');
 
 var dropdown_filter = _interopRequireWildcard(_dropdown_filter);
 
-require('./application_status');
-
 require('./simple_filter');
 
 var _scrollTo = require('./scrollTo');
@@ -1075,7 +1073,7 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
   (0, _show_more2.default)('.results_list_row.hidden');
 })(jQuery);
 
-},{"../../node_modules/semantic-ui-sass/semantic-ui":276,"./application_status":2,"./cdp":3,"./dropdown_filter":4,"./footer.js":6,"./join_form.js":8,"./nav.js":10,"./responsive_background_image.js":14,"./scrollTo":15,"./search.js":16,"./show_more":17,"./simple_filter":18}],10:[function(require,module,exports){
+},{"../../node_modules/semantic-ui-sass/semantic-ui":276,"./cdp":3,"./dropdown_filter":4,"./footer.js":6,"./join_form.js":8,"./nav.js":10,"./responsive_background_image.js":14,"./scrollTo":15,"./search.js":16,"./show_more":17,"./simple_filter":18}],10:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
