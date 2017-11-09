@@ -111,11 +111,28 @@ p {
 }
 
 
-ol, ul {
-  font-size: em(18);
+p, ol, ul {
+  font-size: em(22);
   font-weight: 300;
   line-height: 1.44;
 }
+
+
+ul {
+  
+  ol {
+    font-size: 1em;
+  }
+}
+
+
+ol {
+  
+  ul {
+    font-size: 1em;
+  }
+}
+
 
 blockquote {
   font-size: $font-size + 0px;
