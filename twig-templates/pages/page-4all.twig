@@ -6,15 +6,15 @@
 </section>
 <section class="ui container">
 	<h2 class='title-overlay_title'>{{ page_data.title.rendered }}</h2>
-	<div class='inner-container campaign'>		      
+	<div class='inner-container campaign'>
 		<section class='page-content'>
-			{{ page_data.content.rendered }}          
+			{{ page_data.content.rendered }}
 		</section>
 
 		<section class='section org_event'>
 			<h3>Share your knowledge</h3>
 			<p class='org_event_text'>Organize a #YALILearns session and facilitate <a href='https://yalibeta.edit.america.gov/course-412/'><em>Understanding Human Rights</em></a> to raise awareness and educate
-				your community about protecting human rights. Use our facilitation guide or presentation template to 
+				your community about protecting human rights. Use our facilitation guide or presentation template to
 				help.</p>
 			<div class='ui stackable grid org_event_items'>
 				{% for file in orgevent_data %}
@@ -24,30 +24,30 @@
 				{% endfor %}
 			</div>
 			<br>
-			<p>Already held a YALILearns session? Tell us about it using this report form: <a href='https://yalibeta.edit.america.gov/in-person/yali-learns/eventreport/'>YALILearns Report</a></p>												
+			<p>Already held a YALILearns session? Tell us about it using this report form: <a href='https://yalibeta.edit.america.gov/in-person/yali-learns/eventreport/'>YALILearns Report</a></p>
 		</section>
 
 		<section class='section promote'>
 			<h3>Promote {{ page_data.title.rendered }}</h3>
-			<p>Download and share these graphics on social media to show your investment in protecting the rights of all!</p>					
+			<p>Download and share these graphics on social media to show your investment in protecting the rights of all!</p>
 			<div class='ui stackable grid promote_item'>
 				{% for promo in promo_data %}
 				<div class='eight wide column promote_item'>
 					<div class='promote_item_img' data-preview-image='{{ promo.image_url }}' style='background-image: url({{ promo.image_url }}); background-size: cover;'></div>
 					<p class='promote_item_text'>{{ promo.image_text }}</p>
-				</div>				
+				</div>
 				{% endfor %}
 			</div>
 		</section>
 
 
-		{% include 'content_blocks/honeycomb.twig' with 
-			{ 				
-				headline: 'Stay Involved',
+		{% include 'content_blocks/honeycomb.twig' with
+			{
+				headline: 'More ways to be involved',
 				content: campaign_pages,
 				bg_color: 'lightblue'
 			} 
-		%}		
+		%}
 
 	</div>
 </section>
