@@ -1280,7 +1280,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 exports.default = function () {
 
-	if (location.pathname.includes('partnership-information')) {
+	if (location.pathname.includes('/mwf/us')) {
 		var list_display = function list_display(list_data, dom_elem) {
 			var num_of_cols = 3,
 			    data_length = list_data.length,

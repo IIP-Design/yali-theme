@@ -35,6 +35,10 @@
 			@media screen and (max-width: 320px) {
 				font-size: em(14, $mobile);
 			}
+
+			ul {
+				font-size: 1em;
+			}
 		}
 
 		&_headline {
