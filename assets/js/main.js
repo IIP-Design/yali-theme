@@ -26,6 +26,12 @@ import show_more_posts from './show_more';
   // MWF Links - Page Scroll
   scroll_to_elem('.scroll_link');
 
+  // 16days page
+  if( location.pathname.includes('/16days') ) {
+    let pledge = document.querySelector('.cb_button .ui.button');
+    pledge.addClass('scroll_link');
+  }
+
   // Search Results Page
   show_more_posts('.results_list_row.hidden');
  
