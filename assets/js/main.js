@@ -23,14 +23,14 @@ import show_more_posts from './show_more';
   // Init Accordions
   $('.ui.accordion').accordion();  
 
-  // MWF Links - Page Scroll
-  scroll_to_elem('.scroll_link');
-
-  // 16days page
+  // MWF Links, 16days page - Page Scroll
   if( location.pathname.includes('/16days') ) {
     let pledge = document.querySelector('.cb_button .ui.button');
     pledge.classList.add('scroll_link');
   }
+
+  scroll_to_elem('.scroll_link');
+
 
   // Search Results Page
   show_more_posts('.results_list_row.hidden');
