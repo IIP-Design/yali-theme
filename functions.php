@@ -88,6 +88,15 @@ function yali_add_attachment( $attachments, $form, $args ) {
 
 add_filter( 'frm_notification_attachment', 'yali_add_attachment', 10, 3 );
 
+/*
+ ** Disable Formidable subject encoding
+ */
+add_filter( 'frm_encode_subject', 'frm_encode_subject' );
+function frm_encode_subject() {
+    return false;
+}
+
+
 /**
   * Send token data for Course
   */
