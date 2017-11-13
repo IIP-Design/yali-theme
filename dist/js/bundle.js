@@ -1469,11 +1469,15 @@ var generateBodyQry = exports.generateBodyQry = function generateBodyQry(params)
 
   if (params.series) {
     // need exact match so use term filter
-    body.filter('term', 'taxonomies.series.name.keyword', params.series);
+    if (~params.series.indexOf('-')) {
+      body.filter('term', 'taxonomies.series.slug.keyword', params.series);
+    } else {
+      body.filter('term', 'taxonomies.series.name.keyword', params.series);
+    }
   }
 
   if (params.tags) {
-    body.filter('term', 'tags.name.keyword', params.tags);
+    body.filter('term', 'tags.slug.keyword', params.tags);
   }
 
   if (params.langs) {
