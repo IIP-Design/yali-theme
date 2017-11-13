@@ -28,7 +28,7 @@ $context = array(
 	'archive_name'				=> $queried_object->name,
 	'filter_slug'     		=> $queried_object->slug,
 	'filtered_post_block' => $filtered_post_block, 
-	'header_url'	  			=> get_stylesheet_directory_uri() . '/assets/img/placeholder_img_3x1.png'
+	'header_url'	  			=> get_stylesheet_directory_uri() . '/assets/img/default_background.jpg'
 );
 
 echo Twig::render('archive.twig', $context);
