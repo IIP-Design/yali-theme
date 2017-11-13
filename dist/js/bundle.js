@@ -1447,7 +1447,7 @@ function builder(params, context) {
       series: fetchQry('series', context, params.series),
       from: params.from ? params.from : 0,
       size: params.size,
-      sort: params.sort
+      sort: params.sort ? params.sort : 'recent'
     })
   };
 
