@@ -12,6 +12,7 @@ if( $taxonomy ) {
 }
 
 // A post list content block was created and referenced here
+// Need to do this differently as it is referecing a hard coded value
 $filtered_post_block = do_shortcode("[content_block id='16219' taxonomy='$taxonomy' term='$term']");
 
 // TEMP

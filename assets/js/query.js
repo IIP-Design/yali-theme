@@ -74,6 +74,7 @@ export function getLanguages( filter, cb ) {
 }
 
 export function builder ( params, context )  {
+ 
   let config = {
     meta: params.meta,
     selector: params.selector,
@@ -111,10 +112,10 @@ export const generateBodyQry = ( params ) => {
 
   if ( params.series ) {
     // need exact match so use term filter
-    body.filter( 'term', 'tags.series.name.keyword', params.series ); 
+    body.filter( 'term', 'taxonomies.series.name.keyword', params.series ); 
   }
 
-   if (params.tags) {
+   if ( params.tags ) {
      body.filter('term', 'tags.name.keyword', params.tags); 
    }
 

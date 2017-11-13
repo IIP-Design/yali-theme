@@ -92,9 +92,11 @@ var filterHash = {
   'language': 'langs',
   'series': 'series',
   'sort': 'sort'
-};
 
-var defaultFilterConfig = {
+  /**
+   * Default filter config
+   */
+};var defaultFilterConfig = {
   sites: cdp.searchIndexes,
   from: 0,
   size: 12,
@@ -218,7 +220,7 @@ function initializeDropDownSelects(filters, feed) {
 }
 
 /**
- * update the feed when a filter changes. The feed config is stored in
+ * Update the feed when a filter changes. The feed config is stored in
  * the cdpFilterFeedConfig object by feeds id for reference
  */
 function updateFeed() {
@@ -239,17 +241,18 @@ function updateFeed() {
 /**
  * Remove feed list from the DOM and reset 'from' and selector.  Reset
  * is needed as additional feeds may have been added by clicking 'Show More'
- * @param {string} feed DOM id of parant containing feed list
+ * @param {string} feed DOM id of parent containing feed list
  */
 function removeFeed(feed, config) {
   var el = $('#' + feed);
   var items = el.find('.article-item');
+  var context = getFilterContext(feed);
   el.css('min-height', el.height());
   items.addClass('animate-out').promise().done(function () {
     el.empty();
     config.selector = '#' + feed;
     config.from = 0;
-    addFeed(query.builder(config));
+    addFeed(query.builder(config, context));
   });
 }
 
@@ -283,17 +286,20 @@ function initializeFeed(feed) {
     cdpFilterFeedConfig[id].types = types;
   }
 
+  // check to see if this feed sits on an archive page. 
+  var context = getFilterContext(feed);
+
   addOnFeedReadyHandler(id);
-  addFeed(query.builder(cdpFilterFeedConfig[id]));
+  addFeed(query.builder(cdpFilterFeedConfig[id], context));
 }
 
-/****** Button functions ********/
+/* ================== BUTTON FUNCTIONS ================== */
 
 /**
  * Add 'click' listener to 'Show More' button if present
  */
 function initializeFeedButton(feed) {
-  //let filteredFeed = document.querySelectorAll("[data-content-type='cdp-filtered-list']");
+  // let filteredFeed = document.querySelectorAll("[data-content-type='cdp-filtered-list']");
   // forEach(filteredFeed, function(index, feed) {
   var btnId = 'btn-' + feed.id;
   var btn = document.getElementById(btnId);
@@ -419,7 +425,14 @@ function initializeArticleFeed() {
  * @param {object} feed Configuration object
  */
 function renderArticleFeed(feed) {
+  // check to see if this feed sits on an archive page. 
+  var context = getFilterContext(feed);
+
+  // config that has contains all applicable params not neccessarily being sent to module
   var config = cdpFeedConfig[feed.id];
+
+  // config obj that houses ONLY params that get sent to cdp article feed module
+  // need a clean config object to generate query outside of module if needed
   var configObj = {
     selector: '#' + feed.id,
     sites: config.indexes, // need to have a default
@@ -445,7 +458,14 @@ function renderArticleFeed(feed) {
   };
 
   shouldDisplayRelatedLinks(config);
-  addFeed(configObj);
+
+  if (context) {
+    // Build query outside of cdp module, since using some YALI specific params, i.e.series
+    addFeed(query.builder(configObj, context));
+  } else {
+    // let module generate query since using standard params
+    addFeed(configObj);
+  }
 }
 
 /**
@@ -555,6 +575,20 @@ var forEach = function forEach(array, callback, scope) {
   for (var i = 0; i < array.length; i++) {
     callback.call(scope, i, array[i]);
   }
+};
+
+/**
+ * Checks to see if feed is stting on an archive page and return archive data
+ * 
+ * @param {*} feed  Either a feed id string or the feed DOM element itself
+ * 
+ * @returns DOM data attributes of parent element with '.archive_posts' class. Data elements
+ * contain data-filter and data-filter-value, i.e. data-filter="series", data-filter-value="YALI Voices"
+ */
+var getFilterContext = function getFilterContext(feed) {
+  var el = typeof feed == 'string' ? document.getElementById(feed) : feed;
+  var archive = $(el).closest('div.archive_posts');
+  return archive ? $(archive).data() : null;
 };
 
 /**
@@ -1066,14 +1100,13 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
   // Init Accordions
   $('.ui.accordion').accordion();
 
-  // MWF Links - Page Scroll
-  (0, _scrollTo2.default)('.scroll_link');
-
-  // 16days page
+  // MWF Links, 16days page - Page Scroll
   if (location.pathname.includes('/16days')) {
     var pledge = document.querySelector('.cb_button .ui.button');
     pledge.classList.add('scroll_link');
   }
+
+  (0, _scrollTo2.default)('.scroll_link');
 
   // Search Results Page
   (0, _show_more2.default)('.results_list_row.hidden');
@@ -1396,7 +1429,8 @@ function getLanguages(filter, cb) {
   });
 }
 
-function builder(params) {
+function builder(params, context) {
+
   var config = {
     meta: params.meta,
     selector: params.selector,
@@ -1404,10 +1438,11 @@ function builder(params) {
     query: generateBodyQry({
       sites: INDEXES,
       langs: params.langs,
-      categories: params.categories,
+      categories: fetchQry('category', context, params.categories),
+      tags: fetchQry('tag', context, params.tags),
       types: params.types,
-      series: params.series,
-      from: params.from,
+      series: fetchQry('series', context, params.series),
+      from: params.from ? params.from : 0,
       size: params.size,
       sort: params.sort
     })
@@ -1435,6 +1470,10 @@ var generateBodyQry = exports.generateBodyQry = function generateBodyQry(params)
   if (params.series) {
     // need exact match so use term filter
     body.filter('term', 'taxonomies.series.name.keyword', params.series);
+  }
+
+  if (params.tags) {
+    body.filter('term', 'tags.name.keyword', params.tags);
   }
 
   if (params.langs) {
@@ -1531,14 +1570,16 @@ function capitalize(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-function removeItems(data, itemsToRemove) {}
-
 function fetchArray(str) {
   //console.log(str.split(',').filter( item => item.trim()) );
   return str.split(',').map(function (item) {
     return item.trim();
   });
 }
+
+var fetchQry = function fetchQry(qry, context, params) {
+  return context && context.filter === qry && context.filterValue ? context.filterValue : params;
+};
 
 var appendQry = function appendQry(str, field) {
   var items = fetchArray(str);
