@@ -1,10 +1,17 @@
+{% if header_url is not empty %}
 <section
-  class='cb cb_cta {{ ( cb_layout_width[0] == "yes" ) ? "full-width" : "full-container-width" }}'
-  style="background-color: {{ block_bg_color }}"
-  data-responsive-background-image>
+    class='cb cb_cta {{ ( cb_layout_width[0] == "yes" ) ? "full-width" : "full-container-width" }}'
+    style="background-color: {{ block_bg_color }}"
+    data-responsive-background-image>
   <img src="{{ header_url }}"
       sizes="{{ sizes }}"
       srcset="{{ srcset }}">
+{% endif %}
+{% if header_url is empty %}
+  <section
+    class='cb cb_cta noimage {{ ( cb_layout_width[0] == "yes" ) ? "full-width" : "full-container-width" }}'
+    style="background-color: {{ block_bg_color }}">
+{% endif %}
 	<div class='ui container'>
     <div class='inner-container'>
   		<h2 class="{{ title_underline }}" style="text-align: {{ title_alignment }}; color: {{ title_color }}">{{ title }}</h2>

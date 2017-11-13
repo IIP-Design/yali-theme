@@ -1,4 +1,4 @@
-.yali-learns .materials {	
+.learns .materials {	
 	text-align: center;
 	color: $blue-navy;
 	@media screen and (min-width: 934px) {
@@ -28,6 +28,40 @@
 
 		.promo_item {
 			margin-bottom: 25px !important;
+
+			&_bg {
+				width: 100%;
+				height: 350px;
+				border: 1px solid #cdcdcd;
+				background-size: 100%;
+				background-repeat: no-repeat;
+				background-position: center;
+
+				&--yalilearnslogo {
+					background-image: url("https://staticyali.state.gov/uploads/2017/11/YALILearns-logo.png"); 
+					
+				}
+
+				&--yalilearnstshirt {
+					background-image: url("https://staticyali.state.gov/uploads/2017/11/YALI_tshirts-300x142.png"); 
+				}
+
+				&--yalilearnssignup {
+					background-image: url("https://staticyali.state.gov/uploads/2017/11/YALILearns-Sample-Signup-Form.png"); 
+				}			
+
+				&--yalilearnsprofilephoto {
+					background-image: url("https://staticyali.state.gov/uploads/2017/11/YALI-LEARNS-FB-Profile1.jpg"); 
+				}
+
+				&--yalilearnscoverphoto {
+					background-image: url("https://staticyali.state.gov/uploads/2017/11/YALI-LEARNS-FB-Banner1.jpg"); 
+				}
+
+				&--yalilearnsinstagram {
+					background-image: url("https://staticyali.state.gov/uploads/2017/11/YALI-LEARNS-INSTAGRAM-Profile.jpg"); 
+				}
+			}
 
 			img {
 				width: 100%;

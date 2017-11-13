@@ -1,4 +1,31 @@
-.yali-network {
+.about {
 	
 	
+	.explore {
+		padding: 50px 0;
+
+		&_links {
+
+			.cta_link {
+				display: inline-block;
+				width: 33%;
+				max-width: 100%;
+				font-weight: 600;
+				background-color: $blue-medium;				
+				@media screen and (max-width: 933px) {
+					font-size: 16px;					
+				}
+				@media screen and (max-width: 745px) {
+					width: 32%;
+				}
+				@media screen and (max-width: 669px) {
+					width: 100%;
+					margin-bottom: 5px;
+				}
+				@media screen and (max-width: 320px) {
+					font-size: 14px;
+				}
+			}			
+		}
+	}
 }

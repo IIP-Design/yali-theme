@@ -1,14 +1,14 @@
 .cb_cta {
-	padding-top: 200px; 
-	padding-bottom: 50px;	
+	padding-top: 200px;
+	padding-bottom: 50px;
 	margin-bottom: 50px;
 	@media screen and (max-width: 767px) {
 		margin-bottom: 25px;
 	}
 	@media screen and (max-width: 425px){
 		padding: 50px 0;
-	}	
-	
+	}
+
 	&:last-child {
 		margin-bottom: 0;
 	}
@@ -30,9 +30,14 @@
 		text-align: center;
 	}
 
-	
-	&_link {		
-		
+	&.noimage {
+		/*padding-top: 80px;*/
+		padding-top: 50px;
+		margin-bottom: 0;
+	}
+
+	&_link {
+
 		.cta_link {
 			display: inline-block;
 			max-width: 100%;

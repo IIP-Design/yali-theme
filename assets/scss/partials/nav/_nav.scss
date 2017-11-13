@@ -52,7 +52,7 @@
         top: 13px;
         font-size: em(20);
       }
-      @media screen and (min-width: 934px) and (max-width: 1024px) {
+      @media screen and (min-width: 768px) and (max-width: 1024px) {
         top: 13px;
         font-size: em(16);
       }
@@ -94,7 +94,8 @@
 
     &:hover {
       box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
-      filter: grayscale(30%);
+      filter: brightness(.96);
+      transform: translate(-1px, -1px);
     }
 
     p {
@@ -184,7 +185,9 @@ li.nav_menu_item, li.nav_menu_submenu_item {
 }
 
 li.nav_menu_submenu_item:first-of-type {
-  margin-top: 10px;
+  @media screen and (min-width: 934px) {
+    margin-top: 10px;
+  }
 }
 
 a.nav_siteurl:active {

@@ -6,7 +6,6 @@ import * as search from './search.js';
 import * as cdp from './cdp';
 import * as responsiveImages from './responsive_background_image.js';
 import * as dropdown_filter from './dropdown_filter';
-import './application_status';
 import './simple_filter';
 import scroll_to_elem from './scrollTo';
 import show_more_posts from './show_more';
@@ -24,8 +23,14 @@ import show_more_posts from './show_more';
   // Init Accordions
   $('.ui.accordion').accordion();  
 
-  // MWF Links - Page Scroll
+  // MWF Links, 16days page - Page Scroll
+  if( location.pathname.includes('/16days') ) {
+    let pledge = document.querySelector('.cb_button .ui.button');
+    pledge.classList.add('scroll_link');
+  }
+
   scroll_to_elem('.scroll_link');
+
 
   // Search Results Page
   show_more_posts('.results_list_row.hidden');

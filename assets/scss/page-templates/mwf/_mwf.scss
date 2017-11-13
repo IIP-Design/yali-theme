@@ -1,4 +1,4 @@
-.mandela-washington-fellowship {
+.mwf {
 	
 	
 	.section {
@@ -23,10 +23,14 @@
 			
 			.cta_link {
 				display: inline-block;
-				width: 33%;
+				width: 24.65%;
 				max-width: 100%;
 				font-weight: 600;
 				background-color: $blue-medium;
+				@media screen and (max-width: 1023px) {
+					width: 49%;
+					margin-bottom: 5px;
+				}				
 				@media screen and (max-width: 635px) {
 					width: 100%;
 					margin-bottom: 5px;
@@ -37,11 +41,8 @@
 				@media screen and (max-width: 320px) {
 					font-size: 14px;
 				}
-
 			}
-
 		}
-
 	}
 
 
@@ -89,107 +90,4 @@
 			}
 		}
 	}
-
-	/*
-	.application {
-
-		&_content {
-			font-size: em(22); 
-			font-weight: 300;
-			@media screen and (max-width: 933px) {
-				font-size: em(18, $mobile);
-			}
-			@media screen and (max-width: 320px) {
-				font-size: em(14, $mobile);
-			}
-		}
-
-		&_headline {
-			text-align: center;
-		}
-
-		&_status {		
-			display: none;	
-			padding: 10px;
-			font-style: italic;
-			font-weight: 700;
-			text-align: center;
-			background-color: $red;
-			color: #fff;			
-
-			&.app_closed {
-				display: block;
-			}
-		}		
-
-		&_eligibility {
-			
-		}
-
-		&_resources {
-			padding: 50px;			
-			text-align: center;
-			background-color: #ccc;
-			@media screen and (max-width: 425px){
-				padding: 50px 25px;
-			}
-
-			.two.column.grid {
-				margin-top: 1em;
-				margin-bottom: 1em;
-				@media screen and (max-width: 600px) {
-					margin-bottom: 0;
-				}
-
-				&:last-child {
-					margin-bottom: 0;					
-					@media screen and (max-width: 600px) {
-						margin-top: 0;
-					}
-				}
-			}
-
-			.cta_link {
-				position: relative;
-				width: 50%;
-				height: 125px;
-				margin-right: auto;
-				margin-left: auto;
-				font-weight: 700;
-				background-color: $blue-medium;
-				@media screen and (max-width: 1024px) {
-					width: 45%;					
-					font-size: 18px;
-				}				
-				@media screen and (max-width: 600px) {
-					height: 100px;
-					width: 90%;
-					margin-bottom: 1em;
-				}
-
-			}
-
-			&_resource {
-				position: absolute;
-				top: 50%;
-				left: 0;				
-				transform: translateY(-50%);
-				width: 100%;				
-			}
-		}
-
-		&_faqs {
-
-			.application_faq {
-				margin-bottom: 16px;
-
-				&_q {
-					margin-bottom: 16px;
-					font-weight: 700;
-				}
-			}
-		}
-	}
-	*/
-
 }

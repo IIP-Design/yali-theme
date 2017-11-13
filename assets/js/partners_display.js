@@ -3,7 +3,7 @@ import experience_hosts from './experience_hosts_list';
 
 export default (function() {
 
-	if( location.pathname.includes('partnership-information') ) {
+	if( location.pathname.includes('/mwf/us') ) {
 
 		function list_display(list_data, dom_elem) {
 			let 

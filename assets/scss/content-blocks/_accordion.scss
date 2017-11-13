@@ -38,6 +38,10 @@
 				margin-left: 0;
 			}
 
+			h5, p, li {
+				word-break: break-word;
+			}
+
 			h5 {
 				@media screen and (max-width: 767px) {
 					margin-bottom: 5px;
@@ -49,15 +53,8 @@
 				color: $blue-medium;
 			}
 
-			ul {
-				font-size: em(22); 
+			ul {				
 				font-weight: 300;
-				@media screen and (max-width: 933px) {
-					font-size: em(18, $mobile);
-				}
-				@media screen and (max-width: 320px) {
-					font-size: em(14, $mobile);
-				}
 			}
 		}
 	}

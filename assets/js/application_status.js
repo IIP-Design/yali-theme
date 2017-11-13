@@ -1,4 +1,4 @@
-export default (function application_status() {
+export default function application_status() {
 	let application_status_div = document.querySelector('.application_status');
 	let application_open_date = ( document.querySelector('#countdatetime') ) ? new Date(document.querySelector('#countdatetime').value) : null;
 	
@@ -22,4 +22,4 @@ export default (function application_status() {
 		application_status_div.classList.add('app_closed');	
 	}
 
-})();
+};

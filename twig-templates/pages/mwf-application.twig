@@ -4,12 +4,12 @@
 <section class="hero">
     <img class="ui fluid image" src="{{ header_url }}" srcset="{{ srcset }}" sizes="{{ size }}" alt="{{ header_url }}">
 </section>
-<section class="ui container">	
+<section class="ui container">
 	<div class='inner-container'>
-		<section id='fellowship_application' class='section application'>
+		<section id='fellowship_application' class='section application-information'>
 			<h3 class='application_headline'>{{ page_data.cmb2.mwf_app_application.mwf_app_application_title }}</h3>
 
-			<p class='full-width application_status'>The 2017 Mandela Washington Fellowship application is now closed.</p>
+			<p class='full-width application_status app_closed'>The 2017 Mandela Washington Fellowship application is now closed.</p>
 
 			{% if countdown %}
 			<div class='section application_countdown'>
@@ -30,14 +30,14 @@
 							target='_blank'
 							class='application_content cta_link'
 						>
-							<span class='application_resources_resource'>Download the 2017 Application Instructions (PDF)</span>
+							<span class='application_resources_resource'>Download the 2018 Application Instructions (PDF)</span>
 						</a>
 						<a href='#mandela-washington-fellowship-faqs' class='application_content cta_link scroll_link'>
 							<span class='application_resources_resource'>Read the 2018 Frequently Asked Questions</span>
 						</a>
 					</div>
 					<div class='ui two column grid'>
-						<a href='/category/application-tips' class='application_content cta_link'>
+						<a href='/category/apply' class='application_content cta_link'>
 							<span class='application_resources_resource'>Go to Application Tips <i class='angle right icon'></i></span>
 						</a>
 						<a href='http://yaliapp.irex.org' target='_blank' class='application_content cta_link'>
@@ -47,7 +47,7 @@
 				</div>
 			</div>
 			<div class='section application_selection'>
-				<h4>Application Selection Process</h4>
+				<h4>Application and Selection Process</h4>
 				<div class='application_content'>{{ page_data.cmb2.mwf_app_application.mwf_app_application_selection_process }}</div>
 			</div>
 			<div class='section application_eligibility'>

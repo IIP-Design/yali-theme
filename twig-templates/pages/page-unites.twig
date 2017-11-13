@@ -6,50 +6,50 @@
 </section>
 <section class="ui container">
 	<h2 class='title-overlay_title'>{{ page_data.title.rendered }}</h2>
-	<div class='inner-container campaign'>		      
+	<div class='inner-container campaign'>
 		<section class='page-content'>
-			{{ page_data.content.rendered }}          
+			{{ page_data.content.rendered }}
 		</section>
 
-		{{ yaliunites_post_list }}		
+		{{ yaliunites_post_list }}
 
 		{{ yaliunites_course }}
 
 		<section class='section org_event'>
 			<h3>Share your knowledge</h3>
 			<p class='org_event_text'>
-				Organize a #YALILearns session using <a href='https://yalibeta.edit.america.gov/course-266'><em>Responsible Leadership on Transparency and Good Governance</em></a>.
-				Use the materials below to help plan your session, and for even more #YALILearns resources visit 
-				<a href='https://ali.state.gov/learns'>yali.state.gov/learns</a>.
-			</p>			
+				Organize a #YALILearns session using <a href='/course-266'><em>Responsible Leadership on Transparency and Good Governance</em></a>.
+				Use the materials below to help plan your session, and for even more #YALILearns resources visit
+				<a href='/learns'>yali.state.gov/learns</a>.
+			</p>
 			<div class='ui stackable grid org_event_items'>
 				{% for file in orgevent_data %}
 				<div class='eight wide column org_event_item'>
 					<a href='{{ file.file_url }}' target='target_blank' class='cta_link'>{{ file.file_name }}</a>
 				</div>
 				{% endfor %}
-			</div>	
-			<p>Already held a YALILearns session? Tell us about it using this report form: <a href='https://yalibeta.edit.america.gov/in-person/yali-learns/eventreport/'>YALILearns Report</a></p>		
+			</div>
+			<p>Already held a YALILearns session? Tell us about it using this report form: <a href='/eventreport/'>YALILearns Report</a></p>
 		</section>
 
 		<section class='section promote'>
-			<h3>Promote #YALIUnites</h3>			
+			<h3>Promote #YALIUnites</h3>
 			<div class='ui stackable grid promote_item'>
 				{% for promo in promo_data %}
 				<div class='eight wide column promote_item'>
 					<div class='promote_item_img' data-preview-image='{{ promo.image_url }}' style='background-image: url({{ promo.image_url }}); background-size: cover;'></div>
 					<p class='promote_item_text'>{{ promo.image_text }}</p>
-				</div>				
+				</div>
 				{% endfor %}
 			</div>
 		</section>
 
-		{% include 'content_blocks/honeycomb.twig' with 
-			{ 				
-				headline: 'Stay Involved',				
+		{% include 'content_blocks/honeycomb.twig' with
+			{
+				headline: 'More ways to be involved',
 				content: campaign_pages,
 				bg_color: 'lightblue'
-			} 
+			}
 		%}
 
 	</div>

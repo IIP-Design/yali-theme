@@ -75,6 +75,8 @@ h5 {
 
 a {
 
+  color: $blue-medium;
+
   &:hover {
     color: $blue-medium;
     text-decoration: underline;
@@ -104,6 +106,7 @@ h1, h2, h3, h4, h5, {
 p {
 
   > a {
+
     &:active {
       background-color: $yellow;
     }
@@ -112,10 +115,37 @@ p {
 
 
 p, ol, ul {
-  font-size: em(18);
+  font-size: em(22);
   font-weight: 300;
   line-height: 1.44;
+  @media screen and (max-width: 933px) {
+    font-size: 1em;
+  }
+
+  > a {
+    font-weight: 600;
+  }
 }
+
+li > a {
+  font-weight: 600;
+}
+
+ul {
+
+  ol {
+    font-size: 1em;
+  }
+}
+
+
+ol {
+
+  ul {
+    font-size: 1em;
+  }
+}
+
 
 blockquote {
   font-size: $font-size + 0px;

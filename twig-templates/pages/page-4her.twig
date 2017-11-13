@@ -6,48 +6,48 @@
 </section>
 <section class="ui container">
 	<h2 class='title-overlay_title'>{{ page_data.title.rendered }}</h2>
-	<div class='inner-container campaign'>		
+	<div class='inner-container campaign'>
 		<section class='page-content'>
-			{{ page_data.content.rendered }}          
+			{{ page_data.content.rendered }}
 		</section>
 
-		{{ africa4her_course }}		
+		{{ africa4her_course }}
 
 		<section class='section org_event'>
 			<h3>Share your knowledge</h3>
-			<p class='org_event_text'>Once you’ve taken the course, organize a YALILearns session using <a href='https://yalibeta.edit.america.gov/course-436'><em>Understanding the Rights of Women and Girls</em></a>. 
+			<p class='org_event_text'>Once you’ve taken the course, organize a YALILearns session using <a href='/course-436'><em>Understanding the Rights of Women and Girls</em></a>.
 				Use the materials below to help plan your session.
-			</p>			
+			</p>
 			<div class='ui stackable grid org_event_items'>
 				{% for file in orgevent_data %}
 				<div class='eight wide column org_event_item'>
 					<a href='{{ file.file_url }}' target='target_blank' class='cta_link'>{{ file.file_name }}</a>
 				</div>
-				{% endfor %}				
-			</div>												
+				{% endfor %}
+			</div>
 		</section>
 
 		<section class='section promote'>
 			<h3>Promote {{ page_data.title.rendered }}</h3>
-			<p>Download and share these graphics on social media to show your investment in women and girls around the world!</p>						
+			<p>Download and share these graphics on social media to show your investment in women and girls around the world!</p>
 			<div class='ui stackable grid promote_item'>
 				{% for promo in promo_data %}
 				<div class='eight wide column promote_item'>
 					<div class='promote_item_img' data-preview-image='{{ promo.image_url }}' style='background-image: url({{ promo.image_url }}); background-size: cover;'></div>
 					<p class='promote_item_text'>{{ promo.image_text }}</p>
-				</div>				
+				</div>
 				{% endfor %}
 			</div>
 		</section>
 
 		{{ africa4her_post_list }}
 
-		{% include 'content_blocks/honeycomb.twig' with 
-			{ 				
-				headline: 'Stay Involved',
+		{% include 'content_blocks/honeycomb.twig' with
+			{
+				headline: 'More ways to be involved',
 				content: campaign_pages,
 				bg_color: 'lightblue'
-			} 
+			}
 		%}
 
 	</div>

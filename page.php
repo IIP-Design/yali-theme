@@ -29,6 +29,11 @@ $courses_faq = do_shortcode("[content_block id='13942']");
 $featured_course = do_shortcode("[content_block id='13772']");
 $campaign_materials_accordion = do_shortcode("[content_block id='13615']");
 
+// Action page shortcodes
+$action_postlist = do_shortcode("[content_block id='16105']");
+$action_course = do_shortcode("[content_block id='16106']");
+$action_fellowship = do_shortcode("[content_block id='16109']");
+
 // 'Join the Network' Form
 $formVar = do_shortcode('[formidable id=6]');
 
@@ -40,7 +45,7 @@ $hero_subtitle = get_post_meta($post->ID, '_yali_hero_subtitle_option', true);
 $donot_index = get_post_meta($post->ID, '_iip_donot_index_option', true);
 
 // Query for all Campaign Pages
-if( $pagename === 'action' || $pagename === 'yali-network' ) {
+if( $pagename === 'action' || $pagename === 'network' ) {
   $args = array(
     'post_type' => 'page',
     'meta_key' => 'campaign_page',
@@ -86,7 +91,10 @@ $context = array(
   'courses_faq'   => $courses_faq,
   'featured_course' => $featured_course,
   'campaign_materials_accordion'  => $campaign_materials_accordion,
-  'campaign_pages'       => ( $pagename === 'action' || $pagename === 'yali-network' ) ? $campaign_pages : null
+  'action_postlist' => $action_postlist,
+  'action_course' => $action_course,
+  'action_fellowship' => $action_fellowship,
+  'campaign_pages'       => ( $pagename === 'action' || $pagename === 'network' ) ? $campaign_pages : null
 );
 
 echo Twig::render( array( "pages/page-" . $pagename . ".twig", "page.twig" ), $context );

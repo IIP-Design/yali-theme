@@ -1,18 +1,26 @@
 .cb .article-item-group {
   font-family: "Source Sans Pro", "Helvetica Neue", Arial, Helvetica, sans-serif;
   color: $font-color;
+  font-size: 1em;
 }
 
+
 .cb .article-content   {
+  
   p {
-    font-size: 1.2rem;
     line-height: 1.5;
+    @media screen and (max-width: 933px) {
+      font-size: 16px;
+    }
   }
   
   h3.article-title {
     font-size: 1.5rem;
     text-decoration:  none;
     color: $blue-navy;
+    @media screen and (max-width: 933px) {
+      font-size: 20px;
+    }
   }
 
   .article-title_link {
@@ -20,7 +28,11 @@
   }
 
   div.article-meta {
-    span {  color: $blue-navy; }
     color: lighten($blue-navy, 10%);
+    
+    span {  
+      color: $blue-navy; 
+    }    
   }
+
 }
