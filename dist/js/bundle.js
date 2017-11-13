@@ -460,6 +460,7 @@ function renderArticleFeed(feed) {
   shouldDisplayRelatedLinks(config);
 
   if (context) {
+    console.log('has context');
     // Build query outside of cdp module, since using some YALI specific params, i.e.series
     addFeed(query.builder(configObj, context));
   } else {
@@ -1450,7 +1451,7 @@ function builder(params, context) {
       sort: params.sort ? params.sort : 'recent'
     })
   };
-
+  console.dir(config);
   return config;
 }
 
