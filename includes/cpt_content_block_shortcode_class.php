@@ -131,7 +131,7 @@ class Content_Block_Shortcode {
     $context['selector']    = 'feed' . $id;
     $context['cdp_indexes'] = cdp_get_option('cdp_indexes');
     $context['filters']     = $this->fetch_filters( $atts );  // get_post_meta( $id, 'yali_list_filters', true);
-    $context['types']       = $this->convertToStr( get_post_meta( $id, 'yali_list_filters_types', true) );
+    $context['types']       = $this->convert_to_str( get_post_meta( $id, 'yali_list_filters_types', true) );
     $context                = $this->fetch_btn_config( $context, $id, get_post_meta( $id ) );
  
     return Twig::render( 'content_blocks/post-filtered-list.twig', $context );
@@ -198,12 +198,13 @@ class Content_Block_Shortcode {
   }
 
   private function fetch_btn_config ( &$context, $id, $meta ) {
-      $button = get_post_meta( $id, 'yali_cb_box_btn_link', true);
+      $button = get_post_meta( $id, 'yali_cb_box_btn_link', true );
+     
       if( !$button ) {
         return $context;
       } 
       $context['btn_label']           = $button['text'];
-      $context['btn_link']            = $button['url'];
+      $context['btn_link']            = $this->get_relative_link( $button['url'] );
       $context['btn_new_win']         = ($button['blank'] == 'true') ? 'target="_blank"' : '';
       $context['btn_bg_color']        = $meta['yali_cb_box_btn_bg_color'][0];
       $context['btn_label_color']     = ($context['btn_bg_color'] == '#f2d400') ? '#192856': '#ffffff';
@@ -212,7 +213,16 @@ class Content_Block_Shortcode {
       return $context;
   }
 
-  private function convertToStr( $value ) {
+  private function get_relative_link( $url ) {
+    $current_host = $_SERVER['HTTP_HOST'];
+    $button_host = parse_url( $url, PHP_URL_HOST );
+    if( $current_host === $button_host ) {
+      return parse_url( $url, PHP_URL_PATH );
+    } 
+    return  $url;
+  }
+
+  private function convert_to_str( $value ) {
     if( gettype($value) === 'array' ) {
       return implode(',', $value);
     } 

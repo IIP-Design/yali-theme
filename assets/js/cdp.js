@@ -477,7 +477,10 @@ function appendItem( item, related, relatedDisplay ) {
       div.setAttribute('class', 'cb_button');
 
       var a = document.createElement('a');
-      a.setAttribute('href', related.link);
+      // make link relative if on the same domain
+      let host = `${window.location.protocol}//${window.location.host}`;
+      let link = related.link.replace( host, '' );
+      a.setAttribute( 'href', link );
 
       if ( relatedDisplay === 'display_as_button' ) {
         a.setAttribute('class', 'ui button item');

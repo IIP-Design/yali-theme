@@ -555,7 +555,10 @@ function appendItem(item, related, relatedDisplay) {
       div.setAttribute('class', 'cb_button');
 
       var a = document.createElement('a');
-      a.setAttribute('href', related.link);
+      // make link relative if on the same domain
+      var host = window.location.protocol + '//' + window.location.host;
+      var link = related.link.replace(host, '');
+      a.setAttribute('href', link);
 
       if (relatedDisplay === 'display_as_button') {
         a.setAttribute('class', 'ui button item');
@@ -1469,6 +1472,8 @@ var generateBodyQry = exports.generateBodyQry = function generateBodyQry(params)
 
   if (params.series) {
     // need exact match so use term filter
+    // check to see if series contains a '-' to see if a slug was passed
+    // this is due to the dropdown filter menu only having access to the name
     if (~params.series.indexOf('-')) {
       body.filter('term', 'taxonomies.series.slug.keyword', params.series);
     } else {
