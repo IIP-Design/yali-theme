@@ -73,9 +73,7 @@ export function getLanguages( filter, cb ) {
 
 }
 
-
-
-export function builder ( params )  {
+export function builder ( params, context )  {
   let config = {
     meta: params.meta,
     selector: params.selector,
@@ -83,10 +81,11 @@ export function builder ( params )  {
     query: generateBodyQry({
       sites: INDEXES,
       langs: params.langs,
-      categories: params.categories,
+      categories: fetchQry( 'category', context, params.categories ),
+      tags: fetchQry( 'tag', context, params.tags ),
       types: params.types,
-      series: params.series,
-      from: params.from,
+      series: fetchQry( 'series', context, params.series ),
+      from: (params.from) ? params.from: 0,
       size: params.size,
       sort: params.sort
     })
@@ -112,8 +111,12 @@ export const generateBodyQry = ( params ) => {
 
   if ( params.series ) {
     // need exact match so use term filter
-    body.filter( 'term', 'taxonomies.series.name.keyword', params.series ); 
+    body.filter( 'term', 'tags.series.name.keyword', params.series ); 
   }
+
+   if (params.tags) {
+     body.filter('term', 'tags.name.keyword', params.tags); 
+   }
 
   if ( params.langs ) {
     qry.push( ...appendQry(params.langs, 'language.locale') );
@@ -203,13 +206,15 @@ function getDisplayName( bucket ) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-function removeItems( data, itemsToRemove ) {
-
-}
-
 function fetchArray( str ) {
   //console.log(str.split(',').filter( item => item.trim()) );
   return str.split(',').map( item => item.trim() );
+}
+
+const fetchQry = ( qry, context, params ) => {
+  return ( context && context.filter === qry && context.filterValue )
+    ? context.filterValue
+    : params;
 }
 
 const appendQry = ( str, field ) => {

@@ -2,13 +2,10 @@
 <section class='cb full-width' style="background-color: {{ block_bg_color }}">
 	<div class='ui container'>
     <div class='inner-container'>
-      {% if show_title == 'yes' %}  	
-        {% if title_size == 'h3' %}	  
-          <h3 class="{{ title_underline }}" style="text-align: {{ title_alignment }}">{{ title }}</h3>
-        {% else %}
-          <h2 class="{{ title_underline }}" style="text-align: {{ title_alignment }}">{{ title }}</h2>
-        {% endif %}
-      {% endif %}
+      <!-- content block title -->
+    	{% include 'partials/content_block_title.twig' %}
+      
+       <!-- content block exceprt -->
       <p class="cb_excerpt" style="text-align: {{ excerpt_alignment }}">{{ excerpt }} </p>
 
       <!-- attach article feed module -->

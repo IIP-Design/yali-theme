@@ -40,16 +40,17 @@ class Content_Block_Shortcode {
    */
   public function render_content_block ( $atts ) {
     // check for content block id
-    $id = $atts['id'];
     $type = get_post_meta( $atts['id'], 'yali_cb_type', true );  
     if( empty($type) ) {
       return;
     }
-    return call_user_func( array($this, 'render_' . $type ), $id );
+   
+    return call_user_func( array($this, 'render_' . $type ), $atts );
   }
 
   // CTA CONTENT BLOCK
-  public function render_cta( $id ) {
+  public function render_cta( $atts ) {
+    $id = $atts['id'];
     $meta = get_post_meta(  $id );
     $post = get_post( $id );
 
@@ -69,7 +70,8 @@ class Content_Block_Shortcode {
   }
 
   // SOCIAL CONTENT BLOCK
-  public function render_social( $id ) {
+  public function render_social( $atts ) {
+    $id = $atts['id'];
     $context = array(
       "title"           => get_post_meta( $id, 'yali_cb_social_links_title', true ),
       "facebook"        => get_post_meta( $id, 'yali_cb_social_links_facebook', true ),
@@ -83,7 +85,8 @@ class Content_Block_Shortcode {
 
 
   // ACCORDION CONTENT BLOCK
-  public function render_accordion( $id ) {
+  public function render_accordion( $atts ) {
+    $id = $atts['id'];
     $items = array();
     $meta_data = get_post_meta($id, 'accordion_repeat_group', true);
 
@@ -107,7 +110,8 @@ class Content_Block_Shortcode {
 
 
   // POST LIST CONTENT BLOCK (CDP)
-  public function render_post_list( $id ) {
+  public function render_post_list( $atts ) {
+    $id = $atts['id'];
     $meta = get_post_meta( $id );
     $post = get_post( $id );
    
@@ -121,14 +125,15 @@ class Content_Block_Shortcode {
   }
 
   // FILTERED POST LIST CONTENT BLOCK (CDP)
-  public function render_filtered_list( $id ) {  
+  public function render_filtered_list( $atts ) {
+    $id                     = $atts['id'];  
     $context                = $this->fetch_base_config( $id, get_post( $id ) );
     $context['selector']    = 'feed' . $id;
     $context['cdp_indexes'] = cdp_get_option('cdp_indexes');
-    $context['filters']     = get_post_meta( $id, 'yali_list_filters', true);
+    $context['filters']     = $this->fetch_filters( $atts );  // get_post_meta( $id, 'yali_list_filters', true);
     $context['types']       = $this->convertToStr( get_post_meta( $id, 'yali_list_filters_types', true) );
     $context                = $this->fetch_btn_config( $context, $id, get_post_meta( $id ) );
-
+ 
     return Twig::render( 'content_blocks/post-filtered-list.twig', $context );
   }
   
@@ -212,6 +217,27 @@ class Content_Block_Shortcode {
       return implode(',', $value);
     } 
     return $value;
+  }
+
+  /**
+   * Removes filter from filter group if on an archive page
+   * For example, if on the YALI Voices series page, remove series
+   * filter menu and limit search to series: YALI Voices
+   *
+   * @param [array] $atts Shortcode attributes
+   * @return updatedFilters Array with applicable filter removed
+   */
+  private function fetch_filters( $atts ) {
+    $filters = get_post_meta( $atts['id'], 'yali_list_filters', true);
+    if( !isset($atts['taxonomy']) ) {
+      return $filters;
+    }
+    $taxonomy = $atts['taxonomy'];
+    $updatedFilters = array_filter( $filters, function($filter) use ($taxonomy) {
+      return $filter !== $taxonomy;
+    });
+
+    return $updatedFilters;
   }
 
   private function debug( $obj ) {

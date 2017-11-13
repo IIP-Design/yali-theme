@@ -16,6 +16,9 @@ var filterHash = {
   'sort': 'sort'
 }
 
+/**
+ * Default filter config
+ */
 var defaultFilterConfig = {
   sites: cdp.searchIndexes,
   from: 0,
@@ -100,7 +103,7 @@ function initializeFilters() {
     let filters = group.querySelectorAll( 'div.ui.dropdown' ); 
        if ( filters.length ) {
          initializeDropDownSelects( filters, feed );
-         initializeFeed( feed ) ;
+         initializeFeed( feed );
          initializeFeedButton( feed );
        }
    });
@@ -113,7 +116,7 @@ function initializeFilters() {
 function initializeDropDownSelects( filters, feed ) {
   let config = {
     useLabels: false,
-    onChange: function(value, text, selectedItem) {
+    onChange: function( value, text, selectedItem ) {
       updateFeed(); // add debounce, or do check in article feed
     }
   };
@@ -142,7 +145,7 @@ function initializeDropDownSelects( filters, feed ) {
 }
 
 /**
- * update the feed when a filter changes. The feed config is stored in
+ * Update the feed when a filter changes. The feed config is stored in
  * the cdpFilterFeedConfig object by feeds id for reference
  */
 function updateFeed() {
@@ -163,17 +166,18 @@ function updateFeed() {
 /**
  * Remove feed list from the DOM and reset 'from' and selector.  Reset
  * is needed as additional feeds may have been added by clicking 'Show More'
- * @param {string} feed DOM id of parant containing feed list
+ * @param {string} feed DOM id of parent containing feed list
  */
 function removeFeed( feed, config ) {
   let el = $(`#${feed}`);
   let items = el.find('.article-item');
+  let context = getFilterContext( feed );
   el.css('min-height', el.height() );
   items.addClass('animate-out').promise().done(function() {
     el.empty();
     config.selector = `#${feed}`;
     config.from = 0;
-    addFeed( query.builder(config) );
+    addFeed( query.builder(config, context) );
   });
 }
 
@@ -206,19 +210,22 @@ function initializeFeed( feed ) {
   if( types ) {
      cdpFilterFeedConfig[id].types = types;
   }
+
+  // check to see if this feed sits on an archive page. 
+  let context = getFilterContext( feed );
    
   addOnFeedReadyHandler( id );
-  addFeed( query.builder(cdpFilterFeedConfig[id]) );
+  addFeed( query.builder(cdpFilterFeedConfig[id], context) );
 
 }
 
-/****** Button functions ********/
+/* ================== BUTTON FUNCTIONS ================== */
 
 /**
  * Add 'click' listener to 'Show More' button if present
  */
 function initializeFeedButton( feed ) {
-  //let filteredFeed = document.querySelectorAll("[data-content-type='cdp-filtered-list']");
+  // let filteredFeed = document.querySelectorAll("[data-content-type='cdp-filtered-list']");
   // forEach(filteredFeed, function(index, feed) {
   let btnId = `btn-${feed.id}`;
   let btn = document.getElementById(btnId);
@@ -333,7 +340,7 @@ function initializeArticleFeed() {
     "[data-content-type='cdp-article-feed']"
   );
   forEach(feeds, function(index, feed) {
-    renderArticleFeed(feed);
+    renderArticleFeed( feed );
   });
 }
 
@@ -346,7 +353,14 @@ function initializeArticleFeed() {
  * @param {object} feed Configuration object
  */
 function renderArticleFeed( feed ) {
+   // check to see if this feed sits on an archive page. 
+  let context = getFilterContext( feed );
+
+  // config that has contains all applicable params not neccessarily being sent to module
   let config = cdpFeedConfig[feed.id];
+
+  // config obj that houses ONLY params that get sent to cdp article feed module
+  // need a clean config object to generate query outside of module if needed
   let configObj = {
     selector: `#${feed.id}`,
     sites: config.indexes,  // need to have a default
@@ -372,7 +386,14 @@ function renderArticleFeed( feed ) {
   }
 
   shouldDisplayRelatedLinks( config );
-  addFeed( configObj );
+
+  if( context ) {
+    // Build query outside of cdp module, since using some YALI specific params, i.e.series
+    addFeed( query.builder(configObj, context) );
+  } else {
+    // let module generate query since using standard params
+    addFeed( configObj );
+  }
 }
 
 /**
@@ -477,6 +498,20 @@ const forEach = function(array, callback, scope) {
     callback.call(scope, i, array[i]);
   }
 };
+
+/**
+ * Checks to see if feed is stting on an archive page and return archive data
+ * 
+ * @param {*} feed  Either a feed id string or the feed DOM element itself
+ * 
+ * @returns DOM data attributes of parent element with '.archive_posts' class. Data elements
+ * contain data-filter and data-filter-value, i.e. data-filter="series", data-filter-value="YALI Voices"
+ */
+const getFilterContext = ( feed ) => {
+  let el = ( typeof feed == 'string') ? document.getElementById( feed ) : feed;
+  let archive = $(el).closest('div.archive_posts');
+  return ( archive ) ? $(archive).data() : null;
+}
 
 /**
  * Recursively copy object.
