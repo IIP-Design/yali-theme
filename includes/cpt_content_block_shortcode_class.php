@@ -92,6 +92,7 @@ class Content_Block_Shortcode {
 
     foreach ($meta_data as $item => $item_value) {
       // Add p tags to tinymce content
+      $item_value['item_content'] = $this->filter_link( $item_value['item_content'] );
       $item_value['item_content'] = wpautop($item_value['item_content']);
       array_push($items, $item_value);
     }
@@ -185,7 +186,7 @@ class Content_Block_Shortcode {
     $context['cdp_taxonomy_select_by']          = get_post_meta( $id, 'yali_cdp_select_taxonomy', true );
    
     $context['cdp_post_ids']                    = get_post_meta( $id, 'yali_cdp_autocomplete', true );
-    $context['cdp_posts_related']               = get_post_meta( $id, 'yali_cdp_autocomplete_related', true );
+    $context['cdp_posts_related']               = $this->filter_cdp_posts_related( get_post_meta( $id, 'yali_cdp_autocomplete_related', true ) );
     $context['cdp_posts_related_link_display']  = get_post_meta( $id, 'yali_cdp_autocomplete_links_display', true );
     $context['cdp_post_meta_fields_to_show']    = get_post_meta( $id, 'yali_cdp_fields', true );
     $context['cdp_num_posts']                   = get_post_meta( $id, 'yali_cdp_num_posts', true );
@@ -203,6 +204,22 @@ class Content_Block_Shortcode {
     return $context;
   }
 
+  private function filter_link( $link ) {
+    return apply_filters( 'btn_link_domain_mapping', $link );
+  }
+  
+  private function filter_cdp_posts_related( $cdp_posts_related ) {
+    $cpr = array();
+    if( is_array( $cdp_posts_related ) ) {
+      foreach( $cdp_posts_related as $cdp_post ) {
+        $cdp_post['link'] = $this->filter_link( $cdp_post['link'] );
+        $cpr[] = $cdp_post;
+      }
+      $cdp_posts_related = $cpr;
+    }
+    return $cdp_posts_related;
+  }
+
   private function fetch_btn_config ( &$context, $id, $meta ) {
     $button = get_post_meta( $id, 'yali_cb_box_btn_link', true );
     
@@ -210,7 +227,7 @@ class Content_Block_Shortcode {
       return $context;
     } 
     $context['btn_label']           = $button['text'];
-    $context['btn_link']            = $this->get_relative_link( $button['url'] );
+    $context['btn_link']            = $this->filter_link( $button['url'] );
     $context['btn_new_win']         = ($button['blank'] == 'true') ? 'target="_blank"' : '';
     $context['btn_bg_color']        = $meta['yali_cb_box_btn_bg_color'][0];
     $context['btn_label_color']     = ($context['btn_bg_color'] == '#f2d400') ? '#192856': '#ffffff';
@@ -219,14 +236,14 @@ class Content_Block_Shortcode {
     return $context;
   }
 
-  private function get_relative_link( $url ) {
-    $current_host = $_SERVER['HTTP_HOST'];
-    $button_host = parse_url( $url, PHP_URL_HOST );
-    if( $current_host === $button_host ) {
-      return parse_url( $url, PHP_URL_PATH );
-    } 
-    return  $url;
-  }
+  // private function get_relative_link( $url ) {
+  //   $current_host = $_SERVER['HTTP_HOST'];
+  //   $button_host = parse_url( $url, PHP_URL_HOST );
+  //   if( $current_host === $button_host ) {
+  //     return parse_url( $url, PHP_URL_PATH );
+  //   } 
+  //   return  $url;
+  // }
 
   private function convert_to_str( $value ) {
     if( gettype($value) === 'array' ) {
