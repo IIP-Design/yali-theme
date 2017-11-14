@@ -119,7 +119,7 @@ export const generateBodyQry = ( params ) => {
     if( ~params.series.indexOf('-') ) {
       body.filter( 'term', 'taxonomies.series.slug.keyword', params.series ); 
     } else {
-      body.filter( 'term', 'taxonomies.series.name', params.series ); 
+      body.filter( 'term', 'taxonomies.series.name.keyword', params.series ); 
     }
   }
 
