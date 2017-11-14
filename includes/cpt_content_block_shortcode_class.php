@@ -185,7 +185,7 @@ class Content_Block_Shortcode {
     $context['cdp_taxonomy_select_by']          = get_post_meta( $id, 'yali_cdp_select_taxonomy', true );
    
     $context['cdp_post_ids']                    = get_post_meta( $id, 'yali_cdp_autocomplete', true );
-    $context['cdp_posts_related']               = get_post_meta( $id, 'yali_cdp_autocomplete_related', true );
+    $context['cdp_posts_related']               = $this->filter_links(get_post_meta( $id, 'yali_cdp_autocomplete_related', true ));
     $context['cdp_posts_related_link_display']  = get_post_meta( $id, 'yali_cdp_autocomplete_links_display', true );
     $context['cdp_post_meta_fields_to_show']    = get_post_meta( $id, 'yali_cdp_fields', true );
     $context['cdp_num_posts']                   = get_post_meta( $id, 'yali_cdp_num_posts', true );
@@ -198,17 +198,23 @@ class Content_Block_Shortcode {
     $context['cdp_ui_direction']                = get_post_meta( $id, 'yali_cdp_ui_direction', true);
     $context['cdp_image']                       = get_post_meta( $id, 'yali_cdp_image', true);
     
-    $cpr = array();
-    if( is_array( $context['cdp_posts_related'] ) ) {
-      foreach( $context['cdp_posts_related'] as $con ) {
-        $con['link'] = apply_filters('btn_link_domain_mapping', $con['link']);
-        $cpr[] = $con;
-      }
-      $context['cdp_posts_related'] = $cpr;
-    }
     //$this->debug($context);exit;
 
     return $context;
+  }
+  
+  private function filter_links( $cdp_posts_related ) {
+
+    $cpr = array();
+    if( is_array( $cdp_posts_related ) ) {
+      foreach( $cdp_posts_related as $cdp_post ) {
+        $cdp_post['link'] = apply_filters('btn_link_domain_mapping', $cdp_post['link']);
+        $cpr[] = $cdp_post;
+      }
+      $cdp_posts_related = $cpr;
+    }
+
+    return $cdp_posts_related;
   }
 
   private function fetch_btn_config ( &$context, $id, $meta ) {
