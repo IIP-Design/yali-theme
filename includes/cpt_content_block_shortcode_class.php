@@ -198,6 +198,14 @@ class Content_Block_Shortcode {
     $context['cdp_ui_direction']                = get_post_meta( $id, 'yali_cdp_ui_direction', true);
     $context['cdp_image']                       = get_post_meta( $id, 'yali_cdp_image', true);
     
+    $cpr = array();
+    if( is_array( $context['cdp_posts_related'] ) ) {
+      foreach( $context['cdp_posts_related'] as $con ) {
+        $con['link'] = apply_filters('btn_link_domain_mapping', $con['link']);
+        $cpr[] = $con;
+      }
+      $context['cdp_posts_related'] = $cpr;
+    }
     //$this->debug($context);exit;
 
     return $context;
@@ -210,7 +218,7 @@ class Content_Block_Shortcode {
       return $context;
     } 
     $context['btn_label']           = $button['text'];
-    $context['btn_link']            = $this->get_relative_link( $button['url'] );
+    $context['btn_link']            = apply_filters( 'btn_link_domain_mapping', $button['url'] );
     $context['btn_new_win']         = ($button['blank'] == 'true') ? 'target="_blank"' : '';
     $context['btn_bg_color']        = $meta['yali_cb_box_btn_bg_color'][0];
     $context['btn_label_color']     = ($context['btn_bg_color'] == '#f2d400') ? '#192856': '#ffffff';
@@ -219,14 +227,14 @@ class Content_Block_Shortcode {
     return $context;
   }
 
-  private function get_relative_link( $url ) {
-    $current_host = $_SERVER['HTTP_HOST'];
-    $button_host = parse_url( $url, PHP_URL_HOST );
-    if( $current_host === $button_host ) {
-      return parse_url( $url, PHP_URL_PATH );
-    } 
-    return  $url;
-  }
+  // private function get_relative_link( $url ) {
+  //   $current_host = $_SERVER['HTTP_HOST'];
+  //   $button_host = parse_url( $url, PHP_URL_HOST );
+  //   if( $current_host === $button_host ) {
+  //     return parse_url( $url, PHP_URL_PATH );
+  //   } 
+  //   return  $url;
+  // }
 
   private function convert_to_str( $value ) {
     if( gettype($value) === 'array' ) {
