@@ -24,10 +24,12 @@ import show_more_posts from './show_more';
   $('.ui.accordion').accordion();  
 
   // MWF Links, 16days page - Page Scroll
-  if( location.pathname.includes('/16days') ) {
-    let pledge = document.querySelector('[href="#pledgeform16"]');
-    pledge.classList.add('scroll_link');
-  }
+  if( document.querySelector('.yali_page') !== null ) {
+    if( document.querySelector('.yali_page').classList.contains('16days') ) {    
+      let pledge = document.querySelector('[href="#pledgeform16"]');
+      pledge.classList.add('scroll_link');
+    }  
+  }  
 
   scroll_to_elem('.scroll_link');
 
