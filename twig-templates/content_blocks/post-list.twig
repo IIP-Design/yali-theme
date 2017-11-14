@@ -31,6 +31,7 @@
   var cdpFeedConfig = cdpFeedConfig || {};  // do not put obj in global namespace
   cdpFeedConfig['{{ selector }}'] = {
     selectBy: '{{ cdp_post_select_by }}',
+    selectByTaxonomy: '{{ cdp_taxonomy_select_by }}',
     indexes: '{{ cdp_indexes }}',
     ids:  {{ cdp_post_ids|json_encode() }},
     relatedPosts:  {{ cdp_posts_related|json_encode() }},
@@ -38,6 +39,8 @@
     image:  {{ cdp_image|json_encode() }},
     numPosts: '{{ cdp_num_posts }}',
     categories: '{{ cdp_category }}',
+    series: '{{ cdp_series }}',
+    tags: '{{ cdp_tag }}',
     postMeta: {{ cdp_post_meta_fields_to_show|json_encode() }},
     uiLayout: '{{ cdp_ui_layout }}',
     uiDirection:  '{{ cdp_ui_direction }}',

@@ -90,11 +90,50 @@ class Content_Block {
     $cat_options['select'] = 'Select';
     foreach( $categories as $category ) {
       if( $category->name != 'Uncategorized' )
-      $cat_options[$category->name] = $category->name;
+      $cat_options[$category->slug] = $category->name;
     }
 
     return $cat_options;
   }
+
+  /**
+   * Fetch Wordpress series
+   * @todo fetch from CDP
+   *
+   * @return void
+   */
+  public function fetch_series() {
+    $series_options =  array();
+    $series = get_terms( 'series', array(
+      'hide_empty' => false,
+    ));
+
+    $series_options['select'] = 'Select';
+    foreach( $series as $s ) {
+      $series_options[$s->slug] = $s->name;
+    }
+
+    return $series_options;
+  }
+
+    /**
+   * Fetch Wordpress series
+   * @todo fetch from CDP
+   *
+   * @return void
+   */
+  public function fetch_tags() {
+    $tags_options =  array();
+    $tags = get_tags();
+
+    $tags_options['select'] = 'Select';
+    foreach( $tags as $tag ) {
+      $tags_options[$tag->slug] = $tag->name;
+    }
+
+    return $tags_options;
+  }
+
 
   /**
    * Adds custom column headers to content block admin list

@@ -1,13 +1,16 @@
 (function($) {
   $(document).on('cmb_init', function() {
     // Metabox DOM Selections
-    var widgetMetabox = document.getElementById("yali_cb_box_cdp"),
-      socialMetabox = document.getElementById("yali_cb_social_links"),      
+    var widgetMetabox = document.getElementById('yali_cb_box_cdp'),
+      socialMetabox = document.getElementById('yali_cb_social_links'),
       accordionMetaBox = document.getElementById('yali_cb_accordion'),
-      ctaLayoutWidth = document.getElementById('yali_cb_cta_width'),   
-      filteredListMetaBox = document.getElementById('yali_cb_box_filter'),   
-      selectByPostsNum = $('.cmb2-id-yali-cdp-num-posts'),   
-      selectByPostsCategory = $('.cmb2-id-yali-cdp-category'), 
+      ctaLayoutWidth = document.getElementById('yali_cb_cta_width'),
+      filteredListMetaBox = document.getElementById('yali_cb_box_filter'), 
+      selectByTaxonomy = $('.cdp-select-posts-by-taxonomy'),
+      selectByPostsCategory = $('.cmb2-id-yali-cdp-category'),
+      selectByPostsSeries = $('.cmb2-id-yali-cdp-series'),
+      selectByPostsTags = $('.cmb2-id-yali-cdp-tag'),
+      selectByPostsNum = $('.cmb2-id-yali-cdp-num-posts'),
       selectByPosts = $('.cmb-type-cdp-autocomplete.cmb-repeat'),
       selectByPostsLink = $('.cmb2-id-yali-cdp-autocomplete-related.cmb-repeat'),
       selectByPostsDisplay = $('.cmb2-id-yali-cdp-autocomplete-links-display');
@@ -72,13 +75,23 @@
     });
 
     // Set initial state of post list selection type within the Post List meta box
-    var select =  $('.cdp-select-posts-by input[type=radio]:checked').val();
+    var select = $('.cdp-select-posts-by input[type=radio]:checked').val();
     togglePostListFields( select );
+
+    // Set initial state of taxonomy selection within the Post List meta box
+    var selectTax = $('.cdp-select-posts-by-taxonomy input[type=radio]:checked').val();
+    toggleTaxonomyFields( selectTax );
 
     // Toggle post list selection type (by recent or custom) when selection is changed
     $('.cdp-select-posts-by input[type=radio]').change(function() {
       var selectBy = $(this).val();
       togglePostListFields( selectBy );
+    });
+
+    // Toggle taxonomy selection when selection is changed
+    $('.cdp-select-posts-by-taxonomy input[type=radio]').change(function() {
+      var selectBy = $(this).val();
+      toggleTaxonomyFields( selectBy );
     });
 
     /**
@@ -88,16 +101,43 @@
     function togglePostListFields( selectBy ) {
       if (selectBy === 'custom') {
         selectByPostsNum.hide();
-        selectByPostsCategory.hide();
+        selectByTaxonomy.hide();
         selectByPosts.show();
         selectByPostsLink.show();
         selectByPostsDisplay.show();
       } else {
         selectByPostsNum.show();
-        selectByPostsCategory.show();
+        selectByTaxonomy.show();
         selectByPosts.hide();
         selectByPostsLink.hide();
         selectByPostsDisplay.hide();
+      }
+    }
+
+    function toggleTaxonomyFields( taxonomy ) {
+      switch (taxonomy) {
+        case 'category':
+          selectByPostsCategory.show();
+          selectByPostsSeries.hide();
+          selectByPostsTags.hide();
+          break;
+
+        case 'series':
+          selectByPostsCategory.hide();
+          selectByPostsSeries.show();
+          selectByPostsTags.hide();
+          break;
+
+        case 'tags':
+          selectByPostsCategory.hide();
+          selectByPostsSeries.hide();
+          selectByPostsTags.show();
+          break;
+
+        default:
+          selectByPostsCategory.hide();
+          selectByPostsSeries.hide();
+          selectByPostsTags.hide();
       }
     }
 

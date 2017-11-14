@@ -176,17 +176,23 @@ class Content_Block_Shortcode {
 
     $module                                     = 'article-feed';
     $category_field                             = get_post_meta( $id, 'yali_cdp_category', true);
+    $series_field                               = get_post_meta( $id, 'yali_cdp_series', true);
+    $tag_field                                  = get_post_meta( $id, 'yali_cdp_tag', true);
 
     $context['cdp_widget']                      = $module;
     $context['cdp_indexes']                     = cdp_get_option('cdp_indexes');
     $context['cdp_post_select_by']              = get_post_meta( $id, 'yali_cdp_select_type_posts', true );
+    $context['cdp_taxonomy_select_by']          = get_post_meta( $id, 'yali_cdp_select_taxonomy', true );
    
     $context['cdp_post_ids']                    = get_post_meta( $id, 'yali_cdp_autocomplete', true );
     $context['cdp_posts_related']               = get_post_meta( $id, 'yali_cdp_autocomplete_related', true );
     $context['cdp_posts_related_link_display']  = get_post_meta( $id, 'yali_cdp_autocomplete_links_display', true );
     $context['cdp_post_meta_fields_to_show']    = get_post_meta( $id, 'yali_cdp_fields', true );
     $context['cdp_num_posts']                   = get_post_meta( $id, 'yali_cdp_num_posts', true );
+   
     $context['cdp_category']                    = ( empty($category_field) || $category_field == 'select' ) ?  '' : $category_field;
+    $context['cdp_series']                      = ( empty($series_field) || $series_field == 'select' ) ?  '' : $series_field;
+    $context['cdp_tag']                         = ( empty($tag_field) || $tag_field == 'select' ) ?  '' : $tag_field;
     
     $context['cdp_ui_layout']                   = get_post_meta( $id, 'yali_cdp_ui_layout', true);
     $context['cdp_ui_direction']                = get_post_meta( $id, 'yali_cdp_ui_direction', true);
@@ -198,19 +204,19 @@ class Content_Block_Shortcode {
   }
 
   private function fetch_btn_config ( &$context, $id, $meta ) {
-      $button = get_post_meta( $id, 'yali_cb_box_btn_link', true );
-     
-      if( !$button ) {
-        return $context;
-      } 
-      $context['btn_label']           = $button['text'];
-      $context['btn_link']            = $this->get_relative_link( $button['url'] );
-      $context['btn_new_win']         = ($button['blank'] == 'true') ? 'target="_blank"' : '';
-      $context['btn_bg_color']        = $meta['yali_cb_box_btn_bg_color'][0];
-      $context['btn_label_color']     = ($context['btn_bg_color'] == '#f2d400') ? '#192856': '#ffffff';
-      $context['btn_text_alignment']  = $meta['yali_cb_box_btn_h_alignment'][0];
-
+    $button = get_post_meta( $id, 'yali_cb_box_btn_link', true );
+    
+    if( !$button ) {
       return $context;
+    } 
+    $context['btn_label']           = $button['text'];
+    $context['btn_link']            = $this->get_relative_link( $button['url'] );
+    $context['btn_new_win']         = ($button['blank'] == 'true') ? 'target="_blank"' : '';
+    $context['btn_bg_color']        = $meta['yali_cb_box_btn_bg_color'][0];
+    $context['btn_label_color']     = ($context['btn_bg_color'] == '#f2d400') ? '#192856': '#ffffff';
+    $context['btn_text_alignment']  = $meta['yali_cb_box_btn_h_alignment'][0];
+
+    return $context;
   }
 
   private function get_relative_link( $url ) {

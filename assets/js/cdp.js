@@ -358,7 +358,8 @@ function renderArticleFeed( feed ) {
 
   // config that has contains all applicable params not neccessarily being sent to module
   let config = cdpFeedConfig[feed.id];
-
+  let selectByTaxonomy = config.selectByTaxonomy;
+  
   // config obj that houses ONLY params that get sent to cdp article feed module
   // need a clean config object to generate query outside of module if needed
   let configObj = {
@@ -368,8 +369,9 @@ function renderArticleFeed( feed ) {
     types: '',
     ids: config.ids,
     langs: '',
-    tags: '',
-    categories: config.categories,
+    tags: ( selectByTaxonomy  === 'tag' ) ? config.tags : '',
+    series: ( selectByTaxonomy  === 'series')  ? config.series : '',
+    categories: ( selectByTaxonomy  === 'category' ) ? config.categories : '',
     meta: config.postMeta,
     ui: {
       layout: config.uiLayout,
@@ -387,7 +389,7 @@ function renderArticleFeed( feed ) {
 
   shouldDisplayRelatedLinks( config );
 
-  if( context ) {
+  if( context || config.series ) {
     // Build query outside of cdp module, since using some YALI specific params, i.e.series
     addFeed( query.builder(configObj, context) );
   } else {
