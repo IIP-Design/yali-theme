@@ -68,7 +68,7 @@ function insert_dap(){
  *
 **/
 add_action('wp_head', 'insert_hotjar');
-function () {
+function insert_hotjar() {
 	?>
 	<!-- Hotjar Tracking  -->
 	<script>
