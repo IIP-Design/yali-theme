@@ -1107,7 +1107,7 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
   // MWF Links, 16days page - Page Scroll
   if (location.pathname.includes('/16days')) {
-    var pledge = document.querySelector('.cb_button .ui.button');
+    var pledge = document.querySelector('[href="#pledgeform16"]');
     pledge.classList.add('scroll_link');
   }
 
