@@ -131,7 +131,10 @@ export const generateBodyQry = ( params ) => {
   }
 
   if ( params.categories ) {
-    qry.push( ...appendQry(params.categories, 'categories.name') );
+    str = `categories.name: ${params.categories} OR categories.slug: ${params.categories}`;
+    qry.push( str );
+    // leave for use w/multiple categories, i.e 'environment, climate'
+    // qry.push( ...appendQry(params.categories, 'categories.name') ); 
   }
 
   if ( params.types ) {

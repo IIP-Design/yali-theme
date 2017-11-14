@@ -1493,7 +1493,9 @@ var generateBodyQry = exports.generateBodyQry = function generateBodyQry(params)
   }
 
   if (params.categories) {
-    qry.push.apply(qry, _toConsumableArray(appendQry(params.categories, 'categories.name')));
+    str = 'categories.name: ' + params.categories + ' OR categories.slug: ' + params.categories;
+    qry.push(str);
+    // qry.push( ...appendQry(params.categories, 'categories.name') ); // leave for use w/multiple categories, i.e 'environment, climate'
   }
 
   if (params.types) {
