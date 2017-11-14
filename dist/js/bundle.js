@@ -1477,6 +1477,7 @@ var generateBodyQry = exports.generateBodyQry = function generateBodyQry(params)
     // check to see if series contains a '-' to see if a slug was passed
     // this is due to the dropdown filter menu only having access to the name
     // @todo this 'workaround' will need to be modified as some slugs do not have '-', i.e YALIVotes
+
     if (~params.series.indexOf('-')) {
       body.filter('term', 'taxonomies.series.slug.keyword', params.series);
     } else {
@@ -1495,7 +1496,8 @@ var generateBodyQry = exports.generateBodyQry = function generateBodyQry(params)
   if (params.categories) {
     str = 'categories.name: ' + params.categories + ' OR categories.slug: ' + params.categories;
     qry.push(str);
-    // qry.push( ...appendQry(params.categories, 'categories.name') ); // leave for use w/multiple categories, i.e 'environment, climate'
+    // leave for use w/multiple categories, i.e 'environment, climate'
+    // qry.push( ...appendQry(params.categories, 'categories.name') ); 
   }
 
   if (params.types) {
@@ -1688,14 +1690,19 @@ function scroll_to_elem(elem_class) {
 
 			var nav_height = window.outerWidth > 933 ? 92 : 62,
 			    offset = 50 + nav_height,
-			    scrollToElemID = this.getAttribute('href'),
-			    scrollToElem = document.querySelector(scrollToElemID);
+			    scrollToElemID = this.getAttribute('href');
 
-			window.scrollBy({
-				top: scrollToElem.getBoundingClientRect().y - offset,
-				left: 0,
-				behavior: 'smooth'
-			});
+			if (scrollToElemID) {
+				var scrollToElem = document.querySelector(scrollToElemID);
+
+				if (scrollToElem) {
+					window.scrollBy({
+						top: scrollToElem.getBoundingClientRect().y - offset,
+						left: 0,
+						behavior: 'smooth'
+					});
+				}
+			}
 		});
 	});
 };

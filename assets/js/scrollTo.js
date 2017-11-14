@@ -8,14 +8,19 @@ export default function scroll_to_elem(elem_class) {
 			var 
 				nav_height = ( window.outerWidth > 933 ) ? 92 : 62,
 				offset = 50 + nav_height,
-				scrollToElemID = this.getAttribute('href'),
-				scrollToElem = document.querySelector(scrollToElemID);
+				scrollToElemID = this.getAttribute( 'href' );
 
-			window.scrollBy({
-				top: scrollToElem.getBoundingClientRect().y - offset,
-				left: 0,
-				behavior: 'smooth'
-			});
+			if( scrollToElemID ) {
+				var scrollToElem = document.querySelector( scrollToElemID );
+
+				if( scrollToElem ) {
+					window.scrollBy({
+						top: scrollToElem.getBoundingClientRect().y - offset,
+						left: 0,
+						behavior: 'smooth'
+					});
+				}
+			}
 		});
 	});
 };

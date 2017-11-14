@@ -115,6 +115,7 @@ export const generateBodyQry = ( params ) => {
     // check to see if series contains a '-' to see if a slug was passed
     // this is due to the dropdown filter menu only having access to the name
     // @todo this 'workaround' will need to be modified as some slugs do not have '-', i.e YALIVotes
+  
     if( ~params.series.indexOf('-') ) {
       body.filter( 'term', 'taxonomies.series.slug.keyword', params.series ); 
     } else {
