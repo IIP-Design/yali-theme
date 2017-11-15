@@ -156,7 +156,15 @@ function updateFeed() {
     if( config ) {
       let filters = dropdown.querySelectorAll('div.ui.dropdown input');
       forEach(filters, function(index, filter) {
-        config[filterHash[filter.name]] = filter.value;
+        let value = filter.value;
+
+        // need to transform series name to slug, not the best
+        // @todo use an aggregation to pull the applicable slug w/ the name
+        if(filter.name === 'series') {
+          value = filter.value.replace(/\s+/g, '-' ).toLowerCase();
+          value = value.replace(/[\'\?]/g, '');
+        }
+        config[filterHash[filter.name]] = value;
       });
       removeFeed( target, config );
     }

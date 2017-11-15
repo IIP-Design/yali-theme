@@ -231,7 +231,15 @@ function updateFeed() {
     if (config) {
       var filters = dropdown.querySelectorAll('div.ui.dropdown input');
       forEach(filters, function (index, filter) {
-        config[filterHash[filter.name]] = filter.value;
+        var value = filter.value;
+
+        // need to transform series name to slug, not the best
+        // @todo use an aggregation to pull the applicable slug w/ the name
+        if (filter.name === 'series') {
+          value = filter.value.replace(/\s+/g, '-').toLowerCase();
+          value = value.replace(/[\'\?]/g, '');
+        }
+        config[filterHash[filter.name]] = value;
       });
       removeFeed(target, config);
     }
@@ -1474,14 +1482,7 @@ var generateBodyQry = exports.generateBodyQry = function generateBodyQry(params,
   body.notQuery('match', 'slug', 'course-*');
 
   if (params.series) {
-    // check to see if series contains a '-' to see if a slug was passed
-    // this is due to the dropdown filter menu only having access to the name
-    // @todo this 'workaround' will need to be modified as it is not robust
-    if (context) {
-      body.filter('term', 'taxonomies.series.slug.keyword', params.series);
-    } else {
-      body.filter('term', 'taxonomies.series.name.keyword', params.series);
-    }
+    body.filter('term', 'taxonomies.series.slug.keyword', params.series);
   }
 
   if (params.tags) {

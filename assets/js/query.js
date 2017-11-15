@@ -110,14 +110,7 @@ export const generateBodyQry = ( params, context ) => {
   body.notQuery( 'match', 'slug', 'course-*' );
 
   if ( params.series ) {
-    // check to see if series contains a '-' to see if a slug was passed
-    // this is due to the dropdown filter menu only having access to the name
-    // @todo this 'workaround' will need to be modified as it is not robust
-    if ( context ) {
-      body.filter( 'term', 'taxonomies.series.slug.keyword', params.series );
-    } else {
-      body.filter( 'term', 'taxonomies.series.name.keyword', params.series );
-    }
+    body.filter( 'term', 'taxonomies.series.slug.keyword', params.series );
   }
 
   if ( params.tags ) {
