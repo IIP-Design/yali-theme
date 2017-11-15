@@ -1437,7 +1437,6 @@ function getLanguages(filter, cb) {
 }
 
 function builder(params, context) {
-
   var config = {
     meta: params.meta,
     selector: params.selector,
@@ -1452,13 +1451,13 @@ function builder(params, context) {
       from: params.from ? params.from : 0,
       size: params.size,
       sort: params.sort ? params.sort : 'recent'
-    })
+    }, context)
   };
 
   return config;
 }
 
-var generateBodyQry = exports.generateBodyQry = function generateBodyQry(params) {
+var generateBodyQry = exports.generateBodyQry = function generateBodyQry(params, context) {
   var body = new _bodybuilder2.default();
   var qry = [],
       str = void 0;
@@ -1475,12 +1474,10 @@ var generateBodyQry = exports.generateBodyQry = function generateBodyQry(params)
   body.notQuery('match', 'slug', 'course-*');
 
   if (params.series) {
-    // need exact match so use term filter
     // check to see if series contains a '-' to see if a slug was passed
     // this is due to the dropdown filter menu only having access to the name
-    // @todo this 'workaround' will need to be modified as some slugs do not have '-', i.e YALIVotes
-
-    if (~params.series.indexOf('-')) {
+    // @todo this 'workaround' will need to be modified as it is not robust
+    if (context) {
       body.filter('term', 'taxonomies.series.slug.keyword', params.series);
     } else {
       body.filter('term', 'taxonomies.series.name.keyword', params.series);

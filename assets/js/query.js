@@ -74,7 +74,6 @@ export function getLanguages( filter, cb ) {
 }
 
 export function builder ( params, context )  {
- 
   let config = {
     meta: params.meta,
     selector: params.selector,
@@ -89,13 +88,13 @@ export function builder ( params, context )  {
       from: (params.from) ? params.from: 0,
       size: params.size,
       sort: (params.sort) ? params.sort : 'recent'
-    })
+    }, context )
   }
 
   return config;
 }
 
-export const generateBodyQry = ( params ) => {
+export const generateBodyQry = ( params, context ) => {
   let body = new bodybuilder();
   let qry = [], str;
 
@@ -111,15 +110,13 @@ export const generateBodyQry = ( params ) => {
   body.notQuery( 'match', 'slug', 'course-*' );
 
   if ( params.series ) {
-    // need exact match so use term filter
     // check to see if series contains a '-' to see if a slug was passed
     // this is due to the dropdown filter menu only having access to the name
-    // @todo this 'workaround' will need to be modified as some slugs do not have '-', i.e YALIVotes
-  
-    if( ~params.series.indexOf('-') ) {
-      body.filter( 'term', 'taxonomies.series.slug.keyword', params.series ); 
+    // @todo this 'workaround' will need to be modified as it is not robust
+    if ( context ) {
+      body.filter( 'term', 'taxonomies.series.slug.keyword', params.series );
     } else {
-      body.filter( 'term', 'taxonomies.series.name.keyword', params.series ); 
+      body.filter( 'term', 'taxonomies.series.name.keyword', params.series );
     }
   }
 
