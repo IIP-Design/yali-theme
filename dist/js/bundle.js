@@ -980,14 +980,7 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
   // Init Accordions
   $('.ui.accordion').accordion();
 
-  // MWF Links, 16days page - Page Scroll
-  if (document.querySelector('.yali_page') !== null) {
-    if (document.querySelector('.yali_page').classList.contains('16days')) {
-      var pledge = document.querySelector('[href="#pledgeform16"]');
-      pledge.classList.add('scroll_link');
-    }
-  }
-
+  // MWF Links
   (0, _scrollTo2.default)('.scroll_link');
 
   // Search Results Page
