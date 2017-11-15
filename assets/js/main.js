@@ -5,8 +5,6 @@ import * as join_form from './join_form.js';
 import * as search from './search.js';
 import * as cdp from './cdp';
 import * as responsiveImages from './responsive_background_image.js';
-import * as dropdown_filter from './dropdown_filter';
-import './simple_filter';
 import scroll_to_elem from './scrollTo';
 import show_more_posts from './show_more';
 
@@ -15,8 +13,7 @@ import show_more_posts from './show_more';
   nav.init($);
   footer.init();
   join_form.init();
-  search.init();  
-  dropdown_filter.init();
+  search.init();
   cdp.init($);
   responsiveImages.init();
 
