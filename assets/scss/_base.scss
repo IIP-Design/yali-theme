@@ -73,3 +73,18 @@ main {
 .image_6-1 {
   padding-top: 16.66%;
 }
+
+/*------------------------------------*\
+  #		ANCHOR TAGS
+\*------------------------------------*/
+
+:target::before {
+  content:"";
+  display: block;
+  margin: -150px 0 0;
+  height: 150px;
+}
+
+:target:focus {
+  outline: none;
+}
