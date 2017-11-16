@@ -125,6 +125,7 @@ class Content_Block_Shortcode {
     return Twig::render( 'content_blocks/post-list.twig', $context );
   }
 
+
   // FILTERED POST LIST CONTENT BLOCK (CDP)
   public function render_filtered_list( $atts ) {
     $id                     = $atts['id'];  
@@ -138,6 +139,17 @@ class Content_Block_Shortcode {
     return Twig::render( 'content_blocks/post-filtered-list.twig', $context );
   }
   
+
+  // MEDIA CONTENT BLOCK
+  public function render_media_block( $atts ) {
+    $id = $atts['id'];
+    $context = $this->fetch_base_config( $id, $post );
+    $context['media_items'] = get_post_meta( $id, 'media_block_repeat_group', true );
+    $context['intro'] = wpautop(get_post_meta( $id, 'intro_content', true ));
+    $context['outro'] = wpautop(get_post_meta( $id, 'outro_content', true ));   
+
+    return Twig::render( 'content_blocks/media-block.twig', $context );
+  }
 
   // Helpers
    /**

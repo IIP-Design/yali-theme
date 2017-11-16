@@ -1,0 +1,14 @@
+.media_block {
+	
+	
+	&.ui.grid {
+		margin: 0 0 1em 0;
+	}
+
+
+	&_img {
+		width: 100%;
+		min-height: 300px;		
+		cursor: pointer;
+	}
+}
