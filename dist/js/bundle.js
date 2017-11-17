@@ -117,11 +117,12 @@ var filterHash = {
  */
 function addOnFeedReadyHandler(id) {
   var el = $('#' + id);
-
+  console.log('addOnFeedReadyHandler');
   window.addEventListener('onReadyFeed', function (e) {
     var items = el.find('.article-item');
     forEach(items, function (index, item) {
       if (item.dataset.type === 'courses') {
+        console.log('addLinkToCoursePage');
         addLinkToCoursePage(item);
       }
     });
@@ -418,8 +419,10 @@ function filterSetSelected(filter, selected) {
  * a data-cdp-article-feed exists
  */
 function initializeArticleFeed() {
+  console.log('initializeArticleFeed');
   var feeds = document.querySelectorAll("[data-content-type='cdp-article-feed']");
   forEach(feeds, function (index, feed) {
+    console.log('renderArticleFeed');
     renderArticleFeed(feed);
   });
 }
@@ -466,7 +469,7 @@ function renderArticleFeed(feed) {
       }
     }
   };
-
+  console.log('shouldDisplayRelatedLinks');
   shouldDisplayRelatedLinks(config);
 
   if (context || config.series) {
@@ -491,6 +494,7 @@ function addRelatedLinksToArticle(e, config) {
     var items = list.getElementsByClassName('article-item');
     if (items.length) {
       forEach(items, function (index, item) {
+        console.log('addRelatedLinksToArticle');
         lookUpItem(item, config);
       });
     }
@@ -516,6 +520,7 @@ function shouldDisplayRelatedLinks(config) {
       if (ids.length && relatedPosts.length) {
         // react component dispatches custom 'onReadyFeed' after articles are added to the DOM
         window.addEventListener('onReadyFeed', function (e) {
+          console.log('addRelatedLinksToArticle');
           addRelatedLinksToArticle(e, config);
         });
       }
@@ -544,6 +549,7 @@ function lookUpItem(item, config) {
       if (id === item.dataset.id) {
         var related = relatedPosts[index];
         if (related) {
+          console.log('appending item');
           appendItem(item, related, relatedDisplay);
         }
       }
