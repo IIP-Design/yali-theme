@@ -117,12 +117,10 @@ var filterHash = {
  */
 function addOnFeedReadyHandler(id) {
   var el = $('#' + id);
-  console.log('addOnFeedReadyHandler');
   window.addEventListener('onReadyFeed', function (e) {
     var items = el.find('.article-item');
     forEach(items, function (index, item) {
       if (item.dataset.type === 'courses') {
-        console.log('addLinkToCoursePage');
         addLinkToCoursePage(item);
       }
     });
@@ -419,10 +417,9 @@ function filterSetSelected(filter, selected) {
  * a data-cdp-article-feed exists
  */
 function initializeArticleFeed() {
-  console.log('initializeArticleFeed');
   var feeds = document.querySelectorAll("[data-content-type='cdp-article-feed']");
   forEach(feeds, function (index, feed) {
-    console.log('renderArticleFeed');
+    console.log('render ', feed.id);
     renderArticleFeed(feed);
   });
 }
@@ -469,7 +466,7 @@ function renderArticleFeed(feed) {
       }
     }
   };
-  console.log('shouldDisplayRelatedLinks');
+
   shouldDisplayRelatedLinks(config);
 
   if (context || config.series) {
@@ -490,11 +487,11 @@ function renderArticleFeed(feed) {
  */
 function addRelatedLinksToArticle(e, config) {
   var list = document.querySelector(e.detail);
+
   if (list) {
     var items = list.getElementsByClassName('article-item');
     if (items.length) {
       forEach(items, function (index, item) {
-        console.log('addRelatedLinksToArticle');
         lookUpItem(item, config);
       });
     }
@@ -520,7 +517,6 @@ function shouldDisplayRelatedLinks(config) {
       if (ids.length && relatedPosts.length) {
         // react component dispatches custom 'onReadyFeed' after articles are added to the DOM
         window.addEventListener('onReadyFeed', function (e) {
-          console.log('addRelatedLinksToArticle');
           addRelatedLinksToArticle(e, config);
         });
       }
@@ -543,17 +539,25 @@ function lookUpItem(item, config) {
       relatedPosts = config.relatedPosts,
       relatedDisplay = config.relatedDisplay;
 
+  var div = $(item).closest('[data-content-type]'),
+      contentType = void 0;
 
-  if (item.dataset.id) {
-    ids.map(function (id, index) {
-      if (id === item.dataset.id) {
-        var related = relatedPosts[index];
-        if (related) {
-          console.log('appending item');
-          appendItem(item, related, relatedDisplay);
+  if (div) {
+    contentType = div.attr('data-content-type');
+  }
+
+  // only add related links if post list is a feed and not a filtered list
+  if (contentType && contentType === 'cdp-article-feed') {
+    if (item.dataset.id) {
+      ids.map(function (id, index) {
+        if (id === item.dataset.id) {
+          var related = relatedPosts[index];
+          if (related) {
+            appendItem(item, related, relatedDisplay);
+          }
         }
-      }
-    });
+      });
+    }
   }
 }
 
