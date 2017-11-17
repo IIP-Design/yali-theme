@@ -33,7 +33,7 @@ var experience_hosts = [
 	'Grameen Foundation',
 	'Hennepin County',
 	'Hennepin County Medical Center',
-	'Hip Hop for Change'
+	'Hip Hop for Change',
 	'Holtman\'s Donuts',
 	'International Republican Institute',
 	'International Youth Foundation',
