@@ -1,8 +1,14 @@
 .media_block {
 	
 	
-	&.ui.grid {
-		margin: 0 0 1em 0;
+	.ui.grid {
+		margin-bottom: 1em;
+		
+		.eight.wide.column {
+			@media screen and (max-width: 767px) {
+				padding: 16px 0 !important;
+			}
+		}
 	}
 
 

@@ -1,4 +1,4 @@
-<section>
+<section class='media_block'>
 	{% include 'partials/content_block_title.twig' %}
 
 	{% if intro is not empty %}
@@ -6,7 +6,7 @@
 	{% endif %}	
 
 	{% if media_items is not empty %}
-	<div class='ui stackable grid media_block'>
+	<div class='ui stackable grid'>
 		{% for file in media_items %}
 		<div class='eight wide column'>
 			{% if file.media_file_btn_text is not empty %}
