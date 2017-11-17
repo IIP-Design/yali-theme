@@ -1199,11 +1199,11 @@ exports.default = function () {
 			var num_of_cols = 3,
 			    data_length = list_data.length,
 			    items_per_col = Math.ceil(data_length / num_of_cols),
-			    exp_host_dom = document.querySelector(dom_elem);
+			    list_dom_elem = document.querySelector(dom_elem);
 
 			var _loop = function _loop() {
 				var fragment = document.createDocumentFragment(),
-				    upd_arr = list_data.splice(i, items_per_col),
+				    upd_arr = list_data.splice(0, items_per_col),
 				    list = document.createElement('ul');
 
 				list.classList.add('list_column');
@@ -1215,7 +1215,7 @@ exports.default = function () {
 				});
 
 				fragment.appendChild(list);
-				exp_host_dom.appendChild(fragment);
+				list_dom_elem.appendChild(fragment);
 			};
 
 			for (var i = 0; i < num_of_cols; i++) {
