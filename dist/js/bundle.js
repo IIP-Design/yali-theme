@@ -1337,10 +1337,6 @@ var generateBodyQry = exports.generateBodyQry = function generateBodyQry(params,
   // Becomes a MUST if there is only 1 site
   body.filterMinimumShouldMatch(1);
 
-  // Remove pages that house courses. Actual course data will link to course page ( Course page have naming convention course-[id]) 
-  // so we do not want both the course and the course page to appear in search results
-  body.notQuery('match', 'slug', 'course-*');
-
   if (params.series) {
     body.filter('term', 'taxonomies.series.slug.keyword', params.series);
   }
