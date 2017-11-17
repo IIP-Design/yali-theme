@@ -1,0 +1,25 @@
+.media_block {
+	
+	
+	.ui.grid {
+		margin-bottom: 1em;
+		
+		.eight.wide.column {
+			@media screen and (max-width: 767px) {
+				padding: 16px 0 !important;
+			}
+		}
+	}
+
+
+	&_img {
+		width: 100%;
+		min-height: 300px;		
+		cursor: pointer;
+	}
+
+
+	&_text {
+		margin-top: 10px;
+	}
+}

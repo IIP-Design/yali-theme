@@ -4,8 +4,8 @@
     var widgetMetabox = document.getElementById('yali_cb_box_cdp'),
       socialMetabox = document.getElementById('yali_cb_social_links'),
       accordionMetaBox = document.getElementById('yali_cb_accordion'),
-      ctaLayoutWidth = document.getElementById('yali_cb_cta_width'),
       filteredListMetaBox = document.getElementById('yali_cb_box_filter'), 
+      mediaBlockMetabox = document.getElementById('yali_cb_media'),
       selectByTaxonomy = $('.cdp-select-posts-by-taxonomy'),
       selectByPostsCategory = $('.cmb2-id-yali-cdp-category'),
       selectByPostsSeries = $('.cmb2-id-yali-cdp-series'),
@@ -22,7 +22,7 @@
       post_list: widgetMetabox,
       social: socialMetabox,
       accordion: accordionMetaBox,
-      cta: ctaLayoutWidth
+      media_block: mediaBlockMetabox
     };
 
 
