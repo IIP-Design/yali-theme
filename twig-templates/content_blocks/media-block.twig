@@ -3,7 +3,7 @@
 
 	{% if intro is not empty %}
 		{{ intro }}	
-	{% endif %}
+	{% endif %}	
 
 	{% if media_items is not empty %}
 	<div class='ui stackable grid media_block'>
@@ -13,8 +13,10 @@
 			<a href='{{ file.media_file }}' target='target_blank' class='cta_link'>{{ file.media_file_btn_text }}</a>
 			{% endif %}
 
+			{% if file.media_file_excerpt is not empty %}
 			<div class='media_block_img' data-preview-image='{{ file.media_file }}' style='background-image: url({{ file.media_file }}); background-size: cover;'></div>
 			<p class='media_block_text'>{{ file.media_file_excerpt }}</p>
+			{% endif %}
 		</div>
 		{% endfor %}		
 	</div>

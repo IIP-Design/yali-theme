@@ -34,14 +34,14 @@ $media_block->add_group_field( $media_block_group_field, array(
 $media_block->add_group_field( $media_block_group_field, array(
  	'name'  => 'Media File Button Text',
 	'id'    => 'media_file_btn_text',
-	'description' => __('Add text for file button display (Optional)'),
+	'description' => __('If file, add text for file button display (Optional)'),
 	'type'  => 'text'
 ));
 
 $media_block->add_group_field( $media_block_group_field, array(
  	'name'  => 'Media File Excerpt',
 	'id'    => 'media_file_excerpt',
-	'description' => __('Add content to display under image file (Optional)'),
+	'description' => __('If image, add content to display under image file (Optional)'),
 	'type'  => 'textarea'
 ));
 
