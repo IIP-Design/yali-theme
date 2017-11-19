@@ -40,6 +40,10 @@
 				font-size: em(14, $mobile);
       }
 
+			&:hover {
+				text-decoration: none;
+			}
+
 			&:active {
 				background-color: $blue-medium;
 			}
