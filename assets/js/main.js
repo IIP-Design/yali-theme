@@ -1,3 +1,4 @@
+import * as polyfills from './js_polyfills.js';
 import '../../node_modules/semantic-ui-sass/semantic-ui';
 import * as nav from './nav.js';
 import * as footer from './footer.js';
@@ -9,7 +10,8 @@ import scroll_to_elem from './scrollTo';
 import show_more_posts from './show_more';
 
 (function($) {
-
+  
+  polyfills.init();
   nav.init($);
   footer.init();
   join_form.init();
