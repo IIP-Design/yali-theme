@@ -1,4 +1,3 @@
-import 'babel-polyfill';
 import '../../node_modules/semantic-ui-sass/semantic-ui';
 import * as nav from './nav.js';
 import * as footer from './footer.js';
