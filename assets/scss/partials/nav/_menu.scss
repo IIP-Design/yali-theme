@@ -3,7 +3,7 @@
     display: inline-block;
     padding: 0;
     margin: -4px 0 0 0;
-    list-style: none;    
+    list-style: none;
     @media (max-width: 933px) {
       display: none;
       min-width: 260px;
@@ -25,25 +25,25 @@
       display: inline-block;
       margin: 0 15px;
       font-size: em(18);
-      cursor: pointer;      
-      @media screen and (min-width: 934px) and (max-width: 1209px) {        
-        margin: 0 7.5px;       
-      }      
+      cursor: pointer;
+      @media screen and (min-width: 934px) and (max-width: 1209px) {
+        margin: 0 7.5px;
+      }
       @media screen and (min-width: 1025px) and (max-width: 1200px) {
         font-size: em(16);
       }
       @media screen and (min-width: 934px) and (max-width: 1024px) {
         font-size: em(14);
-      }      
+      }
       @media screen and (max-width: 933px) {
         position: relative;
         display: block;
         width: 100%;
         padding: 10px 16px;
-        margin: 0;               
-      }                  
+        margin: 0;
+      }
 
-      &.initial_wide {        
+      &.initial_wide {
         @media screen and (min-width: 934px) {
           &:not(.search) {
             width: 100px;
@@ -52,21 +52,21 @@
           &.search {
             margin-left: 45px;
           }
-        }        
+        }
       }
 
       &.active {
         .nav_menu_item_title-wrapper {
           @media screen and (max-width: 933px) {
             background-color: $blue-medium;
-          }            
+          }
         }
-      }      
+      }
 
       &_title-wrapper {
           position: relative;
-          z-index: 2;    
-          display: inline-block;    
+          z-index: 2;
+          display: inline-block;
           @media screen and (max-width: 933px) {
             display: block;
             margin: -10px -16px;
@@ -76,7 +76,7 @@
               position: absolute;
               top: 50%;
               right: 16px;
-              transform: translateY(-50%);              
+              transform: translateY(-50%);
             }
           }
 
@@ -91,23 +91,27 @@
                 width: 100%;
                 background-color: $yellow;
               }
-            }          
+            }
           }
 
           a {
             font-weight: 600;
-            color: #fff;            
+            color: #fff;
             @media screen and (max-width: 933px) {
               font-size: em(16, $mobile);
             }
+
+            &:hover {
+              text-decoration: none;
+            }
           }
-      }      
+      }
 
       &--social {
         display: none;
         @media screen and (max-width: 933px) {
-          display: block;          
-          text-align: center;          
+          display: block;
+          text-align: center;
           background-color: #fff;
           color: $blue-navy;
         }

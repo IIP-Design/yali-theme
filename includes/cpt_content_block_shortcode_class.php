@@ -151,6 +151,16 @@ class Content_Block_Shortcode {
     return Twig::render( 'content_blocks/media-block.twig', $context );
   }
 
+
+  // BUTTON LINKS CONTENT BLOCK
+  public function render_button_links( $atts ) {
+    $id = $atts['id'];
+    $context['headline'] = get_post_meta( $id, 'yali_button_links_headline', true );
+    $context['links'] = get_post_meta( $id, 'yali_button_links_repeat_group', true );
+
+    return Twig::render( 'content_blocks/button-links.twig', $context );
+  }
+
   // Helpers
    /**
    * Wrapper function around cmb2_get_option
