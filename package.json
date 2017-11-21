@@ -78,5 +78,8 @@
     "svgo": "^0.7.2",
     "uglify-js": "^3.0.13",
     "versionbump": "git+ssh://git@github.com/IIP-Design/versionbump.git"
+  },
+  "dependencies": {
+    "babel-polyfill": "^6.26.0"
   }
 }
