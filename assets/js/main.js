@@ -1,4 +1,4 @@
-//import * as polyfills from './js_polyfills.js';
+//import * as polyfills from './_js_polyfills.js';
 import '../../node_modules/semantic-ui-sass/semantic-ui';
 import * as nav from './nav.js';
 import * as footer from './footer.js';
