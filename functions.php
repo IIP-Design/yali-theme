@@ -212,6 +212,7 @@ class YaliSite {
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
 		add_action( 'pre_get_posts', array( $this, 'search_filter') );
+		add_action( 'tha_body_bottom', array( $this, 'insert_addthis_snippet') );
 		add_filter( 'wpseo_metabox_prio', array( $this, 'yoasttobottom' ) );
 
 		$this->twig_init();
@@ -368,6 +369,14 @@ class YaliSite {
   function yoasttobottom() {
     return 'low';
   }
+
+	// Adds social share button from Addthis
+	function insert_addthis_snippet() {
+		?>
+		<!-- Go to www.addthis.com/dashboard to customize your tools -->
+		<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5a18345cba3f0930"></script>
+		<?php
+	}
 
 }
 

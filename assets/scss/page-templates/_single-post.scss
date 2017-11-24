@@ -1,5 +1,5 @@
 .single_post {
-	
+
 
 	.section {
 		margin: 50px 0;
@@ -9,12 +9,17 @@
 	}
 
 
+	.addthis_inline_share_toolbox {
+		margin-top: 15px;
+	}
+
+
 	&_tax {
 		margin-top: 16px;
 		padding-top: 8px;
 		border-top: 1px solid #ccc;
 
-		.tax_term {			
+		.tax_term {
 			display: inline-block;
 			font-size: em(14);
 			color: #aaa;
@@ -22,13 +27,13 @@
 				font-size: em(12, $mobile);
 			}
 
-			a {				
+			a {
 				font-style: italic;
-				color: #aaa;		
+				color: #aaa;
 
 				&:hover {
 					color: #000;
-				}	
+				}
 			}
 		}
 	}
@@ -37,13 +42,13 @@
 		text-align: center;
 
 		.cta_link {
-			display: inline-block;		
-			max-width: 100%;		
-			margin: 0 auto;			
+			display: inline-block;
+			max-width: 100%;
+			margin: 0 auto;
 			color: $blue-navy;
 			background-color: $yellow;
 		}
-	}	
+	}
 
 
 }

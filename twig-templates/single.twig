@@ -29,7 +29,8 @@
 		<section class='section single_post_content'>
 			<div>{{ post_data.content.rendered }}</div>
 
-			<div class='single_post_tax'>
+      <div class="addthis_inline_share_toolbox"></div>
+      <div class='single_post_tax'>
 				{% for term in taxonomy_terms %}
 					{% if term.taxonomy == 'post_tag' %}
 					<p class='tax_term'>
