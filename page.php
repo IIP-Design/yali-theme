@@ -41,9 +41,6 @@ $formVar = do_shortcode('[formidable id=6]');
 $hero_title_display = get_post_meta($post->ID, '_yali_hero_title_option', true);
 $hero_subtitle = get_post_meta($post->ID, '_yali_hero_subtitle_option', true);
 
-// Do not index to CDP option
-$donot_index = get_post_meta($post->ID, '_iip_donot_index_option', true);
-
 // Query for all Campaign Pages
 if( $pagename === 'action' || $pagename === 'network' ) {
   $args = array(
@@ -83,7 +80,6 @@ $context = array(
   'formVar'       => $formVar,
   'hero_title_display' => $hero_title_display,
   'hero_subtitle' => $hero_subtitle,
-  'donot_index'   => $donot_index,
   'social_block'  => $social_block,
   'formVar'       => $formVar,
   'category_list' => $categories,

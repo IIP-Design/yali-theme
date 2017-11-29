@@ -27,14 +27,6 @@ $formVar = do_shortcode('[formidable id=6]');
 
 $course_language = get_post_meta($post->ID, '_yali_course_lang_indicator', true);
 
-// Do not index to CDP option
-$donot_index = get_post_meta($post->ID, '_iip_donot_index_option', true);
-if( empty($donot_index) ) {
-	update_post_meta($post->ID, '_iip_donot_index_option', 'no');
-	$donot_index = get_post_meta($post->ID, '_iip_donot_index_option', true);
-}
-
-
 // Data array for twig
 $context = array(
   'pagename'    	  => $pagename,
@@ -44,8 +36,7 @@ $context = array(
   'srcset'			    => $srcset,
   'size'			      => $sizes,
   'formVar'         => $formVar,
-  'course_language' => $course_language,
-  'donot_index' 		=> $donot_index
+  'course_language' => $course_language
 );
 
 
