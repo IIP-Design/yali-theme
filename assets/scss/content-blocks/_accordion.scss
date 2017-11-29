@@ -51,6 +51,10 @@
 			a {
 				font-weight: 700;				
 				color: $blue-medium;
+
+				&.cta_link {
+					color: #fff;
+				}
 			}
 
 			ul {				

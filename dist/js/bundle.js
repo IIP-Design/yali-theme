@@ -1198,7 +1198,15 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
   responsiveImages.init();
 
   // Init Accordions
-  $('.ui.accordion').accordion();
+  $('.ui.accordion').accordion({
+    onOpen: function onOpen(item) {
+      var content_script = this.querySelector('script') || null;
+      if (content_script !== null) {
+        content_script.removeAttribute('class');
+        content_script.removeAttribute('style');
+      }
+    }
+  });
 
   // MWF Links
   (0, _scrollTo2.default)('.scroll_link');

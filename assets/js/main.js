@@ -20,7 +20,15 @@ import show_more_posts from './show_more';
   responsiveImages.init();
 
   // Init Accordions
-  $('.ui.accordion').accordion();
+  $('.ui.accordion').accordion({
+    onOpen: function(item) {
+      let content_script = this.querySelector('script') || null;
+      if( content_script !== null ) {
+        content_script.removeAttribute('class');
+        content_script.removeAttribute('style');
+      }      
+    }
+  });
 
   // MWF Links
   scroll_to_elem('.scroll_link');

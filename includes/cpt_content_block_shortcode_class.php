@@ -94,6 +94,7 @@ class Content_Block_Shortcode {
       // Add p tags to tinymce content
       $item_value['item_content'] = $this->filter_link( $item_value['item_content'] );
       $item_value['item_content'] = wpautop($item_value['item_content']);
+      $item_value['item_content'] = do_shortcode($item_value['item_content']);
       array_push($items, $item_value);
     }
 
