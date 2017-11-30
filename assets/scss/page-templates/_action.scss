@@ -64,6 +64,11 @@
 
 			&_link {
 				color: $blue-navy;
+
+				&:hover {										
+					text-decoration: none;
+					border-bottom: 1px dashed $blue-navy;
+				}
 			}
 		}
 	}

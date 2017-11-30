@@ -13,9 +13,11 @@
 
 
 	&:hover {
+		text-decoration: none;
 		color: #fff;
 		filter: brightness(.96);
 		transform: translate(-1px, -1px);
+		border-bottom: none;
 	}
 
 

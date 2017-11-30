@@ -52,12 +52,12 @@
 			&_break {
 				@media screen and (min-width: 768px) {
 					display: block;
-				}
+				}	
 
 				&--mwf {
 					@media screen and (min-width: 425px) and (max-width: 454px) {
 						display: block;		
-					}
+					}				
 				}
 
 				&--network {
@@ -69,6 +69,15 @@
 
 			a {
 				color: $blue-medium;
+
+				&:hover {					
+					border-bottom: 1px dashed $blue-medium;
+					text-decoration: none;		
+
+					.item_link_break .line_two {
+						border-bottom: 1px dashed $blue-medium;
+					}			
+			    }
 			}
 		}
 	}

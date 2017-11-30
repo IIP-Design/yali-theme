@@ -9,9 +9,11 @@
 		padding: 50px 0;
 	}
 
+
 	&:last-child {
 		margin-bottom: 0;
 	}
+
 
 	&.has_bg_img {
 		padding-top: 33%;
@@ -30,11 +32,12 @@
 		text-align: center;
 	}
 
+
 	&.noimage {
-		/*padding-top: 80px;*/
 		padding-top: 50px;
 		margin-bottom: 0;
 	}
+
 
 	&_link {
 
@@ -42,6 +45,18 @@
 			display: inline-block;
 			max-width: 100%;
 			margin: 0 auto;
+		}
+	}
+
+
+	.cb_excerpt {
+
+		a {
+			color: $blue-medium;
+
+			&:hover {
+				border-bottom: 1px dashed $blue-medium;
+			}
 		}
 	}
 

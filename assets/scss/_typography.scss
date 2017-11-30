@@ -79,7 +79,7 @@ a {
 
   &:hover {
     color: $blue-medium;
-    text-decoration: underline;
+    border-bottom: 1px dashed;
   }
 
 }

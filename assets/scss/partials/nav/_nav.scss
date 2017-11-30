@@ -34,6 +34,11 @@
       margin-right: 10px;
     }
 
+    &:hover {
+      text-decoration: none;
+      border-bottom: none;
+    }
+
     &.mobile {
       display: inline-block;
       float: none;

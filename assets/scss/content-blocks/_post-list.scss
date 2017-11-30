@@ -25,6 +25,12 @@
 
   .article-title_link {
     color: $blue-navy;
+
+    &:hover {
+      color: $blue-medium;
+      border-bottom: 1px dashed $blue-medium;
+      text-decoration: none;
+    }
   }
 
   div.article-meta {
