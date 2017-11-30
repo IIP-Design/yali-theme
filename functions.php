@@ -5,99 +5,8 @@
  */
 require_once get_stylesheet_directory() . '/includes/autoloader.php';
 
-
-/**
- * Require badge generation class
- */
+// Require badge generation class
 include( get_stylesheet_directory() . '/badge/class-america-badge-generation.php');
-
-/**
- * Add attachment using the Formidable 'frm_notification_attachment' hook
- */
-
-function yali_add_attachment( $attachments, $form, $args ) {
-	if ( $form->form_key == 'get_pledge' || $form->form_key == 'get_earthday' || $form->form_key == 'get_yalilearns2016' || $form->form_key == 'get_certificate2' || $form->form_key == 'get_certificate_fr' || $form->form_key == 'get_certificate_pt' || $form->form_key == 'get_4all') {
-
-		$params = array (
-			'key'				=>  $form->form_key,				// form identifier (i.e. project id used to find config)
-			'metas'			=>  $args['entry']->metas		// formidable metas passed in via $args that hold field values
-		);
-
-		$generator = new America_Badge_Generation ();
-		$attachments[] =  $generator->create_image( $params );
- }
-	return $attachments;
-}
-
-add_filter( 'frm_notification_attachment', 'yali_add_attachment', 10, 3 );
-
-/*
- ** Disable Formidable subject encoding
- */
-add_filter( 'frm_encode_subject', 'frm_encode_subject' );
-function frm_encode_subject() {
-    return false;
-}
-
-
-/**
-  * Send token data for Course
-  */
-
-function localize_nonce() {
-
-  include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
-  $requiredplugin = 'wp-simple-nonce/wp-simple-nonce.php';
-
-  if ( is_plugin_active($requiredplugin) ) {
-    global $post;
-
-    if ( is_a( $post, 'WP_Post' ) && has_shortcode( $post->post_content, 'course' ) ) {
-      $nonce = WPSimpleNonce::init( 'certificate', 2592000, true );
-      wp_enqueue_script( 'token-js', get_stylesheet_directory_uri() . '/assets/js/token.js', array() );
-      wp_localize_script( 'token-js', 'token', $nonce );
-    }
-  }
-}
-
-add_action('wp_enqueue_scripts', 'localize_nonce');
-
-/**
-  * Validate token data for Course
-  */
-
-add_filter('frm_validate_entry', 'check_nonce', 20, 2);
-function check_nonce( $errors, $values ) {
-
-  include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
-  $requiredplugin = 'wp-simple-nonce/wp-simple-nonce.php';
-
-  if ( is_plugin_active($requiredplugin) ) {
-
-    if( $values['form_key'] == 'get_certificate2' && strpos($_POST["_wp_http_referer"], 'get-quiz-certificate') !== false && empty($errors) ) {
-
-      $result = WPSimpleNonce::checkNonce($_GET['tokenName'], $_GET['tokenValue']);
-
-      if ( ! $result ) {
-         $errors['my_error'] = 'This certificate page has expired. Please return to the quiz and complete it again to generate your certificate.';
-      }
-
-    }
-
-		if( $values['form_key'] == 'get_certificate_fr' && strpos($_POST["_wp_http_referer"], 'obtenez-votre-certificat') !== false && empty($errors) ) {
-
-      $result = WPSimpleNonce::checkNonce($_GET['tokenName'], $_GET['tokenValue']);
-
-      if ( ! $result ) {
-         $errors['my_error'] = 'Cette page a expiré. Veuillez repasser le quiz pour générer votre certificat.';
-      }
-
-    }
-
-  }
-
-  return $errors;
-}
 
 YALI_Autoloader::register( get_stylesheet_directory() . '/includes/' );
 
@@ -132,13 +41,17 @@ class YaliSite {
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
 		add_action( 'pre_get_posts', array( $this, 'search_filter') );
-		add_action( 'tha_body_bottom', array( $this, 'insert_addthis_snippet') );
+		add_filter( 'frm_notification_attachment', array( $this, 'yali_add_attachment'), 10, 3 );
+		add_filter( 'frm_encode_subject', array( $this, 'frm_encode_subject') );
+		add_filter( 'frm_validate_entry', array( $this, 'check_nonce'), 20, 2);
+		add_action( 'wp_enqueue_scripts', array( $this, 'localize_nonce') );
 		add_filter( 'wpseo_metabox_prio', array( $this, 'yoasttobottom' ) );
 		add_action( 'wp_head', array( $this, 'insert_google_analytics') );
 		add_action( 'wp_head', array( $this, 'insert_gtm_head') );
 		add_action( 'tha_body_top', array( $this, 'insert_gtm_body') );
 		add_action( 'wp_head', array( $this, 'insert_dap') );
 		add_action( 'wp_head', array( $this, 'insert_hotjar') );
+		add_action( 'tha_body_bottom', array( $this, 'insert_addthis_snippet') );
 
 		$this->twig_init();
 
@@ -290,6 +203,77 @@ class YaliSite {
     return $val;
   }
 
+	/* CERTIFICATES */
+	// Add attachment using the Formidable 'frm_notification_attachment' hook
+	function yali_add_attachment( $attachments, $form, $args ) {
+		if ( $form->form_key == 'get_pledge' || $form->form_key == 'get_earthday' || $form->form_key == 'get_yalilearns2016' || $form->form_key == 'get_certificate2' || $form->form_key == 'get_certificate_fr' || $form->form_key == 'get_certificate_pt' || $form->form_key == 'get_4all') {
+
+			$params = array (
+				'key'				=>  $form->form_key,				// form identifier (i.e. project id used to find config)
+				'metas'			=>  $args['entry']->metas		// formidable metas passed in via $args that hold field values
+			);
+
+			$generator = new America_Badge_Generation ();
+			$attachments[] =  $generator->create_image( $params );
+	 }
+		return $attachments;
+	}
+
+	// Disable Formidable subject encoding
+	function frm_encode_subject() {
+	    return false;
+	}
+	/* END CERTIFICATES */
+
+	/* COURSES TOKEN */
+	// Send token data for Course
+	function localize_nonce() {
+
+	  include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+	  $requiredplugin = 'wp-simple-nonce/wp-simple-nonce.php';
+
+	  if ( is_plugin_active($requiredplugin) ) {
+	    global $post;
+
+	    if ( is_a( $post, 'WP_Post' ) && has_shortcode( $post->post_content, 'course' ) ) {
+	      $nonce = WPSimpleNonce::init( 'certificate', 2592000, true );
+	      wp_enqueue_script( 'token-js', get_stylesheet_directory_uri() . '/assets/js/token.js', array() );
+	      wp_localize_script( 'token-js', 'token', $nonce );
+	    }
+	  }
+	}
+
+	//Validate token data for Course
+	function check_nonce( $errors, $values ) {
+
+	  include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+	  $requiredplugin = 'wp-simple-nonce/wp-simple-nonce.php';
+
+	  if ( is_plugin_active($requiredplugin) ) {
+
+	    if( $values['form_key'] == 'get_certificate2' && strpos($_POST["_wp_http_referer"], 'get-quiz-certificate') !== false && empty($errors) ) {
+
+	      $result = WPSimpleNonce::checkNonce($_GET['tokenName'], $_GET['tokenValue']);
+
+	      if ( ! $result ) {
+	         $errors['my_error'] = 'This certificate page has expired. Please return to the quiz and complete it again to generate your certificate.';
+	      }
+	    }
+
+			if( $values['form_key'] == 'get_certificate_fr' && strpos($_POST["_wp_http_referer"], 'obtenez-votre-certificat') !== false && empty($errors) ) {
+
+	      $result = WPSimpleNonce::checkNonce($_GET['tokenName'], $_GET['tokenValue']);
+
+	      if ( ! $result ) {
+	         $errors['my_error'] = 'Cette page a expiré. Veuillez repasser le quiz pour générer votre certificat.';
+	      }
+	    }
+	  }
+
+	  return $errors;
+	}
+	/* END COURSES TOKEN */
+
   // Move Yoast to bottom
   function yoasttobottom() {
     return 'low';
@@ -361,22 +345,15 @@ class YaliSite {
 		<!-- End Hotjar Tracking  -->
 		<?php
 	}
+	/* END ANALYTICS */
 
-	// Adds social share button from Addthis and connects to Google Analytics
+	// Adds social share button from Addthis
 	function insert_addthis_snippet() {
 		?>
 		<!-- Go to www.addthis.com/dashboard to customize your tools -->
-		<script type="text/javascript">
-			var addthis_config = {
-      	data_ga_property: 'UA-22995010-23',
-      	data_ga_social: true
-   		};
-		</script>
 		<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5a18345cba3f0930"></script>
 		<?php
 	}
-
-	/* END ANALYTICS */
 
 }
 
