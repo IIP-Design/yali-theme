@@ -47,37 +47,24 @@
 			}			
 			@media screen and (min-width: 768px) and (max-width: 900px) {
 				font-size: 16px;
-			}
-
-			&_break {
-				@media screen and (min-width: 768px) {
-					display: block;
-				}	
-
-				&--mwf {
-					@media screen and (min-width: 425px) and (max-width: 454px) {
-						display: block;		
-					}				
-				}
-
-				&--network {
-					@media screen and (min-width: 977px) {
-						display: inline;	
-					}
-				}
-			}
+			}			
 
 			a {
 				color: $blue-medium;
 
 				&:hover {					
-					border-bottom: 1px dashed $blue-medium;
-					text-decoration: none;		
+					border-bottom: none;
 
-					.item_link_break .line_two {
-						border-bottom: 1px dashed $blue-medium;
-					}			
+					.text-wrap {
+						border-bottom: 2px dashed $blue-medium;	
+					}						
 			    }
+
+			    .word-break {
+					@media screen and (max-width: 768px) {
+						display: none;
+					}
+				}
 			}
 		}
 	}
