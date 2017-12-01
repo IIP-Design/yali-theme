@@ -17,6 +17,18 @@ $accordion->add_field( array(
   'type' => 'text'
 ));
 
+$accordion->add_field( array(
+  'name' => 'Accordion Headline Alignment (Optional)',
+  'id'   => $prefix . 'cb_accordion_headline_alignment',
+  'type' => 'select',
+  'default' => 'center',
+  'options'          => array(
+    'left'           => __( 'Left', 'yali' ),
+    'center'         => __( 'Center', 'yali' ),
+    'right'          => __( 'Right', 'yali' )
+  )
+));
+
 $accordion_group_field_id = $accordion->add_field( array(
   'id'            => 'accordion_repeat_group',
   'type'          => 'group',

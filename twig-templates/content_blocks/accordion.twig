@@ -1,5 +1,7 @@
 <div id='{{ id }}' class='accordion_layout'>
-	{% if headline %}<h3>{{ headline }}</h3>{% endif %}
+	{% if headline %}
+	<h3 style='text-align: {{ headline_alignment }}'>{{ headline }}</h3>
+	{% endif %}
 	
 	<div class='ui styled accordion'>		
 		{% for item in items_array %}

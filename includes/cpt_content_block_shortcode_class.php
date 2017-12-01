@@ -104,6 +104,7 @@ class Content_Block_Shortcode {
     $context = array(
       'id'  => $slug,
       'headline' => get_post_meta($id, 'yali_cb_accordion_headline', true),
+      'headline_alignment' => get_post_meta($id, 'yali_cb_accordion_headline_alignment', true),
       'items_array' => $items
     );
 

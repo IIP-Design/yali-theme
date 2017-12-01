@@ -14,7 +14,8 @@
 {% endif %}
 	<div class='ui container'>
     <div class='inner-container'>
-  		<h2 class="{{ title_underline }}" style="text-align: {{ title_alignment }}; color: {{ title_color }}">{{ title }}</h2>
+  		<!-- content block title -->
+      {% include 'partials/content_block_title.twig' %}      
       <p class="cb_excerpt" style="text-align: {{ excerpt_alignment }}; color: {{ excerpt_color }}; font-weight: {{ excerpt_font_weight }}">{{ excerpt }} </p>
 
       {% if btn_label is not empty or btn_link is not empty %}
