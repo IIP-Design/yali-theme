@@ -20,5 +20,27 @@
 		}
 
 	}
-
 }
+
+
+.lessons-list-item {
+	
+	> a {
+
+		&:hover {			
+			border-bottom: none;
+		}
+	}
+}
+
+
+.lesson-buttonnav {
+	
+	> a {
+
+		&:hover {
+			border-bottom: none;
+		}
+	}
+}
+
