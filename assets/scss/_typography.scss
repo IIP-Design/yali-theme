@@ -32,10 +32,10 @@ h1 {
     font-size: em(72, $mobile);
   }
   @media screen and (max-width: 415px) {
-    font-size: em(58, $mobile);
+    font-size: em(51, $mobile);
   }
   @media screen and (max-width: 375px) {
-    font-size: em(43, $mobile);
+    font-size: em(39, $mobile);
   }
 }
 
