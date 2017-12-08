@@ -38,12 +38,9 @@ $campaign_pages = $get_campaign_pages->posts;
 foreach ($campaign_pages as $item) {
   $item_id = $item->ID;
 
-  if( has_post_thumbnail($item_id) ) {
-    $image_arr = wp_get_attachment_image_src( get_post_thumbnail_id($item_id), 'full' );
-    $image_src = $image_arr[0];
-    $item->featured_image_src = $image_src;
-  } else {
-    return;
+  $list_img = get_post_meta($item_id, 'campaigns_list_img', true);
+  if( !empty($list_img) ) {
+    $item->campaigns_list_img = $list_img;
   }
 }
 

@@ -17,20 +17,17 @@
 		<h2>Get Started</h2>
 
 		{{ action_postlist }}
-	  {{ action_course }}
-	  {{ action_fellowship }}
+	    {{ action_course }}
+	  	{{ action_fellowship }}
 
 		<div class='ui stackable grid campaigns_list'>
 			<h2>Get engaged with more YALI Network Initiatives:</h2>
 			{% for campaign in campaign_pages %}
 			<div class='row list_item'>
 				<div class='six wide column'>
-					<a href='{{ campaign.post_name }}'>
-					<span
-						class='list_item_img'
-						style='background-image: url("{{ campaign.featured_image_src }}"); background-size: cover;'>
-					</span>
-					</a>
+					<a class='list_item_img_link' href='{{ campaign.post_name }}'>
+						<img src='{{ campaign.campaigns_list_img }}'>						
+					</a>					
 				</div>
 				<div class='nine wide column'>
 					<div class='list_item_content'>
