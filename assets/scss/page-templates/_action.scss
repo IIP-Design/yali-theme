@@ -30,30 +30,17 @@
 				padding-bottom: 32px;
 			}
 
+			&_img_link {
+				
+				&:hover {
+					border-bottom: none;
+				}
 
-			&_img {
-				display: block;
-				box-sizing: border-box;
-				width: 300px;
-				height: 300px;
-				border: 10px solid $blue-navy;
-				border-radius: 50%;
-				background-position: 50%;
-				margin-left: 40px;
-				background-repeat: no-repeat;
-				@media screen and (min-width: 768px) and (max-width: 1023px) {
-					width: 300px;
-					height: 300px;
+				img {
+					width: 100%;
 				}
-				@media screen and (max-width: 767px) {
-					margin: 0 auto;
-				}
-				@media screen and (max-width: 330px) {
-					width: 250px;
-					height: 250px;
-				}
-			}
-
+			}			
+			
 			&_content {
 				@media screen and (min-width: 768px) {
 					position: absolute;
@@ -67,7 +54,7 @@
 
 				&:hover {										
 					text-decoration: none;
-					border-bottom: 1px dashed $blue-navy;
+					border-bottom: 2px dashed $blue-navy;
 				}
 			}
 		}

@@ -13,7 +13,9 @@
 				{% for campaign in content %}
 					{% if current_page != campaign.post_title %}
 					<div class='five wide column cb_honeycomb_item'>
-						<a href='{{ campaign.post_name }}'><div class='cb_honeycomb_item_img' style='background-image: url({{ campaign.featured_image_src }})'></div></a>
+						<a href='{{ campaign.post_name }}'>							
+							<img src='{{ campaign.campaigns_list_img }}'>					
+						</a>
 						<div class='cb_honeycomb_item_text'>
 							<h4 class='cb_honeycomb_item_title'>
 								<a href='{{ campaign.post_name }}'>{{ campaign.post_title }}</a>
