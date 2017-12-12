@@ -19,7 +19,7 @@ class Custom_Button_Shortcode {
       'btn_link'            => '',
       'btn_tab'             => '',
       'btn_color'           => '',
-      'btn_alignment'       => '',
+      'btn_align'           => '',
       'btn_size'            => ''
     ), $atts, 'render_custom_button' );
 

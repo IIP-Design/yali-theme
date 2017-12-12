@@ -55,8 +55,8 @@
 						},
 						{
 							type: 'listbox',
-							text: 'Alignment',
-							name: 'btn_alignment',
+							text: 'Button Alignment',
+							name: 'btn_align',
 							values: [
 								{ text: 'Left', value: 'left' },
 								{ text: 'Center', value: 'center' },
@@ -65,7 +65,7 @@
 						}
 					],
 					onsubmit: function( e ) {
-							editor.insertContent( '[custom_button btn_label="' + e.data.btn_label + '" btn_link="' + e.data.btn_link + '" btn_tab="' + e.data.btn_tab + '" btn_color="' + e.data.btn_color + '" btn_size="' + e.data.btn_size + '" btn_alignment="' + e.data.btn_alignment + '"]' );
+							editor.insertContent( '[custom_button btn_label="' + e.data.btn_label + '" btn_link="' + e.data.btn_link + '" btn_tab="' + e.data.btn_tab + '" btn_color="' + e.data.btn_color + '" btn_size="' + e.data.btn_size + '" btn_align="' + e.data.btn_align + '"]' );
 					}
 				})
 			}
