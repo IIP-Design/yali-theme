@@ -71,6 +71,8 @@ class Content_Block_Shortcode {
       $button["yali_cta_button_link"]["url"] = $this->filter_link($button["yali_cta_button_link"]["url"]);      
     }
 
+    unset($button);
+
     return Twig::render( 'content_blocks/cta.twig', $context );
   }
 
