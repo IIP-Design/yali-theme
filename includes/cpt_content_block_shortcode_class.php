@@ -67,7 +67,7 @@ class Content_Block_Shortcode {
     $context["cb_layout_width"] = get_post_meta( $id, 'yali_cb_layout_width' );
     $context["cta_buttons"] = get_post_meta( $id, 'yali_cta_button_repeat_group', true );
 
-    foreach ($context["cta_buttons"] as $button) {
+    foreach ($context["cta_buttons"] as &$button) {
       $button["yali_cta_button_link"]["url"] = $this->filter_link($button["yali_cta_button_link"]["url"]);      
     }
 
