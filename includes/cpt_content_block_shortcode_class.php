@@ -61,10 +61,11 @@ class Content_Block_Shortcode {
       $img_id = $meta["_thumbnail_id"][0];      
       $context["header_url"] = wp_get_attachment_url( $img_id );
       $context["srcset"] = wp_get_attachment_image_srcset( $img_id, 'full' );
-      $context["sizes"] = wp_get_attachment_image_sizes( $img_id, 'full' );
+      $context["sizes"] = wp_get_attachment_image_sizes( $img_id, 'full' );          
     }
     
     $context["cb_layout_width"] = get_post_meta( $id, 'yali_cb_layout_width' );
+    $context["cta_buttons"] = get_post_meta( $id, 'yali_cta_button_repeat_group', true );
 
     return Twig::render( 'content_blocks/cta.twig', $context );
   }

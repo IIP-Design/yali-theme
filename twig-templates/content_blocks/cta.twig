@@ -26,6 +26,24 @@
       </div>
       {% endif %}
 
+      <!-- New Button Display -->
+      {% if cta_buttons is not empty %}
+      <div class='ui stackable centered grid'>
+        {% for button in cta_buttons %}
+        <div class="cb_button eight wide column">
+          <a 
+            class="ui button cb_cta_button_link" 
+            href="{{ button.yali_cta_button_link.url }}"          
+            {{ button.yali_cta_button_link.blank == 'true' ? "target='_blank'" : '' }}
+            style="background-color: {{ button.yali_cta_button_bg_color }}" 
+            tabindex="0">
+            <div style="color: {{ button.yali_cta_button_text_color }}"> {{ button.yali_cta_button_link.text }}</div>
+          </a>
+        </div>
+        {% endfor %}
+      </div>
+      {% endif %}
+
     </div><!-- inner-container -->
   </div>
 </section>

@@ -60,4 +60,17 @@
 		}
 	}
 
+	.cb_button {
+
+		&.eight.wide.column {
+			@media screen and (max-width: 810px) {
+				padding: 0 !important;
+			}
+		}
+	}
+
+	&_button_link {
+		width: 100%;
+	}
+
 }
