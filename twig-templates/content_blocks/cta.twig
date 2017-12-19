@@ -16,17 +16,9 @@
     <div class='inner-container'>
   		<!-- content block title -->
       {% include 'partials/content_block_title.twig' %}      
-      <p class="cb_excerpt" style="text-align: {{ excerpt_alignment }}; color: {{ excerpt_color }}; font-weight: {{ excerpt_font_weight }}">{{ excerpt }} </p>
+      <p class="cb_excerpt" style="text-align: {{ excerpt_alignment }}; color: {{ excerpt_color }}; font-weight: {{ excerpt_font_weight }}">{{ excerpt }} </p>      
 
-      {% if btn_label is not empty or btn_link is not empty %}
-      <div class="cb_button" style="text-align: {{ btn_text_alignment }}">
-        <a class="ui button" href="{{ btn_link }}" {{ btn_new_win }} style="background-color: {{ btn_bg_color }}" tabindex="0">
-          <div style="color: {{ btn_label_color }}"> {{ btn_label }}</div>
-        </a>
-      </div>
-      {% endif %}
-
-      <!-- New Button Display -->
+      <!-- CTA Button(s) Display -->
       {% if cta_buttons is not empty %}
       <div class='ui stackable centered grid'>
         {% for button in cta_buttons %}
