@@ -64,7 +64,7 @@
 
 		&.eight.wide.column {
 			@media screen and (min-width: 768px) and (max-width: 810px) {
-				padding: 1em !important;				
+				padding: 1em!important;				
 			}
 			
 			@media screen and (max-width: 767px) {
@@ -79,6 +79,10 @@
 
 	&_button_link {
 		width: 100%;
+
+		@media screen and (min-width: 768px) and (max-width: 810px) {
+			padding: 1em !important;				
+		}
 	}
 
 }
