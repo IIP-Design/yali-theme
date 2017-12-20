@@ -54,8 +54,7 @@ class Content_Block_Shortcode {
     $meta = get_post_meta(  $id );
     $post = get_post( $id );
 
-    $context = $this->fetch_base_config( $id, $post );
-    $context = $this->fetch_btn_config( $context, $id, $meta );
+    $context = $this->fetch_base_config( $id, $post );    
 
     if( !empty($meta["_thumbnail_id"]) ) {
       $img_id = $meta["_thumbnail_id"][0];      
@@ -70,7 +69,6 @@ class Content_Block_Shortcode {
     foreach ($context["cta_buttons"] as &$button) {
       $button["yali_cta_button_link"]["url"] = $this->filter_link($button["yali_cta_button_link"]["url"]);      
     }
-
     unset($button);
 
     return Twig::render( 'content_blocks/cta.twig', $context );
