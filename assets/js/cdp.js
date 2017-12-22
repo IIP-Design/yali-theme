@@ -397,7 +397,7 @@ function renderArticleFeed( feed ) {
 
  
   shouldDisplayRelatedLinks(config);
- 
+   
  
   if( context || config.series ) {
     // Build query outside of cdp module, since using some YALI specific params, i.e.series
@@ -420,6 +420,7 @@ function addRelatedLinksToArticle(e, config) {
   
   if(list) {
     var items = list.getElementsByClassName('article-item');
+
     if ( items.length ) { 
       forEach(items, function(index, item) {
         lookUpItem( item, config );
@@ -473,14 +474,21 @@ function lookUpItem( item, config ) {
   // only add related links if post list is a feed and not a filtered list
   if (contentType && contentType === 'cdp-article-feed') {
     if (item.dataset.id) {
+      
       ids.map((id, index) => {
         if (id === item.dataset.id) {
-          let related = relatedPosts[index];
-          if (related) {
-            appendItem(item, related, relatedDisplay);
-          }
+          /********** SHAWN - 12/22/17  ************/          
+          // let related = relatedPosts[index];
+          // if (related) {
+          //   appendItem(item, related, relatedDisplay);
+          // }
+
+          relatedPosts.forEach(post => {
+            appendItem(item, post, relatedDisplay, config)
+          });
+          /**********************/
         }
-      });
+      });            
     }
   }
 }
@@ -491,10 +499,20 @@ function lookUpItem( item, config ) {
  * @param {object} related Link config
  * @param {string} relatedDisplay Display 'link' as link or 'button'
  */
-function appendItem( item, related, relatedDisplay ) {
-  if (item) {
+function appendItem( item, related, relatedDisplay, config ) {
+  if (item) {    
     var contentDiv = item.getElementsByClassName('article-content');
-    if (contentDiv && contentDiv.length) {
+    if (contentDiv && contentDiv.length) {      
+
+      /********** SHAWN - 12/22/17  ************/
+      let
+        articleTitle = contentDiv[0].querySelector('.article-title > a'),
+        articleExcerpt = contentDiv[0].querySelector('p');        
+
+        articleTitle.style.color = config.titleColor;
+        articleExcerpt.style.color = config.excerptColor;
+      /**********************************/
+
       var div = document.createElement('div');
       div.setAttribute('class', 'cb_button');
 

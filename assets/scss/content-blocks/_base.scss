@@ -10,6 +10,21 @@ $filter-bp: 890px; //50em;
   }
 }
 
+
+/************** SHAWN 12/22/17 *******************/
+.article-style-blog {
+  .cb_button {
+    display: inline-block;
+    width: 50%;
+
+    .ui.button.item {
+      width: 95%;
+    }
+  }
+}
+/*********************************/
+
+
 .cb {
 	padding-top: em(45);
   padding-bottom: em(45);

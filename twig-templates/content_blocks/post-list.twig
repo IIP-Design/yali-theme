@@ -6,7 +6,7 @@
     	{% include 'partials/content_block_title.twig' %}
       
        <!-- content block exceprt -->
-      <p class="cb_excerpt" style="text-align: {{ excerpt_alignment }}">{{ excerpt }} </p>
+      <p class="cb_excerpt" style="text-align: {{ excerpt_alignment }}; color: {{ excerpt_color }}">{{ excerpt }} </p>
 
       <!-- attach article feed module -->
       <div id='{{ selector }}' style="margin-top: 2em; text-align: {{ text_alignment }}"
@@ -44,6 +44,8 @@
     postMeta: {{ cdp_post_meta_fields_to_show|json_encode() }},
     uiLayout: '{{ cdp_ui_layout }}',
     uiDirection:  '{{ cdp_ui_direction }}',
+    titleColor: '{{ title_color }}',
+    excerptColor: '{{ excerpt_color }}'
   }
 
  </script>
