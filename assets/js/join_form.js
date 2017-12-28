@@ -49,8 +49,6 @@ function close_form() {
 			nav_join_mobile.style.display = 'inline-block';
 			set_title();
 		}
-
-		off_scroll();
 	});
 }
 
@@ -62,7 +60,6 @@ function display_form() {
 			[...formHiddenFields].forEach(field => field.classList.remove('hide_on_init'));
 
 			formScrollPos = window.pageYOffset;
-			window.addEventListener('scroll', on_scroll, false);
 			formPointer.style.display = 'block';
 		});
 	});		
@@ -70,54 +67,7 @@ function display_form() {
 	close_form();
 }
 
-function on_scroll() {
-	// Hide form after scrolling 300px from formScrollPos
-	if( (window.pageYOffset - formScrollPos) >= 300 ) {
-		// Set session if user scrolled, used for resize event
-		localStorage.scrolled = 'true';				
 
-		// Add fade out class and remove afterwards 
-		form.classList.add('fade_out');
-		setTimeout(() => {
-			form.style.display = 'none';
-			form.classList.remove('fade_out');				
-		}, 250);
-
-		// Remove fixed width from nav list items
-		nav_items.forEach(item => {			
-			if( item.classList.contains('initial_wide') ) item.classList.remove('initial_wide');
-		});
-
-		// Stop scroll event
-		window.removeEventListener('scroll', on_scroll, false);
-		
-		// Display appropriate nav menu join button, set title if mobile
-		// initially set to opacity 0
-		if( window.innerWidth > 933 ) {
-			nav_join_desktop.style.display = 'inline-block';	
-			nav_join_desktop.classList.add('no_show');
-		} else {
-			nav_join_mobile.style.display = 'inline-block';	
-			nav_join_mobile.classList.add('no_show');
-			set_title();			
-		}
-						
-		// Transition in nav join menu btn
-		setTimeout(() => {
-			if( window.innerWidth > 933 ) {
-				nav_join_desktop.classList.remove('no_show');
-				nav_join_desktop.classList.add('fade_in');	
-			} else {
-				nav_join_mobile.classList.remove('no_show');
-				nav_join_mobile.classList.add('fade_in');
-			}					
-		}, 0);
-	}
-}
-
-function off_scroll() {
-	window.removeEventListener('scroll', on_scroll, false);
-}
 
 function set_title() {			
 	if( site_title.textContent === 'Young African Leaders Initiative' ) site_title.textContent = 'YALI';
@@ -143,6 +93,4 @@ export function init() {
 	check_session_data();
 	display_form();		
 	on_resize();
-
-	window.addEventListener('scroll', on_scroll, false);	
 }
