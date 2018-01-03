@@ -9,6 +9,7 @@
       buttonLinksMetabox = document.getElementById('yali_cb_button_links'),
       ctaMetabox = document.getElementById('yali_cb_cta'),
       genericButtonMetabox = document.getElementById('yali_cb_box_btn'),
+      textBlockMetaBox = document.getElementById('yali_cb_text_block'),
       selectByTaxonomy = $('.cdp-select-posts-by-taxonomy'),
       selectByPostsCategory = $('.cmb2-id-yali-cdp-category'),
       selectByPostsSeries = $('.cmb2-id-yali-cdp-series'),
@@ -26,7 +27,8 @@
       accordion: accordionMetaBox,
       media_block: mediaBlockMetabox,
       button_links: buttonLinksMetabox,
-      cta: ctaMetabox
+      cta: ctaMetabox,
+      text_block: textBlockMetaBox
     };
 
 

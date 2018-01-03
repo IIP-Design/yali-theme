@@ -45,7 +45,8 @@ $cb_box->add_field( array(
     'filtered_list'  => __( 'Post List with Filters', 'yali' ),
     'social'         => __( 'Social Icons', 'yali' ),
     'media_block'    => __( 'Media Block', 'yali' ),
-    'button_links'    => __( 'Button Links', 'yali' )
+    'button_links'    => __( 'Button Links', 'yali' ),
+    'text_block'     => __( 'Text Block', 'yali' )
   )
 ));
 
