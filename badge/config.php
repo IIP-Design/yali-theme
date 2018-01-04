@@ -165,14 +165,15 @@ return array(
 		'font_size'				=> 50,
 		'color'						=> '#003d7d',
 		'align'						=> 'center',
-		'line_max_chars' 	=> 40,
+		'line_max_chars' 	=> 35,
 		'line_height' 		=> 60,
 		'text'						=> array (
 			array (
 				'content' 		=> 'FIELD',
 				'field_id'		=> 'course_name2', 			// Course name (formidable field key) -- MUST match
 				'x'		  			=> 550,
-				'y'		  			=> 360
+				'y'		  			=> 365,
+				'align'				=> 'center'
 			),
 			array (
 				'content' 		=> 'FIELD',
@@ -197,14 +198,14 @@ return array(
 		'font_size'				=> 50,
 		'color'						=> '#003d7d',
 		'align'						=> 'center',
-		'line_max_chars' 	=> 40,
+		'line_max_chars' 	=> 35,
 		'line_height' 		=> 60,
 		'text'						=> array (
 			array (
 				'content' 		=> 'FIELD',
 				'field_id'		=> 'course_name_fr', 			// Course name (formidable field key) -- MUST match
 				'x'		  			=> 550,
-				'y'		  			=> 360
+				'y'		  			=> 365
 			),
 			array (
 				'content' 		=> 'FIELD',
@@ -229,14 +230,14 @@ return array(
 		'font_size'				=> 50,
 		'color'						=> '#003d7d',
 		'align'						=> 'center',
-		'line_max_chars' 	=> 40,
+		'line_max_chars' 	=> 35,
 		'line_height' 		=> 60,
 		'text'						=> array (
 			array (
 				'content' 		=> 'FIELD',
 				'field_id'		=> 'course_name_pt', 			// Course name (formidable field key) -- MUST match
 				'x'		  			=> 550,
-				'y'		  			=> 360
+				'y'		  			=> 365
 			),
 			array (
 				'content' 		=> 'FIELD',

@@ -7,6 +7,8 @@
       filteredListMetaBox = document.getElementById('yali_cb_box_filter'), 
       mediaBlockMetabox = document.getElementById('yali_cb_media'),
       buttonLinksMetabox = document.getElementById('yali_cb_button_links'),
+      ctaMetabox = document.getElementById('yali_cb_cta'),
+      genericButtonMetabox = document.getElementById('yali_cb_box_btn'),
       selectByTaxonomy = $('.cdp-select-posts-by-taxonomy'),
       selectByPostsCategory = $('.cmb2-id-yali-cdp-category'),
       selectByPostsSeries = $('.cmb2-id-yali-cdp-series'),
@@ -23,7 +25,8 @@
       social: socialMetabox,
       accordion: accordionMetaBox,
       media_block: mediaBlockMetabox,
-      button_links: buttonLinksMetabox
+      button_links: buttonLinksMetabox,
+      cta: ctaMetabox
     };
 
 
@@ -32,6 +35,7 @@
         for (var type in conditionalMetaboxes) {
           if (type == blockTypeSelection) {
             conditionalMetaboxes[type].style.display = 'block';
+            toggleGenericButtonDisplay(blockTypeSelection);
           } else {
             conditionalMetaboxes[type].style.display = 'none';
           }
@@ -45,6 +49,14 @@
           conditionalMetaboxes[type].style.display = 'none';
         }
       } catch (err) {}
+    }
+
+    function toggleGenericButtonDisplay(blockTypeSelection) {
+      if( blockTypeSelection === 'cta' || blockTypeSelection === 'button_links' ) {
+        genericButtonMetabox.style.display = 'none';
+      } else {
+        genericButtonMetabox.style.display = 'block';
+      }
     }
 
     // Hide Conditional Boxes based on initial content type selection

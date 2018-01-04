@@ -54,17 +54,22 @@ class Content_Block_Shortcode {
     $meta = get_post_meta(  $id );
     $post = get_post( $id );
 
-    $context = $this->fetch_base_config( $id, $post );
-    $context = $this->fetch_btn_config( $context, $id, $meta );
+    $context = $this->fetch_base_config( $id, $post );    
 
     if( !empty($meta["_thumbnail_id"]) ) {
       $img_id = $meta["_thumbnail_id"][0];      
       $context["header_url"] = wp_get_attachment_url( $img_id );
       $context["srcset"] = wp_get_attachment_image_srcset( $img_id, 'full' );
-      $context["sizes"] = wp_get_attachment_image_sizes( $img_id, 'full' );
+      $context["sizes"] = wp_get_attachment_image_sizes( $img_id, 'full' );          
     }
     
     $context["cb_layout_width"] = get_post_meta( $id, 'yali_cb_layout_width' );
+    $context["cta_buttons"] = get_post_meta( $id, 'yali_cta_button_repeat_group', true );
+
+    foreach ($context["cta_buttons"] as &$button) {
+      $button["yali_cta_button_link"]["url"] = $this->filter_link($button["yali_cta_button_link"]["url"]);      
+    }
+    unset($button);
 
     return Twig::render( 'content_blocks/cta.twig', $context );
   }

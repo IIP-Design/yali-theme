@@ -13,7 +13,6 @@ YALI_Autoloader::register( get_stylesheet_directory() . '/includes/' );
 use Yali\Twig as Twig;
 use Yali\Content_Block as Content_Block;
 use Yali\Content_Block_Shortcode as Content_Block_Shortcode;
-use Yali\Custom_Button as Custom_Button;
 use Yali\Custom_Button_Shortcode as Custom_Button_Shortcode;
 use Yali\Bio as Bio;
 use Yali\Content_Type_Tax as Content_Type_Tax;
@@ -71,6 +70,7 @@ class YaliSite {
 		* Add Content Block Select List to TinyMCE - must be after Yali_Autoloader
 		*/
 		require_once 'includes/tinymce_content_block/tinymce_content_block.php';
+		require_once 'includes/tinymce_custom_button/tinymce_custom_button.php';
 
 		/*
 		* Add excerpt to pages
@@ -108,7 +108,6 @@ class YaliSite {
 	 */
 	function register_post_types() {
 		Content_Block::register();
-		// Custom_Button::register();
 		Bio::register();
 	}
 
@@ -120,7 +119,7 @@ class YaliSite {
 
 	function register_shortcodes() {
 		Content_Block_Shortcode::register();
-		// Custom_Button_Shortcode::register();
+		Custom_Button_Shortcode::register();
 	}
 
 	function enqueue_scripts() {
