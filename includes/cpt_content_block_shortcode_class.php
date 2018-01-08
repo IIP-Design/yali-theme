@@ -168,6 +168,22 @@ class Content_Block_Shortcode {
     return Twig::render( 'content_blocks/button-links.twig', $context );
   }
 
+
+  // TEXT CONTENT BLOCK
+  public function render_text_block( $atts ) {
+    $id = $atts['id'];
+    $context = $this->fetch_base_config( $id, get_post($id) );
+
+    $text_content = get_post_meta( $id, 'yali_text_block_content', true );
+    $text_content = $this->filter_link( $text_content );
+    $text_content = wpautop($text_content);
+    $context['text_content'] = do_shortcode($text_content);
+    
+
+    return Twig::render( 'content_blocks/text_block.twig', $context );
+  }
+
+
   // Helpers
    /**
    * Wrapper function around cmb2_get_option

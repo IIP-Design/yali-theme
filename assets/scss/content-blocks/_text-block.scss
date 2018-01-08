@@ -1,0 +1,38 @@
+.text_cb {
+	padding-top: 45px;
+	@media screen and (max-width: 933px) {
+		padding-top: 0;
+	}
+
+	a {
+		color: inherit !important;
+	}
+
+	/*********************
+	Child Content Blocks 
+	**********************/
+	.cb {
+		padding-top: 0;
+		@media screen and (max-width: 933px) { 
+			.ui.container {
+				padding-top: 0;
+			}
+		}
+	}
+
+	/*  Post List  */
+	.article-content {
+		color: #fff;
+
+		h3.article-title,
+		h3.article-title a {
+			color: #fff;		
+		}
+	}
+
+	[data-content-type='cdp-article-feed'] {
+		@media screen and (max-width: 933px) {
+			margin-top: 0 !important; 
+		}
+	}
+}
