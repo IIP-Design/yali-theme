@@ -1,22 +1,35 @@
 .text_cb {
 	padding-top: 45px;
+	padding-bottom: 45px;
 	@media screen and (max-width: 933px) {
 		padding-top: 0;
 	}
 
 	a {
 		color: inherit !important;
+
+		&:hover {
+			border-color: inherit !important;
+		}
 	}
 
 	/*********************
 	Child Content Blocks 
 	**********************/
-	.cb {
+	.cb_post_list:first-of-type {
 		padding-top: 0;
 		@media screen and (max-width: 933px) { 
 			.ui.container {
 				padding-top: 0;
 			}
+		}
+	}
+
+	.cb_cta, 
+	.media_block {
+		margin: 45px 0;
+		@media screen and (max-width: 933px) {
+			margin: 25px 0;
 		}
 	}
 
