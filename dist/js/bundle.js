@@ -762,14 +762,18 @@ function lookUpItem(item, config) {
 
       ids.map(function (id, index) {
         if (id === item.dataset.id) {
-          /********** SHAWN - 12/22/17  ************/
-          // let related = relatedPosts[index];
-          // if (related) {
-          //   appendItem(item, related, relatedDisplay);
+          // ORIGINAL CODE
+          // let related = relatedPosts[ index ];
+          // if ( related ) {
+          //   appendItem( item, related, relatedDisplay );
           // }
 
+          /********** SHAWN - 12/22/17  ************/
+          var useDropdown = void 0;
+          relatedPosts.length > 2 ? useDropdown = true : useDropdown = false;
+
           relatedPosts.forEach(function (post) {
-            appendItem(item, post, relatedDisplay, config);
+            appendItem(item, post, relatedDisplay, useDropdown);
           });
           /**********************/
         }
@@ -784,40 +788,52 @@ function lookUpItem(item, config) {
  * @param {object} related Link config
  * @param {string} relatedDisplay Display 'link' as link or 'button'
  */
-function appendItem(item, related, relatedDisplay, config) {
+function appendItem(item, related, relatedDisplay, useDropdown) {
+  console.log('relatedPosts > 2:', useDropdown);
+
   if (item) {
     var contentDiv = item.getElementsByClassName('article-content');
     if (contentDiv && contentDiv.length) {
 
-      /********** SHAWN - 12/22/17  ************/
-      var articleTitle = contentDiv[0].querySelector('.article-title > a'),
-          articleExcerpt = contentDiv[0].querySelector('p');
-
-      articleTitle.style.color = config.titleColor;
-      articleExcerpt.style.color = config.excerptColor;
-      /**********************************/
-
-      var div = document.createElement('div');
-      div.setAttribute('class', 'cb_button');
-
       var a = document.createElement('a');
       // make link relative if on the same domain
-      var host = window.location.protocol + '//' + window.location.host;
+      var host = '' + window.location.protocol; //${window.location.host}`;
       var link = related.link.replace(host, '');
       a.setAttribute('href', link);
 
-      if (relatedDisplay === 'display_as_button') {
-        a.setAttribute('class', 'ui button item');
-      } else {
-        a.setAttribute('class', 'item-link');
-      }
+      if (!useDropdown) {
+        var div = document.createElement('div');
+        div.setAttribute('class', 'cb_button');
 
-      a.innerText = related.label;
-      div.appendChild(a);
-      contentDiv[0].appendChild(div);
+        if (relatedDisplay === 'display_as_button') {
+          a.setAttribute('class', 'ui button item');
+        } else {
+          a.setAttribute('class', 'item-link');
+        }
+
+        a.innerText = related.label;
+        div.appendChild(a);
+        contentDiv[0].appendChild(div);
+      } else {
+
+        var selectCourseDropdown = document.getElementsByClassName('post_list_course_dropdown')[0];
+        if (!selectCourseDropdown.length) {
+          selectCourseDropdown = document.createElement('select');
+          selectCourseDropdown.setAttribute('class', 'ui dropdown post_list_course_dropdown');
+          contentDiv[0].appendChild(selectCourseDropdown);
+        }
+
+        console.log(a, selectCourseDropdown);
+
+        var option = document.createElement('option');
+        option.appendChild(a);
+        selectCourseDropdown.appendChild(option);
+      }
     }
-  }
+  } // if( item )
 }
+
+function appendDropdown() {}
 
 // Helper method that creates forEach method to loop over NodeList
 var forEach = function forEach(array, callback, scope) {
