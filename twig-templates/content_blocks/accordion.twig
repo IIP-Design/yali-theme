@@ -5,7 +5,11 @@
 	
 	<div class='ui styled accordion'>		
 		{% for item in items_array %}
-		<h4 class='title'>{{ item.item_title }}</h4>			
+		<h4 
+			class='title' 
+			style='color: {{ font_color }}; border-color: {{ font_color }};'>
+			{{ item.item_title }}
+		</h4>			
 		<div class='content'>{{ item.item_content }}</div>
 		{% endfor %}	
 	</div>

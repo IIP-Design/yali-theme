@@ -18,6 +18,7 @@
 	**********************/
 	.cb_post_list:first-of-type {
 		padding-top: 0;
+		padding-bottom: 0;
 		@media screen and (max-width: 933px) { 
 			.ui.container {
 				padding-top: 0;
@@ -34,18 +35,25 @@
 	}
 
 	/*  Post List  */
-	.article-content {
+	/*.article-content {
 		color: #fff;
 
 		h3.article-title,
 		h3.article-title a {
 			color: #fff;		
 		}
-	}
+	}*/
 
 	[data-content-type='cdp-article-feed'] {
 		@media screen and (max-width: 933px) {
 			margin-top: 0 !important; 
+		}
+	}
+
+	/* Accordion */
+	.accordion_layout {
+		@media screen and (max-width: 933px) {
+			margin: 25px 0;
 		}
 	}
 }

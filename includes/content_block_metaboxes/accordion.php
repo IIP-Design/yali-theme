@@ -29,6 +29,20 @@ $accordion->add_field( array(
   )
 ));
 
+$accordion->add_field( array(
+  'name'                => 'Select Font & Border Color',
+    'desc'              => '',
+    'id'                => $prefix . 'cb_accordion_font_color',
+    'type'              => 'colorpicker',
+    'default'           => '#192856',
+  'attributes'          => array(
+    'data-colorpicker'  => json_encode( array(
+        'border'        => false,
+        'palettes'      => array( '#ffffff', '#eeeeee', '#f2d400', '#25ace2', '#174f9f', '#192856' )
+    ))
+  )
+));
+
 $accordion_group_field_id = $accordion->add_field( array(
   'id'            => 'accordion_repeat_group',
   'type'          => 'group',

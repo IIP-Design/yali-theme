@@ -110,6 +110,7 @@ class Content_Block_Shortcode {
       'id'  => $slug,
       'headline' => get_post_meta($id, 'yali_cb_accordion_headline', true),
       'headline_alignment' => get_post_meta($id, 'yali_cb_accordion_headline_alignment', true),
+      'font_color' => get_post_meta($id, 'yali_cb_accordion_font_color', true),
       'items_array' => $items
     );
 
@@ -178,7 +179,7 @@ class Content_Block_Shortcode {
     $text_content = $this->filter_link( $text_content );
     $text_content = wpautop($text_content);
     $context['text_content'] = do_shortcode($text_content);
-    
+    $context['font_color'] = get_post_meta( $id, 'yali_text_block_font_color', true );
 
     return Twig::render( 'content_blocks/text_block.twig', $context );
   }

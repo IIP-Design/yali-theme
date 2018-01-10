@@ -5,12 +5,14 @@
 		width: 100%;
 		text-align: left;
 		box-shadow: none;
+		background: inherit;
 
 		.title {
 			margin-bottom: 16px;
-			border: 8px solid $blue-navy;
+			/*border: 8px solid $blue-navy;*/
+			border: 8px solid;
 			font-size: em(32);
-			color: $blue-navy;
+			/*color: $blue-navy;*/
 			@media screen and (min-width: 768px) and (max-width: 933px) {					
 				font-size: em(24, $mobile);
 			}
@@ -20,7 +22,7 @@
 				font-size: em(20, $mobile);
 			}
 
-			&:hover {
+			/*&:hover {
 				border-color: $blue-medium;
 				color: $blue-medium;					
 			}
@@ -29,7 +31,7 @@
 				border-color: $blue-medium;	
 				color: #fff;					
 				background-color: $blue-medium;
-			}
+			}*/
 		}
 
 		.content {
@@ -50,7 +52,7 @@
 
 			a {
 				font-weight: 700;				
-				color: $blue-medium;
+				/*color: $blue-medium;*/
 
 				&.cta_link {
 					color: #fff;
