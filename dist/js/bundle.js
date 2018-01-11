@@ -775,6 +775,7 @@ function lookUpItem(item, config) {
           relatedPosts.forEach(function (post) {
             appendItem(item, post, relatedDisplay, useDropdown);
           });
+          $('.post_list_links_dropdown').dropdown();
           /**********************/
         }
       });
@@ -789,8 +790,6 @@ function lookUpItem(item, config) {
  * @param {string} relatedDisplay Display 'link' as link or 'button'
  */
 function appendItem(item, related, relatedDisplay, useDropdown) {
-  console.log('relatedPosts > 2:', useDropdown);
-
   if (item) {
     var contentDiv = item.getElementsByClassName('article-content');
     if (contentDiv && contentDiv.length) {
@@ -800,6 +799,7 @@ function appendItem(item, related, relatedDisplay, useDropdown) {
       var host = '' + window.location.protocol; //${window.location.host}`;
       var link = related.link.replace(host, '');
       a.setAttribute('href', link);
+      a.innerText = related.label;
 
       if (!useDropdown) {
         var div = document.createElement('div');
@@ -811,23 +811,24 @@ function appendItem(item, related, relatedDisplay, useDropdown) {
           a.setAttribute('class', 'item-link');
         }
 
-        a.innerText = related.label;
+        // a.innerText = related.label;
         div.appendChild(a);
         contentDiv[0].appendChild(div);
       } else {
 
-        var selectCourseDropdown = document.getElementsByClassName('post_list_course_dropdown')[0];
-        if (!selectCourseDropdown.length) {
-          selectCourseDropdown = document.createElement('select');
-          selectCourseDropdown.setAttribute('class', 'ui dropdown post_list_course_dropdown');
-          contentDiv[0].appendChild(selectCourseDropdown);
+        var linksDropdown = document.getElementsByClassName('post_list_links_dropdown')[0];
+
+        if (!linksDropdown) {
+          linksDropdown = document.createElement('select');
+          linksDropdown.setAttribute('class', 'ui dropdown post_list_links_dropdown');
+
+          contentDiv[0].appendChild(linksDropdown);
         }
 
-        console.log(a, selectCourseDropdown);
-
         var option = document.createElement('option');
-        option.appendChild(a);
-        selectCourseDropdown.appendChild(option);
+        option.setAttribute('value', related.label);
+        option.innerText = related.label;
+        linksDropdown.appendChild(option);
       }
     }
   } // if( item )
