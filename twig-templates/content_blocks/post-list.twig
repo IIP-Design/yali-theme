@@ -11,6 +11,7 @@
       <!-- attach article feed module -->
       <style type="text/css">
         /* Set article title/excerpt color using excerpt color var from general fields */
+        #{{ selector }} .article-title,
         #{{ selector }} .article-title a,        
         #{{ selector }} .article-content p {
           color: {{ (excerpt_color) ? excerpt_color : '#192856' }};
