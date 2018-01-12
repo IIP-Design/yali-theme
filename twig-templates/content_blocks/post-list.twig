@@ -6,9 +6,20 @@
     	{% include 'partials/content_block_title.twig' %}
       
        <!-- content block exceprt -->
-      <p class="cb_excerpt" style="text-align: {{ excerpt_alignment }}">{{ excerpt }} </p>
+      <p class="cb_excerpt" style="text-align: {{ excerpt_alignment }}; color: {{ excerpt_color }}">{{ excerpt }} </p>
 
       <!-- attach article feed module -->
+      <style type="text/css">
+        /* Set article title/excerpt color using excerpt color var from general fields */
+        #{{ selector }} .article-title a,        
+        #{{ selector }} .article-content p {
+          color: {{ (excerpt_color) ? excerpt_color : '#192856' }};
+        }
+
+        #{{ selector }} .article-title a:hover {
+          color: #174f9f;
+        }
+      </style>
       <div id='{{ selector }}' style="margin-top: 2em; text-align: {{ text_alignment }}"
         data-content-type='cdp-article-feed' data-id=''>LOADING Component...</div>
 
@@ -43,7 +54,7 @@
     tags: '{{ cdp_tag }}',
     postMeta: {{ cdp_post_meta_fields_to_show|json_encode() }},
     uiLayout: '{{ cdp_ui_layout }}',
-    uiDirection:  '{{ cdp_ui_direction }}',
+    uiDirection:  '{{ cdp_ui_direction }}'    
   }
 
  </script>

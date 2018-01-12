@@ -397,7 +397,7 @@ function renderArticleFeed( feed ) {
 
  
   shouldDisplayRelatedLinks(config);
- 
+   
  
   if( context || config.series ) {
     // Build query outside of cdp module, since using some YALI specific params, i.e.series
@@ -420,6 +420,7 @@ function addRelatedLinksToArticle(e, config) {
   
   if(list) {
     var items = list.getElementsByClassName('article-item');
+
     if ( items.length ) { 
       forEach(items, function(index, item) {
         lookUpItem( item, config );
@@ -473,14 +474,33 @@ function lookUpItem( item, config ) {
   // only add related links if post list is a feed and not a filtered list
   if (contentType && contentType === 'cdp-article-feed') {
     if (item.dataset.id) {
+      
       ids.map((id, index) => {
         if (id === item.dataset.id) {
-          let related = relatedPosts[index];
-          if (related) {
-            appendItem(item, related, relatedDisplay);
-          }
+          // ORIGINAL CODE
+          // let related = relatedPosts[ index ];
+          // if ( related ) {
+          //   appendItem( item, related, relatedDisplay );
+          // }
+
+          /********** SHAWN - 12/22/17  ************/
+          let useDropdown;
+          ( relatedPosts.length > 2 ) ? useDropdown = true : useDropdown = false;
+                    
+          relatedPosts.forEach(post => {
+            appendItem(item, post, relatedDisplay, useDropdown)
+          });
+
+          // Init dropdown menu
+          // Redirect on link selection
+          $('.post_list_links_dropdown').dropdown({
+            onChange: function(value, text, selectedItem) {
+              window.location.href = value;
+            }
+          });
+          /**********************/
         }
-      });
+      });            
     }
   }
 }
@@ -491,31 +511,70 @@ function lookUpItem( item, config ) {
  * @param {object} related Link config
  * @param {string} relatedDisplay Display 'link' as link or 'button'
  */
-function appendItem( item, related, relatedDisplay ) {
-  if (item) {
+function appendItem( item, related, relatedDisplay, useDropdown ) {
+  if (item) {    
     var contentDiv = item.getElementsByClassName('article-content');
-    if (contentDiv && contentDiv.length) {
-      var div = document.createElement('div');
-      div.setAttribute('class', 'cb_button');
+    if (contentDiv && contentDiv.length) {      
 
       var a = document.createElement('a');
       // make link relative if on the same domain
-      let host = `${window.location.protocol}//${window.location.host}`;
+      let host = `${window.location.protocol}`//${window.location.host}`;
       let link = related.link.replace( host, '' );
       a.setAttribute( 'href', link );
-
-      if ( relatedDisplay === 'display_as_button' ) {
-        a.setAttribute('class', 'ui button item');
-      } else {
-        a.setAttribute('class', 'item-link');
-      }
-
       a.innerText = related.label;
-      div.appendChild(a);
-      contentDiv[0].appendChild(div);
+
+      if( !useDropdown ) {
+        appendButtonOrLink(contentDiv, a, relatedDisplay);
+      } else {
+        appendDropdown(contentDiv, a, related);
+      }
     }
   }
 }
+
+function appendButtonOrLink( contentDiv, a, relatedDisplay ) {
+  let div = document.createElement('div');
+  div.setAttribute('class', 'cb_button');
+
+  if ( relatedDisplay === 'display_as_button' ) {
+    a.setAttribute('class', 'ui button item');
+  } else {
+    a.setAttribute('class', 'item-link');
+  }
+
+  div.appendChild(a);
+  contentDiv[0].appendChild(div);
+}
+
+function appendDropdown( contentDiv, a, related ) {
+  // Store links dropdown menu if it exists
+  let linksDropdown = document.getElementsByClassName('post_list_links_dropdown')[0];  
+
+  // If links dropdown !exist, create wrapper div, select element & default option
+  if( !linksDropdown ) {    
+    let linksWrapper = document.createElement('div');
+    linksWrapper.setAttribute('class', 'post_list_links_wrapper');
+
+    linksDropdown = document.createElement('select');          
+    linksDropdown.setAttribute('class', 'ui dropdown button post_list_links_dropdown');
+
+    let defaultOption = document.createElement('option');
+    defaultOption.setAttribute('value', '');
+    defaultOption.innerText = 'Select Course Language';
+
+    // Append elements to 'article-content'
+    linksDropdown.appendChild(defaultOption);
+    linksWrapper.appendChild(linksDropdown);
+    contentDiv[0].appendChild(linksWrapper);
+  }
+
+  // Create an option for each related link and append to select element
+  let option = document.createElement('option');
+  option.setAttribute('value', a);
+  option.innerText = related.label;
+  linksDropdown.appendChild(option);
+}
+
 
 // Helper method that creates forEach method to loop over NodeList
 const forEach = function(array, callback, scope) {
@@ -557,5 +616,5 @@ const deepClone = function ( obj ) {
 export function init( jQuery ) {
   $ = jQuery;
   initializeFilters();
-  initializeArticleFeed();
+  initializeArticleFeed();   
 }
