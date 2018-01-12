@@ -7,6 +7,7 @@
 
 .cb .article-content   {
   
+
   p {
     line-height: 1.5;
     @media screen and (max-width: 933px) {
@@ -14,6 +15,7 @@
     }
   }
   
+
   h3.article-title {
     font-size: 1.5rem;
     text-decoration:  none;
@@ -23,8 +25,10 @@
     }
   }
 
+
   .article-title_link {
     color: $blue-navy;
+
 
     &:hover {
       color: $blue-medium;
@@ -33,12 +37,65 @@
     }
   }
 
+
   div.article-meta {
     color: lighten($blue-navy, 10%);
     
     span {  
       color: $blue-navy; 
     }    
+  }
+
+  /************* 
+  Related Links Dropdown Menu 
+  **************/
+  .post_list_links {
+    
+    &_wrapper {
+      position: absolute;
+      @media screen and (max-width: 767px) {
+        position: relative;
+      }
+    }
+
+    &_dropdown {
+      border: none;
+      border-radius: 0;
+      border-color: $red;
+      background-color: $red;
+      color: #fff;
+
+      &:hover {
+        background-color: $red;
+        color: #fff;              
+        transform: none;
+      }
+
+      .text {
+        color: #fff !important;
+        font-weight: inherit !important;
+      }
+
+      .menu {
+        width: 100%;
+        min-width: 100%;
+        margin: 0;
+        border: none !important;
+        border-radius: 0;
+        background-color: $red;
+        color: #fff;
+        opacity: 0.85;
+        @media screen and (max-width: 767px) {
+          position: relative;
+          box-shadow: none !important;
+        }
+
+        .item {
+          border: none;
+          color: #fff;
+        }
+      }
+    }
   }
 
 }

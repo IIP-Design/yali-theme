@@ -16,6 +16,9 @@ $filter-bp: 890px; //50em;
   .cb_button {
     display: inline-block;
     width: 50%;
+    @media screen and (max-width: 425px) {
+      width: 100%;
+    }
 
     .ui.button.item {
       width: 95%;
