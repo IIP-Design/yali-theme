@@ -10,6 +10,7 @@
       ctaMetabox = document.getElementById('yali_cb_cta'),
       genericButtonMetabox = document.getElementById('yali_cb_box_btn'),
       textBlockMetaBox = document.getElementById('yali_cb_text_block'),
+      campaignListBlockMetaBox = document.getElementById('yali_cb_campaigns_list'),
       selectByTaxonomy = $('.cdp-select-posts-by-taxonomy'),
       selectByPostsCategory = $('.cmb2-id-yali-cdp-category'),
       selectByPostsSeries = $('.cmb2-id-yali-cdp-series'),
@@ -28,7 +29,8 @@
       media_block: mediaBlockMetabox,
       button_links: buttonLinksMetabox,
       cta: ctaMetabox,
-      text_block: textBlockMetaBox
+      text_block: textBlockMetaBox,
+      campaigns_list: campaignListBlockMetaBox
     };
 
 
@@ -76,6 +78,11 @@
     // Toggle Metabox display on content type selection
     $('#yali_cb_type').change(function() {
       var blockTypeSelection = $(this).val();
+
+      console.log('blockTypeSelection: ', blockTypeSelection);
+      console.log('**** Meta Object ****');
+      console.log(conditionalMetaboxes[blockTypeSelection])
+      console.log('**********************');
 
       try {
         // Check if selection exists in metabox store object & toggle display || hide all conditional metaboxes

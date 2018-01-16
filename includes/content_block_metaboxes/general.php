@@ -46,7 +46,8 @@ $cb_box->add_field( array(
     'social'         => __( 'Social Icons', 'yali' ),
     'media_block'    => __( 'Media Block', 'yali' ),
     'button_links'    => __( 'Button Links', 'yali' ),
-    'text_block'     => __( 'Text Block', 'yali' )
+    'text_block'     => __( 'Text Block', 'yali' ),
+    'campaigns_list'     => __( 'Campaigns List', 'yali' )
   )
 ));
 

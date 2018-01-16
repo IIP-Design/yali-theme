@@ -1,0 +1,24 @@
+<section class='action'>
+	<div class='ui stackable grid campaigns_list'>
+		<!-- content block title -->
+	    {% include 'partials/content_block_title.twig' %}
+
+		{% for campaign in campaign_pages %}
+		<div class='row list_item'>
+			<div class='six wide column'>
+				<a class='list_item_img_link' href='{{ campaign.post_name }}'>
+					<img src='{{ campaign.campaign_img }}'>						
+				</a>					
+			</div>
+			<div class='nine wide column'>
+				<div class='list_item_content'>
+					<h3>
+						<a href='{{ campaign.post_name }}' class='list_item_link'>{{ campaign.post_title }}</a>
+					</h3>
+					<p class='list_item_excerpt'>{{ campaign.post_excerpt }}</p>
+				</div>
+			</div>
+		</div>
+		{% endfor %}
+	</div>
+</section>	

@@ -185,6 +185,32 @@ class Content_Block_Shortcode {
   }
 
 
+  // CAMPAIGNS LIST CONTENT BLOCK
+  public function render_campaigns_list( $atts ) {
+    $id = $atts['id'];
+    $context = $this->fetch_base_config( $id, get_post($id) );    
+
+    $campaign_pages = array();
+    $campaigns_list = get_post_meta($id, 'campaigns_list_repeat_group', true);
+    
+    foreach ($campaigns_list as $campaign) {
+      $campaign_id = $campaign['yali_select_campaign'];
+      $campaign_page = get_page($campaign_id);
+
+      $campaign_img = get_post_meta($campaign_id, 'campaigns_list_img', true);
+      if( !empty($campaign_img) ) {
+        $campaign_page->campaign_img = $campaign_img;
+      }
+
+      array_push($campaign_pages, $campaign_page);
+    }  
+
+    $context['campaign_pages'] = $campaign_pages;
+
+    return Twig::render( 'content_blocks/campaigns-list.twig', $context );
+  }
+
+
   // Helpers
    /**
    * Wrapper function around cmb2_get_option
