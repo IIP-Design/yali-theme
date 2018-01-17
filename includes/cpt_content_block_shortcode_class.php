@@ -190,24 +190,39 @@ class Content_Block_Shortcode {
     $id = $atts['id'];
     $context = $this->fetch_base_config( $id, get_post($id) );    
 
+    // Layout Style
+    $campaigns_list_layout = get_post_meta($id, 'campaigns_layout', true);
+
+    // Campaigns to be included
     $campaign_pages = array();
     $campaigns_list = get_post_meta($id, 'campaigns_list_repeat_group', true);
     
     foreach ($campaigns_list as $campaign) {
+      // Get Campaign ID from meta select dropdown
       $campaign_id = $campaign['yali_select_campaign'];
+      // Get campaign page data
       $campaign_page = get_page($campaign_id);
 
+      // Add campaign page img from page custom field
+      // add prop to campaign page obj
       $campaign_img = get_post_meta($campaign_id, 'campaigns_list_img', true);
       if( !empty($campaign_img) ) {
         $campaign_page->campaign_img = $campaign_img;
       }
+
+      // Get campaign page link and add to page obj as prop
+      $campaign_page_link = get_permalink($campaign_id);
+      $campaign_page->campaign_page_link = $this->filter_link($campaign_page_link);
 
       array_push($campaign_pages, $campaign_page);
     }  
 
     $context['campaign_pages'] = $campaign_pages;
 
-    return Twig::render( 'content_blocks/campaigns-list.twig', $context );
+    // Set twig tmpl to use
+    $twig_tmpl = ($campaigns_list_layout === 'list' ? 'content_blocks/campaigns-list.twig' : 'content_blocks/honeycomb.twig');
+
+    return Twig::render( $twig_tmpl, $context );
   }
 
 
@@ -233,6 +248,7 @@ class Content_Block_Shortcode {
       "title_underline"     => ( get_post_meta($id, 'yali_cb_title_underline', true) == 'yes' ) ? 'cb_h2_underline': '',
       "title_color"         => get_post_meta( $id, 'yali_cb_title_color', true ), 
       "title_alignment"     => get_post_meta( $id, 'yali_cb_title_alignment', true ),
+      "full_screen_width"   => get_post_meta( $id, 'yali_cb_layout_width', true ),
       "block_bg_color"      => get_post_meta( $id, 'yali_cb_bg_color', true ),
       "excerpt"             => $post->post_excerpt,
       "excerpt_alignment"   => get_post_meta( $id, 'yali_cb_excerpt_alignment', true ),  

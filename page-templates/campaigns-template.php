@@ -25,24 +25,26 @@ $sizes = wp_get_attachment_image_sizes($img_id, "full");
 $social_block = do_shortcode("[content_block id='14264']");
 
 // Query for all Campaign Pages
-$args = array(
-  'post_type' => 'page',
-  'meta_key' => 'campaign_page',
-  'meta_value' => 'true'
-);
+// $args = array(
+//   'post_type' => 'page',
+//   'meta_key' => 'campaign_page',
+//   'meta_value' => 'true'
+// );
 
-$get_campaign_pages = new WP_Query($args);
-wp_reset_postdata();
+// $get_campaign_pages = new WP_Query($args);
+// wp_reset_postdata();
 
-$campaign_pages = $get_campaign_pages->posts;
-foreach ($campaign_pages as $item) {
-  $item_id = $item->ID;
+// $campaign_pages = $get_campaign_pages->posts;
+// foreach ($campaign_pages as $item) {
+//   $item_id = $item->ID;
 
-  $list_img = get_post_meta($item_id, 'campaigns_list_img', true);
-  if( !empty($list_img) ) {
-    $item->campaigns_list_img = $list_img;
-  }
-}
+//   $list_img = get_post_meta($item_id, 'campaigns_list_img', true);
+//   if( !empty($list_img) ) {
+//     $item->campaigns_list_img = $list_img;
+//   }
+// }
+
+$campaign_list_grid = do_shortcode("[content_block id='14005' title='Test - Campaigns Grid']");
 
 // 'Join the Network' Form
 $formVar = do_shortcode('[formidable id=6]');
@@ -98,7 +100,8 @@ $context = array(
   "srcset"			    => $srcset,
   "size"			      => $sizes,
   "social_block"  	=> $social_block,
-  "campaign_pages"	=> $campaign_pages,
+  // "campaign_pages"	=> $campaign_pages,
+  "campaign_list_grid"  => $campaign_list_grid,
   "promo_data"	 	  => $promo_data,
   "orgevent_data"	  => $orgevent_data,
   "alumni_vids"     => $alumni_vids_formatted,

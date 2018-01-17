@@ -31,10 +31,10 @@ $accordion->add_field( array(
 
 $accordion->add_field( array(
   'name'                => 'Select Font & Border Color',
-    'desc'              => '',
-    'id'                => $prefix . 'cb_accordion_font_color',
-    'type'              => 'colorpicker',
-    'default'           => '#192856',
+  'desc'              => '',
+  'id'                => $prefix . 'cb_accordion_font_color',
+  'type'              => 'colorpicker',
+  'default'           => '#192856',
   'attributes'          => array(
     'data-colorpicker'  => json_encode( array(
         'border'        => false,

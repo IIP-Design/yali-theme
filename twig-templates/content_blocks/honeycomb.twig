@@ -1,31 +1,43 @@
 {% set current_page = page_data.title.rendered %}
 
-<section class='section full-width cb_honeycomb_wrapper {{ bg_color ? bg_color: "" }}'>
+<!-- <section class='section full-width cb_honeycomb_wrapper {{ bg_color ? bg_color: "" }}'> -->
+<section 
+	class='section full-width cb_honeycomb_wrapper'
+	style='background-color: {{ block_bg_color ? block_bg_color: "" }};'>
 	<div class='ui container cb_honeycomb'>
 		<div class='inner-container'>
-			{% if headline is not empty %}
+			<!-- {% if headline is not empty %}
 			<h2 class='cb_honeycomb_headline'>{{ headline }}</h2>
 			{% endif %}
 			{% if subheadline is not empty %}
 			<h5 class='cb_honeycomb_subheadline'>{{ subheadline }}</h5>
-			{% endif %}
-			<div class='ui stackable grid cb_honeycomb_items'>
-				{% for campaign in content %}
+			{% endif %} -->
+
+			<!-- content block title -->
+			{% include 'partials/content_block_title.twig' %}	    
+
+			<div class='ui stackable grid cb_honeycomb_items'>				
+				{% for campaign in campaign_pages %}					
 					{% if current_page != campaign.post_title %}
-					<div class='five wide column cb_honeycomb_item'>
+					<div class='five wide column cb_honeycomb_item' style='color: {{ excerpt_color }};'>
 						<a href='{{ campaign.post_name }}'>							
-							<img src='{{ campaign.campaigns_list_img }}'>					
+							<img src='{{ campaign.campaign_img }}'>					
 						</a>
 						<div class='cb_honeycomb_item_text'>
 							<h4 class='cb_honeycomb_item_title'>
-								<a href='{{ campaign.post_name }}'>{{ campaign.post_title }}</a>
+								<a 
+									href='{{ campaign.post_name }}' 
+									style='color: {{ excerpt_color }};'>
+									{{ campaign.post_title }}
+								</a>
 							</h4>
 							<p class='cb_honeycomb_item_excerpt'>{{ campaign.post_excerpt }}</p>
 						</div>
 					</div>
 					{% endif %}
 				{% endfor %}
-			</div><!-- cb_homeycomb_items -->
+			</div><!-- cb_honeycomb_items -->
+
 		</div><!-- inner-container -->	
 	</div><!-- ui.container -->
 </section>

@@ -29,6 +29,18 @@ $campaigns_list = new_cmb2_box( array(
 	'priority'     => 'low'
 ));
 
+$campaigns_list->add_field( array(
+	'name' => 'Select Campaign Layout Style',
+	'id' => 'campaigns_layout',
+	'desc' => __( 'Choose either list or grid layout, layout style defaults to list' ),
+	'type' => 'select',
+	'default' => 'list',
+	'options' => array(
+		'list' => __( 'List', 'yali' ),
+		'grid' => __( 'Grid', 'yali' )
+	)
+));
+
 $campaigns_list_group = $campaigns_list->add_field( array(
 	'id' => 'campaigns_list_repeat_group',
 	'type' => 'group',
@@ -48,3 +60,7 @@ $campaigns_list->add_group_field($campaigns_list_group, array(
 	'default' => 'center',
 	'options' => $campaigns_select_menu
 ));
+
+
+
+
