@@ -188,10 +188,7 @@ class Content_Block_Shortcode {
   // CAMPAIGNS LIST CONTENT BLOCK
   public function render_campaigns_list( $atts ) {
     $id = $atts['id'];
-    $context = $this->fetch_base_config( $id, get_post($id) );    
-
-    // Layout Style
-    $campaigns_list_layout = get_post_meta($id, 'campaigns_layout', true);
+    $context = $this->fetch_base_config( $id, get_post($id) );
 
     // Campaigns to be included
     $campaign_pages = array();
@@ -219,10 +216,7 @@ class Content_Block_Shortcode {
 
     $context['campaign_pages'] = $campaign_pages;
 
-    // Set twig tmpl to use
-    $twig_tmpl = ($campaigns_list_layout === 'list' ? 'content_blocks/campaigns-list.twig' : 'content_blocks/honeycomb.twig');
-
-    return Twig::render( $twig_tmpl, $context );
+    return Twig::render( 'content_blocks/campaigns-list.twig', $context );
   }
 
 

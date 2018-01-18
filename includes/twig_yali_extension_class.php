@@ -27,8 +27,7 @@ class Twig_YALI_Extension extends Twig_Extension implements Twig_Extension_Globa
 			new Twig_Function( 'is_single', 									array($this, 'is_single') ),
 			new Twig_Function( 'is_page', 										array($this, 'is_page') ),
 		  	new Twig_Function( 'is_archive', 									array($this, 'is_archive') ), 
-		  	new Twig_Function( 'get_pagename', 									array($this, 'get_pagename') ),
-		  	new Twig_Function( 'post_title', 									array($this, 'post_title') ),		  	
+		  	new Twig_Function( 'get_pagename', 									array($this, 'get_pagename') ),	  	
 
 			new Twig_Function( 'corona_entry_footer_output', 	array($this, 'corona_entry_footer_output') ),  
 			new Twig_Function( 'corona_get_header_image_tag', array($this, 'corona_get_header_image_tag') ),
@@ -62,8 +61,7 @@ class Twig_YALI_Extension extends Twig_Extension implements Twig_Extension_Globa
 	public function is_page() { return is_page(); }
 	public function is_archive() { return is_archive(); }
 	public function the_post_thumbnail() { return the_post_thumbnail(); }
-	public function get_pagename() { return get_query_var('pagename'); }
-	public function post_title() { return single_post_title(); }
+	public function get_pagename() { return get_query_var('pagename'); }	
 
 	// add corona functions
 	public function corona_entry_footer_output() {  return corona_entry_footer_output(); }

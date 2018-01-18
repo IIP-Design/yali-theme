@@ -20,25 +20,12 @@ foreach ($campaign_pages->posts as $campaign) {
 	$campaigns_select_menu[$campaign->ID] = $campaign->post_title;
 }
 
-
 // Campaigns List Metabox
 $campaigns_list = new_cmb2_box( array(
 	'id'           => $prefix . 'cb_campaigns_list',
 	'title'        => __( 'Campaign List', 'yali' ),
 	'object_types' => array('content_block'),
 	'priority'     => 'low'
-));
-
-$campaigns_list->add_field( array(
-	'name' => 'Select Campaign Layout Style',
-	'id' => 'campaigns_layout',
-	'desc' => __( 'Choose either list or grid layout, layout style defaults to list' ),
-	'type' => 'select',
-	'default' => 'list',
-	'options' => array(
-		'list' => __( 'List', 'yali' ),
-		'grid' => __( 'Grid', 'yali' )
-	)
 ));
 
 $campaigns_list_group = $campaigns_list->add_field( array(
