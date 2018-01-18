@@ -301,11 +301,12 @@ var filterHash = {
   'language': 'langs',
   'series': 'series',
   'sort': 'sort'
+};
 
-  /**
-   * Default filter config
-   */
-};var defaultFilterConfig = {
+/**
+ * Default filter config
+ */
+var defaultFilterConfig = {
   sites: cdp.searchIndexes,
   from: 0,
   size: 12,
@@ -626,7 +627,7 @@ function filterSetSelected(filter, selected) {
  * a data-cdp-article-feed exists
  */
 function initializeArticleFeed() {
-  var feeds = document.querySelectorAll("[data-content-type='cdp-article-feed']");
+  var feeds = document.querySelectorAll('[data-content-type=\'cdp-article-feed\']');
   forEach(feeds, function (index, feed) {
     console.log('render ', feed.id);
     renderArticleFeed(feed);
@@ -679,6 +680,7 @@ function renderArticleFeed(feed) {
   shouldDisplayRelatedLinks(config);
 
   if (context || config.series) {
+
     // Build query outside of cdp module, since using some YALI specific params, i.e.series
     addFeed(query.builder(configObj, context));
   } else {
@@ -696,7 +698,6 @@ function renderArticleFeed(feed) {
  */
 function addRelatedLinksToArticle(e, config) {
   var list = document.querySelector(e.detail);
-
   if (list) {
     var items = list.getElementsByClassName('article-item');
 
@@ -1506,7 +1507,14 @@ function getCategories(filter, cb) {
     }).build()
   }).then(function (response) {
     var data = formatResponse(response, 'distinct_categories', ['Uncategorized']);
-    cb(filter, data);
+    // work around has key value is not matching up
+    var d = data.map(function (item) {
+      return {
+        key: item.key,
+        display: item.key.replace('&amp;', '&')
+      };
+    });
+    cb(filter, d);
   });
 }
 
@@ -1569,6 +1577,15 @@ var generateBodyQry = exports.generateBodyQry = function generateBodyQry(params,
   // Becomes a MUST if there is only 1 site
   body.filterMinimumShouldMatch(1);
 
+  // @todo FIX: unbranded courses are appearing in general queries
+  body.orQuery('bool', function (b) {
+    return b.orFilter('term', 'branded', 'yes').orFilter('bool', function (b) {
+      return b.notFilter('exists', 'field', 'branded');
+    }).filterMinimumShouldMatch(1);
+  });
+  //body.orQuery('term', 'branded', 'yes').orFilter('bool', b => b.notFilter('exists', 'field', 'branded'));
+
+
   if (params.series) {
     body.filter('term', 'taxonomies.series.slug.keyword', params.series);
   }
@@ -1612,6 +1629,7 @@ var generateBodyQry = exports.generateBodyQry = function generateBodyQry(params,
   }
 
   var qryStr = reduceQry(qry);
+
   if (qryStr.trim() !== '') {
     body.query('query_string', 'query', qryStr);
   }
@@ -1624,7 +1642,6 @@ var generateBodyQry = exports.generateBodyQry = function generateBodyQry(params,
   } else {
     body.sort('title.keyword', 'asc');
   }
-
   return body.build();
 };
 
