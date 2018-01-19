@@ -805,11 +805,10 @@ function lookUpItem(item, config) {
  * @param {string} relatedDisplay Display 'link' as link or 'button'
  */
 function appendItem(item, related, relatedDisplay, useDropdown) {
+
   if (item) {
     var contentDiv = item.getElementsByClassName('article-content');
     if (contentDiv && contentDiv.length) {
-
-      console.log('contentDiv: ', contentDiv);
 
       var a = document.createElement('a');
       // make link relative if on the same domain
@@ -819,15 +818,15 @@ function appendItem(item, related, relatedDisplay, useDropdown) {
       a.innerText = related.label;
 
       if (!useDropdown) {
-        appendButtonOrLink(contentDiv, a, relatedDisplay);
+        appendButtonOrLink(item, contentDiv, a, relatedDisplay);
       } else {
-        appendDropdown(contentDiv, a, related);
+        appendDropdown(item, contentDiv, a, related);
       }
     }
   }
 }
 
-function appendButtonOrLink(contentDiv, a, relatedDisplay) {
+function appendButtonOrLink(item, contentDiv, a, relatedDisplay) {
   var div = document.createElement('div');
   div.setAttribute('class', 'cb_button');
 
@@ -841,12 +840,15 @@ function appendButtonOrLink(contentDiv, a, relatedDisplay) {
   contentDiv[0].appendChild(div);
 }
 
-function appendDropdown(contentDiv, a, related) {
+function appendDropdown(item, contentDiv, a, related) {
   // Store links dropdown menu if it exists
   var linksDropdown = document.getElementsByClassName('post_list_links_dropdown')[0];
+  var itemDropdown = contentDiv[0].querySelector('.post_list_links_dropdown');
+  console.log(itemDropdown);
 
   // If links dropdown !exist, create wrapper div, select element & default option
-  if (!linksDropdown) {
+  //if( !linksDropdown ) { 
+  if (!itemDropdown) {
     var linksWrapper = document.createElement('div');
     linksWrapper.setAttribute('class', 'post_list_links_wrapper');
 
@@ -867,7 +869,10 @@ function appendDropdown(contentDiv, a, related) {
   var option = document.createElement('option');
   option.setAttribute('value', a);
   option.innerText = related.label;
-  linksDropdown.appendChild(option);
+  //linksDropdown.appendChild(option);
+
+  var itemSelectMenu = contentDiv[0].querySelector('.post_list_links_dropdown');
+  itemSelectMenu.appendChild(option);
 }
 
 // Helper method that creates forEach method to loop over NodeList
