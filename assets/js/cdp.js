@@ -555,13 +555,10 @@ function appendButtonOrLink( item, contentDiv, a, relatedDisplay ) {
 
 function appendDropdown( item, contentDiv, a, related ) {
   // Store links dropdown menu if it exists
-  let linksDropdown = document.getElementsByClassName('post_list_links_dropdown')[0];
-  let itemDropdown = contentDiv[0].querySelector('.post_list_links_dropdown');
-  console.log(itemDropdown);
+  let linksDropdown = contentDiv[0].querySelector('.post_list_links_dropdown');  
 
   // If links dropdown !exist, create wrapper div, select element & default option
-  //if( !linksDropdown ) { 
-  if( !itemDropdown ) {    
+  if( !linksDropdown ) {    
     let linksWrapper = document.createElement('div');
     linksWrapper.setAttribute('class', 'post_list_links_wrapper');
 
@@ -582,7 +579,6 @@ function appendDropdown( item, contentDiv, a, related ) {
   let option = document.createElement('option');
   option.setAttribute('value', a);
   option.innerText = related.label;
-  //linksDropdown.appendChild(option);
 
   let itemSelectMenu = contentDiv[0].querySelector('.post_list_links_dropdown');
   itemSelectMenu.appendChild(option);
