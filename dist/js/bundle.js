@@ -761,32 +761,39 @@ function lookUpItem(item, config) {
   if (contentType && contentType === 'cdp-article-feed') {
     if (item.dataset.id) {
 
-      ids.map(function (id, index) {
-        if (id === item.dataset.id) {
-          // ORIGINAL CODE
-          // let related = relatedPosts[ index ];
-          // if ( related ) {
-          //   appendItem( item, related, relatedDisplay );
-          // }
+      // Check if there is more than 2 posts (there is always an empty value in ids array)
+      // If so, append appropriate button to each post     
+      if (ids.length > 2) {
+        ids.map(function (id, index) {
+          if (id === item.dataset.id) {
+            var related = relatedPosts[index];
+            if (related) {
+              appendItem(item, related, relatedDisplay, false);
+            }
+          }
+        });
+      }
+      // If only 1 post, append button(s) or dropdown
+      else {
+          ids.map(function (id, index) {
+            if (id === item.dataset.id) {
+              var useDropdown = void 0;
+              relatedPosts.length > 2 ? useDropdown = true : useDropdown = false;
 
-          /********** SHAWN - 12/22/17  ************/
-          var useDropdown = void 0;
-          relatedPosts.length > 2 ? useDropdown = true : useDropdown = false;
+              relatedPosts.forEach(function (post) {
+                appendItem(item, post, relatedDisplay, useDropdown);
+              });
 
-          relatedPosts.forEach(function (post) {
-            appendItem(item, post, relatedDisplay, useDropdown);
-          });
-
-          // Init dropdown menu
-          // Redirect on link selection
-          $('.post_list_links_dropdown').dropdown({
-            onChange: function onChange(value, text, selectedItem) {
-              window.location.href = value;
+              // Init dropdown menu
+              // Redirect on link selection
+              $('.post_list_links_dropdown').dropdown({
+                onChange: function onChange(value, text, selectedItem) {
+                  window.location.href = value;
+                }
+              });
             }
           });
-          /**********************/
         }
-      });
     }
   }
 }
@@ -802,9 +809,11 @@ function appendItem(item, related, relatedDisplay, useDropdown) {
     var contentDiv = item.getElementsByClassName('article-content');
     if (contentDiv && contentDiv.length) {
 
+      console.log('contentDiv: ', contentDiv);
+
       var a = document.createElement('a');
       // make link relative if on the same domain
-      var host = '' + window.location.protocol; //${window.location.host}`;
+      var host = '' + window.location.protocol;
       var link = related.link.replace(host, '');
       a.setAttribute('href', link);
       a.innerText = related.label;
