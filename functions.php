@@ -45,7 +45,7 @@ class YaliSite {
 		add_filter( 'frm_validate_entry', array( $this, 'check_nonce'), 20, 2);
 		add_action( 'wp_enqueue_scripts', array( $this, 'localize_nonce') );
 		add_filter( 'wpseo_metabox_prio', array( $this, 'yoasttobottom' ) );
-		add_action( 'wp_head', array( $this, 'insert_google_analytics') );
+		//add_action( 'wp_head', array( $this, 'insert_google_analytics') );
 		add_action( 'wp_head', array( $this, 'insert_gtm_head') );
 		add_action( 'tha_body_top', array( $this, 'insert_gtm_body') );
 		add_action( 'wp_head', array( $this, 'insert_dap') );
