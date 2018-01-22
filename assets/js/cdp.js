@@ -567,7 +567,7 @@ function appendDropdown( item, contentDiv, a, related ) {
 
     let defaultOption = document.createElement('option');
     defaultOption.setAttribute('value', '');
-    defaultOption.innerText = 'Select Course Language';
+    defaultOption.innerText = 'Select';
 
     // Append elements to 'article-content'
     linksDropdown.appendChild(defaultOption);
