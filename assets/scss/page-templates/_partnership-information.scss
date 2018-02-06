@@ -1,4 +1,4 @@
-.mwf-partners {
+.us {
   ul {
     @media screen and (max-width: 933px) {
       font-size: em(18, $mobile);
@@ -6,12 +6,15 @@
     @media screen and (max-width: 320px) {
       font-size: em(14, $mobile);
     }
+  }
+}
 
+.mwf-partners {
+  ul {
     &.list_column {
       margin: 0;
       padding: 0;
       list-style: none;
-      font-weight: 300;
       font-size: em(18);
       @media screen and (min-width: 934px) {
         column-count: 3;
