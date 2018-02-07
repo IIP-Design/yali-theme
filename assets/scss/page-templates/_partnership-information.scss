@@ -1,55 +1,43 @@
 .us {
-	
-	
-	ul {
-		font-size: em(22); 
-		font-weight: 300;
-		@media screen and (max-width: 933px) {
-			font-size: em(18, $mobile);
-		}
-		@media screen and (max-width: 320px) {
-			font-size: em(14, $mobile);
-		}
+  ul {
+    @media screen and (max-width: 933px) {
+      font-size: em(18, $mobile);
+    }
+    @media screen and (max-width: 320px) {
+      font-size: em(14, $mobile);
+    }
+  }
+}
 
+.mwf-partners {
+  ul {
+    &.list_column {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      font-size: em(18);
+      @media screen and (min-width: 934px) {
+        column-count: 3;
+      }
 
-		&.list_column {		
-			vertical-align: top;
-			margin: 0;
-			padding: 0 15px 0 0;
-			list-style: none;			
-			font-weight: 300;
-			font-size: em(18); 			
-			@media screen and (min-width: 934px) {
-				display: inline-block;
-				max-width: 33%;
-			}
-			@media screen and (min-width: 934px) and (max-width: 1003px) {
-				max-width: 30%;
-			}			
+      &--bold {
+        font-weight: 600;
+      }
 
-			&--bold {
-				font-weight: 600;
-			}
+      a {
+        color: $blue-medium;
+      }
 
-			a {
-				color: $blue-medium;
-			}
+      .lightweight {
+        font-weight: 300;
+      }
+    }
+  }
 
-			.lightweight {
-				font-weight: 300;
-			}
-		}
-	}
-
-
-	.partners {
-
-		> div {
-			margin-bottom: 50px;
-			@media screen and (max-width: 767px) {
-				margin-bottom: 25px;
-			}
-		}
-	}
-
+  > div {
+    margin-bottom: 50px;
+    @media screen and (max-width: 767px) {
+      margin-bottom: 25px;
+    }
+  }
 }
