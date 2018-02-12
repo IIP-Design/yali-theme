@@ -166,6 +166,11 @@ class Content_Block_Shortcode {
     $context['headline'] = get_post_meta( $id, 'yali_button_links_headline', true );
     $context['links'] = get_post_meta( $id, 'yali_button_links_repeat_group', true );
 
+    foreach ($context['links'] as &$button) {
+      $button['yali_button_link']['url'] = $this->filter_link($button['yali_button_link']['url']);      
+    }
+    unset($button);
+
     return Twig::render( 'content_blocks/button-links.twig', $context );
   }
 
