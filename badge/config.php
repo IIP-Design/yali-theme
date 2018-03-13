@@ -56,7 +56,7 @@ return array(
     'prefix'           => 'yali_pledge_',
     'src_path'         => 'images/yali_pledge_bkgrd.png',
     'save_path'        => '../../../uploads/generated-images/',
-    'font'             => 'fonts/Futuri Condensed Extra Bold.ttf',
+    'font'             => 'fonts/Futura-Condensed-Extra-Bold.ttf',
     'font_size'        => 50,
     'color'            => '#314071',
     'align'            => 'left',
@@ -283,6 +283,35 @@ return array(
         'field_id'     => 'country3',            // Country (formidable field key)  -- MUST match
         'x'            => 925,
         'y'            => 650
+      )
+    )
+  ),
+  'get_card' =>  array (                         // Form that is sending certificate -- MUST match form key
+    'prefix'           => 'yali_membership_card_',
+    'src_path'         => 'images/yali_membership_card_bkgrd.png',
+    'save_path'        => '../../../uploads/generated-images/',
+    'font'             => 'fonts/futura-condensed-medium.ttf',
+    'font_size'        => 316,
+    'color'            => '#20a8e0',
+    'align'            => 'left',
+    'line_max_chars'   => 50,
+    'line_height'      => 320,
+    'text'             => array (
+      array (
+        'content'      => 'FIELD',
+        'field_id'     => 'full_name_card',          // Full name (formidable field key) -- MUST match
+        'x'            => 234,
+        'y'            => 2490,
+        'uppercase'    => 1
+      ),
+      array (
+        'content'      => 'FIELD',
+        'field_id'     => 'country_card',            // Country (formidable field key)  -- MUST match
+        'x'            => 234,
+        'y'            => 2799,
+        'font_size'    => 233,
+        'uppercase'    => 1,
+        'color'        => '#386b9c'
       )
     )
   )

@@ -205,7 +205,7 @@ class YaliSite {
 	/* CERTIFICATES */
 	// Add attachment using the Formidable 'frm_notification_attachment' hook
 	function yali_add_attachment( $attachments, $form, $args ) {
-		if ( $form->form_key == 'get_pledge' || $form->form_key == 'get_earthday' || $form->form_key == 'get_yalilearns2016' || $form->form_key == 'get_certificate2' || $form->form_key == 'get_certificate_fr' || $form->form_key == 'get_certificate_pt' || $form->form_key == 'get_4all') {
+		if ( $form->form_key == 'get_certificate2' || $form->form_key == 'get_certificate_fr' || $form->form_key == 'get_certificate_pt' || $form->form_key == 'get_card' ) {
 
 			$params = array (
 				'key'				=>  $form->form_key,				// form identifier (i.e. project id used to find config)
