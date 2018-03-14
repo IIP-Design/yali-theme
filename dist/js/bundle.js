@@ -1,4 +1,4 @@
-(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+(function(){function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s}return e})()({1:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -3567,6 +3567,10 @@ var _cloneDeep2 = require('lodash/cloneDeep');
 
 var _cloneDeep3 = _interopRequireDefault(_cloneDeep2);
 
+var _isString2 = require('lodash/isString');
+
+var _isString3 = _interopRequireDefault(_isString2);
+
 var _each2 = require('lodash/each');
 
 var _each3 = _interopRequireDefault(_each2);
@@ -3656,6 +3660,53 @@ function bodybuilder() {
     /**
      * Set a sort direction on a given field.
      *
+     * ```
+     * bodybuilder()
+     *   .sort('timestamp', 'desc')
+     *   .build()
+     * ```
+     * You can sort multiple fields at once
+     *
+     * ```
+     * bodybuilder()
+     *  .sort([
+     *    {"categories": "desc"},
+     *    {"content": "asc"}
+     *  ])
+     *   .build()
+     * ```
+     * Geo Distance sorting is also supported & it's the only sort type that allows for duplicates
+     *
+     * ```
+     * bodyBuilder().sort([
+     *     {
+     *       _geo_distance: {
+     *         'a.pin.location': [-70, 40],
+     *         order: 'asc',
+     *         unit: 'km',
+     *         mode: 'min',
+     *         distance_type: 'sloppy_arc'
+     *       }
+     *     },
+     *     {
+     *       _geo_distance: {
+     *         'b.pin.location': [-140, 80],
+     *         order: 'asc',
+     *         unit: 'km',
+     *         mode: 'min',
+     *         distance_type: 'sloppy_arc'
+     *       }
+     *     }
+     *   ])
+     *   .sort([
+     *     { timestamp: 'desc' },
+     *     { content: 'desc' },
+     *     { content: 'asc' },
+     *    {"price" : {"order" : "asc", "mode" : "avg"}}
+     *   ])
+     * .build()
+     * ```
+     *
      * @param  {String} field             Field name.
      * @param  {String} [direction='asc'] A valid direction: 'asc' or 'desc'.
      * @returns {bodybuilder} Builder.
@@ -3673,6 +3724,9 @@ function bodybuilder() {
 
         if ((0, _isArray3.default)(body.sort)) {
           (0, _each3.default)(field, function (sorts) {
+            if ((0, _isString3.default)(sorts)) {
+              return (0, _utils.sortMerge)(body.sort, sorts, direction);
+            }
             (0, _each3.default)(sorts, function (value, key) {
               (0, _utils.sortMerge)(body.sort, key, value);
             });
@@ -3790,7 +3844,7 @@ function _build(body, queries, filters, aggregations) {
 }
 
 module.exports = bodybuilder;
-},{"./aggregation-builder":42,"./filter-builder":43,"./query-builder":45,"./utils":46,"lodash/cloneDeep":202,"lodash/each":204,"lodash/isArray":216,"lodash/isEmpty":220,"lodash/isPlainObject":227,"lodash/merge":236,"lodash/set":238}],45:[function(require,module,exports){
+},{"./aggregation-builder":42,"./filter-builder":43,"./query-builder":45,"./utils":46,"lodash/cloneDeep":202,"lodash/each":204,"lodash/isArray":216,"lodash/isEmpty":220,"lodash/isPlainObject":227,"lodash/isString":229,"lodash/merge":236,"lodash/set":238}],45:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
