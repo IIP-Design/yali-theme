@@ -291,25 +291,25 @@ return array(
     'src_path'         => 'images/yali_membership_card_bkgrd.png',
     'save_path'        => '../../../uploads/generated-images/',
     'font'             => 'fonts/futura-condensed-medium.ttf',
-    'font_size'        => 316,
+    'font_size'        => 253,
     'color'            => '#20a8e0',
     'align'            => 'left',
     'line_max_chars'   => 50,
-    'line_height'      => 320,
+    'line_height'      => 260,
     'text'             => array (
       array (
         'content'      => 'FIELD',
         'field_id'     => 'full_name_card',          // Full name (formidable field key) -- MUST match
-        'x'            => 234,
-        'y'            => 2490,
+        'x'            => 179,
+        'y'            => 1870,
         'uppercase'    => 1
       ),
       array (
         'content'      => 'FIELD',
         'field_id'     => 'country_card',            // Country (formidable field key)  -- MUST match
-        'x'            => 234,
-        'y'            => 2799,
-        'font_size'    => 233,
+        'x'            => 179,
+        'y'            => 2100,
+        'font_size'    => 200,
         'uppercase'    => 1,
         'color'        => '#386b9c'
       )
