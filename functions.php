@@ -131,8 +131,8 @@ class YaliSite {
 		$article_feed_css = $module_url . "cdp-module-article-feed/cdp-module-article-feed.min.css";
 
 		if ( !is_page_template( 'page-templates/course-template.php' ) ) {
-			wp_enqueue_script( 'artice-feed-js', $article_feed_js, null, '1.0.0', true );
-			wp_enqueue_style( 'artice-feed-css', $article_feed_css, null, '1.0.0' );
+			wp_enqueue_script( 'article-feed-js', $article_feed_js, null, '1.0.0', true );
+			wp_enqueue_style( 'article-feed-css', $article_feed_css, null, '1.0.0' );
 		}
 
 		wp_register_script( 'yali-js', get_stylesheet_directory_uri() . '/dist/js/bundle.min.js', array('jquery'), CHILD_THEME_VERSION, true );
