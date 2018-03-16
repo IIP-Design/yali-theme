@@ -37,7 +37,7 @@ class YaliSite {
 		add_action( 'init', array(  $this, 'excerpt_more_override') );
 		add_action( 'admin_menu', array( $this, 'admin_remove_menu_pages' ), 999 );
 		add_action( 'admin_init', array( $this, 'admin_remove_corona_shortcode_button') );
-		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
+		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ), 5 );
 		add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
 		add_action( 'pre_get_posts', array( $this, 'search_filter') );
 		add_filter( 'frm_notification_attachment', array( $this, 'yali_add_attachment'), 10, 3 );
@@ -130,10 +130,12 @@ class YaliSite {
 		$article_feed_js = $module_url . "cdp-module-article-feed/cdp-module-article-feed.min.js";
 		$article_feed_css = $module_url . "cdp-module-article-feed/cdp-module-article-feed.min.css";
 
-		wp_enqueue_script( 'artice-feed-js', $article_feed_js, null, '1.0.0', true );
-		wp_enqueue_style( 'artice-feed-css', $article_feed_css, null, '1.0.0' );
+		if ( !is_page_template( 'page-templates/course-template.php' ) ) {
+			wp_enqueue_script( 'artice-feed-js', $article_feed_js, null, '1.0.0', true );
+			wp_enqueue_style( 'artice-feed-css', $article_feed_css, null, '1.0.0' );
+		}
 
-		wp_register_script( 'yali-js', get_stylesheet_directory_uri() . '/dist/js/bundle.min.js', array('jquery', 'artice-feed-js'), CHILD_THEME_VERSION, true );
+		wp_register_script( 'yali-js', get_stylesheet_directory_uri() . '/dist/js/bundle.min.js', array('jquery'), CHILD_THEME_VERSION, true );
 		wp_localize_script( 'yali-js', 'cdp', array(
 			'publicAPI'  => $public_api,
 			'searchIndexes'  => $search_indexes
