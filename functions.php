@@ -352,7 +352,22 @@ class YaliSite {
 	function insert_addthis_snippet() {
 		?>
 		<!-- Go to www.addthis.com/dashboard to customize your tools -->
-		<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5a18345cba3f0930"></script>
+		<script type="text/javascript">
+      (function() {
+        if (document.attachEvent ? document.readyState === 'complete' : document.readyState !== 'loading') {
+          yaliAddThis();
+        } else {
+          document.addEventListener('DOMContentLoaded', yaliAddThis);
+        }
+
+        function yaliAddThis() {
+          var tag = document.createElement('script');
+              tag.type = 'text/javascript';
+              tag.src = 'https://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5a18345cba3f0930';
+          document.getElementsByTagName('body')[0].appendChild(tag);
+        }
+      }());
+    </script>
 		<?php
 	}
 
