@@ -1,5 +1,17 @@
 //import * as polyfills from './_js_polyfills.js';
-import '../../node_modules/semantic-ui-sass/semantic-ui';
+// import '../../node_modules/semantic-ui-sass/semantic-ui';
+import '../../node_modules/semantic-ui-sass/js/accordion';
+import '../../node_modules/semantic-ui-sass/js/api';
+import '../../node_modules/semantic-ui-sass/js/checkbox';
+import '../../node_modules/semantic-ui-sass/js/colorize';
+import '../../node_modules/semantic-ui-sass/js/dropdown';
+import '../../node_modules/semantic-ui-sass/js/form';
+import '../../node_modules/semantic-ui-sass/js/search';
+import '../../node_modules/semantic-ui-sass/js/site';
+import '../../node_modules/semantic-ui-sass/js/state';
+import '../../node_modules/semantic-ui-sass/js/transition';
+import '../../node_modules/semantic-ui-sass/js/visibility';
+import '../../node_modules/semantic-ui-sass/js/visit';
 import * as nav from './nav.js';
 import * as footer from './footer.js';
 import * as join_form from './join_form.js';
