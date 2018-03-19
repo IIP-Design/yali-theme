@@ -17,15 +17,39 @@ Text Domain: yali
 @import 'assets/scss/variables';
 @import 'assets/scss/mixins';
 
-// Import semantic ui first so that rules can be overrided
-@import 'node_modules/semantic-ui-sass/semantic-ui';
+/**
+ * Import Semantic UI components as needed to avoid
+ * large stylesheet w/ unused styles. See more
+ * components at node_modules/semantic-ui-sass/scss.
+ * For more granular control, copy component scss file(s)
+ * to assets/scss and comment out unneeded styles.
+ */
+@import 'node_modules/semantic-ui-sass/scss/globals/all';
 
+@import 'node_modules/semantic-ui-sass/scss/elements/container';
+@import 'node_modules/semantic-ui-sass/scss/elements/image';
+@import 'node_modules/semantic-ui-sass/scss/elements/input';
+@import 'node_modules/semantic-ui-sass/scss/elements/label';
+@import 'node_modules/semantic-ui-sass/scss/elements/segment';
+
+@import 'node_modules/semantic-ui-sass/scss/modules/accordion';
+@import 'node_modules/semantic-ui-sass/scss/modules/checkbox';
+@import 'node_modules/semantic-ui-sass/scss/modules/dropdown';
+@import 'node_modules/semantic-ui-sass/scss/modules/search';
+
+// Semantic UI Overrides
 @import 'assets/scss/layout/container';
 @import 'assets/scss/layout/content-block';
 @import 'assets/scss/layout/alignment';
 @import 'assets/scss/typography';
 @import 'assets/scss/base';
 @import 'assets/scss/accessibility';
+@import 'assets/scss/semantic-ui/collections/form';
+@import 'assets/scss/semantic-ui/collections/grid';
+@import 'assets/scss/semantic-ui/collections/menu';
+@import 'assets/scss/semantic-ui/elements/button';
+@import 'assets/scss/semantic-ui/elements/icon';
+@import 'assets/scss/semantic-ui/modules/transition';
 
 
 // PARTIALS
