@@ -1,5 +1,9 @@
-{% if show_title == 'yes' %}  	
-  {% if title_size == 'h3' %}	  
+{% if show_title == 'yes' %}
+  {% if title_size == 'h5' %}
+    <h5 class="{{ title_underline }}" style="text-align: {{ title_alignment }}; color: {{ title_color }}">{{ title }}</h5>
+  {% elseif title_size == 'h4' %}
+    <h4 class="{{ title_underline }}" style="text-align: {{ title_alignment }}; color: {{ title_color }}">{{ title }}</h4> 	
+  {% elseif title_size == 'h3' %}	  
     <h3 class="{{ title_underline }}" style="text-align: {{ title_alignment }}; color: {{ title_color }}">{{ title }}</h3>
   {% else %}
     <h2 class="{{ title_underline }}" style="text-align: {{ title_alignment }}; color: {{ title_color }}">{{ title }}</h2>

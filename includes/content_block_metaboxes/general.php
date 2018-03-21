@@ -26,7 +26,9 @@ $cb_box->add_field(  array(
   'desc'    => 'Block title size',
   'options' => array(
 		'h2'    => __( 'Heading 2', 'yali' ),
-		'h3'    => __( 'Heading 3', 'yali' )
+		'h3'    => __( 'Heading 3', 'yali' ),
+		'h4'    => __( 'Heading 4', 'yali' ),
+		'h5'    => __( 'Heading 5', 'yali' )
 	),
 	'default' => 'h2'
 ));
