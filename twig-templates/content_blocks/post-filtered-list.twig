@@ -36,6 +36,15 @@
         {% endif %}
       {% endfor %}
       </div>
+
+      {% if date_display == 'hide' %}
+      <style type="text/css">
+        #{{ selector }} .article-meta {
+          display: none;
+        }
+      </style>
+      {% endif %}
+
       <!-- attach article feed module -->
       <div id="{{ selector }}" data-content-type='cdp-filtered-list' data-types={{ types|json_encode() }} style="margin-top: 2em; text-align: {{ text_alignment }}">LOADING Component...</div>
     

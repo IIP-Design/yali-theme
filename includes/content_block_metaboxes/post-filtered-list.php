@@ -37,3 +37,15 @@ $cb_box_filter->add_field( array(
     'video'     => 'Video',
 	),
 ) );
+
+$cb_box_filter->add_field(  array(
+  'name'             => 'Post date display',
+  'desc'             =>  '',
+  'id'               => $prefix . 'filtered_list_date_display',
+  'type'             => 'radio_inline',
+  'default'          => 'show',
+  'options'          => array(
+    'show'         	 => 'Show post dates',
+    'hide'         	 => 'Hide post dates'
+  )
+));

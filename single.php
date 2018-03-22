@@ -44,7 +44,7 @@ $context = array(
   'post_data'       => $post_data,
   'header_url'      => $header_url,
   'social_block'    => $social_block,
-  'taxonomy_terms'  => $taxonomy_terms
+	'taxonomy_terms'  => $taxonomy_terms
 );
 
 // Render template passing in data array

@@ -142,6 +142,7 @@ class Content_Block_Shortcode {
     $context['cdp_indexes'] = cdp_get_option('cdp_indexes');
     $context['filters']     = $this->fetch_filters( $atts );  // get_post_meta( $id, 'yali_list_filters', true);
     $context['types']       = $this->convert_to_str( get_post_meta( $id, 'yali_list_filters_types', true) );
+    $context['date_display'] = get_post_meta( $id, 'yali_filtered_list_date_display', true);
     $context                = $this->fetch_btn_config( $context, $id, get_post_meta( $id ) );
  
     return Twig::render( 'content_blocks/post-filtered-list.twig', $context );
