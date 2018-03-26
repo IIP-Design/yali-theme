@@ -14,11 +14,31 @@ wp_reset_postdata();
 
 // Get all post taxonomy & remove default 'Uncategorized' category
 $taxonomy_terms = wp_get_post_terms($post->ID, array('category', 'post_tag', 'series'));
+$series_slug;
+$category_slug;
+$tag_slug;
+$select_by_taxonomy;
+
 foreach($taxonomy_terms as $indx => $obj) {
 	if( $obj->name == 'Uncategorized' ){
 		unset($taxonomy_terms[$indx]);
 	}
+
+	if ( $obj->taxonomy === 'series' && !$series_slug ) {
+		$series_slug = $obj->slug;
+		$select_by_taxonomy = $obj->taxonomy;
+		break;
+	} elseif ( $obj->taxonomy === 'category' && $obj->name !== 'Uncategorized' && !$category_slug ) {
+		$category_slug = $obj->slug;
+		$select_by_taxonomy = $obj->taxonomy;
+	} elseif ( $obj->taxonomy === 'post_tag' && !$tag_slug && !$select_by_taxonomy ) {
+		$tag_slug = $obj->slug;
+		$select_by_taxonomy = 'tag';
+	}
 }
+
+// Get search indices
+$search_indexes = YaliSite::cdp_get_option('cdp_indexes');
 
 // TEMP
 $check_host = $_SERVER['SERVER_NAME'];
@@ -44,7 +64,13 @@ $context = array(
   'post_data'       => $post_data,
   'header_url'      => $header_url,
   'social_block'    => $social_block,
-	'taxonomy_terms'  => $taxonomy_terms
+	'taxonomy_terms'  => $taxonomy_terms,
+	'selector'				=> 'feed' . $post->ID,
+	'select_by_taxonomy' => $select_by_taxonomy,
+	'series_slug'			=> $series_slug,
+	'category_slug'		=> $category_slug,
+	'tag_slug'				=> $tag_slug,
+	'search_indexes'	=> $search_indexes
 );
 
 // Render template passing in data array

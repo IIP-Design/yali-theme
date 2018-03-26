@@ -150,7 +150,7 @@
           selectByPostsTags.hide();
           break;
 
-        case 'tags':
+        case 'tag':
           selectByPostsCategory.hide();
           selectByPostsSeries.hide();
           selectByPostsTags.show();

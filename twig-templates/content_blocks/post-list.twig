@@ -3,10 +3,13 @@
 	<div class='ui container'>
     <div class='inner-container'>
       <!-- content block title -->
-    	{% include 'partials/content_block_title.twig' %}
-      
-       <!-- content block exceprt -->
-      <p class="cb_excerpt" style="text-align: {{ excerpt_alignment }}; color: {{ excerpt_color }}">{{ excerpt }} </p>
+      {% if related_content_display == 'yes' %}
+      <h3 class="cb_h2_underline">{{ title }}</h3>
+      {% else %}
+        {% include 'partials/content_block_title.twig' %}
+      <!-- content block excerpt -->
+      <p class="cb_excerpt" style="text-align: {{ excerpt_alignment }}; color: {{ excerpt_color }}">{{ excerpt }}</p>
+      {% endif %}
 
       <!-- attach article feed module -->
       <style type="text/css">
@@ -20,6 +23,12 @@
         #{{ selector }} .article-title a:hover {
           color: #174f9f;
         }
+
+        {% if related_content_display == 'yes' %}
+        #{{ selector }} .article-content p {
+          display: none;
+        }
+        {% endif %}
       </style>
       <div id='{{ selector }}' style="margin-top: 2em; text-align: {{ text_alignment }}"
         data-content-type='cdp-article-feed' data-id=''>LOADING Component...</div>

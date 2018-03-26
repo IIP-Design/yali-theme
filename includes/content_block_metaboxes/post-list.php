@@ -20,7 +20,7 @@ $cb_box_cdp->add_field(  array(
   'show_option_none' => false,
   'options'          => array(
     'recent'         => __( 'Displaying most recent or most recent in a category, series, or tag', 'america' ),
-    'custom'         => __( 'Choosing specifc posts and adding optional related link', 'america' )
+    'custom'         => __( 'Choosing specific posts and adding optional related link', 'america' )
   ),
   'desc'             =>  __( '', 'america' )
 ));
@@ -36,7 +36,7 @@ $cb_box_cdp->add_field(  array(
     'none'           => __( 'None', 'america' ),
     'category'       => __( 'Category', 'america' ),
     'series'         => __( 'Series', 'america' ),
-    'tags'           => __( 'Tag', 'america' )
+    'tag'           => __( 'Tag', 'america' )
   ),
   'desc'             =>  __( 'Most recent post list in selected taxonomy', 'america' )
 ));

@@ -4,6 +4,10 @@
 
 {% set series_name = (post_data.post_series_names is not empty) ? post_data.post_series_names[0].name : '' %}
 
+{% set category_name = (post_data.post_category_names is not empty) ? post_data.post_category_names[0].name : '' %}
+
+{% set tag_name = (post_data.post_tag_names is not empty) ? post_data.post_tag_names[0].name : '' %}
+
 {% if header_url is not empty %}
   {% if ( hero_title_display == 'yes' ) or ( hero_title_display == 'no') %}
   <section class='hero hero--bg_img' style='background-image: url("{{ header_url }}"); background-size: cover;'>
@@ -44,16 +48,39 @@
 				{% endfor %}
 			</div>
 
+			{% if related_content_display == 'yes' %}
+				{% include 'content_blocks/post-list.twig' with
+					{
+						title: 'You May Also Like',
+						cdp_post_select_by: 'recent',
+						cdp_taxonomy_select_by: select_by_taxonomy,
+						cdp_indexes: search_indexes,
+						cdp_posts_related_link_display: 'display_as_link',
+						cdp_image: {"image-shape":"rectangle","image-height":"","image-border-width":"","image-border-style":"solid","image-border-color":""},
+						cdp_category: category_slug,
+						cdp_series: series_slug,
+						cdp_tag: tag_slug,
+						cdp_num_posts: 3,
+						cdp_ui_layout: 'default',
+						cdp_ui_direction: 'row'
+					}
+				%}
+			{% endif %}
+
 			<h4 class='archive_link'>
 				<a
 					class='cta_link'
 					{% if series_name is not empty %}
 					href='/{{ post_data.post_series_names[0].taxonomy }}/{{ post_data.post_series_names[0].slug }}'
+					{% elseif category_name is not empty and category_name != 'Uncategorized' %}
+					href='/{{ post_data.post_category_names[0].taxonomy }}/{{ post_data.post_category_names[0].slug }}'
+					{% elseif tag_name is not empty %}
+					href='/tag/{{ post_data.post_tag_names[0].slug }}'
 					{% else %}
 					href='/learning'
 					{% endif %}
 					>
-					More from "{{ (series_name is not empty ? series_name : 'YALI Network in Action') }}" <i class='angle right icon'></i>
+					More from &ldquo;{{ (series_name is not empty) ? series_name : (category_name is not empty and category_name != 'Uncategorized') ? category_name : (tag_name is not empty) ? tag_name : 'YALI Network in Action' }}&rdquo; <i class='angle right icon'></i>
 				</a>
 			</h4>
 		</section>
@@ -65,104 +92,6 @@
 		{% endif %}
 
 
-{% if related_content_display == 'yes' %}
-		{% include 'content_blocks/post-filtered-list.twig' with
-			{
-				title: 'Related Content',
-				show_more_block: 'true',
-				posts: [
-					{
-						link: 'http://yali.rebuild.local/wp/lorem-ipsum/',
-						headline: 'Post 1 Lorem ipsum set abet ipsum',
-						excerpt: 'Lorem ipsum set abet ipsum Lorem ipsum set abet ipsum',
-						tags: [
-							{ 'term_id': '4', name: 'tag 1', slug: 'tag-1' },
-							{ 'term_id': '5', name: 'tag 2', slug: 'lorem' },
-							{ 'term_id': '6', name: 'tag 3', slug: 'ipsum' },
-						],
-						featured_img_url: 'data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='
-					},
-					{
-						link: 'http://yali.rebuild.local/wp/lorem-ipsum/',
-						headline: 'Post 2 Lorem ipsum set abet ipsum',
-						excerpt: 'Lorem ipsum set abet ipsum Lorem ipsum set abet ipsum',
-						tags: [
-							{ 'term_id': '4', name: 'tag 1', slug: 'tag-1' },
-							{ 'term_id': '5', name: 'tag 2', slug: 'lorem' },
-							{ 'term_id': '6', name: 'tag 3', slug: 'ipsum' },
-						],
-						featured_img_url: 'data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='
-					},
-					{
-						link: 'http://yali.rebuild.local/wp/lorem-ipsum/',
-						headline: 'Post 3 Lorem ipsum set abet ipsum',
-						excerpt: 'Lorem ipsum set abet ipsum Lorem ipsum set abet ipsum',
-						tags: [
-							{ 'term_id': '4', name: 'tag 1', slug: 'tag-1' },
-							{ 'term_id': '5', name: 'tag 2', slug: 'lorem' },
-							{ 'term_id': '6', name: 'tag 3', slug: 'ipsum' },
-						],
-						featured_img_url: 'data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='
-					},
-					{
-						link: 'http://yali.rebuild.local/wp/lorem-ipsum/',
-						headline: 'Post 4 Lorem ipsum set abet ipsum',
-						excerpt: 'Lorem ipsum set abet ipsum Lorem ipsum set abet ipsum',
-						tags: [
-							{ 'term_id': '4', name: 'tag 1', slug: 'tag-1' },
-							{ 'term_id': '5', name: 'tag 2', slug: 'lorem' },
-							{ 'term_id': '6', name: 'tag 3', slug: 'ipsum' },
-						],
-						featured_img_url: 'data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='
-					},
-					{
-						link: 'http://yali.rebuild.local/wp/lorem-ipsum/',
-						headline: 'Post 5 Lorem ipsum set abet ipsum',
-						excerpt: 'Lorem ipsum set abet ipsum Lorem ipsum set abet ipsum',
-						tags: [
-							{ 'term_id': '4', name: 'tag 1', slug: 'tag-1' },
-							{ 'term_id': '5', name: 'tag 2', slug: 'lorem' },
-							{ 'term_id': '6', name: 'tag 3', slug: 'ipsum' },
-						],
-						featured_img_url: 'data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='
-					},
-					{
-						link: 'http://yali.rebuild.local/wp/lorem-ipsum/',
-						headline: 'Post 6 Lorem ipsum set abet ipsum',
-						excerpt: 'Lorem ipsum set abet ipsum Lorem ipsum set abet ipsum',
-						tags: [
-							{ 'term_id': '4', name: 'tag 1', slug: 'tag-1' },
-							{ 'term_id': '5', name: 'tag 2', slug: 'lorem' },
-							{ 'term_id': '6', name: 'tag 3', slug: 'ipsum' },
-						],
-						featured_img_url: 'data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='
-					},
-					{
-						link: 'http://yali.rebuild.local/wp/lorem-ipsum/',
-						headline: 'Post 7 Lorem ipsum set abet ipsum',
-						excerpt: 'Lorem ipsum set abet ipsum Lorem ipsum set abet ipsum',
-						tags: [
-							{ 'term_id': '4', name: 'tag 1', slug: 'tag-1' },
-							{ 'term_id': '5', name: 'tag 2', slug: 'lorem' },
-							{ 'term_id': '6', name: 'tag 3', slug: 'ipsum' },
-						],
-						featured_img_url: 'data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='
-					},
-					{
-						link: 'http://yali.rebuild.local/wp/lorem-ipsum/',
-						headline: 'Post 8 Lorem ipsum set abet ipsum',
-						excerpt: 'Lorem ipsum set abet ipsum Lorem ipsum set abet ipsum',
-						tags: [
-							{ 'term_id': '4', name: 'tag 1', slug: 'tag-1' },
-							{ 'term_id': '5', name: 'tag 2', slug: 'lorem' },
-							{ 'term_id': '6', name: 'tag 3', slug: 'ipsum' },
-						],
-						featured_img_url: 'data:image/gif;base64,R0lGODlhAQABAPAAAMzMzP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='
-					}
-				]
-			}
-		%}
-	{% endif %}
 	</div>
 </section>
 
