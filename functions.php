@@ -67,10 +67,9 @@ class YaliSite {
 		}
 
 		/*
-		* Add Content Block Select List to TinyMCE - must be after Yali_Autoloader
+		* Add Custom Shortcode Dropdown List to TinyMCE - must be after Yali_Autoloader
 		*/
-		require_once 'includes/tinymce_content_block/tinymce_content_block.php';
-		require_once 'includes/tinymce_custom_button/tinymce_custom_button.php';
+    require_once 'includes/tinymce_dropdown/tinymce_dropdown.php';
 
 		/*
 		* Add excerpt to pages

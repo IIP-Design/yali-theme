@@ -1,9 +1,9 @@
-#yali_add_content_block {
+#yali_shortcode_dropdown {
 	background-color: #fff;
 	border: 1px solid #ccc;
 	padding: 3px;
 }
 
-#yali_add_content_block .mce-txt {
+#yali_shortcode_dropdown .mce-txt {
 	font-size: 13px;
 }
