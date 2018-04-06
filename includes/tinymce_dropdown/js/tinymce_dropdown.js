@@ -159,13 +159,13 @@
           			name: 'autosend',
           			label: 'Autosend',
                 values: [
-          				{ text: 'Yes', value: '1' },
-          				{ text: 'No', value: '0' }
+          				{ text: 'Yes', value: 'true' },
+          				{ text: 'No', value: 'false' }
                 ]
           		}
             ],
             onsubmit: function( e ) {
-              editor.insertContent( '[screendoor embed="' + e.data.embed + '" project="' + e.data.project + '" autosend="'+ e.data.autosend + '"]' );
+              editor.insertContent( '[screendoor embed="' + e.data.embed + '" project="' + e.data.project + '" autosend='+ e.data.autosend + ']' );
             }
           })
         }
