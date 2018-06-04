@@ -74,20 +74,30 @@ function addOnFeedReadyHandler ( id ) {
  */
 function addLinkToCoursePage ( article ) {
   if ( article ) {
-    let link = article.querySelector( '.article-title_link' );
+    const { protocol, host } = window.location;
+    const url = `${protocol}//${host}/course-${article.dataset.id}`;
+
+    // add link to course title
+    const link = article.querySelector( '.article-title_link' );
     if ( !link ) {
-      let el = article.querySelector( '.article-title' );
-      let text = el.textContent;
+      const el = article.querySelector( '.article-title' );
+      const text = el.textContent;
       el.textContent = '';
-      let a = document.createElement( 'a' );
-      let url = window.location.protocol + '//' + window.location.host + '/course-' + article.dataset.id;
+      const a = document.createElement( 'a' );
       a.className = 'article-title_link'; //'item-link';
       a.setAttribute( 'href', url );
+      a.setAttribute( 'rel', 'noopener noreferrer' );
       a.textContent = text;
       el.append( a );
       // let el = article.querySelector( '.article-content' );
       // a.innerHTML = 'Take the Course';
       // el.appendChild(a);
+    }
+
+    // add link to course thumbnail image
+    const thumbLink = article.querySelector( '[class^="article-image_"] > a' );
+    if ( thumbLink.href === '' ) {
+      thumbLink.setAttribute( 'href', url );
     }
   }
 }

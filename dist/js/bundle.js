@@ -406,20 +406,33 @@ function addOnFeedReadyHandler(id) {
  */
 function addLinkToCoursePage(article) {
   if (article) {
+    var _window$location = window.location,
+        protocol = _window$location.protocol,
+        host = _window$location.host;
+
+    var url = protocol + '//' + host + '/course-' + article.dataset.id;
+
+    // add link to course title
     var link = article.querySelector('.article-title_link');
     if (!link) {
       var el = article.querySelector('.article-title');
       var text = el.textContent;
       el.textContent = '';
       var a = document.createElement('a');
-      var url = window.location.protocol + '//' + window.location.host + '/course-' + article.dataset.id;
       a.className = 'article-title_link'; //'item-link';
       a.setAttribute('href', url);
+      a.setAttribute('rel', 'noopener noreferrer');
       a.textContent = text;
       el.append(a);
       // let el = article.querySelector( '.article-content' );
       // a.innerHTML = 'Take the Course';
       // el.appendChild(a);
+    }
+
+    // add link to course thumbnail image
+    var thumbLink = article.querySelector('[class^="article-image_"] > a');
+    if (thumbLink.href === '') {
+      thumbLink.setAttribute('href', url);
     }
   }
 }
