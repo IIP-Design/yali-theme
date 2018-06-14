@@ -1,0 +1,62 @@
+<section
+	class='cb cb_post_list {{ full_screen_width == "yes" ? "full-width": "" }}'
+	style='background-color: {{ block_bg_color }};'>
+	<div class='ui container'>
+		<div class='inner-container'>
+				<!-- content block title -->
+			    {% include 'partials/content_block_title.twig' %}
+
+        <!-- content block excerpt -->
+        <p class="cb_excerpt" style="text-align: {{ excerpt_alignment }}; color: {{ excerpt_color }}">{{ excerpt }}</p>
+
+  			<div >
+        	<ul class='article-item-group'>
+            {% for page in page_list %}
+    				<li class='article-item'>
+    					<div class='article-media'>
+    						<a class='list_item_img_link' href='{{ page.page_link }}'>
+    							<div class='article-image-rectangle' style='border: 0px solid transparent'>
+                    <span class='article-image' style='background-image: url("{{ page.page_img }}"); min-height:260px;'></span>
+                  </div>
+    						</a>
+    					</div>
+    					<div class='article-content'>
+    						<div class='list_item_content'>
+    							<h3 class='article-title'>
+    								<a
+    									href='{{ page.page_link }}'
+    									class='list_item_link'
+    									style='color: {{ excerpt_color }};'>
+    									{{ page.post_title }}
+    								</a>
+    							</h3>
+    							<p class='list_item_excerpt'>{{ page.post_excerpt }}</p>
+
+                  {% if page.related_link is not empty %}
+            			<div class="cb_button">
+                    <a
+                      href='{{ page.related_link }}'
+            				  class='item-link'>
+            				  {{ page.related_link_text }}
+            			  </a>
+            			</div>
+            			{% endif %}
+
+    						</div>
+    					</div>
+            </li>
+    			  {% endfor %}
+          </ul>
+
+          {% if btn_label is not empty or btn_link is not empty %}
+          <div class="cb_button" style="text-align: {{ btn_text_alignment }}">
+            <a class="ui button" href="{{ btn_link }}" {{ btn_new_win }} style="background-color: {{ btn_bg_color }}" tabindex="0">
+              <div style="color: {{ btn_label_color }}"> {{ btn_label }}</div>
+            </a>
+          </div>
+          {% endif %}
+        </div>
+
+		</div>
+	</div>
+</section>

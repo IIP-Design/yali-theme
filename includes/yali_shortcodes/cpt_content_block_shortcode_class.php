@@ -19,7 +19,7 @@ class Content_Block_Shortcode {
    * For example, to render the 'cta' or Call to action block, the function appends 'cta to 'render_'
    * and call the render_cta method.  To add a new content type, add it to the options attribute in
    * 'Type of content block' CMB2 field under the General Box in the content_Block class:
-   * 
+   *
    *  $cb_box->add_field( array(
    *  'name'                 => 'Block Type',
 	 *  'desc'                 => 'Type of content block',
@@ -33,18 +33,18 @@ class Content_Block_Shortcode {
    *     'my_block'          => __( 'My Block', 'yali' )
    *    )
 	 * ));
-   * 
+   *
    *
    * @param [array] $atts Attributes from content block
    * @return void
    */
   public function render_content_block ( $atts ) {
     // check for content block id
-    $type = get_post_meta( $atts['id'], 'yali_cb_type', true );  
+    $type = get_post_meta( $atts['id'], 'yali_cb_type', true );
     if( empty($type) ) {
       return;
     }
-   
+
     return call_user_func( array($this, 'render_' . $type ), $atts );
   }
 
@@ -54,20 +54,20 @@ class Content_Block_Shortcode {
     $meta = get_post_meta(  $id );
     $post = get_post( $id );
 
-    $context = $this->fetch_base_config( $id, $post );    
+    $context = $this->fetch_base_config( $id, $post );
 
     if( !empty($meta["_thumbnail_id"]) ) {
-      $img_id = $meta["_thumbnail_id"][0];      
+      $img_id = $meta["_thumbnail_id"][0];
       $context["header_url"] = wp_get_attachment_url( $img_id );
       $context["srcset"] = wp_get_attachment_image_srcset( $img_id, 'full' );
-      $context["sizes"] = wp_get_attachment_image_sizes( $img_id, 'full' );          
+      $context["sizes"] = wp_get_attachment_image_sizes( $img_id, 'full' );
     }
-    
+
     $context["cb_layout_width"] = get_post_meta( $id, 'yali_cb_layout_width' );
     $context["cta_buttons"] = get_post_meta( $id, 'yali_cta_button_repeat_group', true );
 
     foreach ($context["cta_buttons"] as &$button) {
-      $button["yali_cta_button_link"]["url"] = $this->filter_link($button["yali_cta_button_link"]["url"]);      
+      $button["yali_cta_button_link"]["url"] = $this->filter_link($button["yali_cta_button_link"]["url"]);
     }
     unset($button);
 
@@ -118,17 +118,63 @@ class Content_Block_Shortcode {
   }
 
 
+  // PAGE LIST CONTENT BLOCK
+  public function render_page_list( $atts ) {
+    $id = $atts['id'];
+    $meta = get_post_meta( $id );
+    $context = $this->fetch_base_config( $id, get_post($id) );
+    $context = $this->fetch_btn_config( $context, $id, $meta );
+
+    // Pages to be included
+    $page_list = array();
+    $all_pages = get_post_meta($id, 'cb_pages_list_repeat_group', true);
+
+    foreach ($all_pages as $page) {
+      // Get page ID from meta select dropdown
+      $page_id = $page['yali_select_page'];
+
+      // Get page data
+      $listed_page = get_page($page_id);
+
+      // Get page imgage and add as prop to page object
+      $page_img = get_the_post_thumbnail_url($page_id, 'full');
+      if( !empty($page_img) ) {
+        $listed_page->page_img = $page_img;
+      }
+
+      // Get page link and add as prop to page object
+      $page_link = get_permalink($page_id);
+      $listed_page->page_link = $this->filter_link($page_link);
+
+      // Get related link and text add as prop to page object
+      $related_link = $page['yali_related_link']['link'];
+      $listed_page->related_link = $this->filter_link($related_link);
+
+      $related_link_text = $page['yali_related_link']['label'];
+      $listed_page->related_link_text = $this->f$related_link_text);
+
+      $context['links'] = get_post_meta( $id, 'yali_button_links_repeat_group', true );
+
+      array_push($page_list, $listed_page);
+    }
+
+    $context['page_list'] = $page_list;
+
+    return Twig::render( 'content_blocks/page-list.twig', $context );
+  }
+
+
   // POST LIST CONTENT BLOCK (CDP)
   public function render_post_list( $atts ) {
     $id = $atts['id'];
     $meta = get_post_meta( $id );
     $post = get_post( $id );
-   
+
     $context              = $this->fetch_base_config( $id, $post );
     $context['selector']  = 'feed' . $id;
     $context              = $this->fetch_module_config( $context, $id );
     $context              = $this->fetch_btn_config( $context, $id, $meta );
-    
+
     //$this->debug($context );
     return Twig::render( 'content_blocks/post-list.twig', $context );
   }
@@ -136,7 +182,7 @@ class Content_Block_Shortcode {
 
   // FILTERED POST LIST CONTENT BLOCK (CDP)
   public function render_filtered_list( $atts ) {
-    $id                     = $atts['id'];  
+    $id                     = $atts['id'];
     $context                = $this->fetch_base_config( $id, get_post( $id ) );
     $context['selector']    = 'feed' . $id;
     $context['cdp_indexes'] = cdp_get_option('cdp_indexes');
@@ -144,10 +190,10 @@ class Content_Block_Shortcode {
     $context['types']       = $this->convert_to_str( get_post_meta( $id, 'yali_list_filters_types', true) );
     $context['date_display'] = get_post_meta( $id, 'yali_filtered_list_date_display', true);
     $context                = $this->fetch_btn_config( $context, $id, get_post_meta( $id ) );
- 
+
     return Twig::render( 'content_blocks/post-filtered-list.twig', $context );
   }
-  
+
 
   // MEDIA CONTENT BLOCK
   public function render_media_block( $atts ) {
@@ -155,7 +201,7 @@ class Content_Block_Shortcode {
     $context = $this->fetch_base_config( $id, $post );
     $context['media_items'] = get_post_meta( $id, 'media_block_repeat_group', true );
     $context['intro'] = wpautop(get_post_meta( $id, 'intro_content', true ));
-    $context['outro'] = wpautop(get_post_meta( $id, 'outro_content', true ));   
+    $context['outro'] = wpautop(get_post_meta( $id, 'outro_content', true ));
 
     return Twig::render( 'content_blocks/media-block.twig', $context );
   }
@@ -168,7 +214,7 @@ class Content_Block_Shortcode {
     $context['links'] = get_post_meta( $id, 'yali_button_links_repeat_group', true );
 
     foreach ($context['links'] as &$button) {
-      $button['yali_button_link']['url'] = $this->filter_link($button['yali_button_link']['url']);      
+      $button['yali_button_link']['url'] = $this->filter_link($button['yali_button_link']['url']);
     }
     unset($button);
 
@@ -199,7 +245,7 @@ class Content_Block_Shortcode {
     // Campaigns to be included
     $campaign_pages = array();
     $campaigns_list = get_post_meta($id, 'campaigns_list_repeat_group', true);
-    
+
     foreach ($campaigns_list as $campaign) {
       // Get Campaign ID from meta select dropdown
       $campaign_id = $campaign['yali_select_campaign'];
@@ -218,7 +264,7 @@ class Content_Block_Shortcode {
       $campaign_page->campaign_page_link = $this->filter_link($campaign_page_link);
 
       array_push($campaign_pages, $campaign_page);
-    }  
+    }
 
     $context['campaign_pages'] = $campaign_pages;
 
@@ -234,8 +280,8 @@ class Content_Block_Shortcode {
    * @param  mixed  $default Optional default value
    * @return mixed           Option value
    */
-  
-  
+
+
   private function fetch_base_config ( $id, $post ) {
     //$this->debug( get_post_meta( $id));
 
@@ -246,14 +292,14 @@ class Content_Block_Shortcode {
       "title_size"          => get_post_meta($id, 'yali_cb_block_title_size', true),
       "show_title"          => get_post_meta($id, 'yali_cb_show_title', true),
       "title_underline"     => ( get_post_meta($id, 'yali_cb_title_underline', true) == 'yes' ) ? 'cb_h2_underline': '',
-      "title_color"         => get_post_meta( $id, 'yali_cb_title_color', true ), 
+      "title_color"         => get_post_meta( $id, 'yali_cb_title_color', true ),
       "title_alignment"     => get_post_meta( $id, 'yali_cb_title_alignment', true ),
       "full_screen_width"   => get_post_meta( $id, 'yali_cb_layout_width', true ),
       "block_bg_color"      => get_post_meta( $id, 'yali_cb_bg_color', true ),
       "excerpt"             => $post->post_excerpt,
-      "excerpt_alignment"   => get_post_meta( $id, 'yali_cb_excerpt_alignment', true ),  
-      "excerpt_color"       => get_post_meta( $id, 'yali_cb_excerpt_color', true ), 
-      "excerpt_font_weight" => get_post_meta( $id, 'yali_cb_excerpt_font_weight', true ), 
+      "excerpt_alignment"   => get_post_meta( $id, 'yali_cb_excerpt_alignment', true ),
+      "excerpt_color"       => get_post_meta( $id, 'yali_cb_excerpt_color', true ),
+      "excerpt_font_weight" => get_post_meta( $id, 'yali_cb_excerpt_font_weight', true ),
       "text_alignment"      => get_post_meta( $id, 'yali_cb_text_alignment', true )
     );
 
@@ -272,21 +318,21 @@ class Content_Block_Shortcode {
     $context['cdp_indexes']                     = cdp_get_option('cdp_indexes');
     $context['cdp_post_select_by']              = get_post_meta( $id, 'yali_cdp_select_type_posts', true );
     $context['cdp_taxonomy_select_by']          = get_post_meta( $id, 'yali_cdp_select_taxonomy', true );
-   
+
     $context['cdp_post_ids']                    = get_post_meta( $id, 'yali_cdp_autocomplete', true );
     $context['cdp_posts_related']               = $this->filter_cdp_posts_related( get_post_meta( $id, 'yali_cdp_autocomplete_related', true ) );
     $context['cdp_posts_related_link_display']  = get_post_meta( $id, 'yali_cdp_autocomplete_links_display', true );
     $context['cdp_post_meta_fields_to_show']    = get_post_meta( $id, 'yali_cdp_fields', true );
     $context['cdp_num_posts']                   = get_post_meta( $id, 'yali_cdp_num_posts', true );
-   
+
     $context['cdp_category']                    = ( empty($category_field) || $category_field == 'select' ) ?  '' : $category_field;
     $context['cdp_series']                      = ( empty($series_field) || $series_field == 'select' ) ?  '' : $series_field;
     $context['cdp_tag']                         = ( empty($tag_field) || $tag_field == 'select' ) ?  '' : $tag_field;
-    
+
     $context['cdp_ui_layout']                   = get_post_meta( $id, 'yali_cdp_ui_layout', true);
     $context['cdp_ui_direction']                = get_post_meta( $id, 'yali_cdp_ui_direction', true);
     $context['cdp_image']                       = get_post_meta( $id, 'yali_cdp_image', true);
-    
+
     //$this->debug($context);exit;
 
     return $context;
@@ -295,7 +341,7 @@ class Content_Block_Shortcode {
   private function filter_link( $link ) {
     return apply_filters( 'btn_link_domain_mapping', $link );
   }
-  
+
   private function filter_cdp_posts_related( $cdp_posts_related ) {
     $cpr = array();
     if( is_array( $cdp_posts_related ) ) {
@@ -310,10 +356,10 @@ class Content_Block_Shortcode {
 
   private function fetch_btn_config ( &$context, $id, $meta ) {
     $button = get_post_meta( $id, 'yali_cb_box_btn_link', true );
-    
+
     if( !$button ) {
       return $context;
-    } 
+    }
     $context['btn_label']           = $button['text'];
     $context['btn_link']            = $this->filter_link( $button['url'] );
     $context['btn_new_win']         = ($button['blank'] == 'true') ? 'target="_blank"' : '';
@@ -329,14 +375,14 @@ class Content_Block_Shortcode {
   //   $button_host = parse_url( $url, PHP_URL_HOST );
   //   if( $current_host === $button_host ) {
   //     return parse_url( $url, PHP_URL_PATH );
-  //   } 
+  //   }
   //   return  $url;
   // }
 
   private function convert_to_str( $value ) {
     if( gettype($value) === 'array' ) {
       return implode(',', $value);
-    } 
+    }
     return $value;
   }
 
@@ -366,5 +412,5 @@ class Content_Block_Shortcode {
     print_r( $obj );
     echo '</pre>';
   }
-  
+
 }

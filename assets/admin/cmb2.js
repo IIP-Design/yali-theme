@@ -4,10 +4,11 @@
     var widgetMetabox = document.getElementById('yali_cb_box_cdp'),
       socialMetabox = document.getElementById('yali_cb_social_links'),
       accordionMetaBox = document.getElementById('yali_cb_accordion'),
-      filteredListMetaBox = document.getElementById('yali_cb_box_filter'), 
+      filteredListMetaBox = document.getElementById('yali_cb_box_filter'),
       mediaBlockMetabox = document.getElementById('yali_cb_media'),
       buttonLinksMetabox = document.getElementById('yali_cb_button_links'),
       ctaMetabox = document.getElementById('yali_cb_cta'),
+      pageListMetabox = document.getElementById('yali_cb_pages_list'),
       genericButtonMetabox = document.getElementById('yali_cb_box_btn'),
       textBlockMetaBox = document.getElementById('yali_cb_text_block'),
       campaignListBlockMetaBox = document.getElementById('yali_cb_campaigns_list'),
@@ -18,12 +19,13 @@
       selectByPostsNum = $('.cmb2-id-yali-cdp-num-posts'),
       selectByPosts = $('.cmb-type-cdp-autocomplete.cmb-repeat'),
       selectByPostsLink = $('.cmb2-id-yali-cdp-autocomplete-related.cmb-repeat'),
-      selectByPostsDisplay = $('.cmb2-id-yali-cdp-autocomplete-links-display');    
+      selectByPostsDisplay = $('.cmb2-id-yali-cdp-autocomplete-links-display');
 
     // Metabox Object store for iterating
     var conditionalMetaboxes = {
       filtered_list: filteredListMetaBox,
       post_list: widgetMetabox,
+      page_list: pageListMetabox,
       social: socialMetabox,
       accordion: accordionMetaBox,
       media_block: mediaBlockMetabox,
@@ -68,7 +70,7 @@
     if( init_content_type_selection === undefined ) {
       return;
     }
-    
+
     if (conditionalMetaboxes[init_content_type_selection] !== undefined) {
       toggleConditionalMetaboxes(init_content_type_selection);
     } else {
@@ -117,7 +119,7 @@
     });
 
     /**
-     * 
+     *
      * @param {string} selectBy  how will posts be queried, either by most recent or by individual post selections
      */
     function togglePostListFields( selectBy ) {
@@ -163,7 +165,7 @@
       }
     }
 
-   
+
 
     /** @todo toggle bind related links to its correpsonding post
      * Add a corresponding link chooser if a post autocomplete field is added
