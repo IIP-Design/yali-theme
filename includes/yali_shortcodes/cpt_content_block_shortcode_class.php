@@ -151,7 +151,7 @@ class Content_Block_Shortcode {
       $listed_page->related_link = $this->filter_link($related_link);
 
       $related_link_text = $page['yali_related_link']['label'];
-      $listed_page->related_link_text = $this->f$related_link_text);
+      $listed_page->related_link_text = $related_link_text;
 
       $context['links'] = get_post_meta( $id, 'yali_button_links_repeat_group', true );
 
