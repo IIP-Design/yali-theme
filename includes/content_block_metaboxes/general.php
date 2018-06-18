@@ -42,14 +42,15 @@ $cb_box->add_field( array(
     'default'        => 'post_list',
   'options'          => array(
     'accordion'      => __( 'Accordion', 'yali' ),
+    'button_links'   => __( 'Button Links', 'yali' ),
+    'campaigns_list' => __( 'Campaigns List', 'yali' ),
     'cta'            => __( 'Call To Action', 'yali' ),
+    'media_block'    => __( 'Media Block', 'yali' ),
+    'page_list'      => __( 'Page List', 'yali' ),
     'post_list'      => __( 'Post List', 'yali' ),
     'filtered_list'  => __( 'Post List with Filters', 'yali' ),
     'social'         => __( 'Social Icons', 'yali' ),
-    'media_block'    => __( 'Media Block', 'yali' ),
-    'button_links'    => __( 'Button Links', 'yali' ),
-    'text_block'     => __( 'Text Block', 'yali' ),
-    'campaigns_list'     => __( 'Campaigns List', 'yali' )
+    'text_block'     => __( 'Text Block', 'yali' )
   )
 ));
 
@@ -68,9 +69,9 @@ $cb_box->add_field( array(
   )
 ));
 
-// Full screen width 
+// Full screen width
 $cb_box->add_field( array(
-  'name'    => 'Full Screen Width?',      
+  'name'    => 'Full Screen Width?',
   'id'      => $prefix . 'cb_layout_width',
   'desc'    => '',
   'type'    => 'radio_inline',
@@ -83,7 +84,7 @@ $cb_box->add_field( array(
 
 // Show block title
 $cb_box->add_field( array(
-  'name'    => 'Show block title?',      
+  'name'    => 'Show block title?',
   'id'      => $prefix . 'cb_show_title',
   'desc'    => '',
   'type'    => 'radio_inline',
@@ -96,7 +97,7 @@ $cb_box->add_field( array(
 
 // Underline title
 $cb_box->add_field( array(
-  'name'    => 'Underline title?',      
+  'name'    => 'Underline title?',
   'id'      => $prefix . 'cb_title_underline',
   'desc'    => '',
   'type'    => 'radio_inline',
