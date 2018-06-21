@@ -96,7 +96,7 @@ function addLinkToCoursePage ( article ) {
 
     // add link to course thumbnail image
     const thumbLink = article.querySelector( '[class^="article-image_"] > a' );
-    if ( thumbLink.href === '' ) {
+    if ( thumbLink && !thumbLink.href ) {
       thumbLink.setAttribute( 'href', url );
     }
   }
@@ -416,6 +416,8 @@ function renderArticleFeed ( feed ) {
     // let module generate query since using standard params
     addFeed( configObj );
   }
+
+  addOnFeedReadyHandler( feed.id );
 }
 
 /**
