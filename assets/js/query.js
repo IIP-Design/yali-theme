@@ -25,21 +25,39 @@ export function getCategories ( filter, cb ) {
       .agg( 'terms', 'categories.name.keyword', {
         	'size': 1000,
         	'order': { '_term': 'asc' }
-      },
-      'distinct_categories', ( a ) => {
-        	return a.aggregation( 'terms', 'categories.name.keyword', { 'size': 1 }, 'display' );
-      } )
+        },
+        'distinct_categories', ( a ) => {
+            return a.aggregation( 'terms', 'categories.name.keyword', { 'size': 1 }, 'display' );
+        } )
+      .agg( 'terms', 'unit.categories.name.keyword', {
+        	'size': 1000,
+        	'order': { '_term': 'asc' }
+        },
+        'distinct_categories_video', ( a ) => {
+            return a.aggregation( 'terms', 'categories.name.keyword', { 'size': 1 }, 'display' );
+        } )
       .build()
   } ).then( ( response ) => {
     	let data = formatResponse( response, 'distinct_categories', [ 'Uncategorized' ] );
-    // work around has key value is not matching up
-    	let d = data.map( ( item ) => {
+      // work around has key value is not matching up
+    	data = data.map( ( item ) => {
       	return {
         	key: item.key,
         	display: item.key.replace( '&amp;', '&' )
-      };
-    } );
-    	cb( filter, d );
+        };
+      } );
+    	let dataVideo = formatResponse( response, 'distinct_categories_video', [ 'Uncategorized' ] );
+      // work around has key value is not matching up
+      dataVideo = dataVideo.map( ( item ) => {
+      	return {
+        	key: item.key,
+        	display: item.key.replace( '&amp;', '&' )
+        };
+      } );
+      dataVideo.forEach( val => {
+        if ( data.filter( kv => kv.key === val.key ).length < 1 ) data.push( val );
+      } );
+    	cb( filter, data );
   } );
 }
 
@@ -48,7 +66,7 @@ export function getSeries ( filter, cb ) {
     	body: bodybuilder()
       .size( 0 )
       .query( 'terms', 'site', INDEXES )
-      .agg( 'terms', 'taxonomies.series.name.keyword', {
+      .agg( 'terms', 'custom_taxonomies.series.name.keyword', {
         	'size': 1000,
         	'order': { '_term': 'asc' }
       }, 'distinct_series' )
@@ -68,14 +86,25 @@ export function getLanguages ( filter, cb ) {
       .agg( 'terms', 'language.locale.keyword', {
         	'size': 200,
         	'order': { '_term': 'asc' }
-      },
-      'distinct_languages', ( a ) => {
-        	return a.aggregation( 'terms', 'language.display_name.keyword', { 'size': 1 }, 'display' );
-      } )
+        },
+        'distinct_languages', ( a ) => {
+            return a.aggregation( 'terms', 'language.display_name.keyword', { 'size': 1 }, 'display' );
+        } )
+      .agg( 'terms', 'unit.language.locale.keyword', {
+        	'size': 200,
+        	'order': { '_term': 'asc' }
+        },
+        'distinct_languages_video', ( a ) => {
+            return a.aggregation( 'terms', 'language.display_name.keyword', { 'size': 1 }, 'display' );
+        } )
       .build()
   } ).then( ( response ) => {
     	let data = formatResponse( response, 'distinct_languages' );
-    	cb( filter, data, { key: 'en', value: 'English' } );
+    	let dataVideo = formatResponse( response, 'distinct_languages_video' );
+    	dataVideo.forEach( val => {
+    	  if ( data.filter( kv => kv.key === val.key ).length < 1 ) data.push( val );
+      } );
+    	cb( filter, data, { key: 'en-us', value: 'English' } );
   } );
 
 }
@@ -114,7 +143,7 @@ export const generateBodyQry = ( params, context ) => {
 
   // @todo FIX: unbranded courses are appearing in general queries
   	body.orQuery( 'bool', b => b
-    .orFilter( 'term', 'branded', 'yes' )
+    .orFilter( 'term', 'branded', 'true' )
     .orFilter( 'bool', b => b.notFilter( 'exists', 'field', 'branded' ) )
     .filterMinimumShouldMatch( 1 )
   );
@@ -122,19 +151,19 @@ export const generateBodyQry = ( params, context ) => {
 
 
   	if ( params.series ) {
-    	body.filter( 'term', 'taxonomies.series.slug.keyword', params.series );
+    	body.filter( 'term', 'taxonomies.series.name.keyword', params.series );
   }
 
   	if ( params.tags ) {
-    	body.filter( 'term', 'tags.slug.keyword', params.tags );
+    	body.filter( 'term', 'tags.keyword', params.tags );
   }
 
   	if ( params.langs ) {
-    	qry.push( ...appendQry( params.langs, 'language.locale' ) );
+    	qry.push( ...appendQry( params.langs, ['language.locale', 'unit.language.locale'] ) );
   }
 
   	if ( params.categories ) {
-    	str = `categories.name: ${params.categories} OR categories.slug: ${params.categories}`;
+    	str = `categories.name: ${params.categories}`;
     	qry.push( str );
     // leave for use w/multiple categories, i.e 'environment, climate'
     // qry.push( ...appendQry(params.categories, 'categories.name') ); 
@@ -148,13 +177,13 @@ export const generateBodyQry = ( params, context ) => {
         	break;
 
       case 'courses':
-        	str = 'type: courses AND branded: yes';
+        	str = 'type: courses AND branded: true';
         	qry.push( str );
         	break;
 
       case 'podcast':
       case 'video':
-        	str = `taxonomies.content_type.slug:  ${params.types}`;
+        	str = `custom_taxonomies.content_type.name: ${params.types}`;
         	qry.push( str );
         	break;
 
@@ -184,7 +213,7 @@ export const generateBodyQry = ( params, context ) => {
 
 // Helpers
 function formatResponse ( response, type, itemsToRemove ) {
-  	if ( !response.data.aggregations[ type ] ) { return null; }
+  	if ( !response.data.aggregations || !response.data.aggregations[ type ] ) { return null; }
 
   	let buckets = response.data.aggregations[ type ].buckets;
   	if ( !buckets ) { return null; }
@@ -234,7 +263,13 @@ const fetchQry = ( qry, context, params ) => {
 
 const appendQry = ( str, field ) => {
   	let items = fetchArray( str );
-  	return items.map( item => `${field}: ${item}` );
+  	if ( typeof field === 'string' ) {
+      return items.map( item => `${field}: ${item}` );
+    }
+    return items.map( item => field.reduce( ( accum, subField ) => {
+      accum.push(`${subField}:${item}`);
+      return accum;
+    }, [] ).join( ' OR ' ) );
 };
 
 const reduceQry = ( qry ) => {
@@ -242,7 +277,7 @@ const reduceQry = ( qry ) => {
     	if ( index === ( arr.length - 1 ) ) {
       	acc += value;
     } else {
-      	acc += `${value} AND `;
+      	acc += `(${value}) AND `;
     }
     	return acc;
   }, '' );

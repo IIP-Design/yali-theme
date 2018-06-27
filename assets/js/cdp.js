@@ -25,7 +25,7 @@ var defaultFilterConfig = {
   size: 12,
   sort: 'recent',
   types: '',
-  langs: 'en',
+  langs: 'en-us',
   series: '',
   meta: [ 'date' ],
   categories: '',
@@ -357,7 +357,7 @@ function initializeArticleFeed () {
     '[data-content-type=\'cdp-article-feed\']'
   );
   forEach( feeds, function ( index, feed ) {
-    console.log( 'render ', feed.id );
+    // console.log( 'render', feed.id );
     renderArticleFeed( feed );
   } );
 }

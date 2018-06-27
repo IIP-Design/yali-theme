@@ -359,7 +359,7 @@ var defaultFilterConfig = {
   size: 12,
   sort: 'recent',
   types: '',
-  langs: 'en',
+  langs: 'en-us',
   series: '',
   meta: ['date'],
   categories: '',
@@ -689,7 +689,7 @@ function filterSetSelected(filter, selected) {
 function initializeArticleFeed() {
   var feeds = document.querySelectorAll('[data-content-type=\'cdp-article-feed\']');
   forEach(feeds, function (index, feed) {
-    console.log('render ', feed.id);
+    // console.log( 'render', feed.id );
     renderArticleFeed(feed);
   });
 }
@@ -1527,23 +1527,41 @@ function getCategories(filter, cb) {
       'order': { '_term': 'asc' }
     }, 'distinct_categories', function (a) {
       return a.aggregation('terms', 'categories.name.keyword', { 'size': 1 }, 'display');
+    }).agg('terms', 'unit.categories.name.keyword', {
+      'size': 1000,
+      'order': { '_term': 'asc' }
+    }, 'distinct_categories_video', function (a) {
+      return a.aggregation('terms', 'categories.name.keyword', { 'size': 1 }, 'display');
     }).build()
   }).then(function (response) {
     var data = formatResponse(response, 'distinct_categories', ['Uncategorized']);
     // work around has key value is not matching up
-    var d = data.map(function (item) {
+    data = data.map(function (item) {
       return {
         key: item.key,
         display: item.key.replace('&amp;', '&')
       };
     });
-    cb(filter, d);
+    var dataVideo = formatResponse(response, 'distinct_categories_video', ['Uncategorized']);
+    // work around has key value is not matching up
+    dataVideo = dataVideo.map(function (item) {
+      return {
+        key: item.key,
+        display: item.key.replace('&amp;', '&')
+      };
+    });
+    dataVideo.forEach(function (val) {
+      if (data.filter(function (kv) {
+        return kv.key === val.key;
+      }).length < 1) data.push(val);
+    });
+    cb(filter, data);
   });
 }
 
 function getSeries(filter, cb) {
   _axios2.default.post(API, {
-    body: (0, _bodybuilder2.default)().size(0).query('terms', 'site', INDEXES).agg('terms', 'taxonomies.series.name.keyword', {
+    body: (0, _bodybuilder2.default)().size(0).query('terms', 'site', INDEXES).agg('terms', 'custom_taxonomies.series.name.keyword', {
       'size': 1000,
       'order': { '_term': 'asc' }
     }, 'distinct_series').build()
@@ -1560,10 +1578,21 @@ function getLanguages(filter, cb) {
       'order': { '_term': 'asc' }
     }, 'distinct_languages', function (a) {
       return a.aggregation('terms', 'language.display_name.keyword', { 'size': 1 }, 'display');
+    }).agg('terms', 'unit.language.locale.keyword', {
+      'size': 200,
+      'order': { '_term': 'asc' }
+    }, 'distinct_languages_video', function (a) {
+      return a.aggregation('terms', 'language.display_name.keyword', { 'size': 1 }, 'display');
     }).build()
   }).then(function (response) {
     var data = formatResponse(response, 'distinct_languages');
-    cb(filter, data, { key: 'en', value: 'English' });
+    var dataVideo = formatResponse(response, 'distinct_languages_video');
+    dataVideo.forEach(function (val) {
+      if (data.filter(function (kv) {
+        return kv.key === val.key;
+      }).length < 1) data.push(val);
+    });
+    cb(filter, data, { key: 'en-us', value: 'English' });
   });
 }
 
@@ -1602,7 +1631,7 @@ var generateBodyQry = exports.generateBodyQry = function generateBodyQry(params,
 
   // @todo FIX: unbranded courses are appearing in general queries
   body.orQuery('bool', function (b) {
-    return b.orFilter('term', 'branded', 'yes').orFilter('bool', function (b) {
+    return b.orFilter('term', 'branded', 'true').orFilter('bool', function (b) {
       return b.notFilter('exists', 'field', 'branded');
     }).filterMinimumShouldMatch(1);
   });
@@ -1610,19 +1639,19 @@ var generateBodyQry = exports.generateBodyQry = function generateBodyQry(params,
 
 
   if (params.series) {
-    body.filter('term', 'taxonomies.series.slug.keyword', params.series);
+    body.filter('term', 'taxonomies.series.name.keyword', params.series);
   }
 
   if (params.tags) {
-    body.filter('term', 'tags.slug.keyword', params.tags);
+    body.filter('term', 'tags.keyword', params.tags);
   }
 
   if (params.langs) {
-    qry.push.apply(qry, _toConsumableArray(appendQry(params.langs, 'language.locale')));
+    qry.push.apply(qry, _toConsumableArray(appendQry(params.langs, ['language.locale', 'unit.language.locale'])));
   }
 
   if (params.categories) {
-    str = 'categories.name: ' + params.categories + ' OR categories.slug: ' + params.categories;
+    str = 'categories.name: ' + params.categories;
     qry.push(str);
     // leave for use w/multiple categories, i.e 'environment, climate'
     // qry.push( ...appendQry(params.categories, 'categories.name') ); 
@@ -1636,13 +1665,13 @@ var generateBodyQry = exports.generateBodyQry = function generateBodyQry(params,
         break;
 
       case 'courses':
-        str = 'type: courses AND branded: yes';
+        str = 'type: courses AND branded: true';
         qry.push(str);
         break;
 
       case 'podcast':
       case 'video':
-        str = 'taxonomies.content_type.slug:  ' + params.types;
+        str = 'custom_taxonomies.content_type.name: ' + params.types;
         qry.push(str);
         break;
 
@@ -1670,7 +1699,7 @@ var generateBodyQry = exports.generateBodyQry = function generateBodyQry(params,
 
 // Helpers
 function formatResponse(response, type, itemsToRemove) {
-  if (!response.data.aggregations[type]) {
+  if (!response.data.aggregations || !response.data.aggregations[type]) {
     return null;
   }
 
@@ -1727,8 +1756,16 @@ var fetchQry = function fetchQry(qry, context, params) {
 
 var appendQry = function appendQry(str, field) {
   var items = fetchArray(str);
+  if (typeof field === 'string') {
+    return items.map(function (item) {
+      return field + ': ' + item;
+    });
+  }
   return items.map(function (item) {
-    return field + ': ' + item;
+    return field.reduce(function (accum, subField) {
+      accum.push(subField + ':' + item);
+      return accum;
+    }, []).join(' OR ');
   });
 };
 
@@ -1737,7 +1774,7 @@ var reduceQry = function reduceQry(qry) {
     if (index === arr.length - 1) {
       acc += value;
     } else {
-      acc += value + ' AND ';
+      acc += '(' + value + ') AND ';
     }
     return acc;
   }, '');
