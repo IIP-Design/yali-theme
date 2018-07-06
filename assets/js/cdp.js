@@ -25,7 +25,7 @@ var defaultFilterConfig = {
   size: 12,
   sort: 'recent',
   types: '',
-  langs: 'en',
+  langs: 'en-us',
   series: '',
   meta: [ 'date' ],
   categories: '',
@@ -96,7 +96,7 @@ function addLinkToCoursePage ( article ) {
 
     // add link to course thumbnail image
     const thumbLink = article.querySelector( '[class^="article-image_"] > a' );
-    if ( thumbLink.href === '' ) {
+    if ( thumbLink && !thumbLink.href ) {
       thumbLink.setAttribute( 'href', url );
     }
   }
@@ -357,7 +357,7 @@ function initializeArticleFeed () {
     '[data-content-type=\'cdp-article-feed\']'
   );
   forEach( feeds, function ( index, feed ) {
-    console.log( 'render ', feed.id );
+    // console.log( 'render', feed.id );
     renderArticleFeed( feed );
   } );
 }
@@ -416,6 +416,8 @@ function renderArticleFeed ( feed ) {
     // let module generate query since using standard params
     addFeed( configObj );
   }
+
+  addOnFeedReadyHandler( feed.id );
 }
 
 /**
