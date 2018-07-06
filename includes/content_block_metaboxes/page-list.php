@@ -33,6 +33,20 @@ $cb_pages_list = new_cmb2_box( array(
   'priority'     => 'low'
 ));
 
+$cb_pages_list->add_field( array(
+  'id'      => $prefix . 'cdp_page_list_layout',
+  'name'    => __( 'Layout', 'america' ),
+  'desc'    => 'Layout patterns for the list of pages',
+  'type'    => 'radio',
+  'default'           => '3_column_grid',
+  'options' => array(
+    '3_column_grid'     => __( 'Three column grid of pages', 'america' ),
+    'featured_vertical' => __( 'Featured page with a vertical list of additional page titles', 'america' ),
+    'featured_sidebar'  => __( 'Featured page with a right sidebar of additional page titles (best with 6 to 9 pages)', 'america' ),
+    'featured_block'    => __( 'Featured page with a right sidebar of two smaller featured pages (additional posts appear below in a two column grid)', 'america' )
+  ),
+));
+
 $cb_pages_list_group = $cb_pages_list->add_field( array(
 	'id' => 'cb_pages_list_repeat_group',
 	'type' => 'group',
