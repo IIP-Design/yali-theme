@@ -24,12 +24,27 @@
           color: #174f9f;
         }
 
-        {% if related_content_display == 'yes' %}
+      {% if related_content_display == 'yes' %}
         #{{ selector }} .article-content p {
           display: none;
         }
-        {% endif %}
+      {% endif %}
+
+      {% if post_list_layout == 'featured_vertical' %}
+        {% include 'partials/post-list-featured-vertical-layout.twig' ignore missing %}
+      {% endif %}
+
+      {% if post_list_layout == 'featured_sidebar' %}
+        {% set feature_row_span = cdp_num_posts %}
+        {% include 'partials/post-list-featured-sidebar-layout.twig' ignore missing %}
+      {% endif %}
+
+      {% if post_list_layout == 'featured_block' %}
+        {% set num_rows = ((cdp_num_posts//2))|round(1, 'ceil') + 1 %}
+        {% include 'partials/post-list-featured-block-layout.twig' ignore missing %}
+      {% endif %}
       </style>
+
       <div id='{{ selector }}' style="margin-top: 2em; text-align: {{ text_alignment }}"
         data-content-type='cdp-article-feed' data-id=''>LOADING Component...</div>
 

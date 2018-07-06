@@ -1,0 +1,34 @@
+#{{ selector }} .article-item-group {
+  display: block;
+}
+
+#{{ selector }} .article-item {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+#{{ selector }} .article-image {
+  height: 37.5vw;
+}
+
+#{{ selector }} .article-content p {
+  margin-bottom: .7rem;
+  max-width: 66ch;
+}
+
+#{{ selector }} .article-content .article-title {
+  margin-bottom: 0;
+}
+
+#{{ selector }} .article-item:nth-child(n+2) {
+  border-top: 1px solid {{ title_color }};
+}
+
+#{{ selector }} .article-item:nth-child(n+3) {
+  border-top: 1px solid #ddd;
+}
+
+#{{ selector }} .article-item:nth-child(n+2) > .article-media,
+#{{ selector }} .article-item:nth-child(n+2) > .article-content p {
+  display: none;
+}

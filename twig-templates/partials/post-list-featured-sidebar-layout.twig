@@ -1,0 +1,63 @@
+@supports (display: grid) {
+  #{{ selector }} .article-item-group {
+    display: grid;
+  }
+
+  @media (min-width: 71.25em) {
+    #{{ selector }} .article-item-group {
+      grid-template-columns: 2fr 1fr;
+    }
+
+    #{{ selector }} .article-item:first-child {
+      grid-row: 1 / {{ feature_row_span }};
+    }
+
+    #{{ selector }} .article-item:nth-child(n+2) {
+      grid-column: 2;
+    }
+
+    #{{ selector }} .article-item:nth-child(n+2) {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+              flex-direction: column;
+      -webkit-box-pack: center;
+      -ms-flex-pack: center;
+              justify-content: center;
+      padding-right: 1rem;
+    }
+  }
+
+  #{{ selector }} .article-content > .article-title {
+    margin-bottom: 0;
+  }
+
+  #{{ selector }} .article-content p {
+    margin-bottom: .7rem;
+    max-width: 66ch;
+  }
+
+  #{{ selector }} .article-image {
+    height: 37.5vw;
+  }
+
+  #{{ selector }} .article-item:nth-child(n+2) {
+    padding-top: 1rem;
+  }
+
+  #{{ selector }} .article-item:nth-child(n+2) > .article-media,
+  #{{ selector }} .article-item:nth-child(n+2) > .article-content p {
+    display: none;
+  }
+
+  #{{ selector }} .article-item:nth-child(n+2) {
+    border-top: 1px solid {{ title_color }};
+  }
+
+  #{{ selector }} .article-item:nth-child(n+3) {
+    border-top: 1px solid #ddd;
+  }
+}
