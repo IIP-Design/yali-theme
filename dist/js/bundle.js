@@ -1636,7 +1636,7 @@ var generateBodyQry = exports.generateBodyQry = function generateBodyQry(params,
 
 
   if (params.series) {
-    body.filter('term', 'taxonomies.series.name.keyword', params.series);
+    body.filter('term', 'custom_taxonomies.series.name.keyword', params.series);
   }
 
   if (params.tags) {

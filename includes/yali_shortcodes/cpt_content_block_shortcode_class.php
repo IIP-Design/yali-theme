@@ -315,8 +315,20 @@ class Content_Block_Shortcode {
 
     $module                                     = 'article-feed';
     $category_field                             = get_post_meta( $id, 'yali_cdp_category', true);
+    if ($category_field) {
+      $cat = get_category_by_slug($category_field);
+      if ($cat) $category_field = $cat->name;
+    }
     $series_field                               = get_post_meta( $id, 'yali_cdp_series', true);
+    if ($series_field) {
+      $term = get_term_by('slug', $series_field, 'series');
+      if ($term) $series_field = $term->name;
+    }
     $tag_field                                  = get_post_meta( $id, 'yali_cdp_tag', true);
+    if ($tag_field) {
+      $term = get_term_by('slug', $tag_field, 'post_tag');
+      if ($term) $tag_field = $term->name;
+    }
 
     $context['cdp_widget']                      = $module;
     $context['cdp_indexes']                     = cdp_get_option('cdp_indexes');
