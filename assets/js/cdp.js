@@ -27,7 +27,7 @@ var defaultFilterConfig = {
   types: '',
   langs: 'en-us',
   series: '',
-  meta: [ 'date', 'tags', 'author' ],
+  meta: [ 'date' ],
   categories: '',
   ui: { openLinkInNewWin: 'no' }
 };
