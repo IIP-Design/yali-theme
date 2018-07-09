@@ -101,6 +101,21 @@ $cb_box_cdp->add_field( array(
   )
 ));
 
+// Post list layout style
+$cb_box_cdp->add_field( array(
+  'name'    => __( 'Post list layout', 'america' ),
+  'desc'    => 'Layout patterns for the list of posts',
+  'id'      => $prefix . 'cdp_post_list_layout',
+  'type'    => 'radio',
+  'default'           => '3_column_grid',
+  'options' => array(
+    '3_column_grid'     => __( 'Three column grid of posts', 'america' ),
+    'featured_vertical' => __( 'Featured post with a vertical list of additional post titles', 'america' ),
+    'featured_sidebar'  => __( 'Featured post with a right sidebar of additional post titles (best with 6 to 8 posts)', 'america' ),
+    'featured_block'    => __( 'Featured post with a right sidebar of two smaller featured posts', 'america' )
+  ),
+));
+
 // Display as link or button
 $cb_box_cdp->add_field( array(
   'name'    => __( 'Display related link as', 'america' ),

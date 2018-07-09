@@ -159,6 +159,9 @@ class Content_Block_Shortcode {
     }
 
     $context['page_list'] = $page_list;
+    $context['page_list_layout'] = get_post_meta( $id, 'yali_cdp_page_list_layout', true);
+    $context['selector'] = 'cb-' . get_the_ID();
+    $context['num_pages'] = count($page_list);
 
     return Twig::render( 'content_blocks/page-list.twig', $context );
   }
@@ -174,6 +177,7 @@ class Content_Block_Shortcode {
     $context['selector']  = 'feed' . $id;
     $context              = $this->fetch_module_config( $context, $id );
     $context              = $this->fetch_btn_config( $context, $id, $meta );
+    $context['post_list_layout'] = get_post_meta( $id, 'yali_cdp_post_list_layout', true);
 
     //$this->debug($context );
     return Twig::render( 'content_blocks/post-list.twig', $context );
