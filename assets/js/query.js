@@ -22,19 +22,12 @@ export function getCategories ( filter, cb ) {
     	body: bodybuilder()
       .size( 0 )
       .query( 'terms', 'site', INDEXES )
-      .agg( 'terms', 'categories.name.keyword', {
+      .agg( 'terms', 'site_taxonomies.categories.name.keyword', {
         	'size': 1000,
         	'order': { '_term': 'asc' }
         },
         'distinct_categories', ( a ) => {
-            return a.aggregation( 'terms', 'categories.name.keyword', { 'size': 1 }, 'display' );
-        } )
-      .agg( 'terms', 'unit.categories.name.keyword', {
-        	'size': 1000,
-        	'order': { '_term': 'asc' }
-        },
-        'distinct_categories_video', ( a ) => {
-            return a.aggregation( 'terms', 'categories.name.keyword', { 'size': 1 }, 'display' );
+            return a.aggregation( 'terms', 'site_taxonomies.categories.name.keyword', { 'size': 1 }, 'display' );
         } )
       .build()
   } ).then( ( response ) => {
@@ -43,19 +36,8 @@ export function getCategories ( filter, cb ) {
     	data = data.map( ( item ) => {
       	return {
         	key: item.key,
-        	display: item.key.replace( '&amp;', '&' )
+        	display: capitalize(item.key.replace( '&amp;', '&' ))
         };
-      } );
-    	let dataVideo = formatResponse( response, 'distinct_categories_video', [ 'Uncategorized' ] );
-      // work around has key value is not matching up
-      dataVideo = dataVideo.map( ( item ) => {
-      	return {
-        	key: item.key,
-        	display: item.key.replace( '&amp;', '&' )
-        };
-      } );
-      dataVideo.forEach( val => {
-        if ( data.filter( kv => kv.key === val.key ).length < 1 ) data.push( val );
       } );
     	cb( filter, data );
   } );
@@ -66,7 +48,7 @@ export function getSeries ( filter, cb ) {
     	body: bodybuilder()
       .size( 0 )
       .query( 'terms', 'site', INDEXES )
-      .agg( 'terms', 'custom_taxonomies.series.name.keyword', {
+      .agg( 'terms', 'site_taxonomies.series.name.keyword', {
         	'size': 1000,
         	'order': { '_term': 'asc' }
       }, 'distinct_series' )
@@ -83,27 +65,16 @@ export function getLanguages ( filter, cb ) {
       .size( 0 )
       .query( 'terms', 'site', INDEXES )
       .notFilter( 'term', 'language.locale', 'es' )
-      .agg( 'terms', 'language.locale.keyword', {
+      .agg( 'terms', 'language.display_name.keyword', {
         	'size': 200,
         	'order': { '_term': 'asc' }
         },
         'distinct_languages', ( a ) => {
             return a.aggregation( 'terms', 'language.display_name.keyword', { 'size': 1 }, 'display' );
         } )
-      .agg( 'terms', 'unit.language.locale.keyword', {
-        	'size': 200,
-        	'order': { '_term': 'asc' }
-        },
-        'distinct_languages_video', ( a ) => {
-            return a.aggregation( 'terms', 'language.display_name.keyword', { 'size': 1 }, 'display' );
-        } )
       .build()
   } ).then( ( response ) => {
     	let data = formatResponse( response, 'distinct_languages' );
-    	let dataVideo = formatResponse( response, 'distinct_languages_video' );
-    	dataVideo.forEach( val => {
-    	  if ( data.filter( kv => kv.key === val.key ).length < 1 ) data.push( val );
-      } );
     	cb( filter, data, { key: 'en-us', value: 'English' } );
   } );
 
@@ -151,7 +122,7 @@ export const generateBodyQry = ( params, context ) => {
 
 
   	if ( params.series ) {
-    	body.filter( 'term', 'custom_taxonomies.series.name.keyword', params.series );
+    	body.filter( 'term', 'site_taxonomies.series.name.keyword', params.series );
   }
 
   	if ( params.tags ) {
@@ -159,7 +130,7 @@ export const generateBodyQry = ( params, context ) => {
   }
 
   	if ( params.langs ) {
-    	qry.push( ...appendQry( params.langs, ['language.locale', 'unit.language.locale'] ) );
+    	qry.push( ...appendQry( params.langs, 'language.locale' ) );
   }
 
   	if ( params.categories ) {
@@ -183,7 +154,7 @@ export const generateBodyQry = ( params, context ) => {
 
       case 'podcast':
       case 'video':
-        	str = `custom_taxonomies.content_type.name: ${params.types}`;
+        	str = `site_taxonomies.content_type.name: ${params.types}`;
         	qry.push( str );
         	break;
 
