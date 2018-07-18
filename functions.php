@@ -129,7 +129,7 @@ class YaliSite {
 		$article_feed_js = $module_url . "cdp-module-article-feed/cdp-module-article-feed.min.js";
 		$article_feed_css = $module_url . "cdp-module-article-feed/cdp-module-article-feed.min.css";
 
-		if ( !is_page_template( 'page-templates/course-template.php' ) ) {
+		if ( !has_shortcode( $post->post_content, 'course' ) ) {
 			wp_enqueue_script( 'article-feed-js', $article_feed_js, null, '1.0.0', true );
 			wp_enqueue_style( 'article-feed-css', $article_feed_css, null, '1.0.0' );
 		}
