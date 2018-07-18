@@ -6,3 +6,4 @@ vendor/
 .bundle
 example-functions.php
 dist
+style.css
