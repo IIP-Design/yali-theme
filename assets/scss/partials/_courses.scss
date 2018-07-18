@@ -229,3 +229,15 @@ div.instructor-description {
 .instructor-description > p {
   font-size: em(18);
 }
+
+.react-course {
+	.topics[class*="Course__categories___"] {
+		display: block;
+		margin-top: 1em;
+		margin-bottom: 1em;
+	}
+
+	.topics-label {
+		font-weight: bold;
+	}
+}
