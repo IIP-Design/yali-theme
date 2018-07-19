@@ -31,3 +31,14 @@
     width: 100%;
     height: 100%;
 }
+
+/**
+ * Attachments custom attribution field styles
+ */
+#post-body-content .compat-field-attribution > td.field {
+    width: 100%;
+}
+
+#post-body-content [name$="[attribution]"] {
+    min-width: 100%;
+}

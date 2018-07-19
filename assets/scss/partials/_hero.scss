@@ -40,4 +40,13 @@
 			font-weight: 300;				
 		}
 	}
+
+	.hero-attribution {
+		position: absolute;
+		bottom: 0;
+		right: 0;
+		padding: .5em .875em;
+		font-size: .875em;
+		background-color: rgba(0, 0, 0, .4);
+	}
 }

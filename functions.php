@@ -51,7 +51,10 @@ class YaliSite {
 		add_action( 'wp_head', array( $this, 'insert_dap') );
 		add_action( 'wp_head', array( $this, 'insert_hotjar') );
 		add_action( 'tha_body_bottom', array( $this, 'insert_addthis_snippet') );
-
+		add_filter( 'attachment_fields_to_edit', array( $this, 'yali_attachment_fields' ), 10, 2 );
+		add_action( 'edit_attachment', array( $this, 'yali_update_attachment_meta' ) );
+		add_action( 'wp_ajax_save-attachment-compat', array( $this, 'yali_media_custom_fields' ) );
+		
 		$this->twig_init();
 
 		/*
@@ -122,6 +125,7 @@ class YaliSite {
 	}
 
 	function enqueue_scripts() {
+		global $post;
 		$module_url = self::cdp_get_option('cdp_module_url');
 		$public_api = self::cdp_get_option('cdp_public_url');
 		$search_indexes = self::cdp_get_option('cdp_indexes');
@@ -370,6 +374,38 @@ class YaliSite {
 		<?php
 	}
 
+	/**
+	 * Add custom attribution field to media attachments
+	 */
+	function yali_attachment_fields( $fields, $post ) {
+		$attribution_value = get_post_meta($post->ID, '_attribution', true);
+		$fields['attribution'] = array(
+			'label' => __( 'Attribution' ),
+			'input' => 'text',
+			'value' => $attribution_value,
+			'show_in_edit' => true
+		);
+		return $fields;         
+	}
+
+	/**
+	 * Update custom attribution field on save
+	 */
+	function yali_update_attachment_meta( $attachment ) {
+		$attribution = isset( $_POST['attachments'][$attachment]['attribution'] ) ? $_POST['attachments'][$attachment]['attribution'] : false;
+		update_post_meta($attachment, '_attribution', $attribution);
+		return;
+	}
+
+	/**
+   * Update custom attribution field via ajax
+	 */
+	function yali_media_custom_fields() {
+		$post_id = $_POST['id'];
+		$meta = $_POST['attachments'][$post_id]['attribution'];
+		update_post_meta($post_id, '_attribution', $meta);
+		clean_post_cache($post_id);
+	}
 }
 
 new YaliSite();

@@ -54,6 +54,8 @@ if( empty($hero_title_display) ) {
 	$hero_title_display = get_post_meta($post->ID, '_yali_hero_title_option', true);
 }
 $hero_subtitle = get_post_meta($post->ID, '_yali_hero_subtitle_option', true);
+$hero_attribution_display = get_post_meta($post->ID, '_yali_hero_attribution_option', true );
+$hero_attribution_value = get_post_meta($feat_img_obj['id'], '_attribution', true );
 
 $context = array(
   'check_host'      => $check_host,
@@ -61,6 +63,8 @@ $context = array(
 	'related_content_display' => $related_content_display,
 	'hero_title_display' => $hero_title_display,
 	'hero_subtitle' 	=> $hero_subtitle,
+  'hero_attribution_display' =>$hero_attribution_display,
+  'hero_attribution_value' => $hero_attribution_value,
   'post_data'       => $post_data,
   'header_url'      => $header_url,
   'social_block'    => $social_block,

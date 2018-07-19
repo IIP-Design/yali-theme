@@ -12,6 +12,9 @@
           <p class='subtitle'>{{ hero_subtitle }}</p>
       	</div>
       	{% endif %}
+				{% if ( hero_attribution_display == 'yes' ) and ( hero_attribution_value is not empty) %}
+				<p class='hero-attribution'>{{ hero_attribution_value }}</p>
+				{% endif %}
       </div>
   </section>
   {% endif %}

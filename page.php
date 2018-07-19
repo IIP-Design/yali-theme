@@ -40,6 +40,8 @@ $formVar = do_shortcode('[formidable id=6]');
 // Hero Title Display
 $hero_title_display = get_post_meta($post->ID, '_yali_hero_title_option', true);
 $hero_subtitle = get_post_meta($post->ID, '_yali_hero_subtitle_option', true);
+$hero_attribution_display = get_post_meta($post->ID, '_yali_hero_attribution_option', true );
+$hero_attribution_value = get_post_meta($feat_img_obj['id'], '_attribution', true );
 
 // Query for all Campaign Pages
 if( $pagename === 'action' || $pagename === 'network' ) {
@@ -77,6 +79,8 @@ $context = array(
   'formVar'       => $formVar,
   'hero_title_display' => $hero_title_display,
   'hero_subtitle' => $hero_subtitle,
+  'hero_attribution_display' =>$hero_attribution_display,
+  'hero_attribution_value' => $hero_attribution_value,
   'social_block'  => $social_block,
   'formVar'       => $formVar,
   'category_list' => $categories,

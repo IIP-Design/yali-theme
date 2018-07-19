@@ -30,6 +30,18 @@ function hero_title_option() {
 	));
 
 	$hero_title->add_field( array(
+		'name' => 'Display attribution',
+		'id'   => $prefix . 'hero_attribution_option',
+		'desc' => 'Display the featured image attribution',
+		'type'    => 'radio_inline',
+		'options' => array(
+			'yes'   => __( 'Yes' ),
+			'no'    => __( 'No' )
+		),
+		'default' => 'no'
+	));
+
+	$hero_title->add_field( array(
 		'name' => 'Add a subtitle',
 		'id'   => $prefix . 'hero_subtitle_option',
 		'desc' => 'Enter your subtitle text here (optional)',
