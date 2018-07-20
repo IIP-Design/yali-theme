@@ -126,7 +126,7 @@ export const generateBodyQry = ( params, context ) => {
   }
 
   	if ( params.tags ) {
-    	body.filter( 'term', 'tags.keyword', params.tags );
+      body.filter( 'term', 'site_taxonomies.tags.name.keyword', params.tags );
   }
 
   	if ( params.langs ) {
