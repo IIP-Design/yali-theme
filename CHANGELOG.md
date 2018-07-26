@@ -1,6 +1,13 @@
 # Change Log
 ##### All notable changes to this project will be documented in this file.
 
+## [v1.4.1](https://github.com/IIP-Design/yali-theme/tree/v1.4.1) (2018-07-26)
+
+**Features:**
+
+- Switched to names from slugs in single template to fix 'You May Also Like' section.
+
+
 ## [v1.4.0](https://github.com/IIP-Design/yali-theme/tree/v1.4.0) (2018-07-25)
 
 **Features:**
