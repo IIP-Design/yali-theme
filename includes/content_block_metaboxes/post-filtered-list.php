@@ -26,6 +26,19 @@ $cb_box_filter->add_field( array(
 ));
 
 $cb_box_filter->add_field( array(
+	'name'    => 'Language selection',
+	'desc'    => '',
+	'id'      => $prefix . 'cb_lang_selection',
+  'type'    => 'radio',
+  'default' => 'en',
+	'options' => array(
+		'en-us'   => __( 'English' ),
+    'fr-fr'   => __( 'French' ),
+    'pt-br'   => __( 'Portuguese (Brazil)' )
+	),
+));
+
+$cb_box_filter->add_field( array(
 	'name'    => 'Content types to search',
 	'desc'    => '',
 	'id'      => $prefix . 'list_filters_types',

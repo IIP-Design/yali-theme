@@ -160,12 +160,12 @@ function initializeDropDownSelects(filters, feed) {
  * the cdpFilterFeedConfig object by feeds id for reference
  */
 function updateFeed() {
-	let dropdown = document.querySelector('.cb-cdp-filters');
-	let target = dropdown.dataset.target;
+	let dropdown = $(event.target).closest('.cb-cdp-filters');
+	let target = dropdown.data('target');
 	if (target) {
 		let config = cdpFilterFeedConfig[target];
 		if (config) {
-			let filters = dropdown.querySelectorAll('div.ui.dropdown input');
+			let filters = dropdown.find('div.ui.dropdown input');
 			forEach(filters, function(index, filter) {
 				config[filterHash[filter.name]] = filter.value;
 			});
@@ -220,6 +220,17 @@ function initializeFeed(feed) {
 
 	cdpFilterFeedConfig[id] = deepClone(defaultFilterConfig);
 	cdpFilterFeedConfig[id].selector = `#${id}`;
+
+	/**
+	 * yaliCbLang_feed##### is declared in post-filtered-list.twig.
+	 * Allows campaign team to create post-filtered-list
+	 * content blocks with a preselected language.
+	 * @see IIPNET-131
+	 */
+	let langObj = window[`yaliCbLang_${id}`];
+	if (langObj) {
+		cdpFilterFeedConfig[id].langs = langObj.key;
+	}
 
 	if (types) {
 		cdpFilterFeedConfig[id].types = types;
@@ -341,11 +352,14 @@ function filterSetSelected(filter, selected) {
 	if (selected) {
 		let input = filter.querySelector('input[type=hidden]');
 		let div = filter.querySelector('.text');
+		let dropdown = $(input).closest('.cb_dropdown.cb-cdp-filters');
+		let feedId = dropdown.data('target');
+		let langObj = window[`yaliCbLang_${feedId}`];
 		if (input) {
-			input.value = selected.key;
+			input.value = (langObj && langObj.key) || selected.key;
 		}
 		if (div) {
-			div.textContent = selected.value;
+			div.textContent = (langObj && langObj.value) || selected.value;
 		}
 	}
 }

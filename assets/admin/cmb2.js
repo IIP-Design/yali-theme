@@ -19,7 +19,9 @@
       selectByPostsNum = $('.cmb2-id-yali-cdp-num-posts'),
       selectByPosts = $('.cmb-type-cdp-autocomplete.cmb-repeat'),
       selectByPostsLink = $('.cmb2-id-yali-cdp-autocomplete-related.cmb-repeat'),
-      selectByPostsDisplay = $('.cmb2-id-yali-cdp-autocomplete-links-display');
+      selectByPostsDisplay = $('.cmb2-id-yali-cdp-autocomplete-links-display'),
+      languageFilterOption = $('input[value="language"]'),
+      languageSelectionField = $('.cmb2-id-yali-cb-lang-selection');
 
     // Metabox Object store for iterating
     var conditionalMetaboxes = {
@@ -106,6 +108,9 @@
     var selectTax = $('.cdp-select-posts-by-taxonomy input[type=radio]:checked').val();
     toggleTaxonomyFields( selectTax );
 
+    // Set initial state of language selection within the Post List Filters meta box
+    toggleLanguageSelectionField( languageFilterOption );
+
     // Toggle post list selection type (by recent or custom) when selection is changed
     $('.cdp-select-posts-by input[type=radio]').change(function() {
       var selectBy = $(this).val();
@@ -116,6 +121,11 @@
     $('.cdp-select-posts-by-taxonomy input[type=radio]').change(function() {
       var selectBy = $(this).val();
       toggleTaxonomyFields( selectBy );
+    });
+
+    // Toggle language selection when language filter option is (un)checked
+    languageFilterOption.change(function() {
+      toggleLanguageSelectionField( this );
     });
 
     /**
@@ -165,7 +175,14 @@
       }
     }
 
-
+    function toggleLanguageSelectionField( element ) {
+      const isChecked = $(element).prop('checked');
+      if (isChecked) {
+        languageSelectionField.fadeIn();
+      } else {
+        languageSelectionField.hide();
+      }
+    }
 
     /** @todo toggle bind related links to its correpsonding post
      * Add a corresponding link chooser if a post autocomplete field is added

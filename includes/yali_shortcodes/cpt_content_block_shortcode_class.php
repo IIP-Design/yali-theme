@@ -191,9 +191,22 @@ class Content_Block_Shortcode {
     $context['selector']    = 'feed' . $id;
     $context['cdp_indexes'] = cdp_get_option('cdp_indexes');
     $context['filters']     = $this->fetch_filters( $atts );  // get_post_meta( $id, 'yali_list_filters', true);
+    $context['lang_key'] = get_post_meta( $id, 'yali_cb_lang_selection', true);
     $context['types']       = $this->convert_to_str( get_post_meta( $id, 'yali_list_filters_types', true) );
     $context['date_display'] = get_post_meta( $id, 'yali_filtered_list_date_display', true);
     $context                = $this->fetch_btn_config( $context, $id, get_post_meta( $id ) );
+
+    switch ( $context['lang_key'] ) {
+      case 'en-us' :
+        $context['lang_value'] = 'English';
+        break;
+      case 'fr-fr' :
+        $context['lang_value'] = 'French';
+        break;
+      case 'pt-br' :
+        $context['lang_value'] = 'Portuguese (Brazil)';
+        break;
+    }
 
     return Twig::render( 'content_blocks/post-filtered-list.twig', $context );
   }
