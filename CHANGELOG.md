@@ -1,6 +1,12 @@
 # Change Log
 ##### All notable changes to this project will be documented in this file.
 
+## [v1.4.3](https://github.com/IIP-Design/yali-theme/tree/v1.4.3) (2018-07-30)
+
+**Fixed:**
+
+- Fixed declaration of post list with filters language object in twig template
+  
 ## [v1.4.2](https://github.com/IIP-Design/yali-theme/tree/v1.4.2) (2018-07-30)
 
 **Features:**
@@ -11,7 +17,7 @@
 **Changed:**
 
 - Moved React course styles to `partials/_courses.scss` from `page-templates/courses/_courses.scss`
-- Replaced `is_page_template` with `has_shortcode` in `functios.php` for less brittle conditional loading of CDP article feed assetsb
+- Replaced `is_page_template` with `has_shortcode` in `functios.php` for less brittle conditional loading of CDP article feed assets
 
 ## [v1.4.1](https://github.com/IIP-Design/yali-theme/tree/v1.4.1) (2018-07-26)
 
