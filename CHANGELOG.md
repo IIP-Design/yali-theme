@@ -1,6 +1,18 @@
 # Change Log
 ##### All notable changes to this project will be documented in this file.
 
+## [v1.4.2](https://github.com/IIP-Design/yali-theme/tree/v1.4.2) (2018-07-30)
+
+**Features:**
+
+- Added custom attachment field for attribution and the option to display media attribution for featured images
+- Added a meta box option to preselect a content language when creating a post list with filters
+
+**Changed:**
+
+- Moved React course styles to `partials/_courses.scss` from `page-templates/courses/_courses.scss`
+- Replaced `is_page_template` with `has_shortcode` in `functios.php` for less brittle conditional loading of CDP article feed assetsb
+
 ## [v1.4.1](https://github.com/IIP-Design/yali-theme/tree/v1.4.1) (2018-07-26)
 
 **Features:**
