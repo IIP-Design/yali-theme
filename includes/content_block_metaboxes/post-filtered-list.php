@@ -30,7 +30,7 @@ $cb_box_filter->add_field( array(
 	'desc'    => '',
 	'id'      => $prefix . 'cb_lang_selection',
   'type'    => 'radio',
-  'default' => 'en',
+  'default' => 'en-us',
 	'options' => array(
 		'en-us'   => __( 'English' ),
     'fr-fr'   => __( 'French' ),
