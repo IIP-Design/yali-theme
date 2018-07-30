@@ -228,7 +228,7 @@ function initializeFeed(feed) {
 	 * @see IIPNET-131
 	 */
 	let langObj = window[`yaliCbLang_${id}`];
-	if (langObj.key) {
+	if (langObj) {
 		cdpFilterFeedConfig[id].langs = langObj.key;
 	}
 

@@ -44,6 +44,8 @@
         }
       </style>
       {% endif %}
+
+      {% if lang_key is not empty %}
       <script type="text/javascript">
         /* <![CDATA[ */
         var yaliCbLang_{{ selector }} = {
@@ -52,6 +54,7 @@
         };
         /* ]]> */
       </script>
+      {% endif %}
 
       <!-- attach article feed module -->
       <div id="{{ selector }}" data-content-type='cdp-filtered-list' data-types={{ types|json_encode() }} style="margin-top: 2em; text-align: {{ text_alignment }}">LOADING Component...</div>
