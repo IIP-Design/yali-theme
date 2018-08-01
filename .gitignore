@@ -5,5 +5,4 @@ npm-debug.log*
 vendor/
 .bundle
 example-functions.php
-style.css
 .idea/
