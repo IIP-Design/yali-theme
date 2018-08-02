@@ -173,7 +173,8 @@ return array(
         'field_id'     => 'course_name2',        // Course name (formidable field key) -- MUST match
         'x'            => 550,
         'y'            => 365,
-        'align'        => 'center'
+        'align'        => 'center',
+        'font_size'    => 40
       ),
       array (
         'content'      => 'FIELD',
@@ -198,14 +199,15 @@ return array(
     'font_size'        => 50,
     'color'            => '#003d7d',
     'align'            => 'center',
-    'line_max_chars'   => 35,
-    'line_height'      => 60,
+    'line_max_chars'   => 40,
+    'line_height'      => 40,
     'text'             => array (
       array (
         'content'      => 'FIELD',
         'field_id'     => 'course_name_fr',      // Course name (formidable field key) -- MUST match
         'x'            => 550,
-        'y'            => 365
+        'y'            => 365,
+        'font_size'    => 36
       ),
       array (
         'content'      => 'FIELD',
@@ -230,14 +232,15 @@ return array(
     'font_size'        => 50,
     'color'            => '#003d7d',
     'align'            => 'center',
-    'line_max_chars'   => 35,
-    'line_height'      => 60,
+    'line_max_chars'   => 40,
+    'line_height'      => 40,
     'text'             => array (
       array (
         'content'      => 'FIELD',
         'field_id'     => 'course_name_pt',      // Course name (formidable field key) -- MUST match
         'x'            => 550,
-        'y'            => 365
+        'y'            => 365,
+        'font_size'    => 36
       ),
       array (
         'content'      => 'FIELD',
