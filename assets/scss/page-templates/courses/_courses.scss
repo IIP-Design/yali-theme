@@ -20,6 +20,26 @@
 		}
 
 	}
+
+	/**
+	 * Specific IE styles to fix flexbox bugs
+	 * @see https://github.com/philipwalton/flexbugs#flexbug-7
+	 */
+	@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+    @media (min-width: 48em) {
+			.article-item {
+				-ms-flex: 0 0 46%;
+				flex: 0 0 46%
+			}
+		}
+		
+		@media (min-width: 60em) {
+			.article-item {
+				-ms-flex: 1 0 31%;
+				flex: 1 0 31%
+			}
+		}
+	}
 }
 
 
