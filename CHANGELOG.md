@@ -1,6 +1,17 @@
 # Change Log
 ##### All notable changes to this project will be documented in this file.
 
+## [v1.4.4](https://github.com/IIP-Design/yali-theme/tree/v1.4.4) (2018-08-02)
+
+**Added:**
+
+- IE targeted Polyfills for CustomEvent and ParentNode.append()
+- Styles for IE flexbox layout bugs
+
+**Removed:**
+
+- `dist` and `style.css` from `.gitignore` (temporarily) to allow for reconfiguration of Jenkins build process
+  
 ## [v1.4.3](https://github.com/IIP-Design/yali-theme/tree/v1.4.3) (2018-07-30)
 
 **Fixed:**
