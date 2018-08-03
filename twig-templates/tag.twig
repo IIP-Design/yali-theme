@@ -4,7 +4,7 @@
 
 <section class='ui container'>
 	<div class='inner-container tag_posts'>
-		<h2 class='title-overlay_title tag_posts_title'>{{ archive_query }} Posts</h2>		
+		<h1 class='title-overlay_title tag_posts_title'>{{ archive_query }} Posts</h1>		
 		<div class='ui stackable grid tag_posts_list'>
 
 			{% for post in blog_list.data %}
@@ -14,7 +14,7 @@
 			{% endif %}
 				
 				<article class='column tag_article'>
-					<h5 class='tag_article_title'><a href='{{ post.link }}'>{{ post.title.rendered }}</a></h5>
+					<h4 class='tag_article_title'><a href='{{ post.link }}'>{{ post.title.rendered }}</a></h4>
 					<div class='tag_article_content'>{{ post.excerpt.rendered }}</div>
 				</article>					
 

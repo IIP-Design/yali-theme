@@ -4,7 +4,7 @@
 
 <section class='ui container'>	
 	<div class='inner-container archive_bios'>
-		<h3>Mandela Washington Fellowship Alumni</h3>
+		<h2>Mandela Washington Fellowship Alumni</h2>
 
 		<div class='ui stackable grid bios_list'>
 			{% for bio in bios %}
@@ -15,7 +15,7 @@
 
 				<article class='column bio'>
 					<img src='{{ bio.featured_img_url }}'>
-					<h5 class='bio_name'><a href='{{ bio.link }}'>{{ bio.title.rendered }}</a></h5>
+					<h4 class='bio_name'><a href='{{ bio.link }}'>{{ bio.title.rendered }}</a></h4>
 					<p class='caption bio_title'>{{ bio.bio_title }}</p>					
 				</article>
 

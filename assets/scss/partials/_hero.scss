@@ -32,8 +32,18 @@
 		}
 		
 		h1 {
-			line-height: 1;
-			color: #fff;			
+      font-size: em(112);
+      line-height: 1;
+      color: #fff;
+      @media screen and (max-width: 933px) {
+        font-size: em(72, $mobile);
+      }
+      @media screen and (max-width: 415px) {
+        font-size: em(51, $mobile);
+      }
+      @media screen and (max-width: 375px) {
+        font-size: em(39, $mobile);
+      }			
 		}	
 
 		p {		

@@ -26,21 +26,6 @@ body {
 
 
 h1 {
-  font-size: em(112);
-  font-weight: 900;
-  @media screen and (max-width: 933px) {
-    font-size: em(72, $mobile);
-  }
-  @media screen and (max-width: 415px) {
-    font-size: em(51, $mobile);
-  }
-  @media screen and (max-width: 375px) {
-    font-size: em(39, $mobile);
-  }
-}
-
-
-h2 {
   font-size: em(64);
   font-weight: 900;
   @media screen and (max-width: 933px) {
@@ -49,16 +34,16 @@ h2 {
 }
 
 
-h3 {
+h2 {
   font-size: em(48);
-  font-weight: 700;
+  font-weight: 900;
   @media screen and (max-width: 933px) {
     font-size: em(28, $mobile);
   }
 }
 
 
-h4 {
+h3 {
   font-size: em(32);
   font-weight: 700;
   @media screen and (max-width: 933px) {
@@ -67,11 +52,20 @@ h4 {
 }
 
 
-h5 {
+h4 {
   font-size: em(24);
   font-weight: 700;
   @media screen and (max-width: 933px) {
     font-size: em(20, $mobile);
+  }
+}
+
+
+h5 {
+  font-size: em(20);
+  font-weight: 700;
+  @media screen and (max-width: 933px) {
+    font-size: em(18, $mobile);
   }
 }
 

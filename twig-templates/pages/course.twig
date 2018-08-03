@@ -5,15 +5,15 @@
 <section class='ui container'>
   <div class='lead-in'>
     {% if course_language == 'en' %}
-	    <h4 class='course-page-lead-in'>Course:</h4>
+	    <h3 class='course-page-lead-in'>Course:</h3>
     {% endif %}
     {% if course_language == 'fr' %}
-      <h4 class='course-page-lead-in'>Cours:</h4>
+      <h3 class='course-page-lead-in'>Cours:</h3>
     {% endif %}
     {% if ( course_language == 'pt' ) or ( course_language == 'es' ) %}
-      <h4 class='course-page-lead-in'>Curso:</h4>
+      <h3 class='course-page-lead-in'>Curso:</h3>
     {% endif %}
-    <h3 class='course-page-title'>{{ page_data.title.rendered }}</h3>
+    <h2 class='course-page-title'>{{ page_data.title.rendered }}</h2>
   </div>
 
   <div class='inner-container'>

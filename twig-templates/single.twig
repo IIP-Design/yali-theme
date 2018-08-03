@@ -14,7 +14,7 @@
       <div class='hero-inner bottom_padd {{ hero_title_display == "yes" ? "bottom_padd--thin" : "bottom_padd--thick" }} '>
       	{% if hero_title_display == 'yes' %}
       	<div class='hero-content ui container'>
-      		<h2 class='hero-h1'>{{ post_data.title.rendered }}</h1>
+      		<h1 class='hero-h1'>{{ post_data.title.rendered }}</h1>
           <p class='subtitle'>{{ hero_subtitle }}</p>
       	</div>
       	{% endif %}
@@ -28,8 +28,8 @@
 
 <section class='ui container'>
 	{% if ( hero_title_display == 'no' ) or ( hero_title_display == 'hide' )%}
-  	<h2 class='title-overlay_title'>{{ post_data.title.rendered }}</h2>
-    <h5 class='subtitle-container'>{{ hero_subtitle }}</h5>
+  	<h1 class='title-overlay_title'>{{ post_data.title.rendered }}</h1>
+    <h4 class='subtitle-container'>{{ hero_subtitle }}</h4>
 	{% endif %}
 
 	<div class='inner-container single_post'>
@@ -70,7 +70,7 @@
 				%}
 			{% endif %}
 
-			<h4 class='archive_link'>
+			<h3 class='archive_link'>
 				<a
 					class='cta_link'
 					{% if series_name is not empty %}
@@ -85,7 +85,7 @@
 					>
 					More from &ldquo;{{ (series_name is not empty) ? series_name : (category_name is not empty and category_name != 'Uncategorized') ? category_name : (tag_name is not empty) ? tag_name : 'YALI Network in Action' }}&rdquo; <i class='angle right icon'></i>
 				</a>
-			</h4>
+			</h3>
 		</section>
 	</div>
 </section>

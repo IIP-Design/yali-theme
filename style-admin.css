@@ -42,3 +42,10 @@
 #post-body-content [name$="[attribution]"] {
     min-width: 100%;
 }
+
+/*
+* set column witdh for block type column in content block post list
+*/
+.column-block_type {
+    width: 10%;
+}

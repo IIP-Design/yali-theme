@@ -4,10 +4,10 @@
 	<div class='ui container cb_honeycomb'>
 		<div class='inner-container'>
 			{% if headline is not empty %}
-			<h2 class='cb_honeycomb_headline'>{{ headline }}</h2>
+			<h1 class='cb_honeycomb_headline'>{{ headline }}</h1>
 			{% endif %}
 			{% if subheadline is not empty %}
-			<h5 class='cb_honeycomb_subheadline'>{{ subheadline }}</h5>
+			<h4 class='cb_honeycomb_subheadline'>{{ subheadline }}</h4>
 			{% endif %}
 			<div class='ui stackable grid cb_honeycomb_items'>
 				{% for campaign in content %}
@@ -17,9 +17,9 @@
 							<img src='{{ campaign.campaigns_list_img }}'>					
 						</a>
 						<div class='cb_honeycomb_item_text'>
-							<h4 class='cb_honeycomb_item_title'>
+							<h3 class='cb_honeycomb_item_title'>
 								<a href='{{ campaign.post_name }}'>{{ campaign.post_title }}</a>
-							</h4>
+							</h3>
 							<p class='cb_honeycomb_item_excerpt'>{{ campaign.post_excerpt }}</p>
 						</div>
 					</div>

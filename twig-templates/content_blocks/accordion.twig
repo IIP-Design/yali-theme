@@ -1,15 +1,15 @@
 <div id='{{ id }}' class='accordion_layout'>
 	{% if headline %}
-	<h3 style='text-align: {{ headline_alignment }}'>{{ headline }}</h3>
+	<h2 style='text-align: {{ headline_alignment }}'>{{ headline }}</h2>
 	{% endif %}
 	
 	<div class='ui styled accordion'>		
 		{% for item in items_array %}
-		<h4 
+		<h3 
 			class='title' 
 			style='color: {{ font_color }}; border-color: {{ font_color }};'>
 			{{ item.item_title }}
-		</h4>			
+		</h3>			
 		<div class='content'>{{ item.item_content }}</div>
 		{% endfor %}	
 	</div>
