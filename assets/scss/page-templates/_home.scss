@@ -68,22 +68,4 @@
 			}
 		}
 	}
-
-	/**
-	 * Specific IE styles to fix IE flexbox bug
-	 * @see https://github.com/philipwalton/flexbugs/issues/78
-	 */
-	@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
-    .article-item-group.article-style-blog {
-			min-height: 300px;
-			margin-bottom: 8em;
-			overflow: visible;
-		}
-
-		@media (min-width: 768px) {
-			.article-item-group.article-style-blog {
-				margin-bottom: 0;
-			}
-		}
-	}
 }
