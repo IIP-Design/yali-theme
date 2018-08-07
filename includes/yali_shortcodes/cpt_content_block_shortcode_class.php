@@ -330,17 +330,17 @@ class Content_Block_Shortcode {
     $category_field                             = get_post_meta( $id, 'yali_cdp_category', true);
     if ($category_field) {
       $cat = get_category_by_slug($category_field);
-      if ($cat) $category_field = $cat->name;
+      if ($cat) $category_field = wp_slash($cat->name);
     }
     $series_field                               = get_post_meta( $id, 'yali_cdp_series', true);
     if ($series_field) {
       $term = get_term_by('slug', $series_field, 'series');
-      if ($term) $series_field = $term->name;
+      if ($term) $series_field = wp_slash($term->name);
     }
     $tag_field                                  = get_post_meta( $id, 'yali_cdp_tag', true);
     if ($tag_field) {
       $term = get_term_by('slug', $tag_field, 'post_tag');
-      if ($term) $tag_field = $term->name;
+      if ($term) $tag_field = wp_slash($term->name);
     }
 
     $context['cdp_widget']                      = $module;
