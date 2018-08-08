@@ -9,8 +9,11 @@
     </div>
 </section>
 
+{# Use double quotes instead of single quotes for
+	data-filter-value="" to prevent values with an
+	apostrophe from breaking CDP query string. #}
 <section class='ui container'>	
-	<div class='inner-container archive_posts' data-filter='{{ archive_type }}' data-filter-value='{{ archive_name }}'>
+	<div class='inner-container archive_posts' data-filter='{{ archive_type }}' data-filter-value="{{ archive_name }}">
 		{{ filtered_post_block }}	
 	</div>	
 </section>
