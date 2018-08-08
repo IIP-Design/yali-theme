@@ -90,7 +90,7 @@ export function builder ( params, context ) {
       	langs: params.langs,
       	categories: fetchQry( 'category', context, params.categories ),
       	tags: fetchQry( 'tag', context, params.tags ),
-      	types: params.types,
+      	types: fetchQry( 'content_type', context, params.types ),
       	series: fetchQry( 'series', context, params.series ),
       	from: ( params.from ) ? params.from : 0,
       	size: params.size,
@@ -152,9 +152,9 @@ export const generateBodyQry = ( params, context ) => {
         	qry.push( str );
         	break;
 
-      case 'podcast':
-      case 'video':
-        	str = `site_taxonomies.content_type.name: ${params.types}`;
+      case 'Podcast':
+      case 'Video':
+					str = `site_taxonomies.content_type.name: ${params.types}`;
         	qry.push( str );
         	break;
 
