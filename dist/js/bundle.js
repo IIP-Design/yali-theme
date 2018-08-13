@@ -1644,7 +1644,6 @@ var generateBodyQry = exports.generateBodyQry = function generateBodyQry(params,
   // Becomes a MUST if there is only 1 site
   body.filterMinimumShouldMatch(1);
 
-  // @todo FIX: unbranded courses are appearing in general queries
   body.orQuery('bool', function (b) {
     return b.orFilter('term', 'branded', 'true').orFilter('bool', function (b) {
       return b.notFilter('exists', 'field', 'branded');
@@ -1666,10 +1665,9 @@ var generateBodyQry = exports.generateBodyQry = function generateBodyQry(params,
   }
 
   if (params.categories) {
-    str = 'categories.name: ' + params.categories;
-    qry.push(str);
     // leave for use w/multiple categories, i.e 'environment, climate'
-    // qry.push( ...appendQry(params.categories, 'categories.name') ); 
+    var cats = appendQry(params.categories, ['categories.name', 'site_taxonomies.categories.name']);
+    qry.push.apply(qry, _toConsumableArray(cats));
   }
 
   if (params.types) {
@@ -1777,10 +1775,10 @@ var appendQry = function appendQry(str, field) {
     });
   }
   return items.map(function (item) {
-    return field.reduce(function (accum, subField) {
-      accum.push(subField + ':' + item);
+    return '(' + field.reduce(function (accum, subField) {
+      accum.push(subField + ':(' + item + ')');
       return accum;
-    }, []).join(' OR ');
+    }, []).join(' OR ') + ')';
   });
 };
 

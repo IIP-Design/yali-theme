@@ -112,7 +112,6 @@ export const generateBodyQry = ( params, context ) => {
   // Becomes a MUST if there is only 1 site
   	body.filterMinimumShouldMatch( 1 );
 
-  // @todo FIX: unbranded courses are appearing in general queries
   	body.orQuery( 'bool', b => b
     .orFilter( 'term', 'branded', 'true' )
     .orFilter( 'bool', b => b.notFilter( 'exists', 'field', 'branded' ) )
@@ -134,10 +133,9 @@ export const generateBodyQry = ( params, context ) => {
   }
 
   	if ( params.categories ) {
-    	str = `categories.name: ${params.categories}`;
-    	qry.push( str );
-    // leave for use w/multiple categories, i.e 'environment, climate'
-    // qry.push( ...appendQry(params.categories, 'categories.name') ); 
+      // leave for use w/multiple categories, i.e 'environment, climate'
+    	let cats = appendQry( params.categories, ['categories.name', 'site_taxonomies.categories.name']);
+    	qry.push( ...cats );
   }
 
   	if ( params.types ) {
@@ -237,10 +235,10 @@ const appendQry = ( str, field ) => {
   	if ( typeof field === 'string' ) {
       return items.map( item => `${field}: ${item}` );
     }
-    return items.map( item => field.reduce( ( accum, subField ) => {
-      accum.push(`${subField}:${item}`);
+    return items.map( item => `(${field.reduce( ( accum, subField ) => {
+      accum.push(`${subField}:(${item})`);
       return accum;
-    }, [] ).join( ' OR ' ) );
+    }, [] ).join( ' OR ' )})` );
 };
 
 const reduceQry = ( qry ) => {
