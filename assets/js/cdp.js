@@ -128,7 +128,7 @@ function initializeDropDownSelects(filters, feed) {
 	let config = {
 		useLabels: false,
 		onChange: function(value, text, selectedItem) {
-			updateFeed(); // add debounce, or do check in article feed
+			updateFeed(selectedItem); // add debounce, or do check in article feed
 		}
 	};
 
@@ -159,8 +159,8 @@ function initializeDropDownSelects(filters, feed) {
  * Update the feed when a filter changes. The feed config is stored in
  * the cdpFilterFeedConfig object by feeds id for reference
  */
-function updateFeed() {
-	let dropdown = $(event.target).closest('.cb-cdp-filters');
+function updateFeed(selectedItem) {
+	let dropdown = $(selectedItem.context).closest('.cb-cdp-filters');
 	let target = dropdown.data('target');
 	if (target) {
 		let config = cdpFilterFeedConfig[target];

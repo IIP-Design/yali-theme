@@ -502,7 +502,7 @@ function initializeDropDownSelects(filters, feed) {
 	var config = {
 		useLabels: false,
 		onChange: function onChange(value, text, selectedItem) {
-			updateFeed(); // add debounce, or do check in article feed
+			updateFeed(selectedItem); // add debounce, or do check in article feed
 		}
 	};
 
@@ -533,8 +533,8 @@ function initializeDropDownSelects(filters, feed) {
  * Update the feed when a filter changes. The feed config is stored in
  * the cdpFilterFeedConfig object by feeds id for reference
  */
-function updateFeed() {
-	var dropdown = $(event.target).closest('.cb-cdp-filters');
+function updateFeed(selectedItem) {
+	var dropdown = $(selectedItem.context).closest('.cb-cdp-filters');
 	var target = dropdown.data('target');
 	if (target) {
 		var config = cdpFilterFeedConfig[target];
@@ -1561,7 +1561,7 @@ var INDEXES = cdp.searchIndexes ? fetchArray(cdp.searchIndexes) : 'yali.dev.amer
 
 // Populate dropdown filters
 function getTypes(filter, cb) {
-  cb(filter, [{ key: 'article', display: 'Article' }, { key: 'courses', display: 'Course' }, { key: 'podcast', display: 'Podcast' }, { key: 'video', display: 'Video' }]);
+  cb(filter, [{ key: 'article', display: 'Article' }, { key: 'courses', display: 'Course' }, { key: 'Podcast', display: 'Podcast' }, { key: 'Video', display: 'Video' }]);
 }
 
 function getCategories(filter, cb) {

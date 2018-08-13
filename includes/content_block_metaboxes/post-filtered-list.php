@@ -46,8 +46,8 @@ $cb_box_filter->add_field( array(
 	'options' => array(
 		'article'   => 'Article',
 		'courses'   => 'Course',
-    'podcast'   => 'Podcast',
-    'video'     => 'Video',
+    'Podcast'   => 'Podcast',
+    'Video'     => 'Video',
 	),
 ) );
 

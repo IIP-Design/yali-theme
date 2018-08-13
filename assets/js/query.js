@@ -12,8 +12,8 @@ export function getTypes ( filter, cb ) {
   	cb( filter, [
     { key: 'article', display: 'Article' },
     { key: 'courses', display: 'Course' },
-    { key: 'podcast', display: 'Podcast' },
-    { key: 'video', display: 'Video' }
+    { key: 'Podcast', display: 'Podcast' },
+    { key: 'Video', display: 'Video' }
   ] );
 }
 
@@ -161,7 +161,7 @@ export const generateBodyQry = ( params, context ) => {
       default:
         	qry.push( ...appendQry( params.types, 'type' ) );
     }
-  }
+	}
 
   	let qryStr = reduceQry( qry );
 
