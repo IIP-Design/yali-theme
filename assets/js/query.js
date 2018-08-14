@@ -102,81 +102,87 @@ export function builder ( params, context ) {
 }
 
 export const generateBodyQry = ( params, context ) => {
-  	let body = new bodybuilder();
-  	let qry = [], str;
+  console.log( 'generateBodyQry', params );
+  let body = new bodybuilder();
+  let qry = [], str;
 
-  	params.sites.forEach( ( item ) => {
-    	body.orFilter( 'term', 'site', item );
+  params.sites.forEach( ( item ) => {
+    if ( item.indexOf( 'courses' ) > -1 ) {
+      // Courses for YALI should have branded:true meaning they are YALI branded.
+      // It was easier to do this here when using body builder as checking for true
+      // when the branded field exists wasn't working when created with bodybuilder.
+      body.orFilter( 'bool', ( b ) => b
+        .filter( 'term', 'site', item )
+        .andFilter( 'term', 'branded', 'true' ) )
+    } else body.orFilter( 'term', 'site', item );
   } );
 
   // Becomes a MUST if there is only 1 site
-  	body.filterMinimumShouldMatch( 1 );
-
-  	body.orQuery( 'bool', b => b
-    .orFilter( 'term', 'branded', 'true' )
-    .orFilter( 'bool', b => b.notFilter( 'exists', 'field', 'branded' ) )
-    .filterMinimumShouldMatch( 1 )
-  );
-  //body.orQuery('term', 'branded', 'yes').orFilter('bool', b => b.notFilter('exists', 'field', 'branded'));
+  body.filterMinimumShouldMatch( 1 );
 
 
-  	if ( params.series ) {
-    	body.filter( 'term', 'site_taxonomies.series.name.keyword', params.series );
+  if ( params.series ) {
+    body.filter( 'term', 'site_taxonomies.series.name.keyword', params.series );
   }
 
-  	if ( params.tags ) {
-      body.filter( 'term', 'site_taxonomies.tags.name.keyword', params.tags );
+  if ( params.tags ) {
+    body.filter( 'term', 'site_taxonomies.tags.name.keyword', params.tags );
   }
 
-  	if ( params.langs ) {
-    	qry.push( ...appendQry( params.langs, 'language.locale' ) );
+  if ( params.langs ) {
+    qry.push( ...appendQry( params.langs, 'language.locale' ) );
   }
 
-  	if ( params.categories ) {
-      // leave for use w/multiple categories, i.e 'environment, climate'
-    	let cats = appendQry( params.categories, ['categories.name', 'site_taxonomies.categories.name']);
-    	qry.push( ...cats );
+  if ( params.categories ) {
+    // leave for use w/multiple categories, i.e 'environment, climate'
+    let cats = appendQry( params.categories, ['categories.name', 'site_taxonomies.categories.name']);
+    qry.push( ...cats );
   }
 
-  	if ( params.types ) {
-    	switch ( params.types ) {
-      case 'article':
-        	str = 'type: post OR type: page';
-        	qry.push( str );
-        	break;
+  if ( params.types ) {
+    let types = fetchArray( params.types );
+    let typeArgs = [];
+    types.forEach( ( type ) => {
+      switch ( type ) {
+        case 'article':
+          str = '(type:post OR type:page)';
+          typeArgs.push( str );
+          break;
 
-      case 'courses':
-        	str = 'type: courses AND branded: true';
-        	qry.push( str );
-        	break;
+        case 'courses':
+          str = '(type:courses)';
+          typeArgs.push( str );
+          break;
 
-      case 'Podcast':
-      case 'Video':
-					str = `site_taxonomies.content_type.name: ${params.types}`;
-        	qry.push( str );
-        	break;
+        case 'Podcast':
+        case 'Video':
+          str = `(site_taxonomies.content_type.name: (${type}))`;
+          typeArgs.push( str );
+          break;
 
-      default:
-        	qry.push( ...appendQry( params.types, 'type' ) );
-    }
-	}
-
-  	let qryStr = reduceQry( qry );
-
-
-  	if ( qryStr.trim() !== '' ) {
-    	body.query( 'query_string', 'query', qryStr );
+        default:
+          typeArgs.push( ...appendQry( type, 'type' ) );
+      }
+    } );
+    qry.push( `(${typeArgs.join( ' OR ' )})` );
   }
 
-  	body.from( params.from );
-  	body.size( params.size );
+  let qryStr = reduceQry( qry );
 
-  	if ( params.sort === 'recent' ) {
-    	body.sort( 'published', 'desc' );
+
+  if ( qryStr.trim() !== '' ) {
+    body.query( 'query_string', 'query', qryStr );
+  }
+
+  body.from( params.from );
+  body.size( params.size );
+
+  if ( params.sort === 'recent' ) {
+    body.sort( 'published', 'desc' );
   } else {
-    	body.sort( 'title.keyword', 'asc' );
+    body.sort( 'title.keyword', 'asc' );
   }
-  	return body.build();
+  return body.build();
 };
 
 

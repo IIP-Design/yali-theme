@@ -1633,24 +1633,24 @@ function builder(params, context) {
 }
 
 var generateBodyQry = exports.generateBodyQry = function generateBodyQry(params, context) {
+  console.log('generateBodyQry', params);
   var body = new _bodybuilder2.default();
   var qry = [],
       str = void 0;
 
   params.sites.forEach(function (item) {
-    body.orFilter('term', 'site', item);
+    if (item.indexOf('courses') > -1) {
+      // Courses for YALI should have branded:true meaning they are YALI branded.
+      // It was easier to do this here when using body builder as checking for true
+      // when the branded field exists wasn't working when created with bodybuilder.
+      body.orFilter('bool', function (b) {
+        return b.filter('term', 'site', item).andFilter('term', 'branded', 'true');
+      });
+    } else body.orFilter('term', 'site', item);
   });
 
   // Becomes a MUST if there is only 1 site
   body.filterMinimumShouldMatch(1);
-
-  body.orQuery('bool', function (b) {
-    return b.orFilter('term', 'branded', 'true').orFilter('bool', function (b) {
-      return b.notFilter('exists', 'field', 'branded');
-    }).filterMinimumShouldMatch(1);
-  });
-  //body.orQuery('term', 'branded', 'yes').orFilter('bool', b => b.notFilter('exists', 'field', 'branded'));
-
 
   if (params.series) {
     body.filter('term', 'site_taxonomies.series.name.keyword', params.series);
@@ -1671,26 +1671,31 @@ var generateBodyQry = exports.generateBodyQry = function generateBodyQry(params,
   }
 
   if (params.types) {
-    switch (params.types) {
-      case 'article':
-        str = 'type: post OR type: page';
-        qry.push(str);
-        break;
+    var types = fetchArray(params.types);
+    var typeArgs = [];
+    types.forEach(function (type) {
+      switch (type) {
+        case 'article':
+          str = '(type:post OR type:page)';
+          typeArgs.push(str);
+          break;
 
-      case 'courses':
-        str = 'type: courses AND branded: true';
-        qry.push(str);
-        break;
+        case 'courses':
+          str = '(type:courses)';
+          typeArgs.push(str);
+          break;
 
-      case 'Podcast':
-      case 'Video':
-        str = 'site_taxonomies.content_type.name: ' + params.types;
-        qry.push(str);
-        break;
+        case 'Podcast':
+        case 'Video':
+          str = '(site_taxonomies.content_type.name: (' + type + '))';
+          typeArgs.push(str);
+          break;
 
-      default:
-        qry.push.apply(qry, _toConsumableArray(appendQry(params.types, 'type')));
-    }
+        default:
+          typeArgs.push.apply(typeArgs, _toConsumableArray(appendQry(type, 'type')));
+      }
+    });
+    qry.push('(' + typeArgs.join(' OR ') + ')');
   }
 
   var qryStr = reduceQry(qry);
