@@ -130,7 +130,16 @@ export const generateBodyQry = ( params, context ) => {
 
   if ( params.categories ) {
     // leave for use w/multiple categories, i.e 'environment, climate'
-    appendFilter( body, params.categories, ['categories.name.keyword', 'site_taxonomies.categories.name.keyword'] );
+    appendFilter( body, params.categories, [
+      {
+        key: 'categories.name.keyword',
+        lowercase: true
+      },
+      {
+        key: 'site_taxonomies.categories.name.keyword',
+        lowercase: false
+      }
+    ] );
   }
 
   if ( params.types ) {
@@ -230,6 +239,10 @@ const fetchQry = ( qry, context, params ) => {
 /**
  * Attaches an OR filter for each of the values for each of the keys onto the
  * provided bodybuilder. A minimum of 1 filter should match.
+ * Keys can be objects with properties: key, lowercase.
+ * The key property is the name of the field (string)
+ * and the lowercase property is a boolean for whether or not
+ * the search term should be lowercased.
  *
  * @param body
  * @param vals
@@ -240,8 +253,14 @@ const appendFilter = ( body, vals, keys ) => {
   const fields = fetchArray( keys );
   body.filter( 'bool', b => {
     fields.forEach( ( field ) => {
+      let fieldKey = field;
+      let lowercase = false;
+      if ( typeof field === 'object' ) {
+        fieldKey = field.key;
+        lowercase = field.lowercase;
+      }
       terms.forEach( ( term ) => {
-        b.orFilter( 'term', field, term );
+        b.orFilter( 'term', fieldKey, lowercase ? term.toLowerCase() : term );
       } );
     } );
     return b.filterMinimumShouldMatch(1);

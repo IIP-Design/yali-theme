@@ -1535,6 +1535,9 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.generateBodyQry = undefined;
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
 exports.getTypes = getTypes;
 exports.getCategories = getCategories;
 exports.getSeries = getSeries;
@@ -1659,7 +1662,13 @@ var generateBodyQry = exports.generateBodyQry = function generateBodyQry(params,
 
   if (params.categories) {
     // leave for use w/multiple categories, i.e 'environment, climate'
-    appendFilter(body, params.categories, ['categories.name.keyword', 'site_taxonomies.categories.name.keyword']);
+    appendFilter(body, params.categories, [{
+      key: 'categories.name.keyword',
+      lowercase: true
+    }, {
+      key: 'site_taxonomies.categories.name.keyword',
+      lowercase: false
+    }]);
   }
 
   if (params.types) {
@@ -1764,6 +1773,10 @@ var fetchQry = function fetchQry(qry, context, params) {
 /**
  * Attaches an OR filter for each of the values for each of the keys onto the
  * provided bodybuilder. A minimum of 1 filter should match.
+ * Keys can be objects with properties: key, lowercase.
+ * The key property is the name of the field (string)
+ * and the lowercase property is a boolean for whether or not
+ * the search term should be lowercased.
  *
  * @param body
  * @param vals
@@ -1774,8 +1787,14 @@ var appendFilter = function appendFilter(body, vals, keys) {
   var fields = fetchArray(keys);
   body.filter('bool', function (b) {
     fields.forEach(function (field) {
+      var fieldKey = field;
+      var lowercase = false;
+      if ((typeof field === 'undefined' ? 'undefined' : _typeof(field)) === 'object') {
+        fieldKey = field.key;
+        lowercase = field.lowercase;
+      }
       terms.forEach(function (term) {
-        b.orFilter('term', field, term);
+        b.orFilter('term', fieldKey, lowercase ? term.toLowerCase() : term);
       });
     });
     return b.filterMinimumShouldMatch(1);
