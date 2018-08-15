@@ -1633,7 +1633,6 @@ function builder(params, context) {
 }
 
 var generateBodyQry = exports.generateBodyQry = function generateBodyQry(params, context) {
-  console.log('generateBodyQry', params);
   var body = new _bodybuilder2.default();
   var qry = [],
       str = void 0;
@@ -1666,7 +1665,7 @@ var generateBodyQry = exports.generateBodyQry = function generateBodyQry(params,
 
   if (params.categories) {
     // leave for use w/multiple categories, i.e 'environment, climate'
-    var cats = appendQry(params.categories, ['categories.name', 'site_taxonomies.categories.name']);
+    var cats = appendQry(params.categories, ['categories.name.keyword', 'site_taxonomies.categories.name']);
     qry.push.apply(qry, _toConsumableArray(cats));
   }
 

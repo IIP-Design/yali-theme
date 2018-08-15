@@ -102,7 +102,6 @@ export function builder ( params, context ) {
 }
 
 export const generateBodyQry = ( params, context ) => {
-  console.log( 'generateBodyQry', params );
   let body = new bodybuilder();
   let qry = [], str;
 
@@ -135,7 +134,7 @@ export const generateBodyQry = ( params, context ) => {
 
   if ( params.categories ) {
     // leave for use w/multiple categories, i.e 'environment, climate'
-    let cats = appendQry( params.categories, ['categories.name', 'site_taxonomies.categories.name']);
+    let cats = appendQry( params.categories, ['categories.name.keyword', 'site_taxonomies.categories.name']);
     qry.push( ...cats );
   }
 
