@@ -400,7 +400,7 @@ var defaultFilterConfig = {
 	size: 12,
 	sort: 'recent',
 	types: '',
-	langs: 'en',
+	langs: 'en-us',
 	series: '',
 	meta: ['date'],
 	categories: '',
@@ -1551,8 +1551,6 @@ var _axios2 = _interopRequireDefault(_axios);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
 // NOTE: using ElasticSearch terms aggregations to find distinct values
 // https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-terms-aggregation.html
 
@@ -1634,74 +1632,66 @@ function builder(params, context) {
 
 var generateBodyQry = exports.generateBodyQry = function generateBodyQry(params, context) {
   var body = new _bodybuilder2.default();
-  var qry = [],
-      str = void 0;
+  // let qry = [], str;
 
-  params.sites.forEach(function (item) {
-    if (item.indexOf('courses') > -1) {
-      // Courses for YALI should have branded:true meaning they are YALI branded.
-      // It was easier to do this here when using body builder as checking for true
-      // when the branded field exists wasn't working when created with bodybuilder.
-      body.orFilter('bool', function (b) {
-        return b.filter('term', 'site', item).andFilter('term', 'branded', 'true');
-      });
-    } else body.orFilter('term', 'site', item);
+  appendFilter(body, params.sites, 'site');
+
+  // This only applies to courses. When branded field exists, it must be true.
+  // YALI wants only courses YALI branded which all that this field represents.
+  body.filter('bool', function (b) {
+    return b.orFilter('term', 'branded', 'true').orFilter('bool', function (f) {
+      return f.notFilter('exists', 'branded');
+    }).filterMinimumShouldMatch(1);
   });
 
-  // Becomes a MUST if there is only 1 site
-  body.filterMinimumShouldMatch(1);
-
   if (params.series) {
-    body.filter('term', 'site_taxonomies.series.name.keyword', params.series);
+    appendFilter(body, params.series, 'site_taxonomies.series.name.keyword');
   }
 
   if (params.tags) {
-    body.filter('term', 'site_taxonomies.tags.name.keyword', params.tags);
+    appendFilter(body, params.tags, 'site_taxonomies.tags.name.keyword');
   }
 
   if (params.langs) {
-    qry.push.apply(qry, _toConsumableArray(appendQry(params.langs, 'language.locale')));
+    // qry.push( ...appendQry( params.langs, 'language.locale' ) );
+    appendFilter(body, params.langs, 'language.locale.keyword');
   }
 
   if (params.categories) {
     // leave for use w/multiple categories, i.e 'environment, climate'
-    var cats = appendQry(params.categories, ['categories.name.keyword', 'site_taxonomies.categories.name']);
-    qry.push.apply(qry, _toConsumableArray(cats));
+    appendFilter(body, params.categories, ['categories.name.keyword', 'site_taxonomies.categories.name.keyword']);
   }
 
   if (params.types) {
     var types = fetchArray(params.types);
-    var typeArgs = [];
-    types.forEach(function (type) {
-      switch (type) {
-        case 'article':
-          str = '(type:post OR type:page)';
-          typeArgs.push(str);
-          break;
+    body.filter('bool', function (b) {
+      types.forEach(function (type) {
+        switch (type) {
+          case 'article':
+            b.orFilter('term', 'type.keyword', 'post').orFilter('term', 'type.keyword', 'page');
+            break;
 
-        case 'courses':
-          str = '(type:courses)';
-          typeArgs.push(str);
-          break;
+          case 'courses':
+            b.orFilter('term', 'type.keyword', 'courses');
+            break;
 
-        case 'Podcast':
-        case 'Video':
-          str = '(site_taxonomies.content_type.name: (' + type + '))';
-          typeArgs.push(str);
-          break;
+          case 'Podcast':
+          case 'Video':
+            b.orFilter('term', 'site_taxonomies.content_type.name.keyword', type);
+            break;
 
-        default:
-          typeArgs.push.apply(typeArgs, _toConsumableArray(appendQry(type, 'type')));
-      }
+          default:
+            b.orFilter('term', 'type.keyword', type);
+        }
+      });
+      return b.filterMinimumShouldMatch(1);
     });
-    qry.push('(' + typeArgs.join(' OR ') + ')');
   }
 
-  var qryStr = reduceQry(qry);
-
-  if (qryStr.trim() !== '') {
-    body.query('query_string', 'query', qryStr);
-  }
+  // let qryStr = reduceQry( qry );
+  // if ( qryStr.trim() !== '' ) {
+  //   body.query( 'query_string', 'query', qryStr );
+  // }
 
   body.from(params.from);
   body.size(params.size);
@@ -1761,14 +1751,35 @@ function capitalize(string) {
 }
 
 function fetchArray(str) {
-  //console.log(str.split(',').filter( item => item.trim()) );
-  return str.split(',').map(function (item) {
+  if (typeof str === 'string') return str.split(',').map(function (item) {
     return item.trim();
   });
+  return str;
 }
 
 var fetchQry = function fetchQry(qry, context, params) {
   return context && context.filter === qry && context.filterValue ? context.filterValue : params;
+};
+
+/**
+ * Attaches an OR filter for each of the values for each of the keys onto the
+ * provided bodybuilder. A minimum of 1 filter should match.
+ *
+ * @param body
+ * @param vals
+ * @param keys
+ */
+var appendFilter = function appendFilter(body, vals, keys) {
+  var terms = fetchArray(vals);
+  var fields = fetchArray(keys);
+  body.filter('bool', function (b) {
+    fields.forEach(function (field) {
+      terms.forEach(function (term) {
+        b.orFilter('term', field, term);
+      });
+    });
+    return b.filterMinimumShouldMatch(1);
+  });
 };
 
 var appendQry = function appendQry(str, field) {
@@ -1780,7 +1791,7 @@ var appendQry = function appendQry(str, field) {
   }
   return items.map(function (item) {
     return '(' + field.reduce(function (accum, subField) {
-      accum.push(subField + ':(' + item + ')');
+      accum.push(subField + ':\'' + item + '\'');
       return accum;
     }, []).join(' OR ') + ')';
   });

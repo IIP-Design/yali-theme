@@ -103,75 +103,67 @@ export function builder ( params, context ) {
 
 export const generateBodyQry = ( params, context ) => {
   let body = new bodybuilder();
-  let qry = [], str;
+  // let qry = [], str;
 
-  params.sites.forEach( ( item ) => {
-    if ( item.indexOf( 'courses' ) > -1 ) {
-      // Courses for YALI should have branded:true meaning they are YALI branded.
-      // It was easier to do this here when using body builder as checking for true
-      // when the branded field exists wasn't working when created with bodybuilder.
-      body.orFilter( 'bool', ( b ) => b
-        .filter( 'term', 'site', item )
-        .andFilter( 'term', 'branded', 'true' ) )
-    } else body.orFilter( 'term', 'site', item );
-  } );
+  appendFilter( body, params.sites, 'site' );
 
-  // Becomes a MUST if there is only 1 site
-  body.filterMinimumShouldMatch( 1 );
-
+  // This only applies to courses. When branded field exists, it must be true.
+  // YALI wants only courses YALI branded which all that this field represents.
+  body.filter( 'bool', b => b
+    .orFilter('term', 'branded', 'true')
+    .orFilter('bool', f => f.notFilter('exists', 'branded'))
+    .filterMinimumShouldMatch( 1 )
+  );
 
   if ( params.series ) {
-    body.filter( 'term', 'site_taxonomies.series.name.keyword', params.series );
+    appendFilter( body, params.series, 'site_taxonomies.series.name.keyword');
   }
 
   if ( params.tags ) {
-    body.filter( 'term', 'site_taxonomies.tags.name.keyword', params.tags );
+    appendFilter( body, params.tags, 'site_taxonomies.tags.name.keyword');
   }
 
   if ( params.langs ) {
-    qry.push( ...appendQry( params.langs, 'language.locale' ) );
+    // qry.push( ...appendQry( params.langs, 'language.locale' ) );
+    appendFilter( body, params.langs, 'language.locale.keyword')
   }
 
   if ( params.categories ) {
     // leave for use w/multiple categories, i.e 'environment, climate'
-    let cats = appendQry( params.categories, ['categories.name.keyword', 'site_taxonomies.categories.name']);
-    qry.push( ...cats );
+    appendFilter( body, params.categories, ['categories.name.keyword', 'site_taxonomies.categories.name.keyword'] );
   }
 
   if ( params.types ) {
     let types = fetchArray( params.types );
-    let typeArgs = [];
-    types.forEach( ( type ) => {
-      switch ( type ) {
-        case 'article':
-          str = '(type:post OR type:page)';
-          typeArgs.push( str );
-          break;
+    body.filter( 'bool', b => {
+      types.forEach( ( type ) => {
+        switch ( type ) {
+          case 'article':
+            b.orFilter( 'term', 'type.keyword', 'post')
+            .orFilter( 'term', 'type.keyword', 'page');
+            break;
 
-        case 'courses':
-          str = '(type:courses)';
-          typeArgs.push( str );
-          break;
+          case 'courses':
+            b.orFilter( 'term', 'type.keyword', 'courses');
+            break;
 
-        case 'Podcast':
-        case 'Video':
-          str = `(site_taxonomies.content_type.name: (${type}))`;
-          typeArgs.push( str );
-          break;
+          case 'Podcast':
+          case 'Video':
+            b.orFilter( 'term', 'site_taxonomies.content_type.name.keyword', type );
+            break;
 
-        default:
-          typeArgs.push( ...appendQry( type, 'type' ) );
-      }
+          default:
+            b.orFilter( 'term', 'type.keyword', type );
+        }
+      } );
+      return b.filterMinimumShouldMatch(1);
     } );
-    qry.push( `(${typeArgs.join( ' OR ' )})` );
   }
 
-  let qryStr = reduceQry( qry );
-
-
-  if ( qryStr.trim() !== '' ) {
-    body.query( 'query_string', 'query', qryStr );
-  }
+  // let qryStr = reduceQry( qry );
+  // if ( qryStr.trim() !== '' ) {
+  //   body.query( 'query_string', 'query', qryStr );
+  // }
 
   body.from( params.from );
   body.size( params.size );
@@ -225,8 +217,8 @@ function capitalize ( string ) {
 }
 
 function fetchArray ( str ) {
-  //console.log(str.split(',').filter( item => item.trim()) );
-  	return str.split( ',' ).map( item => item.trim() );
+    if ( typeof str === 'string' ) return str.split( ',' ).map( item => item.trim() );
+    return str;
 }
 
 const fetchQry = ( qry, context, params ) => {
@@ -235,13 +227,34 @@ const fetchQry = ( qry, context, params ) => {
     : params;
 };
 
+/**
+ * Attaches an OR filter for each of the values for each of the keys onto the
+ * provided bodybuilder. A minimum of 1 filter should match.
+ *
+ * @param body
+ * @param vals
+ * @param keys
+ */
+const appendFilter = ( body, vals, keys ) => {
+  const terms = fetchArray( vals );
+  const fields = fetchArray( keys );
+  body.filter( 'bool', b => {
+    fields.forEach( ( field ) => {
+      terms.forEach( ( term ) => {
+        b.orFilter( 'term', field, term );
+      } );
+    } );
+    return b.filterMinimumShouldMatch(1);
+  } );
+};
+
 const appendQry = ( str, field ) => {
   	let items = fetchArray( str );
   	if ( typeof field === 'string' ) {
       return items.map( item => `${field}: ${item}` );
     }
     return items.map( item => `(${field.reduce( ( accum, subField ) => {
-      accum.push(`${subField}:(${item})`);
+      accum.push(`${subField}:'${item}'`);
       return accum;
     }, [] ).join( ' OR ' )})` );
 };

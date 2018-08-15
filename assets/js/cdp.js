@@ -25,7 +25,7 @@ var defaultFilterConfig = {
 	size: 12,
 	sort: 'recent',
 	types: '',
-	langs: 'en',
+	langs: 'en-us',
 	series: '',
 	meta: ['date'],
 	categories: '',
