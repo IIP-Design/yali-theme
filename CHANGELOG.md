@@ -1,6 +1,21 @@
 # Change Log
 ##### All notable changes to this project will be documented in this file.
 
+## [v1.4.5](https://github.com/IIP-Design/yali-theme/tree/v1.4.5) (2018-08-22)
+
+**Fixed:**
+- `data-filter-value` values with apostrophe(s) that break the CDP query string by escaping taxonomy fields for the CDP config and using double quotes for `data-filter-value`
+- `content_type` archive pages that returned *all* content rather than that specific content type only, e.g., `Podcast` `content_type` archive page now returns podcasts only and not other, non-podcast, posts
+- `Podcast` and `Video` drop down selections on post list with filter content blocks
+- Branded courses no longer appear in CDP query results
+- Category CDP queries now return the correct posts and/or courses instead of returning false positives
+
+**Changed:**
+- Adjusted course name sizes for certificate badges
+- Adjusted header sizes and templates so that the main header is an `h1`
+- Moved IE styles to a separate scss partial to allow the styles to apply to entire site
+- Updated the MWF application tips link
+
 ## [v1.4.4](https://github.com/IIP-Design/yali-theme/tree/v1.4.4) (2018-08-02)
 
 **Added:**
