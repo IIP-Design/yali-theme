@@ -1,6 +1,10 @@
 # Change Log
 ##### All notable changes to this project will be documented in this file.
 
+## [v1.4.6](https://github.com/IIP-Design/yali-theme/tree/v1.4.6) (2018-08-22)
+**Changed:**
+- Switched page list content block article title to h3 (rather than h2) 
+
 ## [v1.4.5](https://github.com/IIP-Design/yali-theme/tree/v1.4.5) (2018-08-22)
 
 **Fixed:**
