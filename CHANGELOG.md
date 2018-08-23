@@ -1,7 +1,13 @@
 # Change Log
 ##### All notable changes to this project will be documented in this file.
 
+## [v1.4.7](https://github.com/IIP-Design/yali-theme/tree/v1.4.7) (2018-08-23)
+
+**Fixed:**
+- Post list content blocks no longer return false positives when selecting by tags or categories
+
 ## [v1.4.6](https://github.com/IIP-Design/yali-theme/tree/v1.4.6) (2018-08-22)
+
 **Changed:**
 - Switched page list content block article title to h3 (rather than h2) 
 
