@@ -422,7 +422,7 @@ function renderArticleFeed(feed) {
 
 	shouldDisplayRelatedLinks(config);
 
-	if (context || config.series) {
+	if (context || config.tags || config.series || config.categories) {
 		// Build query outside of cdp module, since using some YALI specific params, i.e.series
 		addFeed(query.builder(configObj, context));
 	} else {
