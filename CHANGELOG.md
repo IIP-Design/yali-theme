@@ -1,6 +1,11 @@
 # Change Log
 ##### All notable changes to this project will be documented in this file.
 
+## [v1.4.8](https://github.com/IIP-Design/yali-theme/tree/v1.4.8) (2018-08-27)
+
+**Fixed:**
+- `scrollToElemID` returns the hash instead of the entire URL, which allows button links to scroll properly to sections of the same page
+
 ## [v1.4.7](https://github.com/IIP-Design/yali-theme/tree/v1.4.7) (2018-08-23)
 
 **Fixed:**
