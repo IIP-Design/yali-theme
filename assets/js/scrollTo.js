@@ -8,7 +8,7 @@ export default function scroll_to_elem(elem_class) {
 			var 
 				nav_height = ( window.outerWidth > 933 ) ? 92 : 62,
 				offset = 50 + nav_height,
-				scrollToElemID = this.getAttribute( 'href' );
+				scrollToElemID = this.hash;
 
 			if( scrollToElemID ) {
 				var scrollToElem = document.querySelector( scrollToElemID );
