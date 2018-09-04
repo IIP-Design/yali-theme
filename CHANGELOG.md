@@ -1,6 +1,11 @@
 # Change Log
 ##### All notable changes to this project will be documented in this file.
 
+## [v1.4.9](https://github.com/IIP-Design/yali-theme/tree/v1.4.9) (2018-09-04)
+
+**Changed:**
+- Updated mwf application twig template
+  
 ## [v1.4.8](https://github.com/IIP-Design/yali-theme/tree/v1.4.8) (2018-08-27)
 
 **Fixed:**
