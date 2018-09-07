@@ -1,28 +1,40 @@
-<section class='media_block'>
-	{% include 'partials/content_block_title.twig' %}
+<section class='cb media_block {{ full_screen_width == 'yes' ? 'full-width' : '' }}' style="color: {{ excerpt_color }}; background-color: {{ block_bg_color }}">
 
-	{% if intro is not empty %}
-		{{ intro }}	
-	{% endif %}	
 
-	{% if media_items is not empty %}
-	<div class='ui stackable grid'>
-		{% for file in media_items %}
-		<div class='eight wide column'>
-			{% if file.media_file_btn_text is not empty %}
-			<a href='{{ file.media_file }}' target='target_blank' class='cta_link'>{{ file.media_file_btn_text }}</a>
-			{% endif %}
-
-			{% if file.media_file_excerpt is not empty %}
-			<div class='media_block_img' data-preview-image='{{ file.media_file }}' style='background-image: url({{ file.media_file }}); background-size: cover;'></div>
-			<p class='media_block_text'>{{ file.media_file_excerpt }}</p>
-			{% endif %}
-		</div>
-		{% endfor %}		
-	</div>
+	{% if full_screen_width == 'yes' %}
+	<div class='ui container'>
+		<div class='inner-container'>
 	{% endif %}
 
-	{% if intro is not empty %}
-		{{ outro }}
+			{% include 'partials/content_block_title.twig' %}
+
+			{% if intro is not empty %}
+				{{ intro }}	
+			{% endif %}	
+
+			{% if media_items is not empty %}
+			<div class='ui stackable grid'>
+				{% for file in media_items %}
+				<div class='eight wide column'>
+					{% if file.media_file_btn_text is not empty %}
+					<a href='{{ file.media_file }}' target='target_blank' class='cta_link'>{{ file.media_file_btn_text }}</a>
+					{% endif %}
+
+					{% if file.media_file_excerpt is not empty %}
+					<div class='media_block_img' data-preview-image='{{ file.media_file }}' style='background-image: url({{ file.media_file }}); background-size: cover;'></div>
+					<p class='media_block_text'>{{ file.media_file_excerpt }}</p>
+					{% endif %}
+				</div>
+				{% endfor %}		
+			</div>
+			{% endif %}
+
+			{% if intro is not empty %}
+				{{ outro }}
+			{% endif %}
+
+	{% if full_screen_width == 'yes' %}
+		</div>
+	</div>
 	{% endif %}
 </section>
