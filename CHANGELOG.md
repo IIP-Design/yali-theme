@@ -1,6 +1,11 @@
 # Change Log
 ##### All notable changes to this project will be documented in this file.
 
+## [v1.4.11](https://github.com/IIP-Design/yali-theme/tree/v1.4.11) (2018-09-07)
+
+**Added:**
+- Background color, full-width, button background color, and button text color options to the media content block
+
 ## [v1.4.10](https://github.com/IIP-Design/yali-theme/tree/v1.4.10) (2018-09-05)
 
 **Changed:**
