@@ -17,7 +17,7 @@
 				{% for file in media_items %}
 				<div class='eight wide column'>
 					{% if file.media_file_btn_text is not empty %}
-					<a href='{{ file.media_file }}' target='target_blank' class='cta_link'>{{ file.media_file_btn_text }}</a>
+					<a href='{{ file.media_file }}' target='target_blank' class='cta_link' style='color: {{ file.button_text_color }}; background-color: {{ file.button_bg_color }};'>{{ file.media_file_btn_text }}</a>
 					{% endif %}
 
 					{% if file.media_file_excerpt is not empty %}

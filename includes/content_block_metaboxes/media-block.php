@@ -39,6 +39,34 @@ $media_block->add_group_field( $media_block_group_field, array(
 ));
 
 $media_block->add_group_field( $media_block_group_field, array(
+  'name'               => 'Background color',
+  'desc'                => 'Background color of button',
+  'id'                  => 'button_bg_color',
+  'type'                => 'colorpicker',
+  'default'             => '#ffffff',
+  'attributes'          => array(
+    'data-colorpicker'  => json_encode( array(
+        'border'        => false,
+        'palettes'      => array( '#ffffff', '#eeeeee', '#f2d400', '#25ace2', '#174f9f', '#192856' )
+    ))
+  )
+));
+
+$media_block->add_group_field( $media_block_group_field, array(
+  'name'               => 'Text Color',
+  'desc'                => 'Color of text label for button',
+  'id'                  => 'button_text_color',
+  'type'                => 'colorpicker',
+  'default'             => '#ffffff',
+  'attributes'          => array(
+    'data-colorpicker'  => json_encode( array(
+        'border'        => false,
+        'palettes'      => array( '#ffffff', '#eeeeee', '#f2d400', '#25ace2', '#174f9f', '#192856' )
+    ))
+  )
+));
+
+$media_block->add_group_field( $media_block_group_field, array(
  	'name'  => 'Media File Excerpt',
 	'id'    => 'media_file_excerpt',
 	'description' => __('If image, add content to display under image file (Optional)'),
