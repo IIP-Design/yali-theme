@@ -91,6 +91,8 @@ class Content_Block_Shortcode {
 
   // ACCORDION CONTENT BLOCK
   public function render_accordion( $atts ) {
+    global $wp_embed;
+
     $id = $atts['id'];
     $items = array();
     $meta_data = get_post_meta($id, 'accordion_repeat_group', true);
@@ -100,6 +102,8 @@ class Content_Block_Shortcode {
       $item_value['item_content'] = $this->filter_link( $item_value['item_content'] );
       $item_value['item_content'] = wpautop($item_value['item_content']);
       $item_value['item_content'] = do_shortcode($item_value['item_content']);
+      $item_value['item_content'] = $wp_embed->autoembed( $item_value['item_content'] );
+      $item_value['item_content'] = $wp_embed->run_shortcode( $item_value['item_content'] );
       array_push($items, $item_value);
     }
 
@@ -214,12 +218,18 @@ class Content_Block_Shortcode {
 
   // MEDIA CONTENT BLOCK
   public function render_media_block( $atts ) {
+    global $wp_embed;
+
     $id = $atts['id'];
     $context = $this->fetch_base_config( $id, $post );
     $context['media_items'] = get_post_meta( $id, 'media_block_repeat_group', true );
     $context['text_color'] = get_post_meta( $id, 'block_text_color', true );
     $context['intro'] = wpautop(get_post_meta( $id, 'intro_content', true ));
+    $context['intro'] = $wp_embed->autoembed( $context['intro'] );
+    $context['intro'] = $wp_embed->run_shortcode( $context['intro'] );
     $context['outro'] = wpautop(get_post_meta( $id, 'outro_content', true ));
+    $context['outro'] = $wp_embed->autoembed( $context['outro'] );
+    $context['outro'] = $wp_embed->run_shortcode( $context['outro'] );
 
     return Twig::render( 'content_blocks/media-block.twig', $context );
   }
@@ -242,12 +252,16 @@ class Content_Block_Shortcode {
 
   // TEXT CONTENT BLOCK
   public function render_text_block( $atts ) {
+    global $wp_embed;
+
     $id = $atts['id'];
     $context = $this->fetch_base_config( $id, get_post($id) );
 
     $text_content = get_post_meta( $id, 'yali_text_block_content', true );
     $text_content = $this->filter_link( $text_content );
     $text_content = wpautop($text_content);
+    $text_content = $wp_embed->autoembed( $text_content );
+    $text_content = $wp_embed->run_shortcode( $text_content );
     $context['text_content'] = do_shortcode($text_content);
     $context['font_color'] = get_post_meta( $id, 'yali_text_block_font_color', true );
 
