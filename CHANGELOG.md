@@ -1,6 +1,12 @@
 # Change Log
 ##### All notable changes to this project will be documented in this file.
 
+## [v1.4.12](https://github.com/IIP-Design/yali-theme/tree/v1.4.12) (2018-09-11)
+
+**Added:**
+- Dedicated text color option for the media content block
+- Applied CMB2 `oembed` filters to content block wysiwyg fields, which allows embedded content, e.g., YouTube videos, to display properly
+
 ## [v1.4.11](https://github.com/IIP-Design/yali-theme/tree/v1.4.11) (2018-09-07)
 
 **Added:**
