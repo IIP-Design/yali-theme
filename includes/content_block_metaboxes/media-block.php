@@ -10,6 +10,20 @@ $media_block = new_cmb2_box( array(
 	'priority' => 'low'
 ));
 
+$media_block->add_field( array(
+  'name'               => 'Text Color',
+  'desc'                => 'Color of text for the block',
+  'id'                  => 'block_text_color',
+  'type'                => 'colorpicker',
+  'default'             => '#192856',
+  'attributes'          => array(
+    'data-colorpicker'  => json_encode( array(
+        'border'        => false,
+        'palettes'      => array( '#ffffff', '#eeeeee', '#f2d400', '#25ace2', '#174f9f', '#192856' )
+    ))
+  )
+));
+
 $media_block_group_field = $media_block->add_field( array(
 	'id'		=>	'media_block_repeat_group',
 	'type'  	=> 'group',

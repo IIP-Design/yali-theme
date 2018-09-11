@@ -217,6 +217,7 @@ class Content_Block_Shortcode {
     $id = $atts['id'];
     $context = $this->fetch_base_config( $id, $post );
     $context['media_items'] = get_post_meta( $id, 'media_block_repeat_group', true );
+    $context['text_color'] = get_post_meta( $id, 'block_text_color', true );
     $context['intro'] = wpautop(get_post_meta( $id, 'intro_content', true ));
     $context['outro'] = wpautop(get_post_meta( $id, 'outro_content', true ));
 
