@@ -1,6 +1,11 @@
 # Change Log
 ##### All notable changes to this project will be documented in this file.
 
+## [v1.4.13](https://github.com/IIP-Design/yali-theme/tree/v1.4.13) (2018-09-12)
+
+**Changed:**
+- Updated mwf-application twig button blocks and application announcement for launch
+
 ## [v1.4.12](https://github.com/IIP-Design/yali-theme/tree/v1.4.12) (2018-09-11)
 
 **Added:**
