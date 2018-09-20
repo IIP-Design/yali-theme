@@ -27,7 +27,7 @@ $size = wp_get_attachment_image_sizes($img_id, 'full');
 // Custom Fields Content
 $countdown = do_shortcode($page_data['cmb2']['mwf_app_application']['mwf_app_application_date']);
 $addtl_content = do_shortcode($page_data['cmb2']['mwf_app_application']['mwf_app_addtl_content']);
-$cta_mwf = do_shortcode("[content_block id='17364' title='MWF: Application Apply Button']");
+$cta_mwf = do_shortcode("[content_block id='19019' title='MWF: Application Apply Button']");
 
 // 'Join the Network' Form
 $formVar = do_shortcode('[formidable id=6]');
