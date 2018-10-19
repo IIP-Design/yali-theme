@@ -1,6 +1,16 @@
 # Change Log
 ##### All notable changes to this project will be documented in this file.
 
+## [v1.4.16](https://github.com/IIP-Design/yali-theme/tree/v1.4.16) (2018-10-19)
+
+**Changed:**
+- Adjusted Portuguese language display to read "Portuguese" instead of "Portuguese (Brazil)" in dropdown menus and post-list filters dashboard
+
+## [v1.4.15](https://github.com/IIP-Design/yali-theme/tree/v1.4.15) (2018-10-10)
+
+**Changed:**
+- Updated MWF Application Twig
+
 ## [v1.4.14](https://github.com/IIP-Design/yali-theme/tree/v1.4.14) (2018-09-20)
 
 **Changed:**
