@@ -334,6 +334,10 @@ function addOptions(filter, options, selected) {
 	if (menu && options) {
 		var fragment = document.createDocumentFragment();
 		options.forEach(function(option) {
+			if (option.key === 'pt-br') {
+				const regex = /\s?\(Brazil\)/g;
+				option.display = option.display.replace(regex, '');
+			}
 			var el = document.createElement('div');
 			el.className = 'item';
 			el.dataset.value = option.key;

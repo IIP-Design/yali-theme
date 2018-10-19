@@ -34,7 +34,7 @@ $cb_box_filter->add_field( array(
 	'options' => array(
 		'en-us'   => __( 'English' ),
     'fr-fr'   => __( 'French' ),
-    'pt-br'   => __( 'Portuguese (Brazil)' )
+    'pt-br'   => __( 'Portuguese' )
 	),
 ));
 

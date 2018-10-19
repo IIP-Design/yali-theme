@@ -208,7 +208,7 @@ class Content_Block_Shortcode {
         $context['lang_value'] = 'French';
         break;
       case 'pt-br' :
-        $context['lang_value'] = 'Portuguese (Brazil)';
+        $context['lang_value'] = 'Portuguese';
         break;
     }
 
