@@ -1,6 +1,11 @@
 # Change Log
 ##### All notable changes to this project will be documented in this file.
 
+## [v1.4.17](https://github.com/IIP-Design/yali-theme/tree/v1.4.17) (2018-10-23)
+
+**Removed:**
+- Removed hard-coded YALIGoesGreen page template (can be replicated with content blocks)
+
 ## [v1.4.16](https://github.com/IIP-Design/yali-theme/tree/v1.4.16) (2018-10-19)
 
 **Changed:**

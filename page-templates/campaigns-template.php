@@ -85,10 +85,6 @@ $yaliunites_blog_list = do_shortcode("[content_block id='16462' title='YALIUnite
 $yaliserves_course = do_shortcode("");
 $yaliserves_post_list = do_shortcode("[content_block id='14002' title='Make everyday Mandela Day']");
 
-// YALIGoesGreen
-$yaligoesgreen_course = do_shortcode("[content_block id='14730' title='Take the courses']");
-$yaligoesgreen_post_list = do_shortcode("[content_block id='14725' title='Read about ways to go green in your community']");
-
 // Data array for twig
 $context = array(
   "pagename"    	  => $pagename,
@@ -110,9 +106,7 @@ $context = array(
   "yaliunites_blog_list"  => $yaliunites_blog_list,
   "yaliunites_whats_the_harm" => $yaliunites_whats_the_harm,
   "yaliserves_course" => $yaliserves_course,
-  "yaliserves_post_list" => $yaliserves_post_list,
-  "yaligoesgreen_course" => $yaligoesgreen_course,
-  "yaligoesgreen_post_list" => $yaligoesgreen_post_list
+  "yaliserves_post_list" => $yaliserves_post_list
 );
 
 
