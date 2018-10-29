@@ -22,7 +22,7 @@
       selectByPostsLink = $('.cmb2-id-yali-cdp-autocomplete-related.cmb-repeat'),
       selectByPostsDisplay = $('.cmb2-id-yali-cdp-autocomplete-links-display'),
       languageFilterOption = $('input[value="language"]'),
-      languageSelectionField = $('.cmb2-id-yali-cb-lang-selection');
+      languageSelectionField = $('.cmb2-id-yali-cb-lang-selection'),
       cdpLanguageSelectionField = $('.cmb2-id-yali-cdp-select-language');
 
     // Metabox Object store for iterating
@@ -139,9 +139,6 @@
         selectByPostsNum.hide();
         selectByContentType.hide();
         selectByTaxonomy.hide();
-        selectByPostsCategory.hide();
-        selectByPostsSeries.hide();
-        selectByPostsTags.hide();
         cdpLanguageSelectionField.hide();
         selectByPosts.show();
         selectByPostsLink.show();
