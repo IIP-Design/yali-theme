@@ -26,6 +26,36 @@ $cb_box_cdp->add_field(  array(
 ));
 
 $cb_box_cdp->add_field(  array(
+  'name'             => __( 'Content type(s) to display:', 'america' ),
+  'id'               => $prefix . 'cdp_select_content_type',
+  'type'             => 'radio_inline',
+  'classes'          => 'cdp-select-posts-by-content-type',
+  'show_option_none' => false,
+  'default'          => 'all',
+  'options'          => array(
+    'all'            => __( 'All types', 'america' ),
+    'article'        => __( 'Article', 'america' ),
+    'courses'        => __( 'Course', 'america' ),
+    'Podcast'        => __( 'Podcast', 'america' ),
+    'Video'          => __( 'Video', 'america' )
+  )
+));
+
+$cb_box_cdp->add_field( array(
+	'name'    => 'Language(s) to display:',
+	'desc'    => '',
+	'id'      => $prefix . 'cdp_select_language',
+  'type'    => 'radio_inline',
+  'default' => 'en-us',
+	'options' => array(
+		'all'     => __( 'All languages', 'america' ),
+		'en-us'   => __( 'English', 'america' ),
+    'fr-fr'   => __( 'French', 'america' ),
+    'pt-br'   => __( 'Portuguese', 'america' )
+	),
+));
+
+$cb_box_cdp->add_field(  array(
   'name'             => __( 'Select posts by taxonomy:', 'america' ),
   'id'               => $prefix . 'cdp_select_taxonomy',
   'type'             => 'radio_inline',

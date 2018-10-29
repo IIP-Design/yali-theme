@@ -149,7 +149,7 @@ $filter-bp: 890px; //50em;
     }
   }
 
-  div[data-content-type='cdp-filtered-list'] .article-item {
+  div[data-content-type^="cdp-"] .article-item {
       flex-grow: 0;
   }
 }

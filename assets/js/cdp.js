@@ -403,9 +403,9 @@ function renderArticleFeed(feed) {
 		selector: `#${feed.id}`,
 		sites: config.indexes, // need to have a default
 		size: config.numPosts,
-		types: '',
+		types: config.contentType === 'all' ? '' : config.contentType,
 		ids: config.ids,
-		langs: '',
+		langs: config.langs === 'all' ? '' : config.langs,
 		tags: selectByTaxonomy === 'tag' ? config.tags : '',
 		series: selectByTaxonomy === 'series' ? config.series : '',
 		categories: selectByTaxonomy === 'category' ? config.categories : '',

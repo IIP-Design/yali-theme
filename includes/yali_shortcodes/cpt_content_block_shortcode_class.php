@@ -361,6 +361,8 @@ class Content_Block_Shortcode {
     $context['cdp_widget']                      = $module;
     $context['cdp_indexes']                     = cdp_get_option('cdp_indexes');
     $context['cdp_post_select_by']              = get_post_meta( $id, 'yali_cdp_select_type_posts', true );
+    $context['cdp_content_type']      = get_post_meta( $id, 'yali_cdp_select_content_type', true );
+    $context['cdp_language']      = get_post_meta( $id, 'yali_cdp_select_language', true );
     $context['cdp_taxonomy_select_by']          = get_post_meta( $id, 'yali_cdp_select_taxonomy', true );
 
     $context['cdp_post_ids']                    = get_post_meta( $id, 'yali_cdp_autocomplete', true );

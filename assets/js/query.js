@@ -267,26 +267,26 @@ const appendFilter = ( body, vals, keys ) => {
   } );
 };
 
-const appendQry = ( str, field ) => {
-  	let items = fetchArray( str );
-  	if ( typeof field === 'string' ) {
-      return items.map( item => `${field}: ${item}` );
-    }
-    return items.map( item => `(${field.reduce( ( accum, subField ) => {
-      accum.push(`${subField}:'${item}'`);
-      return accum;
-    }, [] ).join( ' OR ' )})` );
-};
+// const appendQry = ( str, field ) => {
+//   	let items = fetchArray( str );
+//   	if ( typeof field === 'string' ) {
+//       return items.map( item => `${field}: ${item}` );
+//     }
+//     return items.map( item => `(${field.reduce( ( accum, subField ) => {
+//       accum.push(`${subField}:'${item}'`);
+//       return accum;
+//     }, [] ).join( ' OR ' )})` );
+// };
 
-const reduceQry = ( qry ) => {
-  	let qryStr = qry.reduce( ( acc, value, index, arr ) => {
-    	if ( index === ( arr.length - 1 ) ) {
-      	acc += value;
-    } else {
-      	acc += `(${value}) AND `;
-    }
-    	return acc;
-  }, '' );
+// const reduceQry = ( qry ) => {
+//   	let qryStr = qry.reduce( ( acc, value, index, arr ) => {
+//     	if ( index === ( arr.length - 1 ) ) {
+//       	acc += value;
+//     } else {
+//       	acc += `(${value}) AND `;
+//     }
+//     	return acc;
+//   }, '' );
 
-  	return qryStr;
-};
+//   	return qryStr;
+// };

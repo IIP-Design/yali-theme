@@ -12,6 +12,7 @@
       genericButtonMetabox = document.getElementById('yali_cb_box_btn'),
       textBlockMetaBox = document.getElementById('yali_cb_text_block'),
       campaignListBlockMetaBox = document.getElementById('yali_cb_campaigns_list'),
+      selectByContentType = $('.cdp-select-posts-by-content-type'),
       selectByTaxonomy = $('.cdp-select-posts-by-taxonomy'),
       selectByPostsCategory = $('.cmb2-id-yali-cdp-category'),
       selectByPostsSeries = $('.cmb2-id-yali-cdp-series'),
@@ -22,6 +23,7 @@
       selectByPostsDisplay = $('.cmb2-id-yali-cdp-autocomplete-links-display'),
       languageFilterOption = $('input[value="language"]'),
       languageSelectionField = $('.cmb2-id-yali-cb-lang-selection');
+      cdpLanguageSelectionField = $('.cmb2-id-yali-cdp-select-language');
 
     // Metabox Object store for iterating
     var conditionalMetaboxes = {
@@ -135,12 +137,19 @@
     function togglePostListFields( selectBy ) {
       if (selectBy === 'custom') {
         selectByPostsNum.hide();
+        selectByContentType.hide();
         selectByTaxonomy.hide();
+        selectByPostsCategory.hide();
+        selectByPostsSeries.hide();
+        selectByPostsTags.hide();
+        cdpLanguageSelectionField.hide();
         selectByPosts.show();
         selectByPostsLink.show();
         selectByPostsDisplay.show();
       } else {
         selectByPostsNum.show();
+        selectByContentType.show();
+        cdpLanguageSelectionField.show();
         selectByTaxonomy.show();
         selectByPosts.hide();
         selectByPostsLink.hide();
