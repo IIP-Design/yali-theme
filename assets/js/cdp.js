@@ -335,7 +335,7 @@ function addOptions(filter, options, selected) {
 		var fragment = document.createDocumentFragment();
 		options.forEach(function(option) {
 			if (option.key === 'pt-br') {
-				const regex = /\s?\(Brazil\)/g;
+				const regex = /\s?\((B|b)ra(z|s)(i|í)l(|ia)\)/g;
 				option.display = option.display.replace(regex, '');
 			}
 			var el = document.createElement('div');
