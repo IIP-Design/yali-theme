@@ -1,6 +1,14 @@
 # Change Log
 ##### All notable changes to this project will be documented in this file.
 
+## [v1.4.18](https://github.com/IIP-Design/yali-theme/tree/v1.4.18) (2018-10-29)
+
+**Added:**
+- Content type and language selection options for post list content block, which allows users to filter post lists from the dashboard
+
+**Changed**
+- Refactored regular expression for Portuguese language display for dropdown menus to better handle alternative spellings of Brazil
+
 ## [v1.4.17](https://github.com/IIP-Design/yali-theme/tree/v1.4.17) (2018-10-23)
 
 **Removed:**
@@ -9,7 +17,7 @@
 ## [v1.4.16](https://github.com/IIP-Design/yali-theme/tree/v1.4.16) (2018-10-19)
 
 **Changed:**
-- Adjusted Portuguese language display to read "Portuguese" instead of "Portuguese (Brazil)" in dropdown menus and post-list filters dashboard
+- Adjusted Portuguese language display to read "Portuguese" instead of "Portuguese (Brazil)" in dropdown menus and post list filters dashboard
 
 ## [v1.4.15](https://github.com/IIP-Design/yali-theme/tree/v1.4.15) (2018-10-10)
 
