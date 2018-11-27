@@ -76,11 +76,6 @@ if( !empty($alumni_vids) ) {
 $africa4her_course = do_shortcode("[content_block id='14592' title='Take the course']");
 $africa4her_post_list = do_shortcode("[content_block id='14637' title='Learn more about the rights of women and girls']");
 
-// YALIUnites
-$yaliunites_course = do_shortcode("[content_block id='14706' title='Take the course']");
-$yaliunites_whats_the_harm = do_shortcode("[content_block id='14666' title='What's the harm?']");
-$yaliunites_blog_list = do_shortcode("[content_block id='16462' title='YALIUnites - Learn more about transparency and good governance']");
-
 // YALIServes
 $yaliserves_course = do_shortcode("");
 $yaliserves_post_list = do_shortcode("[content_block id='14002' title='Make everyday Mandela Day']");
@@ -102,9 +97,6 @@ $context = array(
   "formVar"         => $formVar,
   "africa4her_course" => $africa4her_course,
   "africa4her_post_list" => $africa4her_post_list,
-  "yaliunites_course" => $yaliunites_course,
-  "yaliunites_blog_list"  => $yaliunites_blog_list,
-  "yaliunites_whats_the_harm" => $yaliunites_whats_the_harm,
   "yaliserves_course" => $yaliserves_course,
   "yaliserves_post_list" => $yaliserves_post_list
 );
