@@ -74,7 +74,12 @@ class YaliSite {
 		*/
     require_once 'includes/tinymce_dropdown/tinymce_dropdown.php';
 
-		/*
+    /*
+    *Add Appearance YALI Submenu Pages
+    */
+    require_once 'includes/join_form_class.php';
+
+    /*
 		* Add excerpt to pages
 		*/
 		add_post_type_support( 'page', 'excerpt' );
