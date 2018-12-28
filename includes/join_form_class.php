@@ -24,14 +24,7 @@ add_action( 'admin_init', 'yali_theme_init');
 
 function yali_theme_init(){
   /* Add New Option */
-  add_option('formidable_shortcode_setting',1);
-
-  /* Register Settings */
-  register_setting(
-      'wp_options',             // Options group
-      'formidable-shortcode-settings',      // Option name/database
-      'my_settings_sanitize' // sanitize callback function
-  );
+  update_option('_yali-joinus-form', '[formidable=9]');
 
   /* Create settings section */
   add_settings_section(
@@ -51,6 +44,18 @@ function yali_theme_init(){
   );
 }
 
+function register_yali_join_settings(){
+/* Register Settings */
+  register_setting(
+    'wp_options',             // Options group
+    '_yali-joinus-form',      // Option name/database
+    'sanitize_text_field' // sanitize callback function
+  );
+}
+//Init Register Settings
+add_action( 'admin_init', 'register_yali_join_settings' );
+
+
 /* Description for Settings Section */
 function add_settings_join_description() {
     echo wpautop( "Use the field(s) below to enter Formidable shortcodes." );
@@ -61,14 +66,13 @@ function formidable_form_id_input() {
   ?>
   <form method="post" action="options.php">
     <label for="formidable-shortcode-text">
-        <input id="formidable-shortcode-text" type="text" name="formidable_shortcode_setting" value="<?php echo get_option( 'formidable_shortcode_setting' ); ?>">
+        <input id="formidable-shortcode-text" type="text" name="_yali-joinus-form" value="<?php echo get_option( '_yali-joinus-form' ); ?>">
     </label>
-
-    <p>
-      <input type="submit" name="Submit" class="button-primary" value="Save Changes" />
-    </p>
+    
+    <?php submit_button(); ?>
+ 
   </form>
-    <?php
+  <?php
 }
 
 
