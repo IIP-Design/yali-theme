@@ -14,7 +14,6 @@ use Yali\Twig as Twig;
 use Yali\Content_Block as Content_Block;
 use Yali\Content_Block_Shortcode as Content_Block_Shortcode;
 use Yali\Custom_Button_Shortcode as Custom_Button_Shortcode;
-use Yali\Bio as Bio;
 use Yali\Customize_Theme as Customize_Theme;
 use Yali\Content_Type_Tax as Content_Type_Tax;
 use Yali\Series_Tax as Series_Tax;
@@ -111,7 +110,6 @@ class YaliSite {
    */
   function register_post_types() {
     Content_Block::register();
-    Bio::register();
   }
 
   function register_taxonomies() {
