@@ -1,79 +1,99 @@
 <?php
 
-add_action( 'admin_menu', 'yali_theme_submenu' );
+add_action( 'admin_menu', 'yali_customize_theme_submenu' );
 
-//Add YALI Theme Submenu Page 
-function yali_theme_submenu() { 
+// Add YALI theme submenu page 
+function yali_customize_theme_submenu() { 
   add_submenu_page(
     'themes.php',
-    'YALI Theme',
-    'YALI Theme',
+    __( 'YALI Theme', 'yali' ),
+    __( 'YALI Theme', 'yali' ),
     'edit_themes',
     'edit-yali-theme',
-    'edit_yali_theme_page'
+    'yali_customize_theme_page'
   );
 }
 
-function edit_yali_theme_page() {
-  echo "<h1>Edit YALI Theme Settings</h1>";
-  do_settings_sections( 'edit-yali-theme' );
+// Add submenu page title and initialize formidable section
+function yali_customize_theme_page() {
+  $title = __( 'Edit YALI Theme Settings', 'yali' );
+  $html = "<h1 class='wp-heading-inline'>" . $title . "</h1><hr class='wp-header-end'>";
+
+  echo $html;
+  yali_customize_theme_form();
 }
 
-//Admin Init
-add_action( 'admin_init', 'yali_theme_init');
-
-function yali_theme_init(){
-  /* Add New Option */
-  update_option('_yali-joinus-form', '[formidable=9]');
-
-  /* Create settings section */
-  add_settings_section(
-      'yali-theme-join-form',                               // Section ID
-      'Formidable Join Form',                               // Section title
-      'add_settings_join_description',                      // Section callback function
-      'edit-yali-theme'                                     // Settings page slug
-  );
-
-  /* Create settings field */
-  add_settings_field(
-      'join-form-field-id',                                 // Field ID
-      'Join the YALI Network',                             // Field title 
-      'formidable_form_id_input',                           // Field callback function
-      'edit-yali-theme',                                    // Settings page slug
-      'yali-theme-join-form'                                // Section ID
-  );
-}
-
-function register_yali_join_settings(){
-/* Register Settings */
-  register_setting(
-    'wp_options',             // Options group
-    '_yali-joinus-form',      // Option name/database
-    'sanitize_text_field' // sanitize callback function
-  );
-}
-//Init Register Settings
-add_action( 'admin_init', 'register_yali_join_settings' );
+// Initalize admin page that customizes YALI theme
+add_action( 'admin_init', 'yali_customize_theme_sections');
 
 
-/* Description for Settings Section */
-function add_settings_join_description() {
-    echo wpautop( "Use the field(s) below to enter Formidable shortcodes." );
-  }
-
-/* Settings Field Callback */
-function formidable_form_id_input() {
+// Create form for customization input values
+function yali_customize_theme_form() {
   ?>
-  <form method="post" action="options.php">
-    <label for="formidable-shortcode-text">
-        <input id="formidable-shortcode-text" type="text" name="_yali-joinus-form" value="<?php echo get_option( '_yali-joinus-form' ); ?>">
-    </label>
-    
-    <?php submit_button(); ?>
- 
-  </form>
+  <div class="wrap">
+    <form action="options.php" method="post">
+      <?php
+        do_settings_sections( 'edit-yali-theme' );
+        settings_fields( 'edit-yali-theme' );
+        submit_button();
+      ?>
+    </form>
+  </div>
   <?php
 }
 
+// Create settings sections
+function yali_customize_theme_sections(){
+  add_settings_section(
+      'yali-theme-join-form',                // Section ID
+      __( 'Formidable Forms', 'yali' ),      // Section title
+      'formidable_section_description',      // Section callback function
+      'edit-yali-theme'                      // Settings page slug
+  );
+}
+
+// Set description for the formidable form settings section
+function formidable_section_description() {
+  echo wpautop( _e( 'Use the field(s) below to enter Formidable shortcodes.', 'yali' ) );
+}
+
+function formidable_settings(){
+  // Create join us form settings field
+  add_settings_field(
+    'yali-joinus-form-id',                         // Field ID
+    __( 'Join the YALI Network:', 'yali' ),        // Field title 
+    'joinus_input_markup',                         // Field callback function
+    'edit-yali-theme',                             // Settings page slug
+    'yali-theme-join-form',                        // Section ID
+    array( 'label_for' => 'yali-joinus-form-id' )  // Display field title as label
+  );
+
+  // Register join us form settings
+  register_setting(
+    'edit-yali-theme',         // Options group
+    'yali-joinus-form-id',     // Option name/database
+    'sanitize_text_field'      // Sanitize input value
+  );
+}
+
+// Init Register Settings
+add_action( 'admin_init', 'formidable_settings' );
+
+// HTML markup for the API key fields
+function joinus_input_markup() {
+  $formidable_id = get_option( 'yali-joinus-form-id' );
+
+  $html = '<fieldset>';
+    $html .= '<input ';
+      $html .= 'id="yali-joinus-form-id" ';
+      $html .= 'name="yali-joinus-form-id" ';
+      $html .= 'placeholder="[formidable id=1]" ';
+      $html .= 'type="text" ';
+      $html .= 'value="' . $formidable_id;
+    $html .= '">';
+  $html .= '</fieldset>';
+
+  echo $html;
+}
 
 ?>
