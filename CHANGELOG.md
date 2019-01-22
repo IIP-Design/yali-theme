@@ -1,6 +1,15 @@
 # Change Log
 ##### All notable changes to this project will be documented in this file.
 
+## [v1.5.0](https://github.com/IIP-Design/yali-theme/tree/v1.5.0)
+
+**Added:**
+- 'YALI Theme' submenu under the 'Appearance' admin menu, where users can customize their instance of the YALI theme
+- Configurable input in the new theme customization menu that replaces hardcoded 'Join the YALI Network' form ids
+
+**Changed:**
+- Removed unused bio custom post type
+
 ## [v1.4.18](https://github.com/IIP-Design/yali-theme/tree/v1.4.18) (2018-10-29)
 
 **Added:**
