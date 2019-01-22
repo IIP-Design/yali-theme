@@ -19,7 +19,8 @@ $filtered_post_block = do_shortcode("[content_block id='16219' taxonomy='$taxono
 // TEMP
 $check_host = $_SERVER['SERVER_NAME'];
 
-$formVar = do_shortcode('[formidable id=6]');
+$formidable_id = get_option( 'yali-joinus-form-id' );
+$formVar = do_shortcode( $formidable_id );
 
 $context = array(
 	'check_host'      		=> $check_host,

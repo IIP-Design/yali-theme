@@ -30,7 +30,8 @@ $addtl_content = do_shortcode($page_data['cmb2']['mwf_app_application']['mwf_app
 $cta_mwf = do_shortcode("[content_block id='19099' title='MWF: Application Apply Button']");
 
 // 'Join the Network' Form
-$formVar = do_shortcode('[formidable id=6]');
+$formidable_id = get_option( 'yali-joinus-form-id' );
+$formVar = do_shortcode( $formidable_id );
 
 // Data array for twig
 $context = array(

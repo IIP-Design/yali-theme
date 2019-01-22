@@ -35,7 +35,8 @@ $action_course = do_shortcode("[content_block id='16106']");
 $action_fellowship = do_shortcode("[content_block id='16109']");
 
 // 'Join the Network' Form
-$formVar = do_shortcode('[formidable id=6]');
+$formidable_id = get_option( 'yali-joinus-form-id' );
+$formVar = do_shortcode( $formidable_id );
 
 // Hero Title Display
 $hero_title_display = get_post_meta($post->ID, '_yali_hero_title_option', true);

@@ -45,7 +45,8 @@ foreach ($campaign_pages as $item) {
 }
 
 // 'Join the Network' Form
-$formVar = do_shortcode('[formidable id=6]');
+$formidable_id = get_option( 'yali-joinus-form-id' );
+$formVar = do_shortcode( $formidable_id );
 
 // Yali Learns - Campaign Materials Accordion
 $campaign_materials_accordion = do_shortcode("[content_block id='13615' title='Yali Learns Campaign Materials']");

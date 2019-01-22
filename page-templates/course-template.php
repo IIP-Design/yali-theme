@@ -23,7 +23,8 @@ $srcset = wp_get_attachment_image_srcset($img_id, "full");
 $sizes = wp_get_attachment_image_sizes($img_id, "full");
 
 // 'Join the Network' Form
-$formVar = do_shortcode('[formidable id=6]');
+$formidable_id = get_option( 'yali-joinus-form-id' );
+$formVar = do_shortcode( $formidable_id );
 
 $course_language = get_post_meta($post->ID, '_yali_course_lang_indicator', true);
 

@@ -27,7 +27,8 @@ $sizes = wp_get_attachment_image_sizes($img_id, 'full');
 $check_host = $_SERVER['SERVER_NAME'];
 
 // 'Join the Network' Form
-$formVar = do_shortcode('[formidable id=6]');
+$formidable_id = get_option( 'yali-joinus-form-id' );
+$formVar = do_shortcode( $formidable_id );
 
 // Data array for twig
 $context = array(
