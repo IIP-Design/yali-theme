@@ -7,10 +7,15 @@ use Twig_YALI_Extension;
 class Content_Block {
 
   public function __construct() {
-      add_action( 'cmb2_admin_init',                          array($this, 'content_block_fields') );  
-      add_action( 'admin_enqueue_scripts',                    array($this, 'cmb2_toggle_metaboxes_JS') );  
-      add_filter( 'manage_edit-content_block_columns',        array($this, 'edit_content_block_post_columns') );
-      add_filter( 'manage_content_block_posts_custom_column', array($this, 'manage_content_block_post_columns'), 10, 2 );  
+    add_action( 'cmb2_admin_init',                           array( $this, 'content_block_fields' ) );
+    add_action( 'admin_enqueue_scripts',                     array( $this, 'cmb2_toggle_metaboxes_JS' ) );
+    add_action( 'admin_init',                                array( $this, 'remove_yoast_from_content_block' ), 20 );
+    add_action( 'restrict_manage_posts',                     array( $this, 'add_block_type_filter' ) );
+    add_action( 'pre_get_posts',                             array( $this, 'set_block_type_orderby' ) );
+    add_filter( 'manage_edit-content_block_columns',         array( $this, 'edit_content_block_post_columns' ) );
+    add_filter( 'manage_edit-content_block_sortable_column', array( $this, 'make_block_type_column_sortable' ) );
+    add_filter( 'manage_content_block_posts_custom_column',  array( $this, 'manage_content_block_post_columns' ), 10, 2 );
+    add_filter( 'parse_query',                               array( $this, 'filter_blocks_by_type' ) );
   }
 
   //public function admin_enqueue_scripts() {
@@ -33,7 +38,7 @@ class Content_Block {
       'new_item'            => __('New Content Block'),
       'view_item'           => __('View Content Block'),
       'search_items'        => __('Search Content Blocks'),
-      'not_found'           =>  __('No Content Block found'),
+      'not_found'           => __('No Content Block found'),
       'not_found_in_trash'  => __('No Content Blocks found in Trash'),
       'parent_item_colon'   => ''
     );
@@ -143,10 +148,11 @@ class Content_Block {
    */
   public function edit_content_block_post_columns( $columns ) {
     $columns = array(
-        'cb' => '<input type="checkbox" />',
-        'title' => __('Content Block'),
-        'author' => __('Author'),
-        'date' => __('Date'),
+        'cb'                => '<input type="checkbox" />',
+        'title'             => __('Content Block'),
+        'block_type'        => __('Block Type'),
+        'author'            => __('Author'),
+        'date'              => __('Date'),
         'display_shortcode' => __('Display Shortcode')
     );
 
@@ -157,13 +163,96 @@ class Content_Block {
     global $post;
 
     switch( $column ) {
+      case 'block_type':
+        $block_type = get_post_meta( $post_id, 'yali_cb_type', true );
+        if ( is_string( $block_type ) )       
+          echo ucwords(str_replace( '_', ' ', $block_type));
+        else
+          echo '';
+        break;
       case 'display_shortcode':
         echo '<input style="width:100%" type="text" size="35" value="[content_block id=\'' . $post_id .  '\' title=\'' . $post->post_title .  '\']" readonly/>';
         break;        
       default: 
         break;
     }
-  }  
+  }
+
+  // Make block type column sortable
+  public function make_block_type_column_sortable( $columns ) {
+    $columns['block_type'] = 'block_type';
+    return $columns;
+  }
+  
+  // Sort block type column alphabetically
+  public function set_block_type_orderby( $query ) {
+    if ( $query->is_main_query() && ( $orderby = $query->get( 'orderby' ) ) ) {
+      switch( $orderby ) {
+         case 'block_type':
+            $query->set( 'meta_key', 'yali_cb_type' );
+            $query->set( 'orderby', 'meta_value' );
+          break;
+      }
+    }
+  }
+  
+  // Add drop down to filter content blocks by block type
+  public function add_block_type_filter() {
+    global $typenow;
+    global $wp_query;
+    
+    if ($typenow == 'content_block' ) {
+      $filters = array( 
+        'Accordion' => 'accordion',
+        'Button Links' => 'button_links',
+        'Call to Action' => 'cta',
+        'Campaigns List' => 'campaigns_list',
+        'Media Block' => 'media_block',
+        'Page List' => 'page_list',
+        'Post List' => 'post_list',
+        'Post List w/ Filters' => 'filtered_list',
+        'Social Icons' => 'social',
+        'Text Block' => 'text_block' 
+      );
+      $current_filter = '';
+      if( isset( $_GET['block_type'] ) ) {
+        $current_filter = $_GET['block_type'];
+      } ?>
+        <select name="block_type" id="block_type">
+          <option value="all" <?php selected( 'all', $current_filter ); ?>><?php _e( 'All Block Types', 'yali' ); ?></option>
+          <?php foreach( $filters as $key => $value ) { ?>
+            <option value="<?php echo esc_attr( $value );?>" <?php selected( $value, $current_filter ); ?>><?php echo esc_attr( $key ); ?></option>
+          <?php } ?>
+        </select><?php
+    }
+  }
+
+  // Filter results by drop down selection
+  public function filter_blocks_by_type( $query ) {
+    global $pagenow;
+    
+    $post_type = isset( $_GET['post_type'] ) ? $_GET['post_type'] : '';
+    if ( is_admin() && $pagenow == 'edit.php' && $post_type == 'content_block' && isset( $_GET['block_type'] ) && $_GET['block_type'] !='all' ) {
+      
+      $blocktype = $_GET['block_type'];
+      $query->query_vars['post_type'] = 'content_block';
+      $query->query_vars['meta_key'] = 'yali_cb_type';
+      $query->query_vars['meta_value'] = $blocktype;
+      $query->query_vars['meta_compare'] = '=';
+      
+    }
+  }
+  
+  // Remove Yoast post filter and readability dropdowns from content block admin page
+  function remove_yoast_from_content_block() {
+    global $wpseo_meta_columns;
+    global $typenow;
+  
+    if ( $wpseo_meta_columns && $typenow == 'content_block') {
+      remove_action( 'restrict_manage_posts', array( $wpseo_meta_columns, 'posts_filter_dropdown' ) );
+      remove_action( 'restrict_manage_posts', array( $wpseo_meta_columns, 'posts_filter_dropdown_readability' ) );
+    }
+  }
 }
 
 new Content_Block();
