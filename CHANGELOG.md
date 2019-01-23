@@ -6,6 +6,7 @@
 **Added:**
 - 'YALI Theme' submenu under the 'Appearance' admin menu, where users can customize their instance of the YALI theme
 - Configurable input in the new theme customization menu that replaces hardcoded 'Join the YALI Network' form ids
+- Ability to search content blocks and filter them by block type
 
 **Changed:**
 - Removed unused bio custom post type
