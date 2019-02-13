@@ -1,7 +1,12 @@
 # Change Log
 ##### All notable changes to this project will be documented in this file.
 
-## [v1.5.0](https://github.com/IIP-Design/yali-theme/tree/v1.5.0)
+## [v1.5.1](https://github.com/IIP-Design/yali-theme/tree/v1.5.1) (2019-02-13)
+
+**Changed:**
+- Add checks before foreach loops in content blocks to prevent PHP warnings
+
+## [v1.5.0](https://github.com/IIP-Design/yali-theme/tree/v1.5.0) (2019-01-23)
 
 **Added:**
 - 'YALI Theme' submenu under the 'Appearance' admin menu, where users can customize their instance of the YALI theme
