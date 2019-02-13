@@ -45,7 +45,7 @@ class Content_Block_Shortcode {
       return;
     }
 
-    return call_user_func( array($this, 'render_' . $type ), $atts );
+    return call_user_func( array( $this, 'render_' . $type ), $atts );
   }
 
   // CTA CONTENT BLOCK
@@ -65,11 +65,15 @@ class Content_Block_Shortcode {
 
     $context["cb_layout_width"] = get_post_meta( $id, 'yali_cb_layout_width' );
     $context["cta_buttons"] = get_post_meta( $id, 'yali_cta_button_repeat_group', true );
+    
+    if ( $context["cta_buttons"] ) {
 
-    foreach ($context["cta_buttons"] as &$button) {
-      $button["yali_cta_button_link"]["url"] = $this->filter_link($button["yali_cta_button_link"]["url"]);
+      foreach ( $context["cta_buttons"] as &$button ) {
+        $button["yali_cta_button_link"]["url"] = $this->filter_link( $button["yali_cta_button_link"]["url"] );
+      }
+
+      unset($button);
     }
-    unset($button);
 
     return Twig::render( 'content_blocks/cta.twig', $context );
   }
