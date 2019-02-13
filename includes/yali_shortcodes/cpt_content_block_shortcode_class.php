@@ -101,14 +101,17 @@ class Content_Block_Shortcode {
     $items = array();
     $meta_data = get_post_meta($id, 'accordion_repeat_group', true);
 
-    foreach ($meta_data as $item => $item_value) {
-      // Add p tags to tinymce content
-      $item_value['item_content'] = $this->filter_link( $item_value['item_content'] );
-      $item_value['item_content'] = wpautop($item_value['item_content']);
-      $item_value['item_content'] = do_shortcode($item_value['item_content']);
-      $item_value['item_content'] = $wp_embed->autoembed( $item_value['item_content'] );
-      $item_value['item_content'] = $wp_embed->run_shortcode( $item_value['item_content'] );
-      array_push($items, $item_value);
+    if ( $meta_data ) {
+
+      foreach ($meta_data as $item => $item_value) {
+        // Add p tags to tinymce content
+        $item_value['item_content'] = $this->filter_link( $item_value['item_content'] );
+        $item_value['item_content'] = wpautop($item_value['item_content']);
+        $item_value['item_content'] = do_shortcode($item_value['item_content']);
+        $item_value['item_content'] = $wp_embed->autoembed( $item_value['item_content'] );
+        $item_value['item_content'] = $wp_embed->run_shortcode( $item_value['item_content'] );
+        array_push($items, $item_value);
+      }
     }
 
     $post = get_post($id);
@@ -130,46 +133,49 @@ class Content_Block_Shortcode {
   public function render_page_list( $atts ) {
     $id = $atts['id'];
     $meta = get_post_meta( $id );
-    $context = $this->fetch_base_config( $id, get_post($id) );
+    $context = $this->fetch_base_config( $id, get_post( $id ) );
     $context = $this->fetch_btn_config( $context, $id, $meta );
 
     // Pages to be included
     $page_list = array();
-    $all_pages = get_post_meta($id, 'cb_pages_list_repeat_group', true);
+    $all_pages = get_post_meta( $id, 'cb_pages_list_repeat_group', true );
 
-    foreach ($all_pages as $page) {
-      // Get page ID from meta select dropdown
-      $page_id = $page['yali_select_page'];
+    if ( $all_pages ) {
+    
+      foreach ( $all_pages as $page ) {
+        // Get page ID from meta select dropdown
+        $page_id = $page['yali_select_page'];
 
-      // Get page data
-      $listed_page = get_page($page_id);
+        // Get page data
+        $listed_page = get_page( $page_id );
 
-      // Get page imgage and add as prop to page object
-      $page_img = get_the_post_thumbnail_url($page_id, 'full');
-      if( !empty($page_img) ) {
-        $listed_page->page_img = $page_img;
+        // Get page imgage and add as prop to page object
+        $page_img = get_the_post_thumbnail_url( $page_id, 'full' );
+        if( !empty( $page_img ) ) {
+          $listed_page->page_img = $page_img;
+        }
+
+        // Get page link and add as prop to page object
+        $page_link = get_permalink( $page_id );
+        $listed_page->page_link = $this->filter_link( $page_link );
+
+        // Get related link and text add as prop to page object
+        $related_link = $page['yali_related_link']['link'];
+        $listed_page->related_link = $this->filter_link( $related_link );
+
+        $related_link_text = $page['yali_related_link']['label'];
+        $listed_page->related_link_text = $related_link_text;
+
+        $context['links'] = get_post_meta( $id, 'yali_button_links_repeat_group', true );
+
+        array_push( $page_list, $listed_page );
       }
-
-      // Get page link and add as prop to page object
-      $page_link = get_permalink($page_id);
-      $listed_page->page_link = $this->filter_link($page_link);
-
-      // Get related link and text add as prop to page object
-      $related_link = $page['yali_related_link']['link'];
-      $listed_page->related_link = $this->filter_link($related_link);
-
-      $related_link_text = $page['yali_related_link']['label'];
-      $listed_page->related_link_text = $related_link_text;
-
-      $context['links'] = get_post_meta( $id, 'yali_button_links_repeat_group', true );
-
-      array_push($page_list, $listed_page);
     }
 
     $context['page_list'] = $page_list;
-    $context['page_list_layout'] = get_post_meta( $id, 'yali_cdp_page_list_layout', true);
+    $context['page_list_layout'] = get_post_meta( $id, 'yali_cdp_page_list_layout', true );
     $context['selector'] = 'cb-' . get_the_ID();
-    $context['num_pages'] = count($page_list);
+    $context['num_pages'] = count( $page_list );
 
     return Twig::render( 'content_blocks/page-list.twig', $context );
   }
@@ -245,10 +251,13 @@ class Content_Block_Shortcode {
     $context['headline'] = get_post_meta( $id, 'yali_button_links_headline', true );
     $context['links'] = get_post_meta( $id, 'yali_button_links_repeat_group', true );
 
-    foreach ($context['links'] as &$button) {
-      $button['yali_button_link']['url'] = $this->filter_link($button['yali_button_link']['url']);
+    if ( $context['links'] ) {
+
+      foreach ($context['links'] as &$button) {
+        $button['yali_button_link']['url'] = $this->filter_link($button['yali_button_link']['url']);
+      }
+      unset($button);
     }
-    unset($button);
 
     return Twig::render( 'content_blocks/button-links.twig', $context );
   }
@@ -282,24 +291,26 @@ class Content_Block_Shortcode {
     $campaign_pages = array();
     $campaigns_list = get_post_meta($id, 'campaigns_list_repeat_group', true);
 
-    foreach ($campaigns_list as $campaign) {
-      // Get Campaign ID from meta select dropdown
-      $campaign_id = $campaign['yali_select_campaign'];
-      // Get campaign page data
-      $campaign_page = get_page($campaign_id);
+    if ( $campaigns_list ) {
+      foreach ($campaigns_list as $campaign) {
+        // Get Campaign ID from meta select dropdown
+        $campaign_id = $campaign['yali_select_campaign'];
+        // Get campaign page data
+        $campaign_page = get_page($campaign_id);
 
-      // Add campaign page img from page custom field
-      // add prop to campaign page obj
-      $campaign_img = get_post_meta($campaign_id, 'campaigns_list_img', true);
-      if( !empty($campaign_img) ) {
-        $campaign_page->campaign_img = $campaign_img;
+        // Add campaign page img from page custom field
+        // add prop to campaign page obj
+        $campaign_img = get_post_meta($campaign_id, 'campaigns_list_img', true);
+        if( !empty($campaign_img) ) {
+          $campaign_page->campaign_img = $campaign_img;
+        }
+
+        // Get campaign page link and add to page obj as prop
+        $campaign_page_link = get_permalink($campaign_id);
+        $campaign_page->campaign_page_link = $this->filter_link($campaign_page_link);
+
+        array_push($campaign_pages, $campaign_page);
       }
-
-      // Get campaign page link and add to page obj as prop
-      $campaign_page_link = get_permalink($campaign_id);
-      $campaign_page->campaign_page_link = $this->filter_link($campaign_page_link);
-
-      array_push($campaign_pages, $campaign_page);
     }
 
     $context['campaign_pages'] = $campaign_pages;
