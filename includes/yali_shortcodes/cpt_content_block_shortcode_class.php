@@ -292,24 +292,26 @@ class Content_Block_Shortcode {
     $campaigns_list = get_post_meta($id, 'campaigns_list_repeat_group', true);
 
     if ( $campaigns_list ) {
-      foreach ($campaigns_list as $campaign) {
+      foreach ( $campaigns_list as $campaign ) {
         // Get Campaign ID from meta select dropdown
         $campaign_id = $campaign['yali_select_campaign'];
         // Get campaign page data
-        $campaign_page = get_page($campaign_id);
+        $campaign_page = get_page( $campaign_id );
 
         // Add campaign page img from page custom field
         // add prop to campaign page obj
-        $campaign_img = get_post_meta($campaign_id, 'campaigns_list_img', true);
-        if( !empty($campaign_img) ) {
+        $campaign_img = get_post_meta( $campaign_id, 'campaigns_list_img', true );
+        if( !empty( $campaign_img ) ) {
           $campaign_page->campaign_img = $campaign_img;
         }
 
         // Get campaign page link and add to page obj as prop
-        $campaign_page_link = get_permalink($campaign_id);
-        $campaign_page->campaign_page_link = $this->filter_link($campaign_page_link);
+        $campaign_page_link = get_permalink( $campaign_id );
+        if( !empty( $campaign_page_link ) ) {
+          $campaign_page->campaign_page_link = $this->filter_link( $campaign_page_link );
+        }
 
-        array_push($campaign_pages, $campaign_page);
+        array_push( $campaign_pages, $campaign_page );
       }
     }
 

@@ -22,7 +22,7 @@ class Customize_Theme {
       'themes.php',
       __( 'YALI Theme', 'yali' ),
       __( 'YALI Theme', 'yali' ),
-      'edit_themes',
+      'activate_plugins',
       'edit-yali-theme',
       array( $this, 'populate_submenu_form' )
     );

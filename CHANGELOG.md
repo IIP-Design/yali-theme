@@ -1,6 +1,15 @@
 # Change Log
 ##### All notable changes to this project will be documented in this file.
 
+## [v1.5.2](https://github.com/IIP-Design/yali-theme/tree/v1.5.2)
+
+**Changed:**
+- Switch capability on theme settings panel to allow admins on multi-sites to see it (rather than just super admins)
+- Add checks for campaign page link before before adding it to campaign list array to prevent PHP warnings
+
+**Removed:**
+- Deprecated qzzr shortcode
+
 ## [v1.5.1](https://github.com/IIP-Design/yali-theme/tree/v1.5.1) (2019-02-13)
 
 **Changed:**
