@@ -6,6 +6,8 @@
 **Changed:**
 - Switch capability on theme settings panel to allow admins on multi-sites to see it (rather than just super admins)
 - Add checks for campaign page link before before adding it to campaign list array to prevent PHP warnings
+- Adjusted "Select posts by taxonomy" default option to "all" from "none" and the label to "All taxonomies" from "None"
+- Pass all post list feeds through `query.builder` so that a `query` prop will be added to the article feed config. Without a `query` prop, post lists would return erroneously no results if the "Select posts by taxonomy" is set to "none".
 
 **Removed:**
 - Deprecated qzzr shortcode
