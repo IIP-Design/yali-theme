@@ -61,12 +61,12 @@ $cb_box_cdp->add_field(  array(
   'type'             => 'radio_inline',
   'classes'          => 'cdp-select-posts-by-taxonomy',
   'show_option_none' => false,
-  'default'          => 'none',
+  'default'          => 'all',
   'options'          => array(
-    'none'           => __( 'None', 'america' ),
+    'all'            => __( 'All taxonomies', 'america' ),
     'category'       => __( 'Category', 'america' ),
     'series'         => __( 'Series', 'america' ),
-    'tag'           => __( 'Tag', 'america' )
+    'tag'            => __( 'Tag', 'america' )
   ),
   'desc'             =>  __( 'Most recent post list in selected taxonomy', 'america' )
 ));
