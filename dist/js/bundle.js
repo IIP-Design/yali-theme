@@ -790,7 +790,15 @@ function renderArticleFeed(feed) {
 	};
 
 	shouldDisplayRelatedLinks(config);
-	addFeed(query.builder(configObj, context));
+
+	if (config.selectBy === 'custom') {
+		// let module generate query since using standard params
+		addFeed(configObj);
+	} else {
+		// Build query outside of cdp module, since using some YALI specific params, i.e.series
+		addFeed(query.builder(configObj, context));
+	}
+
 	addOnFeedReadyHandler(feed.id);
 }
 

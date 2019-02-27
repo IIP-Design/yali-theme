@@ -61,9 +61,9 @@ $cb_box_cdp->add_field(  array(
   'type'             => 'radio_inline',
   'classes'          => 'cdp-select-posts-by-taxonomy',
   'show_option_none' => false,
-  'default'          => 'all',
+  'default'          => 'none',
   'options'          => array(
-    'all'            => __( 'All taxonomies', 'america' ),
+    'none'           => __( 'All taxonomies', 'america' ),
     'category'       => __( 'Category', 'america' ),
     'series'         => __( 'Series', 'america' ),
     'tag'            => __( 'Tag', 'america' )
