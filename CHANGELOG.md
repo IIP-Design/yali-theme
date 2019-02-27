@@ -1,6 +1,11 @@
 # Change Log
 ##### All notable changes to this project will be documented in this file.
 
+## [v1.5.3](https://github.com/IIP-Design/yali-theme/tree/v1.5.3)
+
+**Changed:**
+- Refactored the conditional call of `addFeed` to handle the `custom` value for the `Select posts by` option since custom selection of posts should not be handled by `query.builder`. If handled by `query.builder`, *all results* will be returned rather than the specifically selected posts.
+
 ## [v1.5.2](https://github.com/IIP-Design/yali-theme/tree/v1.5.2)
 
 **Changed:**
