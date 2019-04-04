@@ -1,6 +1,11 @@
 # Change Log
 ##### All notable changes to this project will be documented in this file.
 
+## [v1.5.4](https://github.com/IIP-Design/yali-theme/tree/v1.5.4)
+
+**Added:**
+- Add Bodybuilder `notFilter`s for Podcast and Video taxonomies to the `article` content type query. This prevents `article` queries from returning posts with the `Podcast` or `Video` `content_type` taxonomy, i.e., only articles that are not podcasts or videos are returned.
+
 ## [v1.5.3](https://github.com/IIP-Design/yali-theme/tree/v1.5.3)
 
 **Changed:**
