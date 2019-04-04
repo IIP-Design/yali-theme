@@ -149,7 +149,9 @@ export const generateBodyQry = ( params, context ) => {
         switch ( type ) {
           case 'article':
             b.orFilter( 'term', 'type.keyword', 'post')
-            .orFilter( 'term', 'type.keyword', 'page');
+            .orFilter( 'term', 'type.keyword', 'page')
+            .notFilter( 'term', 'site_taxonomies.content_type.name.keyword', 'Podcast' )
+            .notFilter( 'term', 'site_taxonomies.content_type.name.keyword', 'Video' );
             break;
 
           case 'courses':

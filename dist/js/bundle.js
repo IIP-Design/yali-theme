@@ -1681,7 +1681,7 @@ var generateBodyQry = exports.generateBodyQry = function generateBodyQry(params,
       types.forEach(function (type) {
         switch (type) {
           case 'article':
-            b.orFilter('term', 'type.keyword', 'post').orFilter('term', 'type.keyword', 'page');
+            b.orFilter('term', 'type.keyword', 'post').orFilter('term', 'type.keyword', 'page').notFilter('term', 'site_taxonomies.content_type.name.keyword', 'Podcast').notFilter('term', 'site_taxonomies.content_type.name.keyword', 'Video');
             break;
 
           case 'courses':
