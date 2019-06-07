@@ -1,6 +1,11 @@
 # Change Log
 ##### All notable changes to this project will be documented in this file.
 
+## [v1.6.0](https://github.com/IIP-Design/yali-theme/tree/v1.6.0)
+
+**Changed:**
+- Updated the footer to remove IIP branding
+
 ## [v1.5.4](https://github.com/IIP-Design/yali-theme/tree/v1.5.4)
 
 **Added:**
