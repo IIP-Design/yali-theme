@@ -1,12 +1,19 @@
 # Change Log
 ##### All notable changes to this project will be documented in this file.
 
-## [v1.6.0](https://github.com/IIP-Design/yali-theme/tree/v1.6.2)
+## [v1.6.3](https://github.com/IIP-Design/yali-theme/tree/v1.6.3)
+
+**Removed:**
+- MWF Twig and Template
+- MWF Apply Twig and Template
+- RLC Twig and Template
+
+## [v1.6.2](https://github.com/IIP-Design/yali-theme/tree/v1.6.2)
 
 **Changed:**
 - Added pop-up function for join form
 
-## [v1.6.0](https://github.com/IIP-Design/yali-theme/tree/v1.6.1)
+## [v1.6.1](https://github.com/IIP-Design/yali-theme/tree/v1.6.1)
 
 **Changed:**
 - Removed pop-up function for join form
