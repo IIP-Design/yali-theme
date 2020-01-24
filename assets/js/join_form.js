@@ -14,7 +14,13 @@ function check_session_data() {
 	
 	if( session == null || session == 'new' ) {
 		localStorage.session = 'new';
-		form.style.display = 'block';
+		form.style.display = 'none';
+
+		if( window.innerWidth > 933 ) {
+			nav_join_desktop.style.display = 'inline-block';
+		} else {
+			nav_join_mobile.style.display = 'inline-block';
+		}
 
 		site_title.textContent === 'Young African Leaders Initiative';
 	}		
