@@ -1,6 +1,16 @@
 # Change Log
 ##### All notable changes to this project will be documented in this file.
 
+## [v1.6.5](https://github.com/IIP-Design/yali-theme/tree/v1.6.5)
+
+**Changed:**
+- Updated static text on homepage: Subtitle, Regional Leadership Centers, YALI Network.
+
+## [v1.6.4](https://github.com/IIP-Design/yali-theme/tree/v1.6.4)
+
+**Removed:**
+- Removed pop-up function for join form
+
 ## [v1.6.3](https://github.com/IIP-Design/yali-theme/tree/v1.6.3)
 
 **Removed:**
